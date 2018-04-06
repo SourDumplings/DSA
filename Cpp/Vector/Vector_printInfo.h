@@ -13,6 +13,8 @@
 #define VECTOR_PRINT_H
 
 #include "Vector.h"
+#include <cstdio>
+#include <iostream>
 
 namespace CZ
 {

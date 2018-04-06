@@ -12,8 +12,6 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#include <iostream>
-#include <cstdio>
 #include <initializer_list>
 
 namespace CZ
