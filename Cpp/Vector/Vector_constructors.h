@@ -43,7 +43,7 @@ namespace CZ
     template <typename T>
     Vector<T>::Vector(const std::initializer_list<T> &initL)
     {
-        printf("initL construct\n");
+        // printf("initL construct\n");
         copyFrom(initL.begin(), initL.end());
     }
 }

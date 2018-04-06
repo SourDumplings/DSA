@@ -22,6 +22,7 @@ namespace CZ
     {
         printf("\nVector %s:\n", name);
         printf("capacity = %u, size = %u\n", _capacity, _size);
+        printf("including: ");
         int output = 0;
         for (unsigned i = 0; i < _size; ++i)
         {
