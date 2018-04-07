@@ -17,3 +17,4 @@
 参考资料：
 [1] 《数据结构》3rd-邓俊辉
 [2] http://en.cppreference.com/w/
+[3] 《C++ Primer》5th- Stanley B. Lippman, Josée Lajoie, Barbara E. Moo
