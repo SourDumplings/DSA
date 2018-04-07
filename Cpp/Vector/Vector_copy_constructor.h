@@ -17,7 +17,7 @@
 namespace CZ
 {
     template <typename T>
-    Vector<T>::Vector(const Vector<T> &V)
+    inline Vector<T>::Vector(const Vector<T> &V)
     {
         copyFrom(V._elem, V._elem + V._size);
     }

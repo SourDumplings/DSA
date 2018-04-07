@@ -17,7 +17,7 @@
 namespace CZ
 {
     template <typename T>
-    Vector<T>::~Vector()
+    inline Vector<T>::~Vector()
     {
         delete [] _elem;
     }

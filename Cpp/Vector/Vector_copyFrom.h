@@ -18,7 +18,7 @@ namespace CZ
 {
     // 迭代器区间的复制
     template <typename T>
-    void Vector<T>::copyFrom(const T *begin, const T *end)
+    inline void Vector<T>::copyFrom(const T *begin, const T *end)
     {
         _elem = new T[_capacity = 2 * (end - begin)];
         _size = 0;

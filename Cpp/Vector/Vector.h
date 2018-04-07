@@ -14,17 +14,27 @@
 
 #include <initializer_list>
 
+// Vector的友元函数
+#include "Vector_friends.h"
+
 namespace CZ
 {
-    using Rank = unsigned;
     const unsigned DEFAULT_CAPACITY = 0; // 默认初始容量
 
     template <typename T>
     class Vector
     {
+        using Rank = unsigned;
+        friend bool operator== <Vector<T>>(const Vector<T> &lv, const Vector<T> &rv);
+        friend bool operator!= <Vector<T>>(const Vector<T> &lv, const Vector<T> &rv);
+        friend bool operator< <Vector<T>>(const Vector<T> &lv, const Vector<T> &rv);
+        friend bool operator<= <Vector<T>>(const Vector<T> &lv, const Vector<T> &rv);
+        friend bool operator> <Vector<T>>(const Vector<T> &lv, const Vector<T> &rv);
+        friend bool operator>= <Vector<T>>(const Vector<T> &lv, const Vector<T> &rv);
+
     protected:
         Rank _size; // 规模
-        unsigned _capacity = DEFAULT_CAPACITY; // 容量
+        Rank _capacity = DEFAULT_CAPACITY; // 容量
         T* _elem; // 数据区
 
         //迭代器区间的复制
@@ -32,7 +42,7 @@ namespace CZ
     public:
         // 构造函数
         // 构造函数1.容量为c，规模为s，所有元素初始为v
-        Vector(unsigned s = DEFAULT_CAPACITY, T v = T());
+        Vector(Rank s = DEFAULT_CAPACITY, T v = T());
         // 构造函数2.迭代器与元素个数构造
         Vector(const T *begin, Rank n);
         // 构造函数3.迭代器区间构造
@@ -43,12 +53,16 @@ namespace CZ
         // 复制构造函数
         Vector(const Vector<T> &V);
 
-
         // 析构函数
         ~Vector();
 
         // 打印所有元素，空格隔开，末尾换行，及容量和规模
         void printInfo(const char *name = "");
+
+        // 迭代器函数
+        using iterator = T*;
+        iterator begin();
+        iterator end();
 
     };
 }

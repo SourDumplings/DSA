@@ -23,5 +23,7 @@
 
 #include "Vector_printInfo.h"
 
+#include "Vector_iterators.h"
+
 #endif
 

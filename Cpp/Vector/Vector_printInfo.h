@@ -20,13 +20,13 @@ namespace CZ
 {
     // 打印所有元素，空格隔开，末尾换行
     template <typename T>
-    void Vector<T>::printInfo(const char *name)
+    inline void Vector<T>::printInfo(const char *name)
     {
         printf("\nVector %s:\n", name);
         printf("capacity = %u, size = %u\n", _capacity, _size);
         printf("including: ");
         int output = 0;
-        for (unsigned i = 0; i < _size; ++i)
+        for (Vector<T>::Rank i = 0; i < _size; ++i)
         {
             if (output++)
             {
