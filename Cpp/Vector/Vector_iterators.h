@@ -23,7 +23,19 @@ namespace CZ
     }
 
     template <typename T>
+    inline typename Vector<T>::iterator Vector<T>::begin() const
+    {
+        return _elem;
+    }
+
+    template <typename T>
     inline typename Vector<T>::iterator Vector<T>::end()
+    {
+        return _elem + _size;
+    }
+
+    template <typename T>
+    inline typename Vector<T>::iterator Vector<T>::end() const
     {
         return _elem + _size;
     }

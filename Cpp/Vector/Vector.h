@@ -63,6 +63,8 @@ namespace CZ
         using iterator = T*;
         iterator begin();
         iterator end();
+        iterator begin() const;
+        iterator end() const;
 
     };
 }

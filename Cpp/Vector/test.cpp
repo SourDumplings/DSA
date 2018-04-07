@@ -31,45 +31,46 @@ int main(int argc, char const *argv[])
     // vs3.printInfo("vs3");
 
     // 测试迭代器函数和比较函数
-    // CZ::Vector<int> v1({1, 2, 3, 4, 5}), v2({1, 2, 3, 4}), v3({3, 6, 7}), v4({3, 6, 7});
-    // CZ::Vector<std::string> vs1({"abc", "def"}), vs2({"abc", "abe"}), vs3({"abc"}),
-    // vs4({"abc", "def"});
+    CZ::Vector<int> v1({1, 2, 3, 4, 5}), v2({1, 2, 3, 4}), v3({3, 6, 7}), v4({3, 6, 7});
+    CZ::Vector<std::string> vs1({"abc", "def"}), vs2({"abc", "abe"}), vs3({"abc"}),
+    vs4({"abc", "def"});
 
-    // printf("v1 has: ");
-    // for (CZ::Vector<int>::iterator it = v1.begin(); it < v1.end(); ++it)
-    // {
-    //     printf("%d ", *it);
-    // }
-    // putchar('\n');
+    printf("v1 has: ");
+    for (CZ::Vector<int>::iterator it = v1.begin(); it < v1.end(); ++it)
+    {
+        printf("%d ", *it);
+    }
+    putchar('\n');
 
-    // printf("\nv2 has: ");
-    // for (auto it = v2.begin(); it < v2.end(); ++it)
-    // {
-    //     printf("%d ", *it);
-    // }
-    // putchar('\n');
+    printf("\nv2 has: ");
+    for (auto it = v2.begin(); it < v2.end(); ++it)
+    {
+        printf("%d ", *it);
+    }
+    putchar('\n');
 
-    // printf("\nvs1 has: ");
-    // for (auto &s : vs1)
-    // {
-    //     std::cout << s << " ";
-    // }
-    // putchar('\n');
+    printf("\nvs1 has: ");
+    for (auto &s : vs1)
+    {
+        std::cout << s << " ";
+    }
+    putchar('\n');
 
-    // putchar('\n');
-    // printf("v1 == v2? %s\n", v1 == v2 ? "true" : "false");
-    // printf("v2 != v3? %s\n", v2 != v3 ? "true" : "false");
-    // printf("v3 == v4? %s\n", v3 == v4 ? "true" : "false");
-    // printf("v3 <= v4? %s\n", v3 <= v4 ? "true" : "false");
-    // printf("v3 < v4? %s\n", v3 < v4 ? "true" : "false");
-    // printf("v1 <= v2? %s\n", v1 <= v2 ? "true" : "false");
-    // printf("v1 > v2? %s\n", v1 > v2 ? "true" : "false");
-    // printf("v2 < v3? %s\n", v2 < v3 ? "true" : "false");
-    // printf("vs1 == vs4? %s\n", vs1 == vs4 ? "true" : "false");
-    // printf("vs1 == vs2? %s\n", vs1 == vs2 ? "true" : "false");
-    // printf("vs1 >= vs3? %s\n", vs1 >= vs3 ? "true" : "false");
-    // printf("vs2 < vs1? %s\n", vs2 < vs1 ? "true" : "false");
-    // putchar('\n');
+    putchar('\n');
+    printf("v1 == v2? %s\n", v1 == v2 ? "true" : "false");
+    printf("v2 != v3? %s\n", v2 != v3 ? "true" : "false");
+    printf("v3 == v4? %s\n", v3 == v4 ? "true" : "false");
+    printf("v3 <= v4? %s\n", v3 <= v4 ? "true" : "false");
+    printf("v3 < v4? %s\n", v3 < v4 ? "true" : "false");
+    printf("v1 <= v2? %s\n", v1 <= v2 ? "true" : "false");
+    printf("v1 > v2? %s\n", v1 > v2 ? "true" : "false");
+    printf("v2 < v3? %s\n", v2 < v3 ? "true" : "false");
+    printf("vs1 == vs4? %s\n", vs1 == vs4 ? "true" : "false");
+    printf("vs1 == vs2? %s\n", vs1 == vs2 ? "true" : "false");
+    printf("vs1 >= vs3? %s\n", vs1 >= vs3 ? "true" : "false");
+    printf("vs3 >= vs4? %s\n", vs3 >= vs4 ? "true" : "false");
+    printf("vs2 < vs1? %s\n", vs2 < vs1 ? "true" : "false");
+    putchar('\n');
     return 0;
 }
 
