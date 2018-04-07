@@ -7,6 +7,9 @@
 
 /*
 容器的字典序比较算法
+要求：
+1.容器必须支持单向访问迭代器，具有_size属性
+2.容器内元素支持比较操作符
  */
 
 #ifndef DICT_COMPARE_CPP
@@ -21,9 +24,10 @@ namespace CZ
         {
             return false;
         }
-        for (typename C::Rank i = 0; i != lhs._size; ++i)
+        for (typename C::iterator itL = lhs.begin(), itR = rhs.begin();
+            itL != lhs.end(); ++itL, ++itR)
         {
-            if (lhs._elem[i] != rhs._elem[i])
+            if (*itL != *itR)
             {
                 return false;
             }
@@ -44,17 +48,18 @@ namespace CZ
         {
             return true;
         }
-        for (typename C::Rank i = 0; i != lhs._size; ++i)
+        for (typename C::iterator itL = lhs.begin(), itR = rhs.begin();
+            itL != lhs.end(); ++itL, ++itR)
         {
-            if (i == rhs._size)
+            if (itR == rhs.end())
             {
                 return false;
             }
-            if (lhs._elem[i] < rhs._elem[i])
+            if (*itL < *itR)
             {
                 return true;
             }
-            else if (lhs._elem[i] > rhs._elem[i])
+            else if (*itL > *itR)
             {
                 return false;
             }
