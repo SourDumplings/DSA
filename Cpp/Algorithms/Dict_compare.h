@@ -8,7 +8,7 @@
 /*
 容器的字典序比较算法
 要求：
-1.容器必须支持单向访问迭代器，具有_size属性
+1.容器必须支持单向访问迭代器，具有size()方法
 2.容器内元素支持比较操作符
  */
 
@@ -20,7 +20,7 @@ namespace CZ
     template <typename C>
     inline bool operator==(const C &lhs, const C &rhs) noexcept
     {
-        if (lhs._size != rhs._size)
+        if (lhs.size() != rhs.size())
         {
             return false;
         }
@@ -44,7 +44,7 @@ namespace CZ
     template <typename C>
     inline bool operator<(const C &lhs, const C &rhs) noexcept
     {
-        if (lhs._size == 0)
+        if (lhs.size() == 0)
         {
             return true;
         }
@@ -64,7 +64,7 @@ namespace CZ
                 return false;
             }
         }
-        if (lhs._size < rhs._size)
+        if (lhs.size() < rhs.size())
         {
             return true;
         }

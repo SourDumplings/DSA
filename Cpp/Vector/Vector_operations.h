@@ -6,15 +6,15 @@
 */
 
 /*
-Vector的友元函数
+Vector本身所支持的操作
  */
 
-#ifndef VECTOR_FRIENDS_H
-#define VECTOR_FRIENDS_H
+#ifndef VECTOR_OPERATIONS_H
+#define VECTOR_OPERATIONS_H
 
 // 字典序的比较函数
 #include "..\Algorithms\Dict_compare.h"
 
-#endif // VECTOR_FRIENDS_H
+#endif // VECTOR_OPERATIONS_H
 
 
