@@ -54,6 +54,9 @@ namespace CZ
         Rank capacity();
         Rank capacity() const;
 
+        // 动态操作
+        void clear();
+
         // 操作符函数
         T& operator[](Rank i);
         const T& operator[](Rank i) const;

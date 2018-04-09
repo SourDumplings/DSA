@@ -25,5 +25,7 @@
 
 #include "Vector_interfaces.h"
 
+#include "Vector_modifications.h"
+
 #endif
 
