@@ -39,7 +39,6 @@ namespace CZ
 
         // 析构函数
         ~Vector();
-        void free();
 
         // 打印所有元素，空格隔开，末尾换行，及容量和规模
         void printInfo(const char *name = "");
@@ -67,6 +66,8 @@ namespace CZ
 
         //迭代器区间的复制
         void copyFrom(const T *begin, const T *end);
+        // 析构辅助方法
+        void free();
     };
 }
 
