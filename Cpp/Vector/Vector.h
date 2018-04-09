@@ -39,6 +39,7 @@ namespace CZ
 
         // 析构函数
         ~Vector();
+        void free();
 
         // 打印所有元素，空格隔开，末尾换行，及容量和规模
         void printInfo(const char *name = "");
@@ -53,6 +54,12 @@ namespace CZ
         Rank size() const;
         Rank capacity();
         Rank capacity() const;
+
+        // 操作符函数
+        T& operator[](Rank i);
+        const T& operator[](Rank i) const;
+        Vector<T>& operator=(const Vector<T> &V);
+        Vector<T>& operator=(Vector<T> &&V);
     protected:
         Rank _size; // 规模
         Rank _capacity = DEFAULT_CAPACITY; // 容量
