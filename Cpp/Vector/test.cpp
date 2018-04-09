@@ -84,15 +84,21 @@ int main(int argc, char const *argv[])
     v1 = v2;
     v1.printInfo("v1");
     v2.printInfo("v2");
+    v1 = v1;
+    v1.printInfo("v1");
     v3.printInfo("v3");
     v1 = std::move(v3);
     v1.printInfo("v1");
     v3.printInfo("v3");
+    v1 = std::move(v1);
+    v1.printInfo();
     vs1.printInfo("vs1");
     vs2.printInfo("vs2");
     vs1 = std::move(vs2);
     vs1.printInfo("vs1");
     vs2.printInfo("vs2");
+    vs1 = std::move(vs1);
+    vs1.printInfo();
     return 0;
 }
 

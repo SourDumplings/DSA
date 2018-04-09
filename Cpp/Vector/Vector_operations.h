@@ -34,21 +34,27 @@ namespace CZ
     template <typename T>
     inline Vector<T>& Vector<T>::operator=(const Vector<T> &V)
     {
-        free();
-        copyFrom(V.begin(), V.end());
+        if (this != &V)
+        {
+            free();
+            copyFrom(V.begin(), V.end());
+        }
         return *this;
     }
 
     template <typename T>
     Vector<T>& Vector<T>::operator=(Vector<T> &&V)
     {
-        free();
-        _elem = V.begin();
-        _size = V.size();
-        _capacity = V.capacity();
-        V._elem = nullptr;
-        V._size = 0;
-        V._capacity = 0;
+        if (this != &V)
+        {
+            free();
+            _elem = V.begin();
+            _size = V.size();
+            _capacity = V.capacity();
+            V._elem = nullptr;
+            V._size = 0;
+            V._capacity = 0;
+        }
         return *this;
     }
 }
