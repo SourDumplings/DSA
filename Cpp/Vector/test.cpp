@@ -77,40 +77,46 @@ int main(int argc, char const *argv[])
     //
 
     // 测试赋值操作符和索引操作符
-    // Vector<int> v1({1, 2, 3}), v2({2, 3, 5}), v3({6, 7});
-    // Vector<string> vs1({"abc", "ac"}), vs2({"cde", "fg"});
+    Vector<int> v1({1, 2, 3}), v2({2, 3, 5}), v3({6, 7});
+    Vector<string> vs1({"abc", "ac"}), vs2({"cde", "fg"});
 
-    // v1.printInfo("v1");
-    // v1 = v2;
-    // v1.printInfo("v1");
-    // v2.printInfo("v2");
-    // v1 = v1;
-    // v1.printInfo("v1");
-    // v3.printInfo("v3");
-    // v1 = std::move(v3);
-    // v1.printInfo("v1");
-    // v3.printInfo("v3");
-    // v1 = std::move(v1);
-    // v1.printInfo();
-    // vs1.printInfo("vs1");
-    // vs2.printInfo("vs2");
-    // vs1 = std::move(vs2);
-    // vs1.printInfo("vs1");
-    // vs2.printInfo("vs2");
-    // vs1 = std::move(vs1);
-    // vs1.printInfo();
+    v1.printInfo("v1");
+    v1 = v2;
+    v1.printInfo("v1");
+    v2.printInfo("v2");
+    v1 = v1;
+    v1.printInfo("v1");
+    v3.printInfo("v3");
+    v1 = std::move(v3);
+    v1.printInfo("v1");
+    v3.printInfo("v3");
+    v1 = std::move(v1);
+    v1.printInfo();
+    vs1.printInfo("vs1");
+    vs2.printInfo("vs2");
+    vs1 = std::move(vs2);
+    vs1.printInfo("vs1");
+    vs2.printInfo("vs2");
+    vs1 = std::move(vs1);
+    vs1.printInfo();
+
+    putchar('\n');
+    printf("v1[0] = %d, v1[1] = %d\n", v1[0], v1[1]);
+    printf("vs1[0] = %s, vs1[1] = %s\n", vs1[0].c_str(), vs1[1].c_str());
+    printf("v2[3] = %d\n", v2[3]);
+
     //
 
     // 测试动态操作
-    Vector<char> vc1({'a', 'b', 'c'});
-    Vector<string> vs1({"abc", "hello"});
+    // Vector<char> vc1({'a', 'b', 'c'});
+    // Vector<string> vs1({"abc", "hello"});
 
-    vc1.printInfo();
-    vc1.clear();
-    vc1.printInfo();
-    vs1.printInfo();
-    vs1.clear();
-    vs1.printInfo();
+    // vc1.printInfo();
+    // vc1.clear();
+    // vc1.printInfo();
+    // vs1.printInfo();
+    // vs1.clear();
+    // vs1.printInfo();
     return 0;
 }
 

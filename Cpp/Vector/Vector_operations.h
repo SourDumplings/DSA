@@ -22,12 +22,36 @@ namespace CZ
     template <typename T>
     inline T& Vector<T>::operator[](const Vector<T>::Rank i)
     {
+        try
+        {
+            if (_size <= i)
+            {
+                throw "index out of range";
+            }
+        }
+        catch (const char *errMsg)
+        {
+            printf("Warning: %s, ", errMsg);
+            printf("rank = %u, size = %u\n", i, _size);
+        }
         return _elem[i];
     }
 
     template <typename T>
     inline const T& Vector<T>::operator[](const Vector<T>::Rank i) const
     {
+        try
+        {
+            if (_size <= i)
+            {
+                throw "index out of range";
+            }
+        }
+        catch (const char *errMsg)
+        {
+            printf("Warning: %s, ", errMsg);
+            printf("rank = %u, size = %u\n", i, _size);
+        }
         return _elem[i];
     }
 
