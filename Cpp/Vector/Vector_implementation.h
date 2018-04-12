@@ -19,6 +19,7 @@
 
 #include "Vector_constructors.h"
 #include "Vector_copy_constructor.h"
+#include "Vector_move_constructor.h"
 #include "Vector_destructor.h"
 
 #include "Vector_printInfo.h"
@@ -26,6 +27,9 @@
 #include "Vector_interfaces.h"
 
 #include "Vector_modifications.h"
+
+#include "Vector_expand.h"
+#include "Vector_shrink.h"
 
 #endif
 

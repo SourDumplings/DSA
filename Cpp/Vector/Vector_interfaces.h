@@ -63,6 +63,86 @@ namespace CZ
     {
         return _capacity;
     }
+
+    template <typename T>
+    const T& Vector<T>::back() const
+    {
+        try
+        {
+            if (_size == 0)
+            {
+                throw "no elements";
+            }
+        }
+        catch (const char *errMsg)
+        {
+            printf("Error: %s\n", errMsg);
+        }
+        return _elem[_size-1];
+    }
+
+    template <typename T>
+    inline T& Vector<T>::back()
+    {
+        try
+        {
+            if (_size == 0)
+            {
+                throw "no elements";
+            }
+        }
+        catch (const char *errMsg)
+        {
+            printf("Error: %s\n", errMsg);
+        }
+        return _elem[_size-1];
+    }
+
+    template <typename T>
+    inline const T& Vector<T>::front() const
+    {
+        try
+        {
+            if (_size == 0)
+            {
+                throw "no elements";
+            }
+        }
+        catch (const char *errMsg)
+        {
+            printf("Error: %s\n", errMsg);
+        }
+        return _elem[0];
+    }
+
+    template <typename T>
+    inline T& Vector<T>::front()
+    {
+        try
+        {
+            if (_size == 0)
+            {
+                throw "no elements";
+            }
+        }
+        catch (const char *errMsg)
+        {
+            printf("Error: %s\n", errMsg);
+        }
+        return _elem[0];
+    }
+
+    template <typename T>
+    inline bool Vector<T>::empty()
+    {
+        return _size == 0;
+    }
+
+    template <typename T>
+    inline bool Vector<T>::empty() const
+    {
+        return _size == 0;
+    }
 }
 
 

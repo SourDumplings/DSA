@@ -16,7 +16,7 @@
 
 namespace CZ
 {
-    const unsigned DEFAULT_CAPACITY = 0; // 默认初始容量
+    const unsigned DEFAULT_CAPACITY = 1; // 默认初始容量
 
     template <typename T>
     class Vector
@@ -36,6 +36,8 @@ namespace CZ
 
         // 复制构造函数
         Vector(const Vector<T> &V);
+        // 移动构造函数
+        Vector(Vector<T> &&V);
 
         // 析构函数
         ~Vector();
@@ -53,9 +55,22 @@ namespace CZ
         Rank size() const;
         Rank capacity();
         Rank capacity() const;
+        const T& back() const;
+        T& back();
+        const T& front() const;
+        T& front();
+        bool empty();
+        bool empty() const;
 
         // 动态操作
         void clear();
+        void push_back(const T &x);
+        void pop_back();
+        iterator insert(iterator itPos, const T &x);
+        iterator insert(iterator itPos, const T *b, const T *e);
+        iterator erase(iterator itPos);
+        iterator erase(iterator itBegin, iterator itEnd);
+        void resize(Rank n);
 
         // 操作符函数
         T& operator[](Rank i);
@@ -71,6 +86,10 @@ namespace CZ
         void copyFrom(const T *begin, const T *end);
         // 析构辅助方法
         void free();
+        // 搬到大房子中，即扩容操作
+        bool expand();
+        // 装填因子过小时缩容
+        bool shrink();
     };
 }
 

@@ -13,6 +13,7 @@ Vector本身所支持的操作
 #define VECTOR_OPERATIONS_H
 
 #include "Vector.h"
+#include <cassert>
 
 // 字典序的比较函数
 #include "..\Algorithms\Dict_compare.h"
@@ -33,6 +34,7 @@ namespace CZ
         {
             printf("Warning: %s, ", errMsg);
             printf("rank = %u, size = %u\n", i, _size);
+            assert(false);
         }
         return _elem[i];
     }
@@ -51,6 +53,7 @@ namespace CZ
         {
             printf("Warning: %s, ", errMsg);
             printf("rank = %u, size = %u\n", i, _size);
+            assert(false);
         }
         return _elem[i];
     }

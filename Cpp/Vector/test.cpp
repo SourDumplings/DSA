@@ -18,7 +18,7 @@ using std::string;
 
 int main(int argc, char const *argv[])
 {
-    // 测试构造函数
+    // 测试构造函数和数据访问接口
     // int a[10] = {1, 2, 4, 5};
     // Vector<int> v1, v2(10), v3(5, 1), v4(v3), v5(a, a+3), v6({1, 4, 7, 8, 3, 2, 8});
     // Vector<string> vs1(20), vs2(3, "abc"), vs3({"123", "abx", "sada1"});
@@ -32,6 +32,23 @@ int main(int argc, char const *argv[])
     // vs1.printInfo("vs1");
     // vs2.printInfo("vs2");
     // vs3.printInfo("vs3");
+
+    // Vector<int> v7(std::move(v6));
+    // Vector<string> vs4(std::move(vs3));
+
+    // v7.printInfo("v7");
+    // v6.printInfo("v6");
+    // vs4.printInfo("vs4");
+    // vs3.printInfo("vs3");
+    //
+    // printf("v6.front() = %d, v6.back() = %d\n", v6.front(), v6.back());
+    // printf("vs3.front() = %s, vs3.back() = %s\n", vs3.front().c_str(), vs3.back().c_str());
+    // printf("v1 is empty? %d\n", v1.empty());
+    // printf("v2 is empty? %d\n", v2.empty());
+    // printf("vs2 is empty? %d\n", vs2.empty());
+    // vs2.clear();
+    // printf("after clear, vs2 is empty? %d\n", vs2.empty());
+    // printf("finish\n");
 
     // 测试迭代器函数和比较函数
     // Vector<int> v1({1, 2, 3, 4, 5}), v2({1, 2, 3, 4}), v3({3, 6, 7}), v4({3, 6, 7});
@@ -77,46 +94,80 @@ int main(int argc, char const *argv[])
     //
 
     // 测试赋值操作符和索引操作符
-    Vector<int> v1({1, 2, 3}), v2({2, 3, 5}), v3({6, 7});
-    Vector<string> vs1({"abc", "ac"}), vs2({"cde", "fg"});
+    // Vector<int> v1({1, 2, 3}), v2({2, 3, 5}), v3({6, 7});
+    // Vector<string> vs1({"abc", "ac"}), vs2({"cde", "fg"});
 
-    v1.printInfo("v1");
-    v1 = v2;
-    v1.printInfo("v1");
-    v2.printInfo("v2");
-    v1 = v1;
-    v1.printInfo("v1");
-    v3.printInfo("v3");
-    v1 = std::move(v3);
-    v1.printInfo("v1");
-    v3.printInfo("v3");
-    v1 = std::move(v1);
-    v1.printInfo();
-    vs1.printInfo("vs1");
-    vs2.printInfo("vs2");
-    vs1 = std::move(vs2);
-    vs1.printInfo("vs1");
-    vs2.printInfo("vs2");
-    vs1 = std::move(vs1);
-    vs1.printInfo();
+    // v1.printInfo("v1");
+    // v1 = v2;
+    // v1.printInfo("v1");
+    // v2.printInfo("v2");
+    // v1 = v1;
+    // v1.printInfo("v1");
+    // v3.printInfo("v3");
+    // v1 = std::move(v3);
+    // v1.printInfo("v1");
+    // v3.printInfo("v3");
+    // v1 = std::move(v1);
+    // v1.printInfo();
+    // vs1.printInfo("vs1");
+    // vs2.printInfo("vs2");
+    // vs1 = std::move(vs2);
+    // vs1.printInfo("vs1");
+    // vs2.printInfo("vs2");
+    // vs1 = std::move(vs1);
+    // vs1.printInfo();
 
-    putchar('\n');
-    printf("v1[0] = %d, v1[1] = %d\n", v1[0], v1[1]);
-    printf("vs1[0] = %s, vs1[1] = %s\n", vs1[0].c_str(), vs1[1].c_str());
-    printf("v2[3] = %d\n", v2[3]);
+    // putchar('\n');
+    // printf("v1[0] = %d, v1[1] = %d\n", v1[0], v1[1]);
+    // printf("vs1[0] = %s, vs1[1] = %s\n", vs1[0].c_str(), vs1[1].c_str());
+    // printf("v2[3] = %d\n", v2[3]);
 
     //
 
     // 测试动态操作
-    // Vector<char> vc1({'a', 'b', 'c'});
-    // Vector<string> vs1({"abc", "hello"});
+    Vector<char> vc1({'a', 'b', 'c'});
+    Vector<string> vs1({"abc", "hello"}), vs2({"world", "add"});
+    Vector<int> v1({1, 2, 3});
 
-    // vc1.printInfo();
-    // vc1.clear();
-    // vc1.printInfo();
-    // vs1.printInfo();
-    // vs1.clear();
-    // vs1.printInfo();
+    vc1.printInfo("vc1");
+    vc1.push_back('d');
+    vc1.printInfo("vc1");
+
+    v1.printInfo("v1");
+    for (unsigned i = 0; i < 10; ++i)
+    {
+        v1.push_back(i + 4);
+    }
+    v1.printInfo("v1");
+    for (unsigned i = 0; i < 11; ++i)
+    {
+        v1.pop_back();
+    }
+    v1.printInfo("v1");
+
+    v1.insert(v1.begin(), 0);
+    v1.printInfo("v1");
+    v1.insert(v1.insert(v1.begin() + 1, 100), 200);
+    v1.printInfo("v1");
+
+    vc1.clear();
+    vc1.printInfo("vc1");
+
+    vs1.printInfo("vs1");
+    vs1.insert(vs1.end(), vs2.begin(), vs2.end());
+    vs1.printInfo("vs1");
+    vs1.erase(vs1.begin() + 1);
+    vs1.printInfo("vs1");
+    vs1.push_back("cz");
+    vs1.push_back("ztt");
+    vs1.printInfo("vs1");
+    vs1.erase(vs1.begin()+1, vs1.end()-1);
+    vs1.printInfo("vs1");
+    // vs1.erase(vs2.begin());
+    // vs1.printInfo("vs1");
+    vs1.erase(vs2.begin(), vs2.end());
+    vs1.printInfo("vs1");
+
     return 0;
 }
 
