@@ -21,8 +21,9 @@ Vector本身所支持的操作
 namespace CZ
 {
     template <typename T>
-    inline T& Vector<T>::operator[](const Vector<T>::Rank i)
+    inline const T& Vector<T>::operator[](const Vector<T>::Rank i) const
     {
+        // printf("const version of [] is called\n");
         try
         {
             if (_size <= i)
@@ -40,22 +41,9 @@ namespace CZ
     }
 
     template <typename T>
-    inline const T& Vector<T>::operator[](const Vector<T>::Rank i) const
+    inline T& Vector<T>::operator[](const Vector<T>::Rank i)
     {
-        try
-        {
-            if (_size <= i)
-            {
-                throw "index out of range";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Warning: %s, ", errMsg);
-            printf("rank = %u, size = %u\n", i, _size);
-            assert(false);
-        }
-        return _elem[i];
+        return const_cast<T&>(static_cast<const Vector<T>&>(*this)[i]);
     }
 
     template <typename T>
