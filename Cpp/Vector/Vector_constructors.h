@@ -32,14 +32,14 @@ namespace CZ
     template <typename T>
     inline Vector<T>::Vector(const T *begin, Rank n)
     {
-        copyFrom(begin, begin + n);
+        copy_construct_from(begin, begin + n);
     }
 
     // 构造函数3.迭代器区间构造
     template <typename T>
     inline Vector<T>::Vector(const T *begin, const T *end)
     {
-        copyFrom(begin, end);
+        copy_construct_from(begin, end);
     }
 
     // 构造函数4.不定参数个数的构造函数
@@ -47,7 +47,7 @@ namespace CZ
     inline Vector<T>::Vector(const std::initializer_list<T> &initL)
     {
         // printf("initL construct\n");
-        copyFrom(initL.begin(), initL.end());
+        copy_construct_from(initL.begin(), initL.end());
     }
 }
 

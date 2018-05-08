@@ -13,7 +13,7 @@ Vector本身所支持的操作
 #define VECTOR_OPERATIONS_H
 
 #include "Vector.h"
-#include <cassert>
+#include <stdexcept>
 
 // 字典序的比较函数
 #include "..\Algorithms\Dict_compare.h"
@@ -35,7 +35,7 @@ namespace CZ
         {
             printf("Warning: %s, ", errMsg);
             printf("rank = %u, size = %u\n", i, _size);
-            assert(false);
+            throw std::exception();
         }
         return _elem[i];
     }
@@ -52,7 +52,7 @@ namespace CZ
         if (this != &V)
         {
             free();
-            copyFrom(V.begin(), V.end());
+            copy_construct_from(V.begin(), V.end());
         }
         return *this;
     }

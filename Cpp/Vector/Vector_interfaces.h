@@ -13,6 +13,7 @@ Vector类模板的数据访问接口方法
 #define VECTOR_INTERFACES_H
 
 #include "Vector.h"
+#include <stdexcept>
 
 namespace CZ
 {
@@ -77,6 +78,7 @@ namespace CZ
         catch (const char *errMsg)
         {
             printf("Error: %s\n", errMsg);
+            throw std::exception();
         }
         return _elem[_size-1];
     }
@@ -94,6 +96,7 @@ namespace CZ
         catch (const char *errMsg)
         {
             printf("Error: %s\n", errMsg);
+            throw std::exception();
         }
         return _elem[_size-1];
     }
@@ -111,6 +114,7 @@ namespace CZ
         catch (const char *errMsg)
         {
             printf("Error: %s\n", errMsg);
+            throw std::exception();
         }
         return _elem[0];
     }
@@ -128,6 +132,7 @@ namespace CZ
         catch (const char *errMsg)
         {
             printf("Error: %s\n", errMsg);
+            throw std::exception();
         }
         return _elem[0];
     }

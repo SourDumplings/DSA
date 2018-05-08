@@ -15,7 +15,7 @@
 #ifndef VECTOR_IMPLEMENTATION_H
 #define VECTOR_IMPLEMENTATION_H
 
-#include "Vector_copyFrom.h"
+#include "Vector_copy_construct_from.h"
 
 #include "Vector_constructors.h"
 #include "Vector_copy_constructor.h"

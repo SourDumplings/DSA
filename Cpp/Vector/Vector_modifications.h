@@ -13,12 +13,12 @@ Vector类模板的动态操作方法
 #define VECTOR_MODIFICATIONS_H
 
 #include "Vector.h"
-#include <cassert>
+#include <stdexcept>
 
 namespace CZ
 {
     template <typename T>
-    void Vector<T>::clear()
+    inline void Vector<T>::clear()
     {
         _size = 0;
         shrink();
@@ -26,7 +26,7 @@ namespace CZ
     }
 
     template <typename T>
-    void Vector<T>::push_back(const T &x)
+    inline void Vector<T>::push_back(const T &x)
     {
         // 如有必要则扩容
         ++_size;
@@ -36,13 +36,13 @@ namespace CZ
     }
 
     template <typename T>
-    void Vector<T>::pop_back()
+    inline void Vector<T>::pop_back()
     {
         try
         {
             if (_size == 0)
             {
-                throw "Vector is empty";
+                throw "no elements";
             }
             --_size;
             // 如有必要则缩容
@@ -51,14 +51,14 @@ namespace CZ
         catch (const char *errMsg)
         {
             printf("Error: %s\n", errMsg);
-            assert(false);
+            throw std::exception();
         }
         return;
     }
 
     // 插入一个元素到指定位置之前，返回指向插入的元素的迭代器
     template <typename T>
-    typename Vector<T>::iterator Vector<T>::insert(typename Vector<T>::iterator itPos, const T &x)
+    inline typename Vector<T>::iterator Vector<T>::insert(typename Vector<T>::iterator itPos, const T &x)
     {
         typename Vector<T>::Rank r = itPos - begin();
         try
@@ -69,7 +69,7 @@ namespace CZ
             }
             ++_size;
             expand();
-            for (unsigned i = _size - 1; i != r - 1; --i)
+            for (unsigned i = _size - 1; i != r; --i)
             {
                 _elem[i] = _elem[i-1];
             }
@@ -78,14 +78,14 @@ namespace CZ
         catch (const char *errMsg)
         {
             printf("Error: %s\n", errMsg);
-            assert(false);
+            throw std::exception();
         }
         return begin() + r;
     }
 
     // 插入一个迭代器范围的元素到指定位置之前，返回指向插入的元素的第一个元素的迭代器
     template <typename T>
-    typename Vector<T>::iterator Vector<T>::insert(typename Vector<T>::iterator itPos,
+    inline typename Vector<T>::iterator Vector<T>::insert(typename Vector<T>::iterator itPos,
         const T *b, const T *e)
     {
         typename Vector<T>::Rank r = itPos - begin();
@@ -115,14 +115,14 @@ namespace CZ
         catch (const char *errMsg)
         {
             printf("Error: %s\n", errMsg);
-            assert(false);
+            throw std::exception();
         }
         return begin() + r;
     }
 
     // 删除单元素，返回删除的元素之后的元素的迭代器
     template <typename T>
-    typename Vector<T>::iterator Vector<T>::erase(typename Vector<T>::iterator itPos)
+    inline typename Vector<T>::iterator Vector<T>::erase(typename Vector<T>::iterator itPos)
     {
         typename Vector<T>::Rank r = itPos - begin();
         try
@@ -141,14 +141,14 @@ namespace CZ
         catch (const char *errMsg)
         {
             printf("Error: %s\n", errMsg);
-            assert(false);
+            throw std::exception();
         }
         return begin() + r;
     }
 
     // 删除一个迭代器区间范围内的元素，原来迭代器区间itEnd所指向的元素的值
     template <typename T>
-    typename Vector<T>::iterator Vector<T>::erase(typename Vector<T>::iterator itBegin,
+    inline typename Vector<T>::iterator Vector<T>::erase(typename Vector<T>::iterator itBegin,
         typename Vector<T>::iterator itEnd)
     {
         typename Vector<T>::Rank rB = itBegin - begin(), rE = itEnd - begin();
@@ -171,13 +171,13 @@ namespace CZ
         catch (const char *errMsg)
         {
             printf("Error: %s\n", errMsg);
-            assert(false);
+            throw std::exception();
         }
         return begin() + rB;
     }
 
     template <typename T>
-    void Vector<T>::resize(typename Vector<T>::Rank n)
+    inline void Vector<T>::resize(typename Vector<T>::Rank n)
     {
         if (n < _size)
         {

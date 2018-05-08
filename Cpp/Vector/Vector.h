@@ -16,8 +16,6 @@
 
 namespace CZ
 {
-    const unsigned DEFAULT_CAPACITY = 1; // 默认初始容量
-
     template <typename T>
     class Vector
     {
@@ -26,7 +24,7 @@ namespace CZ
 
         // 构造函数
         // 构造函数1.容量为c，规模为s，所有元素初始为v
-        Vector(Rank s = DEFAULT_CAPACITY, T v = T());
+        Vector(Rank s = 0, T v = T());
         // 构造函数2.迭代器与元素个数构造
         Vector(const T *begin, Rank n);
         // 构造函数3.迭代器区间构造
@@ -79,11 +77,11 @@ namespace CZ
         Vector<T>& operator=(Vector<T> &&V);
     protected:
         Rank _size; // 规模
-        Rank _capacity = DEFAULT_CAPACITY; // 容量
+        Rank _capacity; // 容量
         T* _elem; // 数据区
 
         //迭代器区间的复制
-        void copyFrom(const T *begin, const T *end);
+        void copy_construct_from(const T *begin, const T *end);
         // 析构辅助方法
         void free();
         // 搬到大房子中，即扩容操作
