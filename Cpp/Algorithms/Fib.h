@@ -20,15 +20,14 @@ namespace CZ
     class Fib
     {
     public:
-        // 初始化为不小于n的最小斐波那契项，默认为第0项
-        Fib(long long n): lastItem(1), thisItem(0)
+        // 初始化为不小于n的最小斐波那契项，默认为第0项，O(log_phi(n))时间
+        Fib(long long n = 0): lastItem(1), thisItem(0)
         {
             while (thisItem < n)
             {
                 next();
             }
         }
-        Fib(): Fib(0) {}
 
         long long get()
         {

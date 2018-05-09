@@ -17,18 +17,18 @@
 
 namespace CZ
 {
-    enum Version {SEARCH_VERSION1, SEARCH_VERSION2, SEARCH_VERSION3};
+    enum BinarySearchVersion {BINARY_SEARCH_VERSION1, BINARY_SEARCH_VERSION2, BINARY_SEARCH_VERSION3};
 
     template <typename It, typename E, typename Cmp>
     It Binary_search(const It &begin, const It &end, const E &value,
-        const Cmp &cmp, const Version &version =  SEARCH_VERSION1)
+        const Cmp &cmp, const BinarySearchVersion &version =  BINARY_SEARCH_VERSION1)
     {
         unsigned lo = 0, hi = end - begin;
         unsigned mi;
 
         switch (version)
         {
-            case  SEARCH_VERSION1:
+            case BINARY_SEARCH_VERSION1:
             {
                 // 普通版本的二分查找，每一步需要比较2次
                 // 若是没找到则返回尾后迭代器
@@ -49,7 +49,7 @@ namespace CZ
                 }
                 return end;
             }
-            case SEARCH_VERSION2:
+            case BINARY_SEARCH_VERSION2:
             {
                 // 优化版本的二分查找，每一步只需比较1次
                 // 若是没找到则返回尾后迭代器
@@ -63,7 +63,7 @@ namespace CZ
                 return (!cmp(value, temp) && !cmp(temp, value)) ?
                     (begin + lo) : end;
             }
-            case SEARCH_VERSION3:
+            case BINARY_SEARCH_VERSION3:
             {
                 // 优化版本的二分查找，每一步只需比较1次
                 // 若是没找到则返回比所查找的元素小的最后一个元素的迭代器
@@ -80,7 +80,7 @@ namespace CZ
 
     template <typename It, typename E>
     It Binary_search(const It &begin, const It &end, const E &value,
-        const Version version =   SEARCH_VERSION1)
+        const BinarySearchVersion version = BINARY_SEARCH_VERSION1)
     {
         return Binary_search(begin, end, value, std::less<const E&>(), version);
     }
