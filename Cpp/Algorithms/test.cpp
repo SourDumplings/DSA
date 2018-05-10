@@ -13,12 +13,14 @@
 #include <cstdio>
 #include <string>
 #include <stdexcept>
+#include <functional>
 
 #include "..\Vector\Vector.h"
 #include "Search.h"
 #include "Binary_search.h"
 #include "Fib.h"
 #include "Fib_search.h"
+#include "Bubble_sort.h"
 
 using namespace std;
 using namespace CZ;
@@ -59,48 +61,61 @@ int main(int argc, char const *argv[])
     // printf("The search result for r9: pos %d\n", r9 - a1);
 
     // 测试斐波那契
-    Fib f1, f2(2), f3(11);
-    printf("f1 = %lld, f2 = %lld, f3 = %lld\n", f1.get(), f2.get(), f3.get());
-    f1.next();
-    printf("f1 = %lld\n", f1.get());
-    f2.next(); f2.next();
-    printf("f2 = %lld\n", f2.get());
-    for (unsigned i = 0; i < 10; ++i)
-    {
-        try
-        {
-            f3.prev();
-            printf("f3 = %lld\n", f3.get());
-        }
-        catch (const runtime_error &err)
-        {
-            printf("%s\n", err.what());
-            break;
-        }
-    }
+    // Fib f1, f2(2), f3(11);
+    // printf("f1 = %lld, f2 = %lld, f3 = %lld\n", f1.get(), f2.get(), f3.get());
+    // f1.next();
+    // printf("f1 = %lld\n", f1.get());
+    // f2.next(); f2.next();
+    // printf("f2 = %lld\n", f2.get());
+    // for (unsigned i = 0; i < 10; ++i)
+    // {
+    //     try
+    //     {
+    //         f3.prev();
+    //         printf("f3 = %lld\n", f3.get());
+    //     }
+    //     catch (const runtime_error &err)
+    //     {
+    //         printf("%s\n", err.what());
+    //         break;
+    //     }
+    // }
 
-    printf("fib[0]0 = %lld, fib[0]1 = %lld, fib[5]0 = %lld, fib[3]1 = %lld\n",
-        get_fib(0, 0), get_fib(0, 1), get_fib(5, 0), get_fib(3, 1));
+    // printf("fib[0]0 = %lld, fib[0]1 = %lld, fib[5]0 = %lld, fib[3]1 = %lld\n",
+    //     get_fib(0, 0), get_fib(0, 1), get_fib(5, 0), get_fib(3, 1));
 
-    // 测试斐波那契查找函数模板
-    Vector<string> vs1({"abc", "def", "cde"});
-    auto rs1 = Fib_search(vs1.begin(), vs1.end(), string("a"), [] (const string & s1, const string & s2)
-    { return s1[0] < s2[0]; });
-    printf("The search result for rs1: pos %lld\n", rs1 - vs1.begin());
+    // // 测试斐波那契查找函数模板
+    // Vector<string> vs1({"abc", "def", "cde"});
+    // auto rs1 = Fib_search(vs1.begin(), vs1.end(), string("a"), [] (const string & s1, const string & s2)
+    // { return s1[0] < s2[0]; });
+    // printf("The search result for rs1: pos %lld\n", rs1 - vs1.begin());
 
-    int a1[7] {1, 3, 5, 7, 9, 11};
-    auto r5 = Fib_search(a1 + 0, a1 + 6, 5);
-    printf("The search result for r5: pos %lld\n", r5 - a1);
+    // int a1[7] {1, 3, 5, 7, 9, 11};
+    // auto r5 = Fib_search(a1 + 0, a1 + 6, 5);
+    // printf("The search result for r5: pos %lld\n", r5 - a1);
 
-    auto r6 = Fib_search(a1 + 0, a1 + 6, 3, FIB_SEARCH_VERSION2);
-    printf("The search result for r6: pos %lld\n", r6 - a1);
+    // auto r6 = Fib_search(a1 + 0, a1 + 6, 3, FIB_SEARCH_VERSION2);
+    // printf("The search result for r6: pos %lld\n", r6 - a1);
 
-    auto r7 = Fib_search(a1 + 0, a1 + 6, 8),
-        r8 = Fib_search(a1 + 0, a1 + 6, 8, FIB_SEARCH_VERSION1),
-        r9 = Fib_search(a1 + 0, a1 + 6, 8, FIB_SEARCH_VERSION2);
-    printf("The search result for r7: pos %lld\n", r7 - a1);
-    printf("The search result for r8: pos %lld\n", r8 - a1);
-    printf("The search result for r9: pos %lld\n", r9 - a1);
+    // auto r7 = Fib_search(a1 + 0, a1 + 6, 8),
+    //     r8 = Fib_search(a1 + 0, a1 + 6, 8, FIB_SEARCH_VERSION1),
+    //     r9 = Fib_search(a1 + 0, a1 + 6, 8, FIB_SEARCH_VERSION2);
+    // printf("The search result for r7: pos %lld\n", r7 - a1);
+    // printf("The search result for r8: pos %lld\n", r8 - a1);
+    // printf("The search result for r9: pos %lld\n", r9 - a1);
+    //
+    //
+
+    // 测试排序算法
+    Vector<int> v1{1, 8, 5, 4, 3, 0};
+    Vector<string> vs1{"jsds", "ass", "aaa", "a", "bsds"};
+    v1.printInfo("v1");
+    Bubble_sort(v1.begin(), v1.end(), less<int>());
+    v1.printInfo("v1");
+    vs1.printInfo("vs1");
+    Bubble_sort(vs1.begin(), vs1.end(), less<string>());
+    vs1.printInfo("vs1");
+
     return 0;
 }
 
