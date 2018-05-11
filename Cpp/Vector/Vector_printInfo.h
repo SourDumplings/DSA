@@ -22,7 +22,7 @@ namespace CZ
     template <typename T>
     inline void Vector<T>::printInfo(const char *name)
     {
-        printf("\nVector %s:\n", name);
+        printf("Vector %s:\n", name);
         printf("capacity = %u, size = %u\n", _capacity, _size);
         printf("including: ");
         int output = 0;
@@ -34,7 +34,7 @@ namespace CZ
             }
             std::cout << _elem[i];
         }
-        putchar('\n');
+        printf("\n\n");
         return;
     }
 }

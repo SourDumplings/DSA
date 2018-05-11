@@ -14,24 +14,24 @@
 #define BINARY_SEARCH_H
 
 #include <functional>
+#include <cstdio>
 
 namespace CZ
 {
-    enum BinarySearchVersion {BINARY_SEARCH_VERSION1, BINARY_SEARCH_VERSION2, BINARY_SEARCH_VERSION3};
-
     template <typename It, typename E, typename Cmp>
     It Binary_search(const It &begin, const It &end, const E &value,
-        const Cmp &cmp, const BinarySearchVersion &version =  BINARY_SEARCH_VERSION1)
+        const Cmp &cmp, const unsigned version =  0)
     {
         unsigned lo = 0, hi = end - begin;
         unsigned mi;
 
         switch (version)
         {
-            case BINARY_SEARCH_VERSION1:
+            case 0:
             {
                 // 普通版本的二分查找，每一步需要比较2次
                 // 若是没找到则返回尾后迭代器
+                // printf("using Binary Search version 0...\n");
                 while (lo < hi)
                 {
                     mi = (lo + hi) >> 1;
@@ -49,10 +49,11 @@ namespace CZ
                 }
                 return end;
             }
-            case BINARY_SEARCH_VERSION2:
+            case 1:
             {
                 // 优化版本的二分查找，每一步只需比较1次
                 // 若是没找到则返回尾后迭代器
+                // printf("using Binary Search version 1...\n");
                 while (lo < hi - 1)
                 {
                     mi = (lo + hi) >> 1;
@@ -63,10 +64,11 @@ namespace CZ
                 return (!cmp(value, temp) && !cmp(temp, value)) ?
                     (begin + lo) : end;
             }
-            case BINARY_SEARCH_VERSION3:
+            case 2:
             {
                 // 优化版本的二分查找，每一步只需比较1次
                 // 若是没找到则返回比所查找的元素小的最后一个元素的迭代器
+                // printf("using Binary Search version 2...\n");
                 while (lo < hi)
                 {
                     mi = (lo + hi) >> 1;
@@ -76,13 +78,7 @@ namespace CZ
                 return begin + (--lo);
             }
         }
-    }
-
-    template <typename It, typename E>
-    It Binary_search(const It &begin, const It &end, const E &value,
-        const BinarySearchVersion version = BINARY_SEARCH_VERSION1)
-    {
-        return Binary_search(begin, end, value, std::less<const E&>(), version);
+        return end;
     }
 } // CZ
 

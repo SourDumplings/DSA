@@ -89,6 +89,7 @@ namespace CZ
                 return (n < 2) ? n : (get_fib(n - 1, 1) + get_fib(n - 2, 1));
             }
         }
+        return thisItem;
     }
 } // CZ
 

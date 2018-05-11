@@ -13,16 +13,16 @@
 #define FIB_SEARCH_H
 
 #include <functional>
-#include "Fib.h"
+#include <cstdio>
+#include "..\Fib.h"
 
 namespace CZ
 {
     // 一共有两个版本的斐波那契查找
-    enum FibSearchVersion {FIB_SEARCH_VERSION1, FIB_SEARCH_VERSION2};
 
     template <typename It, typename E, typename Cmp>
     It Fib_search(const It &begin, const It &end, const E &value,
-        const Cmp &cmp, const FibSearchVersion &version =  FIB_SEARCH_VERSION1)
+        const Cmp &cmp, const unsigned version =  0)
     {
         unsigned lo = 0, hi = end - begin;
         unsigned mi;
@@ -30,10 +30,11 @@ namespace CZ
 
         switch (version)
         {
-            case  FIB_SEARCH_VERSION1:
+            case 0:
             {
                 // 版本一，成功查找可以提前终止
                 // 但是每步迭代最多要做两次比较
+                // printf("using Fib Search version 0...\n");
                 while (lo < hi)
                 {
                     while (hi - lo < fib.get()) // 确定一个黄金比分割
@@ -56,12 +57,13 @@ namespace CZ
                 }
                 return end;
             }
-            case FIB_SEARCH_VERSION2:
+            case 1:
             {
                 // 版本二，成功查找不能提前终止
                 // 但是每步迭代最多只做一次迭代
                 // 有多个命中元素时，总能保证返回最秩最大者的位置
                 // 查找失败时，能够返回失败的位置，即不大于value的元素的最大者的位置
+                // printf("using Fib Search version 1...\n");
                 while (lo < hi)
                 {
                     while (hi - lo < fib.get()) // 确定一个黄金比分割
@@ -77,13 +79,7 @@ namespace CZ
                 return begin + (--lo);
             }
         }
-    }
-
-    template <typename It, typename E>
-    It Fib_search(const It &begin, const It &end, const E &value,
-        const FibSearchVersion version = FIB_SEARCH_VERSION1)
-    {
-        return Fib_search(begin, end, value, std::less<const E&>(), version);
+        return end;
     }
 } // CZ
 

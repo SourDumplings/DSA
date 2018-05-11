@@ -6,20 +6,23 @@
 */
 
 /*
-交换函数模板
+交换函数模板，要求元素必须实现复制构造函数和拷贝赋值操作符
  */
 
 #ifndef SWAP_H
 #define SWAP_H
 
-template <typename T>
-void Swap(T &a, T &b)
+namespace CZ
 {
-    T temp(a);
-    a = b;
-    b = temp;
-    return;
-}
+    template <typename T>
+    void Swap(T &a, T &b)
+    {
+        T temp(a);
+        a = b;
+        b = temp;
+        return;
+    }
+} // CZ
 
 #endif // SWAP_H
 
