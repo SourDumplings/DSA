@@ -106,13 +106,18 @@ int main(int argc, char const *argv[])
 
     // 测试排序算法
     Vector<int> v1{1, 8, 5, 4, 3, 0};
-    Vector<string> vs1{"jsds", "ass", "aaa", "a", "bsds"};
+    Vector<string> vs1{"jsds", "ass", "aaaa", "ab", "bsds"}, vs2(vs1);
     v1.printInfo("v1");
-    Sort(v1.begin(), v1.end());
+    // Sort(v1.begin(), v1.end());
+    Sort(v1.begin(), v1.end(), SELECT_SORT);
     v1.printInfo("v1");
     vs1.printInfo("vs1");
-    Stable_sort(vs1.begin(), vs1.end(), BUBBLE_SORT, 1);
+    // Stable_sort(vs1.begin(), vs1.end(), BUBBLE_SORT, 1);
+    Stable_sort(vs1.begin(), vs1.end(), SELECT_SORT, 1);
     vs1.printInfo("vs1");
+    Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
+        { return s1.length() < s2.length(); }, SELECT_SORT, 0);
+    vs2.printInfo("vs2");
 
     return 0;
 }
