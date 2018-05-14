@@ -78,7 +78,7 @@ namespace CZ
     protected:
         Rank _size; // 规模
         Rank _capacity; // 容量
-        T* _elem; // 数据区
+        T *_elem; // 数据区
 
         //迭代器区间的复制
         void copy_construct_from(const T *begin, const T *end);

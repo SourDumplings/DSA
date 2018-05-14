@@ -49,11 +49,9 @@ namespace CZ
     template <typename T>
     inline Vector<T>& Vector<T>::operator=(const Vector<T> &V)
     {
-        if (this != &V)
-        {
-            free();
-            copy_construct_from(V.begin(), V.end());
-        }
+        T *temp = _elem;
+        copy_construct_from(V.begin(), V.end());
+        delete [] temp;
         return *this;
     }
 
