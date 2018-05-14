@@ -50,7 +50,7 @@ namespace CZ
     inline Vector<T>& Vector<T>::operator=(const Vector<T> &V)
     {
         T *temp = _elem;
-        copy_construct_from(V.begin(), V.end());
+        init_from(V.begin(), V.end());
         delete [] temp;
         return *this;
     }

@@ -19,7 +19,7 @@ namespace CZ
     template <typename T>
     inline Vector<T>::Vector(const Vector<T> &V)
     {
-        copy_construct_from(V._elem, V._elem + V._size);
+        init_from(V._elem, V._elem + V._size);
     }
 }
 

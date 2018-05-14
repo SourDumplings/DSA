@@ -9,8 +9,8 @@
 按迭代器区间拷贝构造
  */
 
-#ifndef VECTOR_COPY_COSTRUCT_FROM_H
-#define VECTOR_COPY_COSTRUCT_FROM_H
+#ifndef INIT_FROM_H
+#define INIT_FROM_H
 
 #include "Vector.h"
 
@@ -18,7 +18,7 @@ namespace CZ
 {
     // 迭代器区间的复制
     template <typename T>
-    inline void Vector<T>::copy_construct_from(const T *begin, const T *end)
+    inline void Vector<T>::init_from(const T *begin, const T *end)
     {
         _elem = new T[_capacity = 2 * (end - begin)];
         _size = 0;
@@ -30,5 +30,5 @@ namespace CZ
     }
 }
 
-#endif // VECTOR_COPY_COSTRUCT_FROM_H
+#endif // INIT_FROM_H
 

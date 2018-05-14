@@ -81,7 +81,7 @@ namespace CZ
         T *_elem; // 数据区
 
         //迭代器区间的复制
-        void copy_construct_from(const T *begin, const T *end);
+        void init_from(const T *begin, const T *end);
         // 析构辅助方法
         void free();
         // 搬到大房子中，即扩容操作
