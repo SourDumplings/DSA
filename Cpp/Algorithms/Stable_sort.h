@@ -17,13 +17,15 @@
 
 #include ".\Sort_methods\Bubble_sort.h"
 #include ".\Sort_methods\Select_sort.h"
+#include ".\Sort_methods\Insertion_sort.h"
 
 namespace CZ
 {
     enum StableSortMethod
     {
         BUBBLE_SORT,
-        SELECT_SORT
+        SELECT_SORT,
+        INSERTION_SORT
     };
 
     template <typename It, typename Cmp>
@@ -49,6 +51,11 @@ namespace CZ
                     case SELECT_SORT:
                     {
                         Select_sort(begin, N, cmp, version);
+                        break;
+                    }
+                    case INSERTION_SORT:
+                    {
+                        Insertion_sort(begin, N, 1, cmp, version);
                         break;
                     }
                 }

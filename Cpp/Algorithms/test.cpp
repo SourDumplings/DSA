@@ -109,14 +109,18 @@ int main(int argc, char const *argv[])
     Vector<string> vs1{"jsds", "ass", "aaaa", "ab", "bsds"}, vs2(vs1);
     v1.printInfo("v1");
     // Sort(v1.begin(), v1.end());
-    Sort(v1.begin(), v1.end(), SELECT_SORT);
+    // Sort(v1.begin(), v1.end(), SELECT_SORT);
+    Sort(v1.begin(), v1.end(), INSERTION_SORT);
     v1.printInfo("v1");
     vs1.printInfo("vs1");
     // Stable_sort(vs1.begin(), vs1.end(), BUBBLE_SORT, 1);
-    Stable_sort(vs1.begin(), vs1.end(), SELECT_SORT, 1);
+    // Stable_sort(vs1.begin(), vs1.end(), SELECT_SORT, 1);
+    Stable_sort(vs1.begin(), vs1.end(), INSERTION_SORT);
     vs1.printInfo("vs1");
+    // Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
+    //     { return s1.length() < s2.length(); }, SELECT_SORT, 0);
     Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-        { return s1.length() < s2.length(); }, SELECT_SORT, 0);
+        { return s1.length() < s2.length(); }, INSERTION_SORT, 0);
     vs2.printInfo("vs2");
 
     return 0;
