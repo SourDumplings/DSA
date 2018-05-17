@@ -76,10 +76,6 @@ namespace CZ
         Vector<T>& operator=(const Vector<T> &V);
         Vector<T>& operator=(Vector<T> &&V);
     protected:
-        Rank _size; // 规模
-        Rank _capacity; // 容量
-        T *_elem; // 数据区
-
         //迭代器区间的复制
         void init_from(const T *begin, const T *end);
         // 析构辅助方法
@@ -88,6 +84,11 @@ namespace CZ
         bool expand();
         // 装填因子过小时缩容
         bool shrink();
+
+    private:
+        Rank _size; // 规模
+        Rank _capacity; // 容量
+        T *_elem; // 数据区
     };
 }
 

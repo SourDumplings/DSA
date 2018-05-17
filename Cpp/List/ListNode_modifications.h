@@ -17,14 +17,14 @@
 namespace CZ
 {
     template <typename T>
-    ListNode<T>* ListNode<T>::insert_as_prev(const T &newData)
+    inline ListNode<T>* ListNode<T>::insert_as_prev(const T &newData)
     {
         ListNode<T>* newNode = new ListNode(newData, _prev, this);
         return newNode;
     }
 
     template <typename T>
-    ListNode<T>* ListNode<T>::insert_as_next(const T &newData)
+    inline ListNode<T>* ListNode<T>::insert_as_next(const T &newData)
     {
         ListNode<T> *newNode = new ListNode(newData, this, _next);
         return newNode;

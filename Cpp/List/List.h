@@ -15,8 +15,9 @@
 #define LIST_H
 
 #include <functional>
+#include <initializer_list>
 #include "ListNode.h"
-#include "List_iterator.h"
+#include "ListIterator.h"
 
 namespace CZ
 {
@@ -25,10 +26,21 @@ namespace CZ
     {
     public:
         using Rank = unsigned;
-        using iterator = List_iterator<T>;
+        using iterator = ListIterator<T>;
 
 		// 构造函数
-        List();
+        List(Rank n = 0, T data = T());
+        List(const T *begin, Rank n);
+        List(iterator begin, Rank n);
+        List(const T *begin, const T *end);
+        List(iterator begin, iterator end);
+        List(const std::initializer_list<T> &L);
+
+        // 复制构造函数
+        List(const List &l);
+
+        // 移动构造函数
+        List(List &&l);
 
 		// 析构函数
         ~List();
@@ -51,6 +63,9 @@ namespace CZ
         T& tail();
         const T& tail() const;
 
+        // 打印列表信息
+        void printInfo(const char *name = "");
+
 		// 动态操作接口
         void push_back(const T &data);
         void push_back(T &&data);
@@ -58,16 +73,35 @@ namespace CZ
         void push_front(T &&data);
         void pop_back();
         void pop_front();
+        iterator insert(iterator pos, const T &data);
+        iterator insert(iterator pos, T &&data);
+        iterator erase(iterator pos);
         void clear();
-
+        void merge(const List &l);
+        void merge(List &&l);
+        void unify();
+        // 排序函数模板
         template <typename Cmp>
         void sort(const Cmp &cmp = std::less<const T&>());
 
+        // 操作符函数
+        List& operator=(const List &l);
+        List& operator=(List &&l);
+
+    protected:
+        void free();
+        void init();
+        void init_from(const T *begin, const T *end);
+        void init_from(iterator begin, iterator end);
+
     private:
-        Rank _size;
+        Rank _size = 0;
         ListNode<T> *_head = nullptr, *_tail = nullptr; // 首尾哨兵结点
     };
 } // CZ
+
+#include "List_implementation.h"
+#include "List_operations.h"
 
 #endif // LIST_H
 
