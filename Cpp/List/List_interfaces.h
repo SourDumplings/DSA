@@ -37,6 +37,28 @@ namespace CZ
     {
         return ListIterator<T>(_tail);
     }
+
+    template <typename T>
+    inline typename List<T>::Rank List<T>::size()
+    {
+        return _size;
+    }
+    template <typename T>
+    inline typename List<T>::Rank List<T>::size() const
+    {
+        return _size;
+    }
+
+    template <typename T>
+    inline bool List<T>::empty()
+    {
+        return _size == 0;
+    }
+    template <typename T>
+    inline bool List<T>::empty() const
+    {
+        return _size == 0;
+    }
 } // CZ
 
 #endif // LIST_INTERFACES_H
