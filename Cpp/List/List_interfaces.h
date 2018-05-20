@@ -59,6 +59,55 @@ namespace CZ
     {
         return _size == 0;
     }
+
+    template <typename T>
+    inline ListNode<T>& List<T>::head()
+    {
+        return *_head;
+    }
+
+    template <typename T>
+    inline const ListNode<T>& List<T>::head() const
+    {
+        return *_head;
+    }
+
+    template <typename T>
+    inline ListNode<T>& List<T>::tail()
+    {
+        return *_tail;
+    }
+
+    template <typename T>
+    inline const ListNode<T>& List<T>::tail() const
+    {
+        return *_tail;
+    }
+
+    template <typename T>
+    inline T& List<T>::front()
+    {
+        return _head->next()->data();
+    }
+
+    template <typename T>
+    inline const T& List<T>::front() const
+    {
+        return _head->next()->data();
+    }
+
+    template <typename T>
+    inline T& List<T>::back()
+    {
+        return _back->data();
+    }
+
+    template <typename T>
+    inline const T& List<T>::back() const
+    {
+        return _back->data();
+    }
+
 } // CZ
 
 #endif // LIST_INTERFACES_H

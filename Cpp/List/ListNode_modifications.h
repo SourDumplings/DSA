@@ -13,6 +13,7 @@
 #define LIST_NODE_MODIFICATIONS_H
 
 #include "ListNode.h"
+#include <utility>
 
 namespace CZ
 {
@@ -24,9 +25,23 @@ namespace CZ
     }
 
     template <typename T>
+    inline ListNode<T>* ListNode<T>::insert_as_prev(T &&newData)
+    {
+        ListNode<T>* newNode = new ListNode(std::move(newData), _prev, this);
+        return newNode;
+    }
+
+    template <typename T>
     inline ListNode<T>* ListNode<T>::insert_as_next(const T &newData)
     {
         ListNode<T> *newNode = new ListNode(newData, this, _next);
+        return newNode;
+    }
+
+    template <typename T>
+    inline ListNode<T>* ListNode<T>::insert_as_next(T &&newData)
+    {
+        ListNode<T> *newNode = new ListNode(std::move(newData), this, _next);
         return newNode;
     }
 

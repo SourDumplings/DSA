@@ -26,7 +26,7 @@ namespace CZ
             last = last->insert_as_next(data);
             last->prev()->next() = last;
         }
-        _tail->prev() = last;
+        _tail->prev() = _back = last;
         return;
     }
 
@@ -47,7 +47,7 @@ namespace CZ
             last = last->insert_as_next(*begin++);
             last->prev()->next() = last;
         }
-        _tail->prev() = last;
+        _tail->prev() = _back = last;
         return;
     }
 

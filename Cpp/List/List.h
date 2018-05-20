@@ -43,7 +43,7 @@ namespace CZ
         List(List &&l);
 
 		// 析构函数
-        ~List();
+        virtual ~List();
 
 		// 数据访问接口
 		Rank size();
@@ -58,35 +58,40 @@ namespace CZ
         const T& front() const;
         T& back();
         const T& back() const;
-        T& head();
-        const T& head() const;
-        T& tail();
-        const T& tail() const;
+        ListNode<T>& head();
+        const ListNode<T>& head() const;
+        ListNode<T>& tail();
+        const ListNode<T>& tail() const;
 
         // 打印列表信息
         void printInfo(const char *name = "");
 
 		// 动态操作接口
-        void push_back(const T &data);
-        void push_back(T &&data);
-        void push_front(const T &data);
-        void push_front(T &&data);
-        void pop_back();
-        void pop_front();
+        virtual void push_back(const T &data);
+        virtual void push_back(T &&data);
+        virtual void push_front(const T &data);
+        virtual void push_front(T &&data);
+        virtual void pop_back();
+        virtual void pop_front();
         iterator insert(iterator pos, const T &data);
         iterator insert(iterator pos, T &&data);
+        iterator insert(iterator pos, iterator b, iterator e);
         iterator erase(iterator pos);
+        iterator erase(iterator b, iterator e);
         void clear();
-        void merge(const List &l);
-        void merge(List &&l);
-        void unify();
+        virtual void merge(const List<T> &l);
+        virtual void merge(List<T> &&l);
         // 排序函数模板
+        void swap(iterator pos1, iterator pos2);
         template <typename Cmp>
         void sort(const Cmp &cmp = std::less<const T&>());
+        // 有序列表去重
+        void unique();
+        virtual void reverse();
 
         // 操作符函数
-        List& operator=(const List &l);
-        List& operator=(List &&l);
+        virtual List& operator=(const List &l);
+        virtual List& operator=(List &&l);
 
     protected:
         void free();
@@ -96,6 +101,7 @@ namespace CZ
 
     private:
         Rank _size = 0;
+        ListNode<T> *_back = nullptr; // 尾结点
         ListNode<T> *_head = nullptr, *_tail = nullptr; // 首尾哨兵结点
     };
 } // CZ

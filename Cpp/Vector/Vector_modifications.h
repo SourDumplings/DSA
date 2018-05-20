@@ -14,6 +14,7 @@ Vector类模板的动态操作方法
 
 #include "Vector.h"
 #include <stdexcept>
+#include <utility>
 
 namespace CZ
 {
@@ -32,6 +33,16 @@ namespace CZ
         ++_size;
         expand();
         _elem[_size-1] = x;
+        return;
+    }
+
+    template <typename T>
+    inline void Vector<T>::push_back(T &&x)
+    {
+        // 如有必要则扩容
+        ++_size;
+        expand();
+        _elem[_size-1] = std::move(x);
         return;
     }
 
@@ -74,6 +85,32 @@ namespace CZ
                 _elem[i] = _elem[i-1];
             }
             _elem[r] = x;
+        }
+        catch (const char *errMsg)
+        {
+            printf("Error: %s\n", errMsg);
+            throw std::exception();
+        }
+        return begin() + r;
+    }
+
+    template <typename T>
+    inline typename Vector<T>::iterator Vector<T>::insert(typename Vector<T>::iterator itPos, T &&x)
+    {
+        typename Vector<T>::Rank r = itPos - begin();
+        try
+        {
+            if (!(itPos <= end() && itPos >= begin()))
+            {
+                throw "Invalid pos iterator";
+            }
+            ++_size;
+            expand();
+            for (unsigned i = _size - 1; i != r; --i)
+            {
+                _elem[i] = _elem[i-1];
+            }
+            _elem[r] = std::move(x);
         }
         catch (const char *errMsg)
         {

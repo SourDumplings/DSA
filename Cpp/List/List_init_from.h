@@ -27,7 +27,7 @@ namespace CZ
             last->prev()->next() = last;
             ++_size;
         }
-        _tail->prev() = last;
+        _tail->prev() = _back = last;
         return;
     }
 
@@ -42,7 +42,7 @@ namespace CZ
             last->prev()->next() = last;
             ++_size;
         }
-        _tail->prev() = last;
+        _tail->prev() = _back = last;
         return;
     }
 } // CZ

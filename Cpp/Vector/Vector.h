@@ -63,8 +63,10 @@ namespace CZ
         // 动态操作
         void clear();
         void push_back(const T &x);
+        void push_back(T &&x);
         void pop_back();
         iterator insert(iterator itPos, const T &x);
+        iterator insert(iterator itPos, T &&x);
         iterator insert(iterator itPos, const T *b, const T *e);
         iterator erase(iterator itPos);
         iterator erase(iterator itBegin, iterator itEnd);

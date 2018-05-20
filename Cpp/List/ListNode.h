@@ -22,7 +22,6 @@ namespace CZ
         // 构造函数
         ListNode();
         ListNode(const T &data_, ListNode<T> *prev_ = nullptr, ListNode<T> *next_ = nullptr);
-        ListNode(T &&data_, ListNode<T> *prev_ = nullptr, ListNode<T> *next_ = nullptr);
 
         // 数据访问接口
         ListNode<T>*& next();
@@ -34,7 +33,9 @@ namespace CZ
 
         // 动态操作接口
         ListNode<T>* insert_as_prev(const T &newData);
+        ListNode<T>* insert_as_prev(T &&newData);
         ListNode<T>* insert_as_next(const T &newData);
+        ListNode<T>* insert_as_next(T &&newData);
     private:
         T _data;
         ListNode<T> *_prev = nullptr, *_next = nullptr;
