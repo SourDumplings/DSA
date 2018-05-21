@@ -18,6 +18,9 @@ List类模板的实现所需的头文件
 #include "List_constructors.h"
 #include "List_destructor.h"
 
+#include "List_copy_constructor.h"
+#include "List_move_constructor.h"
+
 #include "List_interfaces.h"
 
 #include "List_modifications.h"

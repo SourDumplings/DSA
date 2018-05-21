@@ -32,6 +32,7 @@ namespace CZ
         _size = 0;
         _head->next() = _tail;
         _tail->prev() = _head;
+        _back = nullptr;
         return;
     }
 
@@ -180,7 +181,8 @@ namespace CZ
         _tail->prev() = l._back;
         _size += l._size;
 
-        l._head = l._back = l._tail = nullptr;
+        l.init();
+        l._back = nullptr;
         l._size = 0;
         return;
     }

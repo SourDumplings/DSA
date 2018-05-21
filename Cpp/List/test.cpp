@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <cstdio>
+#include <utility>
 #include "List.h"
 
 using namespace std;
@@ -28,6 +29,12 @@ int main(int argc, char const *argv[])
     l3.printInfo("l3");
     l4.printInfo("l4");
     l4.printInfo("l5");
+
+    List<int> l6(l4), l7(std::move(l2));
+    l6.printInfo("l6");
+    l4.printInfo("l4");
+    l7.printInfo("l7");
+    l2.printInfo("l2");
 
     return 0;
 }

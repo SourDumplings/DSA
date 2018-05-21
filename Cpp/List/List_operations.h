@@ -41,7 +41,8 @@ namespace CZ
             _back = l._back;
             _size = l._size;
 
-            l._head = l._tail = l._back = nullptr;
+            l.init();
+            l._back = nullptr;
             l._size = 0;
         }
         return *this;
