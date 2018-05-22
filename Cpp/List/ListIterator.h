@@ -38,6 +38,11 @@ namespace CZ
         { return _node->data(); }
         const T& operator*() const
         { return _node->data(); }
+        ListNode<T>* operator->()
+        { return _node; }
+        const ListNode<T>* operator->() const
+        { return _node; }
+
         ListIterator<T>& operator++()
         {
             _node = _node->next();
