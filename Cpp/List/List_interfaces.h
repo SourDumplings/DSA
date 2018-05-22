@@ -13,6 +13,7 @@ List类模板的访问接口函数
 #define LIST_INTERFACES_H
 
 #include "List.h"
+#include <stdexcept>
 
 namespace CZ
 {
@@ -87,13 +88,41 @@ namespace CZ
     template <typename T>
     inline T& List<T>::front()
     {
-        return _head->next()->data();
+        try
+        {
+            if (!empty())
+            {
+                return _head->next()->data();
+            }
+            else
+                throw "empty list";
+        }
+        catch (const char *errMsg)
+        {
+            printf("%s\n", errMsg);
+            throw std::exception();
+        }
+        return _head->data();
     }
 
     template <typename T>
     inline const T& List<T>::front() const
     {
-        return _head->next()->data();
+        try
+        {
+            if (!empty())
+            {
+                return _head->next()->data();
+            }
+            else
+                throw "empty list";
+        }
+        catch (const char *errMsg)
+        {
+            printf("%s\n", errMsg);
+            throw std::exception();
+        }
+        return _head->data();
     }
 
     template <typename T>

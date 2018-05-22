@@ -32,10 +32,13 @@ namespace CZ
         const T& data() const;
 
         // 动态操作接口
+        // 注意只会影响新插入的结点，改变新插入的那个结点的相应的指针
         ListNode<T>* insert_as_prev(const T &newData);
         ListNode<T>* insert_as_prev(T &&newData);
+        ListNode<T>* insert_as_prev(ListNode<T> *newNode);
         ListNode<T>* insert_as_next(const T &newData);
         ListNode<T>* insert_as_next(T &&newData);
+        ListNode<T>* insert_as_next(ListNode<T> *newNode);
     private:
         T _data;
         ListNode<T> *_prev = nullptr, *_next = nullptr;

@@ -62,15 +62,15 @@ namespace CZ
         typename List<T>::iterator b, typename List<T>::iterator e)
     {
         ListNode<T> *posGet = pos.get();
+        ListNode<T> *hNode = posGet->prev();
         while (b != e)
         {
             ListNode<T> *newNode = posGet->insert_as_prev(*b++);
             posGet->prev()->next() = newNode;
             posGet->prev() = newNode;
-            posGet = newNode;
             ++_size;
         }
-        return ListIterator<T>(posGet);
+        return ListIterator<T>(hNode->next());
     }
 
     template <typename T>
@@ -179,6 +179,8 @@ namespace CZ
     {
         _back->next() = l._head->next();
         _tail->prev() = l._back;
+        _back = l._back;
+        _tail = l._tail;
         _size += l._size;
 
         l.init();
@@ -220,13 +222,14 @@ namespace CZ
     }
 
     template <typename T>
-    inline void List<T>::unique()
+    template <typename Cmp>
+    inline void List<T>::unique(const Cmp &cmp)
     {
         for (iterator firstRepeat = begin(); firstRepeat != end();)
         {
             iterator lastRepeat = firstRepeat;
-            for (; *lastRepeat == *firstRepeat && lastRepeat != end(); ++lastRepeat);
-            erase(firstRepeat, lastRepeat);
+            for (; cmp(*lastRepeat, *firstRepeat) && lastRepeat != end(); ++lastRepeat);
+            firstRepeat = erase(++iterator(firstRepeat), lastRepeat);
         }
         return;
     }
@@ -234,14 +237,17 @@ namespace CZ
     template <typename T>
     inline void List<T>::reverse()
     {
-        for (ListNode<T> *f = _head->next(), *b = _back; f != b; b = b->prev())
+        ListNode<T> *e = _tail;
+        for (unsigned count = 0; count != _size; ++count)
         {
-            Swap(f->data(), b->data());
-            f = f->next();
-            if (f == b)
-            {
-                break;
-            }
+            ListNode<T> *temp = _head->next();
+            _head->next() = temp->next();
+            temp->next()->prev() = _head;
+
+            e->prev()->next() = temp;
+            e->insert_as_prev(temp);
+            e->prev() = temp;
+            e = temp;
         }
         return;
     }

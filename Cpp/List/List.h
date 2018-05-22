@@ -83,10 +83,13 @@ namespace CZ
         virtual void merge(List<T> &&l);
         // 排序函数模板
         void swap(iterator pos1, iterator pos2);
-        template <typename Cmp>
+
+        template <typename Cmp = std::less<const T&>>
         void sort(const Cmp &cmp = std::less<const T&>());
         // 有序列表去重
-        void unique();
+        template <typename Cmp = std::equal_to<const T&>>
+        void unique(const Cmp &cmp = std::equal_to<const T&>());
+
         virtual void reverse();
 
         // 操作符函数

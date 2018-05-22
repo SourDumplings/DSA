@@ -32,6 +32,14 @@ namespace CZ
     }
 
     template <typename T>
+    inline ListNode<T>* ListNode<T>::insert_as_prev(ListNode<T> *newNode)
+    {
+        newNode->next() = this;
+        newNode->prev() = _prev;
+        return newNode;
+    }
+
+    template <typename T>
     inline ListNode<T>* ListNode<T>::insert_as_next(const T &newData)
     {
         ListNode<T> *newNode = new ListNode(newData, this, _next);
@@ -42,6 +50,14 @@ namespace CZ
     inline ListNode<T>* ListNode<T>::insert_as_next(T &&newData)
     {
         ListNode<T> *newNode = new ListNode(std::move(newData), this, _next);
+        return newNode;
+    }
+
+    template <typename T>
+    inline ListNode<T>* ListNode<T>::insert_as_next(ListNode<T> *newNode)
+    {
+        newNode->prev() = this;
+        newNode->next() = _next;
         return newNode;
     }
 
