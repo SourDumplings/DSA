@@ -17,7 +17,7 @@
 namespace CZ
 {
     template <typename T>
-    inline Vector<T>::Vector(const Vector<T> &V)
+    Vector<T>::Vector(const Vector<T> &V)
     {
         init_from(V._elem, V._elem + V._size);
     }

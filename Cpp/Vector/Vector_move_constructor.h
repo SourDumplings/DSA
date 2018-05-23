@@ -17,7 +17,7 @@ Vector的移动构造函数
 namespace CZ
 {
     template <typename T>
-    inline Vector<T>::Vector(Vector<T> &&V)
+    Vector<T>::Vector(Vector<T> &&V)
     {
         _elem = V._elem;
         _size = V._size;

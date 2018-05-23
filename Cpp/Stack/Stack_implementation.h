@@ -22,7 +22,7 @@
 namespace CZ
 {
     template <typename T, typename C>
-    inline const T& Stack<T, C>::top() const
+    const T& Stack<T, C>::top() const
     {
         try
         {
@@ -60,7 +60,7 @@ namespace CZ
     { return _data.push_back(std::move(x)); }
 
     template <typename T, typename C>
-    inline void Stack<T, C>::pop()
+    void Stack<T, C>::pop()
     {
         try
         {
@@ -82,7 +82,7 @@ namespace CZ
     { return _data.clear(); }
 
     template <typename T, typename C>
-    inline void Stack<T, C>::printInfo(const char *name) const
+    void Stack<T, C>::printInfo(const char *name) const
     {
         printf("for stack %s:\n", name);
         printf("size = %u\n", size());

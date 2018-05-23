@@ -20,7 +20,7 @@ namespace CZ
 {
     // 打印所有元素，空格隔开，末尾换行
     template <typename T>
-    inline void Vector<T>::printInfo(const char *name) const
+    void Vector<T>::printInfo(const char *name) const
     {
         printf("Vector %s:\n", name);
         printf("capacity = %u, size = %u\n", _capacity, _size);

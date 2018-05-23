@@ -17,7 +17,7 @@ List模板类的复制构造函数
 namespace CZ
 {
     template <typename T>
-    inline List<T>::List(const List<T> &l)
+    List<T>::List(const List<T> &l)
     {
         init_from(l.begin(), l.end());
         return;

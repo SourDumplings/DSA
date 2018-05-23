@@ -21,7 +21,7 @@ namespace CZ
 {
     // 赋值操作符
     template <typename T>
-    inline List<T>& List<T>::operator=(const List &l)
+    List<T>& List<T>::operator=(const List &l)
     {
         if (l != *this)
         {
@@ -32,7 +32,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline List<T>& List<T>::operator=(List &&l)
+    List<T>& List<T>::operator=(List &&l)
     {
         if (l != *this)
         {

@@ -17,10 +17,10 @@
 namespace CZ
 {
     template <typename T>
-    inline ListNode<T>::ListNode() = default;
+    ListNode<T>::ListNode() = default;
 
     template <typename T>
-    inline ListNode<T>::ListNode(const T &data_, ListNode<T> *prev_, ListNode<T> *next_):
+    ListNode<T>::ListNode(const T &data_, ListNode<T> *prev_, ListNode<T> *next_):
         _data(data_), _prev(prev_), _next(next_) {}
 } // CZ
 

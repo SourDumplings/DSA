@@ -17,7 +17,7 @@ List类模板的析构函数
 namespace CZ
 {
     template <typename T>
-    inline void List<T>::free()
+    void List<T>::free()
     {
         clear();
         delete _head;
@@ -26,7 +26,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline List<T>::~List()
+    List<T>::~List()
     {
         free();
         return;

@@ -48,7 +48,7 @@ namespace CZ
     inline Shared_ptr<T>::Shared_ptr(const Shared_ptr<T> &sPtr): _wPtr(sPtr._wPtr) { ++_wPtr->_count; }
 
     template <typename T>
-    inline Shared_ptr<T>::~Shared_ptr()
+    Shared_ptr<T>::~Shared_ptr()
     {
         printf("Shared_ptr's destructor\n");
         if (--_wPtr->_count == 0)
@@ -59,7 +59,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline Shared_ptr<T>& Shared_ptr<T>::operator=(const Shared_ptr<T> &rhs)
+    Shared_ptr<T>& Shared_ptr<T>::operator=(const Shared_ptr<T> &rhs)
     {
         if (this != &rhs)
         {
@@ -71,7 +71,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline const T& Shared_ptr<T>::operator*() const
+    const T& Shared_ptr<T>::operator*() const
     {
         try
         {
@@ -93,7 +93,7 @@ namespace CZ
     { return const_cast<T&>(*(static_cast<const Shared_ptr<T>&>(*this))); }
 
     template <typename T>
-    inline const T* Shared_ptr<T>::operator->() const
+    const T* Shared_ptr<T>::operator->() const
     {
         try
         {

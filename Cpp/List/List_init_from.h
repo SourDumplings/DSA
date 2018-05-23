@@ -17,7 +17,7 @@
 namespace CZ
 {
     template <typename T>
-    inline void List<T>::init_from(const T *begin, const T *end)
+    void List<T>::init_from(const T *begin, const T *end)
     {
         init();
         ListNode<T> *last = _head;
@@ -32,7 +32,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline void List<T>::init_from(iterator begin, iterator end)
+    void List<T>::init_from(iterator begin, iterator end)
     {
         init();
         ListNode<T> *last = _head;

@@ -17,7 +17,7 @@ List模板类的移动构造函数
 namespace CZ
 {
     template <typename T>
-    inline List<T>::List(List<T> &&l)
+    List<T>::List(List<T> &&l)
     {
         _size = l._size;
         _head = l._head;

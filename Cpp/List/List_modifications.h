@@ -20,7 +20,7 @@ List类模板的动态操作
 namespace CZ
 {
     template <typename T>
-    inline void List<T>::clear()
+    void List<T>::clear()
     {
         for (ListNode<T> *node = _head->next(); node != _tail;)
         {
@@ -37,7 +37,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline typename List<T>::iterator List<T>::insert(typename List<T>::iterator pos, const T &data)
+    typename List<T>::iterator List<T>::insert(typename List<T>::iterator pos, const T &data)
     {
         ListNode<T> *newNode = pos.get()->insert_as_prev(data);
         pos.get()->prev()->next() = newNode;
@@ -48,7 +48,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline typename List<T>::iterator List<T>::insert(typename List<T>::iterator pos, T &&data)
+    typename List<T>::iterator List<T>::insert(typename List<T>::iterator pos, T &&data)
     {
         ListNode<T> *posGet = pos.get();
         ListNode<T> *newNode = posGet->insert_as_prev(std::move(data));
@@ -60,7 +60,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline typename List<T>::iterator List<T>::insert(typename List<T>::iterator pos,
+    typename List<T>::iterator List<T>::insert(typename List<T>::iterator pos,
         typename List<T>::iterator b, typename List<T>::iterator e)
     {
         ListNode<T> *posGet = pos.get();
@@ -77,7 +77,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline typename List<T>::iterator List<T>::erase(typename List<T>::iterator pos)
+    typename List<T>::iterator List<T>::erase(typename List<T>::iterator pos)
     {
         try
         {
@@ -105,7 +105,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline typename List<T>::iterator List<T>::erase(typename List<T>::iterator b,
+    typename List<T>::iterator List<T>::erase(typename List<T>::iterator b,
         typename List<T>::iterator e)
     {
         try
@@ -184,7 +184,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline void List<T>::merge(List<T> &&l)
+    void List<T>::merge(List<T> &&l)
     {
         _back->next() = l._head->next();
         _tail->prev() = l._back;
@@ -207,7 +207,7 @@ namespace CZ
 
     template <typename T>
     template <typename Cmp>
-    inline void List<T>::sort(const Cmp &cmp)
+    void List<T>::sort(const Cmp &cmp)
     {
         bool isSorted = false;
         unsigned unSortedNum = _size, checkedNum;
@@ -232,7 +232,7 @@ namespace CZ
 
     template <typename T>
     template <typename Cmp>
-    inline void List<T>::unique(const Cmp &cmp)
+    void List<T>::unique(const Cmp &cmp)
     {
         for (iterator firstRepeat = begin(); firstRepeat != end();)
         {
@@ -244,7 +244,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline void List<T>::reverse()
+    void List<T>::reverse()
     {
         ListNode<T> *e = _tail;
         _back = _head->next();

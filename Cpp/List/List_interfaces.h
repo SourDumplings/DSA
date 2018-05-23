@@ -86,7 +86,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline T& List<T>::front()
+    T& List<T>::front()
     {
         try
         {
@@ -106,7 +106,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline const T& List<T>::front() const
+    const T& List<T>::front() const
     {
         try
         {

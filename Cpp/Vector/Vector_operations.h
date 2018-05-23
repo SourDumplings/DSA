@@ -21,7 +21,7 @@ Vector本身所支持的操作
 namespace CZ
 {
     template <typename T>
-    inline const T& Vector<T>::operator[](const Vector<T>::Rank i) const
+    const T& Vector<T>::operator[](const Vector<T>::Rank i) const
     {
         // printf("const version of [] is called\n");
         try
@@ -47,7 +47,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline Vector<T>& Vector<T>::operator=(const Vector<T> &V)
+    Vector<T>& Vector<T>::operator=(const Vector<T> &V)
     {
         T *temp = _elem;
         init_from(V.begin(), V.end());

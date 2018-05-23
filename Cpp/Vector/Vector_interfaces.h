@@ -84,7 +84,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline T& Vector<T>::back()
+    T& Vector<T>::back()
     {
         try
         {
@@ -102,7 +102,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline const T& Vector<T>::front() const
+    const T& Vector<T>::front() const
     {
         try
         {
@@ -120,7 +120,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline T& Vector<T>::front()
+    T& Vector<T>::front()
     {
         try
         {

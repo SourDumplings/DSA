@@ -18,7 +18,7 @@
 namespace CZ
 {
     template <typename C>
-    inline bool operator==(const C &lhs, const C &rhs) noexcept
+    bool operator==(const C &lhs, const C &rhs) noexcept
     {
         if (lhs.size() != rhs.size())
         {
@@ -42,7 +42,7 @@ namespace CZ
     }
 
     template <typename C>
-    inline bool operator<(const C &lhs, const C &rhs) noexcept
+    bool operator<(const C &lhs, const C &rhs) noexcept
     {
         if (lhs.size() == 0)
         {

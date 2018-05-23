@@ -17,7 +17,7 @@ List类模板的构造函数
 namespace CZ
 {
     template <typename T>
-    inline List<T>::List(Rank n, T data): _size(n)
+    List<T>::List(Rank n, T data): _size(n)
     {
         init();
         ListNode<T> *last = _head;
@@ -31,14 +31,14 @@ namespace CZ
     }
 
     template <typename T>
-    inline List<T>::List(const T *begin, Rank n): _size(n)
+    List<T>::List(const T *begin, Rank n): _size(n)
     {
         init_from(begin, begin+n);
         return;
     }
 
     template <typename T>
-    inline List<T>::List(iterator begin, Rank n): _size(n)
+    List<T>::List(iterator begin, Rank n): _size(n)
     {
         init();
         ListNode<T> *last = _head;
@@ -52,21 +52,21 @@ namespace CZ
     }
 
     template <typename T>
-    inline List<T>::List(const T *begin, const T *end)
+    List<T>::List(const T *begin, const T *end)
     {
         init_from(begin, end);
         return;
     }
 
     template <typename T>
-    inline List<T>::List(iterator begin, iterator end)
+    List<T>::List(iterator begin, iterator end)
     {
         init_from(begin, end);
         return;
     }
 
     template <typename T>
-    inline List<T>::List(const std::initializer_list<T> &L)
+    List<T>::List(const std::initializer_list<T> &L)
     {
         init_from(L.begin(), L.end());
         return;

@@ -17,13 +17,13 @@
 namespace CZ
 {
     template <typename T>
-    inline void Vector<T>::free()
+    void Vector<T>::free()
     {
         delete [] _elem;
     }
 
     template <typename T>
-    inline Vector<T>::~Vector()
+    Vector<T>::~Vector()
     {
         free();
     }

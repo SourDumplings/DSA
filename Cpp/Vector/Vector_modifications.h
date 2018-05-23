@@ -47,7 +47,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline void Vector<T>::pop_back()
+    void Vector<T>::pop_back()
     {
         try
         {
@@ -69,7 +69,7 @@ namespace CZ
 
     // 插入一个元素到指定位置之前，返回指向插入的元素的迭代器
     template <typename T>
-    inline typename Vector<T>::iterator Vector<T>::insert(typename Vector<T>::iterator itPos, const T &x)
+    typename Vector<T>::iterator Vector<T>::insert(typename Vector<T>::iterator itPos, const T &x)
     {
         typename Vector<T>::Rank r = itPos - begin();
         try
@@ -95,7 +95,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline typename Vector<T>::iterator Vector<T>::insert(typename Vector<T>::iterator itPos, T &&x)
+    typename Vector<T>::iterator Vector<T>::insert(typename Vector<T>::iterator itPos, T &&x)
     {
         typename Vector<T>::Rank r = itPos - begin();
         try
@@ -122,7 +122,7 @@ namespace CZ
 
     // 插入一个迭代器范围的元素到指定位置之前，返回指向插入的元素的第一个元素的迭代器
     template <typename T>
-    inline typename Vector<T>::iterator Vector<T>::insert(typename Vector<T>::iterator itPos,
+    typename Vector<T>::iterator Vector<T>::insert(typename Vector<T>::iterator itPos,
         const T *b, const T *e)
     {
         typename Vector<T>::Rank r = itPos - begin();
@@ -159,7 +159,7 @@ namespace CZ
 
     // 删除单元素，返回删除的元素之后的元素的迭代器
     template <typename T>
-    inline typename Vector<T>::iterator Vector<T>::erase(typename Vector<T>::iterator itPos)
+    typename Vector<T>::iterator Vector<T>::erase(typename Vector<T>::iterator itPos)
     {
         typename Vector<T>::Rank r = itPos - begin();
         try
@@ -185,7 +185,7 @@ namespace CZ
 
     // 删除一个迭代器区间范围内的元素，原来迭代器区间itEnd所指向的元素的值
     template <typename T>
-    inline typename Vector<T>::iterator Vector<T>::erase(typename Vector<T>::iterator itBegin,
+    typename Vector<T>::iterator Vector<T>::erase(typename Vector<T>::iterator itBegin,
         typename Vector<T>::iterator itEnd)
     {
         typename Vector<T>::Rank rB = itBegin - begin(), rE = itEnd - begin();
@@ -214,7 +214,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline void Vector<T>::resize(typename Vector<T>::Rank n)
+    void Vector<T>::resize(typename Vector<T>::Rank n)
     {
         if (n < _size)
         {
