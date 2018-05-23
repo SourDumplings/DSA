@@ -38,22 +38,22 @@ namespace CZ
         const T* get() const;
         unsigned use_count() const;
     private:
-        Weak_ptr<T> *_ptr;
+        Weak_ptr<T> *_wPtr;
     };
 
     template <typename T>
-    inline Shared_ptr<T>::Shared_ptr(T *ptr_): _ptr(new Weak_ptr<T>(ptr_)) {}
+    inline Shared_ptr<T>::Shared_ptr(T *ptr_): _wPtr(new Weak_ptr<T>(ptr_)) {}
 
     template <typename T>
-    inline Shared_ptr<T>::Shared_ptr(const Shared_ptr<T> &sPtr): _ptr(sPtr._ptr) { ++_ptr->_count; }
+    inline Shared_ptr<T>::Shared_ptr(const Shared_ptr<T> &sPtr): _wPtr(sPtr._wPtr) { ++_wPtr->_count; }
 
     template <typename T>
     inline Shared_ptr<T>::~Shared_ptr()
     {
         printf("Shared_ptr's destructor\n");
-        if (--_ptr->_count == 0)
+        if (--_wPtr->_count == 0)
         {
-            delete _ptr;
+            delete _wPtr;
         }
         return;
     }
@@ -63,9 +63,9 @@ namespace CZ
     {
         if (this != &rhs)
         {
-            delete _ptr;
-            _ptr = rhs._ptr;
-            ++_ptr->_count;
+            delete _wPtr;
+            _wPtr = rhs._wPtr;
+            ++_wPtr->_count;
         }
         return *this;
     }
@@ -75,17 +75,17 @@ namespace CZ
     {
         try
         {
-            if (_ptr == nullptr)
+            if (_wPtr == nullptr)
             {
                 throw "pointer is nullptr";
             }
         }
         catch (const char *errMsg)
         {
-            printf("%s\n", errMsg);
+            printf("Error: %s\n", errMsg);
             throw std::exception();
         }
-        return *(_ptr->_ptr);
+        return *(_wPtr->_ptr);
     }
 
     template <typename T>
@@ -97,17 +97,17 @@ namespace CZ
     {
         try
         {
-            if (!_ptr)
+            if (!_wPtr)
             {
                 throw "pointer is nullptr";
             }
         }
         catch (const char *errMsg)
         {
-            printf("%s\n", errMsg);
+            printf("Error: %s\n", errMsg);
             throw std::exception();
         }
-        return _ptr->_ptr;
+        return _wPtr->_ptr;
     }
 
     template <typename T>
@@ -115,13 +115,13 @@ namespace CZ
     { return const_cast<T*>((static_cast<const Shared_ptr<T>&>(*this)).operator->()); }
 
     template <typename T>
-    inline T* Shared_ptr<T>::get() { return _ptr->_ptr; }
+    inline T* Shared_ptr<T>::get() { return _wPtr->_ptr; }
 
     template <typename T>
-    inline const T* Shared_ptr<T>::get() const { return _ptr->_ptr; }
+    inline const T* Shared_ptr<T>::get() const { return _wPtr->_ptr; }
 
     template <typename T>
-    inline unsigned Shared_ptr<T>::use_count() const { return _ptr->_count; }
+    inline unsigned Shared_ptr<T>::use_count() const { return _wPtr->_count; }
 
 } // CZ
 

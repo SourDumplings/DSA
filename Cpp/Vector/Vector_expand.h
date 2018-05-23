@@ -22,9 +22,19 @@ namespace CZ
         if (_size >= _capacity)
         {
             T *oldElem = _elem;
-            while (_size >= _capacity) _capacity <<= 1;
+            Rank tempC = _capacity;
+            while (_size >= _capacity)
+            {
+                if (_capacity)
+                {
+                    _capacity <<= 1;
+                }
+                else
+                    _capacity = 1;
+            }
+
             _elem = new T[_capacity];
-            for (unsigned i = 0; i != _size; ++i)
+            for (Rank i = 0; i != tempC; ++i)
             {
                 _elem[i] = oldElem[i];
             }

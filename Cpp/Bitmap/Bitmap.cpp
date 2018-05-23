@@ -63,7 +63,7 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("%s\n", errMsg);
+            printf("Error: %s\n", errMsg);
             throw std::exception();
         }
 
@@ -110,7 +110,7 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("%s\n", errMsg);
+            printf("Error: %s\n", errMsg);
             throw std::exception();
         }
         return;

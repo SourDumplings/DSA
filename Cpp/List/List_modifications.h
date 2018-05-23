@@ -43,6 +43,7 @@ namespace CZ
         pos.get()->prev()->next() = newNode;
         pos.get()->prev() = newNode;
         ++_size;
+        _back = _tail->prev();
         return ListIterator<T>(newNode);
     }
 
@@ -54,6 +55,7 @@ namespace CZ
         posGet->prev()->next() = newNode;
         posGet->prev() = newNode;
         ++_size;
+        _back = _tail->prev();
         return ListIterator<T>(newNode);
     }
 
@@ -70,6 +72,7 @@ namespace CZ
             posGet->prev() = newNode;
             ++_size;
         }
+        _back = _tail->prev();
         return ListIterator<T>(hNode->next());
     }
 
@@ -88,11 +91,14 @@ namespace CZ
             posGet = posGet->next();
             delete pos.get();
             --_size;
+            if (!empty())
+                _back = _tail->prev();
+            else _back = nullptr;
             return ListIterator<T>(posGet);
         }
         catch (const char *errMsg)
         {
-            printf("%s\n", errMsg);
+            printf("Error: %s\n", errMsg);
             throw std::exception();
         }
         return pos;
@@ -119,9 +125,12 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("%s\n", errMsg);
+            printf("Error: %s\n", errMsg);
             throw std::exception();
         }
+        if (!empty())
+            _back = _tail->prev();
+        else _back = nullptr;
         return e;
     }
 
@@ -238,6 +247,7 @@ namespace CZ
     inline void List<T>::reverse()
     {
         ListNode<T> *e = _tail;
+        _back = _head->next();
         for (unsigned count = 0; count != _size; ++count)
         {
             ListNode<T> *temp = _head->next();

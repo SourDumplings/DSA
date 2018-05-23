@@ -19,7 +19,7 @@ namespace CZ
 {
     // 打印所有元素，空格隔开，末尾换行
     template <typename T>
-    inline void List<T>::printInfo(const char *name)
+    inline void List<T>::printInfo(const char *name) const
     {
         printf("List %s:\n", name);
         printf("size = %u\n", _size);

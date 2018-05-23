@@ -64,7 +64,7 @@ namespace CZ
         const ListNode<T>& tail() const;
 
         // 打印列表信息
-        void printInfo(const char *name = "");
+        void printInfo(const char *name = "") const;
 
 		// 动态操作接口
         virtual void push_back(const T &data);
