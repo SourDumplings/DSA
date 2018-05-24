@@ -41,7 +41,7 @@ namespace CZ
         ~Vector();
 
         // 打印所有元素，空格隔开，末尾换行，及容量和规模
-        void printInfo(const char *name = "") const;
+        void print_info(const char *name = "") const;
 
         // 数据访问接口
         using iterator = T*;

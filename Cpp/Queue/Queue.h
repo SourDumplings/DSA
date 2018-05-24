@@ -1,29 +1,29 @@
 /*
- @Date    : 2018-05-23 10:09:02
+ @Date    : 2018-05-24 09:04:29
  @Author  : 酸饺子 (changzheng300@foxmail.com)
  @Link    : https://github.com/SourDumplings
  @Version : $Id$
 */
 
 /*
-堆栈类模板（容器适配器），默认是通过Vector实现的
+队列类模板(容器适配器)，默认采用List实现
  */
 
-#ifndef STACK_H
-#define STACK_H
+#ifndef QUEUE_H
+#define QUEUE_H
 
-#include "..\Vector\Vector.h"
+#include "..\List\List.h"
 
 namespace CZ
 {
-    template <typename T, typename C = Vector<T>>
-    class Stack
+    template <typename T, typename C = List<T>>
+    class Queue
     {
     public:
-        const T& top() const;
-        T& top();
-        unsigned size() const;
         bool empty() const;
+        unsigned size() const;
+        const T& front() const;
+        T& front();
 
         void push(const T &x);
         void push(T &&x);
@@ -36,6 +36,8 @@ namespace CZ
     };
 } // CZ
 
-#include "Stack_implementation.h"
+#include "Queue_implementation.h"
 
-#endif // STACK_H
+#endif // QUEUE_H
+
+

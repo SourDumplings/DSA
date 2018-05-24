@@ -39,7 +39,7 @@ namespace CZ
         void expand(unsigned k);
 
         // 打印这个位域的信息
-        void printInfo(const char *name = "");
+        void print_info(const char *name = "");
 
     protected:
         void init(unsigned n_);

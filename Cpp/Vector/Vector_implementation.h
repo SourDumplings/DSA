@@ -22,7 +22,7 @@
 #include "Vector_move_constructor.h"
 #include "Vector_destructor.h"
 
-#include "Vector_printInfo.h"
+#include "Vector_print_info.h"
 
 #include "Vector_interfaces.h"
 

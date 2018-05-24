@@ -25,6 +25,6 @@ List类模板的实现所需的头文件
 
 #include "List_modifications.h"
 
-#include "List_printInfo.h"
+#include "List_print_info.h"
 
 #endif // LIST_IMPLEMENTATION_H

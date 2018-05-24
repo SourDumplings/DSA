@@ -150,7 +150,7 @@ namespace CZ
     }
 
     // 打印位域的信息
-    void Bitmap::printInfo(const char *name)
+    void Bitmap::print_info(const char *name)
     {
         printf("Bitmap %s: \n", name);
         printf("contains: ");

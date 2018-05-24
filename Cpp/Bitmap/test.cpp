@@ -43,7 +43,7 @@ int main(int argc, char const *argv[])
         }
     }
     putchar('\n');
-    b.printInfo("b");
+    b.print_info("b");
     return 0;
 }
 

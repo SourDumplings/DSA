@@ -22,31 +22,31 @@ using namespace CZ;
 int main(int argc, char const *argv[])
 {
     // Stack<string> Ss;
-    // Ss.printInfo("Ss");
+    // Ss.print_info("Ss");
     // Ss.push("hello"); Ss.push("hello kitty"); Ss.push("world");
-    // Ss.printInfo("Ss");
+    // Ss.print_info("Ss");
     // printf("Ss.top() = %s\n", Ss.top().c_str());
     // Ss.pop();
-    // Ss.printInfo("Ss");
+    // Ss.print_info("Ss");
     // Stack<string> Ss2(Ss);
-    // Ss2.printInfo("Ss2");
+    // Ss2.print_info("Ss2");
     // Ss2.clear();
-    // Ss2.printInfo("Ss2");
+    // Ss2.print_info("Ss2");
     // printf("Ss2 is empty? %d\n", Ss2.empty());
     // printf("Ss is empty? %d\n", Ss.empty());
 
     // 测试用List实现堆栈
     Stack<string, List<string>> Ss;
-    Ss.printInfo("Ss");
+    Ss.print_info("Ss");
     Ss.push("hello"); Ss.push("hello kitty"); Ss.push("world");
-    Ss.printInfo("Ss");
+    Ss.print_info("Ss");
     printf("Ss.top() = %s\n", Ss.top().c_str());
     Ss.pop();
-    Ss.printInfo("Ss");
+    Ss.print_info("Ss");
     Stack<string, List<string>> Ss2(Ss);
-    Ss2.printInfo("Ss2");
+    Ss2.print_info("Ss2");
     Ss2.clear();
-    Ss2.printInfo("Ss2");
+    Ss2.print_info("Ss2");
     printf("Ss2 is empty? %d\n", Ss2.empty());
     printf("Ss is empty? %d\n", Ss.empty());
     return 0;
