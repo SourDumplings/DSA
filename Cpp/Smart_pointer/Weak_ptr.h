@@ -26,11 +26,11 @@ namespace CZ
         Weak_ptr(T *ptr_ = nullptr): _ptr(ptr_), _count(1) {}
         ~Weak_ptr()
         {
-            printf("Weak_ptr's destructor\n");
+            // printf("Weak_ptr's destructor\n");
             if (_ptr)
             {
                 delete _ptr;
-                printf("memory has been freed\n");
+                // printf("memory has been freed\n");
             }
             return;
         }

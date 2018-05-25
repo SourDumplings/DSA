@@ -50,7 +50,7 @@ namespace CZ
     template <typename T>
     Shared_ptr<T>::~Shared_ptr()
     {
-        printf("Shared_ptr's destructor\n");
+        // printf("Shared_ptr's destructor\n");
         if (--_wPtr->_count == 0)
         {
             delete _wPtr;
