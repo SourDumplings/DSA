@@ -23,7 +23,7 @@ namespace CZ
     inline bool Queue<T, C>::empty() const { return _data.empty(); }
 
     template <typename T, typename C>
-    inline unsigned Queue<T, C>::size() const { return _data.size(); }
+    inline typename Queue<T, C>::Rank Queue<T, C>::size() const { return _data.size(); }
 
     template <typename T, typename C>
     const T& Queue<T, C>::front() const

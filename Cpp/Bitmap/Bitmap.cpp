@@ -33,7 +33,7 @@ Bitmap类的实现
 namespace CZ
 {
     // 初始化函数
-    void Bitmap::init(unsigned n_)
+    void Bitmap::init(Bitmap::Rank n_)
     {
         _m = new char[_n = (n_ + 7) >> 3];
         memset(_m, 0, _n);
@@ -41,13 +41,13 @@ namespace CZ
     }
 
     // 构造函数
-    Bitmap::Bitmap(unsigned n_)
+    Bitmap::Bitmap(Bitmap::Rank n_)
     {
         init(n_);
         return;
     }
 
-    Bitmap::Bitmap(const char *file, unsigned n_)
+    Bitmap::Bitmap(const char *file, Bitmap::Rank n_)
     {
         init(n_);
         try
@@ -78,7 +78,7 @@ namespace CZ
     }
 
     // 扩容函数
-    void Bitmap::expand(unsigned k)
+    void Bitmap::expand(Bitmap::Rank k)
     {
         if (k < 8 * _n)
         {
@@ -86,7 +86,7 @@ namespace CZ
             return;
         }
         // printf("$$k = %d, _n = %d, need expand!$$\n", k, _n);
-        unsigned oldN = _n;
+        Bitmap::Rank oldN = _n;
         char *oldM = _m;
         init(2 * k);
         memcpy_s(_m, _n, oldM, oldN);
@@ -116,33 +116,33 @@ namespace CZ
         return;
     }
 
-    std::string Bitmap::bits2string(unsigned n_)
+    std::string Bitmap::bits2string(Bitmap::Rank n_)
     {
         expand(n_ - 1); // 此时可能被访问的最高位为Bitmap[n_-1]
         std::string res;
         res.resize(n_);
-        for (unsigned i = 0; i < n_; ++i)
+        for (Bitmap::Rank i = 0; i < n_; ++i)
         {
             res[i] = test(i) ? '1' : '0';
         }
         return res;
     }
 
-    bool Bitmap::test(unsigned k)
+    bool Bitmap::test(Bitmap::Rank k)
     {
         expand(k);
         return _m[k >> 3] & (0x80 >> (k & 0x07));
     }
 
     // 动态接口
-    void Bitmap::set(unsigned k)
+    void Bitmap::set(Bitmap::Rank k)
     {
         expand(k);
         _m[k >> 3] |= (0x80 >> (k & 0x07));
         return;
     }
 
-    void Bitmap::clear(unsigned k)
+    void Bitmap::clear(Bitmap::Rank k)
     {
         expand(k);
         _m[k >> 3] &= ~(0x80 >> (k & 0x07));
@@ -154,7 +154,7 @@ namespace CZ
     {
         printf("Bitmap %s: \n", name);
         printf("contains: ");
-        for (unsigned i = 0; i < _n * 8; ++i)
+        for (Bitmap::Rank i = 0; i < _n * 8; ++i)
         {
             if (test(i))
             {

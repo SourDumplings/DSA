@@ -20,8 +20,10 @@ namespace CZ
     class Queue
     {
     public:
+        using Rank = unsigned;
+
         bool empty() const;
-        unsigned size() const;
+        Rank size() const;
         const T& front() const;
         T& front();
 

@@ -20,9 +20,11 @@ namespace CZ
     class Stack
     {
     public:
+        using Rank = unsigned;
+
         const T& top() const;
         T& top();
-        unsigned size() const;
+        Rank size() const;
         bool empty() const;
 
         void push(const T &x);

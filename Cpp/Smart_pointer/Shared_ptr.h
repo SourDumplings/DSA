@@ -23,6 +23,8 @@ namespace CZ
     class Shared_ptr
     {
     public:
+        using Rank = unsigned;
+
         Shared_ptr(T *ptr_ = nullptr);
         Shared_ptr(const Shared_ptr &sPtr);
         ~Shared_ptr();
@@ -36,7 +38,7 @@ namespace CZ
 
         T* get();
         const T* get() const;
-        unsigned use_count() const;
+        Rank use_count() const;
     private:
         Weak_ptr<T> *_wPtr;
     };
@@ -121,7 +123,7 @@ namespace CZ
     inline const T* Shared_ptr<T>::get() const { return _wPtr->_ptr; }
 
     template <typename T>
-    inline unsigned Shared_ptr<T>::use_count() const { return _wPtr->_count; }
+    inline typename Shared_ptr<T>::Rank Shared_ptr<T>::use_count() const { return _wPtr->_count; }
 
 } // CZ
 

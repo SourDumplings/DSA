@@ -44,7 +44,7 @@ namespace CZ
     { return const_cast<T&>(static_cast<const Stack<T, C>&>(*this).top()); }
 
     template <typename T, typename C>
-    inline unsigned Stack<T, C>::size() const
+    inline typename Stack<T, C>::Rank Stack<T, C>::size() const
     { return _data.size(); }
 
     template <typename T, typename C>

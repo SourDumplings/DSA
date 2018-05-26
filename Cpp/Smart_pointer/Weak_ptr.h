@@ -23,6 +23,8 @@ namespace CZ
     {
         friend class Shared_ptr<T>;
     public:
+        using Rank = unsigned;
+
         Weak_ptr(T *ptr_ = nullptr): _ptr(ptr_), _count(1) {}
         ~Weak_ptr()
         {
@@ -37,7 +39,7 @@ namespace CZ
         operator T*() { return _ptr; }
     private:
         T *_ptr = nullptr;
-        unsigned _count = 0;
+        Rank _count = 0;
     };
 } // CZ
 
