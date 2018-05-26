@@ -97,7 +97,7 @@ namespace CZ
     }
 
     template <typename T>
-    void Tree<T>::insert_as_child(Shared_ptr<TreeNode<T>> father, Shared_ptr<TreeNode<T>> node)
+    void Tree<T>::insert(Shared_ptr<TreeNode<T>> father, Shared_ptr<TreeNode<T>> node)
     {
         try
         {

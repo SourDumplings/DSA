@@ -34,7 +34,7 @@ namespace CZ
 
 
         // 将结点node作为father结点的小儿子插入
-        virtual void insert_as_child(Shared_ptr<TreeNode<T>> father, Shared_ptr<TreeNode<T>> node);
+        virtual void insert(Shared_ptr<TreeNode<T>> father, Shared_ptr<TreeNode<T>> node);
         // 移除树中的某个结点及其孩子，返回以目标结点作为根节点的子树
         virtual Tree<T> remove(Shared_ptr<TreeNode<T>> node);
 
