@@ -55,15 +55,14 @@ namespace CZ
             const unsigned version = 0) const;
 
     protected:
-        virtual void free(Shared_ptr<TreeNode<T>> root);
         // 向上更新高度，默认node的高度已经更新好了
         // 版本0为简单版，针对孩子的高度增加的情况
         // 版本1为复杂版，针对孩子的高度减少的情况
         virtual void update_height_above(Shared_ptr<TreeNode<T>> node, const unsigned version = 0);
 
     private:
-        Rank _height = 0, _size = 0;
         Shared_ptr<TreeNode<T>> _root = nullptr;
+        Rank _height = 0, _size = 0;
     };
 } // CZ
 

@@ -22,20 +22,9 @@ namespace CZ
         _size(root_->get_size()) {}
 
     template <typename T>
-    void Tree<T>::free(Shared_ptr<TreeNode<T>> root)
-    {
-        for (auto &c : root->children())
-        {
-            free(c);
-        }
-        delete root;
-        return;
-    }
-
-    template <typename T>
     void Tree<T>::clear()
     {
-        free(_root);
+        _root = nullptr;
         _height = _size = 0;
         return;
     }
@@ -105,7 +94,7 @@ namespace CZ
             {
                 throw "this father is not a node in this tree";
             }
-            if (node->get_root() == root)
+            if (node->get_root() == _root)
             {
                 throw "this node is already in this tree";
             }
@@ -141,9 +130,9 @@ namespace CZ
         // 同时找到要删除的目标结点的位置的迭代器
         typename TreeNode<T>::Rank maxChildHeight = 0;
         Shared_ptr<TreeNode<T>> tallestChild, f = node->father();
-        typename List<T>::iterator nodePos;
+        typename List<Shared_ptr<TreeNode<T>>>::iterator nodePos;
 
-        for (typename List<T>::iterator it = f->children().begin(); it != f->children().end(); ++it)
+        for (typename List<Shared_ptr<TreeNode<T>>>::iterator it = f->children().begin(); it != f->children().end(); ++it)
         {
             if (*it == node)
             {

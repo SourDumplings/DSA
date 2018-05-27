@@ -19,9 +19,15 @@
 
 namespace CZ
 {
+    template <typename T> class Shared_ptr;
+    template <typename T> bool operator==(const Shared_ptr<T> &lhs, const Shared_ptr<T> &rhs);
+    template <typename T> bool operator!=(const Shared_ptr<T> &lhs, const Shared_ptr<T> &rhs);
+
     template <typename T>
     class Shared_ptr
     {
+        friend bool operator==<T>(const Shared_ptr<T> &lhs, const Shared_ptr<T> &rhs);
+        friend bool operator!=<T>(const Shared_ptr<T> &lhs, const Shared_ptr<T> &rhs);
     public:
         using Rank = unsigned;
 
@@ -39,6 +45,8 @@ namespace CZ
         T* get();
         const T* get() const;
         Rank use_count() const;
+
+        operator bool() const;
     private:
         Weak_ptr<T> *_wPtr;
     };
@@ -124,6 +132,18 @@ namespace CZ
 
     template <typename T>
     inline typename Shared_ptr<T>::Rank Shared_ptr<T>::use_count() const { return _wPtr->_count; }
+
+    template <typename T>
+    inline Shared_ptr<T>::operator bool() const
+    { return _wPtr; }
+
+    template <typename T>
+    inline bool operator==(const Shared_ptr<T> &lhs, const Shared_ptr<T> &rhs)
+    { return lhs._wPtr == rhs._wPtr; }
+
+    template <typename T>
+    inline bool operator!=(const Shared_ptr<T> &lhs, const Shared_ptr<T> &rhs)
+    { return !(lhs._wPtr == rhs._wPtr); }
 
 } // CZ
 

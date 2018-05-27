@@ -17,11 +17,16 @@
 namespace CZ
 {
     template <typename T> class Shared_ptr;
+    template <typename T> class Weak_ptr;
+    template <typename T> bool operator==(const Weak_ptr<T> &lhs, const Weak_ptr<T> &rhs);
+    template <typename T> bool operator!=(const Weak_ptr<T> &lhs, const Weak_ptr<T> &rhs);
 
     template <typename T>
     class Weak_ptr
     {
         friend class Shared_ptr<T>;
+        friend bool operator==<T>(const Weak_ptr<T> &lhs, const Weak_ptr<T> &rhs);
+        friend bool operator!=<T>(const Weak_ptr<T> &lhs, const Weak_ptr<T> &rhs);
     public:
         using Rank = unsigned;
 
@@ -37,10 +42,19 @@ namespace CZ
             return;
         }
         operator T*() { return _ptr; }
+        operator bool() { return _ptr != nullptr; }
     private:
         T *_ptr = nullptr;
         Rank _count = 0;
     };
+
+    template <typename T>
+    inline bool operator==(const Weak_ptr<T> &lhs, const Weak_ptr<T> &rhs)
+    { return lhs._ptr == rhs._ptr; }
+
+    template <typename T>
+    inline bool operator!=(const Weak_ptr<T> &lhs, const Weak_ptr<T> &rhs)
+    { return lhs._ptr != rhs._ptr; }
 } // CZ
 
 #endif // WEAK_PTR_H
