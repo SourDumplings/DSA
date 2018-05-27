@@ -52,10 +52,10 @@ namespace CZ
     protected:
         List<Shared_ptr<TreeNode<T>>> _children;
     private:
-        Shared_ptr<TreeNode<T>> _father = nullptr;
         T _data;
         // 以该结点为根的子树的高度，单结点的高度为0
         Rank _height = 0;
+        Shared_ptr<TreeNode<T>> _father = nullptr;
     };
 } // CZ
 

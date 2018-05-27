@@ -31,7 +31,7 @@ namespace CZ
         friend bool operator!=<T>(const ListIterator<T> &lhs, const ListIterator<T> &rhs);
     public:
         // 构造函数
-        ListIterator(ListNode<T> *node_): _node(node_) {}
+        ListIterator(ListNode<T> *node_ = nullptr): _node(node_) {}
 
         // 操作符
         T& operator*()
