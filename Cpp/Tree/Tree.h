@@ -13,7 +13,6 @@
 #define TREE_H
 
 #include "TreeNode.h"
-#include <iostream>
 
 namespace CZ
 {
@@ -25,44 +24,49 @@ namespace CZ
 
         void clear();
 
-        Tree(Shared_ptr<TreeNode<T>> root = nullptr);
+        Tree(TreeNode<T> *root = nullptr);
+        Tree(const Tree<T> &t);
+        Tree(Tree<T> &&t);
         virtual ~Tree();
+
+        Tree<T>& operator=(const Tree &t);
+        Tree<T>& operator=(Tree &&t);
 
         bool empty() const;
         Rank size() const;
-        Shared_ptr<TreeNode<T>> root() const;
+        TreeNode<T>* root() const;
+        Rank height() const; // 树的高度，单结点为1，空树高度为0
 
 
         // 将结点node作为father结点的小儿子插入
-        virtual void insert(Shared_ptr<TreeNode<T>> father, Shared_ptr<TreeNode<T>> node);
+        virtual void insert(TreeNode<T> *father, TreeNode<T> *node);
         // 移除树中的某个结点及其孩子，返回以目标结点作为根节点的子树
-        virtual Tree<T> remove(Shared_ptr<TreeNode<T>> node);
+        virtual Tree<T> remove(TreeNode<T> *node);
 
         // 遍历算法
         // 默认遍历处理函数为输出树结点的数据到标准输出
         // 先序和后序遍历默认版本为递归版
-        template <typename F>
-        void pre_order_traversal(Shared_ptr<TreeNode<T>> root,
-            const F &process = [] (const T &data) { std::cout << data; },
-            const unsigned version = 0) const;
-        template <typename F>
-        void post_order_traversal(Shared_ptr<TreeNode<T>> root,
-            const F &process = [] (const T &data) { std::cout << data; },
-            const unsigned version = 0) const;
-        template <typename F>
-        void level_order_traversal(Shared_ptr<TreeNode<T>> root,
-            const F &process = [] (const T &data) { std::cout << data; },
-            const unsigned version = 0) const;
-
-    protected:
-        // 向上更新高度，默认node的高度已经更新好了
-        // 版本0为简单版，针对孩子的高度增加的情况
-        // 版本1为复杂版，针对孩子的高度减少的情况
-        virtual void update_height_above(Shared_ptr<TreeNode<T>> node, const unsigned version = 0);
+        class OutPut
+        {
+            // 输出数据的可调用类，作为默认结点数据处理函数
+        public:
+            void operator()(const T &data) const;
+        };
+        template <typename F = OutPut>
+        static void pre_order_traversal(TreeNode<T> *root, const F &process = F(),
+            const unsigned version = 0);
+        template <typename F = OutPut>
+        static void post_order_traversal(TreeNode<T> *root, const F &process = F(),
+            const unsigned version = 0);
+        template <typename F = OutPut>
+        static void level_order_traversal(TreeNode<T> *root, const F &process = F(),
+            const unsigned version = 0);
 
     private:
-        Shared_ptr<TreeNode<T>> _root = nullptr;
-        Rank _height = 0, _size = 0;
+        TreeNode<T> *_root = nullptr;
+        Rank _size = 0;
+        TreeNode<T>* copy_from(TreeNode<T> *root);
+        void free(TreeNode<T> *root);
     };
 } // CZ
 

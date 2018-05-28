@@ -19,21 +19,35 @@
 namespace CZ
 {
     template <typename T>
-    TreeNode<T>::TreeNode(const T &data_, typename TreeNode<T>::Rank height_,
-        Shared_ptr<TreeNode<T>> father_):
-        _data(data_), _height(height_), _father(father_) {}
+    TreeNode<T>::TreeNode(const T &data_, TreeNode<T> *father_,
+        typename TreeNode<T>::Rank height_):
+        _data(data_), _height(height_), _father(father_)
+    {
+        if (_father)
+        {
+            _father->insert_child(this);
+        }
+    }
 
     template <typename T>
     TreeNode<T>::~TreeNode() = default;
 
     template <typename T>
-    inline Shared_ptr<TreeNode<T>> TreeNode<T>::father() const
+    inline const TreeNode<T>*& TreeNode<T>::father() const
     { return _father; }
 
     template <typename T>
-    Shared_ptr<TreeNode<T>> TreeNode<T>::get_root() const
+    inline TreeNode<T>*& TreeNode<T>::father()
+    { return _father; }
+
+    template <typename T>
+    TreeNode<T>* TreeNode<T>::get_root() const
     {
-        Shared_ptr<TreeNode<T>> r = _father;
+        if (!_father)
+        {
+            return const_cast<TreeNode<T>*>(this);
+        }
+        TreeNode<T>* r = _father;
         while (r->_father)
         {
             r = r->_father;
@@ -42,7 +56,7 @@ namespace CZ
     }
 
     template <typename T>
-    Shared_ptr<TreeNode<T>> TreeNode<T>::oldest_child() const
+    TreeNode<T>* TreeNode<T>::oldest_child() const
     {
         try
         {
@@ -75,18 +89,18 @@ namespace CZ
     inline typename TreeNode<T>::Rank& TreeNode<T>::height() { return _height; }
 
     template <typename T>
-    inline const List<Shared_ptr<TreeNode<T>>>& TreeNode<T>::children() const
+    inline const List<TreeNode<T>*>& TreeNode<T>::children() const
     { return _children; }
 
     template <typename T>
-    inline List<Shared_ptr<TreeNode<T>>>& TreeNode<T>::children()
+    inline List<TreeNode<T>*>& TreeNode<T>::children()
     { return _children; }
 
     template <typename T>
     typename TreeNode<T>::Rank TreeNode<T>::depth() const
     {
         typename TreeNode<T>::Rank ret = 0;
-        Shared_ptr<TreeNode<T>> p = _father;
+        TreeNode<T>* p = _father;
         while (p)
         {
             ++ret;
@@ -96,11 +110,57 @@ namespace CZ
     }
 
     template <typename T>
-    void TreeNode<T>::insert_child(Shared_ptr<TreeNode<T>> node)
+    void TreeNode<T>::update_height_above(const unsigned version)
+    {
+        TreeNode<T> *f = _father;
+        switch (version)
+        {
+            case 0:
+            {
+                Rank changedChildHeight = _height;
+                while (f)
+                {
+                    if (changedChildHeight >= f->_height)
+                    {
+                        changedChildHeight = f->_height = changedChildHeight + 1;
+                        f = f->father();
+                    }
+                    else return;
+                }
+                break;
+            }
+            case 1:
+            {
+                while (f)
+                {
+                    typename TreeNode<T>::Rank maxChildHeight = 0;
+                    for (auto &c : f->children())
+                    {
+                        if (c->_height > maxChildHeight)
+                        {
+                            maxChildHeight = c->_height;
+                        }
+                    }
+
+                    if (f->_height != maxChildHeight + 1)
+                    {
+                        f->_height = maxChildHeight + 1;
+                        f = f->father();
+                    }
+                    else return;
+                }
+                break;
+            }
+        }
+        return;
+    }
+
+    template <typename T>
+    void TreeNode<T>::insert_child(TreeNode<T> *node)
     {
         _children.push_back(node);
-        _height = (node->_height >= _height) ? node->_height + 1 : _height;
         node->_father = this;
+        node->update_height_above(0);
         return;
     }
 

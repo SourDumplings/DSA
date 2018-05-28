@@ -17,13 +17,8 @@ List模板类的移动构造函数
 namespace CZ
 {
     template <typename T>
-    List<T>::List(List<T> &&l)
+    List<T>::List(List<T> &&l): _size(l._size), _back(l._back), _head(l._head), _tail(l._tail)
     {
-        _size = l._size;
-        _head = l._head;
-        _tail = l._tail;
-        _back = l._back;
-
         l.init();
         l._back = nullptr;
         l._size = 0;

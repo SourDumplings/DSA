@@ -19,8 +19,8 @@ namespace CZ
 {
     template <typename T>
     template <typename F>
-    void Tree<T>::pre_order_traversal(Shared_ptr<TreeNode<T>> root, const F &process,
-        const unsigned version) const
+    void Tree<T>::pre_order_traversal(TreeNode<T> *root, const F &process,
+        const unsigned version)
     {
         process(root->data());
         for (auto &c : root->children())
@@ -32,12 +32,12 @@ namespace CZ
 
     template <typename T>
     template <typename F>
-    void Tree<T>::post_order_traversal(Shared_ptr<TreeNode<T>> root, const F &process,
-        const unsigned version) const
+    void Tree<T>::post_order_traversal(TreeNode<T> *root, const F &process,
+        const unsigned version)
     {
         for (auto &c : root->children())
         {
-            pre_order_traversal(c);
+            post_order_traversal(c);
         }
         process(root->data());
         return;
@@ -45,14 +45,14 @@ namespace CZ
 
     template <typename T>
     template <typename F>
-    void Tree<T>::level_order_traversal(Shared_ptr<TreeNode<T>> root, const F &process,
-        const unsigned version) const
+    void Tree<T>::level_order_traversal(TreeNode<T> *root, const F &process,
+        const unsigned version)
     {
-        Queue<Shared_ptr<TreeNode<T>>> q;
+        Queue<TreeNode<T>*> q;
         q.push(root);
         while (!q.empty())
         {
-            Shared_ptr<TreeNode<T>> node = q.front(); q.pop();
+            TreeNode<T> *node = q.front(); q.pop();
             process(node->data());
             for (auto &c : node->children())
             {

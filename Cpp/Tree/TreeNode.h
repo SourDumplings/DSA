@@ -14,28 +14,31 @@
 #define TREE_NODE_H
 
 #include "..\List\List.h"
-#include "..\Smart_pointer\Shared_ptr.h"
 
 namespace CZ
 {
+    template <typename T> class Tree;
+
     template <typename T>
     class TreeNode
     {
+        friend class Tree<T>;
     public:
         using Rank = unsigned;
 
-        TreeNode(const T &data_ = T(), Rank height_ = 0, Shared_ptr<TreeNode<T>> father_ = nullptr);
+        TreeNode(const T &data_ = T(), TreeNode<T> *father_ = nullptr, Rank height_ = 1);
         virtual ~TreeNode();
 
-        Shared_ptr<TreeNode<T>> father() const;
-        Shared_ptr<TreeNode<T>> get_root() const;
+        const TreeNode<T>*& father() const;
+        TreeNode<T>*& father();
+        TreeNode<T>* get_root() const;
         // 返回以这个结点为根结点的家族共有多少成员，没有孩子则返回1
         Rank get_size() const;
 
-        Shared_ptr<TreeNode<T>> oldest_child() const;
+        TreeNode<T>* oldest_child() const;
 
-        const List<Shared_ptr<TreeNode<T>>>& children() const;
-        List<Shared_ptr<TreeNode<T>>>& children();
+        const List<TreeNode<T>*>& children() const;
+        List<TreeNode<T>*>& children();
 
         const T& data() const;
         T& data();
@@ -48,14 +51,18 @@ namespace CZ
         // 该结点在树中的深度，根结点为0
         virtual Rank depth() const;
 
-        void insert_child(Shared_ptr<TreeNode<T>> node);
+        void insert_child(TreeNode<T> *node);
     protected:
-        List<Shared_ptr<TreeNode<T>>> _children;
+        List<TreeNode<T>*> _children;
+        // 向上更新高度，默认自己的高度已经更新好了
+        // 版本0为简单版，针对孩子的高度增加的情况
+        // 版本1为复杂版，针对孩子的高度减少的情况
+        virtual void update_height_above(const unsigned version = 0);
     private:
         T _data;
-        // 以该结点为根的子树的高度，单结点的高度为0
-        Rank _height = 0;
-        Shared_ptr<TreeNode<T>> _father = nullptr;
+        // 以该结点为根的子树的高度，单结点的高度为1
+        Rank _height = 1;
+        TreeNode<T> *_father = nullptr;
     };
 } // CZ
 

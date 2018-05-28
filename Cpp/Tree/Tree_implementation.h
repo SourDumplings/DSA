@@ -14,19 +14,96 @@
 
 #include "Tree.h"
 #include <stdexcept>
+#include <iostream>
+#include <utility>
 
 namespace CZ
 {
     template <typename T>
-    Tree<T>::Tree(Shared_ptr<TreeNode<T>> root_): _root(root_), _height(root_->height()),
-        _size(root_->get_size()) {}
+    Tree<T>::Tree(TreeNode<T> *root_): _root(root_)
+    {
+        if (root_)
+        {
+            _size = root_->get_size();
+        }
+        // std::cout << "Tree constructor" << std::endl;
+    }
+
+    template <typename T>
+    void Tree<T>::free(TreeNode<T> *root)
+    {
+        if (root)
+        {
+            for (auto &c : root->children())
+            {
+                free(c);
+            }
+            delete root;
+        }
+        return;
+    }
 
     template <typename T>
     void Tree<T>::clear()
     {
+        free(_root);
         _root = nullptr;
-        _height = _size = 0;
+        _size = 0;
         return;
+    }
+
+    template <typename T>
+    TreeNode<T>* Tree<T>::copy_from(TreeNode<T> *root)
+    {
+        TreeNode<T> *copiedRoot = new TreeNode<T>(root->data(), nullptr, 0);
+        for (auto &c : root->children())
+        {
+            TreeNode<T> *child = copy_from(c);
+            child->father() = copiedRoot;
+            copiedRoot->children().push_back(child);
+            copiedRoot->height() = (child->height() >= copiedRoot->height()) ?
+                child->height() + 1 : copiedRoot->height();
+        }
+        return copiedRoot;
+    }
+
+    template <typename T>
+    Tree<T>::Tree(const Tree<T> &t): _size(t._size)
+    {
+        _root = copy_from(t._root);
+    }
+
+    template <typename T>
+    Tree<T>::Tree(Tree<T> &&t): _root(t._root), _size(t._size)
+    {
+        t._root = nullptr;
+        t._size = 0;
+    }
+
+    template <typename T>
+    Tree<T>& Tree<T>::operator=(const Tree<T> &t)
+    {
+        if (&t != this)
+        {
+            clear();
+            _root = copy_from(t._root);
+            _size = t._size;
+        }
+        return *this;
+    }
+
+    template <typename T>
+    Tree<T>& Tree<T>::operator=(Tree<T> &&t)
+    {
+        if (&t != this)
+        {
+            _root = t._root;
+            _size = t._size;
+
+            t._root = nullptr;
+            t._size = t._height = 0;
+        }
+        return *this;
     }
 
     template <typename T>
@@ -39,67 +116,37 @@ namespace CZ
     inline typename Tree<T>::Rank Tree<T>::size() const { return _size; }
 
     template <typename T>
-    inline Shared_ptr<TreeNode<T>> Tree<T>::root() const { return _root; }
+    inline TreeNode<T>* Tree<T>::root() const { return _root; }
 
     template <typename T>
-    void Tree<T>::update_height_above(Shared_ptr<TreeNode<T>> node, const unsigned version)
+    inline typename Tree<T>::Rank Tree<T>::height() const
     {
-        Shared_ptr<TreeNode<T>> f = node->father();
-        while (f)
-        {
-            switch (version)
-            {
-                case 0:
-                {
-                    if (node->height() >= f->height())
-                    {
-                        f->height() = node->height() + 1;
-                        f = f->father();
-                    }
-                    else return;
-                    break;
-                }
-                case 1:
-                {
-                    typename TreeNode<T>::Rank maxChildHeight = 0;
-                    Shared_ptr<TreeNode<T>> tallestChild;
-                    for (auto &c : f->children())
-                    {
-                        if (c->height() > maxChildHeight)
-                        {
-                            maxChildHeight = c->height();
-                            tallestChild = c;
-                        }
-                    }
-                    if (f->height() != maxChildHeight + 1)
-                    {
-                        f->height() = maxChildHeight + 1;
-                        f = f->father();
-                    }
-                    else return;
-                    break;
-                }
-            }
-
-        }
-        return;
+        return _root ? _root->height() : 0;
     }
 
     template <typename T>
-    void Tree<T>::insert(Shared_ptr<TreeNode<T>> father, Shared_ptr<TreeNode<T>> node)
+    void Tree<T>::insert(TreeNode<T> *father, TreeNode<T> *node)
     {
         try
         {
+            if (!father)
+            {
+                throw "father is nullptr, cannot be a father";
+            }
+            if (!node)
+            {
+                throw "node is nullptr, cannot be a child";
+            }
+
             if (father->get_root() != _root)
             {
                 throw "this father is not a node in this tree";
             }
-            if (node->get_root() == _root)
+            if (node->father())
             {
-                throw "this node is already in this tree";
+                throw "this node has already had a father";
             }
             father->insert_child(node);
-            update_height_above(father, 0);
             _size += node->get_size();
         }
         catch (const char *errMsg)
@@ -111,7 +158,7 @@ namespace CZ
     }
 
     template <typename T>
-    Tree<T> Tree<T>::remove(Shared_ptr<TreeNode<T>> node)
+    Tree<T> Tree<T>::remove(TreeNode<T> *node)
     {
         try
         {
@@ -129,10 +176,10 @@ namespace CZ
         // 找同父亲的兄弟姐妹结点中最高的
         // 同时找到要删除的目标结点的位置的迭代器
         typename TreeNode<T>::Rank maxChildHeight = 0;
-        Shared_ptr<TreeNode<T>> tallestChild, f = node->father();
-        typename List<Shared_ptr<TreeNode<T>>>::iterator nodePos;
+        TreeNode<T> *tallestChild, *f = node->father();
+        typename List<TreeNode<T>*>::iterator nodePos;
 
-        for (typename List<Shared_ptr<TreeNode<T>>>::iterator it = f->children().begin(); it != f->children().end(); ++it)
+        for (typename List<TreeNode<T>*>::iterator it = f->children().begin(); it != f->children().end(); ++it)
         {
             if (*it == node)
             {
@@ -154,13 +201,20 @@ namespace CZ
         // 则需要向上更新高度
         if (tallestChild == node)
         {
-            update_height_above(node, 1);
+            node->update_height_above(1);
         }
 
         // 被删掉的目标结点作为根节点构造新子树
         node->father() = nullptr;
         Tree<T> newTree(node);
         return newTree;
+    }
+
+    template <typename T>
+    void Tree<T>::OutPut::operator() (const T &data) const
+    {
+        std::cout << data << " ";
+        return;
     }
 
 } // CZ
