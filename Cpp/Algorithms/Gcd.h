@@ -14,9 +14,11 @@
 
 namespace CZ
 {
-    long long Gcd(long long a, long long b)
+    using GcdValueType = long long;
+
+    GcdValueType Gcd(GcdValueType a, GcdValueType b)
     {
-        long long r;
+        GcdValueType r;
         do
         {
             r = a % b;
