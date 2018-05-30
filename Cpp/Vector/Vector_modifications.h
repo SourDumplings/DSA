@@ -157,6 +157,11 @@ namespace CZ
         return begin() + r;
     }
 
+    template <typename T>
+    inline typename Vector<T>::iterator Vector<T>::insert(typename Vector<T>::iterator itPos,
+        const typename Vector<T>::iterator &b, const typename Vector<T>::iterator &e)
+    { return insert(itPos, b.get(), e.get()); }
+
     // 删除单元素，返回删除的元素之后的元素的迭代器
     template <typename T>
     typename Vector<T>::iterator Vector<T>::erase(typename Vector<T>::iterator itPos)

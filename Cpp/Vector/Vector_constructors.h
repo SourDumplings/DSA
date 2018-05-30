@@ -30,12 +30,24 @@ namespace CZ
 
     // 构造函数2.迭代器与元素个数构造
     template <typename T>
+    Vector<T>::Vector(const iterator &begin, Rank n)
+    {
+        init_from(begin, begin + n);
+    }
+
+    template <typename T>
     Vector<T>::Vector(const T *begin, Rank n)
     {
         init_from(begin, begin + n);
     }
 
     // 构造函数3.迭代器区间构造
+    template <typename T>
+    Vector<T>::Vector(const iterator &begin, const iterator &end)
+    {
+        init_from(begin, end);
+    }
+
     template <typename T>
     Vector<T>::Vector(const T *begin, const T *end)
     {

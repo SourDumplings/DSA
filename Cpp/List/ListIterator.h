@@ -13,6 +13,7 @@
 #define LISTITERATOR_H
 
 #include "ListNode.h"
+#include "../Iterator/BiIterator.h"
 
 namespace CZ
 {
@@ -31,51 +32,57 @@ namespace CZ
         friend bool operator!=<T>(const ListIterator<T> &lhs, const ListIterator<T> &rhs);
     public:
         // 构造函数
-        ListIterator(ListNode<T> *node_ = nullptr): _node(node_) {}
+        ListIterator(ListNode<T> *node_ = nullptr): _it(node_) {}
 
         // 操作符
         T& operator*()
-        { return _node->data(); }
+        { return _it->data(); }
         const T& operator*() const
-        { return _node->data(); }
-        ListNode<T>* operator->()
-        { return _node; }
-        const ListNode<T>* operator->() const
-        { return _node; }
+        { return _it->data(); }
+        BiIterator<ListNode<T>> operator->()
+        { return _it; }
+        const BiIterator<ListNode<T>> operator->() const
+        { return _it; }
 
         ListIterator<T>& operator++()
         {
-            _node = _node->next();
+            _it = BiIterator<ListNode<T>>(_it->next());
             return *this;
         }
         ListIterator<T> operator++(int)
         {
             ListIterator<T> temp = *this;
-            _node = _node->next();
+            _it = BiIterator<ListNode<T>>(_it->next());
             return temp;
         }
         ListIterator<T>& operator--()
         {
-            _node = _node->prev();
+            _it = BiIterator<ListNode<T>>(_it->next());
             return *this;
         }
         ListIterator<T> operator--(int)
         {
             ListIterator<T> temp = *this;
-            _node = _node->prev();
+            _it = BiIterator<ListNode<T>>(_it->next());
             return temp;
         }
 
-        ListNode<T>* get() { return _node; }
-        ListNode<T>* get() const { return _node; }
+        ListNode<T>* get() { return _it.get(); }
+        ListNode<T>* get() const { return _it.get(); }
+
+        operator const BiIterator<ListNode<T>>() const
+        { return _it; }
+
+        operator BiIterator<ListNode<T>>() { return _it; }
+
     private:
-        ListNode<T> *_node;
+        BiIterator<ListNode<T>> _it;
     };
 
     template <typename T>
     bool operator==(const ListIterator<T> &lhs, const ListIterator<T> &rhs)
     {
-        return lhs._node == rhs._node;
+        return lhs._it == rhs._it;
     }
     template <typename T>
     bool operator!=(const ListIterator<T> &lhs, const ListIterator<T> &rhs)

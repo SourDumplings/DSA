@@ -6,7 +6,7 @@
 */
 
 /*
-测试用
+测试向量类模板
  */
 
 #include <iostream>
@@ -122,7 +122,7 @@ int main(int argc, char const *argv[])
     // putchar('\n');
     // printf("v1[0] = %d, v1[1] = %d\n", v1[0], v1[1]);
     // printf("vs1[0] = %s, vs1[1] = %s\n", vs1[0].c_str(), vs1[1].c_str());
-    // printf("v2[3] = %d\n", v2[3]);
+    // // printf("v2[3] = %d\n", v2[3]);
 
 
 
@@ -165,10 +165,10 @@ int main(int argc, char const *argv[])
     vs1.print_info("vs1");
     vs1.erase(vs1.begin()+1, vs1.end()-1);
     vs1.print_info("vs1");
-    vs1.erase(vs2.begin());
-    vs1.print_info("vs1");
-    vs1.erase(vs2.begin(), vs2.end());
-    vs1.print_info("vs1");
+    // vs1.erase(vs2.begin());
+    // vs1.print_info("vs1");
+    // vs1.erase(vs2.begin(), vs2.end());
+    // vs1.print_info("vs1");
 
     return 0;
 }

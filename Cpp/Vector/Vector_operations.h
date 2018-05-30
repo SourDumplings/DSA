@@ -61,7 +61,7 @@ namespace CZ
         if (this != &V)
         {
             free();
-            _elem = V.begin();
+            _elem = V.begin().get();
             _size = V.size();
             _capacity = V.capacity();
             V._elem = nullptr;

@@ -31,7 +31,7 @@ namespace CZ
         Expression(const char *exp_ = "", const char delimiter_ = ' ');
         Expression(const string &exp_, const char delimiter_ = ' ');
 
-        void print_info(const string &name = "") const;
+        void print_info(const char *name = "") const;
 
         ValueType calc_value() const;
 

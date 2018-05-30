@@ -25,9 +25,9 @@ namespace CZ
     Expression::Expression(const string &exp_, const char delimiter_):
     Expression(exp_.c_str(), delimiter_) {}
 
-    void Expression::print_info(const string &name) const
+    void Expression::print_info(const char *name) const
     {
-        printf("expression %s is: %s\n\n", name.c_str(), _exp);
+        printf("expression %s is: %s\n\n", name, _exp);
         return;
     }
 

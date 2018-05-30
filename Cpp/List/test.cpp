@@ -65,9 +65,9 @@ int main(int argc, char const *argv[])
     // ls2.back() += "cc";
     // printf("ls2.back() = %s\n", ls2.back().c_str());
     // printf("ls3.size() = %d\n", ls3.size());
-    //
 
-    // 测试动态操作
+
+    // // 测试动态操作
     ls1.print_info("ls1");
     ls1.push_back("ddd");
     ls1.print_info("ls1");

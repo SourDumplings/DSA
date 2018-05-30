@@ -7,12 +7,14 @@
 
 /*
 向量类模板
+迭代器为随机访问迭代器
  */
 
 #ifndef VECTOR_H
 #define VECTOR_H
 
 #include <initializer_list>
+#include "../Iterator/RandomIterator.h"
 
 namespace CZ
 {
@@ -21,13 +23,16 @@ namespace CZ
     {
     public:
         using Rank = unsigned;
+        using iterator = RandomIterator<T>;
 
         // 构造函数
         // 构造函数1.容量为c，规模为s，所有元素初始为v
         Vector(Rank s = 0, T v = T());
         // 构造函数2.迭代器与元素个数构造
+        Vector(const iterator &begin, Rank n);
         Vector(const T *begin, Rank n);
         // 构造函数3.迭代器区间构造
+        Vector(const iterator &begin, const iterator &end);
         Vector(const T *begin, const T *end);
         // 构造函数4.不定参数个数的构造函数
         Vector(const std::initializer_list<T> &initL);
@@ -38,13 +43,12 @@ namespace CZ
         Vector(Vector<T> &&V);
 
         // 析构函数
-        ~Vector();
+        virtual ~Vector();
 
         // 打印所有元素，空格隔开，末尾换行，及容量和规模
         void print_info(const char *name = "") const;
 
         // 数据访问接口
-        using iterator = T*;
         iterator begin();
         iterator end();
         iterator begin() const;
@@ -68,6 +72,7 @@ namespace CZ
         iterator insert(iterator itPos, const T &x);
         iterator insert(iterator itPos, T &&x);
         iterator insert(iterator itPos, const T *b, const T *e);
+        iterator insert(iterator itPos, const iterator &b, const iterator &e);
         iterator erase(iterator itPos);
         iterator erase(iterator itBegin, iterator itEnd);
         void resize(Rank n);
@@ -79,6 +84,7 @@ namespace CZ
         Vector<T>& operator=(Vector<T> &&V);
     protected:
         //迭代器区间的复制
+        void init_from(const iterator &begin, const iterator &end);
         void init_from(const T *begin, const T *end);
         // 析构辅助方法
         void free();
