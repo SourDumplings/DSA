@@ -80,7 +80,17 @@ namespace CZ
     inline T& TreeNode<T>::data() { return _data; }
 
     template <typename T>
-    inline bool TreeNode<T>::is_leaf() const { return _children.empty() ? true : false; }
+    bool TreeNode<T>::is_leaf() const
+    {
+        for (auto &c : _children)
+        {
+            if (c)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
     template <typename T>
     inline const typename TreeNode<T>::Rank& TreeNode<T>::height() const { return _height; }

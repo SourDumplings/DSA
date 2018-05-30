@@ -43,7 +43,7 @@ namespace CZ
         const T& data() const;
         T& data();
 
-        virtual bool is_leaf() const;
+        bool is_leaf() const;
 
         const Rank& height() const;
         Rank& height();

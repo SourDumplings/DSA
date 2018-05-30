@@ -55,6 +55,10 @@ namespace CZ
     template <typename T>
     TreeNode<T>* Tree<T>::copy_from(TreeNode<T> *root)
     {
+        if (!root)
+        {
+            return nullptr;
+        }
         TreeNode<T> *copiedRoot = new TreeNode<T>(root->data(), nullptr, 0);
         for (auto &c : root->children())
         {
@@ -160,6 +164,11 @@ namespace CZ
     template <typename T>
     Tree<T> Tree<T>::remove(TreeNode<T> *node)
     {
+        if (!node)
+        {
+            return *this;
+        }
+
         try
         {
             if (node->get_root() != _root)

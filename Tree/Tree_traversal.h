@@ -22,10 +22,13 @@ namespace CZ
     void Tree<T>::pre_order_traversal(TreeNode<T> *root, const F &process,
         const unsigned version)
     {
-        process(root->data());
-        for (auto &c : root->children())
+        if (root)
         {
-            pre_order_traversal(c);
+            process(root->data());
+            for (auto &c : root->children())
+            {
+                pre_order_traversal(c);
+            }
         }
         return;
     }
@@ -35,11 +38,14 @@ namespace CZ
     void Tree<T>::post_order_traversal(TreeNode<T> *root, const F &process,
         const unsigned version)
     {
-        for (auto &c : root->children())
+        if (root)
         {
-            post_order_traversal(c);
+            for (auto &c : root->children())
+            {
+                pre_order_traversal(c);
+            }
+            process(root->data());
         }
-        process(root->data());
         return;
     }
 
@@ -53,10 +59,13 @@ namespace CZ
         while (!q.empty())
         {
             TreeNode<T> *node = q.front(); q.pop();
-            process(node->data());
-            for (auto &c : node->children())
+            if (node)
             {
-                q.push(c);
+                process(node->data());
+                for (auto &c : node->children())
+                {
+                    q.push(c);
+                }
             }
         }
         return;
