@@ -162,7 +162,7 @@ namespace CZ
     }
 
     template <typename T>
-    Tree<T> Tree<T>::remove(TreeNode<T> *node)
+    Tree<T> Tree<T>::secede(TreeNode<T> *node)
     {
         if (!node)
         {
