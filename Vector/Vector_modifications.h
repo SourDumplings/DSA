@@ -132,14 +132,14 @@ namespace CZ
             {
                 throw "Invalid pos iterator";
             }
-            if (!(b < e))
+            if (!(b <= e))
             {
                 throw "Invalid iterator range";
             }
             typename Vector<T>::Rank n = e - b;
             _size += n;
             expand();
-            for (unsigned i = _size - 1; i != r - 1; --i)
+            for (unsigned i = _size - 1; n < i && i != r - 1; --i)
             {
                 _elem[i] = _elem[i-n];
             }

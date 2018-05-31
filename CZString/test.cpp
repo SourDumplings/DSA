@@ -27,5 +27,25 @@ int main(int argc, char const *argv[])
 
     printf("s.substr(1) = %s\n", s.substr(1).c_str());
     printf("s.substr(1, 2) = %s\n", s.substr(1, 2).c_str());
+
+    s += " world";
+    s.print_info("s");
+
+    s += 'y';
+    s.print_info("s");
+
+    printf("now s is %s\n", s.c_str());
+    s += to_string(12.5);
+    s.print_info("s");
+
+    CZString sc(s);
+    sc.print_info("sc");
+
+    s = "abc" + s;
+    s.print_info("s");
+
+    sc.clear();
+    sc.print_info("sc");
+    s.print_info("s");
     return 0;
 }

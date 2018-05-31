@@ -15,12 +15,11 @@
 #ifndef EXPRESSION_H
 #define EXPRESSION_H
 
+#include "../CZString/CZString.h"
 #include <string>
 
 namespace CZ
 {
-    using std::string;
-
     static const unsigned OPERTAOR_NUM = 9;
 
     class Expression
@@ -29,25 +28,30 @@ namespace CZ
         using ValueType = double;
 
         Expression(const char *exp_ = "", const char delimiter_ = ' ');
-        Expression(const string &exp_, const char delimiter_ = ' ');
+        Expression(const std::string &exp_, const char delimiter_ = ' ');
+        Expression(const CZString &exp_, const char delimiter_ = ' ');
+        ~Expression();
 
         void print_info(const char *name = "") const;
 
         ValueType calc_value() const;
 
-        string to_PN() const;
-        string to_RPN() const;
+        CZString to_PN() const;
+        CZString to_RPN() const;
+
     private:
         ValueType read_num(const char *&p) const;
+        ValueType reverse_read_num(const char *&p) const;
         char compare_operator(const char nowOp, const char sOp) const;
+        char reverse_compare_operator(const char nowOp, const char sOp) const;
         ValueType calc(const ValueType &lhs, const char op, const ValueType &rhs) const;
         ValueType calc(const ValueType &operand, const char op) const;
         bool is_one_element_operator(const char op) const;
         unsigned get_operator_index(const char op) const;
+        char *_exp = nullptr, _delimiter = ' ';
 
-
-        const char *_exp, _delimiter = ' ';
         static const char priTable[OPERTAOR_NUM][OPERTAOR_NUM]; // 运算符优先级表
+        static const char priTableReverse[OPERTAOR_NUM][OPERTAOR_NUM]; // 运算符优先级逆表
     };
 
     // 初始化算数符号优先级顺序表
@@ -68,6 +72,23 @@ namespace CZ
         /* 算  (  */  '>', '>', '>', '>', '>', '>', '>', '=', 'e',
         /* |   )  */  'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e',
         /* 符  \0 */  '>', '>', '>', '>', '>', '>', '>', 'e', '=',
+        /* |                                                       */
+    };
+
+    const char Expression::priTableReverse[OPERTAOR_NUM][OPERTAOR_NUM] =
+    {
+        /* ------------------当前运算符---------------------*/
+        /*             +    -    *    /    ^    !    (    )    \0  */
+        /* |                                                       */
+        /* 栈  +  */  '<', '<', '>', '>', '>', '>', '<', '>', '<',
+        /* |   -  */  '<', '<', '>', '>', '>', '>', '<', '>', '<',
+        /* 顶  *  */  '<', '<', '<', '<', '>', '>', '<', '>', '<',
+        /* |   /  */  '<', '<', '<', '<', '>', '>', '<', '>', '<',
+        /* 运  ^  */  '<', '<', '<', '<', '<', '>', '<', '>', '<',
+        /* |   !  */  '<', '<', '<', '<', '<', '<', '<', '>', '<',
+        /* 算  (  */  'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e',
+        /* |   )  */  '>', '>', '>', '>', '>', '>', '=', '>', 'e',
+        /* 符  \0 */  '>', '>', '>', '>', '>', '>', '<', 'e', '=',
         /* |                                                       */
     };
 } // CZ

@@ -46,7 +46,7 @@ namespace CZ
         virtual ~Vector();
 
         // 打印所有元素，空格隔开，末尾换行，及容量和规模
-        void print_info(const char *name = "") const;
+        virtual void print_info(const char *name = "") const;
 
         // 数据访问接口
         iterator begin();
@@ -65,7 +65,7 @@ namespace CZ
         bool empty() const;
 
         // 动态操作
-        void clear();
+        virtual void clear();
         void push_back(const T &x);
         void push_back(T &&x);
         void pop_back();

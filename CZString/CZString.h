@@ -7,7 +7,6 @@
 
 /*
 字符串类
-注意和std::string不同的是length()方法返回的是字符串长度，size()返回的是length() + 1
  */
 
 #ifndef CZSTRING_H
@@ -15,6 +14,7 @@
 
 #include "../Vector/Vector.h"
 #include <string>
+#include <iostream>
 
 namespace CZ
 {
@@ -23,10 +23,15 @@ namespace CZ
     public:
         using Rank = Vector<char>::Rank;
 
-        CZString(const char *str_);
+        CZString(const char *str_ = "");
         CZString(const std::string &str_);
+        ~CZString();
 
-        void print_info(const char *name = "") const;
+        void clear() override;
+
+        CZString(const CZString &CZstring);
+
+        void print_info(const char *name = "") const override;
 
         const char* c_str() const;
         Rank length() const;
@@ -36,6 +41,11 @@ namespace CZ
 
         operator const char*() const;
         operator const std::string() const;
+
+        CZString& operator+=(const char rhs);
+        CZString& operator+=(const CZString &rhs);
+    private:
+        mutable char *_tempStr = nullptr;
     };
 } // CZ
 

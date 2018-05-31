@@ -19,20 +19,51 @@
 
 namespace CZ
 {
-    CZString::CZString(const char *str_): Vector<char>(str_, strlen(str_) + 1) {}
+    CZString::CZString(const char *str_): Vector<char>(str_, strlen(str_)) {}
     CZString::CZString(const std::string &str_): CZString(str_.c_str()) {}
 
-    void CZString::print_info(const char *name) const
+    CZString::~CZString() { if (_tempStr) delete [] _tempStr; }
+
+    CZString::CZString(const CZString &CZstring): Vector<char>(CZstring)
     {
-        printf("CZString %s is %s\n", name, c_str());
-        printf("size = %u, length = %u\n\n", size(), length());
+        _tempStr = nullptr;
+    }
+
+    void CZString::clear()
+    {
+        Vector<char>::clear();
+        if (_tempStr)
+        {
+            delete [] _tempStr;
+        }
+        _tempStr = nullptr;
         return;
     }
 
-    inline const char* CZString::c_str() const
-    { return &front(); }
+    void CZString::print_info(const char *name) const
+    {
+        printf("CZString %s is ", name);
+        for (iterator it = begin(); it != end(); ++it)
+        {
+            putchar(*it);
+        }
+        printf("\nlength = %u\n\n", length());
+        return;
+    }
 
-    inline CZString::Rank CZString::length() const { return size() - 1; }
+    inline CZString::Rank CZString::length() const { return size(); }
+
+    const char* CZString::c_str() const
+    {
+        if (_tempStr)
+        {
+            delete [] _tempStr;
+        }
+        _tempStr = new char[length()+1];
+        strncpy(_tempStr, &front(), length());
+        _tempStr[length()] = '\0';
+        return _tempStr;
+    }
 
     CZString CZString::substr(Rank pos, Rank l) const
     {
@@ -49,7 +80,7 @@ namespace CZ
             throw std::exception();
         }
         char temp[l+1];
-        strncpy(temp, c_str()+pos, l);
+        strncpy(temp, &front()+pos, l);
         temp[l] = '\0';
         return CZString(temp);
     }
@@ -63,7 +94,36 @@ namespace CZ
     inline CZString::operator const std::string() const
     { return std::string(c_str()); }
 
+    const CZString operator+(const CZString &lhs, const char rhs)
+    {
+        CZString temp(lhs);
+        temp.push_back(rhs);
+        return temp;
+    }
 
+    const CZString operator+(const CZString &lhs, const CZString &rhs)
+    {
+        CZString temp(lhs);
+        temp.insert(temp.end(), rhs.begin(), rhs.end());
+        return temp;
+    }
+
+    inline CZString& CZString::operator+=(const char rhs)
+    { *this = *this + rhs; return *this; }
+
+    inline CZString& CZString::operator+=(const CZString &rhs)
+    { *this = *this + rhs; return *this; }
+
+    inline std::ostream& operator<<(std::ostream &os, const CZString &rhs)
+    { return os << rhs.c_str(); }
+
+    std::istream& operator>>(std::istream &is, CZString &rhs)
+    {
+        std::string s;
+        is >> s;
+        rhs = s;
+        return is;
+    }
 } // CZ
 
 #endif // CZ_STRING_IMPLEMENTATION_H
