@@ -62,7 +62,7 @@ int main(int argc, char const *argv[])
     Tree<string>::level_order_traversal(wN);
     putchar('\n');
 
-    auto tW = T.secede(wN);
+    auto tW = Tree<string>(T.remove(wN));
     printf("T.size() = %u\n", T.size());
     printf("T.height() = %u\n", T.height());
     printf("tW.size() = %u\n", tW.size());

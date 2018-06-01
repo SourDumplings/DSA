@@ -29,7 +29,7 @@ namespace CZ
         TreeNode(const T &data_ = T(), TreeNode<T> *father_ = nullptr, Rank height_ = 1);
         virtual ~TreeNode();
 
-        const TreeNode<T>*& father() const;
+        TreeNode<T>* father() const;
         TreeNode<T>*& father();
         TreeNode<T>* get_root() const;
         // 返回以这个结点为根结点的家族共有多少成员，没有孩子则返回1

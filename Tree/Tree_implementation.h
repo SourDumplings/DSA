@@ -105,7 +105,7 @@ namespace CZ
             _size = t._size;
 
             t._root = nullptr;
-            t._size = t._height = 0;
+            t._size = 0;
         }
         return *this;
     }
@@ -121,6 +121,9 @@ namespace CZ
 
     template <typename T>
     inline TreeNode<T>* Tree<T>::root() const { return _root; }
+
+    template <typename T>
+    inline TreeNode<T>*& Tree<T>::root() { return _root; }
 
     template <typename T>
     inline typename Tree<T>::Rank Tree<T>::height() const
@@ -162,11 +165,11 @@ namespace CZ
     }
 
     template <typename T>
-    Tree<T> Tree<T>::secede(TreeNode<T> *node)
+    TreeNode<T>* Tree<T>::remove(TreeNode<T> *node)
     {
         if (!node)
         {
-            return *this;
+            return nullptr;
         }
 
         try
@@ -213,10 +216,10 @@ namespace CZ
             node->update_height_above(1);
         }
 
-        // 被删掉的目标结点作为根节点构造新子树
+        // 被删掉的目标结点解除其与父亲的关系
         node->father() = nullptr;
-        Tree<T> newTree(node);
-        return newTree;
+
+        return node;
     }
 
     template <typename T>
@@ -226,6 +229,13 @@ namespace CZ
         return;
     }
 
+    template <typename T>
+    inline bool operator==(const Tree<T> &lhs, const Tree<T> &rhs)
+    { return lhs._root == rhs._root; }
+
+    template <typename T>
+    inline bool operator!=(const Tree<T> &lhs, const Tree<T> &rhs)
+    { return !(lhs == rhs); }
 } // CZ
 
 #include "Tree_traversal.h"

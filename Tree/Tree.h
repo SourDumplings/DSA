@@ -16,9 +16,15 @@
 
 namespace CZ
 {
+    template <typename T> class Tree;
+    template <typename T> bool operator==(const Tree<T> &lhs, const Tree<T> &rhs);
+    template <typename T> bool operator!=(const Tree<T> &lhs, const Tree<T> &rhs);
+
     template <typename T>
     class Tree
     {
+        friend bool operator==<T>(const Tree<T> &lhs, const Tree<T> &rhs);
+        friend bool operator!=<T>(const Tree<T> &lhs, const Tree<T> &rhs);
     public:
         using Rank = unsigned;
 
@@ -35,13 +41,14 @@ namespace CZ
         bool empty() const;
         Rank size() const;
         TreeNode<T>* root() const;
+        TreeNode<T>*& root();
         Rank height() const; // 树的高度，单结点为1，空树高度为0
 
 
         // 将结点node作为father结点的小儿子插入
         virtual void insert(TreeNode<T> *father, TreeNode<T> *node);
-        // 移除树中的某个结点及其孩子，返回以目标结点作为根节点的子树
-        Tree<T> secede(TreeNode<T> *node);
+        // 移除树中的某个结点及其孩子，返回该目标结点
+        TreeNode<T>* remove(TreeNode<T> *node);
 
         // 遍历算法
         // 默认遍历处理函数为输出树结点的数据到标准输出
@@ -65,6 +72,7 @@ namespace CZ
     private:
         TreeNode<T> *_root = nullptr;
         Rank _size = 0;
+
         TreeNode<T>* copy_from(TreeNode<T> *root);
         void free(TreeNode<T> *root);
     };

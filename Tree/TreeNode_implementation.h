@@ -33,7 +33,7 @@ namespace CZ
     TreeNode<T>::~TreeNode() = default;
 
     template <typename T>
-    inline const TreeNode<T>*& TreeNode<T>::father() const
+    inline TreeNode<T>* TreeNode<T>::father() const
     { return _father; }
 
     template <typename T>
@@ -180,7 +180,10 @@ namespace CZ
         Rank ret = 1;
         for (auto &c : _children)
         {
-            ret += c->get_size();
+            if (c)
+            {
+                ret += c->get_size();
+            }
         }
         return ret;
     }
