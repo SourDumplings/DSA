@@ -39,7 +39,9 @@ namespace CZ
     public:
         using Rank = unsigned;
 
-        Shared_ptr(T *ptr_ = nullptr);
+        template <typename U>
+        Shared_ptr(U *ptr_ = nullptr);
+
         Shared_ptr(const Shared_ptr &sPtr);
         ~Shared_ptr();
 
@@ -60,7 +62,8 @@ namespace CZ
     };
 
     template <typename T>
-    inline Shared_ptr<T>::Shared_ptr(T *ptr_)
+    template <typename U>
+    inline Shared_ptr<T>::Shared_ptr(U *ptr_)
     {
         if (ptr_)
         {
@@ -191,4 +194,3 @@ namespace CZ
 } // CZ
 
 #endif // SHARED_PTR_H
-

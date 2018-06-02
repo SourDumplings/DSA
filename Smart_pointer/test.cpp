@@ -18,26 +18,48 @@ using namespace CZ;
 
 int main(int argc, char const *argv[])
 {
-    Shared_ptr<string> ps1(new string("string1")), ps2(new string("string2"));
-    printf("ps1.use_count() = %u\n", ps1.use_count());
+    // Shared_ptr<string> ps1(new string("string1")), ps2(new string("string2"));
+    // printf("ps1.use_count() = %u\n", ps1.use_count());
+    // {
+    //     Shared_ptr<string> ps3(ps1);
+    //     printf("ps1.use_count() = %u\n", ps1.use_count());
+    //     printf("ps3.use_count() = %u\n", ps3.use_count());
+    // }
+    // printf("ps1.use_count() = %u\n", ps1.use_count());
+    // printf("*ps1 = %s\n", (*ps1).c_str());
+    // printf("ps1->length() = %llu\n", ps1->length());
+
+    // (*ps1)[0] = 'a';
+    // printf("*ps1 = %s\n", (*ps1).c_str());
+
+    // printf("ps1.use_count() = %u\n", ps1.use_count());
+    // printf("ps2.use_count() = %u\n", ps2.use_count());
+    // ps1 = ps2;
+    // printf("ps1.use_count() = %u\n", ps1.use_count());
+    // printf("ps2.use_count() = %u\n", ps2.use_count());
+
+    // 测试智能指针的隐式转换
+    class B
     {
-        Shared_ptr<string> ps3(ps1);
-        printf("ps1.use_count() = %u\n", ps1.use_count());
-        printf("ps3.use_count() = %u\n", ps3.use_count());
-    }
-    printf("ps1.use_count() = %u\n", ps1.use_count());
-    printf("*ps1 = %s\n", (*ps1).c_str());
-    printf("ps1->length() = %llu\n", ps1->length());
+    public:
+        virtual ~B() = default;
+        virtual void f() { printf("B.f()\n"); }
+    };
 
-    (*ps1)[0] = 'a';
-    printf("*ps1 = %s\n", (*ps1).c_str());
+    class D: public B
+    {
+    public:
+        void f() { printf("D.f()\n"); }
+    };
 
-    printf("ps1.use_count() = %u\n", ps1.use_count());
-    printf("ps2.use_count() = %u\n", ps2.use_count());
-    ps1 = ps2;
-    printf("ps1.use_count() = %u\n", ps1.use_count());
-    printf("ps2.use_count() = %u\n", ps2.use_count());
+    Shared_ptr<D> pD(new D);
+    Shared_ptr<B> pB(new B);
+    pB->f();
+    pD->f();
 
+    // Shared_ptr<B> pBd1(new D), pBd2(pD)
+    // pBd1->f();
+    // pBd2->f();
 
     return 0;
 }

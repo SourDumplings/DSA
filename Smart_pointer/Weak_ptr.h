@@ -37,13 +37,13 @@ namespace CZ
         friend bool operator!=<T>(const std::nullptr_t &lhs, const Weak_ptr<T> &rhs);
     public:
         using Rank = unsigned;
-        Weak_ptr(T *ptr_ = nullptr): _count(1)
+
+        template <typename U>
+        Weak_ptr(U *ptr_ = nullptr): _count(1)
         {
-            if (ptr_)
-            {
-                _ptr = ptr_;
-            }
+            _ptr = ptr_;
         }
+
         ~Weak_ptr()
         {
             printf("Weak_ptr's destructor\n");
@@ -58,8 +58,8 @@ namespace CZ
         operator T*() { return _ptr; }
         operator bool() const { return static_cast<bool>(_ptr); }
     private:
-        T *_ptr = nullptr;
-        Rank _count = 0;
+        T *_ptr;
+        Rank _count;
     };
 
     template <typename T>
@@ -84,5 +84,3 @@ namespace CZ
 } // CZ
 
 #endif // WEAK_PTR_H
-
-
