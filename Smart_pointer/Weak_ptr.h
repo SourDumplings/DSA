@@ -17,29 +17,22 @@
 namespace CZ
 {
     template <typename T> class Shared_ptr;
-    template <typename T> class Weak_ptr;
-    template <typename T> bool operator==(const Weak_ptr<T> &lhs, const Weak_ptr<T> &rhs);
-    template <typename T> bool operator==(const Weak_ptr<T> &lhs, const std::nullptr_t &rhs);
-    template <typename T> bool operator==(const std::nullptr_t &lhs, const Weak_ptr<T> &rhs);
-    template <typename T> bool operator!=(const Weak_ptr<T> &lhs, const Weak_ptr<T> &rhs);
-    template <typename T> bool operator!=(const Weak_ptr<T> &lhs, const std::nullptr_t &rhs);
-    template <typename T> bool operator!=(const std::nullptr_t &lhs, const Weak_ptr<T> &rhs);
 
     template <typename T>
     class Weak_ptr
     {
         friend class Shared_ptr<T>;
-        friend bool operator==<T>(const Weak_ptr<T> &lhs, const Weak_ptr<T> &rhs);
-        friend bool operator==<T>(const Weak_ptr<T> &lhs, const std::nullptr_t &rhs);
-        friend bool operator==<T>(const std::nullptr_t &lhs, const Weak_ptr<T> &rhs);
-        friend bool operator!=<T>(const Weak_ptr<T> &lhs, const Weak_ptr<T> &rhs);
-        friend bool operator!=<T>(const Weak_ptr<T> &lhs, const std::nullptr_t &rhs);
-        friend bool operator!=<T>(const std::nullptr_t &lhs, const Weak_ptr<T> &rhs);
+        friend bool operator==(const Weak_ptr<T> &lhs, const Weak_ptr<T> &rhs)
+        { return lhs._ptr == rhs._ptr; }
+        friend bool operator!=(const Weak_ptr<T> &lhs, const Weak_ptr<T> &rhs)
+        { return !(lhs == rhs); }
     public:
         using Rank = unsigned;
 
+        Weak_ptr(std::nullptr_t) { _ptr = nullptr; }
+
         template <typename U>
-        Weak_ptr(U *ptr_ = nullptr): _count(1)
+        Weak_ptr(U *ptr_): _count(1)
         {
             _ptr = ptr_;
         }
@@ -62,25 +55,6 @@ namespace CZ
         Rank _count;
     };
 
-    template <typename T>
-    inline bool operator==(const Weak_ptr<T> &lhs, const Weak_ptr<T> &rhs)
-    { return lhs._ptr == rhs._ptr; }
-    template <typename T>
-    inline bool operator==(const Weak_ptr<T> &lhs, const std::nullptr_t &rhs)
-    { return lhs._ptr == nullptr; }
-    template <typename T>
-    inline bool operator==(const std::nullptr_t &lhs, const Weak_ptr<T> &rhs)
-    { return nullptr == rhs._ptr; }
-
-    template <typename T>
-    inline bool operator!=(const Weak_ptr<T> &lhs, const Weak_ptr<T> &rhs)
-    { return lhs._ptr != rhs._ptr; }
-    template <typename T>
-    inline bool operator!=(const Weak_ptr<T> &lhs, const std::nullptr_t &rhs)
-    { return lhs._ptr != nullptr; }
-    template <typename T>
-    inline bool operator!=(const std::nullptr_t &lhs, const Weak_ptr<T> &rhs)
-    { return nullptr != rhs._ptr; }
 } // CZ
 
 #endif // WEAK_PTR_H

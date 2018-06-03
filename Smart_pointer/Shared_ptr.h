@@ -19,28 +19,19 @@
 
 namespace CZ
 {
-    template <typename T> class Shared_ptr;
-    template <typename T> bool operator==(const Shared_ptr<T> &lhs, const Shared_ptr<T> &rhs);
-    template <typename T> bool operator==(const Shared_ptr<T> &lhs, const std::nullptr_t &rhs);
-    template <typename T> bool operator==(const std::nullptr_t &lhs, const Shared_ptr<T> &rhs);
-    template <typename T> bool operator!=(const Shared_ptr<T> &lhs, const Shared_ptr<T> &rhs);
-    template <typename T> bool operator!=(const Shared_ptr<T> &lhs, const std::nullptr_t &rhs);
-    template <typename T> bool operator!=(const std::nullptr_t &lhs, const Shared_ptr<T> &rhs);
-
     template <typename T>
     class Shared_ptr
     {
-        friend bool operator==<T>(const Shared_ptr<T> &lhs, const Shared_ptr<T> &rhs);
-        friend bool operator==<T>(const Shared_ptr<T> &lhs, const std::nullptr_t &rhs);
-        friend bool operator==<T>(const std::nullptr_t &lhs, const Shared_ptr<T> &rhs);
-        friend bool operator!=<T>(const Shared_ptr<T> &lhs, const Shared_ptr<T> &rhs);
-        friend bool operator!=<T>(const Shared_ptr<T> &lhs, const std::nullptr_t &rhs);
-        friend bool operator!=<T>(const std::nullptr_t &lhs, const Shared_ptr<T> &rhs);
+        friend bool operator==(const Shared_ptr<T> &lhs, const Shared_ptr<T> &rhs)
+        { return lhs._wPtr == rhs._wPtr; }
+        friend bool operator!=(const Shared_ptr<T> &lhs, const Shared_ptr<T> &rhs)
+        { return !(lhs == rhs); }
     public:
         using Rank = unsigned;
 
+        Shared_ptr(std::nullptr_t);
         template <typename U>
-        Shared_ptr(U *ptr_ = nullptr);
+        Shared_ptr(U *ptr_);
 
         Shared_ptr(const Shared_ptr &sPtr);
         ~Shared_ptr();
@@ -62,18 +53,17 @@ namespace CZ
     };
 
     template <typename T>
+    Shared_ptr<T>::Shared_ptr(std::nullptr_t) { _wPtr = nullptr; }
+
+    template <typename T>
     template <typename U>
-    inline Shared_ptr<T>::Shared_ptr(U *ptr_)
+    Shared_ptr<T>::Shared_ptr(U *ptr_)
     {
-        if (ptr_)
-        {
-            _wPtr = new Weak_ptr<T>(ptr_);
-        }
-        else _wPtr = nullptr;
+        _wPtr = new Weak_ptr<T>(ptr_);
     }
 
     template <typename T>
-    inline Shared_ptr<T>::Shared_ptr(const Shared_ptr<T> &sPtr): _wPtr(sPtr._wPtr)
+    Shared_ptr<T>::Shared_ptr(const Shared_ptr<T> &sPtr): _wPtr(sPtr._wPtr)
     {
         if (_wPtr)
         {
@@ -166,30 +156,6 @@ namespace CZ
     template <typename T>
     inline Shared_ptr<T>::operator bool() const
     { return static_cast<bool>(_wPtr); }
-
-    template <typename T>
-    inline bool operator==(const Shared_ptr<T> &lhs, const Shared_ptr<T> &rhs)
-    { return lhs._wPtr == rhs._wPtr; }
-
-    template <typename T>
-    inline bool operator==(const std::nullptr_t &lhs, const Shared_ptr<T> &rhs)
-    { return rhs._wPtr == nullptr; }
-
-    template <typename T>
-    inline bool operator==(const Shared_ptr<T> &lhs, const std::nullptr_t &rhs)
-    { return lhs._wPtr == nullptr; }
-
-    template <typename T>
-    inline bool operator!=(const Shared_ptr<T> &lhs, const Shared_ptr<T> &rhs)
-    { return !(lhs._wPtr == rhs._wPtr); }
-
-    template <typename T>
-    inline bool operator!=(const std::nullptr_t &lhs, const Shared_ptr<T> &rhs)
-    { return rhs._wPtr != nullptr; }
-
-    template <typename T>
-    inline bool operator!=(const Shared_ptr<T> &lhs, const std::nullptr_t &rhs)
-    { return lhs._wPtr != nullptr; }
 
 } // CZ
 

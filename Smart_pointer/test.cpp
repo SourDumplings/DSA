@@ -39,23 +39,51 @@ int main(int argc, char const *argv[])
     // printf("ps2.use_count() = %u\n", ps2.use_count());
 
     // 测试智能指针的隐式转换
-    class B
+    //
+    // 与nullptr的比较
+    Shared_ptr<int> p(new int());
+    if (p == nullptr)
     {
-    public:
-        virtual ~B() = default;
-        virtual void f() { printf("B.f()\n"); }
-    };
+        printf("p is not nullptr\n");
+    }
+    else
+        printf("p is nullptr\n");
 
-    class D: public B
+    Shared_ptr<string> ps1(nullptr), ps2(ps1), ps3(new string("hello world"));
+    if (ps1 == nullptr)
     {
-    public:
-        void f() { printf("D.f()\n"); }
-    };
+        printf("ps1 is nullptr\n");
+    }
+    if (ps2 == nullptr)
+    {
+        printf("ps2 is nullptr\n");
+    }
+    if (ps3 != nullptr)
+    {
+        printf("ps3 is not nullptr\n");
+        printf("ps3: %s\n", ps3->c_str());
+    }
 
-    Shared_ptr<D> pD(new D);
-    Shared_ptr<B> pB(new B);
-    pB->f();
-    pD->f();
+
+    //
+    // 多态性
+    // class B
+    // {
+    // public:
+    //     virtual ~B() = default;
+    //     virtual void f() { printf("B.f()\n"); }
+    // };
+
+    // class D: public B
+    // {
+    // public:
+    //     void f() { printf("D.f()\n"); }
+    // };
+
+    // Shared_ptr<D> pD(new D);
+    // Shared_ptr<B> pB(new B);
+    // pB->f();
+    // pD->f();
 
     // Shared_ptr<B> pBd1(new D), pBd2(pD)
     // pBd1->f();
