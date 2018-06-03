@@ -123,4 +123,6 @@ namespace CZ
     }
 } // CZ
 
+#include "BinTreeNode_zigzag.h"
+
 #endif // BIN_TREE_NODE_IMPLEMENTATION_H
