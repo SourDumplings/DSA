@@ -45,6 +45,8 @@ namespace CZ
 
         bool is_leaf() const;
 
+        static bool are_brother(const TreeNode<T> *node1, const TreeNode<T> *node2);
+
         const Rank& height() const;
         Rank& height();
 

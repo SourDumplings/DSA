@@ -19,6 +19,8 @@
 #include ".\Sort_methods\Select_sort.h"
 #include ".\Sort_methods\Insertion_sort.h"
 
+#include "..\Iterator\Iterator_traits.h"
+
 namespace CZ
 {
     enum StableSortMethod
@@ -29,7 +31,7 @@ namespace CZ
     };
 
     template <typename It, typename Cmp>
-    void Stable_sort(const It &begin, const It &end, const Cmp &cmp,
+    void doStable_sort(const It &begin, const It &end, const Cmp &cmp,
         const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
     {
         try
@@ -64,6 +66,54 @@ namespace CZ
         catch (const char *errMsg)
         {
             printf("%s\n", errMsg);
+            throw std::exception();
+        }
+        return;
+    }
+
+    namespace TestIterator
+    {
+        template <typename It, typename Cmp>
+        void test_iterator_for_stable_sort(const It &begin, const It &end,
+            random_iterator_tag,
+            const Cmp &cmp, const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+        {
+            doStable_sort(begin, end, cmp, method, version);
+            return;
+        }
+
+        template <typename It, typename Cmp>
+        void test_iterator_for_stable_sort(const It &begin, const It &end,
+            seq_iterator_tag,
+            const Cmp &cmp, const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+        {
+            throw "iterator is seq_iterator, should be random_iterator";
+            return;
+        }
+
+        template <typename It, typename Cmp>
+        void test_iterator_for_stable_sort(const It &begin, const It &end,
+            bi_iterator_tag,
+            const Cmp &cmp, const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+        {
+            throw "iterator is bi_iterator, should be random_iterator";
+            return;
+        }
+    } // TestIterator
+
+    template <typename It, typename Cmp>
+    void Stable_sort(const It &begin, const It &end, const Cmp &cmp,
+        const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+    {
+        try
+        {
+            TestIterator::test_iterator_for_stable_sort(begin, end,
+                typename Iterator_traits<It>::iterator_category(),
+                cmp, method, version);
+        }
+        catch (const char *errMsg)
+        {
+            printf("Error from stable sort: %s\n", errMsg);
             throw std::exception();
         }
         return;

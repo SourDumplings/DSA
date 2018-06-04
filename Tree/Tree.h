@@ -48,7 +48,7 @@ namespace CZ
         // 将结点node作为father结点的小儿子插入
         virtual void insert(TreeNode<T> *father, TreeNode<T> *node);
         // 移除树中的某个结点及其孩子，返回该目标结点
-        TreeNode<T>* remove(TreeNode<T> *node);
+        virtual TreeNode<T>* remove(TreeNode<T> *node);
 
         // 遍历算法
         // 默认遍历处理函数为输出树结点的数据到标准输出
@@ -60,14 +60,11 @@ namespace CZ
             void operator()(const T &data) const;
         };
         template <typename F = OutPut>
-        static void pre_order_traversal(TreeNode<T> *root, const F &process = F(),
-            const unsigned version = 0);
+        static void pre_order_traversal(TreeNode<T> *root, const F &visit = F());
         template <typename F = OutPut>
-        static void post_order_traversal(TreeNode<T> *root, const F &process = F(),
-            const unsigned version = 0);
+        static void post_order_traversal(TreeNode<T> *root, const F &visit = F());
         template <typename F = OutPut>
-        static void level_order_traversal(TreeNode<T> *root, const F &process = F(),
-            const unsigned version = 0);
+        static void level_order_traversal(TreeNode<T> *root, const F &visit = F());
 
     private:
         TreeNode<T> *_root = nullptr;

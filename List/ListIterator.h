@@ -31,6 +31,8 @@ namespace CZ
         friend bool operator==<T>(const ListIterator<T> &lhs, const ListIterator<T> &rhs);
         friend bool operator!=<T>(const ListIterator<T> &lhs, const ListIterator<T> &rhs);
     public:
+        typedef bi_iterator_tag iterator_category;
+
         // 构造函数
         ListIterator(ListNode<T> *node_ = nullptr): _it(node_) {}
 

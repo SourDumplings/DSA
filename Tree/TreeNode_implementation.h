@@ -93,6 +93,10 @@ namespace CZ
     }
 
     template <typename T>
+    inline bool TreeNode<T>::are_brother(const TreeNode<T> *node1, const TreeNode<T> *node2)
+    { return node1->_father == node2->_father; }
+
+    template <typename T>
     inline const typename TreeNode<T>::Rank& TreeNode<T>::height() const { return _height; }
 
     template <typename T>

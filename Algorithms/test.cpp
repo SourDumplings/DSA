@@ -16,6 +16,7 @@
 #include <functional>
 
 #include "..\Vector\Vector.h"
+#include "..\List\List.h"
 #include "Search.h"
 #include "Fib.h"
 #include "Sort.h"
@@ -125,11 +126,22 @@ int main(int argc, char const *argv[])
     // vs2.print_info("vs2");
     //
     // 测试最大公约数算法
-    int a = 156, b = 81, c = 54;
-    printf("gcd of %d and %d is %lld\n", a, b, Gcd(a, b));
-    printf("gcd of %d and %d is %lld\n", c, b, Gcd(c, b));
-    printf("gcd of %d and %d is %lld\n", a, c, Gcd(a, c));
+    // int a = 156, b = 81, c = 54;
+    // printf("gcd of %d and %d is %lld\n", a, b, Gcd(a, b));
+    // printf("gcd of %d and %d is %lld\n", c, b, Gcd(c, b));
+    // printf("gcd of %d and %d is %lld\n", a, c, Gcd(a, c));
 
+    // 测试迭代器traits类，用于类型识别
+    Vector<int> v({4, 6, 1, 3, 2});
+    v.print_info("v");
+    Sort(v.begin(), v.end());
+    v.print_info("v");
+
+    List<int> l({4, 6, 1, 3, 2});
+    l.print_info("l");
+    // Stable_sort(l.begin(), l.end());
+    Sort(l.begin(), l.end());
+    l.print_info("l");
     return 0;
 }
 

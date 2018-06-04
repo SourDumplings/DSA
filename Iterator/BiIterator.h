@@ -29,6 +29,8 @@ namespace CZ
         friend bool operator==<T>(const BiIterator<T> &lhs, const BiIterator<T> &rhs);
         friend bool operator!=<T>(const BiIterator<T> &lhs, const BiIterator<T> &rhs);
     public:
+        typedef bi_iterator_tag iterator_category;
+
         BiIterator(T *p_ = nullptr): SeqIterator<T>(p_) {}
         virtual ~BiIterator() = default;
 

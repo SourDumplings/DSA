@@ -50,6 +50,7 @@ namespace CZ
         friend bool operator><T>(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs);
         friend bool operator>=<T>(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs);
     public:
+        using iterator_category = random_iterator_tag;
         using Rank = RandomIteratorRank;
 
         RandomIterator(T *p_ = nullptr): BiIterator<T>(p_) {}

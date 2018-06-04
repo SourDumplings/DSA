@@ -178,6 +178,11 @@ namespace CZ
             {
                 throw "this node is not in this tree";
             }
+            if (node == _root)
+            {
+                // 不能移除根结点
+                throw "cannot remove root";
+            }
         }
         catch (const char *errMsg)
         {

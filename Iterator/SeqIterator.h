@@ -12,6 +12,8 @@
 #ifndef SEQ_ITERATOR_H
 #define SEQ_ITERATOR_H
 
+#include "Iterator_traits.h"
+
 namespace CZ
 {
     template <typename T>
@@ -28,6 +30,8 @@ namespace CZ
         friend bool operator==<T>(const SeqIterator<T> &lhs, const SeqIterator<T> &rhs);
         friend bool operator!=<T>(const SeqIterator<T> &lhs, const SeqIterator<T> &rhs);
     public:
+        typedef seq_iterator_tag iterator_category;
+
         // 构造函数
         SeqIterator(T *p_ = nullptr): _p(p_) {}
 

@@ -13,8 +13,11 @@
 #define SORT_H
 
 #include "Stable_sort.h"
+#include "../Iterator/Iterator_traits.h"
 
 #include <functional>
+#include <stdexcept>
+#include <typeinfo>
 
 namespace CZ
 {
@@ -26,10 +29,58 @@ namespace CZ
 
     // 对于指定使用稳定排序方法
     template <typename It, typename Cmp>
-    void Sort(const It &begin, const It &end, const Cmp &cmp,
+    void doSort(const It &begin, const It &end, const Cmp &cmp,
         const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
     {
         Stable_sort(begin, end, cmp, method, version);
+        return;
+    }
+
+    namespace TestIterator
+    {
+        template <typename It, typename Cmp>
+        void test_iterator_for_sort(const It &begin, const It &end,
+            random_iterator_tag,
+            const Cmp &cmp, const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+        {
+            doSort(begin, end, cmp, method, version);
+            return;
+        }
+
+        template <typename It, typename Cmp>
+        void test_iterator_for_sort(const It &begin, const It &end,
+            seq_iterator_tag,
+            const Cmp &cmp, const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+        {
+            throw "iterator is seq_iterator, should be random_iterator";
+            return;
+        }
+
+        template <typename It, typename Cmp>
+        void test_iterator_for_sort(const It &begin, const It &end,
+            bi_iterator_tag,
+            const Cmp &cmp, const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+        {
+            throw "iterator is bi_iterator, should be random_iterator";
+            return;
+        }
+    } // TestIterator
+
+    template <typename It, typename Cmp>
+    void Sort(const It &begin, const It &end, const Cmp &cmp,
+        const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+    {
+        try
+        {
+            TestIterator::test_iterator_for_sort(begin, end,
+                typename Iterator_traits<It>::iterator_category(),
+                cmp, method, version);
+        }
+        catch (const char *errMsg)
+        {
+            printf("Error from sort: %s\n", errMsg);
+            throw std::exception();
+        }
         return;
     }
 

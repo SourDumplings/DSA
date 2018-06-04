@@ -19,12 +19,11 @@ namespace CZ
 {
     template <typename T>
     template <typename F>
-    void Tree<T>::pre_order_traversal(TreeNode<T> *root, const F &process,
-        const unsigned version)
+    void Tree<T>::pre_order_traversal(TreeNode<T> *root, const F &visit)
     {
         if (root)
         {
-            process(root->data());
+            visit(root->data());
             for (auto &c : root->children())
             {
                 pre_order_traversal(c);
@@ -35,8 +34,7 @@ namespace CZ
 
     template <typename T>
     template <typename F>
-    void Tree<T>::post_order_traversal(TreeNode<T> *root, const F &process,
-        const unsigned version)
+    void Tree<T>::post_order_traversal(TreeNode<T> *root, const F &visit)
     {
         if (root)
         {
@@ -44,15 +42,14 @@ namespace CZ
             {
                 pre_order_traversal(c);
             }
-            process(root->data());
+            visit(root->data());
         }
         return;
     }
 
     template <typename T>
     template <typename F>
-    void Tree<T>::level_order_traversal(TreeNode<T> *root, const F &process,
-        const unsigned version)
+    void Tree<T>::level_order_traversal(TreeNode<T> *root, const F &visit)
     {
         Queue<TreeNode<T>*> q;
         q.push(root);
@@ -61,7 +58,7 @@ namespace CZ
             TreeNode<T> *node = q.front(); q.pop();
             if (node)
             {
-                process(node->data());
+                visit(node->data());
                 for (auto &c : node->children())
                 {
                     q.push(c);
