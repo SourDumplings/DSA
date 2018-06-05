@@ -12,6 +12,7 @@
 #ifndef BIN_TREE_IMPLEMENTATION_H
 #define BIN_TREE_IMPLEMENTATION_H
 
+#include "BinTree_constructors.h"
 #include "BinTree_traversal.h"
 #include "BinTree_modifications.h"
 

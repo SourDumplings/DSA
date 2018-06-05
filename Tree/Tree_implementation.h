@@ -20,6 +20,9 @@
 namespace CZ
 {
     template <typename T>
+    Tree<T>::Tree(std::nullptr_t): Tree<T>() {}
+
+    template <typename T>
     Tree<T>::Tree(TreeNode<T> *root_): _root(root_)
     {
         if (root_)

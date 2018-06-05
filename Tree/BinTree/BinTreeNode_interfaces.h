@@ -17,16 +17,20 @@
 namespace CZ
 {
     template <typename T>
-    inline BinTreeNode<T>* BinTreeNode<T>::left_child() const { return TreeNode<T>::_children.front(); }
+    inline BinTreeNode<T>* BinTreeNode<T>::left_child() const
+    { return dynamic_cast<BinTreeNode<T>*>(this->_children.front()); }
 
     template <typename T>
-    inline BinTreeNode<T>*& BinTreeNode<T>::left_child() { return TreeNode<T>::_children.front(); }
+    inline BinTreeNode<T>*& BinTreeNode<T>::left_child()
+    { return (BinTreeNode<T>*&)(this->_children.back()); }
 
     template <typename T>
-    inline BinTreeNode<T>* BinTreeNode<T>::right_child() const { return TreeNode<T>::_children.back(); }
+    inline BinTreeNode<T>* BinTreeNode<T>::right_child() const
+    { return dynamic_cast<BinTreeNode<T>*>(this->_children.back()); }
 
     template <typename T>
-    inline BinTreeNode<T>*& BinTreeNode<T>::right_child() { return TreeNode<T>::_children.back(); }
+    inline BinTreeNode<T>*& BinTreeNode<T>::right_child()
+    { return (BinTreeNode<T>*&)(this->_children.back()); }
 
     template <typename T>
     BinTreeNode<T>* BinTreeNode<T>::brother() const

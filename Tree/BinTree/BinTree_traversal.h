@@ -168,6 +168,54 @@ namespace CZ
             }
             return;
         }
+
+        template <typename T, typename F>
+        void post_order_traversal_recursion(BinTreeNode<T> *root, const F &visit)
+        {
+            if (root->left_child())
+                post_order_traversal_recursion(root->left_child(), visit);
+            if (root->right_child())
+                post_order_traversal_recursion(root->right_child(), visit);
+            visit(root->data());
+            return;
+        }
+
+        // 后序遍历的访问顺序为先是左侧最高可见叶结点（LHVFL）
+        // 再深入其右兄（可能不存在）后序遍历
+        // 最后是其父亲结点，于是一路尽量向左地向下走，一路将父结点和右兄压栈，直到走到叶结点
+        template <typename T, typename F>
+        void post_order_traversal_nonrecursion1(BinTreeNode<T> *root, const F &visit)
+        {
+            Stack<BinTreeNode<T>*> S;
+            S.push(root);
+            while (!S.empty())
+            {
+                if (S.top() != root->father())
+                {
+                    // 如果栈顶结点不是当前结点的父结点，则必为右兄结点，
+                    // 则需要深入右兄找到最侧最高可见叶结点(LHVFL)
+                    BinTreeNode<T> *temp = nullptr;
+                    while (temp = S.top())
+                    {
+                        if (temp->left_child())
+                        {
+                            if (temp->right_child())
+                            {
+                                S.push(temp->right_child());
+                            }
+                            S.push(temp->left_child());
+                        }
+                        else
+                            // 如果没有左孩子的结点就直接将可能为空的右孩子入栈
+                            S.push(temp->right_child());
+                    }
+                    S.pop(); // 弹出栈顶空结点
+                }
+                root = S.top()->data(); S.pop();
+                visit(root);
+            }
+            return;
+        }
     } // BinTreeTraversal
 
     template <typename T>
@@ -234,6 +282,34 @@ namespace CZ
                 break;
             }
         }
+    }
+
+    template <typename T>
+    template <typename F>
+    void BinTree<T>::post_order_traversal(BinTreeNode<T> *root, const F &visit,
+        const BinTreeTraversalVersion &version)
+    {
+        if (!root)
+        {
+            return;
+        }
+
+        switch (version)
+        {
+            case RECURSION_TRAVERSAL:
+            {
+                BinTreeTraversal::post_order_traversal_recursion(root, visit);
+                break;
+            }
+            case NONRECURSION_TRAVERSAL1:
+            case NONRECURSION_TRAVERSAL2:
+            case NONRECURSION_TRAVERSAL3:
+            {
+                BinTreeTraversal::post_order_traversal_nonrecursion1(root, visit);
+                break;
+            }
+        }
+        return;
     }
 } // CZ
 

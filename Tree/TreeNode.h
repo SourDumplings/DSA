@@ -55,11 +55,11 @@ namespace CZ
 
         void insert_child(TreeNode<T> *node);
     protected:
-        List<TreeNode<T>*> _children;
         // 向上更新高度，默认自己的高度已经更新好了
         // 版本0为简单版，针对孩子的高度增加的情况
         // 版本1为复杂版，针对孩子的高度减少的情况
         virtual void update_height_above(const unsigned version = 0);
+        List<TreeNode<T>*> _children;
     private:
         T _data;
         // 以该结点为根的子树的高度，单结点的高度为1

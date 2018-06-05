@@ -30,6 +30,7 @@ namespace CZ
 
         void clear();
 
+        Tree(std::nullptr_t);
         Tree(TreeNode<T> *root = nullptr);
         Tree(const Tree<T> &t);
         Tree(Tree<T> &&t);
@@ -66,7 +67,7 @@ namespace CZ
         template <typename F = OutPut>
         static void level_order_traversal(TreeNode<T> *root, const F &visit = F());
 
-    private:
+    protected:
         TreeNode<T> *_root = nullptr;
         Rank _size = 0;
 
