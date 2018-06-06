@@ -22,7 +22,7 @@ namespace CZ
 
     template <typename T>
     inline BinTreeNode<T>*& BinTreeNode<T>::left_child()
-    { return (BinTreeNode<T>*&)(this->_children.back()); }
+    { return (BinTreeNode<T>*&)(this->_children.front()); }
 
     template <typename T>
     inline BinTreeNode<T>* BinTreeNode<T>::right_child() const

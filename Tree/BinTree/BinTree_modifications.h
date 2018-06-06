@@ -33,41 +33,52 @@ namespace CZ
     {
         try
         {
-            if (!father)
-            {
-                throw "father is nullptr, cannot be a father";
-            }
             if (!node)
             {
                 throw "node is nullptr, cannot be a child";
-            }
-
-            if (father->get_root() != Tree<T>::root())
-            {
-                throw "this father is not a node in this tree";
             }
             if (node->father())
             {
                 throw "this node has already had a father";
             }
 
-            if (!father->left_child())
+            if (Tree<T>::root())
             {
-                father->insert_as_left_child(node);
-            }
-            else if (!father->right_child())
-            {
-                father->insert_as_right_child(node);
+                if (!father)
+                {
+                    throw "father is nullptr, cannot be a father";
+                }
+                if (father->get_root() != Tree<T>::root())
+                {
+                    throw "this father is not a node in this tree";
+                }
+
+                if (!father->left_child())
+                {
+                    father->insert_as_left_child(node);
+                }
+                else if (!father->right_child())
+                {
+                    father->insert_as_right_child(node);
+                }
+                else
+                {
+                    throw "this father has two children, cannot have more";
+                }
             }
             else
             {
-                throw "this father has two children, cannot have more";
+                if (father)
+                {
+                    throw "root node cannot have father";
+                }
+                Tree<T>::root() = node;
             }
             Tree<T>::_size += node->get_size();
         }
         catch (const char *errMsg)
         {
-            printf("Error: %s\n", errMsg);
+            printf("Error from BinTree's insert: %s\n", errMsg);
             std::exception();
         }
         return;

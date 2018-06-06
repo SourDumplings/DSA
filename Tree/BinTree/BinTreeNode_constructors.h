@@ -13,19 +13,44 @@
 #define BIN_TREE_NODE_CONSTRUCTORS_H
 
 #include "BinTreeNode.h"
+#include "../../Algorithms/Max.h"
 
 namespace CZ
 {
     template <typename T>
     BinTreeNode<T>::BinTreeNode(const T &data, BinTreeNode<T> *lChild_, BinTreeNode<T> *rChild_,
-        BinTreeNode<T> *father_): TreeNode<T>(data, father_)
+        BinTreeNode<T> *father_): TreeNode<T>(data)
     {
+        try
+        {
+            if (father_)
+            {
+                if (!father_->left_child())
+                {
+                    father_->insert_as_left_child(this);
+                }
+                else if (!father_->right_child())
+                {
+                    father_->insert_as_right_child(this);
+                }
+                else
+                {
+                    throw "father has two children, cannot have more";
+                }
+            }
+        }
+        catch (const char *errMsg)
+        {
+            printf("Error from BinTreeNode's constructor: %s\n", errMsg);
+            throw std::exception();
+        }
+
         TreeNode<T>::_children.push_back(lChild_);
         TreeNode<T>::_children.push_back(rChild_);
 
         Rank leftHeight = lChild_ ? lChild_->height() : 0;
         Rank rightHeight = rChild_ ? rChild_->height() : 0;
-        TreeNode<T>::_height = Max(leftHeight, rightHeight) + 1;
+        TreeNode<T>::height() = Max(leftHeight, rightHeight) + 1;
     }
 } // CZ
 

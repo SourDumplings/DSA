@@ -17,13 +17,13 @@
 namespace CZ
 {
     template <typename T, typename Cmp>
-    T& Max(const T &a, const T& b, const Cmp &cmp)
+    T& Max(T &a, T& b, const Cmp &cmp)
     {
         return cmp(b, a) ? a : b;
     }
 
     template <typename T>
-    T& Max(const T &a, const T& b)
+    T& Max(T &a, T& b)
     {
         return Max(a, b, std::less<const T&>());
     }

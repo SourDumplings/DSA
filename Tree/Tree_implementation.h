@@ -147,16 +147,28 @@ namespace CZ
             {
                 throw "node is nullptr, cannot be a child";
             }
-
-            if (father->get_root() != _root)
-            {
-                throw "this father is not a node in this tree";
-            }
             if (node->father())
             {
                 throw "this node has already had a father";
             }
-            father->insert_child(node);
+
+
+            if (_root)
+            {
+                if (father->get_root() != _root)
+                {
+                    throw "this father is not a node in this tree";
+                }
+                father->insert_child(node);
+            }
+            else
+            {
+                if (father)
+                {
+                    throw "root node cannot have a father";
+                }
+                _root = node;
+            }
             _size += node->get_size();
         }
         catch (const char *errMsg)

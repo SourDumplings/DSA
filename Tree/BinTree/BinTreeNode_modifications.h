@@ -34,7 +34,7 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("Error: %s\n", errMsg);
+            printf("Error from BinTreeNode's insert_as_left_child: %s\n", errMsg);
             throw std::exception();
         }
 
@@ -49,7 +49,7 @@ namespace CZ
     {
         try
         {
-            if (left_child())
+            if (right_child())
             {
                 throw "right child position is occupied";
             }
@@ -60,7 +60,7 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("Error: %s\n", errMsg);
+            printf("Error from BinTreeNode's insert_as_right_child: %s\n", errMsg);
             throw std::exception();
         }
 
