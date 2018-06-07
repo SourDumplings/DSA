@@ -195,7 +195,7 @@ namespace CZ
                     // 如果栈顶结点不是当前结点的父结点，则必为右兄结点，
                     // 则需要深入右兄找到最侧最高可见叶结点(LHVFL)
                     BinTreeNode<T> *temp = nullptr;
-                    while (temp = S.top())
+                    while (static_cast<bool>(temp = S.top()))
                     {
                         if (temp->left_child())
                         {
@@ -211,8 +211,8 @@ namespace CZ
                     }
                     S.pop(); // 弹出栈顶空结点
                 }
-                root = S.top()->data(); S.pop();
-                visit(root);
+                root = S.top(); S.pop();
+                visit(root->data());
             }
             return;
         }

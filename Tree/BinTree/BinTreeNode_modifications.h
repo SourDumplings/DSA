@@ -64,7 +64,7 @@ namespace CZ
             throw std::exception();
         }
 
-        left_child() = newChild;
+        right_child() = newChild;
         newChild->father() = this;
         newChild->update_height_above(0);
         return;

@@ -17,18 +17,18 @@
 
 namespace CZ
 {
+    enum BinTreeTraversalVersion
+    {
+        RECURSION_TRAVERSAL,
+        NONRECURSION_TRAVERSAL1,
+        NONRECURSION_TRAVERSAL2,
+        NONRECURSION_TRAVERSAL3
+    };
+
     template <typename T>
     class BinTree: public Tree<T>
     {
     public:
-        enum BinTreeTraversalVersion
-        {
-            RECURSION_TRAVERSAL,
-            NONRECURSION_TRAVERSAL1,
-            NONRECURSION_TRAVERSAL2,
-            NONRECURSION_TRAVERSAL3
-        };
-
         BinTree(std::nullptr_t);
         BinTree(BinTreeNode<T> *root = nullptr);
         BinTree(const BinTree<T> &t);

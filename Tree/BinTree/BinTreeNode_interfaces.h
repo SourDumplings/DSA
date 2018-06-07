@@ -100,10 +100,11 @@ namespace CZ
         else if (TreeNode<T>::father())
         {
             // 没有右孩子的话就是该结点的把该结点包含在左子树的最低的祖先
-            ret = this;
-            while (ret == ret->father()->right_child())
+            ret = const_cast<BinTreeNode<T>*>(this);
+            BinTreeNode<T> *&f = (BinTreeNode<T>*&)(ret->father());
+            while (ret == f->right_child())
             {
-                ret = ret->father();
+                ret = f;
                 if (!ret)
                 {
                     break;
@@ -111,7 +112,7 @@ namespace CZ
             }
             if (ret)
             {
-                ret = ret->father();
+                ret = f;
             }
             // 如果是最右侧的结点了便没有直接后继
         }
