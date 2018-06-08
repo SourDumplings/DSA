@@ -39,8 +39,8 @@ namespace CZ
             {
                 BinTreeNode<T> *f = S.top(); S.pop();
                 visit(f->data());
-                if (f->left_child()) S.push(f->left_child());
                 if (f->right_child()) S.push(f->right_child());
+                if (f->left_child()) S.push(f->left_child());
             }
             return;
         }

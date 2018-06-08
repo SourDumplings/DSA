@@ -67,16 +67,16 @@ int main(int argc, char const *argv[])
     t1.insert(n1->left_child(), new BinTreeNode<CZString>("me"));
     t1.insert(n1->left_child(), new BinTreeNode<CZString>("cat"));
 
-    printf("t1r->data(): %s\n", t1r->data().c_str());
-    printf("t1r->left_child()->data(): %s\n", t1r->left_child()->data().c_str());
-    printf("t1r->right_child()->data(): %s\n", t1r->right_child()->data().c_str());
-    printf("n1->data(): %s\n", n1->data().c_str());
-    printf("n1->left_child()->data(): %s\n", n1->left_child()->data().c_str());
-    printf("n1->right_child()->data(): %s\n", n1->right_child()->data().c_str());
-    printf("n1->left_child()->left_child()->data(): %s\n",
-        n1->left_child()->left_child()->data().c_str());
-    printf("n1->left_child()->right_child()->data(): %s\n",
-        n1->left_child()->right_child()->data().c_str());
+    // printf("t1r->data(): %s\n", t1r->data().c_str());
+    // printf("t1r->left_child()->data(): %s\n", t1r->left_child()->data().c_str());
+    // printf("t1r->right_child()->data(): %s\n", t1r->right_child()->data().c_str());
+    // printf("n1->data(): %s\n", n1->data().c_str());
+    // printf("n1->left_child()->data(): %s\n", n1->left_child()->data().c_str());
+    // printf("n1->right_child()->data(): %s\n", n1->right_child()->data().c_str());
+    // printf("n1->left_child()->left_child()->data(): %s\n",
+    //     n1->left_child()->left_child()->data().c_str());
+    // printf("n1->left_child()->right_child()->data(): %s\n",
+    //     n1->left_child()->right_child()->data().c_str());
 
     // printf("pre_order_traversal of t1: recursion\n");
     // BinTree<CZString>::pre_order_traversal(t1r);
@@ -101,26 +101,36 @@ int main(int argc, char const *argv[])
     // BinTree<CZString>::in_order_traversal(t1r, BinTree<CZString>::OutPut(),
     //     NONRECURSION_TRAVERSAL2);
     // printf("\n\n");
+    // BinTreeNode<CZString> *temp = t1r;
+    // while (temp)
+    // {
+    //     if (temp->next())
+    //     {
+    //         printf("%s's next is %s\n", temp->data().c_str(), temp->next()->data().c_str());
+    //     }
+    //     temp = temp->next();
+    // }
+    // printf("\n\n");
     // printf("in_order_traversal of t1: nonrecursion3\n");
     // BinTree<CZString>::in_order_traversal(t1r, BinTree<CZString>::OutPut(),
     //     NONRECURSION_TRAVERSAL3);
     // printf("\n\n");
 
-    // printf("post_order_traversal of t1: recursion\n");
-    // BinTree<CZString>::post_order_traversal(t1r);
-    // printf("\n\n");
-    // printf("post_order_traversal of t1: nonrecursion1\n");
-    // BinTree<CZString>::post_order_traversal(t1r, BinTree<CZString>::OutPut(),
-    //     NONRECURSION_TRAVERSAL1);
-    // printf("\n\n");
-    // printf("post_order_traversal of t1: nonrecursion2\n");
-    // BinTree<CZString>::post_order_traversal(t1r, BinTree<CZString>::OutPut(),
-    //     NONRECURSION_TRAVERSAL2);
-    // printf("\n\n");
+    printf("post_order_traversal of t1: recursion\n");
+    BinTree<CZString>::post_order_traversal(t1r);
+    printf("\n\n");
+    printf("post_order_traversal of t1: nonrecursion1\n");
+    BinTree<CZString>::post_order_traversal(t1r, BinTree<CZString>::OutPut(),
+        NONRECURSION_TRAVERSAL1);
+    printf("\n\n");
+    printf("post_order_traversal of t1: nonrecursion2\n");
+    BinTree<CZString>::post_order_traversal(t1r, BinTree<CZString>::OutPut(),
+        NONRECURSION_TRAVERSAL2);
+    printf("\n\n");
 
-    // printf("level_order_traversal of t1:\n");
-    // BinTree<CZString>::level_order_traversal(t1r);
-    // printf("\n\n");
+    printf("level_order_traversal of t1:\n");
+    BinTree<CZString>::level_order_traversal(t1r);
+    printf("\n\n");
 
     return 0;
 }

@@ -101,20 +101,21 @@ namespace CZ
         {
             // 没有右孩子的话就是该结点的把该结点包含在左子树的最低的祖先
             ret = const_cast<BinTreeNode<T>*>(this);
-            BinTreeNode<T> *&f = (BinTreeNode<T>*&)(ret->father());
-            while (ret == f->right_child())
+            BinTreeNode<T> *f = dynamic_cast<BinTreeNode<T>*>(ret->father());
+            while (f && ret == f->right_child())
             {
                 ret = f;
-                if (!ret)
-                {
-                    break;
-                }
+                f = dynamic_cast<BinTreeNode<T>*>(f->father());
             }
-            if (ret)
+            if (f)
             {
                 ret = f;
             }
-            // 如果是最右侧的结点了便没有直接后继
+            else
+            {
+                // 如果是最右侧的结点了便没有直接后继
+                ret = nullptr;
+            }
         }
         // 既没有右子树也没有父结点则没有后继
         return ret;
