@@ -63,7 +63,7 @@ int main(int argc, char const *argv[])
 
     t1.insert(n1, new BinTreeNode<CZString>("I"));
     t1.insert(n1, new BinTreeNode<CZString>("love"));
-    printf("t1.size() = %u\n", t1.size());
+    // printf("t1.size() = %u\n", t1.size());
     t1.insert(n1->left_child(), new BinTreeNode<CZString>("me"));
     t1.insert(n1->left_child(), new BinTreeNode<CZString>("cat"));
 
@@ -77,7 +77,13 @@ int main(int argc, char const *argv[])
     //     n1->left_child()->left_child()->data().c_str());
     // printf("n1->left_child()->right_child()->data(): %s\n",
     //     n1->left_child()->right_child()->data().c_str());
+    //
+    // 测试旋转操作
+    // n1->zig();
+    // n1->zag();
+    // printf("t1's height is %u\n", t1.height());
 
+    // // 测试遍历算法
     // printf("pre_order_traversal of t1: recursion\n");
     // BinTree<CZString>::pre_order_traversal(t1r);
     // printf("\n\n");
@@ -116,22 +122,41 @@ int main(int argc, char const *argv[])
     //     NONRECURSION_TRAVERSAL3);
     // printf("\n\n");
 
-    printf("post_order_traversal of t1: recursion\n");
-    BinTree<CZString>::post_order_traversal(t1r);
-    printf("\n\n");
-    printf("post_order_traversal of t1: nonrecursion1\n");
-    BinTree<CZString>::post_order_traversal(t1r, BinTree<CZString>::OutPut(),
-        NONRECURSION_TRAVERSAL1);
-    printf("\n\n");
-    printf("post_order_traversal of t1: nonrecursion2\n");
-    BinTree<CZString>::post_order_traversal(t1r, BinTree<CZString>::OutPut(),
+    // printf("post_order_traversal of t1: recursion\n");
+    // BinTree<CZString>::post_order_traversal(t1r);
+    // printf("\n\n");
+    // printf("post_order_traversal of t1: nonrecursion1\n");
+    // BinTree<CZString>::post_order_traversal(t1r, BinTree<CZString>::OutPut(),
+    //     NONRECURSION_TRAVERSAL1);
+    // printf("\n\n");
+    // printf("post_order_traversal of t1: nonrecursion2\n");
+    // BinTree<CZString>::post_order_traversal(t1r, BinTree<CZString>::OutPut(),
+    //     NONRECURSION_TRAVERSAL2);
+    // printf("\n\n");
+
+    // printf("level_order_traversal of t1:\n");
+    // BinTree<CZString>::level_order_traversal(t1r);
+    // printf("\n\n");
+
+    // // 测试删除操作
+    printf("before removing, t1.size() = %u\n", t1.size());
+    BinTree<CZString> tw(t1.remove(t1r->right_child()));
+    printf("after removing, t1.size() = %u\n", t1.size());
+    printf("tw.size() = %u\n", tw.size());
+
+    // // 测试动态遍历
+    int i = 0;
+    BinTree<CZString>::post_order_traversal(tw.root(),
+        [&i] (CZString &s)
+        {
+            s += i + '0';
+            ++i;
+        }
+        );
+    printf("pre_order_traversal of tw: \n");
+    BinTree<CZString>::pre_order_traversal(tw.root(), BinTree<CZString>::OutPut(),
         NONRECURSION_TRAVERSAL2);
     printf("\n\n");
-
-    printf("level_order_traversal of t1:\n");
-    BinTree<CZString>::level_order_traversal(t1r);
-    printf("\n\n");
-
     return 0;
 }
 

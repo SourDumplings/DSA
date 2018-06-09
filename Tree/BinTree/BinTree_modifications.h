@@ -17,19 +17,9 @@
 
 namespace CZ
 {
-    template <typename T>
-    void BinTree<T>::insert(TreeNode<T> *father, TreeNode<T> *node)
-    {
-        return do_insert(dynamic_cast<BinTreeNode<T>*>(father),
-            dynamic_cast<BinTreeNode<T>*>(node));
-    }
 
     template <typename T>
-    TreeNode<T>* BinTree<T>::remove(TreeNode<T> *node)
-    { return do_remove(dynamic_cast<BinTreeNode<T>*>(node)); }
-
-    template <typename T>
-    void BinTree<T>::do_insert(BinTreeNode<T> *father, BinTreeNode<T> *node)
+    void BinTree<T>::insert(BinTreeNode<T> *father, BinTreeNode<T> *node)
     {
         try
         {
@@ -85,7 +75,7 @@ namespace CZ
     }
 
     template <typename T>
-    BinTreeNode<T>* BinTree<T>::do_remove(BinTreeNode<T> *node)
+    BinTreeNode<T>* BinTree<T>::remove(BinTreeNode<T> *node)
     {
         if (!node)
         {

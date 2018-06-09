@@ -40,8 +40,8 @@ namespace CZ
         virtual BinTreeNode<T>* remove_left_child();
         virtual BinTreeNode<T>* remove_right_child();
 
-        BinTreeNode<T>* zig(); // 顺时针旋转
-        BinTreeNode<T>* zag(); // 逆时针旋转
+        BinTreeNode<T>* zig(); // 顺时针旋转, 返回旋转后的原来位置的结点指针
+        BinTreeNode<T>* zag(); // 逆时针旋转, 返回旋转后的原来位置的结点指针
 
         TreeNode<T>* oldest_child() = delete;
         const List<TreeNode<T>*>& children() const = delete;

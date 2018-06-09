@@ -21,7 +21,7 @@ namespace CZ
     BinTree<T>::BinTree(std::nullptr_t): BinTree<T>() {}
 
     template <typename T>
-    BinTree<T>::BinTree(BinTreeNode<T> *root): Tree<T>() {}
+    BinTree<T>::BinTree(BinTreeNode<T> *root): Tree<T>(root) {}
 
     template <typename T>
     BinTree<T>::BinTree(const BinTree<T> &t): Tree<T>(t) {}

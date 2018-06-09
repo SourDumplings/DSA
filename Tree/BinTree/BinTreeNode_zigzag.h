@@ -7,6 +7,7 @@
 
 /*
 二叉树结点类模板的旋转操作实现，返回旋转后的原来位置的结点指针
+该方法将会完成结点父子关系的调整和高度的更新
 
 zig:
       |                |
@@ -50,10 +51,11 @@ namespace CZ
         }
 
         lChild->father() = this->father();
-        if (this->father())
+        BinTreeNode<T> *&f = (BinTreeNode<T>*&)(this->father());
+        if (f)
         {
-            ((this == this->father->left_child()) ?
-                this->father->left_child(): this->father->right_child()) = lChild;
+            ((this == f->left_child()) ?
+                f->left_child() : f->right_child()) = lChild;
         }
         left_child() = lChild->right_child();
         if (left_child())
@@ -62,6 +64,16 @@ namespace CZ
         }
         lChild->right_child() = this;
         this->father() = lChild;
+
+        // 更新这个结点的高度
+        Rank lH = left_child() ? left_child()->height() : 0;
+        Rank rH = right_child() ? right_child()->height() : 0;
+        this->height() = Max(lH, rH) + 1;
+        // 更新结点B的高度
+        lH = lChild->left_child() ? lChild->left_child()->height() : 0;
+        rH = lChild->right_child() ? lChild->right_child()->height() : 0;
+        lChild->height() = Max(lH, rH) + 1;
+        lChild->update_height_above(0); // 结点B的高度只可能增加
         return lChild;
     }
 
@@ -83,18 +95,29 @@ namespace CZ
         }
 
         rChild->father() = this->father();
-        if (this->father())
+        BinTreeNode<T> *&f = (BinTreeNode<T>*&)(this->father());
+        if (f)
         {
-            ((this == this->father->right_child()) ?
-                this->father->right_child(): this->father->left_child()) = rChild;
+            ((this == f->right_child()) ?
+                f->right_child() : f->left_child()) = rChild;
         }
         right_child() = rChild->left_child();
         if (right_child())
         {
             right_child()->father() = this;
         }
-        rChild->right_child() = this;
+        rChild->left_child() = this;
         this->father() = rChild;
+
+        // 更新这个结点的高度
+        Rank lH = left_child() ? left_child()->height() : 0;
+        Rank rH = right_child() ? right_child()->height() : 0;
+        this->height() = Max(lH, rH) + 1;
+        // 更新结点C的高度
+        lH = rChild->left_child() ? rChild->left_child()->height() : 0;
+        rH = rChild->right_child() ? rChild->right_child()->height() : 0;
+        rChild->height() = Max(lH, rH) + 1;
+        rChild->update_height_above(0); // 结点C的高度只可能增加
         return rChild;
     }
 } // CZ

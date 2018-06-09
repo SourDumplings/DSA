@@ -38,8 +38,8 @@ namespace CZ
         BinTreeNode<T>* root() const;
 
         // 插入结点作为father的孩子，哪个位置空就插到哪，默认插到左孩子位置，没空则抛出异常
-        virtual void insert(TreeNode<T> *father, TreeNode<T> *node) override;
-        virtual TreeNode<T>* remove(TreeNode<T> *node) override;
+        void insert(BinTreeNode<T> *father, BinTreeNode<T> *node);
+        BinTreeNode<T>* remove(BinTreeNode<T> *node);
 
         // 二叉树的三种遍历，默认版本是递归版
         template <typename F = typename Tree<T>::OutPut>
@@ -51,9 +51,6 @@ namespace CZ
         template <typename F = typename Tree<T>::OutPut>
         static void post_order_traversal(BinTreeNode<T> *root, const F &visit = F(),
             const BinTreeTraversalVersion &version = RECURSION_TRAVERSAL);
-    private:
-        void do_insert(BinTreeNode<T> *father, BinTreeNode<T> *node);
-        BinTreeNode<T>* do_remove(BinTreeNode<T> *node);
     };
 } // CZ
 
