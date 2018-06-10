@@ -104,8 +104,8 @@ namespace CZ
                 _family.insert(root(), c);
             }
             _family.insert(root(), u._family.root());
-            _family.root() = nullptr;
-            _family.clear();
+            u._family.root() = nullptr;
+            u._family.clear();
         }
         return;
     }
