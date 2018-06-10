@@ -37,6 +37,8 @@ namespace CZ
         BinTreeNode<T>*& root();
         BinTreeNode<T>* root() const;
 
+        void print_info(const char *name = "") const;
+
         // 插入结点作为father的孩子，哪个位置空就插到哪，默认插到左孩子位置，没空则抛出异常
         void insert(BinTreeNode<T> *father, BinTreeNode<T> *node);
         BinTreeNode<T>* remove(BinTreeNode<T> *node);
@@ -51,6 +53,20 @@ namespace CZ
         template <typename F = typename Tree<T>::OutPut>
         static void post_order_traversal(BinTreeNode<T> *root, const F &visit = F(),
             const BinTreeTraversalVersion &version = RECURSION_TRAVERSAL);
+
+        // 根据遍历序列返回构造二叉树的算法
+        template <typename It>
+        static BinTree<T> constuct_from_pre_in_traversal(const It preB, const It &preE,
+            const It &inB, const It &inE);
+        template <typename It>
+        static BinTree<T> constuct_from_post_in_traversal(const It &postB, const It &postE,
+            const It &inB, const It &inE);
+        template <typename It>
+        static BinTree<T> constuct_from_in_pre_traversal(const It &inB, const It &inE,
+            const It &preB, const It &preE);
+        template <typename It>
+        static BinTree<T> constuct_from_in_post_traversal(const It &inB, const It &inE,
+            const It &postB, const It &postE);
     };
 } // CZ
 

@@ -18,6 +18,7 @@
 
 #include "BinTree_traversal.h"
 #include "BinTree_modifications.h"
+#include "BinTree_print_info.h"
 
 #endif // BIN_TREE_IMPLEMENTATION_H
 

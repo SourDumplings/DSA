@@ -157,6 +157,9 @@ int main(int argc, char const *argv[])
     BinTree<CZString>::pre_order_traversal(tw.root(), BinTree<CZString>::OutPut(),
         NONRECURSION_TRAVERSAL2);
     printf("\n\n");
+
+    tw.print_info("tw");
+    t1.print_info("t1");
     return 0;
 }
 
