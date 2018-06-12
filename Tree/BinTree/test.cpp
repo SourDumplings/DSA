@@ -16,9 +16,11 @@
 #include <algorithm>
 #include <memory>
 #include <stdexcept>
+#include <utility>
 
 #include "BinTree.h"
 #include "../../CZString/CZString.h"
+#include "../../Vector/Vector.h"
 
 using namespace std;
 using namespace CZ;
@@ -139,27 +141,74 @@ int main(int argc, char const *argv[])
     // printf("\n\n");
 
     // // 测试删除操作
-    printf("before removing, t1.size() = %u\n", t1.size());
-    BinTree<CZString> tw(t1.remove(t1r->right_child()));
-    printf("after removing, t1.size() = %u\n", t1.size());
-    printf("tw.size() = %u\n", tw.size());
+    // printf("before removing, t1.size() = %u\n", t1.size());
+    // BinTree<CZString> tw(t1.remove(t1r->right_child()));
+    // printf("after removing, t1.size() = %u\n", t1.size());
+    // printf("tw.size() = %u\n", tw.size());
 
     // // 测试动态遍历
-    int i = 0;
-    BinTree<CZString>::post_order_traversal(tw.root(),
-        [&i] (CZString &s)
-        {
-            s += i + '0';
-            ++i;
-        }
-        );
-    printf("pre_order_traversal of tw: \n");
-    BinTree<CZString>::pre_order_traversal(tw.root(), BinTree<CZString>::OutPut(),
-        NONRECURSION_TRAVERSAL2);
-    printf("\n\n");
+    // int i = 0;
+    // BinTree<CZString>::post_order_traversal(tw.root(),
+    //     [&i] (CZString &s)
+    //     {
+    //         s += i + '0';
+    //         ++i;
+    //     }
+    //     );
+    // printf("pre_order_traversal of tw: \n");
+    // BinTree<CZString>::pre_order_traversal(tw.root(), BinTree<CZString>::OutPut(),
+    //     NONRECURSION_TRAVERSAL2);
+    // printf("\n\n");
 
-    tw.print_info("tw");
+    // tw.print_info("tw");
+    // t1.print_info("t1");
+    //
+
+    // 测试树的重构算法
     t1.print_info("t1");
+    Vector<CZString> vsPre, vsIn, vsPost; // 记录树的各种遍历
+
+    printf("from pre_order_traversal: \n");
+    BinTree<CZString>::pre_order_traversal(t1.root(),
+        [&vsPre] (const CZString &s)
+        { vsPre.push_back(s); });
+    vsPre.print_info("vsPre");
+
+    printf("from post_order_traversal: \n");
+    BinTree<CZString>::post_order_traversal(t1.root(),
+        [&vsPost] (const CZString &s)
+        { vsPost.push_back(s); });
+    vsPost.print_info("vsPost");
+
+    printf("from in_order_traversal: \n");
+    BinTree<CZString>::in_order_traversal(t1.root(),
+        [&vsIn] (const CZString &s)
+        { vsIn.push_back(s); });
+    vsIn.print_info("vsIn");
+
+    BinTree<CZString> rt1, rt2, rt3, rt4, rt5;
+    rt1 = BinTree<CZString>::reconstruct_from_pre_in_traversal(vsPre.begin(), vsPre.end(),
+        vsIn.begin(), vsIn.end());
+    rt1.print_info("rt1");
+    rt2 = std::move(BinTree<CZString>::reconstruct_from_pre_in_traversal(vsPre.begin(), vsPre.end(),
+        vsIn.begin(), vsIn.end()));
+    rt2.print_info("rt2");
+    rt3 = std::move(BinTree<CZString>::reconstruct_from_post_in_traversal(vsPost.begin(), vsPost.end(),
+        vsIn.begin(), vsIn.end()));
+    rt3.print_info("rt3");
+    rt4 = std::move(BinTree<CZString>::reconstruct_from_in_pre_traversal(vsIn.begin(), vsIn.end(),
+        vsPre.begin(), vsPre.end()));
+    rt4.print_info("rt4");
+    rt5 = std::move(BinTree<CZString>::reconstruct_from_in_post_traversal(vsIn.begin(), vsIn.end(),
+        vsPost.begin(), vsPost.end()));
+    rt5.print_info("rt5");
+
+    printf("rt1 == rt2? %d\n", rt1 == rt2);
+    printf("rt1 != rt3? %d\n", rt1 != rt3);
+    printf("equivalent(rt1, rt2)? %d\n", BinTree<CZString>::equivalent(rt1, rt2));
+    printf("equivalent(rt1, rt3)? %d\n", BinTree<CZString>::equivalent(rt1, rt3));
+
+
     return 0;
 }
 

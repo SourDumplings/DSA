@@ -25,9 +25,19 @@ namespace CZ
         NONRECURSION_TRAVERSAL3
     };
 
+    template <typename T> class BinTree;
+
+    template <typename T>
+    bool operator==(const BinTree<T> &lhs, const BinTree<T> &rhs);
+
+    template <typename T>
+    bool operator!=(const BinTree<T> &lhs, const BinTree<T> &rhs);
+
     template <typename T>
     class BinTree: public Tree<T>
     {
+        friend bool operator==<T>(const BinTree<T> &lhs, const BinTree<T> &rhs);
+        friend bool operator!=<T>(const BinTree<T> &lhs, const BinTree<T> &rhs);
     public:
         BinTree(std::nullptr_t);
         BinTree(BinTreeNode<T> *root = nullptr);
@@ -43,6 +53,9 @@ namespace CZ
         void insert(BinTreeNode<T> *father, BinTreeNode<T> *node);
         BinTreeNode<T>* remove(BinTreeNode<T> *node);
 
+        BinTree<T>& operator=(const BinTree<T> &t);
+        BinTree<T>& operator=(BinTree<T> &&t);
+
         // 二叉树的三种遍历，默认版本是递归版
         template <typename F = typename Tree<T>::OutPut>
         static void pre_order_traversal(BinTreeNode<T> *root, const F &visit = F(),
@@ -56,17 +69,19 @@ namespace CZ
 
         // 根据遍历序列返回构造二叉树的算法
         template <typename It>
-        static BinTree<T> constuct_from_pre_in_traversal(const It preB, const It &preE,
-            const It &inB, const It &inE);
+        static BinTree<T> reconstruct_from_pre_in_traversal(It preB, It preE,
+            It inB, It inE);
         template <typename It>
-        static BinTree<T> constuct_from_post_in_traversal(const It &postB, const It &postE,
-            const It &inB, const It &inE);
+        static BinTree<T> reconstruct_from_post_in_traversal(It postB, It postE,
+            It inB, It inE);
         template <typename It>
-        static BinTree<T> constuct_from_in_pre_traversal(const It &inB, const It &inE,
-            const It &preB, const It &preE);
+        static BinTree<T> reconstruct_from_in_pre_traversal(It inB, It inE,
+            It preB, It preE);
         template <typename It>
-        static BinTree<T> constuct_from_in_post_traversal(const It &inB, const It &inE,
-            const It &postB, const It &postE);
+        static BinTree<T> reconstruct_from_in_post_traversal(It inB, It inE,
+            It postB, It postE);
+
+        static bool equivalent(const BinTree<T> &lhs, const BinTree<T> &rhs);
     };
 } // CZ
 

@@ -23,6 +23,10 @@ namespace CZ
     template <typename T>
     inline BinTreeNode<T>*& BinTree<T>::root()
     { return (BinTreeNode<T>*&)(Tree<T>::root()); }
+
+    template <typename T>
+    inline bool BinTree<T>::equivalent(const BinTree<T> &lhs, const BinTree<T> &rhs)
+    { return Tree<T>::equivalent(lhs, rhs); }
 } // CZ
 
 #endif // BIN_TREE_INTERFACES_H

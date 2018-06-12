@@ -256,6 +256,10 @@ namespace CZ
     template <typename T>
     inline bool operator!=(const Tree<T> &lhs, const Tree<T> &rhs)
     { return !(lhs == rhs); }
+
+    template <typename T>
+    inline bool Tree<T>::equivalent(const Tree<T> &lhs, const Tree<T> &rhs)
+    { return TreeNode<T>::equivalent(*lhs.root(), *rhs.root()); }
 } // CZ
 
 #include "Tree_traversal.h"

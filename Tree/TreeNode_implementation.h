@@ -191,6 +191,46 @@ namespace CZ
         }
         return ret;
     }
+
+    template <typename T>
+    bool TreeNode<T>::equivalent(const TreeNode<T> &lhs, const TreeNode<T> &rhs)
+    {
+        if (lhs.data() == rhs.data())
+        {
+            if (lhs.children().empty() && rhs.children().empty())
+            {
+                return true;
+            }
+            else if (!lhs.children().empty() && !rhs.children().empty() &&
+                lhs.children().size() == rhs.children().size())
+            {
+                for (auto it1 = lhs.children().begin(), it2 = rhs.children().begin();
+                    it1 != lhs.children().end(); ++it1, ++it2)
+                {
+                    if ((!*it1 && *it2) || (*it1 && !*it2))
+                    {
+                        return false;
+                    }
+                    else if (*it1 && *it2)
+                    {
+                        if (!equivalent(**it1, **it2))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+        return true;
+    }
 } // CZ
 
 #endif // TREE_NODE_IMPLEMENTATION_H

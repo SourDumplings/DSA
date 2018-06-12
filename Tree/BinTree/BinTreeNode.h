@@ -47,6 +47,8 @@ namespace CZ
         const List<TreeNode<T>*>& children() const = delete;
         List<TreeNode<T>*>& children() = delete;
         void insert_child() = delete;
+
+        static bool equivalent(const BinTreeNode<T> &lhs, const BinTreeNode<T> &rhs);
     };
 } // CZ
 

@@ -67,6 +67,8 @@ namespace CZ
         template <typename F = OutPut>
         static void level_order_traversal(TreeNode<T> *root, const F &visit = F());
 
+        static bool equivalent(const Tree<T> &lhs, const Tree<T> &rhs);
+
     protected:
         TreeNode<T> *_root = nullptr;
         Rank _size = 0;

@@ -120,6 +120,10 @@ namespace CZ
         // 既没有右子树也没有父结点则没有后继
         return ret;
     }
+
+    template <typename T>
+    inline bool equivalent(const BinTreeNode<T> &lhs, const BinTreeNode<T> &rhs)
+    { return TreeNode<T>::equivalent(lhs, rhs); }
 } // CZ
 
 #endif // BIN_TREE_NODE_INTERFACES_H
