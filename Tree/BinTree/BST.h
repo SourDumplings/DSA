@@ -22,6 +22,7 @@ namespace CZ
     class BST: public BinTree<T>
     {
     public:
+        // 二叉搜索树的构造函数
         BST(std::nullptr_t);
         BST(BinTreeNode<T> *root = nullptr);
         BST(const BST<T> &t);
