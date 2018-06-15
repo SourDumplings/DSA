@@ -47,7 +47,7 @@ namespace CZ
         BinTreeNode<T>*& root();
         BinTreeNode<T>* root() const;
 
-        void print_info(const char *name = "") const;
+        virtual void print_info(const char *name = "") const;
 
         // 插入结点作为father的孩子，哪个位置空就插到哪，默认插到左孩子位置，没空则抛出异常
         void insert(BinTreeNode<T> *father, BinTreeNode<T> *node);

@@ -135,6 +135,10 @@ namespace CZ
     }
 
     template <typename T>
+    inline bool Tree<T>::has_this_node(const TreeNode<T> *node) const
+    { return _root == node->get_root(); }
+
+    template <typename T>
     void Tree<T>::insert(TreeNode<T> *father, TreeNode<T> *node)
     {
         try

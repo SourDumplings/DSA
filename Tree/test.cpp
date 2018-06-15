@@ -87,6 +87,9 @@ int main(int argc, char const *argv[])
     Tree<string>::level_order_traversal(tW.root());
     putchar('\n');
 
+    printf("wN in T? %d\n", T.has_this_node(wN));
+    printf("wN in tW? %d\n", tW.has_this_node(wN));
+
     printf("tW.size() = %u, tW.height = %u\n", tW.size(), tW.height());
     tW.clear();
     printf("tW.size() = %u, tW.height = %u\n", tW.size(), tW.height());

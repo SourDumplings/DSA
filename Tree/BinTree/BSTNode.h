@@ -51,13 +51,15 @@ namespace CZ
 
         static bool& set_strict();
 
-    protected:
+    private:
         // 将二叉树结点指定左右的动态操作隐藏
         void insert_as_left_child(BSTNode *newChild);
         void insert_as_right_child(BSTNode *newChild);
         static bool isStrictBSTNode; // 是否为严格搜索，即左子结点是否应该严格小于该结点
     };
 } // CZ
+
+#include "BSTNode_implementation.h"
 
 #endif // BST_NODE_H
 

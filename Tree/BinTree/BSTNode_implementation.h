@@ -78,7 +78,7 @@ namespace CZ
         {
             if (data < TreeNode<T>::data() || data == TreeNode<T>::data())
             {
-                if (isStrictBSTNode && data == TreeNode<T>::data)
+                if (isStrictBSTNode && data == TreeNode<T>::data())
                 {
                     throw "this node's value is equal to the data inserting";
                 }
@@ -121,7 +121,7 @@ namespace CZ
         {
             if (node->data() < TreeNode<T>::data() || node->data() == TreeNode<T>::data())
             {
-                if (isStrictBSTNode && node->data() == TreeNode<T>::data)
+                if (isStrictBSTNode && node->data() == TreeNode<T>::data())
                 {
                     throw "this node's value is equal to the data inserting";
                 }

@@ -44,6 +44,8 @@ namespace CZ
         TreeNode<T>* root() const;
         TreeNode<T>*& root();
         Rank height() const; // 树的高度，单结点为1，空树高度为0
+        // 判断一个结点在不在这棵树中
+        bool has_this_node(const TreeNode<T> *node) const;
 
 
         // 将结点node作为father结点的小儿子插入
