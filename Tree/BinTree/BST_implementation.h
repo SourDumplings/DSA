@@ -47,9 +47,11 @@ namespace CZ
         printf("it contains %u nodes(including root) and height is %u\n",
             Tree<T>::size(), Tree<T>::height());
         printf("its pre_order_traversal is: \n");
-        BinTree<T>::pre_order_traversal(root(), typename Tree<T>::OutPut(), NONRECURSION_TRAVERSAL2);
+        BinTree<T>::pre_order_traversal(root(), typename Tree<T>::OutPut(),
+            NONRECURSION_TRAVERSAL2);
         printf("\nits in_order_traversal is: \n");
-        BinTree<T>::in_order_traversal(root(), typename Tree<T>::OutPut(), NONRECURSION_TRAVERSAL2);
+        BinTree<T>::in_order_traversal(root(), typename Tree<T>::OutPut(),
+            NONRECURSION_TRAVERSAL2);
         printf("\n\n");
         return;
     }
@@ -212,6 +214,10 @@ namespace CZ
         }
         return remove(target);
     }
+
+    template <typename T>
+    inline BSTNode<T>* BST<T>::rotate_at(BSTNode<T> *v)
+    { return dynamic_cast<BSTNode<T>*>(BinTree<T>::rotate_at(v)); }
 } // CZ
 
 #endif // BST_IMPLEMENTATION_H

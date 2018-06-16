@@ -39,6 +39,8 @@ namespace CZ
         friend bool operator==<T>(const BinTree<T> &lhs, const BinTree<T> &rhs);
         friend bool operator!=<T>(const BinTree<T> &lhs, const BinTree<T> &rhs);
     public:
+        using Rank = typename Tree<T>::Rank;
+
         BinTree(std::nullptr_t);
         BinTree(BinTreeNode<T> *root = nullptr);
         BinTree(const BinTree<T> &t);
@@ -82,6 +84,18 @@ namespace CZ
             It postB, It postE);
 
         static bool equivalent(const BinTree<T> &lhs, const BinTree<T> &rhs);
+
+        // 旋转与3+4重构
+        // 旋转，返回旋转后局部子树树根的位置，借助3+4重构算法实现
+        // 需传入非空孙辈结点
+        BinTreeNode<T>* rotate_at(BinTreeNode<T> *v);
+    protected:
+        // 3+4重构算法，返回重组之后局部子树根节点的位置，即b
+        // 可用于AVL树和RedBlack树的平衡调整
+        // 对于调整好的子树的根结点与上层结点的双向链接由上层调用负责调整
+        // 传入的a、b、c结点不能为空
+        BinTreeNode<T>* connect34(BinTreeNode<T> *a, BinTreeNode<T> *b, BinTreeNode<T> *c,
+            BinTreeNode<T> *T0, BinTreeNode<T> *T1, BinTreeNode<T> *T2, BinTreeNode<T> *T3);
     };
 } // CZ
 

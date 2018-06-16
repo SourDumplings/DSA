@@ -22,6 +22,7 @@
 #include "BinTree_print_info.h"
 
 #include "BinTree_reconstruct.h"
+#include "BinTree_rotation.h"
 
 #endif // BIN_TREE_IMPLEMENTATION_H
 

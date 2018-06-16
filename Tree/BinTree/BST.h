@@ -49,6 +49,8 @@ namespace CZ
         BSTNode<T>* do_recursion_search(const BSTNode<T> *nowCheck, const T &data) const;
         void do_recursion_insert(BSTNode<T> *&father, BSTNode<T> *node);
         void do_recursion_insert(BSTNode<T> *&father, const T &data);
+        // 旋转操作不能由用户控制
+        BSTNode<T>* rotate_at(BSTNode<T> *v);
     };
 
 } // CZ
