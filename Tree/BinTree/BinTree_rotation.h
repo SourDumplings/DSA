@@ -37,40 +37,64 @@ namespace CZ
             {
                 throw "this node is not in this BinTree";
             }
-            BinTreeNode<T> *f = v->father();
+            BinTreeNode<T> *f = dynamic_cast<BinTreeNode<T>*>(v->father());
             if (!f)
             {
                 throw "this node doesn't have father";
             }
-            BinTreeNode<T> *g = f->father();
+            BinTreeNode<T> *g = dynamic_cast<BinTreeNode<T>*>(f->father());
             if (!g)
             {
                 throw "this node doesn't have grandfather";
             }
-
-            BinTreeNode<T> *z = g->father(); // 记录曾祖父结点
+            BinTreeNode<T> *z = dynamic_cast<BinTreeNode<T>*>(g->father()); // 记录曾祖父结点
 
             if (f == g->left_child())
             {
                 if (v == f->left_child())
                 {
+                    // printf("case 1\n");
                     // 情况1
-                    ret = connect34(v, f, g, v->lc, v->rc, f->rc, g->rc);
+                    ret = connect34(v, f, g,
+                        v->left_child(), v->right_child(), f->right_child(), g->right_child());
                 }
                 else
+                {
+                    // printf("case 2\n");
                     // 情况2
-                    ret = connect34(f, v, g, f->lc, v->lc, v->rc, g->rc);
+                    ret = connect34(f, v, g,
+                        f->left_child(), v->left_child(), v->right_child(), g->right_child());
+                }
             }
             else
             {
                 if (v == f->left_child())
                 {
+                    // printf("case 3\n");
                     // 情况3
-                    ret = connect34(g, v, f, g->lc, v->lc, v->rc, f->rc);
+                    ret = connect34(g, v, f,
+                        g->left_child(), v->left_child(), v->right_child(), f->right_child());
                 }
                 else
+                {
                     // 情况4
-                    ret = connect34(g, f, v, g->lc, f->lc, v->lc, v->rc);
+                    // printf("case 4\n");
+                    ret = connect34(g, f, v,
+                        g->left_child(), f->left_child(), v->left_child(), v->right_child());
+                }
+            }
+
+            // 建立重构之后新的根节点和曾祖父结点之间的父子关系，并且更新高度
+            if (z)
+            {
+                (z->left_child() == g ? z->left_child() : z->right_child()) = ret;
+                ret->father() = z;
+                ret->update_height_above(1);
+            }
+            else
+            {
+                ret->father() = nullptr;
+                Tree<T>::root() = ret;
             }
         }
         catch (const char *errMsg)
@@ -139,8 +163,7 @@ namespace CZ
         a->father() = b;
         b->right_child() = c;
         c->father() = b;
-        b->height() = Max(a->height(), c->heght()) + 1;
-        b->update_height_above(0);
+        b->height() = Max(a->height(), c->height()) + 1;
         return b;
     }
 } // CZ

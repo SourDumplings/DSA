@@ -150,7 +150,7 @@ namespace CZ
                     typename TreeNode<T>::Rank maxChildHeight = 0;
                     for (auto &c : f->children())
                     {
-                        if (c->_height > maxChildHeight)
+                        if (c && c->_height > maxChildHeight)
                         {
                             maxChildHeight = c->_height;
                         }
