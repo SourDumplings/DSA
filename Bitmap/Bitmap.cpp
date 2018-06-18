@@ -29,6 +29,7 @@ Bitmap类的实现
 #include <cstdio>
 #include <string>
 #include <stdexcept>
+#include <iostream>
 
 namespace CZ
 {
@@ -165,5 +166,6 @@ namespace CZ
         return;
     }
 
+    inline std::ostream& operator<<(std::ostream &os, const Bitmap &b) { return os; }
 } // CZ
 

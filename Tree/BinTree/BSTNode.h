@@ -25,7 +25,7 @@ namespace CZ
     public:
         using Rank = typename BSTNode<T>::Rank;
 
-        // 构造函数不能传入子女，只能传入数据
+        // 构造函数不能传入子女，只能传入数据和父结点
         BSTNode(const T &data = T(), BSTNode *father_ = nullptr);
 
         BSTNode* left_child() const;
@@ -37,6 +37,8 @@ namespace CZ
         // 中序遍历下的直接前驱和后继
         BSTNode* prev() const;
         BSTNode* next() const;
+        BSTNode*& father();
+        BSTNode* father() const;
 
         // 二叉搜索树结点对于插入和删除孩子结点的操作
         // 只能插入和删除这个结点的某个孩子，不满足搜索树条件则抛出异常
@@ -48,14 +50,10 @@ namespace CZ
         BSTNode* remove_right_child();
         BSTNode* zig(); // 顺时针旋转, 返回旋转后的原来位置的结点指针
         BSTNode* zag(); // 逆时针旋转, 返回旋转后的原来位置的结点指针
-
-        static bool& set_strict();
-
     private:
         // 将二叉树结点指定左右的动态操作隐藏
         void insert_as_left_child(BSTNode *newChild);
         void insert_as_right_child(BSTNode *newChild);
-        static bool isStrictBSTNode; // 是否为严格搜索，即左子结点是否应该严格小于该结点
     };
 } // CZ
 

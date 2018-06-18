@@ -15,6 +15,7 @@
 #include "TreeNode.h"
 #include <stdexcept>
 #include <cstdio>
+#include <iostream>
 
 namespace CZ
 {
@@ -231,6 +232,10 @@ namespace CZ
         }
         return true;
     }
+
+    template <typename T>
+    inline std::ostream& operator<<(std::ostream &os, const TreeNode<T> &tN)
+    { return os << tN.data(); }
 } // CZ
 
 #endif // TREE_NODE_IMPLEMENTATION_H

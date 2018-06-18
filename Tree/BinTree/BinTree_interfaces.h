@@ -18,7 +18,7 @@ namespace CZ
 {
     template <typename T>
     inline BinTreeNode<T>* BinTree<T>::root() const
-    { return dynamic_cast<BinTreeNode<T>*>(Tree<T>::root()); }
+    { return reinterpret_cast<BinTreeNode<T>*>(Tree<T>::root()); }
 
     template <typename T>
     inline BinTreeNode<T>*& BinTree<T>::root()

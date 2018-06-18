@@ -142,6 +142,9 @@ namespace CZ
     bool operator!=(const UnionFindSet<T> &lhs, const UnionFindSet<T> &rhs)
     { return !(lhs == rhs); }
 
+    template <typename T>
+    inline std::ostream& operator<<(std::ostream &os, const UnionFindSet<T> &u) { return os; }
+
 } // CZ
 
 

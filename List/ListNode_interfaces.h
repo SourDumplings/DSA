@@ -13,6 +13,7 @@
 #define LIST_NODE_INTERFACES_H
 
 #include "ListNode.h"
+#include <iostream>
 
 namespace CZ
 {
@@ -30,6 +31,10 @@ namespace CZ
     inline T& ListNode<T>::data() { return _data; }
     template <typename T>
     inline const T& ListNode<T>::data() const { return _data; }
+
+    template <typename T>
+    std::ostream& operator<<(std::ostream &os, const ListNode<T> &lN)
+    { return os << lN.data(); }
 } // CZ
 
 #endif // LIST_NODE_INTERFACES_H

@@ -62,23 +62,25 @@ namespace CZ
         {
             return nullptr;
         }
-        TreeNode<T> *copiedRoot = new TreeNode<T>(root->data(), nullptr, 0);
+        TreeNode<T> *copiedRoot = new TreeNode<T>(root->data(), nullptr, 1);
         for (auto &c : root->children())
         {
             TreeNode<T> *child = copy_from(c);
-            child->father() = copiedRoot;
+            if (child)
+            {
+                child->father() = copiedRoot;
+                if (child->height() >= copiedRoot->height())
+                {
+                    copiedRoot->height() = child->height() + 1;
+                }
+            }
             copiedRoot->children().push_back(child);
-            copiedRoot->height() = (child->height() >= copiedRoot->height()) ?
-                child->height() + 1 : copiedRoot->height();
         }
         return copiedRoot;
     }
 
     template <typename T>
-    Tree<T>::Tree(const Tree<T> &t): _size(t._size)
-    {
-        _root = copy_from(t._root);
-    }
+    Tree<T>::Tree(const Tree<T> &t): _root(copy_from(t._root)), _size(t._size) {}
 
     template <typename T>
     Tree<T>::Tree(Tree<T> &&t): _root(t._root), _size(t._size)
@@ -264,6 +266,10 @@ namespace CZ
     template <typename T>
     inline bool Tree<T>::equivalent(const Tree<T> &lhs, const Tree<T> &rhs)
     { return TreeNode<T>::equivalent(*lhs.root(), *rhs.root()); }
+
+    template <typename T>
+    inline std::ostream& operator<<(std::ostream &os, const Tree<T> &t)
+    { return os; }
 } // CZ
 
 #include "Tree_traversal.h"

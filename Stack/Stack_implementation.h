@@ -94,6 +94,9 @@ namespace CZ
         printf("\n\n");
         return;
     }
+
+    template <typename T>
+    inline std::ostream& operator<<(std::ostream &os, const Stack<T> &s) { return os; }
 } // CZ
 
 #endif // STACK_IMPLEMENTATION_H

@@ -19,12 +19,6 @@
 namespace CZ
 {
     template <typename T>
-    inline bool& BST<T>::set_strict() { return BSTNode<T>::set_strict(); }
-
-    template <typename T>
-    inline bool BST<T>::is_strict() { return BSTNode<T>::isStrictBSTNode; }
-
-    template <typename T>
     BST<T>::BST(std::nullptr_t): BinTree<T>(nullptr) {}
     template <typename T>
     BST<T>::BST(BSTNode<T> *root): BinTree<T>(root) {}
@@ -35,7 +29,7 @@ namespace CZ
 
     template <typename T>
     inline BSTNode<T>* BST<T>::root() const
-    { return dynamic_cast<BSTNode<T>*>(BinTree<T>::root()); }
+    { return reinterpret_cast<BSTNode<T>*>(BinTree<T>::root()); }
     template <typename T>
     inline BSTNode<T>*& BST<T>::root()
     { return (BSTNode<T>*&)(BinTree<T>::root()); }
@@ -85,108 +79,45 @@ namespace CZ
     template <typename T>
     void BST<T>::do_recursion_insert(BSTNode<T> *&father, BSTNode<T> *node)
     {
-        try
+        if (!father)
         {
-            if (!father)
+            Tree<T>::_size = node->get_size();
+            father = node;
+        }
+        else
+        {
+            if (node->data() < father->data() || node->data() == father->data())
             {
-                Tree<T>::_size = node->get_size();
-                father = node;
-            }
-            else
-            {
-                if (node->data() < father->data() ||
-                    (node->data() == father->data() && !is_strict()))
+                if (father->left_child())
                 {
-                    if (father->left_child())
-                    {
-                        do_recursion_insert(father->left_child(), node);
-                    }
-                    else
-                    {
-                        father->insert_child(node);
-                        Tree<T>::_size += node->get_size();
-                    }
-                }
-                else if (father->data() < node->data())
-                {
-                    if (father->right_child())
-                    {
-                        do_recursion_insert(father->right_child(), node);
-                    }
-                    else
-                    {
-                        father->insert_child(node);
-                        Tree<T>::_size += node->get_size();
-                    }
+                    do_recursion_insert(father->left_child(), node);
                 }
                 else
                 {
-                    throw "cannot insert an exist value in a strict BST";
+                    father->insert_child(node);
+                    Tree<T>::_size += node->get_size();
                 }
             }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from BST do_recursion_insert: %s\n", errMsg);
-            throw std::exception();
-        }
+            else
+            {
+                if (father->right_child())
+                {
+                    do_recursion_insert(father->right_child(), node);
+                }
+                else
+                {
+                    father->insert_child(node);
+                    Tree<T>::_size += node->get_size();
+                }
+            }
         return;
+        }
     }
 
-    template <typename T>
-    void BST<T>::do_recursion_insert(BSTNode<T> *&father, const T &data)
-    {
-        try
-        {
-            if (!father)
-            {
-                father = new BSTNode<T>(data);
-                Tree<T>::_size = 1;
-            }
-            else
-            {
-                if (data < father->data() ||
-                    (data == father->data() && !is_strict()))
-                {
-                    if (father->left_child())
-                    {
-                        do_recursion_insert(father->left_child(), data);
-                    }
-                    else
-                    {
-                        father->insert_child(data);
-                        ++Tree<T>::_size;
-                    }
-                }
-                else if (father->data() < data)
-                {
-                    if (father->right_child())
-                    {
-                        do_recursion_insert(father->right_child(), data);
-                    }
-                    else
-                    {
-                        father->insert_child(data);
-                        ++Tree<T>::_size;
-                    }
-                }
-                else
-                {
-                    throw "cannot insert an exist value in a strict BST";
-                }
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from BST do_recursion_insert: %s\n", errMsg);
-            throw std::exception();
-        }
-        return;
-    }
 
     template <typename T>
     inline void BST<T>::insert(const T &data)
-    { do_recursion_insert(root(), data); }
+    { do_recursion_insert(root(), new BSTNode<T>(data)); }
 
     template <typename T>
     inline void BST<T>::insert(BSTNode<T> *node)
@@ -194,7 +125,7 @@ namespace CZ
 
     template <typename T>
     inline BSTNode<T>* BST<T>::remove(BSTNode<T> *node)
-    { return dynamic_cast<BSTNode<T>*>(BinTree<T>::remove(node)); }
+    { return reinterpret_cast<BSTNode<T>*>(BinTree<T>::remove(node)); }
 
     template <typename T>
     BSTNode<T>* BST<T>::remove(const T &data)
@@ -217,7 +148,7 @@ namespace CZ
 
     template <typename T>
     inline BSTNode<T>* BST<T>::rotate_at(BSTNode<T> *v)
-    { return dynamic_cast<BSTNode<T>*>(BinTree<T>::rotate_at(v)); }
+    { return reinterpret_cast<BSTNode<T>*>(BinTree<T>::rotate_at(v)); }
 } // CZ
 
 #endif // BST_IMPLEMENTATION_H

@@ -99,7 +99,7 @@ namespace CZ
             throw std::exception();
         }
 
-        BinTreeNode<T> *f = dynamic_cast<BinTreeNode<T>*>(node->father());
+        BinTreeNode<T> *f = node->father();
         node == f->left_child() ? f->remove_left_child() : f->remove_right_child();
 
         Tree<T>::_size -= node->get_size();

@@ -18,7 +18,7 @@ namespace CZ
 {
     template <typename T>
     inline BinTreeNode<T>* BinTreeNode<T>::left_child() const
-    { return dynamic_cast<BinTreeNode<T>*>(this->_children.front()); }
+    { return reinterpret_cast<BinTreeNode<T>*>(this->_children.front()); }
 
     template <typename T>
     inline BinTreeNode<T>*& BinTreeNode<T>::left_child()
@@ -26,11 +26,19 @@ namespace CZ
 
     template <typename T>
     inline BinTreeNode<T>* BinTreeNode<T>::right_child() const
-    { return dynamic_cast<BinTreeNode<T>*>(this->_children.back()); }
+    { return reinterpret_cast<BinTreeNode<T>*>(this->_children.back()); }
 
     template <typename T>
     inline BinTreeNode<T>*& BinTreeNode<T>::right_child()
     { return (BinTreeNode<T>*&)(this->_children.back()); }
+
+    template <typename T>
+    inline BinTreeNode<T>*& BinTreeNode<T>::father()
+    { return (BinTreeNode<T>*&)(TreeNode<T>::father()); }
+
+    template <typename T>
+    inline BinTreeNode<T>* BinTreeNode<T>::father() const
+    { return reinterpret_cast<BinTreeNode<T>*>(TreeNode<T>::father()); }
 
     template <typename T>
     BinTreeNode<T>* BinTreeNode<T>::brother() const
@@ -101,11 +109,11 @@ namespace CZ
         {
             // 没有右孩子的话就是该结点的把该结点包含在左子树的最低的祖先
             ret = const_cast<BinTreeNode<T>*>(this);
-            BinTreeNode<T> *f = dynamic_cast<BinTreeNode<T>*>(ret->father());
+            BinTreeNode<T> *f = ret->father();
             while (f && ret == f->right_child())
             {
                 ret = f;
-                f = dynamic_cast<BinTreeNode<T>*>(f->father());
+                f = f->father();
             }
             if (f)
             {

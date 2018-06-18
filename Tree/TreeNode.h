@@ -68,6 +68,7 @@ namespace CZ
         Rank _height = 1;
         TreeNode<T> *_father = nullptr;
     };
+
 } // CZ
 
 #include "TreeNode_implementation.h"

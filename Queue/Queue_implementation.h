@@ -16,6 +16,7 @@
 #include <stdexcept>
 #include <cstdio>
 #include <utility>
+#include <iostream>
 
 namespace CZ
 {
@@ -89,6 +90,9 @@ namespace CZ
         printf("\n\n");
         return;
     }
+
+    template <typename T>
+    inline std::ostream& operator<<(std::ostream &os, const Queue<T> &q) { return os; }
 } // CZ
 
 #endif // QUEUE_IMPLEMENTATION_H

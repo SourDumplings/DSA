@@ -13,6 +13,7 @@
 #define WEAK_PTR_H
 
 #include <cstdio>
+#include <iostream>
 
 namespace CZ
 {
@@ -54,6 +55,9 @@ namespace CZ
         T *_ptr;
         Rank _count;
     };
+
+    template <typename T>
+    inline std::ostream& operator<<(std::ostream &os, const Weak_ptr<T> &wP) { return os; }
 
 } // CZ
 

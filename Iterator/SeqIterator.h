@@ -13,6 +13,7 @@
 #define SEQ_ITERATOR_H
 
 #include "Iterator_traits.h"
+#include <iostream>
 
 namespace CZ
 {
@@ -75,6 +76,9 @@ namespace CZ
     {
         return !(lhs == rhs);
     }
+
+    template <typename T>
+    inline std::ostream& operator<<(std::ostream &os, const SeqIterator<T> &it) { return os; }
 } // CZ
 
 #endif // SEQ_ITERATOR_H

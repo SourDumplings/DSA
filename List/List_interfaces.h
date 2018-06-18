@@ -14,6 +14,7 @@ List类模板的访问接口函数
 
 #include "List.h"
 #include <stdexcept>
+#include <iostream>
 
 namespace CZ
 {
@@ -136,6 +137,9 @@ namespace CZ
     {
         return _back->data();
     }
+
+    template <typename T>
+    inline std::ostream& operator<<(std::ostream &os, const List<T> &l) { return os; }
 
 } // CZ
 

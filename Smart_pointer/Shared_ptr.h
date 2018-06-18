@@ -14,6 +14,7 @@
 
 #include <cstdio>
 #include <stdexcept>
+#include <iostream>
 
 #include "Weak_ptr.h"
 
@@ -156,6 +157,9 @@ namespace CZ
     template <typename T>
     inline Shared_ptr<T>::operator bool() const
     { return static_cast<bool>(_wPtr); }
+
+    template <typename T>
+    inline std::ostream& operator<<(std::ostream &os, const Shared_ptr<T> &sP) { return os; }
 
 } // CZ
 

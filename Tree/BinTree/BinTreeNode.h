@@ -34,6 +34,8 @@ namespace CZ
         // 中序遍历下的直接前驱和后继
         BinTreeNode<T>* prev() const;
         BinTreeNode<T>* next() const;
+        BinTreeNode<T>*& father();
+        BinTreeNode<T>* father() const;
 
         virtual void insert_as_left_child(BinTreeNode<T> *newChild);
         virtual void insert_as_right_child(BinTreeNode<T> *newChild);

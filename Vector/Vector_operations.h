@@ -14,6 +14,7 @@ Vector本身所支持的操作
 
 #include "Vector.h"
 #include <stdexcept>
+#include <iostream>
 
 // 字典序的比较函数
 #include "..\Algorithms\Dict_compare.h"
@@ -70,6 +71,9 @@ namespace CZ
         }
         return *this;
     }
+
+    template <typename T>
+    inline std::ostream& operator<<(std::ostream &os, const Vector<T> &v) { return os; }
 }
 
 

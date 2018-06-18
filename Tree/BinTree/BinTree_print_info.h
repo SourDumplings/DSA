@@ -23,11 +23,18 @@ namespace CZ
         printf("for bintree %s\n", name);
         printf("it contains %u nodes(including root) and height is %u\n",
             Tree<T>::size(), Tree<T>::height());
-        printf("its pre_order_traversal is: \n");
-        pre_order_traversal(root(), typename Tree<T>::OutPut(), NONRECURSION_TRAVERSAL2);
-        printf("\nits in_order_traversal is: \n");
-        in_order_traversal(root(), typename Tree<T>::OutPut(), NONRECURSION_TRAVERSAL2);
-        printf("\n\n");
+        if (!root())
+        {
+            printf("%s is an empty bintree\n\n", name);
+        }
+        else
+        {
+            printf("its pre_order_traversal is: \n");
+            pre_order_traversal(root(), typename Tree<T>::OutPut(), NONRECURSION_TRAVERSAL2);
+            printf("\nits in_order_traversal is: \n");
+            in_order_traversal(root(), typename Tree<T>::OutPut(), NONRECURSION_TRAVERSAL2);
+            printf("\n\n");
+        }
         return;
     }
 } // CZ

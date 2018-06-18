@@ -26,7 +26,6 @@ int main(int argc, char const *argv[])
 {
     // 插入测试
     BST<int> bst1;
-    // bst1.set_strict() = true;
     Vector<int> v1({1, 5, 3, 2, 7, 2, 6, 3, 4, 10});
     bst1.print_info("bst1");
     for (auto &i : v1)

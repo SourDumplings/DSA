@@ -13,6 +13,7 @@
 #include <stdexcept>
 #include <cmath>
 #include <cstring>
+#include <iostream>
 
 #include "Expression.h"
 #include "../Stack/Stack.h"
@@ -369,5 +370,7 @@ namespace CZ
         }
         return PN;
     }
+
+    inline std::ostream& operator<<(std::ostream &os, const Expression &e) { return os; }
 } // CZ
 

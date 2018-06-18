@@ -13,32 +13,17 @@
 #define BIN_TREE_OPERATORS_H
 
 #include "BinTree.h"
+#include <utility>
 
 namespace CZ
 {
     template <typename T>
-    BinTree<T>& BinTree<T>::operator=(const BinTree<T> &t)
-    {
-        if (&t != *this)
-        {
-            Tree<T>::free();
-            Tree<T>::root() = dynamic_cast<BinTreeNode<T>*>(copy_from(t.root()));
-        }
-        return *this;
-    }
+    inline BinTree<T>& BinTree<T>::operator=(const BinTree<T> &t)
+    { return dynamic_cast<BinTree<T>&>(Tree<T>::operator=(static_cast<const Tree<T>&>(t))); }
 
     template <typename T>
-    BinTree<T>& BinTree<T>::operator=(BinTree<T> &&t)
-    {
-        if (&t != this)
-        {
-            Tree<T>::root() = t.root();
-            Tree<T>::_size = t._size;
-            t.root() = nullptr;
-            t._size = 0;
-        }
-        return *this;
-    }
+    inline BinTree<T>& BinTree<T>::operator=(BinTree<T> &&t)
+    { return dynamic_cast<BinTree<T>&>(Tree<T>::operator=(static_cast<Tree<T>&&>(std::move(t)))); }
 
     template <typename T>
     inline bool operator==(const BinTree<T> &lhs, const BinTree<T> &rhs)

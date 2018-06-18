@@ -16,6 +16,7 @@
 #include <cstring>
 #include <cstdio>
 #include <stdexcept>
+#include <iostream>
 
 namespace CZ
 {
