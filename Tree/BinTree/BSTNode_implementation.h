@@ -112,25 +112,20 @@ namespace CZ
     }
 
     template <typename T>
-    inline BSTNode<T>* BSTNode<T>::remove_left_child()
-    { return reinterpret_cast<BSTNode<T>*>(BinTreeNode<T>::remove_left_child()); }
-    template <typename T>
-    inline BSTNode<T>* BSTNode<T>::remove_right_child()
-    { return reinterpret_cast<BSTNode<T>*>(BinTreeNode<T>::remove_right_child()); }
-
-    template <typename T>
     BSTNode<T>* BSTNode<T>::remove_child(const T &data)
     {
         BSTNode<T> *ret = nullptr;
         try
         {
-            if (data == left_child()->data())
+            if (left_child() && data == left_child()->data())
             {
-                ret = remove_left_child();
+                ret = left_child();
+                BinTreeNode<T>::remove_left_child();
             }
-            else if (data == right_child()->data())
+            else if (right_child() && data == right_child()->data())
             {
-                ret = remove_right_child();
+                ret = right_child();
+                BinTreeNode<T>::remove_right_child();
             }
             else
                 throw "this node doesn't have child with this data";
@@ -146,16 +141,22 @@ namespace CZ
     template <typename T>
     inline BSTNode<T>* BSTNode<T>::remove_child(BSTNode *node)
     {
+        if (!node)
+        {
+            return nullptr;
+        }
         BSTNode<T> *ret = nullptr;
         try
         {
-            if (node == left_child())
+            if (left_child() && node == left_child())
             {
-                ret = remove_left_child();
+                ret = left_child();
+                BinTreeNode<T>::remove_left_child();
             }
-            else if (node == right_child())
+            else if (right_child() && node == right_child())
             {
-                ret = remove_right_child();
+                ret = right_child();
+                BinTreeNode<T>::remove_right_child();
             }
             else
                 throw "this node doesn't have that child";

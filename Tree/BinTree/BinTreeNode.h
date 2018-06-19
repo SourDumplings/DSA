@@ -37,10 +37,10 @@ namespace CZ
         BinTreeNode<T>*& father();
         BinTreeNode<T>* father() const;
 
-        virtual void insert_as_left_child(BinTreeNode<T> *newChild);
-        virtual void insert_as_right_child(BinTreeNode<T> *newChild);
-        virtual BinTreeNode<T>* remove_left_child();
-        virtual BinTreeNode<T>* remove_right_child();
+        void insert_as_left_child(BinTreeNode<T> *newChild);
+        void insert_as_right_child(BinTreeNode<T> *newChild);
+        void remove_left_child();
+        void remove_right_child();
 
         BinTreeNode<T>* zig(); // 顺时针旋转, 返回旋转后的原来位置的结点指针
         BinTreeNode<T>* zag(); // 逆时针旋转, 返回旋转后的原来位置的结点指针

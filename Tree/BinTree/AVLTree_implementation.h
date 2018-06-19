@@ -82,6 +82,10 @@ namespace CZ
     template <typename T>
     AVLTreeNode<T>* AVLTree<T>::remove(AVLTreeNode<T> *node)
     {
+        if (!node)
+        {
+            return nullptr;
+        }
         AVLTreeNode<T> *f = node->father();
         BST<T>::remove(node);
         if (!f)
@@ -92,12 +96,12 @@ namespace CZ
 
         // 原结点的父亲结点和祖先结点都有可能失衡
         // 需要做Ω(logn)次调整
-        for (AVLTreeNode<T> *g = f->father(); g; g = g->father())
+        for (AVLTreeNode<T> *hot = f; hot; hot = hot->father())
         {
-            if (!g->is_balance())
+            if (!hot->is_balance())
             {
                 // 一旦发现失衡，则采用3+4重构算法调整，并将子树重新接回原树
-                BinTree<T>::rotate_at(g->taller_child()->taller_child());
+                BinTree<T>::rotate_at(hot->taller_child()->taller_child());
             }
         }
         return node;

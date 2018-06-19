@@ -43,6 +43,9 @@ int main(int argc, char const *argv[])
     BST<int> bst2(bst1.remove(bst1.search(7)));
     bst1.print_info("bst1");
     bst2.print_info("bst2");
+    // bst2.root()->remove_child(6);
+    bst2.root()->remove_left_child();
+    bst2.print_info("bst2");
 
 
     return 0;

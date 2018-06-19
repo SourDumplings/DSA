@@ -46,8 +46,6 @@ namespace CZ
         BSTNode* remove_child(BSTNode *node);
         void insert_child(const T &data);
         BSTNode* remove_child(const T &data);
-        BSTNode* remove_left_child();
-        BSTNode* remove_right_child();
         BSTNode* zig(); // 顺时针旋转, 返回旋转后的原来位置的结点指针
         BSTNode* zag(); // 逆时针旋转, 返回旋转后的原来位置的结点指针
     private:

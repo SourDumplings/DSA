@@ -49,12 +49,13 @@ int main(int argc, char const *argv[])
     aT.print_info("aT");
 
     // 删除测试
-    // AVLTree<int> aT2(aT);
-    // aT2.print_info("aT2");
-    // AVLTreeNode<int> *n8 = aT2.root()->right_child();
-    // printf("n8 = %d\n", n8->data());
-    // aT2.remove(n8);
-    // aT2.print_info("aT2");
+    AVLTree<int> aT2(aT);
+    aT2.print_info("aT2");
+    AVLTreeNode<int> *n8 = aT2.root()->right_child();
+    printf("n8 = %d\n", n8->data());
+    // n8->remove_left_child();
+    aT2.remove(n8);
+    aT2.print_info("aT2");
     return 0;
 }
 

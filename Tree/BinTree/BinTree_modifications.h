@@ -98,10 +98,9 @@ namespace CZ
             printf("Error: %s\n", errMsg);
             throw std::exception();
         }
-
         BinTreeNode<T> *f = node->father();
-        node == f->left_child() ? f->remove_left_child() : f->remove_right_child();
 
+        (node == f->left_child()) ? f->remove_left_child() : f->remove_right_child();
         Tree<T>::_size -= node->get_size();
 
         return node;

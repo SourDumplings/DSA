@@ -18,9 +18,12 @@ AVL树结点类模板
 
 namespace CZ
 {
+    template <typename T> class AVLTree;
+
     template <typename T>
     class AVLTreeNode: public BSTNode<T>
     {
+        friend class AVLTree<T>;
     public:
         using Rank = typename BSTNode<T>::Rank;
 
@@ -62,19 +65,18 @@ namespace CZ
         AVLTreeNode* father() const
         { return reinterpret_cast<AVLTreeNode<T>*>(BSTNode<T>::father()); }
 
+    private:
         // 树结点本身不负责旋转，旋转交给AVL树模板类，故直接继承BST的算法即可
         AVLTreeNode* remove_child(AVLTreeNode *node)
         { return reinterpret_cast<AVLTreeNode<T>*>(BSTNode<T>::remove_child(node)); }
         AVLTreeNode* remove_child(const T &data)
         { return reinterpret_cast<AVLTreeNode<T>*>(BSTNode<T>::remove_child(data)); }
-        AVLTreeNode* remove_left_child()
-        { return reinterpret_cast<AVLTreeNode<T>*>(BSTNode<T>::remove_left_child()); }
-        AVLTreeNode* remove_right_child()
-        { return reinterpret_cast<AVLTreeNode<T>*>(BSTNode<T>::remove_right_child()); }
         AVLTreeNode* zig() // 顺时针旋转, 返回旋转后的原来位置的结点指针
         { return reinterpret_cast<AVLTreeNode<T>*>(BSTNode<T>::zig()); }
         AVLTreeNode* zag() // 逆时针旋转, 返回旋转后的原来位置的结点指针
         { return reinterpret_cast<AVLTreeNode<T>*>(BSTNode<T>::zag()); }
+        void remove_left_child() { return BSTNode<T>::remove_left_child(); }
+        void remove_right_child() { return BSTNode<T>::remove_right_child(); }
     };
 } // CZ
 

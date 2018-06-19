@@ -141,10 +141,10 @@ int main(int argc, char const *argv[])
     // printf("\n\n");
 
     // // 测试删除操作
-    // printf("before removing, t1.size() = %u\n", t1.size());
-    // BinTree<CZString> tw(t1.remove(t1r->right_child()));
-    // printf("after removing, t1.size() = %u\n", t1.size());
-    // printf("tw.size() = %u\n", tw.size());
+    t1.print_info("t1 before removing\n");
+    BinTree<CZString> tw(t1.remove(t1r->right_child()));
+    t1.print_info("t1 after removing");
+    tw.print_info("tw");
 
     // // 测试动态遍历
     // int i = 0;
@@ -209,23 +209,23 @@ int main(int argc, char const *argv[])
     // printf("equivalent(rt1, rt3)? %d\n", BinTree<CZString>::equivalent(rt1, rt3));
 
     // 测试复制构造函数等一系列构造函数
-    t1.print_info("t1");
-    BinTree<CZString> t3(t1);
-    t3.print_info("t3");
-    printf("t3.left = %s\n", t3.root()->left_child()->data().c_str());
-    printf("t3.right = %s\n", t3.root()->right_child()->data().c_str());
-    BinTree<CZString> t4;
-    t4 = t3;
-    t4.print_info("t4");
-    BinTree<CZString> t5(std::move(t4));
-    t5.print_info("t5");
-    t4.print_info("t4");
-    t1.print_info("t1");
-    BinTree<CZString> t6;
-    t6 = std::move(t5);
-    t6.print_info("t6");
-    t5.print_info("t5");
-    t1.print_info("t1");
+    // t1.print_info("t1");
+    // BinTree<CZString> t3(t1);
+    // t3.print_info("t3");
+    // printf("t3.left = %s\n", t3.root()->left_child()->data().c_str());
+    // printf("t3.right = %s\n", t3.root()->right_child()->data().c_str());
+    // BinTree<CZString> t4;
+    // t4 = t3;
+    // t4.print_info("t4");
+    // BinTree<CZString> t5(std::move(t4));
+    // t5.print_info("t5");
+    // t4.print_info("t4");
+    // t1.print_info("t1");
+    // BinTree<CZString> t6;
+    // t6 = std::move(t5);
+    // t6.print_info("t6");
+    // t5.print_info("t5");
+    // t1.print_info("t1");
 
 
     return 0;

@@ -71,31 +71,37 @@ namespace CZ
     }
 
     template <typename T>
-    BinTreeNode<T>* BinTreeNode<T>::remove_left_child()
+    void BinTreeNode<T>::remove_left_child()
     {
+        if (!left_child())
+        {
+            return;
+        }
         Rank tempHeight = left_child()->height();
         left_child()->height() = 0;
         left_child()->update_height_above(1);
         left_child()->height() = tempHeight;
         left_child()->father() = nullptr;
 
-        BinTreeNode<T> *ret = left_child();
         left_child() = nullptr;
-        return ret;
+        return;
     }
 
     template <typename T>
-    BinTreeNode<T>* BinTreeNode<T>::remove_right_child()
+    void BinTreeNode<T>::remove_right_child()
     {
+        if (!right_child())
+        {
+            return;
+        }
         Rank tempHeight = right_child()->height();
         right_child()->height() = 0;
         right_child()->update_height_above(1);
         right_child()->height() = tempHeight;
         right_child()->father() = nullptr;
 
-        BinTreeNode<T> *ret = right_child();
         right_child() = nullptr;
-        return ret;
+        return;
     }
 } // CZ
 
