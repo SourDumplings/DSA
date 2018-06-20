@@ -39,8 +39,8 @@ int main(int argc, char const *argv[])
     printf("3 is in bst1? %d\n", static_cast<bool>(bst1.search(3)));
     printf("8 is in bst1? %d\n", static_cast<bool>(bst1.search(8)));
 
-    // 测试remove
-    BST<int> bst2(bst1.remove(bst1.search(7)));
+    // 测试secede
+    BST<int> bst2(bst1.secede(bst1.search(7)));
     bst1.print_info("bst1");
     bst2.print_info("bst2");
     // bst2.root()->remove_child(6);

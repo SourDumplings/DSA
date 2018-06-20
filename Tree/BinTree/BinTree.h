@@ -53,7 +53,7 @@ namespace CZ
 
         // 插入结点作为father的孩子，哪个位置空就插到哪，默认插到左孩子位置，没空则抛出异常
         void insert(BinTreeNode<T> *father, BinTreeNode<T> *node);
-        BinTreeNode<T>* remove(BinTreeNode<T> *node);
+        BinTreeNode<T>* secede(BinTreeNode<T> *node);
 
         BinTree<T>& operator=(const BinTree<T> &t);
         BinTree<T>& operator=(BinTree<T> &&t);

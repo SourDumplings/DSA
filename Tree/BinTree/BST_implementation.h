@@ -124,11 +124,11 @@ namespace CZ
     { do_recursion_insert(root(), node); }
 
     template <typename T>
-    inline BSTNode<T>* BST<T>::remove(BSTNode<T> *node)
-    { return reinterpret_cast<BSTNode<T>*>(BinTree<T>::remove(node)); }
+    inline BSTNode<T>* BST<T>::secede(BSTNode<T> *node)
+    { return reinterpret_cast<BSTNode<T>*>(BinTree<T>::secede(node)); }
 
     template <typename T>
-    BSTNode<T>* BST<T>::remove(const T &data)
+    BSTNode<T>* BST<T>::secede(const T &data)
     {
         BSTNode<T> *target = search(data);
         try
@@ -140,10 +140,10 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("Error from bst remove: %s\n", errMsg);
+            printf("Error from bst secede: %s\n", errMsg);
             throw std::exception();
         }
-        return remove(target);
+        return secede(target);
     }
 
     template <typename T>

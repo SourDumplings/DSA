@@ -80,14 +80,14 @@ namespace CZ
     { return insert(new AVLTreeNode<T>(data)); }
 
     template <typename T>
-    AVLTreeNode<T>* AVLTree<T>::remove(AVLTreeNode<T> *node)
+    AVLTreeNode<T>* AVLTree<T>::secede(AVLTreeNode<T> *node)
     {
         if (!node)
         {
             return nullptr;
         }
         AVLTreeNode<T> *f = node->father();
-        BST<T>::remove(node);
+        BST<T>::secede(node);
         if (!f)
         {
             // 移除了根结点，不需要再调整了
@@ -108,7 +108,7 @@ namespace CZ
     }
 
     template <typename T>
-    AVLTreeNode<T>* AVLTree<T>::remove(const T &data)
+    AVLTreeNode<T>* AVLTree<T>::secede(const T &data)
     {
         AVLTreeNode<T> *node = search(data);
         try
@@ -120,10 +120,10 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("Error from AVLTree remove: %s\n");
+            printf("Error from AVLTree secede: %s\n");
             throw std::exception();
         }
-        return remove(node);
+        return secede(node);
     }
 } // CZ
 

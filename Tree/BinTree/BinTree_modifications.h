@@ -75,7 +75,7 @@ namespace CZ
     }
 
     template <typename T>
-    BinTreeNode<T>* BinTree<T>::remove(BinTreeNode<T> *node)
+    BinTreeNode<T>* BinTree<T>::secede(BinTreeNode<T> *node)
     {
         if (!node)
         {

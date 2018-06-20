@@ -54,7 +54,7 @@ int main(int argc, char const *argv[])
     AVLTreeNode<int> *n8 = aT2.root()->right_child();
     printf("n8 = %d\n", n8->data());
     // n8->remove_left_child();
-    aT2.remove(n8);
+    aT2.secede(n8);
     aT2.print_info("aT2");
     return 0;
 }

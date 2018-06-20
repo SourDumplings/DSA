@@ -141,9 +141,9 @@ int main(int argc, char const *argv[])
     // printf("\n\n");
 
     // // 测试删除操作
-    t1.print_info("t1 before removing\n");
-    BinTree<CZString> tw(t1.remove(t1r->right_child()));
-    t1.print_info("t1 after removing");
+    t1.print_info("t1 before seceding\n");
+    BinTree<CZString> tw(t1.secede(t1r->right_child()));
+    t1.print_info("t1 after seceding");
     tw.print_info("tw");
 
     // // 测试动态遍历

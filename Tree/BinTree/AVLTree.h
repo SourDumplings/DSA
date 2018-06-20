@@ -37,8 +37,8 @@ namespace CZ
 
         void insert(AVLTreeNode<T> *node);
         void insert(const T &data);
-        AVLTreeNode<T>* remove(AVLTreeNode<T> *node);
-        AVLTreeNode<T>* remove(const T &data);
+        AVLTreeNode<T>* secede(AVLTreeNode<T> *node);
+        AVLTreeNode<T>* secede(const T &data);
     };
 } // CZ
 

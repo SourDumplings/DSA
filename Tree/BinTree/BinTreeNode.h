@@ -7,6 +7,7 @@
 
 /*
 二叉树结点类模板
+对于树结点的remove其实就是一种secede，移除的是树结点及其子结点
  */
 
 #ifndef BIN_TREE_NODE_H

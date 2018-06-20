@@ -38,8 +38,8 @@ namespace CZ
 
         void insert(BSTNode<T> *node);
         void insert(const T &data);
-        BSTNode<T>* remove(BSTNode<T> *node);
-        BSTNode<T>* remove(const T &data);
+        BSTNode<T>* secede(BSTNode<T> *node);
+        BSTNode<T>* secede(const T &data);
     protected:
         // 旋转操作不能由用户控制
         BSTNode<T>* rotate_at(BSTNode<T> *v);

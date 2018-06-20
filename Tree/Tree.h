@@ -51,7 +51,7 @@ namespace CZ
         // 将结点node作为father结点的小儿子插入
         void insert(TreeNode<T> *father, TreeNode<T> *node);
         // 移除树中的某个结点及其孩子，返回该目标结点
-        TreeNode<T>* remove(TreeNode<T> *node);
+        TreeNode<T>* secede(TreeNode<T> *node);
 
         // 遍历算法
         // 默认遍历处理函数为输出树结点的数据到标准输出
