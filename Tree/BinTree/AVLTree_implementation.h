@@ -125,6 +125,12 @@ namespace CZ
         }
         return secede(node);
     }
+
+    template <typename T>
+    AVLTreeNode<T>* AVLTree<T>::remove(AVLTreeNode<T> *node)
+    {
+
+    }
 } // CZ
 
 #endif // AVL_TREE_IMPLEMENTATION_H

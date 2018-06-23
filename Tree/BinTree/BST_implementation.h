@@ -15,6 +15,8 @@
 #include "BST.h"
 #include <stdexcept>
 #include <utility>
+#include <iostream>
+#include "../../Algorithms/Swap.h"
 
 namespace CZ
 {
@@ -141,6 +143,7 @@ namespace CZ
         catch (const char *errMsg)
         {
             printf("Error from bst secede: %s\n", errMsg);
+            std::cout << "target is " << data << std::endl;
             throw std::exception();
         }
         return secede(target);
@@ -149,6 +152,101 @@ namespace CZ
     template <typename T>
     inline BSTNode<T>* BST<T>::rotate_at(BSTNode<T> *v)
     { return reinterpret_cast<BSTNode<T>*>(BinTree<T>::rotate_at(v)); }
+
+    template <typename T>
+    BSTNode<T>* BST<T>::remove_at(BSTNode<T> *&target, BSTNode<T> *&hot)
+    {
+        if (!target)
+        {
+            return nullptr;
+        }
+
+        BSTNode<T> *actualRemoved = target;
+        BSTNode<T> *succ = nullptr; // 接替者，默认为空
+        if (!target->left_child())
+        {
+            // 如果左子树为空，那么直接让右子树接替即可
+            succ = target->right_child();
+        }
+        else if (!target->right_child())
+        {
+            // 如果右子树为空，则对称处理
+            // 注意此时左子树一定不空
+            succ = target->left_child();
+        }
+        else
+        {
+            // 左右子树均不空
+            actualRemoved = actualRemoved->next(); // 实际摘除结点为传入的目标的直接后继
+            Swap(actualRemoved->data(), target->data()); // 交换数据，让node的直接后继代替node
+            succ = actualRemoved->right_child();
+        }
+
+        // 把接替者摘出来
+        if (succ)
+        {
+            BSTNode<T> *f = succ->father();
+            f->remove_child(succ);
+        }
+
+        // 执行删除并且接替者接任
+        hot = actualRemoved->father();
+        if (hot)
+        {
+            hot->remove_child(actualRemoved);
+            hot->insert_child(succ);
+        }
+        else
+            Tree<T>::_root = succ;
+        --Tree<T>::_size;
+
+        // target指向被实际删除的结点的指针，返回接替者
+        target = actualRemoved;
+        return succ;
+    }
+
+    template <typename T>
+    BSTNode<T>* BST<T>::remove(BSTNode<T> *node)
+    {
+        try
+        {
+            if (!Tree<T>::has_this_node(node))
+            {
+                throw "this node isn't in this tree";
+            }
+        }
+        catch (const char *errMsg)
+        {
+            printf("Error from BST remove: %s\n", errMsg);
+            throw std::exception();
+        }
+
+        BSTNode<T> *actualRemoved = node, *hot = node->father();
+        remove_at(actualRemoved, hot);
+        return actualRemoved;
+    }
+
+
+    template <typename T>
+    BSTNode<T>* BST<T>::remove(const T &data)
+    {
+        BSTNode<T> *node = search(data);
+        try
+        {
+            if (!node)
+            {
+                throw "this value is not in this BST";
+            }
+        }
+        catch (const char *errMsg)
+        {
+            printf("Error from BST remove: %s\n", errMsg);
+            std::cout << "target is " << data << std::endl;
+            throw std::exception();
+        }
+
+        return remove(node);
+    }
 } // CZ
 
 #endif // BST_IMPLEMENTATION_H

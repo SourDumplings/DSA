@@ -18,11 +18,15 @@
 namespace CZ
 {
     template <typename T>
-    class SplayTree
+    class SplayTree: public BST<T>
     {
     public:
-        SplayTree();
-        ~SplayTree();
+        SplayTree(std::nullptr_t);
+        SplayTree(SplayTreeNode<T> *root = nullptr);
+        SplayTree(const SplayTree<T> &t);
+        SplayTree(SplayTree<T> &&t);
+
+
 
     };
 } // CZ

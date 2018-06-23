@@ -78,6 +78,10 @@ namespace CZ
     template <typename T>
     void BSTNode<T>::insert_child(BSTNode *node)
     {
+        if (!node)
+        {
+            return;
+        }
         try
         {
             if (node->data() < TreeNode<T>::data() || node->data() == TreeNode<T>::data())
