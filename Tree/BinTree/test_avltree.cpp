@@ -56,6 +56,13 @@ int main(int argc, char const *argv[])
     // n8->remove_left_child();
     aT2.secede(n8);
     aT2.print_info("aT2");
+
+    // auto n7 = aT.remove(7); delete n7;
+    // aT.print_info("aT");
+    // auto n0 = aT.remove(0); delete n0;
+    // aT.print_info("aT");
+    auto n4 = aT.remove(aT.root()); delete n4;
+    aT.print_info("aT");
     return 0;
 }
 

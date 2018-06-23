@@ -42,6 +42,7 @@ namespace CZ
         BSTNode<T>* secede(BSTNode<T> *node);
         BSTNode<T>* secede(const T &data);
         // 删除单个结点的方法，返回实际被删除的结点的指针
+        // 注意被删的结点的内存就不再受树的管理了，需要另外释放
         BSTNode<T>* remove(BSTNode<T> *node);
         BSTNode<T>* remove(const T &data);
     protected:

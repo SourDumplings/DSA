@@ -54,11 +54,14 @@ int main(int argc, char const *argv[])
     //     printf("n5 is not isolated\n");
     // }
     // bst1.print_info("bst1");
-    bst1.remove(bst1.search(7));
+    auto n7 = bst1.remove(bst1.search(7));
     bst1.print_info("bst1");
-    bst1.remove(1);
+    auto n1 = bst1.remove(1);
     bst1.print_info("bst1");
-    bst1.remove(8);
+    // auto n8 = bst1.remove(8);
+    delete n1;
+    delete n7;
+    // delete n8;
 
 
     return 0;

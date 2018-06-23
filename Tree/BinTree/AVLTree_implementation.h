@@ -14,6 +14,7 @@ AVL树模板的实现
 
 #include "AVLTree.h"
 #include <utility>
+#include <iostream>
 
 namespace CZ
 {
@@ -121,6 +122,7 @@ namespace CZ
         catch (const char *errMsg)
         {
             printf("Error from AVLTree secede: %s\n");
+            std::cout << "target value is " << data << std::endl;
             throw std::exception();
         }
         return secede(node);
@@ -129,7 +131,50 @@ namespace CZ
     template <typename T>
     AVLTreeNode<T>* AVLTree<T>::remove(AVLTreeNode<T> *node)
     {
+        try
+        {
+            if (!Tree<T>::has_this_node(node))
+            {
+                throw "this node is not in this AVLTree";
+            }
+        }
+        catch (const char *errMsg)
+        {
+            printf("Error from AVLTree remove: %s\n", errMsg);
+            throw std::exception();
+        }
 
+        AVLTreeNode<T> *hot = node->father();
+        BST<T>::remove_at((BSTNode<T>*&)(node), (BSTNode<T>*&)(hot));
+        for (AVLTreeNode<T> *f = reinterpret_cast<AVLTreeNode<T>*>(hot); f; f = f->father())
+        {
+            if (!f->is_balance())
+            {
+                // 一旦发现失衡，则采用3+4重构算法调整，并将子树重新接回原树
+                BinTree<T>::rotate_at(hot->taller_child()->taller_child());
+            }
+        }
+        return node;
+    }
+
+    template <typename T>
+    AVLTreeNode<T>* AVLTree<T>::remove(const T &data)
+    {
+        AVLTreeNode<T> *node = search(data);
+        try
+        {
+            if (!node)
+            {
+                throw "this value is not in this AVLTree";
+            }
+        }
+        catch (const char *errMsg)
+        {
+            printf("Error from AVLTree secede: %s\n", errMsg);
+            std::cout << "target value is " << data << std::endl;
+            throw std::exception();
+        }
+        return remove(node);
     }
 } // CZ
 
