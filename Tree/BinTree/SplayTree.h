@@ -38,11 +38,13 @@ namespace CZ
         SplayTreeNode<T>* remove(const T &data);
     protected:
         // 伸展调整算法，将目标结点v伸展至树根
-        // 采用双层伸展算法，每次访问最深的叶结点伸展完毕后，树的高度折半
+        // 采用双层伸展算法，每次访问最深的叶结点伸展完毕后，树的高度接近折半
         // 采用双层伸展策略之后，伸展树的单次操作均可在O(nlogn)时间完成
         SplayTreeNode<T>* splay(SplayTreeNode<T> *v);
     };
 } // CZ
+
+#include "SplayTree_implementation.h"
 
 #endif // SPLAY_TREE_H
 

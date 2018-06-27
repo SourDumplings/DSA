@@ -31,7 +31,7 @@ namespace CZ
 
     template <typename T>
     inline SplayTreeNode<T>* SplayTree<T>::root() const
-    { return reinterpret_cast<SplayTreeNode<T>*>(BSTNode<T>::root()); }
+    { return reinterpret_cast<SplayTreeNode<T>*>(BST<T>::root()); }
     template <typename T>
     inline SplayTreeNode<T>*& SplayTree<T>::root()
     { return (SplayTreeNode<T>*&)(BSTNode<T>::root()); }
@@ -72,7 +72,8 @@ namespace CZ
                 else
                 {
                     // zig-zag
-                    g->zig()->zag();
+                    f->zig();
+                    g->zag();
                 }
             }
             else
@@ -80,7 +81,8 @@ namespace CZ
                 if (f == g->left_child())
                 {
                     // zag-zig
-                    g->zag()->zig();
+                    f->zag();
+                    g->zig();
                 }
                 else
                 {
@@ -103,7 +105,7 @@ namespace CZ
     template <typename T>
     SplayTreeNode<T>* SplayTree<T>::search(const T &data) const
     {
-        SplayTreeNode<T> *v = BSTNode<T>::search(data);
+        SplayTreeNode<T> *v = reinterpret_cast<SplayTreeNode<T>*>(BST<T>::search(data));
         try
         {
             if (!v)
@@ -117,9 +119,65 @@ namespace CZ
             std::cout << "target value is " << data << std::endl;
             throw std::exception();
         }
-        return const_cast<SplayTree<T>*&>(this)->splay(v);
+        return const_cast<SplayTree<T>*>(this)->splay(v);
     }
 
+    template <typename T>
+    void SplayTree<T>::insert(SplayTreeNode<T> *node)
+    {
+        BST<T>::insert(node);
+        splay(node);
+        return;
+    }
+
+    template <typename T>
+    inline void SplayTree<T>::insert(const T &data) { return insert(new SplayTreeNode<T>(data)); }
+
+    template <typename T>
+    SplayTreeNode<T>* SplayTree<T>::remove(SplayTreeNode<T> *node)
+    {
+        if (!node)
+        {
+            return nullptr;
+        }
+
+        try
+        {
+            if (Tree<T>::has_this_node(node))
+            {
+                throw "this node is not in this SplayTree";
+            }
+        }
+        catch (const char *errMsg)
+        {
+            printf("Error from SplayTree remove: %s\n", errMsg);
+            throw std::exception();
+        }
+
+        splay(node);
+        SplayTreeNode<T> *lC = node->left_child(), *rC = node->right_child(), *next = node->next();
+        node->remove_left_child();
+        node->remove_right_child();
+        --Tree<T>::_size;
+
+        if (rC)
+        {
+            // 将右子树作为临时伸展树，把右子树中最小的结点伸展至树根
+            SplayTree<T> sT(rC);
+            sT.splay(next);
+            next->insert_as_left_child(lC);
+
+            sT.root() = nullptr;
+            sT._size() = 0;
+        }
+
+        root() = next;
+        return node;
+    }
+
+    template <typename T>
+    inline SplayTreeNode<T>* SplayTree<T>::remove(const T &data)
+    { return remove(BST<T>::search(data)); }
 } // CZ
 
 #endif // SPLAY_TREE_IMPLEMENTATION_H
