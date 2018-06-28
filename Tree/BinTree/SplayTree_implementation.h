@@ -34,7 +34,7 @@ namespace CZ
     { return reinterpret_cast<SplayTreeNode<T>*>(BST<T>::root()); }
     template <typename T>
     inline SplayTreeNode<T>*& SplayTree<T>::root()
-    { return (SplayTreeNode<T>*&)(BSTNode<T>::root()); }
+    { return (SplayTreeNode<T>*&)(BST<T>::root()); }
 
     template <typename T>
     void SplayTree<T>::print_info(const char *name) const
@@ -143,7 +143,7 @@ namespace CZ
 
         try
         {
-            if (Tree<T>::has_this_node(node))
+            if (!Tree<T>::has_this_node(node))
             {
                 throw "this node is not in this SplayTree";
             }
@@ -165,10 +165,10 @@ namespace CZ
             // 将右子树作为临时伸展树，把右子树中最小的结点伸展至树根
             SplayTree<T> sT(rC);
             sT.splay(next);
-            next->insert_as_left_child(lC);
+            next->insert_child(lC);
 
-            sT.root() = nullptr;
-            sT._size() = 0;
+            sT._root = nullptr;
+            sT._size = 0;
         }
 
         root() = next;
@@ -177,7 +177,14 @@ namespace CZ
 
     template <typename T>
     inline SplayTreeNode<T>* SplayTree<T>::remove(const T &data)
-    { return remove(BST<T>::search(data)); }
+    { return remove(reinterpret_cast<SplayTreeNode<T>*>(BST<T>::search(data))); }
+
+    template <typename T>
+    inline SplayTreeNode<T>* SplayTree<T>::secede(SplayTreeNode<T> *node)
+    { return reinterpret_cast<SplayTreeNode<T>*>(BST<T>::secede(node)); }
+    template <typename T>
+    inline SplayTreeNode<T>* SplayTree<T>::secede(const T &data)
+    { return reinterpret_cast<SplayTreeNode<T>*>(BST<T>::secede(data)); }
 } // CZ
 
 #endif // SPLAY_TREE_IMPLEMENTATION_H

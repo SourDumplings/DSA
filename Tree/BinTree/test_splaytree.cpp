@@ -45,22 +45,33 @@ int main(int argc, char const *argv[])
     //     sT.print_info("sT");
     // }
     // 测试插入算法
+    // SplayTree<int> sT;
+    // for (unsigned i = 0; i < 7; ++i)
+    // {
+        // sT.insert(v[i]);
+    // }
+    // sT.print_info("sT");
+    // for (unsigned i = 0; i < 7; ++i)
+    // {
+        // printf("trying to insert %d\n", v[i]);
+        // sT.insert(v[i]);
+        // sT.insert(new SplayTreeNode<int>(v[i]));
+        // printf("after insert %d\n", v[i]);
+        // sT.print_info("sT");
+    // }
+
+    // 测试删除算法
     SplayTree<int> sT;
     for (unsigned i = 0; i < 7; ++i)
     {
         sT.insert(v[i]);
     }
     sT.print_info("sT");
-    for (unsigned i = 0; i < 7; ++i)
-    {
-        printf("trying to insert %d\n", v[i]);
-        // sT.insert(v[i]);
-        sT.insert(new SplayTreeNode<int>(v[i]));
-        printf("after insert %d\n", v[i]);
-        sT.print_info("sT");
-    }
-    // 测试删除算法
-
+    sT.search(1);
+    // sT.remove(1);
+    // sT.remove(4);
+    sT.secede(2);
+    sT.print_info("sT");
     return 0;
 }
 

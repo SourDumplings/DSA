@@ -29,11 +29,15 @@ namespace CZ
         SplayTreeNode<T>*& root();
         SplayTreeNode<T>* root() const;
         void print_info(const char *name = "") const override;
+        // 伸展树的查找算法，将找到的目标结点伸展至树根以备频繁访问
         SplayTreeNode<T>* search(const T &data) const;
+        // 伸展树的插入算法，先按照BST插入再将其伸展至树根
         void insert(SplayTreeNode<T> *node);
         void insert(const T &data);
+        // 摘除子树的算法和BST一样
         SplayTreeNode<T>* secede(SplayTreeNode<T> *node);
         SplayTreeNode<T>* secede(const T &data);
+        // 伸展树的删除节点算法，先将目标结点伸展至树根摘除后将后继结点伸展出来作为新树根
         SplayTreeNode<T>* remove(SplayTreeNode<T> *node);
         SplayTreeNode<T>* remove(const T &data);
     protected:
