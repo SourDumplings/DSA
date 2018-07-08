@@ -13,6 +13,8 @@ B树结点模板类
 #define B_TREE_NODE_H
 
 #include "../../Vector/Vector.h"
+#include <cstdio>
+#include <iostream>
 
 namespace CZ
 {
@@ -36,7 +38,19 @@ namespace CZ
             if (lc) lc->_father = this;
             if (rc) rc->_father = this;
         }
-        ~BTreeNode();
+        ~BTreeNode() = default;
+
+        void print_info(const char *name = "") const
+        {
+            printf("for btreenode %s: \n", name);
+            printf("it contains keys:");
+            for (auto &item : _keys)
+            {
+                std::cout << " " << item;
+            }
+            printf("\nit has %u children\n\n", _children.size());
+            return;
+        }
     private:
         Vector<T> _keys; // 存放关键码的列表，长度总比孩子数少1
         Vector<BTreeNode<T>*> _children; // 孩子向量，其长度总比关键码数多1
