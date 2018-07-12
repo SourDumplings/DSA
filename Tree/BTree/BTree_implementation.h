@@ -18,5 +18,8 @@ B树的实现
 #include "BTree_destructor.h"
 
 #include "BTree_interfaces.h"
+#include "BTree_modifications.h"
+
+#include "BTree_print_info.h"
 
 #endif // B_TREE_IMPLEMENTATION_H

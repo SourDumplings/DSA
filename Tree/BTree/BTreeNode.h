@@ -53,8 +53,20 @@ namespace CZ
         }
     private:
         Vector<T> _keys; // 存放关键码的列表，长度总比孩子数少1
+        // 若B树的阶数为m，每个结点的分支数在区间[上取整(m/2)，m]上，相应的关键码数在[上取整(m/2)-1，m-1]上
         Vector<BTreeNode<T>*> _children; // 孩子向量，其长度总比关键码数多1
         BTreeNode<T> *_father;
+
+        BTreeNode<T>* get_root() const
+        {
+            BTreeNode<T> *r = this, *f = _father;
+            while (f)
+            {
+                r = f;
+                f = f->_father;
+            }
+            return r;
+        }
     };
 } // CZ
 

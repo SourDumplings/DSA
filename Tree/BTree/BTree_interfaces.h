@@ -30,6 +30,27 @@ namespace CZ
     inline BTreeNode<T>* BTree<T>::root() const { return _root; }
 
     template <typename T>
+    inline typename BTree<T>::Rank BTree<T>::height() const { return get_height(_root); }
+
+    template <typename T>
+    typename BTree<T>::Rank BTree<T>::get_height(BTreeNode<T> *root) const
+    {
+        Rank ret = 0;
+        for (auto &c : root->_children)
+        {
+            if (c)
+            {
+                Rank hc = get_height(c);
+                if (ret < hc + 1)
+                {
+                    ret = hc + 1;
+                }
+            }
+        }
+        return ret;
+    }
+
+    template <typename T>
     BTreeNode<T>* BTree<T>::search(const T &data) const
     {
         BTreeNode<T> *v = _root; // 从根结点开始
