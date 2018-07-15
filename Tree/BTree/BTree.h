@@ -20,7 +20,7 @@ namespace CZ
     class BTree
     {
     public:
-        using Rank = unsigned;
+        using Rank = int;
 
         BTree(Rank order_ = 3);
         BTree(const BTree &bt);
@@ -29,6 +29,7 @@ namespace CZ
 
         Rank order() const;
         Rank size() const;
+        Rank keys_num() const;
         Rank height() const;
         BTreeNode<T>* root() const;
         bool empty() const;
@@ -49,6 +50,7 @@ namespace CZ
 
         void free(BTreeNode<T>*);
         Rank get_height(BTreeNode<T>*) const;
+        Rank get_keys_num(BTreeNode<T>*) const;
         BTreeNode<T>* construct_node_from(BTreeNode<T>*);
         void solve_overflow(BTreeNode<T>*); // 分裂解决由于插入结点而可能导致的上溢
         void solve_underflow(BTreeNode<T>*); // 合并解决由于删除结点而可能导致的下溢

@@ -13,7 +13,7 @@ B树打印信息的方法
 #define B_TREE_PRINT_INFO_H
 
 #include "BTree.h"
-#include "../../Stack/Stack.h"
+#include "../../Queue/Queue.h"
 #include <iostream>
 
 namespace CZ
@@ -22,31 +22,38 @@ namespace CZ
     void BTree<T>::print_info(const char *name) const
     {
         printf("for btree %s: \n", name);
-        printf("contains %u nodes, with height %u\n", _size, height());
+        printf("contains %d nodes, with height %d\n", keys_num(), height());
         printf("level order traversal for keys are: \n");
 
-        Stack<BTreeNode<T>> S;
+        Queue<BTreeNode<T>*> Q;
         if (_root)
-            S.push(_root);
-        while (!S.empty())
+            Q.push(_root);
+        while (!Q.empty())
         {
-            BTreeNode<T> *v = S.top(); S.pop();
+            BTreeNode<T> *v = Q.front(); Q.pop();
             putchar('(');
+            bool first = true;
             for (typename Vector<T>::Rank i = 0; i < v->_keys.size(); ++i)
             {
-                std::cout << " " << (v->_keys)[i];
+                if (!first)
+                {
+                    putchar(' ');
+                }
+                std::cout << (v->_keys)[i];
+                first = false;
                 if ((v->_children)[i])
                 {
-                    S.push((v->_children)[i]);
+                    Q.push((v->_children)[i]);
                 }
             }
             if (v->_children.back())
             {
-                S.push(v->_children.back());
+                Q.push(v->_children.back());
             }
             putchar(')');
-            printf("\n\n");
+            putchar(' ');
         }
+        printf("\n\n");
         return;
     }
 } // CZ
