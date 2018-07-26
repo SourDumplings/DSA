@@ -30,6 +30,11 @@ namespace CZ
     template <typename T>
     BinTreeNode<T>* BinTree<T>::rotate_at(BinTreeNode<T> *v)
     {
+        if (!v)
+        {
+            return nullptr;
+        }
+
         BinTreeNode<T> *ret = nullptr;
         try
         {

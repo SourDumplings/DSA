@@ -46,15 +46,15 @@ namespace CZ
         BinTreeNode<T> *ret = nullptr;
         if (TreeNode<T>::father())
         {
-            ret = (this == TreeNode<T>::father()->left_child()) ?
-                TreeNode<T>::father()->right_child() : TreeNode<T>::father()->left_child();
+            ret = (this == this->father()->left_child()) ?
+                this->father()->right_child() : this->father()->left_child();
         }
         return ret;
     }
 
     template <typename T>
     inline BinTreeNode<T>* BinTreeNode<T>::uncle() const
-    { return TreeNode<T>::father()->brother(); }
+    { return this->father()->brother(); }
 
     template <typename T>
     BinTreeNode<T>* BinTreeNode<T>::prev() const
