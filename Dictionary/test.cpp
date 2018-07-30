@@ -15,17 +15,15 @@
 #include <cctype>
 #include <ctime>
 
-#include "Dictionary.h"
-
-// #include "Dictionary.h"
+#include "HashTable.h"
 
 using namespace std;
 using namespace CZ;
 
 int main(int argc, char const *argv[])
 {
-    // Dictionary<int> d(10);
-    Dictionary<int> d(10, SQUARE_PROBING);
+    // HashTable<int> d(10);
+    HashTable<int> d(10, SQUARE_PROBING);
     // d.print_info("d");
 
     // 测试插入操作

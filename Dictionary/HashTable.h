@@ -6,14 +6,14 @@
 */
 
 /*
-词典类模板
+哈希表类模板
 默认使用Vector作为数据容器
 支持哈希函数定制(接受值和哈希表大小两个参数)，内置线性和平方探测法
 内置了取余的哈希函数，因此如果存放非数值类则必须定制哈希函数
  */
 
-#ifndef DICTIONARY_H
-#define DICTIONARY_H
+#ifndef HASHTABLE_H
+#define HASHTABLE_H
 
 #include "../Vector/Vector.h"
 #include "Pair.h"
@@ -41,20 +41,19 @@ namespace CZ
     };
 
     template <typename T, typename H = Dict::ModeHash<T>>
-    class Dictionary
+    class HashTable
     {
     public:
         using Rank = Dict::Rank;
 
         // 构造函数，默认大小10000，使用取模作为哈希函数，采用线性探测法
-        Dictionary(const Rank tableSize_ = 10000,
+        HashTable(const Rank tableSize_ = 10000,
             const ProbingMethod probingMethod_ = LINEAR_PROBING);
 
         // 查找函数，返回所在的秩，如果元素不存在则返回-1
         Rank search(const T &value) const;
         // 数据访问接口
         const T& get(const Rank pos) const;
-        T& get(const Rank pos);
         Rank size() const;
         Rank table_size() const;
 
@@ -80,8 +79,8 @@ namespace CZ
     };
 } // CZ
 
-#include "Dictionary_implementation.h"
+#include "HashTable_implementation.h"
 
-#endif // DICTIONARY_H
+#endif // HASHTABLE_H
 
 
