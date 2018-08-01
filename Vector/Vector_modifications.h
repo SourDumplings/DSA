@@ -61,7 +61,7 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("Error: %s\n", errMsg);
+            printf("Error from Vector pop_back: %s\n", errMsg);
             throw std::exception();
         }
         return;
@@ -88,7 +88,7 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("Error: %s\n", errMsg);
+            printf("Error from Vector insert: %s\n", errMsg);
             throw std::exception();
         }
         return begin() + r;
@@ -114,7 +114,7 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("Error: %s\n", errMsg);
+            printf("Error from Vector insert: %s\n", errMsg);
             throw std::exception();
         }
         return begin() + r;
@@ -151,7 +151,7 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("Error: %s\n", errMsg);
+            printf("Error from Vector insert: %s\n", errMsg);
             throw std::exception();
         }
         return begin() + r;
@@ -182,7 +182,7 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("Error: %s\n", errMsg);
+            printf("Error from Vector erase: %s\n", errMsg);
             throw std::exception();
         }
         return begin() + r;
@@ -212,7 +212,7 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("Error: %s\n", errMsg);
+            printf("Error from Vector erase: %s\n", errMsg);
             throw std::exception();
         }
         return begin() + rB;

@@ -6,48 +6,58 @@
 */
 
 /*
-堆
-采用二叉树实现，可以定制比较器，默认为大顶堆
+堆，元素可重复
+采用向量实现，可以定制比较器，默认为大顶堆
+堆顶元素为_data[0]，对于_data[i]，由于完全二叉树的性质，其孩子结点为_data[i*2+1]和_data[i*2+2]
+同理，对于结点_data[i]，其父结点为_data[(i-1)/2]
  */
 
 #ifndef HEAP_H
 #define HEAP_H
 
 #include <utility>
-#include "../Tree/BinTree/BinTree.h"
 #include "../Iterator/SeqIterator.h"
+#include "../Vector/Vector.h"
 #include <initializer_list>
 
 namespace CZ
 {
     using std::less;
 
-    template <typename T, typename Cmp = less<const T&>>
+    template <typename T, typename Cmp = less<T>>
     class Heap
     {
     public:
-        using Rank = unsigned;
-        Heap(const Rank size_ = 0);
-        Heap(SeqIterator<T> begin, SeqIterator<T> end);
+        using Rank = int;
+
+        Heap();
+        Heap(const SeqIterator<T> &begin, const SeqIterator<T> &end);
         Heap(T *begin, T *end);
         Heap(const std::initializer_list<T> &l);
-
-        ~Heap();
 
         // 数据访问接口
         Rank size() const;
         const T& top() const;
+        bool empty() const;
 
-        // 插入和删除，可以设置失败时抛出异常还是返回false
-        bool insert(const T &value, const bool nonexcept = true, const bool repeatable = true);
-        bool remove(const T &value, const bool nonexcept = true);
+        // 插入和删除
+        void insert(const T &value);
+        void pop();
 
         void print_info(const char *name = "") const;
     private:
+        Vector<T> _data;
         Rank _size;
-        BinTree<T> _tree;
+
+        template <typename It>
+        void _construct_from(const It begin, const It end);
+        void _build_heap(); // 采用Floyd算法进行建堆，使得_data中的元素满足偏序化
+        void _perc_down(Rank i); // 下滤，即将_data[i]为根的子堆调整为最大堆
+        void _perc_up(Rank i); // 将_data[i]元素进行上滤
     };
 } // CZ
+
+#include "Heap_implementation.h"
 
 #endif // HEAP_H
 

@@ -34,7 +34,7 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("Warning: %s, ", errMsg);
+            printf("Warning from Vector []: %s, ", errMsg);
             printf("rank = %u, size = %u\n", i, _size);
             throw std::exception();
         }

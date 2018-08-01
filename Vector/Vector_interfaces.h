@@ -77,7 +77,7 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("Error: %s\n", errMsg);
+            printf("Error from Vector back: %s\n", errMsg);
             throw std::exception();
         }
         return _elem[_size-1];
@@ -113,7 +113,7 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("Error: %s\n", errMsg);
+            printf("Error from Vector front: %s\n", errMsg);
             throw std::exception();
         }
         return _elem[0];
@@ -131,7 +131,7 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("Error: %s\n", errMsg);
+            printf("Error from Vector front: %s\n", errMsg);
             throw std::exception();
         }
         return _elem[0];
