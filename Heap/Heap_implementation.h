@@ -21,36 +21,35 @@
 namespace CZ
 {
     template <typename T, typename Cmp>
-    Heap<T, Cmp>::Heap(): _size(0) {}
+    Heap<T, Cmp>::Heap() = default;
 
     template <typename T, typename Cmp>
-    Heap<T, Cmp>::Heap(const SeqIterator<T> &begin, const SeqIterator<T> &end): Heap()
+    Heap<T, Cmp>::Heap(const SeqIterator<T> &begin, const SeqIterator<T> &end)
     {
         using It = SeqIterator<T>;
         for (It it = begin; it != end; ++it)
         {
             _data.push_back(*it);
-            ++_size;
         }
         _build_heap();
         return;
     }
 
     template <typename T, typename Cmp>
-    Heap<T, Cmp>::Heap(T *begin, T *end): _data(begin, end), _size(_data.size()) { _build_heap(); }
+    Heap<T, Cmp>::Heap(T *begin, T *end): _data(begin, end) { _build_heap(); }
 
     template <typename T, typename Cmp>
     Heap<T, Cmp>::Heap(const std::initializer_list<T> &l):
-        _data(l.begin(), l.end()), _size(_data.size()) { _build_heap(); }
+        _data(l.begin(), l.end()) { _build_heap(); }
 
     template <typename T, typename Cmp>
     void Heap<T, Cmp>::_build_heap()
     {
-        if (_size < 2)
+        if (size() < 2)
         {
             return;
         }
-        for (Rank i = (_size - 2) >> 1; -1 < i; --i)
+        for (Rank i = (size() - 2) >> 1; -1 < i; --i)
         {
             // 从最后一个结点的父结点开始
             _perc_down(i);
@@ -63,11 +62,11 @@ namespace CZ
     {
         Rank f, c;
         T x = _data[i];
-        for (f = i; (f << 1) + 1 < _size; f = c)
+        for (f = i; (f << 1) + 1 < size(); f = c)
         {
             c = (f << 1) + 1;
             // 取较大的子结点
-            if (c < _size - 1 && Cmp()(_data[c], _data[c+1]))
+            if (c < size() - 1 && Cmp()(_data[c], _data[c+1]))
             {
                 ++c;
             }
@@ -92,7 +91,6 @@ namespace CZ
     {
         // 插入元素，将元素插入到末尾再上滤
         _data.push_back(value);
-        ++_size;
         _perc_up(_data.size()-1);
         return;
     }
@@ -121,7 +119,6 @@ namespace CZ
         // 然后把刚刚换到根结点的元素做下滤
         Swap(_data.front(), _data.back());
         _data.pop_back();
-        --_size;
         if (!empty())
         {
             _perc_down(0);
@@ -131,19 +128,19 @@ namespace CZ
     }
 
     template <typename T, typename Cmp>
-    inline typename Heap<T, Cmp>::Rank Heap<T, Cmp>::size() const { return _size; }
+    inline typename Heap<T, Cmp>::Rank Heap<T, Cmp>::size() const { return _data.size(); }
 
     template <typename T, typename Cmp>
     inline const T& Heap<T, Cmp>::top() const { return _data.front(); }
 
     template <typename T, typename Cmp>
-    inline bool Heap<T, Cmp>::empty() const { return _size == 0; }
+    inline bool Heap<T, Cmp>::empty() const { return size() == 0; }
 
     template <typename T, typename Cmp>
     void Heap<T, Cmp>::print_info(const char *name) const
     {
         printf("for Heap %s:\n", name);
-        printf("its size is %u\n", _size);
+        printf("its size is %u\n", size());
         printf("it contains:");
         for (auto &i : _data)
         {

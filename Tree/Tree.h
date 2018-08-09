@@ -53,6 +53,8 @@ namespace CZ
         // 移除树中的某个结点及其孩子，返回该目标结点
         // 注意该方法返回的结点以及它的孩子的内存空间就不再受树的控制了
         TreeNode<T>* secede(TreeNode<T> *node);
+        // 调用根结点的get_size()方法更新全树的_size
+        void update_size();
 
         // 遍历算法
         // 默认遍历处理函数为输出树结点的数据到标准输出

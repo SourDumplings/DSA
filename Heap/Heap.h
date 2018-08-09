@@ -15,7 +15,6 @@
 #ifndef HEAP_H
 #define HEAP_H
 
-#include <utility>
 #include "../Iterator/SeqIterator.h"
 #include "../Vector/Vector.h"
 #include <initializer_list>
@@ -47,11 +46,10 @@ namespace CZ
         void print_info(const char *name = "") const;
     private:
         Vector<T> _data;
-        Rank _size;
 
         template <typename It>
         void _construct_from(const It begin, const It end);
-        void _build_heap(); // 采用Floyd算法进行建堆，使得_data中的元素满足偏序化
+        void _build_heap(); // 采用Floyd算法进行建堆，使得_data中的元素满足偏序化，时间复杂度O(n)
         void _perc_down(Rank i); // 下滤，即将_data[i]为根的子堆调整为最大堆
         void _perc_up(Rank i); // 将_data[i]元素进行上滤
     };

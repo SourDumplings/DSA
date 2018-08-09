@@ -249,6 +249,18 @@ namespace CZ
     }
 
     template <typename T>
+    void Tree<T>::update_size()
+    {
+        if (_root)
+        {
+            _size = _root->get_size();
+        }
+        else
+            _size = 0;
+        return;
+    }
+
+    template <typename T>
     void Tree<T>::OutPut::operator() (const T &data) const
     {
         std::cout << data << " ";
