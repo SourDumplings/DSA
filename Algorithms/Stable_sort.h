@@ -18,6 +18,7 @@
 #include ".\Sort_methods\Bubble_sort.h"
 #include ".\Sort_methods\Select_sort.h"
 #include ".\Sort_methods\Insertion_sort.h"
+#include ".\Sort_methods\Merge_sort.h"
 
 #include "..\Iterator\Iterator_traits.h"
 
@@ -27,16 +28,19 @@ namespace CZ
     {
         BUBBLE_SORT,
         SELECT_SORT,
-        INSERTION_SORT
+        INSERTION_SORT,
+        MERGE_SORT
     };
+
+    using Rank_sort = long long;
 
     template <typename It, typename Cmp>
     void doStable_sort(const It &begin, const It &end, const Cmp &cmp,
-        const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+        const StableSortMethod &method = MERGE_SORT, const unsigned version = 0)
     {
         try
         {
-            unsigned N = end - begin;
+            Rank_sort N = end - begin;
             if (N < 0)
             {
                 throw "invalid iterator range";
@@ -60,6 +64,11 @@ namespace CZ
                         Insertion_sort(begin, N, 1, cmp, version);
                         break;
                     }
+                    case MERGE_SORT:
+                    {
+                        Merge_sort(begin, N, cmp, version);
+                        break;
+                    }
                 }
             }
         }
@@ -76,7 +85,7 @@ namespace CZ
         template <typename It, typename Cmp>
         void test_iterator_for_stable_sort(const It &begin, const It &end,
             random_iterator_tag,
-            const Cmp &cmp, const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+            const Cmp &cmp, const StableSortMethod &method = MERGE_SORT, const unsigned version = 0)
         {
             doStable_sort(begin, end, cmp, method, version);
             return;
@@ -85,7 +94,7 @@ namespace CZ
         template <typename It, typename Cmp>
         void test_iterator_for_stable_sort(const It &begin, const It &end,
             seq_iterator_tag,
-            const Cmp &cmp, const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+            const Cmp &cmp, const StableSortMethod &method = MERGE_SORT, const unsigned version = 0)
         {
             throw "iterator is seq_iterator, should be random_iterator";
             return;
@@ -94,7 +103,7 @@ namespace CZ
         template <typename It, typename Cmp>
         void test_iterator_for_stable_sort(const It &begin, const It &end,
             bi_iterator_tag,
-            const Cmp &cmp, const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+            const Cmp &cmp, const StableSortMethod &method = MERGE_SORT, const unsigned version = 0)
         {
             throw "iterator is bi_iterator, should be random_iterator";
             return;
@@ -103,7 +112,7 @@ namespace CZ
 
     template <typename It, typename Cmp>
     void Stable_sort(const It &begin, const It &end, const Cmp &cmp,
-        const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+        const StableSortMethod &method = MERGE_SORT, const unsigned version = 0)
     {
         try
         {
@@ -121,7 +130,7 @@ namespace CZ
 
     template <typename It>
     void Stable_sort(const It &begin, const It &end,
-        const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+        const StableSortMethod &method = MERGE_SORT, const unsigned version = 0)
     {
         Stable_sort(begin, end, std::less<const decltype(*begin)>(), method, version);
         return;

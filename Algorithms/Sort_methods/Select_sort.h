@@ -19,8 +19,10 @@
 
 namespace CZ
 {
+    using Rank_select_sort = long long;
+
     template <typename It, typename Cmp>
-    void Select_sort(const It &begin, unsigned N, const Cmp &cmp, const unsigned version = 0)
+    void Select_sort(const It &begin, Rank_select_sort N, const Cmp &cmp, const unsigned version = 0)
     {
         switch (version)
         {
@@ -42,7 +44,7 @@ namespace CZ
             {
                 // 把最小值一个一个选在后面
                 // printf("using Select Sort version 1...\n");
-                for (unsigned i = 0; i != N; ++i)
+                for (Rank_select_sort i = 0; i != N; ++i)
                 {
                     It minItemIt = Min_element(begin + i, begin + N, cmp);
                     if (minItemIt != begin + i)
@@ -57,7 +59,7 @@ namespace CZ
     }
 
     template <typename It>
-    void Select_sort(const It &begin, unsigned N, const unsigned version = 0)
+    void Select_sort(const It &begin, Rank_select_sort N, const unsigned version = 0)
     {
         Select_sort(begin, N, std::less<const decltype(*begin)>(), version);
         return;

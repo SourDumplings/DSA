@@ -17,8 +17,10 @@
 
 namespace CZ
 {
+    using Rank_bubble_sort = long long;
+
     template <typename It, typename Cmp>
-    void Bubble_sort(const It &begin, unsigned N, const Cmp &cmp, const unsigned version = 0)
+    void Bubble_sort(const It &begin, Rank_bubble_sort N, const Cmp &cmp, const unsigned version = 0)
     {
         switch (version)
         {
@@ -29,7 +31,7 @@ namespace CZ
                 while (!isSorted)
                 {
                     isSorted = true;
-                    for (unsigned i = 0; i != N - 1; ++i)
+                    for (Rank_bubble_sort i = 0; i != N - 1; ++i)
                     {
                         auto &thisElem = *(begin + i), &nextElem = *(begin + i + 1);
                         if (cmp(nextElem, thisElem))
@@ -47,8 +49,8 @@ namespace CZ
                 // printf("using Bubble Sort version 1...\n");
                 while (N > 1)
                 {
-                    unsigned last = 0; // last记录最右侧的逆序对的一个位置
-                    for (unsigned i = 0; i != N - 1; ++i)
+                    Rank_bubble_sort last = 0; // last记录最右侧的逆序对的一个位置
+                    for (Rank_bubble_sort i = 0; i != N - 1; ++i)
                     {
                         auto &thisElem = *(begin + i), &nextElem = *(begin + i + 1);
                         if (cmp(nextElem, thisElem))

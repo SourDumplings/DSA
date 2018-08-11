@@ -17,20 +17,22 @@
 
 namespace CZ
 {
+    using Rank_insertion_sort = long long;
+
     template <typename It, typename Cmp>
-    void Insertion_sort(const It &begin, unsigned N, const unsigned steps,
+    void Insertion_sort(const It &begin, Rank_insertion_sort N, const Rank_insertion_sort steps,
         const Cmp &cmp, const unsigned version = 0)
     {
         // printf("using Insertion sort, steps = %d\n", steps);
-        for (unsigned i = steps; i < N; i += steps)
+        for (Rank_insertion_sort i = steps; i < N; i += steps)
         {
             auto temp = *(begin + i);
-            int j = i - steps;
+            Rank_insertion_sort j = i - steps;
             for (; j >= 0 && cmp(temp, *(begin + j)); j -= steps)
             {
-                *(begin + j + steps) = *(begin + j);
+                *(begin + (j + steps)) = *(begin + j);
             }
-            *(begin + j + steps) = temp;
+            *(begin + (j + steps)) = temp;
         }
         return;
     }

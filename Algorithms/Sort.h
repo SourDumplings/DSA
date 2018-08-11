@@ -14,6 +14,7 @@
 
 #include "Stable_sort.h"
 #include "../Iterator/Iterator_traits.h"
+#include "Sort_methods/Quick_sort.h"
 
 #include <functional>
 #include <stdexcept>
@@ -22,17 +23,40 @@
 namespace CZ
 {
     // 对于不稳定排序
-    enum UnstableSortMethod
+    enum UnStableSortMethod
     {
-
+        QUICK_SORT
     };
 
     // 对于指定使用稳定排序方法
     template <typename It, typename Cmp>
     void doSort(const It &begin, const It &end, const Cmp &cmp,
-        const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+        const UnStableSortMethod &method = QUICK_SORT, const unsigned version = 0)
     {
-        Stable_sort(begin, end, cmp, method, version);
+        try
+        {
+            Rank_sort N = end - begin;
+            if (N < 0)
+            {
+                throw "invalid iterator range";
+            }
+            else if (N >= 1)
+            {
+                switch (method)
+                {
+                    case QUICK_SORT:
+                    {
+                        Quick_sort(begin, N, cmp, version);
+                        break;
+                    }
+                }
+            }
+        }
+        catch (const char *errMsg)
+        {
+            printf("%s\n", errMsg);
+            throw std::exception();
+        }
         return;
     }
 
@@ -41,7 +65,7 @@ namespace CZ
         template <typename It, typename Cmp>
         void test_iterator_for_sort(const It &begin, const It &end,
             random_iterator_tag,
-            const Cmp &cmp, const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+            const Cmp &cmp, const UnStableSortMethod &method = QUICK_SORT, const unsigned version = 0)
         {
             doSort(begin, end, cmp, method, version);
             return;
@@ -50,7 +74,7 @@ namespace CZ
         template <typename It, typename Cmp>
         void test_iterator_for_sort(const It &begin, const It &end,
             seq_iterator_tag,
-            const Cmp &cmp, const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+            const Cmp &cmp, const UnStableSortMethod &method = QUICK_SORT, const unsigned version = 0)
         {
             throw "iterator is seq_iterator, should be random_iterator";
             return;
@@ -59,7 +83,7 @@ namespace CZ
         template <typename It, typename Cmp>
         void test_iterator_for_sort(const It &begin, const It &end,
             bi_iterator_tag,
-            const Cmp &cmp, const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+            const Cmp &cmp, const UnStableSortMethod &method = QUICK_SORT, const unsigned version = 0)
         {
             throw "iterator is bi_iterator, should be random_iterator";
             return;
@@ -68,7 +92,7 @@ namespace CZ
 
     template <typename It, typename Cmp>
     void Sort(const It &begin, const It &end, const Cmp &cmp,
-        const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+        const UnStableSortMethod &method = QUICK_SORT, const unsigned version = 0)
     {
         try
         {
@@ -86,9 +110,27 @@ namespace CZ
 
     template <typename It>
     void Sort(const It &begin, const It &end,
-        const StableSortMethod &method = BUBBLE_SORT, const unsigned version = 0)
+        const UnStableSortMethod &method = QUICK_SORT, const unsigned version = 0)
     {
         Sort(begin, end, std::less<const decltype(*begin)>(), method, version);
+        return;
+    }
+
+    // 稳定排序情况：默认比较函数
+    template <typename It>
+    void Sort(const It &begin, const It &end,
+        const StableSortMethod &method, const unsigned version = 0)
+    {
+        Sort(begin, end, std::less<const decltype(*begin)>(), method, version);
+        return;
+    }
+
+    // 稳定排序情况：指定比较函数
+    template <typename It, typename Cmp>
+    void Sort(const It &begin, const It &end, const Cmp &cmp,
+        const StableSortMethod &method, const unsigned version = 0)
+    {
+        Stable_sort(begin, end, cmp, method, version);
         return;
     }
 } // CZ
