@@ -169,7 +169,6 @@ int main(int argc, char const *argv[])
     // vs1.print_info("vs1");
     // vs1.erase(vs2.begin(), vs2.end());
     // vs1.print_info("vs1");
-
     return 0;
 }
 

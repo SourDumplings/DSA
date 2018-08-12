@@ -59,13 +59,13 @@ namespace CZ
         }
         ListIterator<T>& operator--()
         {
-            _it = BiIterator<ListNode<T>>(_it->next());
+            _it = BiIterator<ListNode<T>>(_it->prev());
             return *this;
         }
         ListIterator<T> operator--(int)
         {
             ListIterator<T> temp = *this;
-            _it = BiIterator<ListNode<T>>(_it->next());
+            _it = BiIterator<ListNode<T>>(_it->prev());
             return temp;
         }
 
