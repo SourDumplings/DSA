@@ -15,7 +15,6 @@
 #define LEFT_HEAP_H
 
 #include <functional>
-#include "../Iterator/SeqIterator.h"
 #include "../Tree/BinTree/BinTree.h"
 #include <initializer_list>
 #include "../Dictionary/Pair.h"
@@ -29,9 +28,10 @@ namespace CZ
         using Rank = int;
 
         LeftHeap();
-        LeftHeap(const SeqIterator<T> &begin, const SeqIterator<T> &end);
         LeftHeap(T *begin, T *end);
         LeftHeap(const std::initializer_list<T> &l);
+        template <typename It>
+        LeftHeap(const It &begin, const It &end);
 
         // 数据访问接口
         Rank size() const;

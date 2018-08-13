@@ -21,7 +21,7 @@ namespace CZ
     namespace QuickSort
     {
         template <typename It, typename Cmp>
-        Rank_quick_sort partition_1(const It &begin, Rank_quick_sort b, Rank_quick_sort e,
+        Rank_quick_sort partition_1(It begin, Rank_quick_sort b, Rank_quick_sort e,
             const Cmp &cmp)
         {
             Swap(*(begin + b), *(begin + ((e + b - 1) >> 1))); // 将中间元素与首元素互换
@@ -50,7 +50,7 @@ namespace CZ
         }
 
         template <typename It, typename Cmp>
-        Rank_quick_sort partition_2(const It &begin, Rank_quick_sort b, Rank_quick_sort e,
+        Rank_quick_sort partition_2(It begin, Rank_quick_sort b, Rank_quick_sort e,
             const Cmp &cmp)
         {
             Swap(*(begin + b), *(begin + ((e + b - 1) >> 1))); // 将中间元素与首元素互换
@@ -92,7 +92,7 @@ namespace CZ
         }
 
         template <typename It, typename Cmp>
-        void quick_sort_1(const It &begin, Rank_quick_sort b, Rank_quick_sort e, const Cmp &cmp)
+        void quick_sort_1(It begin, Rank_quick_sort b, Rank_quick_sort e, const Cmp &cmp)
         {
             if (e - b < 2)
             {
@@ -107,7 +107,7 @@ namespace CZ
         }
 
         template <typename It, typename Cmp>
-        void quick_sort_2(const It &begin, Rank_quick_sort b, Rank_quick_sort e, const Cmp &cmp)
+        void quick_sort_2(It begin, Rank_quick_sort b, Rank_quick_sort e, const Cmp &cmp)
         {
             if (e - b < 2)
             {
@@ -123,7 +123,7 @@ namespace CZ
     }
 
     template <typename It, typename Cmp>
-    void Quick_sort(const It &begin, Rank_quick_sort N, const Cmp &cmp, const unsigned version = 0)
+    void Quick_sort(It begin, Rank_quick_sort N, const Cmp &cmp, const unsigned version = 0)
     {
         // 两个版本区别在于对于重复元素的态度不同，
         // 想像极端情况，若是全是重复，则第一个版本就遇到了最坏情况，变成线性递归

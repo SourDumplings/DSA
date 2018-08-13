@@ -23,27 +23,25 @@ namespace CZ
     Set<T>::Set() = default;
 
     template <typename T>
-    Set<T>::Set(const SeqIterator<T> &begin, const SeqIterator<T> &end)
-    { _build_set(begin, end); }
-
-    template <typename T>
-    Set<T>::Set(T *begin, T *end)
-    { _build_set(begin, end); }
-
-    template <typename T>
-    Set<T>::Set(const std::initializer_list<T> &l)
-    { _build_set(l.begin(), l.end()); }
-
-    template <typename T>
     template <typename It>
-    void Set<T>::_build_set(const It &begin, const It &end)
+    void Set<T>::_construct_from(const It &begin, const It &end)
     {
-        for (It it = begin; it < end; ++it)
+        for (It it = begin; it != end; ++it)
         {
             insert(*it, true);
         }
         return;
     }
+
+    template <typename T>
+    template <typename It>
+    Set<T>::Set(const It &begin, const It &end) { _construct_from(begin, end); }
+
+    template <typename T>
+    Set<T>::Set(T *begin, T *end) { _construct_from(begin, end); }
+
+    template <typename T>
+    Set<T>::Set(const std::initializer_list<T> &l): Set(l.begin(), l.end()) {}
 
     template <typename T>
     inline typename Set<T>::Rank Set<T>::size() const { return _T.size(); }
@@ -117,7 +115,7 @@ namespace CZ
 
     template <typename T>
     inline typename Set<T>::iterator Set<T>::begin()
-    { return static_cast<const Set<T>&>(*this)->begin(); }
+    { return static_cast<const Set<T>&>(*this).begin(); }
 
     template <typename T>
     typename Set<T>::iterator Set<T>::last() const
@@ -137,13 +135,13 @@ namespace CZ
 
     template <typename T>
     inline typename Set<T>::iterator Set<T>::last()
-    { return static_cast<const Set<T>&>(*this)->last(); }
+    { return static_cast<const Set<T>&>(*this).last(); }
 
     template <typename T>
     void Set<T>::print_info(const char *name) const
     {
         printf("for set %s, it has %u elements\n", name, size());
-        printf("it contains:\n");
+        printf("it contains:");
         iterator b = begin(), l = last();
         for (iterator it = b; it.get(); ++it)
         {

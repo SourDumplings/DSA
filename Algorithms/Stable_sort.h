@@ -35,7 +35,7 @@ namespace CZ
     using Rank_sort = long long;
 
     template <typename It, typename Cmp>
-    void doStable_sort(const It &begin, const It &end, const Cmp &cmp,
+    void doStable_sort(It begin, It end, const Cmp &cmp,
         const StableSortMethod &method = MERGE_SORT, const unsigned version = 0)
     {
         try
@@ -111,7 +111,7 @@ namespace CZ
     } // TestIterator
 
     template <typename It, typename Cmp>
-    void Stable_sort(const It &begin, const It &end, const Cmp &cmp,
+    void Stable_sort(It begin, It end, const Cmp &cmp,
         const StableSortMethod &method = MERGE_SORT, const unsigned version = 0)
     {
         try
@@ -129,7 +129,7 @@ namespace CZ
     }
 
     template <typename It>
-    void Stable_sort(const It &begin, const It &end,
+    void Stable_sort(It begin, It end,
         const StableSortMethod &method = MERGE_SORT, const unsigned version = 0)
     {
         Stable_sort(begin, end, std::less<const decltype(*begin)>(), method, version);

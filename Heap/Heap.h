@@ -15,7 +15,6 @@
 #ifndef HEAP_H
 #define HEAP_H
 
-#include "../Iterator/SeqIterator.h"
 #include "../Vector/Vector.h"
 #include <initializer_list>
 
@@ -30,9 +29,10 @@ namespace CZ
         using Rank = int;
 
         Heap();
-        Heap(const SeqIterator<T> &begin, const SeqIterator<T> &end);
-        Heap(T *begin, T *end);
         Heap(const std::initializer_list<T> &l);
+        Heap(T *begin, T *end);
+        template <typename It>
+        Heap(const It &begin, const It &end);
 
         // 数据访问接口
         Rank size() const;
@@ -47,8 +47,6 @@ namespace CZ
     private:
         Vector<T> _data;
 
-        template <typename It>
-        void _construct_from(const It begin, const It end);
         void _build_heap(); // 采用Floyd算法进行建堆，使得_data中的元素满足偏序化，时间复杂度O(n)
         void _perc_down(Rank i); // 下滤，即将_data[i]为根的子堆调整为最大堆
         void _perc_up(Rank i); // 将_data[i]元素进行上滤

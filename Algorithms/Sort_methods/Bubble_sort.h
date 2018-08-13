@@ -20,7 +20,7 @@ namespace CZ
     using Rank_bubble_sort = long long;
 
     template <typename It, typename Cmp>
-    void Bubble_sort(const It &begin, Rank_bubble_sort N, const Cmp &cmp, const unsigned version = 0)
+    void Bubble_sort(It begin, Rank_bubble_sort N, const Cmp &cmp, const unsigned version = 0)
     {
         switch (version)
         {

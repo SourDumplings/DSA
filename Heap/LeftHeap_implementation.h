@@ -25,7 +25,8 @@ namespace CZ
     LeftHeap<T, Cmp>::LeftHeap() = default;
 
     template <typename T, typename Cmp>
-    LeftHeap<T, Cmp>::LeftHeap(const SeqIterator<T> &begin, const SeqIterator<T> &end)
+    template <typename It>
+    LeftHeap<T, Cmp>::LeftHeap(const It &begin, const It &end)
         { _build_heap(begin, end); }
 
     template <typename T, typename Cmp>

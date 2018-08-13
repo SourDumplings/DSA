@@ -22,7 +22,7 @@ namespace CZ
     namespace MergeSort
     {
         template <typename It, typename Cmp>
-        void merge(const It &begin, Rank_merge_sort mi, Rank_merge_sort N, const Cmp &cmp)
+        void merge(It begin, Rank_merge_sort mi, Rank_merge_sort N, const Cmp &cmp)
         {
             if (mi == N) return;
 
@@ -66,7 +66,7 @@ namespace CZ
     }
 
     template <typename It, typename Cmp>
-    void Merge_sort(const It &begin, Rank_merge_sort N, const Cmp &cmp, const unsigned version = 0)
+    void Merge_sort(const It begin, Rank_merge_sort N, const Cmp &cmp, const unsigned version = 0)
     {
         if (N < 2)
         {

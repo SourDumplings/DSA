@@ -24,9 +24,9 @@ namespace CZ
     Heap<T, Cmp>::Heap() = default;
 
     template <typename T, typename Cmp>
-    Heap<T, Cmp>::Heap(const SeqIterator<T> &begin, const SeqIterator<T> &end)
+    template <typename It>
+    Heap<T, Cmp>::Heap(const It &begin, const It &end)
     {
-        using It = SeqIterator<T>;
         for (It it = begin; it != end; ++it)
         {
             _data.push_back(*it);

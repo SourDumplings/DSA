@@ -15,6 +15,7 @@
 #include "Stable_sort.h"
 #include "../Iterator/Iterator_traits.h"
 #include "Sort_methods/Quick_sort.h"
+#include "Sort_methods/Heap_sort.h"
 
 #include <functional>
 #include <stdexcept>
@@ -25,13 +26,14 @@ namespace CZ
     // 对于不稳定排序
     enum UnStableSortMethod
     {
-        QUICK_SORT
+        QUICK_SORT,
+        HEAP_SORT
     };
 
     // 对于指定使用稳定排序方法
     template <typename It, typename Cmp>
-    void doSort(const It &begin, const It &end, const Cmp &cmp,
-        const UnStableSortMethod &method = QUICK_SORT, const unsigned version = 0)
+    void doSort(It begin, It end, const Cmp &cmp, const UnStableSortMethod &method = QUICK_SORT,
+        const unsigned version = 0)
     {
         try
         {
@@ -49,6 +51,11 @@ namespace CZ
                         Quick_sort(begin, N, cmp, version);
                         break;
                     }
+                    // case HEAP_SORT:
+                    // {
+                    //     Heap_sort(begin, N, cmp, version);
+                    //     break;
+                    // }
                 }
             }
         }
@@ -91,8 +98,8 @@ namespace CZ
     } // TestIterator
 
     template <typename It, typename Cmp>
-    void Sort(const It &begin, const It &end, const Cmp &cmp,
-        const UnStableSortMethod &method = QUICK_SORT, const unsigned version = 0)
+    void Sort(It begin, It end, const Cmp &cmp, const UnStableSortMethod &method = QUICK_SORT,
+        const unsigned version = 0)
     {
         try
         {
@@ -109,8 +116,8 @@ namespace CZ
     }
 
     template <typename It>
-    void Sort(const It &begin, const It &end,
-        const UnStableSortMethod &method = QUICK_SORT, const unsigned version = 0)
+    void Sort(It begin, It end, const UnStableSortMethod &method = QUICK_SORT,
+        const unsigned version = 0)
     {
         Sort(begin, end, std::less<const decltype(*begin)>(), method, version);
         return;
@@ -118,8 +125,8 @@ namespace CZ
 
     // 稳定排序情况：默认比较函数
     template <typename It>
-    void Sort(const It &begin, const It &end,
-        const StableSortMethod &method, const unsigned version = 0)
+    void Sort(It begin, It end, const StableSortMethod &method,
+        const unsigned version = 0)
     {
         Sort(begin, end, std::less<const decltype(*begin)>(), method, version);
         return;
@@ -127,8 +134,8 @@ namespace CZ
 
     // 稳定排序情况：指定比较函数
     template <typename It, typename Cmp>
-    void Sort(const It &begin, const It &end, const Cmp &cmp,
-        const StableSortMethod &method, const unsigned version = 0)
+    void Sort(It begin, It end, const Cmp &cmp, const StableSortMethod &method,
+        const unsigned version = 0)
     {
         Stable_sort(begin, end, cmp, method, version);
         return;

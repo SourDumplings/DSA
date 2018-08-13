@@ -20,7 +20,7 @@ namespace CZ
     using Rank_insertion_sort = long long;
 
     template <typename It, typename Cmp>
-    void Insertion_sort(const It &begin, Rank_insertion_sort N, const Rank_insertion_sort steps,
+    void Insertion_sort(It begin, Rank_insertion_sort N, const Rank_insertion_sort steps,
         const Cmp &cmp, const unsigned version = 0)
     {
         // printf("using Insertion sort, steps = %d\n", steps);

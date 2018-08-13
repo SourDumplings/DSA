@@ -38,9 +38,10 @@ namespace CZ
         using iterator = SetIterator<T>;
 
         Set();
-        Set(const SeqIterator<T> &begin, const SeqIterator<T> &end);
-        Set(T *begin, T *end);
         Set(const std::initializer_list<T> &l);
+        Set(T *begin, T *end);
+        template <typename It>
+        Set(const It &begin, const It &end);
 
         // 数据访问接口
         Rank size() const;
@@ -61,7 +62,7 @@ namespace CZ
         RedBlackTree<T> _T;
 
         template <typename It>
-        void _build_set(const It &begin, const It &end);
+        void _construct_from(const It &begin, const It &end);
     };
 } // CZ
 
