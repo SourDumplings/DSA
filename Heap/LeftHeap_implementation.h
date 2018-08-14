@@ -26,25 +26,25 @@ namespace CZ
 
     template <typename T, typename Cmp>
     template <typename It>
-    LeftHeap<T, Cmp>::LeftHeap(const It &begin, const It &end)
-        { _build_heap(begin, end); }
+    LeftHeap<T, Cmp>::LeftHeap(const It &begin, const It &end, const Cmp &cmp)
+        { _build_heap(begin, end, cmp); }
 
     template <typename T, typename Cmp>
-    LeftHeap<T, Cmp>::LeftHeap(T *begin, T *end)
-        { _build_heap(begin, end); }
+    LeftHeap<T, Cmp>::LeftHeap(T *begin, T *end, const Cmp &cmp)
+        { _build_heap(begin, end, cmp); }
 
     template <typename T, typename Cmp>
-    LeftHeap<T, Cmp>::LeftHeap(const std::initializer_list<T> &l)
-        { _build_heap(l.begin(), l.end()); }
+    LeftHeap<T, Cmp>::LeftHeap(const std::initializer_list<T> &l, const Cmp &cmp)
+        { _build_heap(l.begin(), l.end(), cmp); }
 
     template <typename T, typename Cmp>
     template <typename It>
-    void LeftHeap<T, Cmp>::_build_heap(const It &begin, const It &end)
+    void LeftHeap<T, Cmp>::_build_heap(const It &begin, const It &end, const Cmp &cmp)
     {
         // 逐个插入法建堆
         for (It it = begin; it != end; ++it)
         {
-            insert(*it);
+            insert(*it, cmp);
         }
         return;
     }
@@ -70,22 +70,23 @@ namespace CZ
     }
 
     template <typename T, typename Cmp>
-    LeftHeap<T, Cmp>& LeftHeap<T, Cmp>::merge(LeftHeap<T, Cmp> &lHeap1, LeftHeap<T, Cmp> &lHeap2)
+    LeftHeap<T, Cmp>& LeftHeap<T, Cmp>::merge(LeftHeap<T, Cmp> &lHeap1, LeftHeap<T, Cmp> &lHeap2,
+        const Cmp &cmp)
     {
         if (lHeap1.empty()) return lHeap2;
         if (lHeap2.empty()) return lHeap1;
 
-        if (Cmp()(lHeap1.top(), lHeap2.top()))
+        if (cmp(lHeap1.top(), lHeap2.top()))
         {
             // 确保lHeap1是不小的那个
-            return merge(lHeap2, lHeap1);
+            return merge(lHeap2, lHeap1, cmp);
         }
 
         BinTreeNode<Pair<T, typename LeftHeap<T, Cmp>::Rank>> *r = lHeap2._T.root();
         lHeap2._T.root() = nullptr;
         lHeap2._T.update_size();
 
-        _do_merge(lHeap1._T.root(), r);
+        _do_merge(lHeap1._T.root(), r, cmp);
         lHeap1._T.update_size();
         return lHeap1;
     }
@@ -93,19 +94,19 @@ namespace CZ
     template <typename T, typename Cmp>
     BinTreeNode<Pair<T, typename LeftHeap<T, Cmp>::Rank>>*
     LeftHeap<T, Cmp>::_do_merge(BinTreeNode<Pair<T, typename LeftHeap<T, Cmp>::Rank>> *a,
-        BinTreeNode<Pair<T, typename LeftHeap<T, Cmp>::Rank>> *b)
+        BinTreeNode<Pair<T, typename LeftHeap<T, Cmp>::Rank>> *b, const Cmp &cmp)
     {
         if (!a) return b;
         if (!b) return a;
 
-        if (Cmp()(a->data().key(), b->data().key()))
+        if (cmp(a->data().key(), b->data().key()))
         {
             Swap(a, b);
         }
 
         BinTreeNode<Pair<T, typename LeftHeap<T, Cmp>::Rank>> *rc = a->right_child();
         a->remove_right_child();
-        a->insert_as_right_child(_do_merge(rc, b));
+        a->insert_as_right_child(_do_merge(rc, b, cmp));
 
         if (!a->left_child() ||
             (a->right_child() &&
@@ -120,7 +121,7 @@ namespace CZ
     }
 
     template <typename T, typename Cmp>
-    void LeftHeap<T, Cmp>::pop()
+    void LeftHeap<T, Cmp>::pop(const Cmp &cmp)
     {
         if (empty())
         {
@@ -133,16 +134,16 @@ namespace CZ
         if (rr) rr->father() = nullptr;
         delete _T.root();
 
-        BinTreeNode<Pair<T, Rank>> *r = _do_merge(lr, rr);
+        BinTreeNode<Pair<T, Rank>> *r = _do_merge(lr, rr, cmp);
         _T = BinTree<Pair<T, Rank>>(r);
         return;
     }
 
     template <typename T, typename Cmp>
-    void LeftHeap<T, Cmp>::insert(const T &value)
+    void LeftHeap<T, Cmp>::insert(const T &value, const Cmp &cmp)
     {
         BinTreeNode<Pair<T, Rank>> *node = new BinTreeNode<Pair<T, Rank>>(Pair<T, Rank>(value, 1));
-        BinTreeNode<Pair<T, Rank>> *r = _do_merge(_T.root(), node);
+        BinTreeNode<Pair<T, Rank>> *r = _do_merge(_T.root(), node, cmp);
         _T = BinTree<Pair<T, Rank>>(r);
         return;
     }

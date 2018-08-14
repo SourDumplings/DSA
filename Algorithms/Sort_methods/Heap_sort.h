@@ -19,27 +19,15 @@ namespace CZ
 {
     using Rank_heap_sort = long long;
 
-    namespace HeapSort
-    {
-        // 由于我写的堆是默认大顶堆，传入的比较函数是小于号的比较，因此需要一个把比较函数反过来的类
-        template <typename T, typename Cmp>
-        class AntiCmp
-        {
-        public:
-            bool operator()(const T &lhs, const T &rhs)
-            { return !(Cmp()(const_cast<T&>(lhs), const_cast<T&>(rhs))); }
-        };
-    }
-
     template <typename It, typename Cmp>
     void Heap_sort(It begin, Rank_heap_sort N, const Cmp &cmp, const unsigned version = 0)
     {
         using DataType = typename std::remove_reference<decltype(*begin)>::type;
-        Heap<DataType, HeapSort::AntiCmp<DataType, Cmp>> H(begin, begin+N);
+        Heap<DataType, Cmp> H(begin, begin+N, cmp);
         for (Rank_heap_sort i = 0; i != N; ++i)
         {
-            *(begin + i) = H.top();
-            H.pop();
+            *(begin + (N - i - 1)) = H.top();
+            H.pop(cmp);
         }
         return;
     }

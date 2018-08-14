@@ -25,25 +25,25 @@ namespace CZ
 
     template <typename T, typename Cmp>
     template <typename It>
-    Heap<T, Cmp>::Heap(const It &begin, const It &end)
+    Heap<T, Cmp>::Heap(const It &begin, const It &end, const Cmp &cmp)
     {
         for (It it = begin; it != end; ++it)
         {
             _data.push_back(*it);
         }
-        _build_heap();
+        _build_heap(cmp);
         return;
     }
 
     template <typename T, typename Cmp>
-    Heap<T, Cmp>::Heap(T *begin, T *end): _data(begin, end) { _build_heap(); }
+    Heap<T, Cmp>::Heap(T *begin, T *end, const Cmp &cmp): _data(begin, end) { _build_heap(cmp); }
 
     template <typename T, typename Cmp>
-    Heap<T, Cmp>::Heap(const std::initializer_list<T> &l):
-        _data(l.begin(), l.end()) { _build_heap(); }
+    Heap<T, Cmp>::Heap(const std::initializer_list<T> &l, const Cmp &cmp):
+        _data(l.begin(), l.end()) { _build_heap(cmp); }
 
     template <typename T, typename Cmp>
-    void Heap<T, Cmp>::_build_heap()
+    void Heap<T, Cmp>::_build_heap(const Cmp &cmp)
     {
         if (size() < 2)
         {
@@ -52,13 +52,13 @@ namespace CZ
         for (Rank i = (size() - 2) >> 1; -1 < i; --i)
         {
             // 从最后一个结点的父结点开始
-            _perc_down(i);
+            _perc_down(i, cmp);
         }
         return;
     }
 
     template <typename T, typename Cmp>
-    void Heap<T, Cmp>::_perc_down(Rank i)
+    void Heap<T, Cmp>::_perc_down(Rank i, const Cmp &cmp)
     {
         Rank f, c;
         T x = _data[i];
@@ -66,12 +66,12 @@ namespace CZ
         {
             c = (f << 1) + 1;
             // 取较大的子结点
-            if (c < size() - 1 && Cmp()(_data[c], _data[c+1]))
+            if (c < size() - 1 && cmp(_data[c], _data[c+1]))
             {
                 ++c;
             }
 
-            if (Cmp()(x, _data[c]))
+            if (cmp(x, _data[c]))
             {
                 // 下滤
                 _data[f] = _data[c];
@@ -87,19 +87,19 @@ namespace CZ
     }
 
     template <typename T, typename Cmp>
-    void Heap<T, Cmp>::insert(const T &value)
+    void Heap<T, Cmp>::insert(const T &value, const Cmp &cmp)
     {
         // 插入元素，将元素插入到末尾再上滤
         _data.push_back(value);
-        _perc_up(_data.size()-1);
+        _perc_up(_data.size()-1, cmp);
         return;
     }
 
     template <typename T, typename Cmp>
-    void Heap<T, Cmp>::_perc_up(typename Heap<T, Cmp>::Rank i)
+    void Heap<T, Cmp>::_perc_up(typename Heap<T, Cmp>::Rank i, const Cmp &cmp)
     {
         T x = _data[i];
-        for (; 0 < i && Cmp()(_data[( i - 1 ) >> 1], x); i = (i - 1) >> 1)
+        for (; 0 < i && cmp(_data[( i - 1 ) >> 1], x); i = (i - 1) >> 1)
         {
             _data[i] = _data[(i - 1) >> 1];
         }
@@ -108,7 +108,7 @@ namespace CZ
     }
 
     template <typename T, typename Cmp>
-    void Heap<T, Cmp>::pop()
+    void Heap<T, Cmp>::pop(const Cmp &cmp)
     {
         if (empty())
         {
@@ -121,7 +121,7 @@ namespace CZ
         _data.pop_back();
         if (!empty())
         {
-            _perc_down(0);
+            _perc_down(0, cmp);
         }
 
         return;

@@ -16,6 +16,7 @@
 #include "../Iterator/Iterator_traits.h"
 #include "Sort_methods/Quick_sort.h"
 #include "Sort_methods/Heap_sort.h"
+#include "Sort_methods/Shell_sort.h"
 
 #include <functional>
 #include <stdexcept>
@@ -27,7 +28,8 @@ namespace CZ
     enum UnStableSortMethod
     {
         QUICK_SORT,
-        HEAP_SORT
+        HEAP_SORT,
+        SHELL_SORT
     };
 
     // 对于指定使用稳定排序方法
@@ -51,11 +53,16 @@ namespace CZ
                         Quick_sort(begin, N, cmp, version);
                         break;
                     }
-                    // case HEAP_SORT:
-                    // {
-                    //     Heap_sort(begin, N, cmp, version);
-                    //     break;
-                    // }
+                    case HEAP_SORT:
+                    {
+                        Heap_sort(begin, N, cmp, version);
+                        break;
+                    }
+                    case SHELL_SORT:
+                    {
+                        Shell_sort(begin, N, cmp, version);
+                        break;
+                    }
                 }
             }
         }

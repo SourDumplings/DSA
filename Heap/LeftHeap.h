@@ -21,17 +21,17 @@
 
 namespace CZ
 {
-    template <typename T, typename Cmp = std::less<T>>
+    template <typename T, typename Cmp = std::less<const T&>>
     class LeftHeap
     {
     public:
         using Rank = int;
 
         LeftHeap();
-        LeftHeap(T *begin, T *end);
-        LeftHeap(const std::initializer_list<T> &l);
+        LeftHeap(T *begin, T *end, const Cmp &cmp = Cmp());
+        LeftHeap(const std::initializer_list<T> &l, const Cmp &cmp = Cmp());
         template <typename It>
-        LeftHeap(const It &begin, const It &end);
+        LeftHeap(const It &begin, const It &end, const Cmp &cmp = Cmp());
 
         // 数据访问接口
         Rank size() const;
@@ -39,10 +39,10 @@ namespace CZ
         bool empty() const;
 
         // 插入和删除，基于合并操作实现
-        void insert(const T &value);
-        void pop(); // Pop会负责根结点的内存释放
+        void insert(const T &value, const Cmp &cmp = Cmp());
+        void pop(const Cmp &cmp = Cmp()); // Pop会负责根结点的内存释放
         // 合并，会清空右堆，返回左堆的引用
-        static LeftHeap& merge(LeftHeap &lHeap1, LeftHeap &lHeap2);
+        static LeftHeap& merge(LeftHeap &lHeap1, LeftHeap &lHeap2, const Cmp &cmp = Cmp());
 
         void print_info(const char *name = "") const;
 
@@ -55,10 +55,10 @@ namespace CZ
         Rank _get_npl(BinTreeNode<T> *node) const;
         // 在二叉树级别上执行合并操作，由上层调用者更新树的size
         static BinTreeNode<Pair<T, Rank>>* _do_merge(BinTreeNode<Pair<T, Rank>> *a,
-            BinTreeNode<Pair<T, Rank>> *b);
+            BinTreeNode<Pair<T, Rank>> *b, const Cmp &cmp = Cmp());
 
         template <typename It>
-        void _build_heap(const It &begin, const It &end); // floyd算法建堆还不会，用逐个插入法建堆
+        void _build_heap(const It &begin, const It &end, const Cmp &cmp = Cmp()); // floyd算法建堆还不会，用逐个插入法建堆
     };
 } // CZ
 

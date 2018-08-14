@@ -22,17 +22,17 @@ namespace CZ
 {
     using std::less;
 
-    template <typename T, typename Cmp = less<T>>
+    template <typename T, typename Cmp = less<const T&>>
     class Heap
     {
     public:
         using Rank = int;
 
         Heap();
-        Heap(const std::initializer_list<T> &l);
-        Heap(T *begin, T *end);
+        Heap(const std::initializer_list<T> &l, const Cmp &cmp = Cmp());
+        Heap(T *begin, T *end, const Cmp &cmp = Cmp());
         template <typename It>
-        Heap(const It &begin, const It &end);
+        Heap(const It &begin, const It &end, const Cmp &cmp = Cmp());
 
         // 数据访问接口
         Rank size() const;
@@ -40,16 +40,16 @@ namespace CZ
         bool empty() const;
 
         // 插入和删除
-        void insert(const T &value);
-        void pop();
+        void insert(const T &value, const Cmp &cmp = Cmp());
+        void pop(const Cmp &cmp = Cmp());
 
         void print_info(const char *name = "") const;
     private:
         Vector<T> _data;
 
-        void _build_heap(); // 采用Floyd算法进行建堆，使得_data中的元素满足偏序化，时间复杂度O(n)
-        void _perc_down(Rank i); // 下滤，即将_data[i]为根的子堆调整为最大堆
-        void _perc_up(Rank i); // 将_data[i]元素进行上滤
+        void _build_heap(const Cmp &cmp = Cmp()); // 采用Floyd算法进行建堆，使得_data中的元素满足偏序化，时间复杂度O(n)
+        void _perc_down(Rank i, const Cmp &cmp = Cmp()); // 下滤，即将_data[i]为根的子堆调整为最大堆
+        void _perc_up(Rank i, const Cmp &cmp = Cmp()); // 将_data[i]元素进行上滤
     };
 } // CZ
 
