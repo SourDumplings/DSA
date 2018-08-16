@@ -46,7 +46,7 @@ namespace CZ
         Set<T> sumSet(lhs);
         for (typename Set<T>::iterator it = rhs.begin();; ++it)
         {
-            sumSet.insert(*it, true);
+            sumSet.insert(*it);
             if (it == rhs.last())
             {
                 break;

@@ -28,7 +28,7 @@ namespace CZ
     {
         for (It it = begin; it != end; ++it)
         {
-            insert(*it, true);
+            insert(*it);
         }
         return;
     }
@@ -54,25 +54,19 @@ namespace CZ
     { return _T.search(value); }
 
     template <typename T>
-    bool Set<T>::insert(const T &value, bool nonexcept)
+    void Set<T>::insert(const T &value)
     {
-        if (!_T.search(value))
+        RedBlackTreeNode<T> *p = _T.search(value);
+
+        if (!p)
         {
             _T.insert(value);
         }
         else
         {
-            if (nonexcept)
-            {
-                return false;
-            }
-            else
-            {
-                printf("Error from Set insert: this value is alreay in this set\n");
-                throw std::exception();
-            }
+            p->data() = value;
         }
-        return true;
+        return;
     }
 
     template <typename T>

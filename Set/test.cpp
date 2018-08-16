@@ -56,6 +56,15 @@ int main(int argc, char const *argv[])
     int a[] = {2, 3, 6, 7, 3, 2, 0};
     Set<int> s3(a, a+4);
     s3.print_info("s3");
+
+    Vector<void*> vs;
+    vs.push_back(&s1);
+    vs.push_back(&s2);
+    vs.push_back(&s3);
+    for (unsigned i = 0; i < 3; ++i)
+    {
+        reinterpret_cast<Set<int>*>(vs[i])->print_info(to_string(i).c_str());
+    }
     return 0;
 }
 

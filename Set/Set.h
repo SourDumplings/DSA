@@ -53,8 +53,9 @@ namespace CZ
         iterator last();
         iterator last() const;
 
-        // 插入和删除，成功返回true，失败返回false或者抛出异常
-        bool insert(const T &value, bool nonexcept = true);
+        // 插入，如果该值已经存在则替换
+        void insert(const T &value);
+        // 删除，成功返回true，失败返回false或者抛出异常
         bool remove(const T &value, bool nonexcept = true);
 
         void print_info(const char *name = "") const;

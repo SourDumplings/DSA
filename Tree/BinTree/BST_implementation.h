@@ -58,17 +58,17 @@ namespace CZ
         BSTNode<T> *ret = nullptr;
         if (nowCheck)
         {
-            if (data == nowCheck->data())
-            {
-                ret = const_cast<BSTNode<T>*>(nowCheck);
-            }
-            else if (data < nowCheck->data())
+            if (data < nowCheck->data())
             {
                 ret = do_recursion_search(nowCheck->left_child(), data);
             }
-            else
+            else if (nowCheck->data() < data)
             {
                 ret = do_recursion_search(nowCheck->right_child(), data);
+            }
+            else
+            {
+                ret = const_cast<BSTNode<T>*>(nowCheck);
             }
         }
         return ret;
@@ -88,19 +88,7 @@ namespace CZ
         }
         else
         {
-            if (node->data() < father->data() || node->data() == father->data())
-            {
-                if (father->left_child())
-                {
-                    do_recursion_insert(father->left_child(), node);
-                }
-                else
-                {
-                    father->insert_child(node);
-                    Tree<T>::_size += node->get_size();
-                }
-            }
-            else
+            if (father->data() < node->data())
             {
                 if (father->right_child())
                 {
@@ -112,8 +100,20 @@ namespace CZ
                     Tree<T>::_size += node->get_size();
                 }
             }
-        return;
+            else
+            {
+                if (father->left_child())
+                {
+                    do_recursion_insert(father->left_child(), node);
+                }
+                else
+                {
+                    father->insert_child(node);
+                    Tree<T>::_size += node->get_size();
+                }
+            }
         }
+        return;
     }
 
 
