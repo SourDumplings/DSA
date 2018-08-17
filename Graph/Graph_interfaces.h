@@ -25,6 +25,10 @@ namespace CZ
     { return _dataV[i]; }
 
     template <typename ED, typename VD>
+    inline VD& Graph<ED, VD>::node_data(typename Graph<ED, VD>::Rank i)
+    { return _dataV[i]; }
+
+    template <typename ED, typename VD>
     bool Graph<ED, VD>::has_edge(typename Graph<ED, VD>::Rank s,
         typename Graph<ED, VD>::Rank d) const
     {

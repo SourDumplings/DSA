@@ -77,6 +77,7 @@ int main(int argc, char const *argv[])
     //
 
 
+
     // 测试图算法
     Graph<bool, int> G1(false, ADJACENCY_MATRIX, 8, true), G2(true, ADJACENCY_LIST, 8, true);
     G1.add_edge(0, 1, true);
@@ -90,7 +91,7 @@ int main(int argc, char const *argv[])
     {
         G1.set_vertice_data(i, i);
     }
-    G1.print_info("G1");
+    // G1.print_info("G1");
     G2.add_edge(0, 1, true);
     G2.add_edge(0, 3, true);
     G2.add_edge(2, 0, true);
@@ -102,22 +103,42 @@ int main(int argc, char const *argv[])
     {
         G2.set_vertice_data(i, i*2);
     }
-    G2.print_info("G2");
+    // G2.print_info("G2");
 
-    Vector<Graph<bool, int>::Rank> res;
-    int trueENum = 0;
-    // G1.dfs(0, res,
+    // 测试dfs
+    // Vector<Graph<bool, int>::Rank> res;
+    // int trueENum = 0;
+    // // G1.dfs(0, res,
+    // //     [&trueENum] (const bool &eB) { if (eB) { ++trueENum; }},
+    // //     [] (int &vD) { ++vD; });
+    // // res.print_info("res");
+    // // printf("trueENum = %d\n", trueENum);
+    // // G1.print_info("G1");
+    // G2.dfs(0, res,
     //     [&trueENum] (const bool &eB) { if (eB) { ++trueENum; }},
     //     [] (int &vD) { ++vD; });
     // res.print_info("res");
     // printf("trueENum = %d\n", trueENum);
-    // G1.print_info("G1");
-    G2.dfs(0, res,
-        [&trueENum] (const bool &eB) { if (eB) { ++trueENum; }},
-        [] (int &vD) { ++vD; });
-    res.print_info("res");
-    printf("trueENum = %d\n", trueENum);
-    G2.print_info("G2");
+    // G2.print_info("G2");
+
+    // 测试bfs
+    // Vector<Graph<bool, int>::Rank> res;
+    // int trueENum = 0;
+    // // G1.bfs(0, res,
+    // //     [&trueENum] (const bool &eB) { if (eB) { ++trueENum; }},
+    // //     [] (int &vD) { ++vD; });
+    // // res.print_info("res");
+    // // printf("trueENum = %d\n", trueENum);
+    // // G1.print_info("G1");
+    // G2.bfs(2, res,
+    //     [&trueENum] (const bool &eB) { if (eB) { ++trueENum; }},
+    //     [] (int &vD) { --vD; });
+    // res.print_info("res");
+    // printf("trueENum = %d\n", trueENum);
+    // G2.print_info("G2");
+
+    // 测试欧拉回路判断
+    Graph<bool, int> G3(G1), G4(G2), G5(G2);
     return 0;
 }
 

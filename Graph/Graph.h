@@ -51,11 +51,13 @@ namespace CZ
         void set_Nv(Rank Nv_);
         // 增加一条边
         void add_edge(Rank s, Rank d, const ED &eData, bool has_added = false);
+        void delete_edge(Rank s, Rank d, const ED &eData, bool has_deleted = false);
         void set_vertice_data(Rank i, const VD &vData);
 
         bool has_edge(Rank s, Rank d) const;
         // 访问结点的数据
         const VD& node_data(Rank i) const;
+        VD& node_data(Rank i);
         // 访问边的数据
         const ED& edge_data(Rank s, Rank d) const;
         ED& edge_data(Rank s, Rank d);

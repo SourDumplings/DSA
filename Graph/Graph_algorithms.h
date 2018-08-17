@@ -13,6 +13,9 @@
 #define GRAPH_ALGORITHMS_H
 
 #include "Graph_dfs.h"
+#include "Graph_bfs.h"
+
+#include "Graph_Eulerian.h"
 
 #endif // GRAPH_ALGORITHMS_H
 
