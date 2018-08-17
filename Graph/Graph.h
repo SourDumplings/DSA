@@ -28,6 +28,16 @@ namespace CZ
     template <typename ED = bool, typename VD = bool>
     class Graph
     {
+        class DoNothingE
+        {
+        public:
+            void operator()(const ED&) { return; }
+        };
+        class DoNothingV
+        {
+        public:
+            void operator()(const VD&) { return; }
+        };
     public:
         using Rank = unsigned;
 
@@ -41,12 +51,14 @@ namespace CZ
         void set_Nv(Rank Nv_);
         // 增加一条边
         void add_edge(Rank s, Rank d, const ED &eData, bool has_added = false);
+        void set_vertice_data(Rank i, const VD &vData);
 
         bool has_edge(Rank s, Rank d) const;
         // 访问结点的数据
         const VD& node_data(Rank i) const;
         // 访问边的数据
         const ED& edge_data(Rank s, Rank d) const;
+        ED& edge_data(Rank s, Rank d);
         Rank Nv() const;
         Rank indegree(Rank i) const;
         Rank outdegree(Rank i) const;
@@ -55,12 +67,18 @@ namespace CZ
 
         // 图算法
         // 搜索算法，给出搜索顺序即结点序号构成的向量作为results，并且可以按顺序处理经过的边和结点
-        template <typename EF, typename VF>
+        template <typename EF = DoNothingE, typename VF = DoNothingV>
         void dfs(Rank s, Vector<Rank> &results, const EF &processE = EF(),
             const VF &processV = VF()) const;
-        template <typename EF, typename VF>
+        template <typename EF = DoNothingE, typename VF = DoNothingV>
         void bfs(Rank s, Vector<Rank> &results, const EF &processE = EF(),
             const VF &processV = VF()) const;
+        template <typename EF = DoNothingE, typename VF = DoNothingV>
+        void dfs(Rank s, Vector<Rank> &results, const EF &processE = EF(),
+            const VF &processV = VF());
+        template <typename EF = DoNothingE, typename VF = DoNothingV>
+        void bfs(Rank s, Vector<Rank> &results, const EF &processE = EF(),
+            const VF &processV = VF());
         // 最短路径算法，要求边数据必须可以比较，可以相加
         // Dijkstra算法，解决单元最短路径问题，paths为经过算法优化后每个点到原点s的最短距离
         void Dijkstra(Rank s, Vector<Rank> &paths) const;
@@ -90,6 +108,14 @@ namespace CZ
         // 行向量的每一个元素是一个键值对，键值对的键代表这条边是否有效，值代表边值
         Vector<void*> _dataE;
         Vector<Rank> _inDegree, _outDegree; // 记录每个结点的出入度
+
+        //算法辅助方法
+        template <typename EF = DoNothingE, typename VF = DoNothingV>
+        void _do_dfs(Rank s, Vector<Rank> &results, Vector<bool> &visited, const EF &processE = EF(),
+            const VF &processV = VF()) const;
+        template <typename EF = DoNothingE, typename VF = DoNothingV>
+        void _do_dfs(Rank s, Vector<Rank> &results, Vector<bool> &visited, const EF &processE = EF(),
+            const VF &processV = VF());
     };
 } // CZ
 

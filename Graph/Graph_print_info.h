@@ -20,7 +20,8 @@ namespace CZ
     template <typename ED, typename VD>
     void Graph<ED, VD>::print_info(const char *name) const
     {
-        printf("for Graph %s, it is in form of %s\n", name,
+        printf("for %s Graph %s, it is in form of %s\n", name,
+            _directed ? "directed" : "undireceted",
             _graphType == ADJACENCY_LIST ? "adjacency_list" : "adjacency_matrix");
 
         if (_Nv == 0)

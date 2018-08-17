@@ -47,7 +47,7 @@ namespace CZ
         bool ret = false;
         if (_graphType == ADJACENCY_LIST)
         {
-            Vector<Edge<ED>> &eV = *(_dataE[s]);
+            Vector<Edge<ED>> &eV = *reinterpret_cast<Vector<Edge<ED>>*>(_dataE[s]);
             for (auto &e : eV)
             {
                 if (e.valid() && e.destination() == d)
@@ -59,7 +59,7 @@ namespace CZ
         }
         else
         {
-            Vector<Pair<bool, ED>> *pEV = _dataE[s];
+            Vector<Pair<bool, ED>> *pEV = reinterpret_cast<Vector<Pair<bool, ED>>*>(_dataE[s]);
             ret = (*pEV)[d].key();
         }
         return ret;
@@ -75,10 +75,10 @@ namespace CZ
             throw std::exception();
         }
 
-        ED *pRet = nullptr;
+        const ED *pRet = nullptr;
         if (_graphType == ADJACENCY_LIST)
         {
-            Vector<Edge<ED>> &eV = *(_dataE[s]);
+            Vector<Edge<ED>> &eV = *reinterpret_cast<Vector<Edge<ED>>*>(_dataE[s]);
             // 这个方法只用于返回两个街道之间最多只有一条边的情况
             bool oneEdge = true;
             for (auto &e : eV)
@@ -100,11 +100,16 @@ namespace CZ
         }
         else
         {
-            Vector<Pair<bool, ED>> *pEV = _dataE[s];
+            Vector<Pair<bool, ED>> *pEV = reinterpret_cast<Vector<Pair<bool, ED>>*>(_dataE[s]);
             pRet = &((*pEV)[d].value());
         }
         return *pRet;
     }
+
+    template <typename ED, typename VD>
+    inline ED& Graph<ED, VD>::edge_data(typename Graph<ED, VD>::Rank s,
+        typename Graph<ED, VD>::Rank d)
+    { return const_cast<ED&>(static_cast<const Graph<ED, VD>&>(*this).edge_data(s, d)); }
 
     template <typename ED, typename VD>
     typename Graph<ED, VD>::Rank Graph<ED, VD>::indegree(typename Graph<ED, VD>::Rank i) const

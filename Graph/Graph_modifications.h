@@ -118,6 +118,18 @@ namespace CZ
         }
         return;
     }
+
+    template <typename ED, typename VD>
+    void Graph<ED, VD>::set_vertice_data(typename Graph<ED, VD>::Rank i, const VD &vData)
+    {
+        if (_Nv <= i)
+        {
+            printf("Error from Graph set_vertice_data: this vertice doesn't exist\n");
+            throw std::exception();
+        }
+        _dataV[i] = vData;
+        return;
+    }
 } // CZ
 
 #endif // GRAPH_MODIFICATIONS_H

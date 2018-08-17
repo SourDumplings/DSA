@@ -21,4 +21,6 @@
 
 #include "Graph_print_info.h"
 
+#include "Graph_algorithms.h"
+
 #endif // GRAPH_IMPLEMENTATION_H
