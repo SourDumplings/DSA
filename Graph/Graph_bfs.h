@@ -46,12 +46,28 @@ namespace CZ
             results.push_back(v);
             visited[v] = true;
 
-            for (Rank w = 0; w != _Nv; ++w)
+            if (_graphType == ADJACENCY_MATRIX)
             {
-                if (!visited[w] && has_edge(v, w))
+                for (Rank w = 0; w != _Nv; ++w)
                 {
-                    processE(edge_data(v, w));
-                    Q.push(w);
+                    if (!visited[w] && has_edge(v, w))
+                    {
+                        processE(edge_data(v, w));
+                        Q.push(w);
+                    }
+                }
+            }
+            else
+            {
+                Vector<Edge<ED>> &eV = *reinterpret_cast<Vector<Edge<ED>>*>(_dataE[v]);
+                for (auto &e : eV)
+                {
+                    Rank w = e.destination();
+                    if (!visited[w])
+                    {
+                        processE(e.data());
+                        Q.push(w);
+                    }
                 }
             }
         }
@@ -87,12 +103,28 @@ namespace CZ
             results.push_back(v);
             visited[v] = true;
 
-            for (Rank w = 0; w != _Nv; ++w)
+            if (_graphType == ADJACENCY_MATRIX)
             {
-                if (!visited[w] && has_edge(v, w))
+                for (Rank w = 0; w != _Nv; ++w)
                 {
-                    processE(edge_data(v, w));
-                    Q.push(w);
+                    if (!visited[w] && has_edge(v, w))
+                    {
+                        processE(edge_data(v, w));
+                        Q.push(w);
+                    }
+                }
+            }
+            else
+            {
+                Vector<Edge<ED>> &eV = *reinterpret_cast<Vector<Edge<ED>>*>(_dataE[v]);
+                for (auto &e : eV)
+                {
+                    Rank w = e.destination();
+                    if (!visited[w])
+                    {
+                        processE(e.data());
+                        Q.push(w);
+                    }
                 }
             }
         }

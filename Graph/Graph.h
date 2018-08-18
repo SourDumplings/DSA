@@ -15,6 +15,7 @@
 
 #include "../Vector/Vector.h"
 #include "../Dictionary/Pair.h"
+#include <cstdint>
 
 namespace CZ
 {
@@ -31,12 +32,12 @@ namespace CZ
         class DoNothingE
         {
         public:
-            void operator()(const ED&) { return; }
+            void operator()(const ED&) const { return; }
         };
         class DoNothingV
         {
         public:
-            void operator()(const VD&) { return; }
+            void operator()(const VD&) const { return; }
         };
     public:
         using Rank = unsigned;
@@ -50,8 +51,9 @@ namespace CZ
         // 设置图的规模，若是在构造时没有指定的话必须要先调用该方法，否则不能调用该方法
         void set_Nv(Rank Nv_);
         // 增加一条边
-        void add_edge(Rank s, Rank d, const ED &eData, bool has_added = false);
-        void delete_edge(Rank s, Rank d, const ED &eData, bool has_deleted = false);
+        void add_edge(Rank s, Rank d, const ED &eData = ED(), bool has_added = false);
+        // 删除一条边，可以选择在删除失败（边不存在时）是返回false还是抛出异常
+        bool delete_edge(Rank s, Rank d, bool has_deleted = false, bool nonexcept = true);
         void set_vertice_data(Rank i, const VD &vData);
 
         bool has_edge(Rank s, Rank d) const;
@@ -81,9 +83,11 @@ namespace CZ
         template <typename EF = DoNothingE, typename VF = DoNothingV>
         void bfs(Rank s, Vector<Rank> &results, const EF &processE = EF(),
             const VF &processV = VF());
-        // 最短路径算法，要求边数据必须可以比较，可以相加
-        // Dijkstra算法，解决单元最短路径问题，paths为经过算法优化后每个点到原点s的最短距离
-        void Dijkstra(Rank s, Vector<Rank> &paths) const;
+        // 最短路径算法，要求边数据必须是可以比较并且可以相加
+        // Dijkstra算法，解决单元最短路径问题，dist为经过算法优化后每个点到源点s的最短距离
+        // path为每个点到源点s最短路径的上一个点的秩
+        void Dijkstra(Rank s, Vector<ED> &dist, Vector<Rank> &path, const ED &maxDist = UINT_MAX,
+            const ED &minDist = 0, bool heapOptimize = true) const;
         // Floyd算法，解决多元最短路径问题
         void Floyd(Vector<Vector<Rank>> &distances) const;
         // 计算连通集的个数
@@ -93,7 +97,7 @@ namespace CZ
         // 最小生成树，要求边的值一定要可比较，不能有回路
         // 返回一个图即为最小生成树，结点的数据被忽略
         Graph<ED, bool> minimum_spanning_tree() const;
-        // 回路的欧拉性
+        // 回路的欧拉性，只能判断无向图
         // 欧拉回路：所有结点都是偶度结点，即存在一条访问所有的边仅一次的路径
         // 半欧拉回路：有且仅有两个结点是奇度结点，即为路径的起点和终点
         bool is_Eulerian() const;

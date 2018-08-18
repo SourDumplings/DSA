@@ -17,5 +17,9 @@
 
 #include "Graph_Eulerian.h"
 
+#include "Graph_connected_set_num.h"
+
+#include "Graph_min_dist.h"
+
 #endif // GRAPH_ALGORITHMS_H
 

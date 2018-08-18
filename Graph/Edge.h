@@ -32,6 +32,7 @@ namespace CZ
         Rank source() const { return _s; }
         Rank destination() const { return _d; }
         const T& data() const { return _data; }
+        T& data() { return _data; }
 
         void set_valid() { _valid = true; return; }
         void set_invalid() { _valid = false; return; }

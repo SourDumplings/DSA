@@ -19,10 +19,16 @@ namespace CZ
     template <typename ED, typename VD>
     bool Graph<ED, VD>::is_Eulerian() const
     {
-        bool ret = true;
-        for (Rank i = 0; i < _Nv; ++i)
+        if (_directed)
         {
-            if ((_inDegree[i] + _outDegree[i]) & 1 == 1)
+            printf("Error from Graph is_Eulerian: cannot deal with directed Graph\n");
+            throw std::exception();
+        }
+
+        bool ret = true;
+        for (Rank i = 0; i != _Nv; ++i)
+        {
+            if ((_inDegree[i] & 1) == 1)
             {
                 ret = false;
                 break;
@@ -34,11 +40,17 @@ namespace CZ
     template <typename ED, typename VD>
     bool Graph<ED, VD>::is_semi_Eulerian() const
     {
+        if (_directed)
+        {
+            printf("Error from Graph is_semi_Eulerian: cannot deal with directed Graph\n");
+            throw std::exception();
+        }
+
         bool ret = true;
         short count = 0;
-        for (Rank i = 0; i < _Nv; ++i)
+        for (Rank i = 0; i != _Nv; ++i)
         {
-            if ((_inDegree[i] + _outDegree[i]) & 1 == 1)
+            if ((_inDegree[i] & 1) == 1)
             {
                 ++count;
                 if (2 < count)

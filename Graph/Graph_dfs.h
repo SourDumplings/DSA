@@ -69,12 +69,28 @@ namespace CZ
         visited[s] = true;
         results.push_back(s);
 
-        for (Rank i = 0; i != _Nv; ++i)
+        if (_graphType == ADJACENCY_MATRIX)
         {
-            if (!visited[i] && has_edge(s, i))
+            for (Rank i = 0; i != _Nv; ++i)
             {
-                processE(edge_data(s, i));
-                _do_dfs(i, results, visited, processE, processV);
+                if (!visited[i] && has_edge(s, i))
+                {
+                    processE(edge_data(s, i));
+                    _do_dfs(i, results, visited, processE, processV);
+                }
+            }
+        }
+        else
+        {
+            Vector<Edge<ED>> &eV = *reinterpret_cast<Vector<Edge<ED>>*>(_dataE[s]);
+            for (auto &e : eV)
+            {
+                Rank i = e.destination();
+                if (!visited[i])
+                {
+                    processE(e.data());
+                    _do_dfs(i, results, visited, processE, processV);
+                }
             }
         }
         return;
@@ -92,12 +108,28 @@ namespace CZ
         visited[s] = true;
         results.push_back(s);
 
-        for (Rank i = 0; i != _Nv; ++i)
+        if (_graphType == ADJACENCY_MATRIX)
         {
-            if (!visited[i] && has_edge(s, i))
+            for (Rank i = 0; i != _Nv; ++i)
             {
-                processE(edge_data(s, i));
-                _do_dfs(i, results, visited, processE, processV);
+                if (!visited[i] && has_edge(s, i))
+                {
+                    processE(edge_data(s, i));
+                    _do_dfs(i, results, visited, processE, processV);
+                }
+            }
+        }
+        else
+        {
+            Vector<Edge<ED>> &eV = *reinterpret_cast<Vector<Edge<ED>>*>(_dataE[s]);
+            for (auto &e : eV)
+            {
+                Rank i = e.destination();
+                if (!visited[i])
+                {
+                    processE(e.data());
+                    _do_dfs(i, results, visited, processE, processV);
+                }
             }
         }
         return;

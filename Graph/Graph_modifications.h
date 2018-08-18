@@ -101,11 +101,11 @@ namespace CZ
         else
         {
             // 注意对于邻接矩阵法，两结点之间的边最多只能有一条
-            Pair<bool, ED> &e = (*(reinterpret_cast<Vector<Pair<bool, ED>>*>(_dataE[s])))[d];
-            e.value() = eData;
-            if (!e.key())
+            Pair<bool, ED> &eP = (*(reinterpret_cast<Vector<Pair<bool, ED>>*>(_dataE[s])))[d];
+            eP.value() = eData;
+            if (!eP.key())
             {
-                e.key() = true;
+                eP.key() = true;
                 ++_inDegree[d];
                 ++_outDegree[s];
             }
@@ -129,6 +129,65 @@ namespace CZ
         }
         _dataV[i] = vData;
         return;
+    }
+
+    template <typename ED, typename VD>
+    bool Graph<ED, VD>::delete_edge(typename Graph<ED, VD>::Rank s, typename Graph<ED, VD>::Rank d,
+        bool has_deleted, bool nonexcept)
+    {
+        if (_Nv <= s)
+        {
+            printf("Error from Graph delete_edge: invalid source, s = %u, _Nv = %u\n", s, _Nv);
+            throw std::exception();
+        }
+        if (_Nv <= d)
+        {
+            printf("Error from Graph delete_edge: invalid destination, d = %u, _Nv = %u\n", d, _Nv);
+            throw std::exception();
+        }
+
+        bool success = false;
+        if (_graphType == ADJACENCY_LIST)
+        {
+            Vector<Edge<ED>> &eV = *reinterpret_cast<Vector<Edge<ED>>*>(_dataE[s]);
+            for (typename Vector<Edge<ED>>::iterator it = eV.begin(); it != eV.end(); ++it)
+            {
+                if (it->valid() && it->destination() == d)
+                {
+                    eV.erase(it);
+                    success = true;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            Pair<bool, ED> &eP = (*(reinterpret_cast<Vector<Pair<bool, ED>>*>(_dataE[s])))[d];
+            if (eP.key())
+            {
+                eP.key() = false;
+                success = true;
+            }
+        }
+
+        if (success)
+        {
+            --_inDegree[d];
+            --_outDegree[s];
+            if (!_directed && !has_deleted)
+            {
+                delete_edge(d, s, true, nonexcept);
+            }
+        }
+        else
+        {
+            if (!nonexcept)
+            {
+                printf("Error from Graph delete_edge: this edge doesn't exist\n");
+                throw std::exception();
+            }
+        }
+        return success;
     }
 } // CZ
 

@@ -47,11 +47,11 @@ namespace CZ
     // 键值数对的大小比较是比较key
     template <typename K, typename V>
     inline bool operator<(const Pair<K, V> &lhs, const Pair<K, V> &rhs)
-    { return lhs._key < rhs._value; }
+    { return lhs._key < rhs._key; }
 
     template <typename K, typename V>
     inline bool operator>(const Pair<K, V> &lhs, const Pair<K, V> &rhs)
-    { return lhs._key > rhs._value; }
+    { return lhs._key > rhs._key; }
 
 } // CZ
 

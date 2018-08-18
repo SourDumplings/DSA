@@ -79,30 +79,30 @@ int main(int argc, char const *argv[])
 
 
     // 测试图算法
-    Graph<bool, int> G1(false, ADJACENCY_MATRIX, 8, true), G2(true, ADJACENCY_LIST, 8, true);
-    G1.add_edge(0, 1, true);
-    G1.add_edge(0, 3, true);
-    G1.add_edge(2, 0, true);
-    G1.add_edge(1, 6, true);
-    G1.add_edge(2, 5, true);
-    G1.add_edge(3, 4, true);
-    G1.add_edge(4, 7, true);
-    for (unsigned i = 0; i < 8; ++i)
-    {
-        G1.set_vertice_data(i, i);
-    }
+    // Graph<bool, int> G1(false, ADJACENCY_MATRIX, 8, true), G2(true, ADJACENCY_LIST, 8, true);
+    // G1.add_edge(0, 1, true);
+    // G1.add_edge(0, 3, true);
+    // G1.add_edge(2, 0, true);
+    // G1.add_edge(1, 6, true);
+    // G1.add_edge(2, 5, true);
+    // G1.add_edge(3, 4, true);
+    // G1.add_edge(4, 7, true);
+    // for (unsigned i = 0; i < 8; ++i)
+    // {
+    //     G1.set_vertice_data(i, i);
+    // }
     // G1.print_info("G1");
-    G2.add_edge(0, 1, true);
-    G2.add_edge(0, 3, true);
-    G2.add_edge(2, 0, true);
-    G2.add_edge(1, 6, true);
-    G2.add_edge(2, 5, true);
-    G2.add_edge(3, 4, true);
-    G2.add_edge(4, 7, true);
-    for (unsigned i = 0; i < 8; ++i)
-    {
-        G2.set_vertice_data(i, i*2);
-    }
+    // G2.add_edge(0, 1, true);
+    // G2.add_edge(0, 3, true);
+    // G2.add_edge(2, 0, true);
+    // G2.add_edge(1, 6, true);
+    // G2.add_edge(2, 5, true);
+    // G2.add_edge(3, 4, true);
+    // G2.add_edge(4, 7, true);
+    // for (unsigned i = 0; i < 8; ++i)
+    // {
+    //     G2.set_vertice_data(i, i*2);
+    // }
     // G2.print_info("G2");
 
     // 测试dfs
@@ -137,8 +137,78 @@ int main(int argc, char const *argv[])
     // printf("trueENum = %d\n", trueENum);
     // G2.print_info("G2");
 
-    // 测试欧拉回路判断
-    Graph<bool, int> G3(G1), G4(G2), G5(G2);
+    // 测试删除边和欧拉回路判断
+    // Graph<bool, int> G3(G1), G4(G1), G5(G1);
+    // G3.print_info("G3");
+    // if (!G3.is_Eulerian())
+    // {
+    //     if (!G3.is_semi_Eulerian())
+    //     {
+    //         printf("G3 is none of both\n");
+    //     }
+    // }
+    // G4.delete_edge(0, 2);
+    // G4.delete_edge(2, 5);
+    // G4.print_info("G4");
+    // if (!G4.is_Eulerian())
+    // {
+    //     if (G4.is_semi_Eulerian())
+    //     {
+    //         printf("G4 is_semi_Eulerian\n");
+    //     }
+    // }
+    // G5.add_edge(5, 7);
+    // G5.delete_edge(0, 1);
+    // G5.delete_edge(1, 6);
+    // G5.print_info("G5");
+    // if (G5.is_Eulerian())
+    // {
+    //     printf("G5 is_Eulerian\n");
+    // }
+    //
+    // 测试连通集计算
+    // G1.print_info("G1");
+    // printf("connected_set_num of G1 is %d\n", G1.connected_set_num());
+    // G2.print_info("G2");
+    // printf("connected_set_num of G2 is %d\n", G2.connected_set_num());
+    // Graph<bool, int> G6(G1);
+    // G6.delete_edge(0, 1);
+    // G6.delete_edge(3, 4);
+    // G6.print_info("G6");
+    // printf("connected_set_num of G6 is %d\n", G6.connected_set_num());
+
+    // 测试Dijkstra
+    Graph<int> G1(false, ADJACENCY_MATRIX, 8), G2(true, ADJACENCY_LIST, 8);
+    Vector<int> dist;
+    Vector<typename Graph<int>::Rank> path;
+    G1.add_edge(0, 1, 2);
+    G1.add_edge(0, 3, 5);
+    G1.add_edge(2, 0, 3);
+    G1.add_edge(1, 6, 10);
+    G1.add_edge(2, 5, 1);
+    G1.add_edge(3, 4, 1);
+    G1.add_edge(4, 7, 4);
+    G1.add_edge(2, 6, 2);
+    G1.add_edge(4, 5, 3);
+    G1.print_info("G1");
+    G1.Dijkstra(2, dist, path, 99999, 0, true);
+    // G1.Dijkstra(2, dist, path, 99999, 0, false);
+    dist.print_info("dist");
+    path.print_info("path");
+    // G2.add_edge(0, 1, 2);
+    // G2.add_edge(0, 3, 5);
+    // G2.add_edge(2, 0, 3);
+    // G2.add_edge(1, 6, 10);
+    // G2.add_edge(2, 5, 1);
+    // G2.add_edge(3, 4, 1);
+    // G2.add_edge(4, 7, 4);
+    // G2.add_edge(2, 6, 2);
+    // G2.add_edge(4, 5, 3);
+    // G2.print_info("G2");
+    // // G2.Dijkstra(2, dist, path, 99999, 0, true);
+    // G2.Dijkstra(2, dist, path, 99999, 0, false);
+    // dist.print_info("dist");
+    // path.print_info("path");
     return 0;
 }
 
