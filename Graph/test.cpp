@@ -191,24 +191,70 @@ int main(int argc, char const *argv[])
     G1.add_edge(2, 6, 2);
     G1.add_edge(4, 5, 3);
     G1.print_info("G1");
-    G1.Dijkstra(2, dist, path, 99999, 0, true);
+    // G1.Dijkstra(2, dist, path, 99999, 0, true);
     // G1.Dijkstra(2, dist, path, 99999, 0, false);
-    dist.print_info("dist");
-    path.print_info("path");
-    // G2.add_edge(0, 1, 2);
-    // G2.add_edge(0, 3, 5);
-    // G2.add_edge(2, 0, 3);
-    // G2.add_edge(1, 6, 10);
-    // G2.add_edge(2, 5, 1);
-    // G2.add_edge(3, 4, 1);
-    // G2.add_edge(4, 7, 4);
-    // G2.add_edge(2, 6, 2);
-    // G2.add_edge(4, 5, 3);
-    // G2.print_info("G2");
-    // // G2.Dijkstra(2, dist, path, 99999, 0, true);
-    // G2.Dijkstra(2, dist, path, 99999, 0, false);
     // dist.print_info("dist");
     // path.print_info("path");
+    G2.add_edge(0, 1, 2);
+    G2.add_edge(0, 3, 5);
+    G2.add_edge(2, 0, 3);
+    G2.add_edge(1, 6, 10);
+    G2.add_edge(2, 5, 1);
+    G2.add_edge(3, 4, 1);
+    G2.add_edge(4, 7, 4);
+    G2.add_edge(2, 6, 2);
+    G2.add_edge(4, 5, 3);
+    G2.print_info("G2");
+    // // // G2.Dijkstra(2, dist, path, 99999, 0, true);
+    // // G2.Dijkstra(2, dist, path, 99999, 0, false);
+    // // dist.print_info("dist");
+    // // path.print_info("path");
+    // // 测试Floyd
+    // Vector<Vector<int>> distA;
+    // Vector<Vector<typename Graph<int>::Rank>> pathA;
+    // // G1.Floyd(distA, pathA, 99999);
+    // G2.Floyd(distA, pathA, 99999);
+    // printf("for distA: \n");
+    // for (unsigned i = 0; i < 8; ++i)
+    // {
+    //     for (unsigned j = 0; j < 8; ++j)
+    //     {
+    //         printf("%8d", distA[i][j]);
+    //     }
+    //     putchar('\n');
+    // }
+    // printf("for pathA: \n");
+    // for (unsigned i = 0; i < 8; ++i)
+    // {
+    //     for (unsigned j = 0; j < 8; ++j)
+    //     {
+    //         printf("%4d", pathA[i][j]);
+    //     }
+    //     putchar('\n');
+    // }
+
+    // 测试最小生成树算法
+    Vector<typename Graph<int>::Rank> MST;
+    Graph<int> G3(G1);
+    G3.delete_edge(4, 7);
+    int minS = G1.minimum_spanning_tree(MST, PRIM, 99999);
+    // int minS = G1.minimum_spanning_tree(MST, KRUSKAL, 99999);
+    // int minS = G3.minimum_spanning_tree(MST, PRIM, 99999);
+    // int minS = G3.minimum_spanning_tree(MST, KRUSKAL, 99999);
+    printf("minS = %d\n", minS);
+    MST.print_info("MST");
+
+    // 测试拓扑排序
+    // Graph<int> G4(G2), G5(G2);
+    // G4.delete_edge(4, 5);
+    // G4.delete_edge(1, 6);
+    // Vector<typename Graph<int>::Rank> res;
+    // // G4.top_sort(res);
+    // // G1.top_sort(res);
+    // G2.top_sort(res);
+    // // G5.add_edge(7, 3);
+    // // G5.top_sort(res);
+    // res.print_info("res");
     return 0;
 }
 

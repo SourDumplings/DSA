@@ -7,7 +7,8 @@
 
 /*
 图模板，支持邻接表和邻接矩阵两种方式存储数据
-两结点之间的边最多只能有一条
+两结点之间的边最多只能有一条，对于结点的秩，从0开始到_Nv-1，秩为_Nv代表无效
+注意对于邻接表表示法每个结点为起点的边是不按照终点的秩从小到大排序的
  */
 
 #ifndef GRAPH_H
@@ -16,6 +17,7 @@
 #include "../Vector/Vector.h"
 #include "../Dictionary/Pair.h"
 #include <cstdint>
+#include <cstdio>
 
 namespace CZ
 {
@@ -23,6 +25,11 @@ namespace CZ
     {
         ADJACENCY_LIST,
         ADJACENCY_MATRIX
+    };
+    enum MSTMethod
+    {
+        PRIM,
+        KRUSKAL
     };
 
     // ED代表边数据类型，VD代表点数据类型
@@ -85,18 +92,26 @@ namespace CZ
             const VF &processV = VF());
         // 最短路径算法，要求边数据必须是可以比较并且可以相加
         // Dijkstra算法，解决单元最短路径问题，dist为经过算法优化后每个点到源点s的最短距离
-        // path为每个点到源点s最短路径的上一个点的秩
+        // path为每个点到源点s最短路径的上一个点的秩，自己到自己为该结点的秩，中间无结点则为_Nv
         void Dijkstra(Rank s, Vector<ED> &dist, Vector<Rank> &path, const ED &maxDist = UINT_MAX,
             const ED &minDist = 0, bool heapOptimize = true) const;
-        // Floyd算法，解决多元最短路径问题
-        void Floyd(Vector<Vector<Rank>> &distances) const;
+        // Floyd算法，解决多元最短路径问题，返回一个邻接矩阵
+        // 传入的二维矩阵distA的Aij即为结点i到结点j的最短距离
+        // 传入的二维矩阵pathA的Aij即为该最短距离下的结点从i到j的路径中对于结点j的上一个结点
+        void Floyd(Vector<Vector<ED>> &distA, Vector<Vector<Rank>> &pathA,
+            const ED &maxDist = UINT_MAX, const ED &minDist = 0) const;
         // 计算连通集的个数
         Rank connected_set_num() const;
-        // 拓扑排序，结果results中为拓扑排序结果的结点序号
+        // 拓扑排序，结果results中为拓扑排序结果的结点序号，只能处理有向图
+        // 对于每一层入度的结点按照秩从小到大排序
         void top_sort(Vector<Rank> &results) const;
-        // 最小生成树，要求边的值一定要可比较，不能有回路
-        // 返回一个图即为最小生成树，结点的数据被忽略
-        Graph<ED, bool> minimum_spanning_tree() const;
+        // 最小生成树，要求边的值一定要可比较，图必须连通，只能计算无向图
+        // 返回一个边最小生成树边数据之和
+        // 传入向量代表最小生成树，结点的数据被忽略，总能够通过这个MST还原最小生成树
+        // 对于Prim算法MST向量的元素为对应秩号结点的父结点的秩，根节点为_Nv
+        // 对于Kruskal算法也能反映最小生成树的连接关系
+        ED minimum_spanning_tree(Vector<Rank> &MST, const MSTMethod &method = PRIM,
+            const ED &maxDist = UINT_MAX, const ED &minDist = 0) const;
         // 回路的欧拉性，只能判断无向图
         // 欧拉回路：所有结点都是偶度结点，即存在一条访问所有的边仅一次的路径
         // 半欧拉回路：有且仅有两个结点是奇度结点，即为路径的起点和终点
@@ -122,6 +137,14 @@ namespace CZ
         template <typename EF = DoNothingE, typename VF = DoNothingV>
         void _do_dfs(Rank s, Vector<Rank> &results, Vector<bool> &visited, const EF &processE = EF(),
             const VF &processV = VF());
+        void _Dijkstra_heap(Rank s, Vector<ED> &dist, Vector<Rank> &path,
+            Vector<bool> &visited) const;
+        void _Dijkstra_nonheap(Vector<ED> &dist, Vector<Rank> &path, Vector<bool> &visited,
+            const ED &maxDist) const;
+        void _initialize_Floyd(Vector<Vector<ED>> &distA, Vector<Vector<Rank>> &pathA,
+            const ED &maxDist, const ED &minDist) const;
+        ED _Prim(Vector<Rank> &MST, const ED &maxDist = UINT_MAX, const ED &minDist = 0) const;
+        ED _Kruskal(Vector<Rank> &MST, const ED &maxDist = UINT_MAX, const ED &minDist = 0) const;
     };
 } // CZ
 

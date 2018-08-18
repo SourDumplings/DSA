@@ -21,5 +21,9 @@
 
 #include "Graph_min_dist.h"
 
+#include "Graph_minimum_spanning_tree.h"
+
+#include "Graph_top_sort.h"
+
 #endif // GRAPH_ALGORITHMS_H
 

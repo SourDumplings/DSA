@@ -39,6 +39,93 @@ namespace CZ
     }
 
     template <typename ED, typename VD>
+    void Graph<ED, VD>::_Dijkstra_heap(Rank s, Vector<ED> &dist, Vector<Rank> &path,
+        Vector<bool> &visited) const
+    {
+        // 堆，元素类型为键值对，键为边值，值为边目的端的秩
+        Heap<Pair<ED, Rank>, std::greater<const Pair<ED, Rank>&>> H;
+        H.insert(Pair<ED, Rank>(dist[s], s));
+        while (!H.empty())
+        {
+            Pair<ED, Rank> eVP = H.top(); H.pop();
+            Rank v = eVP.value();
+            if (eVP.key() == dist[v])
+            {
+                // 只考虑对于每个结点最终每一轮下来的最优值
+                // 分别对邻接矩阵和邻接表分开计算
+                if (_graphType == ADJACENCY_MATRIX)
+                {
+                    for (Rank w = 0; w < _Nv; ++w)
+                    {
+                        if (has_edge(v, w) && edge_data(v, w) + dist[v] < dist[w])
+                        {
+                            dist[w] = edge_data(v, w) + dist[v];
+                            path[w] = v;
+                            H.insert(Pair<ED, Rank>(dist[w], w));
+                        }
+                    }
+                }
+                else
+                {
+                    Vector<Edge<ED>> &eV = *reinterpret_cast<Vector<Edge<ED>>*>(_dataE[v]);
+                    for (auto &e : eV)
+                    {
+                        Rank w = e.destination();
+                        if (e.data() + dist[v] < dist[w])
+                        {
+                            dist[w] = e.data() + dist[v];
+                            path[w] = v;
+                            H.insert(Pair<ED, Rank>(dist[w], w));
+                        }
+                    }
+                }
+            }
+        }
+        return;
+    }
+
+    template <typename ED, typename VD>
+    void Graph<ED, VD>::_Dijkstra_nonheap(Vector<ED> &dist, Vector<Rank> &path,
+        Vector<bool> &visited, const ED &maxDist) const
+    {
+        while (true)
+        {
+            Rank v = MinDist::find_min_dist<ED, VD>(dist, visited, _Nv, maxDist);
+            if (v == _Nv)
+            {
+                break;
+            }
+            visited[v] = true;
+            // 分别对邻接矩阵和邻接表分开计算
+            if (_graphType == ADJACENCY_MATRIX)
+            {
+                for (Rank w = 0; w != _Nv; ++w)
+                {
+                    if (!visited[w] && has_edge(v, w) && dist[v] + edge_data(v, w) < dist[w])
+                    {
+                        dist[w] = dist[v] + edge_data(v, w);
+                        path[w] = v;
+                    }
+                }
+            }
+            else
+            {
+                Vector<Edge<ED>> &eV = *reinterpret_cast<Vector<Edge<ED>>*>(_dataE[v]);
+                for (auto &e : eV)
+                {
+                    Rank w = e.destination();
+                    if (!visited[w] && dist[v] + e.data() < dist[w])
+                    {
+                        dist[w] = dist[v] + e.data();
+                        path[w] = v;
+                    }
+                }
+            }
+        }
+        return;
+    }
+
+    template <typename ED, typename VD>
     void Graph<ED, VD>::Dijkstra(Rank s, Vector<ED> &dist, Vector<Rank> &path,
         const ED &maxDist, const ED &minDist, bool heapOptimize) const
     {
@@ -63,41 +150,40 @@ namespace CZ
         // 进行计算，分为堆优化和不堆优化两种算法
         if (heapOptimize)
         {
-            // 堆，元素类型为键值对，键为边值，值为边目的端的秩
-            Heap<Pair<ED, Rank>, std::greater<const Pair<ED, Rank>&>> H;
-            H.insert(Pair<ED, Rank>(minDist, s));
-            while (!H.empty())
+            _Dijkstra_heap(s, dist, path, visited);
+        }
+        else
+        {
+            _Dijkstra_nonheap(dist, path, visited, maxDist);
+        }
+        return;
+    }
+
+    template <typename ED, typename VD>
+    void Graph<ED, VD>::_initialize_Floyd(Vector<Vector<ED>> &distA, Vector<Vector<Rank>> &pathA,
+        const ED &maxDist, const ED &minDist) const
+    {
+        distA.resize(_Nv);
+        if (_graphType == ADJACENCY_MATRIX)
+        {
+            for (Rank i = 0; i != _Nv; ++i)
             {
-                Pair<ED, Rank> eVP = H.top(); H.pop();
-                Rank v = eVP.value();
-                if (eVP.key() == dist[v])
+                distA[i].resize(_Nv);
+                for (Rank j = 0; j != _Nv; ++j)
                 {
-                    // 只考虑对于每个结点最终每一轮下来的最优值
-                    // 分别对邻接矩阵和邻接表分开计算
-                    if (_graphType == ADJACENCY_MATRIX)
+                    if (i == j)
                     {
-                        for (Rank w = 0; w < _Nv; ++w)
-                        {
-                            if (has_edge(v, w) && edge_data(v, w) + dist[v] < dist[w])
-                            {
-                                dist[w] = edge_data(v, w) + dist[v];
-                                path[w] = v;
-                                H.insert(Pair<ED, Rank>(dist[w], w));
-                            }
-                        }
+                        distA[i][j] = minDist;
                     }
                     else
                     {
-                        Vector<Edge<ED>> &eV = *reinterpret_cast<Vector<Edge<ED>>*>(_dataE[v]);
-                        for (auto &e : eV)
+                        if (has_edge(i, j))
                         {
-                            Rank w = e.destination();
-                            if (e.data() + dist[v] < dist[w])
-                            {
-                                dist[w] = e.data() + dist[v];
-                                path[w] = v;
-                                H.insert(Pair<ED, Rank>(dist[w], w));
-                            }
+                            distA[i][j] = edge_data(i, j);
+                        }
+                        else
+                        {
+                            distA[i][j] = maxDist;
                         }
                     }
                 }
@@ -105,37 +191,64 @@ namespace CZ
         }
         else
         {
-            while (true)
+            for (Rank i = 0; i != _Nv; ++i)
             {
-                Rank v = MinDist::find_min_dist<ED, VD>(dist, visited, _Nv, maxDist);
-                if (v == _Nv)
+                distA[i].resize(_Nv);
+                for (Rank j = 0; j != _Nv; ++j)
                 {
-                    break;
-                }
-                visited[v] = true;
-                // 分别对邻接矩阵和邻接表分开计算
-                if (_graphType == ADJACENCY_MATRIX)
-                {
-                    for (Rank w = 0; w != _Nv; ++w)
+                    if (i == j)
                     {
-                        if (!visited[w] && has_edge(v, w) && dist[v] + edge_data(v, w) < dist[w])
-                        {
-                            dist[w] = dist[v] + edge_data(v, w);
-                            path[w] = v;
-                        }
+                        distA[i][j] = minDist;
                     }
+                    else
+                        distA[i][j] = maxDist;
+                }
+            }
+            for (Rank i = 0; i != _Nv; ++i)
+            {
+                Vector<Edge<ED>> &eV = *reinterpret_cast<Vector<Edge<ED>>*>(_dataE[i]);
+                for (auto &e : eV)
+                {
+                    distA[i][e.destination()] = e.data();
+                }
+            }
+        }
+
+        pathA.resize(_Nv);
+        for (Rank i = 0; i != _Nv; ++i)
+        {
+            pathA[i].resize(_Nv);
+            for (Rank j = 0; j != _Nv; ++j)
+            {
+                if (i == j)
+                {
+                    pathA[i][j] = i;
                 }
                 else
+                    pathA[i][j] = _Nv;
+            }
+        }
+        return;
+    }
+
+    template <typename ED, typename VD>
+    void Graph<ED, VD>::Floyd(Vector<Vector<ED>> &distA, Vector<Vector<Rank>> &pathA,
+        const ED &maxDist, const ED &minDist) const
+    {
+        // 用图中的边数据初始化二维距离矩阵distA
+        _initialize_Floyd(distA, pathA, maxDist, minDist);
+
+        for (Rank i = 0; i != _Nv; ++i)
+        {
+            for (Rank s = 0; s != _Nv; ++s)
+            {
+                for (Rank d = 0; d != _Nv; ++d)
                 {
-                    Vector<Edge<ED>> &eV = *reinterpret_cast<Vector<Edge<ED>>*>(_dataE[v]);
-                    for (auto &e : eV)
+                    if (distA[s][i] != maxDist && distA[i][d] != maxDist &&
+                        distA[s][i] + distA[i][d] < distA[s][d])
                     {
-                        Rank w = e.destination();
-                        if (!visited[w] && dist[v] + e.data() < dist[w])
-                        {
-                            dist[w] = dist[v] + e.data();
-                            path[w] = v;
-                        }
+                        distA[s][d] = distA[s][i] + distA[i][d];
+                        pathA[s][d] = i;
                     }
                 }
             }
