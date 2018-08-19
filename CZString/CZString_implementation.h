@@ -77,7 +77,7 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("Error: %s %u\n", errMsg, length());
+            printf("Error from CZString substr: %s %u\n", errMsg, length());
             throw std::exception();
         }
         char temp[l+1];
@@ -88,6 +88,27 @@ namespace CZ
 
     inline CZString CZString::substr(Rank pos) const
     { return substr(pos, length() - pos); }
+
+    inline CZString CZString::prefix(Rank l) const
+    {
+        if (length() < l)
+        {
+            printf("Error from CZString prefix: prefix length is greater than full length\n");
+            throw std::exception();
+        }
+        return substr(0, l);
+    }
+
+    inline CZString CZString::suffix(Rank l) const
+    {
+        Rank len = length();
+        if (len < l)
+        {
+            printf("Error from CZString suffix: suffix length is greater than full length\n");
+            throw std::exception();
+        }
+        return substr(len - l, l);
+    }
 
     inline CZString::operator const char*() const
     { return c_str(); }

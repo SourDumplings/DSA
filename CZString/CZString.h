@@ -6,7 +6,8 @@
 */
 
 /*
-字符串类
+字符串类，本质为存储了字符型的向量，注意不存储c字符串中的结尾字符'\0'
+即向量的大小就是字符串的长度
  */
 
 #ifndef CZSTRING_H
@@ -38,6 +39,11 @@ namespace CZ
 
         CZString substr(Rank pos = 0) const;
         CZString substr(Rank pos, Rank l) const;
+        // 返回长度为l的前、后缀
+        CZString prefix(Rank l) const;
+        CZString suffix(Rank l) const;
+        // 若s是当前字符串的一个子串，则返回子串起始位置，否则返回length()
+        Rank index_of(const CZString &s) const;
 
         operator const char*() const;
         operator const std::string() const;
