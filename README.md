@@ -71,6 +71,7 @@
                     Prim
                     Kruskal
                 拓扑排序
+        树状数组
     特殊工具：
         智能指针
             Shared_ptr
@@ -85,3 +86,4 @@
 [2] http://en.cppreference.com/w/
 [3] 《C++ Primer》5th-Stanley B. Lippman, Josée Lajoie, Barbara E. Moo
 [4] 《Effective C++》3rd-Scott Meyers
+[5] 《数据结构》2nd-陈越
