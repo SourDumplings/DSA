@@ -19,6 +19,7 @@
 #include <stdexcept>
 #include "../Iterator/Iterator_traits.h"
 #include "Match/Brute_force_match.h"
+#include "Match/KMP_match.h"
 
 namespace CZ
 {
@@ -26,60 +27,19 @@ namespace CZ
 
     enum MatchMethod
     {
-        BRUTE_FORCE
+        BRUTE_FORCE,
+        KMP
     };
-
-    namespace TestIterator
-    {
-        template <typename It>
-        inline MatchRank test_iterator_for_match(const It &TBegin, const It &TEnd, const It &PBegin,
-            const It &PEnd, random_iterator_tag, const MatchMethod &method = BRUTE_FORCE,
-            const unsigned &version = 0)
-        {
-            return do_Match(TBegin, TEnd, PBegin, PEnd, method, version);
-        }
-
-        template <typename It>
-        inline MatchRank test_iterator_for_match(const It &TBegin, const It &TEnd, const It &PBegin,
-            const It &PEnd, seq_iterator_tag, const MatchMethod &method = BRUTE_FORCE,
-            const unsigned &version = 0)
-        {
-            throw "iterator is seq_iterator, should be random_iterator";
-            return 0;
-        }
-
-        template <typename It>
-        inline MatchRank test_iterator_for_match(const It &TBegin, const It &TEnd, const It &PBegin,
-            const It &PEnd, bi_iterator_tag, const MatchMethod &method = BRUTE_FORCE,
-            const unsigned &version = 0)
-        {
-            throw "iterator is bi_iterator, should be random_iterator";
-            return 0;
-        }
-    } // TestIterator
-
-    template <typename It>
-    MatchRank Match(const It &TBegin, const It &TEnd, const It &PBegin, const It &PEnd,
-        const MatchMethod &method = BRUTE_FORCE, const unsigned &version = 0)
-    {
-        MatchRank ret;
-        try
-        {
-            ret = TestIterator::test_iterator_for_match(TBegin, TEnd, PBegin, PEnd,
-                typename Iterator_traits<It>::iterator_category(), method, version);
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from Match: %s\n", errMsg);
-            throw std::exception();
-        }
-        return ret;
-    }
 
     template <typename It>
     MatchRank doMatch(const It &TBegin, const It &TEnd, const It &PBegin, const It &PEnd,
-        const MatchMethod &method = BRUTE_FORCE, const unsigned &version = 0)
+        const MatchMethod &method = KMP, const unsigned &version = 0)
     {
+        if (TEnd <= TBegin || PEnd <= PBegin)
+        {
+            printf("Error from doMatch: invalid iterator range\n");
+        }
+
         MatchRank tL = TEnd - TBegin, pL = PEnd - PBegin;
         if (tL < pL)
         {
@@ -91,7 +51,56 @@ namespace CZ
         switch (method)
         {
             // 蛮力算法
-            case BRUTE_FORCE: ret = Brute_force_match(TBegin, tL, TEnd, pL, version); break;
+            case BRUTE_FORCE: ret = Brute_force_match(TBegin, tL, PBegin, pL, version); break;
+            // KMP算法
+            case KMP: ret = KMP_match(TBegin, tL, PBegin, pL, version); break;
+        }
+        return ret;
+    }
+
+    namespace TestIterator
+    {
+        template <typename It>
+        inline MatchRank test_iterator_for_match(const It &TBegin, const It &TEnd, const It &PBegin,
+            const It &PEnd, random_iterator_tag, const MatchMethod &method = KMP,
+            const unsigned &version = 0)
+        {
+            return doMatch(TBegin, TEnd, PBegin, PEnd, method, version);
+        }
+
+        template <typename It>
+        inline MatchRank test_iterator_for_match(const It &TBegin, const It &TEnd, const It &PBegin,
+            const It &PEnd, seq_iterator_tag, const MatchMethod &method = KMP,
+            const unsigned &version = 0)
+        {
+            throw "iterator is seq_iterator, should be random_iterator";
+            return 0;
+        }
+
+        template <typename It>
+        inline MatchRank test_iterator_for_match(const It &TBegin, const It &TEnd, const It &PBegin,
+            const It &PEnd, bi_iterator_tag, const MatchMethod &method = KMP,
+            const unsigned &version = 0)
+        {
+            throw "iterator is bi_iterator, should be random_iterator";
+            return 0;
+        }
+    } // TestIterator
+
+    template <typename It>
+    MatchRank Match(const It &TBegin, const It &TEnd, const It &PBegin, const It &PEnd,
+        const MatchMethod &method = KMP, const unsigned &version = 0)
+    {
+        MatchRank ret;
+        try
+        {
+            ret = TestIterator::test_iterator_for_match(TBegin, TEnd, PBegin, PEnd,
+                typename Iterator_traits<It>::iterator_category(), method, version);
+        }
+        catch (const char *errMsg)
+        {
+            printf("Error from Match: %s\n", errMsg);
+            throw std::exception();
         }
         return ret;
     }

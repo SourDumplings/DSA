@@ -17,6 +17,7 @@
 #include <cstdio>
 #include <stdexcept>
 #include <iostream>
+#include "../Algorithms/Match.h"
 
 namespace CZ
 {
@@ -109,6 +110,9 @@ namespace CZ
         }
         return substr(len - l, l);
     }
+
+    inline CZString::Rank CZString::index_of(const CZString &s) const
+    { return static_cast<CZString::Rank>(Match(begin(), end(), s.begin(), s.end())); }
 
     inline CZString::operator const char*() const
     { return c_str(); }

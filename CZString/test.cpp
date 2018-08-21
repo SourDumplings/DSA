@@ -47,5 +47,11 @@ int main(int argc, char const *argv[])
     sc.clear();
     sc.print_info("sc");
     s.print_info("s");
+
+    s.suffix(3).print_info("s.suffix(3)");
+    s.prefix(4).print_info("s.prefix(4)");
+
+    printf("s.index_of(\"hello\") = %u\n", s.index_of("hello"));
+    printf("s.index_of(\"000\") = %u\n", s.index_of("000"));
     return 0;
 }
