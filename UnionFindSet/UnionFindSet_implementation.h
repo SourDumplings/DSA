@@ -84,7 +84,7 @@ namespace CZ
 
     template <typename T>
     inline typename UnionFindSet<T>::UnionFindSetNode* UnionFindSet<T>::remove(UnionFindSetNode *node)
-    { return _family.remove(node); }
+    { return _family.secede(node); }
 
     template <typename T>
     inline void UnionFindSet<T>::clear() { return _family.clear(); }
