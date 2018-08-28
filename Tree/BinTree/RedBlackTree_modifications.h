@@ -55,25 +55,9 @@ namespace CZ
     template <typename T>
     void RedBlackTree<T>::insert(const T &data)
     {
-        RedBlackTreeNode<T> *v = search(data);
-        try
-        {
-            if (v)
-            {
-                throw "this value alreay exists in this RedBlackTree";
-            }
-            else
-            {
-                v = new RedBlackTreeNode<T>(data);
-                BST<T>::insert(v);
-                solve_double_red(v);
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from RedBlackTree insert: %s\n", errMsg);
-            throw std::exception();
-        }
+        RedBlackTreeNode<T> *v = new RedBlackTreeNode<T>(data);
+        BST<T>::insert(v);
+        solve_double_red(v);
         return;
     }
 

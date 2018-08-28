@@ -50,6 +50,7 @@ namespace CZ
 
         void print_info(const char *name = "") const override;
 
+        // 红黑树的插入与删除
         void insert(RedBlackTreeNode<T> *node);
         void insert(const T &data);
         RedBlackTreeNode<T>* remove(const T &data);

@@ -31,7 +31,8 @@ int main(int argc, char const *argv[])
     // rt1.insert(4);
     RedBlackTreeNode<int> *node = new RedBlackTreeNode<int>(4);
     rt1.insert(node);
-    rt1.insert(6);
+    // rt1.insert(6);
+    rt1.insert(7);
     rt1.insert(8);
     rt1.insert(9);
     rt1.print_info("rt1");
