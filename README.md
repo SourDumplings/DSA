@@ -88,3 +88,4 @@
 [3] 《C++ Primer》5th-Stanley B. Lippman, Josée Lajoie, Barbara E. Moo
 [4] 《Effective C++》3rd-Scott Meyers
 [5] 《数据结构》2nd-陈越
+[6] 《2019年数据结构考研复习指导》-王道论坛组编

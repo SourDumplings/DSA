@@ -17,7 +17,7 @@
 namespace CZ
 {
     template <typename T> class RandomIterator;
-    using RandomIteratorRank = unsigned;
+    using RandomIteratorRank = long long;
 
     template <typename T> bool operator==(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs);
     template <typename T> bool operator!=(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs);
