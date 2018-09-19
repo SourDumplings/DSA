@@ -16,7 +16,6 @@
 #include <functional>
 
 #include ".\Sort_methods\Bubble_sort.h"
-#include ".\Sort_methods\Select_sort.h"
 #include ".\Sort_methods\Insertion_sort.h"
 #include ".\Sort_methods\Merge_sort.h"
 
@@ -27,7 +26,6 @@ namespace CZ
     enum StableSortMethod
     {
         BUBBLE_SORT,
-        SELECT_SORT,
         INSERTION_SORT,
         MERGE_SORT
     };
@@ -52,11 +50,6 @@ namespace CZ
                     case BUBBLE_SORT:
                     {
                         Bubble_sort(begin, N, cmp, version);
-                        break;
-                    }
-                    case SELECT_SORT:
-                    {
-                        Select_sort(begin, N, cmp, version);
                         break;
                     }
                     case INSERTION_SORT:

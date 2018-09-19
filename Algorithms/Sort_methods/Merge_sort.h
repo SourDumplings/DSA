@@ -31,15 +31,16 @@ namespace CZ
                 temp(begin+0, begin+N);
             for (Rank_merge_sort i = 0, i1 = 0, i2 = mi; i != N; ++i)
             {
-                if (cmp(temp[i1], temp[i2]))
-                {
-                    *(begin + i) = temp[i1];
-                    ++i1;
-                }
-                else
+                // 注意这里的次序，是小于等于的时候都用前半段，否则便无法保证稳定性
+                if (cmp(temp[i2], temp[i1]))
                 {
                     *(begin + i) = temp[i2];
                     ++i2;
+                }
+                else
+                {
+                    *(begin + i) = temp[i1];
+                    ++i1;
                 }
                 // 一个已经全部搞定
                 if (i1 == mi)
@@ -74,7 +75,7 @@ namespace CZ
             return;
         }
         // 分而治之
-        Rank_merge_sort mi = N >> 1;
+        Rank_merge_sort mi = N / 2;
         Merge_sort(begin, mi, cmp, version);
         Merge_sort(begin + mi, N - mi, cmp, version);
         // 合并

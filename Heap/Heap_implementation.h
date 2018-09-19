@@ -49,7 +49,7 @@ namespace CZ
         {
             return;
         }
-        for (Rank i = (size() - 2) >> 1; -1 < i; --i)
+        for (Rank i = (size() - 2) / 2; -1 < i; --i)
         {
             // 从最后一个结点的父结点开始
             _perc_down(i, cmp);
@@ -99,9 +99,9 @@ namespace CZ
     void Heap<T, Cmp>::_perc_up(typename Heap<T, Cmp>::Rank i, const Cmp &cmp)
     {
         T x = _data[i];
-        for (; 0 < i && cmp(_data[( i - 1 ) >> 1], x); i = (i - 1) >> 1)
+        for (; 0 < i && cmp(_data[( i - 1 ) / 2], x); i = (i - 1) / 2)
         {
-            _data[i] = _data[(i - 1) >> 1];
+            _data[i] = _data[(i - 1) / 2];
         }
         _data[i] = x;
         return;

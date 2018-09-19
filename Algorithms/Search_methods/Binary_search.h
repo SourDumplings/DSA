@@ -34,7 +34,7 @@ namespace CZ
                 // printf("using Binary Search version 0...\n");
                 while (b < e)
                 {
-                    mi = (b + e) >> 1;
+                    mi = (b + e) / 2;
                     const E &temp = *(begin + mi);
                     if (cmp(value, temp))
                     {
@@ -56,7 +56,7 @@ namespace CZ
                 // printf("using Binary Search version 1...\n");
                 while (b < e - 1)
                 {
-                    mi = (b + e) >> 1;
+                    mi = (b + e) / 2;
                     const E &temp = *(begin + mi);
                     cmp(value, temp) ? e = mi : b = mi;
                 }
@@ -71,7 +71,7 @@ namespace CZ
                 // printf("using Binary Search version 2...\n");
                 while (b < e)
                 {
-                    mi = (b + e) >> 1;
+                    mi = (b + e) / 2;
                     const E &temp = *(begin + mi);
                     cmp(value, temp) ? e = mi : b = mi + 1;
                 }

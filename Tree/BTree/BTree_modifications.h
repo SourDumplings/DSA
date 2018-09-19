@@ -27,7 +27,7 @@ namespace CZ
         }
         else
         {
-            Rank s = _order >> 1; // 轴点
+            Rank s = _order / 2; // 轴点
             //（此时应有_order == target->_keys.size() == target->_children.size() - 1）
             BTreeNode<T> *right = new BTreeNode<T>(); // 注意新结点right已经有一个空孩子
             right->_children.pop_back();

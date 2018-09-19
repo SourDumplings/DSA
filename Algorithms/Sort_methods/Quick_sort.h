@@ -24,7 +24,7 @@ namespace CZ
         Rank_quick_sort partition_1(It begin, Rank_quick_sort b, Rank_quick_sort e,
             const Cmp &cmp)
         {
-            Swap(*(begin + b), *(begin + ((e + b - 1) >> 1))); // 将中间元素与首元素互换
+            Swap(*(begin + b), *(begin + (e + b - 1) / 2)); // 将中间元素与首元素互换
             auto pivot = *(begin + b); // 将首元素（原中间元素）作为轴点元素
             while (b < e - 1)
             {
@@ -53,7 +53,7 @@ namespace CZ
         Rank_quick_sort partition_2(It begin, Rank_quick_sort b, Rank_quick_sort e,
             const Cmp &cmp)
         {
-            Swap(*(begin + b), *(begin + ((e + b - 1) >> 1))); // 将中间元素与首元素互换
+            Swap(*(begin + b), *(begin + (e + b - 1) / 2)); // 将中间元素与首元素互换
             auto pivot = *(begin + b); // 将首元素（原中间元素）作为轴点元素
             while (b < e - 1)
             {
