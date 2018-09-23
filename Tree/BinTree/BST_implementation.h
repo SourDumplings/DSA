@@ -178,7 +178,8 @@ namespace CZ
         {
             // 左右子树均不空
             actualRemoved = actualRemoved->next(); // 实际摘除结点为传入的目标的直接后继
-            Swap(actualRemoved->data(), target->data()); // 交换数据，让node的直接后继代替node
+            // 交换数据，让node的直接后继代替node
+            Swap(const_cast<T&>(actualRemoved->data()), const_cast<T&>(target->data()));
             succ = actualRemoved->right_child();
         }
 

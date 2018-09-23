@@ -7,7 +7,7 @@
 
 /*
 双向列表模板类，
-支持首尾增删改查O(1)
+支持首尾增删改查O(1)，采用循环双链表实现
 支持双向迭代器
  */
 
@@ -46,9 +46,7 @@ namespace CZ
         virtual ~List();
 
 		// 数据访问接口
-		Rank size();
 		Rank size() const;
-		bool empty();
 		bool empty() const;
         iterator begin();
         iterator begin() const;
@@ -58,10 +56,6 @@ namespace CZ
         const T& front() const;
         T& back();
         const T& back() const;
-        ListNode<T>& head();
-        const ListNode<T>& head() const;
-        ListNode<T>& tail();
-        const ListNode<T>& tail() const;
 
         // 打印列表信息
         void print_info(const char *name = "") const;
@@ -81,15 +75,17 @@ namespace CZ
         void clear();
         virtual void merge(const List<T> &l);
         virtual void merge(List<T> &&l);
-        // 排序函数模板
+        // 交换函数模板
         void swap(iterator pos1, iterator pos2);
-
+        // 列表元素的排序算法，version 0为冒泡排序，对元素值进行操作，适用于元素值体积小的情况
+        // version 1为插入排序，对链表结点进行操作，适用于元素体积较大的情况
         template <typename Cmp = std::less<const T&>>
-        void sort(const Cmp &cmp = std::less<const T&>());
-        // 有序列表去重
+        void sort(const Cmp &cmp = std::less<const T&>(), const unsigned version = 0);
+        // 有序列表去重，可根据列表是否已经排好序选择不同的算法
+        // 对于排好序的列表，算法时间复杂度为O(n)，否则为O(n^2)
         template <typename Cmp = std::equal_to<const T&>>
-        void unique(const Cmp &cmp = std::equal_to<const T&>());
-
+        void unique(bool sorted = false, const Cmp &cmp = std::equal_to<const T&>());
+        // 列表元素逆置
         virtual void reverse();
 
         // 操作符函数
@@ -104,8 +100,7 @@ namespace CZ
 
     private:
         Rank _size = 0;
-        ListNode<T> *_back = nullptr; // 尾结点
-        ListNode<T> *_head = nullptr, *_tail = nullptr; // 首尾哨兵结点
+        ListNode<T> *_head = nullptr; // 头哨兵结点
     };
 } // CZ
 

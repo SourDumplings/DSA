@@ -15,20 +15,23 @@
 
 namespace CZ
 {
+    template <typename T> class List;
+    template <typename T> class ListIterator;
+
     template <typename T>
     class ListNode
     {
+        friend class List<T>;
+        friend class ListIterator<T>;
     public:
         // 构造函数
         ListNode();
         ListNode(const T &data_, ListNode<T> *prev_ = nullptr, ListNode<T> *next_ = nullptr);
 
         // 数据访问接口
-        ListNode<T>*& next();
-        ListNode<T>*& prev();
         T& data();
-        ListNode<T>*& next() const;
-        ListNode<T>*& prev() const;
+        ListNode<T>* next() const;
+        ListNode<T>* prev() const;
         const T& data() const;
 
         // 动态操作接口

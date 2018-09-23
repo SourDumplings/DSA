@@ -22,17 +22,15 @@ namespace CZ
     template <typename T>
     void List<T>::clear()
     {
-        for (ListNode<T> *node = _head->next(); node != _tail;)
+        for (ListNode<T> *node = _head->_next; node != _head;)
         {
             ListNode<T> *temp = node;
-            node->next()->prev() = nullptr;
-            node = node->next();
+            node->_next->_prev = nullptr;
+            node = node->_next;
             delete temp;
         }
         _size = 0;
-        _head->next() = _tail;
-        _tail->prev() = _head;
-        _back = nullptr;
+        _head->_next = _head->_prev = _head;
         return;
     }
 
@@ -40,10 +38,9 @@ namespace CZ
     typename List<T>::iterator List<T>::insert(typename List<T>::iterator pos, const T &data)
     {
         ListNode<T> *newNode = pos.get()->insert_as_prev(data);
-        pos.get()->prev()->next() = newNode;
-        pos.get()->prev() = newNode;
+        pos.get()->_prev->_next = newNode;
+        pos.get()->_prev = newNode;
         ++_size;
-        _back = _tail->prev();
         return ListIterator<T>(newNode);
     }
 
@@ -52,10 +49,9 @@ namespace CZ
     {
         ListNode<T> *posGet = pos.get();
         ListNode<T> *newNode = posGet->insert_as_prev(std::move(data));
-        posGet->prev()->next() = newNode;
-        posGet->prev() = newNode;
+        posGet->_prev->_next = newNode;
+        posGet->_prev = newNode;
         ++_size;
-        _back = _tail->prev();
         return ListIterator<T>(newNode);
     }
 
@@ -64,16 +60,15 @@ namespace CZ
         typename List<T>::iterator b, typename List<T>::iterator e)
     {
         ListNode<T> *posGet = pos.get();
-        ListNode<T> *hNode = posGet->prev();
+        ListNode<T> *hNode = posGet->_prev;
         while (b != e)
         {
             ListNode<T> *newNode = posGet->insert_as_prev(*b++);
-            posGet->prev()->next() = newNode;
-            posGet->prev() = newNode;
+            posGet->_prev->_next = newNode;
+            posGet->_prev = newNode;
             ++_size;
         }
-        _back = _tail->prev();
-        return ListIterator<T>(hNode->next());
+        return ListIterator<T>(hNode->_next);
     }
 
     template <typename T>
@@ -82,23 +77,20 @@ namespace CZ
         try
         {
             ListNode<T> *posGet = pos.get();
-            if (!posGet->prev() || !posGet->next())
+            if (posGet == _head)
             {
-                throw "head or tail can not be erased!";
+                throw "head can not be erased!";
             }
-            posGet->next()->prev() = posGet->prev();
-            posGet->prev()->next() = posGet->next();
-            posGet = posGet->next();
+            posGet->_next->_prev = posGet->_prev;
+            posGet->_prev->_next = posGet->_next;
+            posGet = posGet->_next;
             delete pos.get();
             --_size;
-            if (!empty())
-                _back = _tail->prev();
-            else _back = nullptr;
             return ListIterator<T>(posGet);
         }
         catch (const char *errMsg)
         {
-            printf("Error: %s\n", errMsg);
+            printf("Error from List erase: %s\n", errMsg);
             throw std::exception();
         }
         return pos;
@@ -113,24 +105,21 @@ namespace CZ
             while (b != e)
             {
                 ListNode<T> *posGet = b++.get();
-                if (!posGet->prev() || !posGet->next())
+                if (posGet == _head)
                 {
-                    throw "head or tail can not be erased!";
+                    throw "head can not be erased!";
                 }
-                posGet->next()->prev() = posGet->prev();
-                posGet->prev()->next() = posGet->next();
+                posGet->_next->_prev = posGet->_prev;
+                posGet->_prev->_next = posGet->_next;
                 delete posGet;
                 --_size;
             }
         }
         catch (const char *errMsg)
         {
-            printf("Error: %s\n", errMsg);
+            printf("Error from List erase: %s\n", errMsg);
             throw std::exception();
         }
-        if (!empty())
-            _back = _tail->prev();
-        else _back = nullptr;
         return e;
     }
 
@@ -151,114 +140,28 @@ namespace CZ
     template <typename T>
     inline void List<T>::push_front(const T &data)
     {
-        insert(_head->next(), data);
+        insert(_head->_next, data);
         return;
     }
 
     template <typename T>
     inline void List<T>::push_front(T &&data)
     {
-        insert(_head->next(), std::move(data));
+        insert(_head->_next, std::move(data));
         return;
     }
 
     template <typename T>
     inline void List<T>::pop_front()
     {
-        erase(_head->next());
+        erase(_head->_next);
         return;
     }
 
     template <typename T>
     inline void List<T>::pop_back()
     {
-        erase(_back);
-        return;
-    }
-
-    template <typename T>
-    inline void List<T>::merge(const List<T> &l)
-    {
-        insert(end(), l.begin(), l.end());
-        return;
-    }
-
-    template <typename T>
-    void List<T>::merge(List<T> &&l)
-    {
-        _back->next() = l._head->next();
-        _tail->prev() = l._back;
-        _back = l._back;
-        _tail = l._tail;
-        _size += l._size;
-
-        l.init();
-        l._back = nullptr;
-        l._size = 0;
-        return;
-    }
-
-    template <typename T>
-    inline void List<T>::swap(iterator pos1, iterator pos2)
-    {
-        Swap(*pos1, *pos2);
-        return;
-    }
-
-    template <typename T>
-    template <typename Cmp>
-    void List<T>::sort(const Cmp &cmp)
-    {
-        bool isSorted = false;
-        unsigned unSortedNum = _size, checkedNum;
-        while (!isSorted)
-        {
-            isSorted = true;
-            checkedNum = 0;
-            for (iterator it = begin(); checkedNum != unSortedNum - 1 && it != end(); ++checkedNum)
-            {
-                T &thisData = *it;
-                T &nextData = *++it;
-                if (cmp(nextData, thisData))
-                {
-                    Swap(thisData, nextData);
-                    isSorted = false;
-                }
-            }
-            --unSortedNum;
-        }
-        return;
-    }
-
-    template <typename T>
-    template <typename Cmp>
-    void List<T>::unique(const Cmp &cmp)
-    {
-        for (iterator firstRepeat = begin(); firstRepeat != end();)
-        {
-            iterator lastRepeat = firstRepeat;
-            for (; cmp(*lastRepeat, *firstRepeat) && lastRepeat != end(); ++lastRepeat);
-            firstRepeat = erase(++iterator(firstRepeat), lastRepeat);
-        }
-        return;
-    }
-
-    template <typename T>
-    void List<T>::reverse()
-    {
-        ListNode<T> *e = _tail;
-        _back = _head->next();
-        for (unsigned count = 0; count != _size; ++count)
-        {
-            ListNode<T> *temp = _head->next();
-            _head->next() = temp->next();
-            temp->next()->prev() = _head;
-
-            e->prev()->next() = temp;
-            e->insert_as_prev(temp);
-            e->prev() = temp;
-            e = temp;
-        }
+        erase(_head->_prev);
         return;
     }
 

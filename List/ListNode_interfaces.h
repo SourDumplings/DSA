@@ -18,14 +18,10 @@
 namespace CZ
 {
     template <typename T>
-    inline ListNode<T>*& ListNode<T>::next() { return _next; }
-    template <typename T>
-    inline ListNode<T>*& ListNode<T>::next() const { return _next; }
+    inline ListNode<T>* ListNode<T>::next() const { return _next; }
 
     template <typename T>
-    inline ListNode<T>*& ListNode<T>::prev() { return _prev; }
-    template <typename T>
-    inline ListNode<T>*& ListNode<T>::prev() const { return _prev; }
+    inline ListNode<T>* ListNode<T>::prev() const { return _prev; }
 
     template <typename T>
     inline T& ListNode<T>::data() { return _data; }

@@ -45,8 +45,10 @@ int main(int argc, char const *argv[])
     // printf("ls2 <= ls3 ? %d\n", ls2 <= ls3);
 
     // ls1.print_info("ls1");
+    // printf("ls1.front() = %s, ls1.back() = %s\n", ls1.front().c_str(), ls2.back().c_str());
     // ls1 = ls2;
     // ls1.print_info("ls1");
+    // printf("ls1.front() = %s, ls1.back() = %s\n", ls1.front().c_str(), ls2.back().c_str());
 
     // ls4.print_info("ls4");
     // ls1 = std::move(ls4);
@@ -86,14 +88,16 @@ int main(int argc, char const *argv[])
     ls2.push_front("vc"); ls2.push_front("dsjd"); ls2.push_front("assa");
     ls2.print_info("ls2");
 
+    // 测试列表算法
     ls3.print_info("ls3");
     ls3.merge(ls2);
     ls3.print_info("ls3");
     ls3.sort();
     ls3.print_info("ls3");
-    ls3.sort([] (const string &s1, const string &s2) { return s1.length() > s2.length(); });
+    // ls3.sort([] (const string &s1, const string &s2) { return s1.length() > s2.length(); });
+    ls3.sort([] (const string &s1, const string &s2) { return s1.length() > s2.length(); }, 1);
     ls3.print_info("ls3");
-    ls3.unique([] (const string &s1, const string &s2) { return s1.length() == s2.length(); });
+    ls3.unique(true, [] (const string &s1, const string &s2) { return s1.length() == s2.length(); });
     ls3.print_info("ls3");
     ls3.reverse();
     ls3.print_info("ls3");
@@ -104,6 +108,15 @@ int main(int argc, char const *argv[])
     ls4.merge(std::move(ls3));
     ls4.print_info("ls4");
     ls3.print_info("ls3");
+
+    List<string> ls5({"ashdj", "das", "asdsada", "das", "absxx", "wis", "ahd", "absxx", "das"}),
+        ls6(ls5);
+    ls5.print_info("ls5");
+    ls5.unique();
+    ls5.print_info("ls5");
+    ls6.print_info("ls6");
+    ls6.unique(false, [] (const string &s1, const string &s2) { return s1.length() == s2.length(); });
+    ls6.print_info("ls6");
     return 0;
 }
 

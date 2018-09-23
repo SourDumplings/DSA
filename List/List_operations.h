@@ -36,14 +36,8 @@ namespace CZ
     {
         if (l != *this)
         {
-            _head = l._head;
-            _tail = l._tail;
-            _back = l._back;
-            _size = l._size;
-
-            l.init();
-            l._back = nullptr;
-            l._size = 0;
+            clear();
+            merge(std::move(l));
         }
         return *this;
     }

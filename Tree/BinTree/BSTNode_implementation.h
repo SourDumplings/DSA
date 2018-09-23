@@ -65,6 +65,9 @@ namespace CZ
     { return reinterpret_cast<BSTNode<T>*>(BinTreeNode<T>::father()); }
 
     template <typename T>
+    inline const T& BSTNode<T>::data() const { return BinTreeNode<T>::data(); }
+
+    template <typename T>
     inline void BSTNode<T>::insert_as_left_child(BSTNode<T> *node)
     { return BinTreeNode<T>::insert_as_left_child(node); }
     template <typename T>
@@ -84,7 +87,7 @@ namespace CZ
         }
         try
         {
-            if (node->data() < TreeNode<T>::data() || node->data() == TreeNode<T>::data())
+            if (node->data() < data() || node->data() == data())
             {
                 if (left_child())
                 {
@@ -95,7 +98,7 @@ namespace CZ
                     insert_as_left_child(node);
                 }
             }
-            else if (TreeNode<T>::data() < node->data())
+            else if (data() < node->data())
             {
                 if (right_child())
                 {

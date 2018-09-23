@@ -21,30 +21,25 @@ namespace CZ
     template <typename T>
     inline typename List<T>::iterator List<T>::begin()
     {
-        return ListIterator<T>(_head->next());
+        return ListIterator<T>(_head->_next);
     }
     template <typename T>
     inline typename List<T>::iterator List<T>::begin() const
     {
-        return ListIterator<T>(_head->next());
+        return ListIterator<T>(_head->_next);
     }
 
     template <typename T>
     inline typename List<T>::iterator List<T>::end()
     {
-        return ListIterator<T>(_tail);
+        return ListIterator<T>(_head);
     }
     template <typename T>
     inline typename List<T>::iterator List<T>::end() const
     {
-        return ListIterator<T>(_tail);
+        return ListIterator<T>(_head);
     }
 
-    template <typename T>
-    inline typename List<T>::Rank List<T>::size()
-    {
-        return _size;
-    }
     template <typename T>
     inline typename List<T>::Rank List<T>::size() const
     {
@@ -52,38 +47,9 @@ namespace CZ
     }
 
     template <typename T>
-    inline bool List<T>::empty()
-    {
-        return _size == 0;
-    }
-    template <typename T>
     inline bool List<T>::empty() const
     {
-        return _size == 0;
-    }
-
-    template <typename T>
-    inline ListNode<T>& List<T>::head()
-    {
-        return *_head;
-    }
-
-    template <typename T>
-    inline const ListNode<T>& List<T>::head() const
-    {
-        return *_head;
-    }
-
-    template <typename T>
-    inline ListNode<T>& List<T>::tail()
-    {
-        return *_tail;
-    }
-
-    template <typename T>
-    inline const ListNode<T>& List<T>::tail() const
-    {
-        return *_tail;
+        return _head->_next == _head;
     }
 
     template <typename T>
@@ -93,17 +59,17 @@ namespace CZ
         {
             if (!empty())
             {
-                return _head->next()->data();
+                return _head->_next->_data;
             }
             else
                 throw "empty list";
         }
         catch (const char *errMsg)
         {
-            printf("%s\n", errMsg);
+            printf("Error from List front: %s\n", errMsg);
             throw std::exception();
         }
-        return _head->data();
+        return _head->_data;
     }
 
     template <typename T>
@@ -113,29 +79,57 @@ namespace CZ
         {
             if (!empty())
             {
-                return _head->next()->data();
+                return _head->_next->_data;
             }
             else
                 throw "empty list";
         }
         catch (const char *errMsg)
         {
-            printf("%s\n", errMsg);
+            printf("Error from List front: %s\n", errMsg);
             throw std::exception();
         }
-        return _head->data();
+        return _head->_data;
     }
 
     template <typename T>
     inline T& List<T>::back()
     {
-        return _back->data();
+        try
+        {
+            if (!empty())
+            {
+                return _head->_prev->_data;
+            }
+            else
+                throw "empty list";
+        }
+        catch (const char *errMsg)
+        {
+            printf("Error from List back: %s\n", errMsg);
+            throw std::exception();
+        }
+        return _head->_data;
     }
 
     template <typename T>
     inline const T& List<T>::back() const
     {
-        return _back->data();
+        try
+        {
+            if (!empty())
+            {
+                return _head->_prev->_data;
+            }
+            else
+                throw "empty list";
+        }
+        catch (const char *errMsg)
+        {
+            printf("Error from List back: %s\n", errMsg);
+            throw std::exception();
+        }
+        return _head->_data;
     }
 
     template <typename T>

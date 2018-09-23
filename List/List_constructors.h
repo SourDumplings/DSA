@@ -24,9 +24,9 @@ namespace CZ
         for (unsigned i = 0; i != n; ++i)
         {
             last = last->insert_as_next(data);
-            last->prev()->next() = last;
+            last->_prev->_next = last;
+            last->_next->_prev = last;
         }
-        _tail->prev() = _back = last;
         return;
     }
 
@@ -45,9 +45,9 @@ namespace CZ
         for (unsigned i = 0; i != n; ++i)
         {
             last = last->insert_as_next(*begin++);
-            last->prev()->next() = last;
+            last->_prev->_next = last;
+            last->_next->_prev = last;
         }
-        _tail->prev() = _back = last;
         return;
     }
 

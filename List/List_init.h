@@ -20,9 +20,8 @@ namespace CZ
     void List<T>::init()
     {
         _head = new ListNode<T>();
-        _tail = new ListNode<T>();
-        _head->next() = _tail;
-        _tail->prev() = _head;
+        _head->_next = _head;
+        _head->_prev = _head;
         return;
     }
 } // CZ

@@ -21,7 +21,6 @@ namespace CZ
     {
         clear();
         delete _head;
-        delete _tail;
         return;
     }
 

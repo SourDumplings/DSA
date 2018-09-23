@@ -24,10 +24,10 @@ namespace CZ
         for (T *it = const_cast<T*>(begin); it != end; ++it)
         {
             last = last->insert_as_next(*it);
-            last->prev()->next() = last;
+            last->_prev->_next = last;
+            last->_next->_prev = last;
             ++_size;
         }
-        _tail->prev() = _back = last;
         return;
     }
 
@@ -39,10 +39,10 @@ namespace CZ
         while (begin != end)
         {
             last = last->insert_as_next(*begin++);
-            last->prev()->next() = last;
+            last->_prev->_next = last;
+            last->_next->_prev = last;
             ++_size;
         }
-        _tail->prev() = _back = last;
         return;
     }
 } // CZ

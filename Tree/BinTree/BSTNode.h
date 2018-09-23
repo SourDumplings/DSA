@@ -40,6 +40,9 @@ namespace CZ
         BSTNode*& father();
         BSTNode* father() const;
 
+        // 对于BST结点，结点数据不允许修改
+        const T& data() const;
+
         // 二叉搜索树结点对于插入和删除孩子结点的操作
         // 只能插入和删除这个结点的某个孩子，不满足搜索树条件则抛出异常
         void insert_child(BSTNode *node);

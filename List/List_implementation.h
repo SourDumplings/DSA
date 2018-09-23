@@ -27,4 +27,6 @@ List类模板的实现所需的头文件
 
 #include "List_print_info.h"
 
+#include "List_algorithms.h"
+
 #endif // LIST_IMPLEMENTATION_H
