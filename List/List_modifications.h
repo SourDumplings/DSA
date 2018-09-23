@@ -165,6 +165,20 @@ namespace CZ
         return;
     }
 
+    template <typename T>
+    void List<T>::remove(const T &value)
+    {
+        for (auto it = begin(); it != end();)
+        {
+            if (*it == value)
+            {
+                it = erase(it);
+            }
+            else
+                ++it;
+        }
+        return;
+    }
 } // CZ
 
 #endif // LIST_MODIFICATIONS_H

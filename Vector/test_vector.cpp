@@ -127,48 +127,64 @@ int main(int argc, char const *argv[])
 
 
     // 测试动态操作
-    Vector<char> vc1({'a', 'b', 'c'});
-    Vector<string> vs1({"abc", "hello"}), vs2({"world", "add"});
-    Vector<int> v1({1, 2, 3});
+    // Vector<char> vc1({'a', 'b', 'c'});
+    // Vector<string> vs1({"abc", "hello"}), vs2({"world", "add"});
+    // Vector<int> v1({1, 2, 3});
 
-    vc1.print_info("vc1");
-    vc1.push_back('d');
-    vc1.print_info("vc1");
+    // vc1.print_info("vc1");
+    // vc1.push_back('d');
+    // vc1.print_info("vc1");
 
-    v1.print_info("v1");
-    for (unsigned i = 0; i < 10; ++i)
-    {
-        v1.push_back(i + 4);
-    }
-    v1.print_info("v1");
-    for (unsigned i = 0; i < 11; ++i)
-    {
-        v1.pop_back();
-    }
-    v1.print_info("v1");
+    // v1.print_info("v1");
+    // for (unsigned i = 0; i < 10; ++i)
+    // {
+    //     v1.push_back(i + 4);
+    // }
+    // v1.print_info("v1");
+    // for (unsigned i = 0; i < 11; ++i)
+    // {
+    //     v1.pop_back();
+    // }
+    // v1.print_info("v1");
 
-    v1.insert(v1.begin(), 0);
-    v1.print_info("v1");
-    v1.insert(v1.insert(v1.begin() + 1, 100), 200);
-    v1.print_info("v1");
+    // v1.insert(v1.begin(), 0);
+    // v1.print_info("v1");
+    // v1.insert(v1.insert(v1.begin() + 1, 100), 200);
+    // v1.print_info("v1");
 
-    vc1.clear();
-    vc1.print_info("vc1");
+    // vc1.clear();
+    // vc1.print_info("vc1");
 
-    vs1.print_info("vs1");
-    vs1.insert(vs1.end(), vs2.begin(), vs2.end());
-    vs1.print_info("vs1");
-    vs1.erase(vs1.begin() + 1);
-    vs1.print_info("vs1");
-    vs1.push_back("cz");
-    vs1.push_back("ztt");
-    vs1.print_info("vs1");
-    vs1.erase(vs1.begin()+1, vs1.end()-1);
-    vs1.print_info("vs1");
-    // vs1.erase(vs2.begin());
     // vs1.print_info("vs1");
-    // vs1.erase(vs2.begin(), vs2.end());
+    // vs1.insert(vs1.end(), vs2.begin(), vs2.end());
     // vs1.print_info("vs1");
+    // vs1.erase(vs1.begin() + 1);
+    // vs1.print_info("vs1");
+    // vs1.push_back("cz");
+    // vs1.push_back("ztt");
+    // vs1.print_info("vs1");
+    // vs1.erase(vs1.begin()+1, vs1.end()-1);
+    // vs1.print_info("vs1");
+    // // vs1.erase(vs2.begin());
+    // // vs1.print_info("vs1");
+    // // vs1.erase(vs2.begin(), vs2.end());
+    // // vs1.print_info("vs1");
+
+    // 测试按值删除和assign
+    Vector<string> vs1({"jd", "adsads", "jd", "jd", "dasda", "jd", "ee"}), vs2(vs1);
+    vs1.print_info("vs1");
+    vs1.remove("jd");
+    vs1.print_info("vs1");
+    vs1.remove("ddd");
+    // vs1.remove("adsads");
+    // vs1.remove("ee");
+    vs1.print_info("vs1");
+
+    vs2.print_info("vs2");
+    vs2.assign(vs1.begin(), vs1.end());
+    vs2.print_info("vs2");
+    vs2.assign(vs2.begin(), vs2.end() - 2);
+    vs2.print_info("vs2");
     return 0;
 }
 

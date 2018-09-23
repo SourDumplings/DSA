@@ -72,6 +72,7 @@ namespace CZ
         iterator insert(iterator pos, iterator b, iterator e);
         iterator erase(iterator pos);
         iterator erase(iterator b, iterator e);
+        void remove(const T &value); // 删除所有value值
         void clear();
         virtual void merge(const List<T> &l);
         virtual void merge(List<T> &&l);

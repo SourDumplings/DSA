@@ -76,6 +76,10 @@ namespace CZ
         iterator erase(iterator itPos);
         iterator erase(iterator itBegin, iterator itEnd);
         void resize(Rank n);
+        // 区间赋值
+        void assign(const iterator &begin, const iterator &end);
+        // 删除所有值为value的元素
+        void remove(const T &value);
 
         // 操作符函数
         T& operator[](Rank i);

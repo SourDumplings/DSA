@@ -233,6 +233,38 @@ namespace CZ
         }
         return;
     }
+
+    template <typename T>
+    void Vector<T>::assign(const typename Vector<T>::iterator &begin,
+        const typename Vector<T>::iterator &end)
+    {
+        _size = end - begin;
+        expand();
+        for (Rank i= 0; i != _size; ++i)
+        {
+            _elem[i] = *(begin + i);
+        }
+        shrink();
+        return;
+    }
+
+    template <typename T>
+    void Vector<T>::remove(const T &value)
+    {
+        Rank k = 0;
+        for (Rank i = 0; i != _size; ++i)
+        {
+            if (_elem[i] != value)
+            {
+                _elem[i - k] = _elem[i];
+            }
+            else
+                ++k;
+        }
+        _size -= k;
+        shrink();
+        return;
+    }
 }
 
 #endif // VECTOR_MODIFICATIONS_H

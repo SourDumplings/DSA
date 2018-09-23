@@ -126,6 +126,11 @@ int main(int argc, char const *argv[])
     ls6.splice(it3, ls4);
     ls6.print_info("ls6");
     ls4.print_info("ls4");
+
+    ls6.remove("das");
+    ls6.print_info("ls6");
+    ls6.remove("ss");
+    ls6.print_info("ls6");
     return 0;
 }
 
