@@ -117,6 +117,15 @@ int main(int argc, char const *argv[])
     ls6.print_info("ls6");
     ls6.unique(false, [] (const string &s1, const string &s2) { return s1.length() == s2.length(); });
     ls6.print_info("ls6");
+    auto it2 = ls6.begin();
+    ++it2;
+    auto it3 = ls6.splice(it2, ls5);
+    ls6.print_info("ls6");
+    ls5.print_info("ls5");
+    ++it3; ++it3;
+    ls6.splice(it3, ls4);
+    ls6.print_info("ls6");
+    ls4.print_info("ls4");
     return 0;
 }
 

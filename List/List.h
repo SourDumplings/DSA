@@ -87,6 +87,9 @@ namespace CZ
         void unique(bool sorted = false, const Cmp &cmp = std::equal_to<const T&>());
         // 列表元素逆置
         virtual void reverse();
+        // 剪切函数，可以把另一个列表剪切到前一个列表的指定位置的前面，即为时间复杂度为O(1)的插入操作
+        // 返回插入元素后插入的元素中最前面的结点的迭代器
+        iterator splice(iterator pos, List<T> &l);
 
         // 操作符函数
         virtual List& operator=(const List &l);

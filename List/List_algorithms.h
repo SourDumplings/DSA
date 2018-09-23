@@ -161,6 +161,25 @@ namespace CZ
         }
         return;
     }
+
+    template <typename T>
+    typename List<T>::iterator List<T>::splice(iterator pos, List<T> &l)
+    {
+        if (l.empty())
+        {
+            return pos;
+        }
+        _size += l._size;
+        l._size = 0;
+        ListNode<T> *first = l._head->_next, *last = l._head->_prev;
+        l._head->_next = l._head->_prev = l._head;
+
+        first->_prev = pos.get()->_prev;
+        first->_prev->_next = first;
+        last->_next = pos.get();
+        pos.get()->_prev = last;
+        return ListIterator<T>(first);
+    }
 } // CZ
 
 #endif // LIST_ALGORITHMS_H
