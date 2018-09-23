@@ -64,7 +64,7 @@ namespace CZ
         }
         else
         {
-            p->data() = value;
+            const_cast<T&>(p->data()) = value;
         }
         return;
     }
@@ -147,6 +147,25 @@ namespace CZ
         }
         printf("\n\n");
         return;
+    }
+
+    template <typename T>
+    Set<T> Set<T>::intersection(const Set<T> &s1, const Set<T> &s2)
+    {
+        Set<T> ret;
+        auto it = s1.begin();
+        while (true)
+        {
+            if (s2.has_this_element(*it))
+            {
+                ret.insert(*it);
+            }
+            if (++it == s1.last())
+            {
+                break;
+            }
+        }
+        return ret;
     }
 } // CZ
 

@@ -59,6 +59,8 @@ namespace CZ
         bool remove(const T &value, bool nonexcept = true);
 
         void print_info(const char *name = "") const;
+
+        static Set<T> intersection(const Set<T> &s1, const Set<T> &s2);
     private:
         RedBlackTree<T> _T;
 

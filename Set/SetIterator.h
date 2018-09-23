@@ -37,8 +37,6 @@ namespace CZ
         SetIterator(RedBlackTreeNode<T> *node_ = nullptr): _it(node_) {}
 
         // 操作符
-        T& operator*()
-        { return _it->data(); }
         const T& operator*() const
         { return _it->data(); }
         BiIterator<RedBlackTreeNode<T>> operator->()

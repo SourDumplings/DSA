@@ -38,6 +38,7 @@ int main(int argc, char const *argv[])
 
     (s1+s2).print_info("s1+s2");
     (s1-s2).print_info("s1-s2");
+    (Set<int>::intersection(s1, s2)).print_info("intersection(s1, s2)");
 
     if (s1.has_this_element(11))
     {
