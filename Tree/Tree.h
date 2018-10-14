@@ -46,7 +46,8 @@ namespace CZ
         Rank height() const; // 树的高度，单结点为1，空树高度为0
         // 判断一个结点在不在这棵树中
         bool has_this_node(const TreeNode<T> *node) const;
-
+        Rank depth(const TreeNode<T> *node) const; // 得到某个结点在树中的深度，根结点为1
+        TreeNode<T>* LCA(TreeNode<T>* a, TreeNode<T> *b) const; // 最低公共祖先
 
         // 将结点node作为father结点的小儿子插入
         void insert(TreeNode<T> *father, TreeNode<T> *node);

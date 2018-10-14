@@ -50,9 +50,6 @@ namespace CZ
         const Rank& height() const;
         Rank& height();
 
-        // 该结点在树中的深度，根结点为0
-        virtual Rank depth() const;
-
         void insert_child(TreeNode<T> *node);
 
         static bool equivalent(const TreeNode<T> &lhs, const TreeNode<T> &rhs);

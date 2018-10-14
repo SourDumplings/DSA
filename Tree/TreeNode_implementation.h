@@ -112,19 +112,6 @@ namespace CZ
     { return _children; }
 
     template <typename T>
-    typename TreeNode<T>::Rank TreeNode<T>::depth() const
-    {
-        typename TreeNode<T>::Rank ret = 0;
-        TreeNode<T>* p = _father;
-        while (p)
-        {
-            ++ret;
-            p = p->_father;
-        }
-        return ret;
-    }
-
-    template <typename T>
     void TreeNode<T>::update_height_above(const unsigned version)
     {
         TreeNode<T> *f = _father;

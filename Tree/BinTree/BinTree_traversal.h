@@ -181,8 +181,8 @@ namespace CZ
         }
 
         // 后序遍历的访问顺序为先是左侧最高可见叶结点（LHVFL）
-        // 再深入其右兄（可能不存在）后序遍历
-        // 最后是其父亲结点，于是一路尽量向左地向下走，一路将父结点和右兄压栈，直到走到叶结点
+        // 再深入其右兄弟（可能不存在）后序遍历
+        // 最后是其父亲结点，于是一路尽量向左地向下走，一路将父结点和右兄弟压栈，直到走到叶结点
         template <typename T, typename F>
         void post_order_traversal_nonrecursion1(BinTreeNode<T> *root, const F &visit)
         {
@@ -192,8 +192,8 @@ namespace CZ
             {
                 if (S.top() != root->father())
                 {
-                    // 如果栈顶结点不是当前结点的父结点，则必为右兄结点，
-                    // 则需要深入右兄找到最侧最高可见叶结点(LHVFL)
+                    // 如果栈顶结点不是当前结点的父结点，则必为右兄弟结点，
+                    // 则需要深入右兄弟找到左侧最高可见叶结点(LHVFL)
                     BinTreeNode<T> *temp = nullptr;
                     while (static_cast<bool>(temp = S.top()))
                     {
@@ -213,6 +213,45 @@ namespace CZ
                 }
                 root = S.top(); S.pop();
                 visit(root->data());
+            }
+            return;
+        }
+
+        // 这种做法来自于王道
+        template <typename T, typename F>
+        void post_order_traversal_nonrecursion2(BinTreeNode<T> *root, const F &visit)
+        {
+            Stack<BinTreeNode<T>*> S;
+            BinTreeNode<T> *p = root, *lastVisited = nullptr;
+            while (p || !S.empty())
+            {
+                if (p)
+                {
+                    // p不为空，则向左走到底，顺路压栈
+                    S.push(p);
+                    p = p->left_child();
+                }
+                else
+                {
+                    // p为空时，针对于栈顶元素，即目前的最左侧元素讨论
+                    p = S.top();
+                    if (p->right_child() && p->right_child() != lastVisited)
+                    {
+                        // 如果最左侧元素有右孩子并且右孩子不是刚刚访问过的那个，则将右孩子压栈
+                        // 并转入其左侧
+                        p = p->right_child();
+                        S.push(p);
+                        p = p->left_child();
+                    }
+                    else
+                    {
+                        // 否则，访问之，p置空，弹栈
+                        visit(p->data());
+                        lastVisited = p;
+                        p = nullptr;
+                        S.pop();
+                    }
+                }
             }
             return;
         }
@@ -302,10 +341,14 @@ namespace CZ
                 break;
             }
             case NONRECURSION_TRAVERSAL1:
+            {
+                BinTreeTraversal::post_order_traversal_nonrecursion1(root, visit);
+                break;
+            }
             case NONRECURSION_TRAVERSAL2:
             case NONRECURSION_TRAVERSAL3:
             {
-                BinTreeTraversal::post_order_traversal_nonrecursion1(root, visit);
+                BinTreeTraversal::post_order_traversal_nonrecursion2(root, visit);
                 break;
             }
         }

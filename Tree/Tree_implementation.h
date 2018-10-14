@@ -141,6 +141,63 @@ namespace CZ
     { return _root == node->get_root(); }
 
     template <typename T>
+    typename Tree<T>::Rank Tree<T>::depth(const TreeNode<T> *node) const
+    {
+        if (!node->_father)
+        {
+            if (node == _root)
+            {
+                return 1;
+            }
+            else
+            {
+                printf("Error from Tree depth: this node is not in this tree\n");
+                throw std::exception();
+            }
+        }
+        return depth(node->_father) + 1;
+    }
+
+    template <typename T>
+    TreeNode<T>* Tree<T>::LCA(TreeNode<T> *a, TreeNode<T> *b) const
+    {
+        Rank dA, dB;
+        try
+        {
+            dA = depth(a);
+            dB = depth(b);
+        }
+        catch (std::exception())
+        {
+            printf("Error from Tree lca: these two nodes must in this tree both\n");
+            throw std::exception();
+        }
+
+        Rank dH = dA, dL = dB;
+        TreeNode<T> *h = a, *l = b;
+        if (dB < dA)
+        {
+            dH = dB;
+            dL = dA;
+            h = b;
+            l = a;
+        }
+        // 先上到同一层
+        while (dL != dH && l->_father != h)
+        {
+            --dL;
+            l = l->_father;
+        }
+        // 然后一起上升，啥时候父亲相等了就是lca了
+        while (l->_father != h && l->_father != h->_father)
+        {
+            l = l->_father;
+            h = h->_father;
+        }
+        return l->_father;
+    }
+
+    template <typename T>
     void Tree<T>::insert(TreeNode<T> *father, TreeNode<T> *node)
     {
         try
