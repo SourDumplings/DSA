@@ -67,70 +67,75 @@ int main(int argc, char const *argv[])
     // ls2.back() += "cc";
     // printf("ls2.back() = %s\n", ls2.back().c_str());
     // printf("ls3.size() = %d\n", ls3.size());
+    printf("ls3.at(-1) = %s\n", ls3.at(-1).c_str());
+    printf("ls1.at(2) = %s\n", ls1.at(2).c_str());
+    printf("ls1.at(-2) = %s\n", ls1.at(-2).c_str());
 
 
     // // 测试动态操作
-    ls1.print_info("ls1");
-    ls1.push_back("ddd");
-    ls1.print_info("ls1");
-    ls1.insert(ls1.insert(ls1.insert(ls1.end(), "kjskd"), ls2.begin(), ls2.end()), "123");
-    ls1.print_info("ls1");
-    auto it = ls1.begin();
-    ++it; ++it; ++it;
-    it = ls1.erase(it);
-    ls1.print_info("ls1");
-    ls1.swap(it, ls1.begin());
-    ls1.print_info("ls1");
-    ls1.erase(ls1.begin(), it);
-    ls1.print_info("ls1");
+    // ls1.print_info("ls1");
+    // ls1.push_back("ddd");
+    // ls1.print_info("ls1");
+    // ls1.insert(ls1.insert(ls1.insert(ls1.end(), "kjskd"), ls2.begin(), ls2.end()), "123");
+    // ls1.print_info("ls1");
+    // auto it = ls1.begin();
+    // ++it; ++it; ++it;
+    // it = ls1.erase(it);
+    // ls1.print_info("ls1");
+    // ls1.swap(it, ls1.begin());
+    // ls1.print_info("ls1");
+    // ls1.erase(ls1.begin(), it);
+    // ls1.print_info("ls1");
 
-    ls2.print_info("ls2");
-    ls2.push_front("vc"); ls2.push_front("dsjd"); ls2.push_front("assa");
-    ls2.print_info("ls2");
+    // ls2.print_info("ls2");
+    // ls2.push_front("vc"); ls2.push_front("dsjd"); ls2.push_front("assa");
+    // ls2.print_info("ls2");
 
-    // 测试列表算法
-    ls3.print_info("ls3");
-    ls3.merge(ls2);
-    ls3.print_info("ls3");
-    ls3.sort();
-    ls3.print_info("ls3");
-    // ls3.sort([] (const string &s1, const string &s2) { return s1.length() > s2.length(); });
-    ls3.sort([] (const string &s1, const string &s2) { return s1.length() > s2.length(); }, 1);
-    ls3.print_info("ls3");
-    ls3.unique(true, [] (const string &s1, const string &s2) { return s1.length() == s2.length(); });
-    ls3.print_info("ls3");
-    ls3.reverse();
-    ls3.print_info("ls3");
+    // // 测试列表算法
+    // ls3.print_info("ls3");
+    // ls3.merge(ls2);
+    // ls3.print_info("ls3");
+    // ls3.sort();
+    // ls3.print_info("ls3");
+    // // ls3.sort([] (const string &s1, const string &s2) { return s1.length() > s2.length(); });
+    // ls3.sort([] (const string &s1, const string &s2) { return s1.length() > s2.length(); }, 1);
+    // ls3.print_info("ls3");
+    // ls3.unique(true, [] (const string &s1, const string &s2) { return s1.length() == s2.length(); });
+    // ls3.print_info("ls3");
+    // ls3.reverse();
+    // ls3.print_info("ls3");
 
-    ls4.print_info("ls4");
-    ls4.pop_front();
-    ls4.print_info("ls4");
-    ls4.merge(std::move(ls3));
-    ls4.print_info("ls4");
-    ls3.print_info("ls3");
+    // ls4.print_info("ls4");
+    // ls4.pop_front();
+    // ls4.print_info("ls4");
+    // ls4.merge(std::move(ls3));
+    // ls4.print_info("ls4");
+    // ls3.print_info("ls3");
 
-    List<string> ls5({"ashdj", "das", "asdsada", "das", "absxx", "wis", "ahd", "absxx", "das"}),
-        ls6(ls5);
-    ls5.print_info("ls5");
-    ls5.unique();
-    ls5.print_info("ls5");
-    ls6.print_info("ls6");
-    ls6.unique(false, [] (const string &s1, const string &s2) { return s1.length() == s2.length(); });
-    ls6.print_info("ls6");
-    auto it2 = ls6.begin();
-    ++it2;
-    auto it3 = ls6.splice(it2, ls5);
-    ls6.print_info("ls6");
-    ls5.print_info("ls5");
-    ++it3; ++it3;
-    ls6.splice(it3, ls4);
-    ls6.print_info("ls6");
-    ls4.print_info("ls4");
+    // List<string> ls5({"ashdj", "das", "asdsada", "das", "absxx", "wis", "ahd", "absxx", "das"}),
+    //     ls6(ls5);
+    // ls5.print_info("ls5");
+    // ls5.unique();
+    // ls5.print_info("ls5");
+    // ls6.print_info("ls6");
+    // ls6.unique(false, [] (const string &s1, const string &s2) { return s1.length() == s2.length(); });
+    // ls6.print_info("ls6");
+    // auto it2 = ls6.begin();
+    // ++it2;
+    // auto it3 = ls6.splice(it2, ls5);
+    // ls6.print_info("ls6");
+    // ls5.print_info("ls5");
+    // ++it3; ++it3;
+    // ls6.splice(it3, ls4);
+    // ls6.print_info("ls6");
+    // ls4.print_info("ls4");
 
-    ls6.remove("das");
-    ls6.print_info("ls6");
-    ls6.remove("ss");
-    ls6.print_info("ls6");
+    // ls6.remove("das");
+    // ls6.print_info("ls6");
+    // ls6.remove("ss");
+    // ls6.print_info("ls6");
+
+
     return 0;
 }
 

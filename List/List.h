@@ -26,6 +26,7 @@ namespace CZ
     {
     public:
         using Rank = unsigned;
+        using RankPlus = int;
         using iterator = ListIterator<T>;
 
 		// 构造函数
@@ -56,6 +57,8 @@ namespace CZ
         const T& front() const;
         T& back();
         const T& back() const;
+        T& at(RankPlus index);
+        const T& at(RankPlus index) const;
 
         // 打印列表信息
         void print_info(const char *name = "") const;

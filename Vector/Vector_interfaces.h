@@ -148,6 +148,21 @@ namespace CZ
     {
         return _size == 0;
     }
+
+    template <typename T>
+    const T& Vector<T>::at(RankPlus index) const
+    {
+        if (index >= 0)
+        {
+            return (*this)[static_cast<Rank>(index)];
+        }
+        else
+            return (*this)[static_cast<Rank>(_size + index)];
+    }
+
+    template <typename T>
+    T& Vector<T>::at(RankPlus index)
+    { return const_cast<T&>(static_cast<const Vector<T>&>(*this).at(index)); }
 }
 
 

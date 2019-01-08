@@ -23,6 +23,7 @@ namespace CZ
     {
     public:
         using Rank = unsigned;
+        using RankPlus = int;
         using iterator = RandomIterator<T>;
 
         // 构造函数
@@ -63,6 +64,8 @@ namespace CZ
         T& front();
         bool empty();
         bool empty() const;
+        const T& at(RankPlus index) const;
+        T& at(RankPlus index);
 
         // 动态操作
         virtual void clear();

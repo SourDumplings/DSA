@@ -21,8 +21,14 @@ using std::string;
 int main(int argc, char const *argv[])
 {
     // 测试构造函数和数据访问接口
-    // int a[10] = {1, 2, 4, 5};
-    // Vector<int> v1, v2(10), v3(5, 1), v4(v3), v5(a, a+3), v6({1, 4, 7, 8, 3, 2, 8});
+    int a[10] = {1, 2, 4, 5};
+    Vector<int> v1, v2(10), v3(5, 1), v4(v3), v5(a, a+3), v6({1, 4, 7, 8, 3, 2, 8});
+    printf("v6.at(1) = %d\n", v6.at(1));
+    printf("v6.at(4) = %d\n", v6.at(4));
+    printf("v6.at(-1) = %d\n", v6.at(-1));
+    printf("v6.at(-3) = %d\n", v6.at(-3));
+    printf("v3.at(1) = %d\n", v3.at(1));
+
     // Vector<string> vs1(20), vs2(3, "abc"), vs3({"123", "abx", "sada1"});
 
     // v1.print_info("v1");
@@ -170,21 +176,21 @@ int main(int argc, char const *argv[])
     // // vs1.erase(vs2.begin(), vs2.end());
     // // vs1.print_info("vs1");
 
-    // 测试按值删除和assign
-    Vector<string> vs1({"jd", "adsads", "jd", "jd", "dasda", "jd", "ee"}), vs2(vs1);
-    vs1.print_info("vs1");
-    vs1.remove("jd");
-    vs1.print_info("vs1");
-    vs1.remove("ddd");
-    // vs1.remove("adsads");
-    // vs1.remove("ee");
-    vs1.print_info("vs1");
+    // // 测试按值删除和assign
+    // Vector<string> vs1({"jd", "adsads", "jd", "jd", "dasda", "jd", "ee"}), vs2(vs1);
+    // vs1.print_info("vs1");
+    // vs1.remove("jd");
+    // vs1.print_info("vs1");
+    // vs1.remove("ddd");
+    // // vs1.remove("adsads");
+    // // vs1.remove("ee");
+    // vs1.print_info("vs1");
 
-    vs2.print_info("vs2");
-    vs2.assign(vs1.begin(), vs1.end());
-    vs2.print_info("vs2");
-    vs2.assign(vs2.begin(), vs2.end() - 2);
-    vs2.print_info("vs2");
+    // vs2.print_info("vs2");
+    // vs2.assign(vs1.begin(), vs1.end());
+    // vs2.print_info("vs2");
+    // vs2.assign(vs2.begin(), vs2.end() - 2);
+    // vs2.print_info("vs2");
     return 0;
 }
 
