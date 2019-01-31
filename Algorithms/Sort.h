@@ -123,7 +123,7 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("Error from sort: %s\n", errMsg);
+            printf("Error from Sort: %s\n", errMsg);
             throw std::exception();
         }
         return;

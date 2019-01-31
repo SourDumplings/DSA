@@ -50,9 +50,12 @@ namespace CZ
     template <typename T>
     Vector<T>& Vector<T>::operator=(const Vector<T> &V)
     {
-        T *temp = _elem;
-        init_from(V.begin(), V.end());
-        delete [] temp;
+        if (this != &V)
+        {
+            T *temp = _elem;
+            init_from(V.begin(), V.end());
+            delete [] temp;
+        }
         return *this;
     }
 

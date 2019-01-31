@@ -15,6 +15,7 @@
 
 #include <initializer_list>
 #include "../Iterator/RandomIterator.h"
+#include "../Algorithms/Dict_compare.h"
 
 namespace CZ
 {

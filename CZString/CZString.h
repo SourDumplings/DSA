@@ -48,8 +48,11 @@ namespace CZ
         operator const char*() const;
         operator const std::string() const;
 
+        CZString& operator=(const CZString &s);
+        CZString& operator=(CZString &&s);
         CZString& operator+=(const char rhs);
         CZString& operator+=(const CZString &rhs);
+
     private:
         mutable char *_tempStr = nullptr;
     };

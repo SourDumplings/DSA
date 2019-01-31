@@ -134,6 +134,18 @@ namespace CZ
         return temp;
     }
 
+    CZString& CZString::operator=(const CZString &s)
+    {
+        Vector<char>::operator=(static_cast<Vector<char>>(s));
+        return *this;
+    }
+
+    CZString& CZString::operator=(CZString &&s)
+    {
+        Vector<char>::operator=(static_cast<Vector<char>>(s));
+        return *this;
+    }
+
     inline CZString& CZString::operator+=(const char rhs)
     { *this = *this + rhs; return *this; }
 
