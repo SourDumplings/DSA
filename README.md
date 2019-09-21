@@ -1,8 +1,17 @@
+<!--
+ * @Autor: SourDumplings
+ * @Date: 2019-09-21 22:54:58
+ * @Link: https://github.com/SourDumplings/
+ * @Email: changzheng300@foxmail.com
+ * @Description: 我自己实现的各种数据结构和算法的模板，用以学习数据结构和算法及编程语言
+ -->
 # DSNA
 
 ----- 版权所有 酸饺子 -----
 
-我自己实现的各种数据结构和算法的模板，采用C++11语言实现，统一在CZ命名空间中
+我自己实现的各种数据结构和算法的模板，用C++语言实现了一些，打算再用Java实现一遍
+
+- 采用C++（C++11）语言实现，统一在CZ命名空间中
 在编译器gcc version 7.2.0 (x86_64-posix-seh-rev0, Built by MinGW-W64 project)下测试通过
 
 统一使用在命名空间CZ下面
