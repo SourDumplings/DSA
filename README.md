@@ -12,7 +12,7 @@
 我自己实现的各种数据结构和算法的模板，用C++语言实现了一些，打算再用Java实现一遍
 
 - 采用C++（C++11）语言实现，统一在CZ命名空间中
-在编译器gcc version 7.2.0 (x86_64-posix-seh-rev0, Built by MinGW-W64 project)下测试通过统一使用在命名空间CZ下面
+在编译器gcc version 7.2.0 (x86_64-posix-seh-rev0, Built by MinGW-W64 project)下测试通过。我统一使用在命名空间CZ下面。
 
 ## 通用算法（模板）：
 1. ### 字典序比较操作符
