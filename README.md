@@ -5,7 +5,7 @@
  * @Email: changzheng300@foxmail.com
  * @Description: 我自己实现的各种数据结构和算法的模板，用以学习数据结构和算法及编程语言
  -->
-# DSNA
+# DSA
 
 ----- 版权所有 酸饺子 -----
 
