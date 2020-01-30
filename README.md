@@ -56,6 +56,7 @@
 			- ###### 伸展树
 			- ###### 红黑树
 	- #### B树
+	- #### B+树
 7. ### 算术表达式
 8. ### 字符串
 9. ### 并查集
@@ -105,4 +106,6 @@
 [5] 《数据结构》2nd-陈越
 
 [6] 《2019年数据结构考研复习指导》-王道论坛组编
+
+[7] 《Database System Concepts》6th-Abraham Silberschatz, Henry F. Korth, S. Sudarshan
 
