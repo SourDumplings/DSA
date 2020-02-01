@@ -1,5 +1,5 @@
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2020-01-30 17:40:59
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com
@@ -16,11 +16,11 @@
 
 namespace CZ
 {
-template <typename K, typename V>
+template<typename K, typename V>
 class BPlusTree
 {
 public:
-    using Rank = int;
+    using Rank = unsigned;
 
     BPlusTree(Rank order_ = 3);
     BPlusTree(const BPlusTree &bt);
@@ -34,10 +34,11 @@ public:
     BPlusTreeNode<K, V> *root() const;
     bool empty() const;
 
-    void insert(const K &key, const V *pData);
+    void insert(const K &key, V *pData);
     void remove(const K &key);
 
     void print_info(const char *name = "") const;
+
 
 private:
     Rank _size;                        // 存放的关键码总数
@@ -46,9 +47,20 @@ private:
     BPlusTreeNode<K, V> *_root;        // 根结点的指针
     mutable BPlusTreeNode<K, V> *_hot; // search()方法最后一次访问（除非树空）的非空结点的指针
 
-    void free(BPlusTreeNode<K, V> *);
+    void free_node(BPlusTreeNode<K, V> *);
     BPlusTreeNode<K, V> *construct_node_from(BPlusTreeNode<K, V> *);
-    BPlusTreeNode<K, V> *get_first_leaf_node() const;
+    // 查找包含或者应该包含关键码 key 的叶结点
+    BPlusTreeNode<K, V> *find_leaf(const K &key) const;
+    // 把关键码和指针插入到适当的结点 node 处，不会更新计数信息
+    void insert_in_node(BPlusTreeNode<K, V> *node, const K &key, void *p);
+    // 将关键码 keyUp 插入 lNode 的父结点并插入合适的孩子指针指向 rNode，用以解决上溢问题
+    void insert_in_father(BPlusTreeNode<K, V> *lNode,
+                          const K &keyUp,
+                          BPlusTreeNode<K, V> *rNode);
+    // 将 lNode 作为左侧结点等分，返回分裂后的右侧结点
+    BPlusTreeNode<K, V> *split_node(BPlusTreeNode<K, V> *lNode);
+
+    void print_keys_in_node(BPlusTreeNode<K, V> *node) const;
 };
 } // namespace CZ
 

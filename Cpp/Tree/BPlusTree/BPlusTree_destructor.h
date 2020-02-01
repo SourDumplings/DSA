@@ -1,5 +1,5 @@
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2020-01-30 18:37:28
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com
@@ -13,31 +13,34 @@
 
 namespace CZ
 {
-template <typename K, typename V>
-void BPlusTree<K, V>::free(BPlusTreeNode<K, V> *target)
+template<typename K, typename V>
+void BPlusTree<K, V>::free_node(BPlusTreeNode <K, V> *target)
 {
-    if (!target)
+    if (target == nullptr)
     {
         return;
     }
     if (!target->_isLeaf)
     {
-        Vector<void *>::Rank s = target->_children.size();
-        for (Vector<void *>::Rank i = 0; i < s; i++)
+        for (void *c : target->_children)
         {
-            free(reinterpret_cast<BPlusTreeNode<K, V> *>((target->_children)[i]));
+            free_node(reinterpret_cast<BPlusTreeNode<K, V> *>(c));
         }
     }
     else
     {
-        free(reinterpret_cast<BPlusTreeNode<K, V> *>(target->_children.back()));
+        free_node(reinterpret_cast<BPlusTreeNode<K,
+                                                 V> *>(target->_children.back()));
     }
-    
+//    target->print_info("going to free");
     delete target;
 }
 
-template <typename K, typename V>
-BPlusTree<K, V>::~BPlusTree() { free(_root); }
+template<typename K, typename V>
+BPlusTree<K, V>::~BPlusTree()
+{
+    free_node(_root);
+}
 } // namespace CZ
 
 #endif // B_PLUS_TREE_DESTRUCTORS_H

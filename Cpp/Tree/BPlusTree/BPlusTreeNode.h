@@ -1,5 +1,5 @@
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2020-01-30 17:26:38
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com
@@ -17,17 +17,22 @@
 
 namespace CZ
 {
-template <typename K, typename V>
+template<typename K, typename V>
 class BPlusTree;
 
-template <typename K, typename V>
+template<typename K, typename V>
 class BPlusTreeNode
 {
     friend class BPlusTree<K, V>;
 
 public:
     using Rank = unsigned;
-    BPlusTreeNode(const K &key, BPlusTreeNode<K, V> *father_ = nullptr, bool isLeaf_ = false, V *pData = nullptr) : _father(father_), _isLeaf(isLeaf_)
+
+    explicit BPlusTreeNode(const K &key,
+                           BPlusTreeNode<K, V> *father_ = nullptr,
+                           bool isLeaf_ = false,
+                           V *pData = nullptr)
+        : _father(father_), _isLeaf(isLeaf_)
     {
         _keys.push_back(key);
         if (_isLeaf)
@@ -40,18 +45,24 @@ public:
         }
         _children.push_back(nullptr);
     }
+    explicit BPlusTreeNode(BPlusTreeNode<K, V> *father_ = nullptr,
+                           bool isLeaf_ = false)
+        : _father(father_), _isLeaf(isLeaf_)
+    {
+    }
+
     ~BPlusTreeNode() = default;
 
     void print_info(const char *name = "") const
     {
-        printf("for %s bPlustreenode %s: \n", name, _isLeaf ? "leaf" : "inner");
+        printf("for %s bPlusTreeNode %s: \n", _isLeaf ? "leaf" : "inner", name);
 
-        printf("it contains keys:");
-        for (auto &item : _keys)
+        printf("it contains %d keys:", _keys.size());
+        for (const K &k : _keys)
         {
-            std::cout << " " << item;
+            std::cout << " " << k;
         }
-        return;
+        printf("\n\n");
     }
 
 private:
