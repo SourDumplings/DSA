@@ -55,7 +55,8 @@ inline typename BPlusTree<K, V>::Rank BPlusTree<K, V>::node_num() const
 { return _nodeNum; }
 
 template<typename K, typename V>
-inline BPlusTreeNode<K, V> *BPlusTree<K, V>::find_leaf(const K &key) const
+inline BPlusTreeNode<K, V> *
+BPlusTree<K, V>::find_leaf(const K &key) const
 {
     BPlusTreeNode<K, V> *p = _root;
     while (!p->_isLeaf)
@@ -98,6 +99,87 @@ inline BPlusTreeNode<K, V> *BPlusTree<K, V>::find_leaf(const K &key) const
         }
     }
     return p;
+}
+
+template<typename K, typename V>
+const V *BPlusTree<K, V>::search(const K &key) const
+{
+    V *res = nullptr;
+    BPlusTreeNode<K, V> *leaf = find_leaf(key);
+    const Vector<K> &keys = leaf->_keys;
+    typename Vector<K>::Rank s = keys.size();
+    for (typename Vector<K>::Rank i = 0; i < s; ++i)
+    {
+        if (keys[i] == key)
+        {
+            res = reinterpret_cast<V *>((leaf->_children)[i]);
+            break;
+        }
+    }
+    return res;
+}
+
+template<typename K, typename V>
+V *BPlusTree<K, V>::search(const K &key)
+{
+    return const_cast<V *>(static_cast<const BPlusTree<K, V> &>(*this).search(
+        key));
+}
+
+template<typename K, typename V>
+Vector<const V *> &&
+BPlusTree<K, V>::search(const K &minKey, const K &maxKey) const
+{
+    Vector<const V *> res;
+    BPlusTreeNode<K, V> *leaf = find_leaf(minKey);
+    bool flag = true;
+    while (leaf != nullptr && flag)
+    {
+        const Vector<K> &keys = leaf->_keys;
+        typename Vector<K>::Rank s = keys.size();
+        for (typename Vector<K>::Rank i = 0; i < s; ++i)
+        {
+            if (minKey <= keys[i])
+            {
+                if (maxKey < keys[i])
+                {
+                    flag = false;
+                    break;
+                }
+                res.push_back(reinterpret_cast<const V *>((leaf->_children)[i]));
+            }
+        }
+        leaf = reinterpret_cast<BPlusTreeNode<K, V> *>(leaf->_children.back());
+    }
+    return std::move(res);
+}
+
+template<typename K, typename V>
+Vector<V *> &&
+BPlusTree<K, V>::search(const K &minKey, const K &maxKey)
+{
+    Vector < V * > res;
+    BPlusTreeNode <K, V> *leaf = find_leaf(minKey);
+    bool flag = true;
+    while (leaf != nullptr && flag)
+    {
+        const Vector <K> &keys = leaf->_keys;
+        typename Vector<K>::Rank s = keys.size();
+        for (typename Vector<K>::Rank i = 0; i < s; ++i)
+        {
+            if (minKey <= keys[i])
+            {
+                if (maxKey < keys[i])
+                {
+                    flag = false;
+                    break;
+                }
+                res.push_back(reinterpret_cast<V *>((leaf->_children)[i]));
+            }
+        }
+        leaf = reinterpret_cast<BPlusTreeNode <K, V> *>(leaf->_children.back());
+    }
+    return std::move(res);
 }
 } // namespace CZ
 

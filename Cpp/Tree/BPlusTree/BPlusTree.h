@@ -34,6 +34,12 @@ public:
     BPlusTreeNode<K, V> *root() const;
     bool empty() const;
 
+    const V *search(const K &key) const;
+    V *search(const K &key);
+    // 范围查找关键码在闭区间 [minKey, maxKey] 上的所有数据指针
+    Vector<const V *> &&search(const K &minKey, const K &maxKey) const;
+    Vector<V *> &&search(const K &minKey, const K &maxKey);
+
     void insert(const K &key, V *pData);
     void remove(const K &key);
 
@@ -49,7 +55,7 @@ private:
 
     void free_node(BPlusTreeNode<K, V> *);
     BPlusTreeNode<K, V> *construct_node_from(BPlusTreeNode<K, V> *);
-    // 查找包含或者应该包含关键码 key 的叶结点
+    // 查找包含或者应该包含关键码 key 的叶结点，为插入而准备
     BPlusTreeNode<K, V> *find_leaf(const K &key) const;
     // 把关键码和指针插入到适当的结点 node 处，不会更新计数信息
     void insert_in_node(BPlusTreeNode<K, V> *node, const K &key, void *p);

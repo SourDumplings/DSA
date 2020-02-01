@@ -72,7 +72,7 @@ void BPlusTree<K, V>::print_keys_in_node(BPlusTreeNode<K, V> *node) const
     {
         if (i != 0)
         {
-            putchar(' ');
+            printf(", ");
         }
         std::cout << keys[i];
     }
