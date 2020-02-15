@@ -5,8 +5,13 @@
  * @Email: changzheng300@foxmail.com
  * @Description: B+树模板，允许关键码重复
  * 
- * 模板参数：K 关键码类型，V 数据类型
+ * 模板参数：K关键码类型，V数据类型
  * 对于数据，该B+树不负责管理其生命周期
+ *
+ * n阶B+树：
+ * 叶结点，最多 n - 1 个搜索键的值，最少上取整((n - 1)/2)个。指针最多 n 个，最少上取整((n - 1)/2) + 1个。
+ * 内部结点的指针数最多 n 个，最少上取整(n/2)个。搜索键值最多 n - 1 个，最少(上取整(n/2)) - 1 个。
+ * 根结点最少的为 1 个搜索键值，2个指针，最多和非根结点一样。
  */
 
 #ifndef B_PLUS_TREE_H
@@ -65,6 +70,9 @@ private:
                           BPlusTreeNode<K, V> *rNode);
     // 将 lNode 作为左侧结点等分，返回分裂后的右侧结点
     BPlusTreeNode<K, V> *split_node(BPlusTreeNode<K, V> *lNode);
+    // 删除
+    void remove_entry(BPlusTreeNode<K, V> *node,
+                      const typename Vector<K>::Rank &index);
 
     void print_keys_in_node(BPlusTreeNode<K, V> *node) const;
 };

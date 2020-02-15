@@ -5,7 +5,7 @@
  * @Email: changzheng300@foxmail.com
  * @Description: B+树结点模板类
  * 
- * 模板参数：K 关键码类型，V 数据类型
+ * 模板参数：K关键码类型，V数据类型
  */
 
 #ifndef B_PLUS_TREE_NODE_H

@@ -27,11 +27,6 @@ void BPlusTree<K, V>::free_node(BPlusTreeNode <K, V> *target)
             free_node(reinterpret_cast<BPlusTreeNode<K, V> *>(c));
         }
     }
-    else
-    {
-        free_node(reinterpret_cast<BPlusTreeNode<K,
-                                                 V> *>(target->_children.back()));
-    }
 //    target->print_info("going to free");
     delete target;
 }

@@ -144,6 +144,30 @@ BPlusTree<K, V>::split_node(BPlusTreeNode <K, V> *lNode)
 template<typename K, typename V>
 void BPlusTree<K, V>::remove(const K &key)
 {
+    // 找到包含该关键码的叶结点
+    BPlusTreeNode<K, V> *leaf = find_leaf(key);
+    if (leaf != nullptr)
+    {
+        typename Vector<K>::Rank index = 0;
+        Vector<K> &keysOfLeaf = leaf->_keys;
+        for (; index != keysOfLeaf.size() && key != keysOfLeaf[index]; ++index)
+        {}
+        remove_entry(leaf, index);
+    }
+    --_size;
+}
+
+template<typename K, typename V>
+void BPlusTree<K, V>::remove_entry(BPlusTreeNode <K, V> *node,
+                                   const typename Vector<K>::Rank &index)
+{
+    Vector<K> &keys = node->_keys;
+    Vector<void *> &children = node->_children;
+
+    // 从 node 中删除该 index 对应的 key 和 child
+    keys.erase(keys.begin() + index);
+    children.erase(children.begin() + index);
+
 }
 } // namespace CZ
 
