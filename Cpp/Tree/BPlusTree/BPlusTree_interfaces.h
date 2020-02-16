@@ -158,12 +158,12 @@ template<typename K, typename V>
 Vector<V *> &&
 BPlusTree<K, V>::search(const K &minKey, const K &maxKey)
 {
-    Vector < V * > res;
-    BPlusTreeNode <K, V> *leaf = find_leaf(minKey);
+    Vector<V *> res;
+    BPlusTreeNode<K, V> *leaf = find_leaf(minKey);
     bool flag = true;
     while (leaf != nullptr && flag)
     {
-        const Vector <K> &keys = leaf->_keys;
+        const Vector<K> &keys = leaf->_keys;
         typename Vector<K>::Rank s = keys.size();
         for (typename Vector<K>::Rank i = 0; i < s; ++i)
         {
@@ -177,9 +177,39 @@ BPlusTree<K, V>::search(const K &minKey, const K &maxKey)
                 res.push_back(reinterpret_cast<V *>((leaf->_children)[i]));
             }
         }
-        leaf = reinterpret_cast<BPlusTreeNode <K, V> *>(leaf->_children.back());
+        leaf = reinterpret_cast<BPlusTreeNode<K, V> *>(leaf->_children.back());
     }
     return std::move(res);
+}
+
+template<typename K, typename V>
+bool BPlusTree<K, V>::is_underflow(BPlusTreeNode<K, V> *node) const
+{
+    if (_root != node)
+    {
+        Vector<void *>::Rank childrenNum = node->_children.size();
+        if (node->_isLeaf)
+        {
+            return childrenNum < _order / 2 + 1;
+        }
+        else
+        {
+            return childrenNum < (_order + 1) / 2;
+        }
+    }
+    return false;
+}
+
+template<typename K, typename V>
+inline bool BPlusTree<K, V>::is_overflow(BPlusTreeNode<K, V> *node) const
+{
+    return is_overflow(node->_keys.size());
+}
+
+template<typename K, typename V>
+inline bool BPlusTree<K, V>::is_overflow(typename Vector<K>::Rank keyNum) const
+{
+    return _order <= keyNum;
 }
 } // namespace CZ
 

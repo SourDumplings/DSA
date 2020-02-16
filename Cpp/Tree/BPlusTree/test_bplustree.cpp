@@ -25,7 +25,7 @@ int main(int argc, char const *argv[])
          "Mozart", "Crick", "Katz", "Kim", "Singh", "Eiii Said", "Wuuuu",
          "Lamport", "Cindy"};
 
-    BPlusTree<CZString, CZString> bp(3);
+    BPlusTree<CZString, CZString> bp(4);
     bp.print_info("bp");
 
     const int subStrLen = 3;
@@ -76,7 +76,14 @@ int main(int argc, char const *argv[])
     //    }
 
     // 3.测试删除
-    bp.remove("Wuu");
+    // 简单删除，对于 4 阶 B+ 树
+//    bp.remove("Cri");
+//    bp.print_info("bp");
+    // 下溢合并
+//    bp.remove("Sri");
+    bp.remove("Sin");
+//    bp.remove("Moz");
     bp.print_info("bp");
+
     return 0;
 }

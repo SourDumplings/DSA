@@ -70,9 +70,14 @@ private:
                           BPlusTreeNode<K, V> *rNode);
     // 将 lNode 作为左侧结点等分，返回分裂后的右侧结点
     BPlusTreeNode<K, V> *split_node(BPlusTreeNode<K, V> *lNode);
-    // 删除
+    // 从 node 中删除该 index 对应的 key 以及相对应 child
     void remove_entry(BPlusTreeNode<K, V> *node,
                       const typename Vector<K>::Rank &index);
+    // 判断是否下溢
+    bool is_underflow(BPlusTreeNode<K, V> *node) const;
+    // 判断是否上溢
+    bool is_overflow(BPlusTreeNode<K, V> *node) const;
+    bool is_overflow(typename Vector<K>::Rank keyNum) const;
 
     void print_keys_in_node(BPlusTreeNode<K, V> *node) const;
 };

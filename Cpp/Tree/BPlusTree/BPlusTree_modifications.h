@@ -11,6 +11,7 @@
 
 #include "BPlusTree.h"
 #include "../../Algorithms/Search.h"
+#include "../../Algorithms/Swap.h"
 
 namespace CZ
 {
@@ -29,7 +30,7 @@ void BPlusTree<K, V>::insert(const K &key, V *pData)
         BPlusTreeNode<K, V> *leaf = find_leaf(key);
         insert_in_node(leaf, key, pData);
 
-        if (_order == leaf->_keys.size())
+        if (is_overflow(leaf))
         {
             // 上溢
             auto rNode = split_node(leaf);
@@ -71,9 +72,9 @@ void BPlusTree<K, V>::insert_in_node(CZ::BPlusTreeNode<K, V> *node,
 }
 
 template<typename K, typename V>
-void BPlusTree<K, V>::insert_in_father(BPlusTreeNode <K, V> *lNode,
+void BPlusTree<K, V>::insert_in_father(BPlusTreeNode<K, V> *lNode,
                                        const K &keyUp,
-                                       BPlusTreeNode <K, V> *rNode)
+                                       BPlusTreeNode<K, V> *rNode)
 {
     if (lNode == _root)
     {
@@ -89,7 +90,7 @@ void BPlusTree<K, V>::insert_in_father(BPlusTreeNode <K, V> *lNode,
         BPlusTreeNode<K, V> *f = lNode->_father;
         insert_in_node(f, keyUp, rNode);
         rNode->_father = f;
-        if (f->_keys.size() == _order)
+        if (is_overflow(f))
         {
             // 上溢
             auto r = split_node(f);
@@ -103,8 +104,8 @@ void BPlusTree<K, V>::insert_in_father(BPlusTreeNode <K, V> *lNode,
 }
 
 template<typename K, typename V>
-BPlusTreeNode <K, V> *
-BPlusTree<K, V>::split_node(BPlusTreeNode <K, V> *lNode)
+BPlusTreeNode<K, V> *
+BPlusTree<K, V>::split_node(BPlusTreeNode<K, V> *lNode)
 {
     auto rNode = new BPlusTreeNode<K, V>();
     Vector<K> &lKeys = lNode->_keys;
@@ -153,20 +154,96 @@ void BPlusTree<K, V>::remove(const K &key)
         for (; index != keysOfLeaf.size() && key != keysOfLeaf[index]; ++index)
         {}
         remove_entry(leaf, index);
+        --_size;
     }
-    --_size;
 }
 
 template<typename K, typename V>
-void BPlusTree<K, V>::remove_entry(BPlusTreeNode <K, V> *node,
+void BPlusTree<K, V>::remove_entry(BPlusTreeNode<K, V> *node,
                                    const typename Vector<K>::Rank &index)
 {
-    Vector<K> &keys = node->_keys;
-    Vector<void *> &children = node->_children;
+    node->print_info("node is going to remove_entry");
+    printf("index = %d\n", index);
 
-    // 从 node 中删除该 index 对应的 key 和 child
-    keys.erase(keys.begin() + index);
-    children.erase(children.begin() + index);
+    node->_keys.erase(node->_keys.begin() + index);
+    if (node->_isLeaf)
+    {
+        // 如果 node 是叶结点，删掉其左侧指针
+        node->_children.erase(node->_children.begin() + index);
+    }
+    else
+    {
+        // 如果 node 是内部结点，删掉其右侧指针
+        node->_children.erase(node->_children.begin() + index + 1);
+    }
+
+    if (node == _root && node->_children.size() == 1)
+    {
+        // 如果 node 是根结点并且其只有一个儿子
+//        BPlusTreeNode<K, V> *temp = node->_children.front();
+//        delete _root;
+//        --_nodeNum;
+//        _root = temp;
+//        _root->_father = nullptr;
+    }
+    else if (is_underflow(node))
+    {
+        // 下溢
+        BPlusTreeNode<K, V> *father = node->_father;
+        Vector<void *> &brothers = father->_children;
+        typename Vector<void *>::Rank childIndex = 0;
+        for (; childIndex < brothers.size() && node != brothers[childIndex];
+               ++childIndex)
+        {}
+
+        typename Vector<K>::Rank indexOfKeysBetweenTwo = 0;
+        BPlusTreeNode<K, V>
+            *brother = reinterpret_cast<BPlusTreeNode<K, V> *>(brothers[1]);
+        if (childIndex != 0)
+        {
+            indexOfKeysBetweenTwo = childIndex - 1;
+            brother =
+                reinterpret_cast<BPlusTreeNode<K, V> *>(brothers[childIndex
+                    - 1]);
+        }
+
+        if (is_overflow(brother->_keys.size() + node->_keys.size()))
+        {
+            // 如果 brother 和 node 不能合并
+        }
+        else
+        {
+            // 如果 brother 和 node 可以合并
+            if (childIndex == 0)
+            {
+                // node 是哥哥，就交换二者，始终保证 brother 指向哥哥，node指向弟弟
+                Swap(brother, node);
+            }
+
+            if (node->_isLeaf)
+            {
+                // 如果兄弟俩是叶结点，合并两个结点
+                brother->_keys.insert(brother->_keys.end(),
+                                      node->_keys.begin(),
+                                      node->_keys.end());
+                // 去掉哥哥指向弟弟的指针
+                brother->_children.erase(brother->_children.end() - 1);
+
+                brother->_children.insert(brother->_children.end(),
+                                          node->_children.begin(),
+                                          node->_children.end());
+            }
+            else
+            {
+                // 如果兄弟俩是内部结点
+            }
+
+            remove_entry(father, indexOfKeysBetweenTwo);
+            --_nodeNum;
+            delete node;
+        }
+
+    }
 
 }
 } // namespace CZ
