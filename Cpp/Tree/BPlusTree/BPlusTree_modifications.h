@@ -226,16 +226,16 @@ void BPlusTree<K, V>::remove_entry(BPlusTreeNode<K, V> *node,
                 brother->_keys.insert(brother->_keys.end(),
                                       node->_keys.begin(),
                                       node->_keys.end());
-                // 去掉哥哥指向弟弟的指针
-                brother->_children.erase(brother->_children.end() - 1);
-
+                // 去掉哥哥指向弟弟的指针，然后将弟弟的儿子都给哥哥
+                brother->_children.back() = node->_children.front();
                 brother->_children.insert(brother->_children.end(),
-                                          node->_children.begin(),
+                                          node->_children.begin() + 1,
                                           node->_children.end());
             }
             else
             {
                 // 如果兄弟俩是内部结点
+
             }
 
             remove_entry(father, indexOfKeysBetweenTwo);
