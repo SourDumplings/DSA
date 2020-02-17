@@ -145,6 +145,7 @@ BPlusTree<K, V>::split_node(BPlusTreeNode<K, V> *lNode)
 template<typename K, typename V>
 void BPlusTree<K, V>::remove(const K &key)
 {
+    printf("we are going to remove %s\n", key.c_str());
     // 找到包含该关键码的叶结点
     BPlusTreeNode<K, V> *leaf = find_leaf(key);
     if (leaf != nullptr)
@@ -180,11 +181,12 @@ void BPlusTree<K, V>::remove_entry(BPlusTreeNode<K, V> *node,
     if (node == _root && node->_children.size() == 1)
     {
         // 如果 node 是根结点并且其只有一个儿子
-//        BPlusTreeNode<K, V> *temp = node->_children.front();
-//        delete _root;
-//        --_nodeNum;
-//        _root = temp;
-//        _root->_father = nullptr;
+        BPlusTreeNode<K, V> *temp =
+            reinterpret_cast<BPlusTreeNode<K, V> *>(node->_children.front());
+        delete _root;
+        --_nodeNum;
+        _root = temp;
+        _root->_father = nullptr;
     }
     else if (is_underflow(node))
     {
@@ -235,7 +237,20 @@ void BPlusTree<K, V>::remove_entry(BPlusTreeNode<K, V> *node,
             else
             {
                 // 如果兄弟俩是内部结点
-
+                // 将弟兄俩中间的键值加入哥哥，然后将弟弟的键值和儿子都给哥哥
+                brother->_keys.push_back((father->_keys)[indexOfKeysBetweenTwo]);
+                brother->_keys.insert(brother->_keys.end(),
+                                      node->_keys.begin(),
+                                      node->_keys.end());
+                brother->_children.insert(brother->_children.end(),
+                                          node->_children.begin(),
+                                          node->_children.end());
+                // 更新哥哥的新孩子的父亲
+                for (void *c : node->_children)
+                {
+                    reinterpret_cast<BPlusTreeNode<K, V> *>(c)->_father =
+                        brother;
+                }
             }
 
             remove_entry(father, indexOfKeysBetweenTwo);

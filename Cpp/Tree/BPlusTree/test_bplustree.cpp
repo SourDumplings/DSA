@@ -81,8 +81,21 @@ int main(int argc, char const *argv[])
 //    bp.print_info("bp");
     // 下溢合并
 //    bp.remove("Sri");
-    bp.remove("Sin");
+//    bp.remove("Wuu");
+//    bp.remove("Sin");
 //    bp.remove("Moz");
+    bp.remove("Cri");
+    bp.remove("Ada");
+    bp.remove("Sri");
+    bp.remove("Wuu");
+    bp.remove("Gol");
+    bp.remove("Sin");
+    bp.remove("Moz");
+    bp.remove("Kat");
+    bp.remove("Cin");
+    bp.remove("Lam");
+    bp.remove("Ein");
+    bp.remove("Kim");
     bp.print_info("bp");
 
     return 0;
