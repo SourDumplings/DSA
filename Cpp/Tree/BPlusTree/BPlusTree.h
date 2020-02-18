@@ -3,7 +3,7 @@
  * @Date: 2020-01-30 17:40:59
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com
- * @Description: B+树模板，允许关键码重复
+ * @Description: B+树模板，不支持关键码重复
  * 
  * 模板参数：K关键码类型，V数据类型
  * 对于数据，该B+树不负责管理其生命周期
@@ -39,13 +39,15 @@ public:
     BPlusTreeNode<K, V> *root() const;
     bool empty() const;
 
+    // 查找单个关键码，返回指向数据的指针
     const V *search(const K &key) const;
     V *search(const K &key);
     // 范围查找关键码在闭区间 [minKey, maxKey] 上的所有数据指针
-    Vector<const V *> &&search(const K &minKey, const K &maxKey) const;
-    Vector<V *> &&search(const K &minKey, const K &maxKey);
+    Vector<const V *> search(const K &minKey, const K &maxKey) const;
+    Vector<V *> search(const K &minKey, const K &maxKey);
 
     void insert(const K &key, V *pData);
+    // 删除该关键码及对应的数据指针，对于不存在的关键码什么都不做
     void remove(const K &key);
 
     void print_info(const char *name = "") const;
@@ -77,7 +79,7 @@ private:
     bool is_underflow(BPlusTreeNode<K, V> *node) const;
     // 判断是否上溢
     bool is_overflow(BPlusTreeNode<K, V> *node) const;
-    bool is_overflow(typename Vector<K>::Rank keyNum) const;
+    bool is_overflow(typename Vector<void *>::Rank pointerNum) const;
 
     void print_keys_in_node(BPlusTreeNode<K, V> *node) const;
 };

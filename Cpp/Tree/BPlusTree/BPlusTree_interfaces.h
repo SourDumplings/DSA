@@ -127,7 +127,7 @@ V *BPlusTree<K, V>::search(const K &key)
 }
 
 template<typename K, typename V>
-Vector<const V *> &&
+Vector<const V *>
 BPlusTree<K, V>::search(const K &minKey, const K &maxKey) const
 {
     Vector<const V *> res;
@@ -155,7 +155,7 @@ BPlusTree<K, V>::search(const K &minKey, const K &maxKey) const
 }
 
 template<typename K, typename V>
-Vector<V *> &&
+Vector<V *>
 BPlusTree<K, V>::search(const K &minKey, const K &maxKey)
 {
     Vector<V *> res;
@@ -203,13 +203,14 @@ bool BPlusTree<K, V>::is_underflow(BPlusTreeNode<K, V> *node) const
 template<typename K, typename V>
 inline bool BPlusTree<K, V>::is_overflow(BPlusTreeNode<K, V> *node) const
 {
-    return is_overflow(node->_keys.size());
+    return is_overflow(node->_children.size());
 }
 
 template<typename K, typename V>
-inline bool BPlusTree<K, V>::is_overflow(typename Vector<K>::Rank keyNum) const
+inline bool
+BPlusTree<K, V>::is_overflow(typename Vector<void *>::Rank pointerNum) const
 {
-    return _order <= keyNum;
+    return _order < pointerNum;
 }
 } // namespace CZ
 
