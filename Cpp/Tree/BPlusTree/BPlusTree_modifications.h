@@ -202,7 +202,6 @@ void BPlusTree<K, V>::remove_entry(BPlusTreeNode<K, V> *node,
     }
     else if (is_underflow(node))
     {
-        printf("underflow\n");
         // 下溢
         BPlusTreeNode<K, V> *father = node->_father;
         Vector<void *> &brothers = father->_children;
