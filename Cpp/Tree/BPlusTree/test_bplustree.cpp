@@ -30,7 +30,7 @@ int main(int argc, char const *argv[])
     bp.print_info("bp");
 
     const int subStrLen = 3;
-    const int size = l;
+    const int size = 5;
 
     // 1.测试插入
     for (int i = 0; i < size; ++i)
@@ -83,18 +83,34 @@ int main(int argc, char const *argv[])
 
     // 3.测试删除
     // 随机数引擎
-    uniform_int_distribution<unsigned> u(0, l - 1);
-    default_random_engine e; // 生成无符号随机整数
-    for (int i = 0; i < size * 2; ++i)
-    {
-        //生成 0 到 size - 1 之间（包含）均匀分布的随机数
-        unsigned subPos = u(e);
-        CZString key = s[subPos].substr(0, subStrLen);
-        printf("we are going to remove %s\n", key.c_str());
-        bp.remove(key);
-        printf("after removing %s\n", key.c_str());
-        bp.print_info("bp");
-    }
+//    uniform_int_distribution<unsigned> u(0, l - 1);
+//    default_random_engine e; // 生成无符号随机整数
+//    for (int i = 0; i < size * 2; ++i)
+//    {
+//        //生成 0 到 size - 1 之间（包含）均匀分布的随机数
+//        unsigned subPos = u(e);
+//        CZString key = s[subPos].substr(0, subStrLen);
+//        printf("we are going to remove %s\n", key.c_str());
+//        bp.remove(key);
+//        printf("after removing %s\n", key.c_str());
+//        bp.print_info("bp");
+//    }
 
+    // 4.测试 bottom-up 构建
+    Vector<Pair<CZString, CZString *>> indexDataV;
+    for (int i = 0; i < size; ++i)
+    {
+        CZString &str = s[i];
+        indexDataV.push_back(Pair<CZString, CZString *>(str.substr(0,
+                                                                   subStrLen),
+                                                        &str));
+    }
+    Sort(indexDataV.begin(),
+         indexDataV.end(),
+         [](const Pair<CZString, CZString *> &p1,
+            const Pair<CZString, CZString *> &p2)
+         { return p1.key() < p2.key(); });
+    BPlusTree<CZString, CZString> bp1(indexDataV, 4);
+    bp1.print_info("bp1");
     return 0;
 }

@@ -57,7 +57,9 @@ public:
     {
         printf("for %s bPlusTreeNode %s: \n", _isLeaf ? "leaf" : "inner", name);
 
-        printf("it contains %d keys:", _keys.size());
+        printf("it contains %d keys, %d children\n:",
+               _keys.size(),
+               _children.size());
         for (const K &k : _keys)
         {
             std::cout << " " << k;

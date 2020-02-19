@@ -18,6 +18,7 @@
 #define B_PLUS_TREE_H
 
 #include "BPlusTreeNode.h"
+#include "../../Dictionary/Pair.h"
 
 namespace CZ
 {
@@ -30,6 +31,8 @@ public:
     BPlusTree(Rank order_ = 3);
     BPlusTree(const BPlusTree &bt);
     BPlusTree(BPlusTree &&bt);
+    // bottom-up 地批量建立 B+ 树索引，注意输入的 indexDataV 必须是按照索引排好序的
+    BPlusTree(const Vector<Pair<K, V *>> &indexDataV, Rank order_ = 3);
     ~BPlusTree();
 
     Rank order() const;
@@ -58,7 +61,6 @@ private:
     Rank _nodeNum;                     // 树中结点的总数
     const Rank _order;                 // B树的阶次，至少为3，创建时就指定，一般不能修改
     BPlusTreeNode<K, V> *_root;        // 根结点的指针
-    mutable BPlusTreeNode<K, V> *_hot; // search()方法最后一次访问（除非树空）的非空结点的指针
 
     void free_node(BPlusTreeNode<K, V> *);
     BPlusTreeNode<K, V> *construct_node_from(BPlusTreeNode<K, V> *);
