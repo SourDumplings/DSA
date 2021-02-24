@@ -45,7 +45,7 @@ namespace CZ
         void add(const Rank pos, const T &x);
     private:
         Vector<T> _data;
-        // 返回x的二进制形式中，从左其第一位的1保留，其余位全为0所对应的数
+        // 返回x的二进制形式中，从右起第一位的1保留，其余位全为0所对应的数
         Rank _low_bit(const Rank x) const;
     };
 } // CZ
