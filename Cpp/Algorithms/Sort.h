@@ -142,7 +142,7 @@ namespace CZ
     void Sort(It begin, It end, const StableSortMethod &method,
         const unsigned version = 0)
     {
-        Sort(begin, end, std::less<const decltype(*begin)>(), method, version);
+        Stable_Sort(begin, end, std::less<const decltype(*begin)>(), method, version);
         return;
     }
 
