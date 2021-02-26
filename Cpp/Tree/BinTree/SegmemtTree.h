@@ -10,7 +10,7 @@
  * 比如在对数时间内从数组中找到最小值、最大值、总和、最大公约数、最小公倍数等满足交换律的二元运算，空间复杂度 O(n)
  * 满足交换律是指，交换谁前谁后，二元运算结果一样
  * 其基本思想是父节点维持左右子节点对应的二元运算结果，即 Val(node) = F（Val(node.left), Val(node.right)）
- * 在实现上可以用二叉树实现，也可以用数组（列表）实现
+ * 在实现上可以用二叉树实现, 但最好用数组（列表）实现，效率更高
  *
  * 例如对于维持和的线段树，原数组 [2, 4, 5, 7, 8, 9]，线段树如下所示，括号中为存储列表的索引：
  *                           35(1)
@@ -47,8 +47,7 @@ public:
     using Rank = typename BinTreeNode<T>::Rank;
     // 构造函数
     SegmentTree(const Vector<T> data, // 需要存储的值列表，即原列表
-                const F &f = F(), // 需要维护的结果所需的二元运算器对象，默认为相加函数
-                const SegmentTreeImplementation &impl = ARRAY_IMPL); // 默认为数组实现
+                const F &f = F()); // 需要维护的结果所需的二元运算器对象，默认为相加函数)
     // 更新原列表索引为 index 处的值为 val
     // 计算复杂度 O(log(_n))
     void update(typename Vector<T>::Rank index, const T& val);
@@ -60,7 +59,6 @@ public:
 private:
     typename Vector<T>::Rank _n; // 管理的原列表总数据数
     Vector<T> _tree_data; // 如果是列表实现，存储列表，有效下标索引从 1 开始，原列表下标
-    const SegmentTreeImplementation _impl; // 实现方式
     const F& _f; // 二元处理函数
 };
 }
