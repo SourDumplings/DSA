@@ -7,6 +7,29 @@
 
 /*
 数据对模板类，尤其用于存储键值对
+
+在 C++11 中，pair 支持多态，vector 等不支持，例如：
+class B
+{
+
+};
+
+class D: public B
+{
+
+};
+
+int main()
+{
+    vector<D> vd;
+    vector<B> vb(vd);  // 会编译错误，找不到相应的构造函数
+
+    pair<D, int> pD;
+    pair<B, int> pB(pD); // 正常编译
+    return 0;
+}
+
+因此对于 Pair 这里使用成员模板使之兼容多态性
  */
 
 #ifndef PAIR_H
