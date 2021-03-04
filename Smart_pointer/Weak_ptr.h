@@ -51,7 +51,7 @@ public:
         {
             delete _ptr;
             _ptr = nullptr;
-            printf("memory has been freed\n");
+//            printf("memory has been freed\n");
         }
         return;
     }
