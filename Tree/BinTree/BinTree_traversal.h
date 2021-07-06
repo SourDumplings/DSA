@@ -52,12 +52,12 @@ void pre_order_traversal_nonrecursion1(BinTreeNode<T> *root, const F &visit)
     return;
 }
 
+// 二叉树的先序遍历可以看做是从根结点一路向左访问
+// 遇到的所有结点只要有右儿子就将其入栈
+// 最左侧的结点被访问完后再弹栈，即从最深的右儿子开始再先序遍历
 template<typename T, typename F>
 void pre_order_traversal_nonrecursion2(BinTreeNode<T> *root, const F &visit)
 {
-    // 二叉树的先序遍历可以看做是从根结点一路向左访问
-    // 遇到的所有结点只要有右儿子就将其入栈
-    // 最左侧的结点被访问完后再弹栈，即从最深的右儿子开始再先序遍历
     Stack<BinTreeNode<T> *> S;
     BinTreeNode<T> *node = root;
     while (true)
@@ -79,6 +79,50 @@ void pre_order_traversal_nonrecursion2(BinTreeNode<T> *root, const F &visit)
     return;
 }
 
+// Morris 遍历法，
+// 使用空余孩子指针记录相对根节点，不需要栈
+// 空间复杂度 O(1)，时间 O(n)
+// 参考：https://blog.csdn.net/danmo_wuhen/article/details/104339630
+template<typename T, typename F>
+void pre_order_traversal_nonrecursion3(BinTreeNode<T> *root, const F &visit)
+{
+    BinTreeNode<T> *node = root;
+    while (node)
+    {
+        if (node->left_child())
+        {
+            BinTreeNode<T> *tmp = node->left_child();
+            // 去左子树的最右端
+            while (tmp->right_child() && tmp->right_child() != node)
+            {
+                tmp = tmp->right_child();
+            }
+
+            if (tmp->right_child() == nullptr)
+            {
+                // 第一次到达左子树的最右端
+                visit(node->data());
+                tmp->right_child() = node;
+                node = node->left_child();
+            }
+            else
+            {
+                // 第二次到达左子树的最右端
+                // 说明左子树已经访问完毕，需要还原树结构
+                tmp->right_child() = nullptr;
+                node = node->right_child();
+            }
+        }
+        else
+        {
+            // 左子树为空，直接访问该结点即可
+            visit(node->data());
+            node = node->right_child();
+        }
+    }
+    return;
+}
+
 template<typename T, typename F>
 void in_order_traversal_recursion(BinTreeNode<T> *root, const F &visit)
 {
@@ -94,11 +138,11 @@ void in_order_traversal_recursion(BinTreeNode<T> *root, const F &visit)
     return;
 }
 
+// 二叉树的中序遍历可以看做是从根结点一路向左入栈
+// 然后弹栈并访问，进入其右子树进行中序遍历
 template<typename T, typename F>
 void in_order_traversal_nonrecursion1(BinTreeNode<T> *root, const F &visit)
 {
-    // 二叉树的中序遍历可以看做是从根结点一路向左入栈
-    // 然后弹栈并访问，进入其右子树进行中序遍历
     Stack<BinTreeNode<T> *> S;
     while (true)
     {
@@ -121,10 +165,10 @@ void in_order_traversal_nonrecursion1(BinTreeNode<T> *root, const F &visit)
     return;
 }
 
+// 实际上为NONRECURSION_TRAVERSAL1的等价版本
 template<typename T, typename F>
 void in_order_traversal_nonrecursion2(BinTreeNode<T> *root, const F &visit)
 {
-    // 实际上为NONRECURSION_TRAVERSAL1的等价版本
     Stack<BinTreeNode<T> *> S;
     while (true)
     {
@@ -148,11 +192,11 @@ void in_order_traversal_nonrecursion2(BinTreeNode<T> *root, const F &visit)
     return;
 }
 
+// 不需要借助堆栈，（额外）空间复杂度由O(logn)降为O(1)
+// 但是由于要调用next()，牺牲了时间效率
 template<typename T, typename F>
 void in_order_traversal_nonrecursion3(BinTreeNode<T> *root, const F &visit)
 {
-    // 不需要借助堆栈，（额外）空间复杂度由O(logn)降为O(1)
-    // 但是由于要调用next()，牺牲了时间效率
     bool backTrace = false; // 记录前一步是否刚刚从右子树回溯，以免重复访问
     while (true)
     {
@@ -181,6 +225,50 @@ void in_order_traversal_nonrecursion3(BinTreeNode<T> *root, const F &visit)
                 }
                 backTrace = true;
             }
+        }
+    }
+    return;
+}
+
+// Morris 遍历法
+// 参考：https://blog.csdn.net/danmo_wuhen/article/details/104339630
+// Morris中序遍历和前序遍历相差不大，只是在访问位置上出现了变化
+// 空间复杂度 O(1)，时间 O(n)
+template<typename T, typename F>
+void in_order_traversal_nonrecursion4(BinTreeNode<T> *root, const F &visit)
+{
+    BinTreeNode<T> *node = root;
+    while (node)
+    {
+        if (node->left_child())
+        {
+            BinTreeNode<T> *tmp = node->left_child();
+            // 去左子树的最右端
+            while (tmp->right_child() && tmp->right_child() != node)
+            {
+                tmp = tmp->right_child();
+            }
+
+            if (tmp->right_child() == nullptr)
+            {
+                // 第一次到达左子树的最右端
+                tmp->right_child() = node;
+                node = node->left_child();
+            }
+            else
+            {
+                // 第二次到达左子树的最右端
+                // 说明左子树已经访问完毕，需要还原树结构
+                tmp->right_child() = nullptr;
+                visit(node->data());
+                node = node->right_child();
+            }
+        }
+        else
+        {
+            // 左子树为空，直接访问该结点即可
+            visit(node->data());
+            node = node->right_child();
         }
     }
     return;
@@ -284,8 +372,8 @@ void post_order_traversal_nonrecursion2(BinTreeNode<T> *root, const F &visit)
 template<typename T, typename F>
 void post_order_traversal_nonrecursion3(BinTreeNode<T> *root, const F &visit)
 {
-    List<BinTreeNode<T> *> list;
-    Vector<BinTreeNode<T> *> reverseVisitV;
+    List < BinTreeNode<T> * > list;
+    Vector < BinTreeNode<T> * > reverseVisitV;
     if (root)
     {
         list.push_front(root);
@@ -317,6 +405,83 @@ void post_order_traversal_nonrecursion3(BinTreeNode<T> *root, const F &visit)
 
     return;
 }
+
+// Morris 遍历法
+// 参考：https://blog.csdn.net/danmo_wuhen/article/details/104339630
+// 空间复杂度 O(1)，时间复杂度 O(n)
+// Morris 后序遍历较为复杂，因为右孩子需要在根节点之前输出
+// 需要逆转左子树右边界结点的父子关系，再恢复
+namespace Morris
+{
+template<typename T>
+BinTreeNode<T>* reverse_node(BinTreeNode<T> *node)
+{
+    BinTreeNode<T> *p = nullptr;
+    BinTreeNode<T> *q = nullptr;
+    while (node)
+    {
+        q = node->right_child();
+        node->right_child() = p;
+        p = node;
+        node = q;
+    }
+    return p;
+}
+
+
+template<typename T, typename F>
+void visit_node_after_reverse(BinTreeNode<T> *node, const F &visit)
+{
+    BinTreeNode<T> *tail = reverse_node(node);
+    BinTreeNode<T> *cur = tail;
+    while (cur)
+    {
+        visit(cur->data());
+        cur = cur->right_child();
+    }
+    reverse_node(tail);
+}
+}
+
+template<typename T, typename F>
+void post_order_traversal_nonrecursion4(BinTreeNode<T> *root, const F &visit)
+{
+    BinTreeNode<T> *node = root;
+    while (node)
+    {
+        if (node->left_child())
+        {
+            BinTreeNode<T> *tmp = node->left_child();
+            // 去左子树的最右端
+            while (tmp->right_child() && tmp->right_child() != node)
+            {
+                tmp = tmp->right_child();
+            }
+
+            if (tmp->right_child() == nullptr)
+            {
+                // 第一次到达左子树的最右端
+                tmp->right_child() = node;
+                node = node->left_child();
+            }
+            else
+            {
+                // 第二次到达左子树的最右端
+                // 说明左子树已经访问完毕，需要还原树结构
+                tmp->right_child() = nullptr;
+                Morris::visit_node_after_reverse(node->left_child(), visit);
+                node = node->right_child();
+            }
+        }
+        else
+        {
+            // 左子树为空
+            node = node->right_child();
+        }
+    }
+    Morris::visit_node_after_reverse(root, visit);
+    return;
+}
 } // BinTreeTraversal
 
 template<typename T>
@@ -342,9 +507,16 @@ void BinTree<T>::pre_order_traversal(BinTreeNode<T> *root, const F &visit,
             break;
         }
         case NONRECURSION_TRAVERSAL2:
-        case NONRECURSION_TRAVERSAL3:
         {
-            BinTreeTraversal::pre_order_traversal_nonrecursion2(root, visit);
+            BinTreeTraversal::pre_order_traversal_nonrecursion2(root,
+                                                                visit);
+            break;
+        }
+        case NONRECURSION_TRAVERSAL3:
+        case NONRECURSION_TRAVERSAL4:
+        {
+            BinTreeTraversal::pre_order_traversal_nonrecursion3(root,
+                                                                visit);
             break;
         }
     }
@@ -382,6 +554,11 @@ void BinTree<T>::in_order_traversal(BinTreeNode<T> *root, const F &visit,
             BinTreeTraversal::in_order_traversal_nonrecursion3(root, visit);
             break;
         }
+        case NONRECURSION_TRAVERSAL4:
+        {
+            BinTreeTraversal::in_order_traversal_nonrecursion4(root, visit);
+            break;
+        }
     }
 }
 
@@ -404,17 +581,26 @@ void BinTree<T>::post_order_traversal(BinTreeNode<T> *root, const F &visit,
         }
         case NONRECURSION_TRAVERSAL1:
         {
-            BinTreeTraversal::post_order_traversal_nonrecursion1(root, visit);
+            BinTreeTraversal::post_order_traversal_nonrecursion1(root,
+                                                                 visit);
             break;
         }
         case NONRECURSION_TRAVERSAL2:
         {
-            BinTreeTraversal::post_order_traversal_nonrecursion2(root, visit);
+            BinTreeTraversal::post_order_traversal_nonrecursion2(root,
+                                                                 visit);
             break;
         }
         case NONRECURSION_TRAVERSAL3:
         {
-            BinTreeTraversal::post_order_traversal_nonrecursion3(root, visit);
+            BinTreeTraversal::post_order_traversal_nonrecursion3(root,
+                                                                 visit);
+            break;
+        }
+        case NONRECURSION_TRAVERSAL4:
+        {
+            BinTreeTraversal::post_order_traversal_nonrecursion4(root,
+                                                                 visit);
             break;
         }
     }

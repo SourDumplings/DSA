@@ -97,6 +97,10 @@ int main(int argc, char const *argv[])
     BinTree<CZString>::pre_order_traversal(t1r, BinTree<CZString>::OutPut(),
                                            NONRECURSION_TRAVERSAL2);
     printf("\n\n");
+    printf("pre_order_traversal of t1: nonrecursion3\n");
+    BinTree<CZString>::pre_order_traversal(t1r, BinTree<CZString>::OutPut(),
+                                           NONRECURSION_TRAVERSAL3);
+    printf("\n\n");
 
     printf("in_order_traversal of t1: recursion\n");
     BinTree<CZString>::in_order_traversal(t1r);
@@ -125,6 +129,10 @@ int main(int argc, char const *argv[])
     BinTree<CZString>::in_order_traversal(t1r, BinTree<CZString>::OutPut(),
                                           NONRECURSION_TRAVERSAL3);
     printf("\n\n");
+    printf("in_order_traversal of t1: nonrecursion4\n");
+    BinTree<CZString>::in_order_traversal(t1r, BinTree<CZString>::OutPut(),
+                                          NONRECURSION_TRAVERSAL4);
+    printf("\n\n");
 
     printf("post_order_traversal of t1: recursion\n");
     BinTree<CZString>::post_order_traversal(t1r);
@@ -140,6 +148,10 @@ int main(int argc, char const *argv[])
     printf("post_order_traversal of t1: nonrecursion3\n");
     BinTree<CZString>::post_order_traversal(t1r, BinTree<CZString>::OutPut(),
                                             NONRECURSION_TRAVERSAL3);
+    printf("\n\n");
+    printf("post_order_traversal of t1: nonrecursion4\n");
+    BinTree<CZString>::post_order_traversal(t1r, BinTree<CZString>::OutPut(),
+                                            NONRECURSION_TRAVERSAL4);
     printf("\n\n");
 
     printf("level_order_traversal of t1:\n");

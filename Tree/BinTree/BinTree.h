@@ -22,7 +22,8 @@ namespace CZ
         RECURSION_TRAVERSAL,
         NONRECURSION_TRAVERSAL1,
         NONRECURSION_TRAVERSAL2,
-        NONRECURSION_TRAVERSAL3
+        NONRECURSION_TRAVERSAL3,
+        NONRECURSION_TRAVERSAL4
     };
 
     template <typename T> class BinTree;
