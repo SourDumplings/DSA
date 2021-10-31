@@ -28,7 +28,7 @@ namespace CZ
         using iterator = RandomIterator<T>;
 
         // 构造函数
-        // 构造函数1.容量为c，规模为s，所有元素初始为v
+        // 构造函数1.容量为 c = 2 * s，规模为 s，所有元素初始为 v
         Vector(Rank s = 0, T v = T());
         // 构造函数2.迭代器与元素个数构造
         Vector(const iterator &begin, Rank n);
