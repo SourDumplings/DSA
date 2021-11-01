@@ -21,11 +21,9 @@
 
 ## TODO
 1. 将类型别名首字母改为大写
-已完成：
-- Deque
+已完成
 2. 去掉非 const 的 size() 方法
-已完成：
-- Deque
+已完成
 3. 实现 Deque
 4. 实现空间复杂度为O(1)的归并排序，参考：https://leetcode-cn.com/problems/sort-list/solution/
 5. 实现树状数组（区间）

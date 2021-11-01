@@ -42,12 +42,6 @@ namespace CZ
     }
 
     template <typename T>
-    inline typename Vector<T>::Rank Vector<T>::size()
-    {
-        return _size;
-    }
-
-    template <typename T>
     inline typename Vector<T>::Rank Vector<T>::size() const
     {
         return _size;

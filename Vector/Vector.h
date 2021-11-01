@@ -55,7 +55,6 @@ namespace CZ
         Iterator end();
         Iterator begin() const;
         Iterator end() const;
-        Rank size();
         Rank size() const;
         Rank capacity();
         Rank capacity() const;
