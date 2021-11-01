@@ -15,7 +15,7 @@ List类模板的动态操作
 #include "List.h"
 #include <stdexcept>
 #include <utility>
-#include "..\Algorithms\Swap.h"
+#include "../Algorithms/Swap.h"
 
 namespace CZ
 {
@@ -35,7 +35,7 @@ namespace CZ
     }
 
     template <typename T>
-    typename List<T>::iterator List<T>::insert(typename List<T>::iterator pos, const T &data)
+    typename List<T>::Iterator List<T>::insert(typename List<T>::Iterator pos, const T &data)
     {
         ListNode<T> *newNode = pos.get()->insert_as_prev(data);
         pos.get()->_prev->_next = newNode;
@@ -45,7 +45,7 @@ namespace CZ
     }
 
     template <typename T>
-    typename List<T>::iterator List<T>::insert(typename List<T>::iterator pos, T &&data)
+    typename List<T>::Iterator List<T>::insert(typename List<T>::Iterator pos, T &&data)
     {
         ListNode<T> *posGet = pos.get();
         ListNode<T> *newNode = posGet->insert_as_prev(std::move(data));
@@ -56,8 +56,8 @@ namespace CZ
     }
 
     template <typename T>
-    typename List<T>::iterator List<T>::insert(typename List<T>::iterator pos,
-        typename List<T>::iterator b, typename List<T>::iterator e)
+    typename List<T>::Iterator List<T>::insert(typename List<T>::Iterator pos,
+        typename List<T>::Iterator b, typename List<T>::Iterator e)
     {
         ListNode<T> *posGet = pos.get();
         ListNode<T> *hNode = posGet->_prev;
@@ -72,7 +72,7 @@ namespace CZ
     }
 
     template <typename T>
-    typename List<T>::iterator List<T>::erase(typename List<T>::iterator pos)
+    typename List<T>::Iterator List<T>::erase(typename List<T>::Iterator pos)
     {
         try
         {
@@ -97,8 +97,8 @@ namespace CZ
     }
 
     template <typename T>
-    typename List<T>::iterator List<T>::erase(typename List<T>::iterator b,
-        typename List<T>::iterator e)
+    typename List<T>::Iterator List<T>::erase(typename List<T>::Iterator b,
+        typename List<T>::Iterator e)
     {
         try
         {

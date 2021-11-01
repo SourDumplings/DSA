@@ -24,7 +24,7 @@ namespace CZ
         {
             return false;
         }
-        for (typename C::iterator itL = lhs.begin(), itR = rhs.begin();
+        for (typename C::Iterator itL = lhs.begin(), itR = rhs.begin();
             itL != lhs.end(); ++itL, ++itR)
         {
             if (*itL != *itR)
@@ -48,7 +48,7 @@ namespace CZ
         {
             return true;
         }
-        for (typename C::iterator itL = lhs.begin(), itR = rhs.begin();
+        for (typename C::Iterator itL = lhs.begin(), itR = rhs.begin();
             itL != lhs.end(); ++itL, ++itR)
         {
             if (itR == rhs.end())

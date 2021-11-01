@@ -15,7 +15,7 @@ List类模板的操作符函数模板
 #include "List.h"
 
 // 字典序的比较函数
-#include "..\Algorithms\Dict_compare.h"
+#include "../Algorithms/Dict_compare.h"
 
 namespace CZ
 {

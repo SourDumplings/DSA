@@ -83,7 +83,7 @@ namespace CZ
         while (v && !v->_keys.empty())
         {
             // 对结点v的关键码向量进行二分查找，返回不大于data的最后一个元素
-            typename Vector<T>::iterator it =
+            typename Vector<T>::Iterator it =
                 Search(v->_keys.begin(), v->_keys.end(), data, BINARY_SEARCH, 2);
             if (it < v->_keys.end() && v->_keys.begin() <= it && *it == data)
             {

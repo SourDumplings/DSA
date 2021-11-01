@@ -13,7 +13,7 @@
 #ifndef TREE_NODE_H
 #define TREE_NODE_H
 
-#include "..\List\List.h"
+#include "../List/List.h"
 
 namespace CZ
 {

@@ -13,7 +13,7 @@
 
 我自己实现的各种数据结构和算法的模板，采用C++（C++11）语言实现，统一在CZ命名空间中
 
-在编译器gcc version 7.2.0 (x86_64-posix-seh-rev0, Built by MinGW-W64 project)下测试通过
+在编译器 gcc version 7.2.0 (x86_64-posix-seh-rev0, Built by MinGW-W64 project) 及 gcc version 4.8.5 20150623 (Red Hat 4.8.5-44) 下测试通过
 
 说明：如果使用 CLion，欲运行单个 cpp 文件，可以使用命令行或者配置 external tools，
 或者在载入我的配置文件后，使用快捷键 ctrl + shift + B 进行 C++11 编译，

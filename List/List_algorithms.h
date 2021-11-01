@@ -41,7 +41,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline void List<T>::swap(iterator pos1, iterator pos2)
+    inline void List<T>::swap(Iterator pos1, Iterator pos2)
     {
         Swap(*pos1, *pos2);
         return;
@@ -66,7 +66,7 @@ namespace CZ
                 {
                     isSorted = true;
                     checkedNum = 0;
-                    for (iterator it = begin(); checkedNum != unSortedNum - 1 && it != end();
+                    for (Iterator it = begin(); checkedNum != unSortedNum - 1 && it != end();
                         ++checkedNum)
                     {
                         T &thisData = *it;
@@ -115,11 +115,11 @@ namespace CZ
         }
         if (sorted)
         {
-            for (iterator firstRepeat = begin(); firstRepeat != end();)
+            for (Iterator firstRepeat = begin(); firstRepeat != end();)
             {
-                iterator lastRepeat = firstRepeat;
+                Iterator lastRepeat = firstRepeat;
                 for (; cmp(*lastRepeat, *firstRepeat) && lastRepeat != end(); ++lastRepeat);
-                firstRepeat = erase(++iterator(firstRepeat), lastRepeat);
+                firstRepeat = erase(++Iterator(firstRepeat), lastRepeat);
             }
         }
         else
@@ -163,7 +163,7 @@ namespace CZ
     }
 
     template <typename T>
-    typename List<T>::iterator List<T>::splice(iterator pos, List<T> &l)
+    typename List<T>::Iterator List<T>::splice(Iterator pos, List<T> &l)
     {
         if (l.empty())
         {

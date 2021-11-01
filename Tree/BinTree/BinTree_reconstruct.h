@@ -14,7 +14,7 @@
 #define BIN_TREE_RECONSTRUCT_H
 
 #include "BinTree.h"
-#include "..\..\Iterator\Iterator_traits.h"
+#include "../../Iterator/Iterator_traits.h"
 #include <cstdio>
 #include <stdexcept>
 #include <type_traits>
@@ -120,7 +120,7 @@ namespace CZ
     namespace TestIterator
     {
         template <typename It, typename T>
-        void test_iterator_for_reconstruct(BinTree<T> &res, It begin1, It end1,
+        void test_Iterator_for_reconstruct(BinTree<T> &res, It begin1, It end1,
             It begin2, It end2,
             random_iterator_tag, const ConstructBinTreeFrom &seqV)
         {
@@ -161,21 +161,21 @@ namespace CZ
         }
 
         template <typename It, typename T>
-        void test_iterator_for_reconstruct(BinTree<T> &res, It begin1, It end1,
+        void test_Iterator_for_reconstruct(BinTree<T> &res, It begin1, It end1,
             It begin2, It end2,
             seq_iterator_tag, const ConstructBinTreeFrom &seqV)
         {
-            printf("Error: iterator is seq_iterator, should be random_iterator\n");
+            printf("Error: Iterator is seq_Iterator, should be random_Iterator\n");
             throw std::exception();
             return;
         }
 
         template <typename It, typename T>
-        void test_iterator_for_reconstruct(BinTree<T> &res, It begin1, It end1,
+        void test_Iterator_for_reconstruct(BinTree<T> &res, It begin1, It end1,
             It begin2, It end2,
             bi_iterator_tag, const ConstructBinTreeFrom &seqV)
         {
-            printf("Error: iterator is bi_iterator, should be random_iterator\n");
+            printf("Error: Iterator is bi_Iterator, should be random_Iterator\n");
             throw std::exception();
             return;
         }
@@ -189,7 +189,7 @@ namespace CZ
         It inB, It inE)
     {
         BinTree<T> t;
-        TestIterator::test_iterator_for_reconstruct(t, preB, preE, inB, inE,
+        TestIterator::test_Iterator_for_reconstruct(t, preB, preE, inB, inE,
             typename Iterator_traits<It>::iterator_category(), PRE_IN);
         t._size = inE - inB;
         return t;
@@ -201,7 +201,7 @@ namespace CZ
         It inB, It inE)
     {
         BinTree<T> t;
-        TestIterator::test_iterator_for_reconstruct(t, postB, postE, inB, inE,
+        TestIterator::test_Iterator_for_reconstruct(t, postB, postE, inB, inE,
             typename Iterator_traits<It>::iterator_category(), POST_IN);
         t._size = inE - inB;
         return t;
@@ -213,7 +213,7 @@ namespace CZ
         It preB, It preE)
     {
         BinTree<T> t;
-        TestIterator::test_iterator_for_reconstruct(t, inB, inE, preB, preE,
+        TestIterator::test_Iterator_for_reconstruct(t, inB, inE, preB, preE,
             typename Iterator_traits<It>::iterator_category(), IN_PRE);
         t._size = inE - inB;
         return t;
@@ -225,7 +225,7 @@ namespace CZ
         It postB, It postE)
     {
         BinTree<T> t;
-        TestIterator::test_iterator_for_reconstruct(t, inB, inE, postB, postE,
+        TestIterator::test_Iterator_for_reconstruct(t, inB, inE, postB, postE,
             typename Iterator_traits<It>::iterator_category(), IN_POST);
         t._size = inE - inB;
         return t;

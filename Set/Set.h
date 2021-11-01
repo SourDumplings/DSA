@@ -35,7 +35,7 @@ namespace CZ
         friend class SetIterator<T>;
     public:
         using Rank = unsigned;
-        using iterator = SetIterator<T>;
+        using Iterator = SetIterator<T>;
 
         Set();
         Set(const std::initializer_list<T> &l);
@@ -47,11 +47,11 @@ namespace CZ
         Rank size() const;
         bool empty() const;
         bool has_this_element(const T &value) const;
-        iterator begin();
-        iterator begin() const;
+        Iterator begin();
+        Iterator begin() const;
         // 注意Set没有尾后迭代器end()，取而代之的是最后一个元素的迭代器last()
-        iterator last();
-        iterator last() const;
+        Iterator last();
+        Iterator last() const;
 
         // 插入，如果该值已经存在则替换
         void insert(const T &value);

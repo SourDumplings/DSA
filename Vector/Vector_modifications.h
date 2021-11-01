@@ -69,14 +69,14 @@ namespace CZ
 
     // 插入一个元素到指定位置之前，返回指向插入的元素的迭代器
     template <typename T>
-    typename Vector<T>::iterator Vector<T>::insert(typename Vector<T>::iterator itPos, const T &x)
+    typename Vector<T>::Iterator Vector<T>::insert(typename Vector<T>::Iterator itPos, const T &x)
     {
         typename Vector<T>::Rank r = itPos - begin();
         try
         {
             if (!(itPos <= end() && itPos >= begin()))
             {
-                throw "Invalid pos iterator";
+                throw "Invalid pos Iterator";
             }
             ++_size;
             expand();
@@ -95,14 +95,14 @@ namespace CZ
     }
 
     template <typename T>
-    typename Vector<T>::iterator Vector<T>::insert(typename Vector<T>::iterator itPos, T &&x)
+    typename Vector<T>::Iterator Vector<T>::insert(typename Vector<T>::Iterator itPos, T &&x)
     {
         typename Vector<T>::Rank r = itPos - begin();
         try
         {
             if (!(itPos <= end() && itPos >= begin()))
             {
-                throw "Invalid pos iterator";
+                throw "Invalid pos Iterator";
             }
             ++_size;
             expand();
@@ -122,7 +122,7 @@ namespace CZ
 
     // 插入一个迭代器范围的元素到指定位置之前，返回指向插入的元素的第一个元素的迭代器
     template <typename T>
-    typename Vector<T>::iterator Vector<T>::insert(typename Vector<T>::iterator itPos,
+    typename Vector<T>::Iterator Vector<T>::insert(typename Vector<T>::Iterator itPos,
         const T *b, const T *e)
     {
         typename Vector<T>::Rank r = itPos - begin();
@@ -130,11 +130,11 @@ namespace CZ
         {
             if (!(itPos <= end() && itPos >= begin()))
             {
-                throw "Invalid pos iterator";
+                throw "Invalid pos Iterator";
             }
             if (!(b <= e))
             {
-                throw "Invalid iterator range";
+                throw "Invalid Iterator range";
             }
             typename Vector<T>::Rank n = e - b;
             _size += n;
@@ -158,20 +158,20 @@ namespace CZ
     }
 
     template <typename T>
-    inline typename Vector<T>::iterator Vector<T>::insert(typename Vector<T>::iterator itPos,
-        const typename Vector<T>::iterator &b, const typename Vector<T>::iterator &e)
+    inline typename Vector<T>::Iterator Vector<T>::insert(typename Vector<T>::Iterator itPos,
+        const typename Vector<T>::Iterator &b, const typename Vector<T>::Iterator &e)
     { return insert(itPos, b.get(), e.get()); }
 
     // 删除单元素，返回删除的元素之后的元素的迭代器
     template <typename T>
-    typename Vector<T>::iterator Vector<T>::erase(typename Vector<T>::iterator itPos)
+    typename Vector<T>::Iterator Vector<T>::erase(typename Vector<T>::Iterator itPos)
     {
         typename Vector<T>::Rank r = itPos - begin();
         try
         {
             if (!(itPos < end() && itPos >= begin()))
             {
-                throw "Invalid pos iterator";
+                throw "Invalid pos Iterator";
             }
             for (unsigned i = r; i != _size - 1; ++i)
             {
@@ -190,8 +190,8 @@ namespace CZ
 
     // 删除一个迭代器区间范围内的元素，原来迭代器区间itEnd所指向的元素的值
     template <typename T>
-    typename Vector<T>::iterator Vector<T>::erase(typename Vector<T>::iterator itBegin,
-        typename Vector<T>::iterator itEnd)
+    typename Vector<T>::Iterator Vector<T>::erase(typename Vector<T>::Iterator itBegin,
+        typename Vector<T>::Iterator itEnd)
     {
         typename Vector<T>::Rank rB = itBegin - begin(), rE = itEnd - begin();
         try
@@ -200,7 +200,7 @@ namespace CZ
                 (itEnd > begin() && itEnd <= end()) &&
                 itBegin <= itEnd))
             {
-                throw "Invalid iterator range";
+                throw "Invalid Iterator range";
             }
             typename Vector<T>::Rank n = itEnd - itBegin;
             for (unsigned i = rB; i != rE; ++i)
@@ -235,8 +235,8 @@ namespace CZ
     }
 
     template <typename T>
-    void Vector<T>::assign(const typename Vector<T>::iterator &begin,
-        const typename Vector<T>::iterator &end)
+    void Vector<T>::assign(const typename Vector<T>::Iterator &begin,
+        const typename Vector<T>::Iterator &end)
     {
         _size = end - begin;
         expand();

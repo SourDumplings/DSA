@@ -14,7 +14,7 @@
 #define TREE_TRAVERSAL_H
 
 #include "Tree.h"
-#include "..\Queue\Queue.h"
+#include "../Queue/Queue.h"
 
 namespace CZ
 {

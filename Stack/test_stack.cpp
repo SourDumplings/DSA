@@ -14,7 +14,7 @@
 #include <string>
 
 #include "Stack.h"
-#include "..\List\List.h"
+#include "../List/List.h"
 
 using namespace std;
 using namespace CZ;

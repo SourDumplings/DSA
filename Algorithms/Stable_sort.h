@@ -15,11 +15,11 @@
 #include <stdexcept>
 #include <functional>
 
-#include ".\Sort_methods\Bubble_sort.h"
-#include ".\Sort_methods\Insertion_sort.h"
-#include ".\Sort_methods\Merge_sort.h"
+#include "./Sort_methods/Bubble_sort.h"
+#include "./Sort_methods/Insertion_sort.h"
+#include "./Sort_methods/Merge_sort.h"
 
-#include "..\Iterator\Iterator_traits.h"
+#include "../Iterator/Iterator_traits.h"
 
 namespace CZ
 {
@@ -125,7 +125,7 @@ namespace CZ
     void Stable_sort(It begin, It end,
         const StableSortMethod &method = MERGE_SORT, const unsigned version = 0)
     {
-        Stable_sort(begin, end, std::less<const decltype(*begin)>(), method, version);
+        Stable_sort(begin, end, std::less<decltype(*begin)>(), method, version);
         return;
     }
 } // CZ

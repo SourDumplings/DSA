@@ -89,7 +89,7 @@ namespace CZ
     template <typename It>
     inline It Median_of_two_seq(const It &begin1, const It &end1, const It &begin2, const It &end2)
     {
-        return Median_of_two_seq(begin1, end1, begin2, end2, std::less<const decltype(*begin1)>());
+        return Median_of_two_seq(begin1, end1, begin2, end2, std::less<decltype(*begin1)>());
     }
 } // CZ
 

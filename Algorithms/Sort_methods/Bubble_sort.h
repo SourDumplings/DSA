@@ -12,7 +12,7 @@
 #ifndef BUBBLE_SORT_H
 #define BUBBLE_SORT_H
 
-#include "..\Swap.h"
+#include "../Swap.h"
 #include <cstdio>
 
 namespace CZ

@@ -18,25 +18,25 @@ Vector类模板的数据访问接口方法
 namespace CZ
 {
     template <typename T>
-    inline typename Vector<T>::iterator Vector<T>::begin()
+    inline typename Vector<T>::Iterator Vector<T>::begin()
     {
         return _elem;
     }
 
     template <typename T>
-    inline typename Vector<T>::iterator Vector<T>::begin() const
+    inline typename Vector<T>::Iterator Vector<T>::begin() const
     {
         return _elem;
     }
 
     template <typename T>
-    inline typename Vector<T>::iterator Vector<T>::end()
+    inline typename Vector<T>::Iterator Vector<T>::end()
     {
         return _elem + _size;
     }
 
     template <typename T>
-    inline typename Vector<T>::iterator Vector<T>::end() const
+    inline typename Vector<T>::Iterator Vector<T>::end() const
     {
         return _elem + _size;
     }

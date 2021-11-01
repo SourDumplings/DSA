@@ -92,7 +92,7 @@ namespace CZ
     }
 
     template <typename T>
-    typename Set<T>::iterator Set<T>::begin() const
+    typename Set<T>::Iterator Set<T>::begin() const
     {
         if (empty())
         {
@@ -108,11 +108,11 @@ namespace CZ
     }
 
     template <typename T>
-    inline typename Set<T>::iterator Set<T>::begin()
+    inline typename Set<T>::Iterator Set<T>::begin()
     { return static_cast<const Set<T>&>(*this).begin(); }
 
     template <typename T>
-    typename Set<T>::iterator Set<T>::last() const
+    typename Set<T>::Iterator Set<T>::last() const
     {
         if (empty())
         {
@@ -128,7 +128,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline typename Set<T>::iterator Set<T>::last()
+    inline typename Set<T>::Iterator Set<T>::last()
     { return static_cast<const Set<T>&>(*this).last(); }
 
     template <typename T>
@@ -136,8 +136,8 @@ namespace CZ
     {
         printf("for set %s, it has %u elements\n", name, size());
         printf("it contains:");
-        iterator b = begin(), l = last();
-        for (iterator it = b; it.get(); ++it)
+        Iterator b = begin(), l = last();
+        for (Iterator it = b; it.get(); ++it)
         {
             std::cout << " " << *it;
             if (it == l)

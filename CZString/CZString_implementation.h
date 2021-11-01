@@ -45,7 +45,7 @@ namespace CZ
     void CZString::print_info(const char *name) const
     {
         printf("CZString %s is ", name);
-        for (iterator it = begin(); it != end(); ++it)
+        for (Iterator it = begin(); it != end(); ++it)
         {
             putchar(*it);
         }

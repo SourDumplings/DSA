@@ -13,9 +13,9 @@
 #define SELECT_SORT_H
 
 #include <cstdio>
-#include "..\Max_element.h"
-#include "..\Min_element.h"
-#include "..\Swap.h"
+#include "../Max_element.h"
+#include "../Min_element.h"
+#include "../Swap.h"
 
 namespace CZ
 {
@@ -61,7 +61,7 @@ namespace CZ
     template <typename It>
     void Select_sort(It begin, Rank_select_sort N, const unsigned version = 0)
     {
-        Select_sort(begin, N, std::less<const decltype(*begin)>(), version);
+        Select_sort(begin, N, std::less<decltype(*begin)>(), version);
         return;
     }
 } // CZ

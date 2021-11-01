@@ -150,7 +150,7 @@ namespace CZ
         if (_graphType == ADJACENCY_LIST)
         {
             Vector<Edge<ED>> &eV = *reinterpret_cast<Vector<Edge<ED>>*>(_dataE[s]);
-            for (typename Vector<Edge<ED>>::iterator it = eV.begin(); it != eV.end(); ++it)
+            for (typename Vector<Edge<ED>>::Iterator it = eV.begin(); it != eV.end(); ++it)
             {
                 if (it->valid() && it->destination() == d)
                 {

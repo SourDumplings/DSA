@@ -12,7 +12,7 @@
 #ifndef STACK_H
 #define STACK_H
 
-#include "..\Vector\Vector.h"
+#include "../Vector/Vector.h"
 
 namespace CZ
 {

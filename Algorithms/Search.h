@@ -15,9 +15,9 @@
 #include <functional>
 #include <stdexcept>
 
-#include ".\Search_methods\Seq_search.h"
-#include ".\Search_methods\Binary_search.h"
-#include ".\Search_methods\Fib_search.h"
+#include "./Search_methods/Seq_search.h"
+#include "./Search_methods/Binary_search.h"
+#include "./Search_methods/Fib_search.h"
 
 namespace CZ
 {

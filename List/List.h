@@ -27,14 +27,14 @@ namespace CZ
     public:
         using Rank = unsigned;
         using RankPlus = int;
-        using iterator = ListIterator<T>;
+        using Iterator = ListIterator<T>;
 
 		// 构造函数
         List(Rank n = 0, T data = T());
         List(const T *begin, Rank n);
-        List(iterator begin, Rank n);
+        List(Iterator begin, Rank n);
         List(const T *begin, const T *end);
-        List(iterator begin, iterator end);
+        List(Iterator begin, Iterator end);
         List(const std::initializer_list<T> &L);
 
         // 复制构造函数
@@ -49,10 +49,10 @@ namespace CZ
 		// 数据访问接口
 		Rank size() const;
 		bool empty() const;
-        iterator begin();
-        iterator begin() const;
-        iterator end();
-        iterator end() const;
+        Iterator begin();
+        Iterator begin() const;
+        Iterator end();
+        Iterator end() const;
         T& front();
         const T& front() const;
         T& back();
@@ -70,17 +70,17 @@ namespace CZ
         virtual void push_front(T &&data);
         virtual void pop_back();
         virtual void pop_front();
-        iterator insert(iterator pos, const T &data);
-        iterator insert(iterator pos, T &&data);
-        iterator insert(iterator pos, iterator b, iterator e);
-        iterator erase(iterator pos);
-        iterator erase(iterator b, iterator e);
+        Iterator insert(Iterator pos, const T &data);
+        Iterator insert(Iterator pos, T &&data);
+        Iterator insert(Iterator pos, Iterator b, Iterator e);
+        Iterator erase(Iterator pos);
+        Iterator erase(Iterator b, Iterator e);
         void remove(const T &value); // 删除所有value值
         void clear();
         virtual void merge(const List<T> &l);
         virtual void merge(List<T> &&l);
         // 交换函数模板
-        void swap(iterator pos1, iterator pos2);
+        void swap(Iterator pos1, Iterator pos2);
         // 列表元素的排序算法，version 0为冒泡排序，对元素值进行操作，适用于元素值体积小的情况
         // version 1为插入排序，对链表结点进行操作，适用于元素体积较大的情况
         template <typename Cmp = std::less<const T&>>
@@ -93,7 +93,7 @@ namespace CZ
         virtual void reverse();
         // 剪切函数，可以把另一个列表剪切到前一个列表的指定位置的前面，即为时间复杂度为O(1)的插入操作
         // 返回插入元素后插入的元素中最前面的结点的迭代器
-        iterator splice(iterator pos, List<T> &l);
+        Iterator splice(Iterator pos, List<T> &l);
 
         // 操作符函数
         virtual List& operator=(const List &l);
@@ -103,7 +103,7 @@ namespace CZ
         void free();
         void init();
         void init_from(const T *begin, const T *end);
-        void init_from(iterator begin, iterator end);
+        void init_from(Iterator begin, Iterator end);
 
     private:
         Rank _size = 0;

@@ -16,7 +16,7 @@
 
 #include "../Vector/Vector.h"
 #include "../Dictionary/Pair.h"
-#include <cstdint>
+#include <limits.h>
 #include <cstdio>
 
 namespace CZ

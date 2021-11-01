@@ -49,7 +49,7 @@ namespace CZ
     template <typename It>
     It Min_element(const It &begin, const It &end)
     {
-        return Min_element(begin, end, std::less<const decltype(*begin)>());
+        return Min_element(begin, end, std::less<decltype(*begin)>());
     }
 } // CZ
 

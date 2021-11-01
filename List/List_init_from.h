@@ -32,7 +32,7 @@ namespace CZ
     }
 
     template <typename T>
-    void List<T>::init_from(iterator begin, iterator end)
+    void List<T>::init_from(Iterator begin, Iterator end)
     {
         init();
         ListNode<T> *last = _head;

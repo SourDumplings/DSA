@@ -17,7 +17,7 @@ Vector本身所支持的操作
 #include <iostream>
 
 // 字典序的比较函数
-#include "..\Algorithms\Dict_compare.h"
+#include "../Algorithms/Dict_compare.h"
 
 namespace CZ
 {

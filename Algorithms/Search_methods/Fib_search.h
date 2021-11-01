@@ -14,7 +14,7 @@
 
 #include <functional>
 #include <cstdio>
-#include "..\Fib.h"
+#include "../Fib.h"
 
 namespace CZ
 {

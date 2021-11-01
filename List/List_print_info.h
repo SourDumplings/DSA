@@ -25,7 +25,7 @@ namespace CZ
         printf("size = %u\n", _size);
         printf("including: ");
         int output = 0;
-        for (iterator it = begin(); it != end(); ++it)
+        for (Iterator it = begin(); it != end(); ++it)
         {
             if (output++)
             {

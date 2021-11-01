@@ -23,7 +23,7 @@ namespace CZ
         {
             return false;
         }
-        for (typename Set<T>::iterator itL = lhs.begin(), itR = rhs.begin();; ++itL, ++itR)
+        for (typename Set<T>::Iterator itL = lhs.begin(), itR = rhs.begin();; ++itL, ++itR)
         {
             if (*itL != *itR)
             {
@@ -44,7 +44,7 @@ namespace CZ
     Set<T> operator+(const Set<T> &lhs, const Set<T> &rhs)
     {
         Set<T> sumSet(lhs);
-        for (typename Set<T>::iterator it = rhs.begin();; ++it)
+        for (typename Set<T>::Iterator it = rhs.begin();; ++it)
         {
             sumSet.insert(*it);
             if (it == rhs.last())
@@ -59,9 +59,9 @@ namespace CZ
     Set<T> operator-(const Set<T> &lhs, const Set<T> &rhs)
     {
         Set<T> retSet(lhs);
-        for (typename Set<T>::iterator it = retSet.begin();;)
+        for (typename Set<T>::Iterator it = retSet.begin();;)
         {
-            typename Set<T>::iterator tempIt = it;
+            typename Set<T>::Iterator tempIt = it;
             ++it;
             if (rhs.has_this_element(*tempIt))
             {

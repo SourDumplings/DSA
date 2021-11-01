@@ -14,11 +14,11 @@
 
 namespace CZ
 {
-    struct seq_iterator_tag { static const char * what() { return "seq_iterator"; }};
+    struct seq_iterator_tag { static const char * what() { return "seq_Iterator"; }};
     struct bi_iterator_tag: public seq_iterator_tag
-    { static const char * what() { return "bi_iterator"; }};
+    { static const char * what() { return "bi_Iterator"; }};
     struct random_iterator_tag: public bi_iterator_tag
-    { static const char * what() { return "random_iterator"; }};
+    { static const char * what() { return "random_Iterator"; }};
 
     template <typename It>
     struct Iterator_traits

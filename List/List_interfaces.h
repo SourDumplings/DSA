@@ -19,23 +19,23 @@ List类模板的访问接口函数
 namespace CZ
 {
     template <typename T>
-    inline typename List<T>::iterator List<T>::begin()
+    inline typename List<T>::Iterator List<T>::begin()
     {
         return ListIterator<T>(_head->_next);
     }
     template <typename T>
-    inline typename List<T>::iterator List<T>::begin() const
+    inline typename List<T>::Iterator List<T>::begin() const
     {
         return ListIterator<T>(_head->_next);
     }
 
     template <typename T>
-    inline typename List<T>::iterator List<T>::end()
+    inline typename List<T>::Iterator List<T>::end()
     {
         return ListIterator<T>(_head);
     }
     template <typename T>
-    inline typename List<T>::iterator List<T>::end() const
+    inline typename List<T>::Iterator List<T>::end() const
     {
         return ListIterator<T>(_head);
     }
@@ -138,7 +138,7 @@ namespace CZ
     template <typename T>
     const T& List<T>::at(typename List<T>::RankPlus index) const
     {
-        iterator it = begin();
+        Iterator it = begin();
         if (index >= 0)
         {
             if (static_cast<Rank>(index) >= _size)
@@ -166,7 +166,7 @@ namespace CZ
             }
 
             // // 方法二：间接法，亦适用于单链表
-            // iterator temp = it;
+            // Iterator temp = it;
             // for (RankPlus i = 0; i < -index; ++i)
             // {
             //     ++temp;

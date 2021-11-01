@@ -14,7 +14,7 @@
 
 #include "Stable_sort.h"
 #include "../Iterator/Iterator_traits.h"
-#include ".\Sort_methods\Select_sort.h"
+#include "./Sort_methods/Select_sort.h"
 #include "Sort_methods/Quick_sort.h"
 #include "Sort_methods/Heap_sort.h"
 #include "Sort_methods/Shell_sort.h"
@@ -133,7 +133,7 @@ namespace CZ
     void Sort(It begin, It end, const UnStableSortMethod &method = QUICK_SORT,
         const unsigned version = 0)
     {
-        Sort(begin, end, std::less<const decltype(*begin)>(), method, version);
+        Sort(begin, end, std::less<decltype(*begin)>(), method, version);
         return;
     }
 
@@ -142,7 +142,7 @@ namespace CZ
     void Sort(It begin, It end, const StableSortMethod &method,
         const unsigned version = 0)
     {
-        Stable_Sort(begin, end, std::less<const decltype(*begin)>(), method, version);
+        Stable_sort(begin, end, std::less<decltype(*begin)>(), method, version);
         return;
     }
 

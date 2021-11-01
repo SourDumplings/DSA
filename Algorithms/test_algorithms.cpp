@@ -15,8 +15,8 @@
 #include <stdexcept>
 #include <functional>
 
-#include "..\Vector\Vector.h"
-#include "..\List\List.h"
+#include "../Vector/Vector.h"
+#include "../List/List.h"
 #include "Search.h"
 #include "Fib.h"
 #include "Sort.h"

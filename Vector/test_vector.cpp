@@ -64,7 +64,7 @@ int main(int argc, char const *argv[])
     // vs4({"abc", "def"});
 
     // printf("v1 has: ");
-    // for (Vector<int>::iterator it = v1.begin(); it < v1.end(); ++it)
+    // for (Vector<int>::Iterator it = v1.begin(); it < v1.end(); ++it)
     // {
     //     printf("%d ", *it);
     // }

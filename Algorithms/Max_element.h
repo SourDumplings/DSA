@@ -49,7 +49,7 @@ namespace CZ
     template <typename It>
     It Max_element(const It &begin, const It &end)
     {
-        return Max_element(begin, end, std::less<const decltype(*begin)>());
+        return Max_element(begin, end, std::less<decltype(*begin)>());
     }
 } // CZ
 

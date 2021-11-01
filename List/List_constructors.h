@@ -38,7 +38,7 @@ namespace CZ
     }
 
     template <typename T>
-    List<T>::List(iterator begin, Rank n): _size(n)
+    List<T>::List(Iterator begin, Rank n): _size(n)
     {
         init();
         ListNode<T> *last = _head;
@@ -59,7 +59,7 @@ namespace CZ
     }
 
     template <typename T>
-    List<T>::List(iterator begin, iterator end)
+    List<T>::List(Iterator begin, Iterator end)
     {
         init_from(begin, end);
         return;
