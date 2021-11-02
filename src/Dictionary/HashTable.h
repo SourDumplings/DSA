@@ -26,7 +26,7 @@ namespace CZ
 
         // 哈希函数，取模法
         template <typename T>
-        class ModeHash
+        class ModHash
         {
         public:
             Rank operator()(const T &value, const Rank size) const { return value % size; }
@@ -40,7 +40,7 @@ namespace CZ
         SQUARE_PROBING
     };
 
-    template <typename T, typename H = Dict::ModeHash<T>>
+    template <typename T, typename H = Dict::ModHash<T>>
     class HashTable
     {
     public:
