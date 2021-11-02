@@ -21,7 +21,7 @@
 
 namespace CZ
 {
-    CZString::CZString(const char *str_): Vector<char>(str_, strlen(str_)) {}
+    CZString::CZString(const char *str_): Vector<char>(str_, str_ + strlen(str_)) {}
     CZString::CZString(const std::string &str_): CZString(str_.c_str()) {}
 
     CZString::~CZString() { if (_tempStr) delete [] _tempStr; }

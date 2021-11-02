@@ -31,8 +31,6 @@ namespace CZ
 
 		// 构造函数
         List(Rank n = 0, T data = T());
-        List(const T *begin, Rank n);
-        List(Iterator begin, Rank n);
         List(const T *begin, const T *end);
         List(Iterator begin, Iterator end);
         List(const std::initializer_list<T> &L);

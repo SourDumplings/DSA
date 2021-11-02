@@ -16,8 +16,6 @@ Vector的构造函数
 
 namespace CZ
 {
-    // 构造函数
-    // 构造函数1.容量为c，规模为s，所有元素初始为v
     template <typename T>
     Vector<T>::Vector(Vector<T>::Rank s, T v)
     {
@@ -28,20 +26,6 @@ namespace CZ
         }
     }
 
-    // 构造函数2.迭代器与元素个数构造
-    template <typename T>
-    Vector<T>::Vector(const Iterator &begin, Rank n)
-    {
-        init_from(begin, begin + n);
-    }
-
-    template <typename T>
-    Vector<T>::Vector(const T *begin, Rank n)
-    {
-        init_from(begin, begin + n);
-    }
-
-    // 构造函数3.迭代器区间构造
     template <typename T>
     Vector<T>::Vector(const Iterator &begin, const Iterator &end)
     {
@@ -54,7 +38,6 @@ namespace CZ
         init_from(begin, end);
     }
 
-    // 构造函数4.不定参数个数的构造函数
     template <typename T>
     Vector<T>::Vector(const std::initializer_list<T> &initL)
     {

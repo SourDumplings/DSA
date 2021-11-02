@@ -28,15 +28,12 @@ namespace CZ
         using Iterator = RandomIterator<T>;
 
         // 构造函数
-        // 构造函数1.容量为 c = 2 * s，规模为 s，所有元素初始为 v
+        // 构造函数 1：容量为 c = 2 * s，规模为 s，所有元素初始为 v
         Vector(Rank s = 0, T v = T());
-        // 构造函数2.迭代器与元素个数构造
-        Vector(const Iterator &begin, Rank n);
-        Vector(const T *begin, Rank n);
-        // 构造函数3.迭代器区间构造
+        // 构造函数 2：迭代器区间构造
         Vector(const Iterator &begin, const Iterator &end);
         Vector(const T *begin, const T *end);
-        // 构造函数4.不定参数个数的构造函数
+        // 构造函数 3：不定参数个数的构造函数
         Vector(const std::initializer_list<T> &initL);
 
         // 复制构造函数

@@ -31,27 +31,6 @@ namespace CZ
     }
 
     template <typename T>
-    List<T>::List(const T *begin, Rank n): _size(n)
-    {
-        init_from(begin, begin+n);
-        return;
-    }
-
-    template <typename T>
-    List<T>::List(Iterator begin, Rank n): _size(n)
-    {
-        init();
-        ListNode<T> *last = _head;
-        for (unsigned i = 0; i != n; ++i)
-        {
-            last = last->insert_as_next(*begin++);
-            last->_prev->_next = last;
-            last->_next->_prev = last;
-        }
-        return;
-    }
-
-    template <typename T>
     List<T>::List(const T *begin, const T *end)
     {
         init_from(begin, end);
