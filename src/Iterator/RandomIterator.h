@@ -53,7 +53,8 @@ namespace CZ
         using iterator_category = random_iterator_tag;
         using Rank = RandomIteratorRank;
 
-        RandomIterator(T *p_ = nullptr): BiIterator<T>(p_) {}
+        RandomIterator(const T *p_ = nullptr): BiIterator<T>(p_) {}
+
         virtual ~RandomIterator() = default;
 
         virtual const T& operator[](const Rank index) const

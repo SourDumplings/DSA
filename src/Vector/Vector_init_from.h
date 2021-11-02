@@ -28,18 +28,6 @@ namespace CZ
         }
         return;
     }
-
-    template <typename T>
-    void Vector<T>::init_from(const T *begin, const T *end)
-    {
-        _elem = new T[_capacity = 2 * (end - begin)];
-        _size = 0;
-        for (T* it = const_cast<T*>(begin); it != end; ++it)
-        {
-            _elem[_size++] = *it;
-        }
-        return;
-    }
 }
 
 #endif // INIT_FROM_H

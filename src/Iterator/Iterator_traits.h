@@ -26,8 +26,8 @@ namespace CZ
         typedef typename It::iterator_category iterator_category;
     };
 
-    template <typename It>
-    struct Iterator_traits<It*>
+    template <typename T>
+    struct Iterator_traits<T*>
     {
         typedef random_iterator_tag iterator_category;
     };

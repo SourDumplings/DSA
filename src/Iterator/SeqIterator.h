@@ -34,7 +34,7 @@ namespace CZ
         typedef seq_iterator_tag iterator_category;
 
         // 构造函数
-        SeqIterator(T *p_ = nullptr): _p(p_) {}
+        SeqIterator(const T *p_ = nullptr): _p(const_cast<T*>(p_)) {}
 
         virtual ~SeqIterator() = default;
 

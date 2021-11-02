@@ -32,7 +32,6 @@ namespace CZ
         Vector(Rank s = 0, T v = T());
         // 构造函数 2：迭代器区间构造
         Vector(const Iterator &begin, const Iterator &end);
-        Vector(const T *begin, const T *end);
         // 构造函数 3：不定参数个数的构造函数
         Vector(const std::initializer_list<T> &initL);
 
@@ -89,7 +88,6 @@ namespace CZ
     protected:
         //迭代器区间的复制
         void init_from(const Iterator &begin, const Iterator &end);
-        void init_from(const T *begin, const T *end);
         // 析构辅助方法
         void free();
         // 搬到大房子中，即扩容操作

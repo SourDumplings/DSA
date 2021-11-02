@@ -12,6 +12,7 @@
 #include "Deque.h"
 #include <cstdio>
 #include <iostream>
+#include <stdexcept>
 
 namespace CZ
 {
@@ -42,7 +43,7 @@ namespace CZ
 
                     if (count == s)
                     {
-                        // 最后一个缓冲区的最后一个元素
+                        // 已经存完最后一个缓冲区的最后一个元素
                         _finish.init(buffer + j + 1, buffer, buffer + _bufferSize, &buffer);
                     }
                 }
@@ -52,6 +53,24 @@ namespace CZ
                 }
             }
         }
+    }
+
+    template <typename T>
+    Deque<T>::Deque(const Iterator &begin, const Iterator &end, Rank bufferSize_ = 10)
+    {
+        init_from(begin, end, bufferSize_);
+    }
+
+    template <typename T>
+    Deque<T>::Deque(const T *begin, const T *end, Rank bufferSize_ = 10)
+    {
+        init_from(begin, end, bufferSize_);
+    }
+    
+    template <typename T>
+    Deque<T>::Deque(const std::initializer_list<T> &initL)
+    {
+
     }
 
     // 析构函数
@@ -108,6 +127,52 @@ namespace CZ
             std::cout << *it;
         }
         printf("\n\n");
+    }
+
+    template <typename T>
+    template <typename It>
+    void Deque<T>::init_from(const It &begin, const It &end, Rank bufferSize_)
+    {
+        _bufferSize = bufferSize_;
+
+        if (end < begin)
+        {
+            printf("Error from Deque init_from: invalid iterator range for end < begin.\n");
+            throw std::exception();
+        }
+        
+        _size = end - begin;
+        _mapSize = _size % _bufferSize == 0 ? _size / _bufferSize + 2 : _size / _bufferSize + 3; // 左右各多一个 node
+        _bufferMap = new Node[_mapSize];
+        Iterator it = begin;
+        for (Rank i = 0; i < _mapSize; ++i)
+        {
+            Node &buffer = _bufferMap[i];
+            buffer = new T[_bufferSize];
+            if (i >= 1) // 从第二个缓冲区开始存元素
+            {
+                if (i == 1)
+                {
+                    // 第一个缓冲区
+                    _start.init(buffer, buffer, buffer + _bufferSize, &buffer);
+                }
+
+                for (Rank j = 0; j < _bufferSize && count < s; ++j)
+                {
+                    buffer[j] = *(it++);
+
+                    if (it == end)
+                    {
+                        // 已经存完最后一个缓冲区的最后一个元素
+                        _finish.init(buffer + j + 1, buffer, buffer + _bufferSize, &buffer);
+                    }
+                }
+                if (it == end)
+                {
+                    break;
+                }
+            }
+        }
     }
 }
 

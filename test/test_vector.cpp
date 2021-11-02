@@ -22,7 +22,13 @@ int main(int argc, char const *argv[])
 {
     // 测试构造函数和数据访问接口
     int a[10] = {1, 2, 4, 5};
-    Vector<int> v1, v2(10), v3(5, 1), v4(v3), v5(a, a+3), v6({1, 4, 7, 8, 3, 2, 8});
+    Vector<int> v1;
+    Vector<int> v2(10);
+    Vector<int> v3(5, 1);
+    Vector<int> v4(v3);
+    Vector<int> v5(a, a+3);
+    Vector<int> v6({1, 4, 7, 8, 3, 2, 8});
+    
     printf("v6.at(1) = %d\n", v6.at(1));
     printf("v6.at(4) = %d\n", v6.at(4));
     printf("v6.at(-1) = %d\n", v6.at(-1));

@@ -31,7 +31,8 @@ namespace CZ
     public:
         typedef bi_iterator_tag iterator_category;
 
-        BiIterator(T *p_ = nullptr): SeqIterator<T>(p_) {}
+        BiIterator(const T *p_ = nullptr): SeqIterator<T>(p_) {}
+
         virtual ~BiIterator() = default;
 
         virtual BiIterator<T>& operator--()

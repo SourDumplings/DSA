@@ -33,12 +33,6 @@ namespace CZ
     }
 
     template <typename T>
-    Vector<T>::Vector(const T *begin, const T *end)
-    {
-        init_from(begin, end);
-    }
-
-    template <typename T>
     Vector<T>::Vector(const std::initializer_list<T> &initL)
     {
         // printf("initL construct\n");
