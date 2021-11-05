@@ -18,7 +18,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin/)
 # 动态库版本
 set(version 2.0)
 # API 版本
-set(api_version 4)
+set(api_version 5)
 
 message(STATUS "source dir: " ${PROJECT_SOURCE_DIR})
 message(STATUS "binary dir: " ${PROJECT_BINARY_DIR})

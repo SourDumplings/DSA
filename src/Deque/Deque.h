@@ -35,7 +35,10 @@ namespace CZ
         Deque(const Iterator &begin, const Iterator &end, Rank bufferSize_ = 10);
         Deque(const T *begin, const T *end, Rank bufferSize_ = 10);
         // 构造函数 3：初始化列表构造
-        Deque(const std::initializer_list<T> &initL);
+        Deque(const std::initializer_list<T> &initL, Rank bufferSize_ = 10);
+
+        // 复制构造函数
+        Deque(const Deque<T> &dq);
 
         // 析构函数
         virtual ~Deque();
@@ -49,6 +52,9 @@ namespace CZ
         Iterator end();
         Iterator end() const;
         Rank size() const;
+
+        // 操作符
+        Deque<T>& operator=(const Deque<T> &dq);
     private:
         Rank _bufferSize;
         Rank _mapSize;
@@ -59,6 +65,8 @@ namespace CZ
 
         template<typename It>
         void init_from(const It &begin, const It &end, Rank bufferSize_ = 10);
+
+        static const Rank MIN_BUFFER_SIZE = 5;
     };
 }
 
