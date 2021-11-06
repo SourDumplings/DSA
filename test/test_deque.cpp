@@ -22,6 +22,8 @@ int main(int argc, char const *argv[])
     Deque<int> dq6({2, 4, 6, 8, 10});
     Deque<int> dq61({2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28}, 3);
     Deque<int> dq7(dq6);
+    Deque<int> dq8(dq61.end() - 3, dq61.end());
+    Deque<int> dq81(dq61.begin(), dq61.end() - 8, 4);
     dq1.print_info("dq1");
     dq2.print_info("dq2");
     dq3.print_info("dq3");
@@ -31,5 +33,7 @@ int main(int argc, char const *argv[])
     dq6.print_info("dq6");
     dq61.print_info("dq61");
     dq7.print_info("dq7");
+    dq8.print_info("dq8");
+    dq81.print_info("dq81");
     return 0;
 }

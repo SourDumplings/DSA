@@ -31,6 +31,8 @@ namespace CZ
     template <typename T>
     DequeIteratorRank operator-(const DequeIterator<T> &lhs, const DequeIterator<T> &rhs);
     template <typename T>
+    DequeIterator<T> operator-(const DequeIterator<T> &lhs, const DequeIteratorRank n);
+    template <typename T>
     DequeIterator<T> operator+(const DequeIterator<T> &lhs, const DequeIteratorRank n);
     template <typename T>
     DequeIterator<T> operator+(const DequeIteratorRank n, const DequeIterator<T> &rhs);
@@ -44,6 +46,7 @@ namespace CZ
         friend bool operator!=<T>(const DequeIterator<T> &lhs, const DequeIterator<T> &rhs);
         friend bool operator< <T>(const DequeIterator<T> &lhs, const DequeIterator<T> &rhs);
         friend DequeIteratorRank operator-<T>(const DequeIterator<T> &lhs, const DequeIterator<T> &rhs);
+        friend DequeIterator<T> operator-<T>(const DequeIterator<T> &lhs, const DequeIteratorRank n);
         friend DequeIterator<T> operator+<T>(const DequeIterator<T> &lhs, const DequeIteratorRank n);
         friend DequeIterator<T> operator+<T>(const DequeIteratorRank n, const DequeIterator<T> &rhs);
 
@@ -149,6 +152,24 @@ namespace CZ
     {
         typename Deque<T>::Rank bufferSize = lhs._last - lhs._first + 1;
         return (lhs._pNode - rhs._pNode - 1) * bufferSize + (rhs._last - rhs._cur + 1) + (lhs._cur - lhs._first);
+    }
+
+    template <typename T>
+    DequeIterator<T> operator-(const DequeIterator<T> &lhs, const DequeIteratorRank n)
+    {
+        DequeIterator<T> res;
+        if (lhs._first <= lhs._cur - n)
+        {
+            res.init(lhs._cur - n, lhs._first, lhs._last, lhs._pNode);
+        }
+        else
+        {
+            typename Deque<T>::Rank bufferSize = lhs._last - lhs._first + 1;
+            typename Deque<T>::Rank bufferNumDelta = (n - (lhs._cur - lhs._first)) / bufferSize + 1;
+            typename Deque<T>::Node *newPNode = lhs._pNode - bufferNumDelta;
+            res.init(*newPNode + bufferSize - (n - (lhs._cur - lhs._first)) % bufferSize, *newPNode, *newPNode + bufferSize - 1, newPNode);
+        }
+        return res;
     }
 
     template <typename T>
