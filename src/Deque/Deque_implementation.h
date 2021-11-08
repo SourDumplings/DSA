@@ -155,6 +155,10 @@ namespace CZ
     }
 
     template <typename T>
+    bool Deque<T>::empty() const
+    { return _size == 0; }
+
+    template <typename T>
     template <typename It>
     void Deque<T>::init_from(const It &begin, const It &end, Rank bufferSize_)
     {

@@ -58,7 +58,6 @@ namespace CZ
         T& back();
         const T& front() const;
         T& front();
-        bool empty();
         bool empty() const;
         const T& at(RankPlus index) const;
         T& at(RankPlus index);

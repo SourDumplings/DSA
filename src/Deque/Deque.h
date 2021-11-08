@@ -52,6 +52,7 @@ namespace CZ
         Iterator end();
         Iterator end() const;
         Rank size() const;
+        bool empty() const;
 
         // 操作符
         Deque<T>& operator=(const Deque<T> &dq);
