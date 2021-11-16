@@ -7,6 +7,7 @@
  */
 
 #include "Deque/Deque.h"
+#include "CZString/CZString.h"
 
 using namespace CZ;
 
@@ -40,7 +41,28 @@ int main(int argc, char const *argv[])
     // dq81.print_info("dq81");
 
     // 测试数据访问接口
-    printf("dq3.empty() = %d, dq3.size() = %d\n", dq3.empty(), dq3.size());
-    printf("dq2.empty() = %d, dq2.size() = %d\n", dq2.empty(), dq2.size());
+    // printf("dq3.empty() = %d, dq3.size() = %d\n", dq3.empty(), dq3.size());
+    // printf("dq2.empty() = %d, dq2.size() = %d\n", dq2.empty(), dq2.size());
+
+    // 测试 push_back
+    dq1.push_back(1);
+    dq1.print_info("dq1");
+    for (int i = 0; i < 25; ++i)
+    {
+        dq1.push_back(i);
+    }
+    dq1.print_info("dq1");
+    for (int i = 0; i < 100; ++i)
+    {
+        dq2.push_back(i);
+    }
+    dq2.print_info("dq2");
+    Deque<CZString> dqs1;
+    CZString s = "hello";
+    for (int i = 0; i < 20; ++i)
+    {
+        dqs1.push_back(s + (i + '0'));
+    }
+    dqs1.print_info("dqs1");
     return 0;
 }

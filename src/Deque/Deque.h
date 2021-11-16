@@ -56,6 +56,10 @@ namespace CZ
 
         // 操作符
         Deque<T>& operator=(const Deque<T> &dq);
+
+        // 动态操作接口
+        void push_back(const T &x);
+        void push_back(T &&x);
     private:
         Rank _bufferSize;
         Rank _mapSize;
@@ -66,6 +70,7 @@ namespace CZ
 
         template<typename It>
         void init_from(const It &begin, const It &end, Rank bufferSize_ = 10);
+        void expand();
 
         static const Rank MIN_BUFFER_SIZE = 5;
     };
