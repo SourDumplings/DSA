@@ -22,6 +22,9 @@ namespace CZ
         b = temp;
         return;
     }
+
+    template <>
+    void Swap<int>(int &a, int &b);
 } // CZ
 
 #endif // SWAP_H
