@@ -16,10 +16,10 @@
 #include <algorithm>
 #include <memory>
 #include <stdexcept>
-#include "Paren_match.h"
-#include "../Match.h"
-#include "../../Vector/Vector.h"
-#include "../../CZString/CZString.h"
+#include "Algorithms/Match/Paren_match.h"
+#include "Algorithms/Match.h"
+#include "Vector/Vector.h"
+#include "CZString/CZString.h"
 #include <cstring>
 
 using namespace std;
