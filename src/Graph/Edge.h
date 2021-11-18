@@ -24,7 +24,7 @@ namespace CZ
     {
         template <typename ED, typename VD> friend class Graph;
     public:
-        using Rank = uint64_t;
+        using Rank = uint32_t;
 
         Edge(Rank s_ = 0, Rank d_ = 0, const T &data_ = T()):
             _s(s_), _d(d_), _data(data_), _valid(false) {}

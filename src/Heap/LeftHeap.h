@@ -25,7 +25,7 @@ namespace CZ
     class LeftHeap
     {
     public:
-        using Rank = int64_t;
+        using Rank = int32_t;
 
         LeftHeap();
         LeftHeap(T *begin, T *end, const Cmp &cmp = Cmp());

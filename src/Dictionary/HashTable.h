@@ -22,7 +22,7 @@ namespace CZ
 {
     namespace Dict
     {
-        using Rank = int64_t;
+        using Rank = int32_t;
 
         // 哈希函数，取模法
         template <typename T>

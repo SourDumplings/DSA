@@ -19,7 +19,7 @@ namespace CZ
     class Bitmap
     {
     public:
-        using Rank = uint64_t;
+        using Rank = uint32_t;
         // 构造函数
         Bitmap(Rank n_ = 8); // 按一定规模创建比特图
         Bitmap(const char *file, Rank n_ = 8); // 从指定文件中读取比特图

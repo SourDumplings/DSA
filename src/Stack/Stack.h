@@ -20,7 +20,7 @@ namespace CZ
     class Stack
     {
     public:
-        using Rank = uint64_t;
+        using Rank = uint32_t;
 
         const T& top() const;
         T& top();

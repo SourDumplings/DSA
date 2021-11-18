@@ -20,7 +20,7 @@ namespace CZ
     class Queue
     {
     public:
-        using Rank = uint64_t;
+        using Rank = uint32_t;
 
         bool empty() const;
         Rank size() const;
