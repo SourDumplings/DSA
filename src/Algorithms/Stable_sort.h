@@ -30,7 +30,7 @@ namespace CZ
         MERGE_SORT
     };
 
-    using Rank_sort = long long;
+    using Rank_sort = int64_t;
 
     template <typename It, typename Cmp>
     void doStable_sort(It begin, It end, const Cmp &cmp,

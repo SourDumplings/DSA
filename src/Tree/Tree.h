@@ -26,7 +26,7 @@ namespace CZ
         friend bool operator==<T>(const Tree<T> &lhs, const Tree<T> &rhs);
         friend bool operator!=<T>(const Tree<T> &lhs, const Tree<T> &rhs);
     public:
-        using Rank = unsigned;
+        using Rank = uint64_t;
 
         void clear();
 

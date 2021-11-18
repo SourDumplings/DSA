@@ -25,8 +25,8 @@ namespace CZ
     class List
     {
     public:
-        using Rank = unsigned;
-        using RankPlus = int;
+        using Rank = uint64_t;
+        using RankPlus = int64_t;
         using Iterator = ListIterator<T>;
 
 		// 构造函数

@@ -18,7 +18,7 @@
 
 namespace CZ
 {
-    using Rank_shell_sort = long long;
+    using Rank_shell_sort = int64_t;
 
     namespace ShellSort
     {

@@ -23,8 +23,8 @@ namespace CZ
     class Vector
     {
     public:
-        using Rank = unsigned;
-        using RankPlus = int;
+        using Rank = uint64_t;
+        using RankPlus = int64_t;
         using Iterator = RandomIterator<T>;
 
         // 构造函数

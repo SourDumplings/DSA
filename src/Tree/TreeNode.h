@@ -24,7 +24,7 @@ namespace CZ
     {
         friend class Tree<T>;
     public:
-        using Rank = unsigned;
+        using Rank = uint64_t;
 
         TreeNode(const T &data_ = T(), TreeNode<T> *father_ = nullptr, Rank height_ = 1);
         virtual ~TreeNode();

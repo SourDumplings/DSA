@@ -14,7 +14,7 @@
 
 namespace CZ
 {
-    using DequeIteratorRank = long long;
+    using DequeIteratorRank = int64_t;
 
     template <typename T>
     class DequeIterator;

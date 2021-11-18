@@ -19,7 +19,7 @@
 
 namespace CZ
 {
-    using Rank_select_sort = long long;
+    using Rank_select_sort = int64_t;
 
     template <typename It, typename Cmp>
     void Select_sort(It begin, Rank_select_sort N, const Cmp &cmp, const unsigned version = 0)

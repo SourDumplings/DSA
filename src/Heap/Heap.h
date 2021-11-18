@@ -26,7 +26,7 @@ namespace CZ
     class Heap
     {
     public:
-        using Rank = int;
+        using Rank = int64_t;
 
         Heap();
         Heap(const std::initializer_list<T> &l, const Cmp &cmp = Cmp());

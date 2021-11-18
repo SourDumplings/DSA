@@ -21,7 +21,7 @@ namespace CZ
 {
     enum ParenMatchVersion { RECURSION_PAREN_MATCH, NONRECURSION_PAREN_MATCH };
 
-    using ParenMatchRank = unsigned;
+    using ParenMatchRank = uint64_t;
     namespace ParenMatch
     {
         bool recursion_paren_match(const char exp[], ParenMatchRank b, ParenMatchRank e,

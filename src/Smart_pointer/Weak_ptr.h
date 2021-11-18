@@ -29,7 +29,7 @@ class Weak_ptr
     friend bool operator!=(const Weak_ptr<T> &lhs, const Weak_ptr<T> &rhs)
     { return !(lhs == rhs); }
 public:
-    using Rank = unsigned;
+    using Rank = uint64_t;
 
     Weak_ptr(std::nullptr_t)
     { _ptr = nullptr; }

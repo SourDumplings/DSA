@@ -17,7 +17,7 @@
 
 namespace CZ
 {
-    using Rank_merge_sort = long long;
+    using Rank_merge_sort = int64_t;
 
     namespace MergeSort
     {

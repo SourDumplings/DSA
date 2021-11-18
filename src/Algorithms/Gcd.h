@@ -14,7 +14,7 @@
 
 namespace CZ
 {
-    using GcdValueType = long long;
+    using GcdValueType = int64_t;
 
     GcdValueType Gcd(GcdValueType a, GcdValueType b)
     {

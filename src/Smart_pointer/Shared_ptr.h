@@ -28,7 +28,7 @@ class Shared_ptr
     friend bool operator!=(const Shared_ptr<T> &lhs, const Shared_ptr<T> &rhs)
     { return !(lhs == rhs); }
 public:
-    using Rank = unsigned;
+    using Rank = uint64_t;
 
     Shared_ptr(std::nullptr_t);
 

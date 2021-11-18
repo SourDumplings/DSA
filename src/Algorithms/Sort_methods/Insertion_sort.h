@@ -17,7 +17,7 @@
 
 namespace CZ
 {
-    using Rank_insertion_sort = long long;
+    using Rank_insertion_sort = int64_t;
 
     template <typename It, typename Cmp>
     void Insertion_sort(It begin, Rank_insertion_sort N, const Rank_insertion_sort steps,

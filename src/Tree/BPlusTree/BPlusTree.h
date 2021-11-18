@@ -26,7 +26,7 @@ template<typename K, typename V>
 class BPlusTree
 {
 public:
-    using Rank = unsigned;
+    using Rank = uint64_t;
 
     BPlusTree(Rank order_ = 3);
     BPlusTree(const BPlusTree &bt);

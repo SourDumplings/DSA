@@ -34,7 +34,7 @@ namespace CZ
         friend Set<T> operator-<T>(const Set<T> &lhs, const Set<T> &rhs);
         friend class SetIterator<T>;
     public:
-        using Rank = unsigned;
+        using Rank = uint64_t;
         using Iterator = SetIterator<T>;
 
         Set();

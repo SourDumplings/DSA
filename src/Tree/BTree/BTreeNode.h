@@ -25,7 +25,7 @@ namespace CZ
     {
         friend class BTree<T>;
     public:
-        using Rank = unsigned;
+        using Rank = uint64_t;
         // BTreeNode只能作为根节点创建，初始时有0个关键码和一个空孩子指针
         BTreeNode(): _father(nullptr)
         { _children.push_back(nullptr); }

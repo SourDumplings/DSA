@@ -24,7 +24,7 @@ namespace CZ
     class Deque
     {
     public:
-        using Rank = unsigned;
+        using Rank = uint64_t;
         using Iterator = DequeIterator<T>;
         using Node = T*;
 

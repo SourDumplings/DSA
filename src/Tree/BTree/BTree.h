@@ -20,7 +20,7 @@ namespace CZ
     class BTree
     {
     public:
-        using Rank = int;
+        using Rank = int64_t;
 
         BTree(Rank order_ = 3);
         BTree(const BTree &bt);

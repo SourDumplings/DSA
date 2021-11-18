@@ -16,7 +16,7 @@
 
 namespace CZ
 {
-    using Rank_quick_sort = long long;
+    using Rank_quick_sort = int64_t;
 
     namespace QuickSort
     {

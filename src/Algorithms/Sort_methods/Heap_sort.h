@@ -17,7 +17,7 @@
 
 namespace CZ
 {
-    using Rank_heap_sort = long long;
+    using Rank_heap_sort = int64_t;
 
     template <typename It, typename Cmp>
     void Heap_sort(It begin, Rank_heap_sort N, const Cmp &cmp, const unsigned version = 0)

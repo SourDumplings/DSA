@@ -24,7 +24,7 @@ namespace CZ
     template <typename It, typename F>
     It doRemove(const It begin, const It end, const F &is_remove)
     {
-        using Rank = unsigned;
+        using Rank = uint64_t;
         It it = begin;
         Rank i = 0;
         for (; it != end; ++it)

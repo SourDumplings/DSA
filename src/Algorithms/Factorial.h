@@ -21,7 +21,7 @@ namespace CZ
 
     namespace Factorial_Impl
     {
-        using ValueType = long long;
+        using ValueType = int64_t;
 
         ValueType recursion_fact(const ValueType x)
         {

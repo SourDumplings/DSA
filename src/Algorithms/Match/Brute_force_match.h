@@ -14,7 +14,7 @@
 
 namespace CZ
 {
-    using MatchRank = unsigned;
+    using MatchRank = uint64_t;
 
     /******************************************************************************************
      Text : 0 1 2 . . . i-j . . . . i . . n-1
