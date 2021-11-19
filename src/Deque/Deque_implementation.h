@@ -276,6 +276,51 @@ namespace CZ
         }
     }
 
+    template<typename T>
+    void Deque<T>::push_front(const T &x)
+    {
+        if (_start._first < _start._cur)
+        {
+            // 当前 buffer 中还有空位
+            --_start._cur;
+        }
+        else
+        {
+            // 当前 buffer 已满
+            if (_start._pNode == _bufferMap)
+            {
+                // 无空 buffer，需要扩容
+                expand();
+            }
+            _start.init(*(_start._pNode - 1) + _bufferSize - 1, *(_start._pNode - 1), *(_start._pNode - 1) + _bufferSize - 1, _start._pNode - 1);
+        }
+        ++_size;
+        *(_start._cur) = x;
+    }
+
+
+    template<typename T>
+    void Deque<T>::push_front(T &&x)
+    {
+        if (_start._first < _start._cur)
+        {
+            // 当前 buffer 中还有空位
+            --_start._cur;
+        }
+        else
+        {
+            // 当前 buffer 已满
+            if (_start._pNode == _bufferMap)
+            {
+                // 无空 buffer，需要扩容
+                expand();
+            }
+            _start.init(*(_start._pNode - 1) + _bufferSize - 1, *(_start._pNode - 1), *(_start._pNode - 1) + _bufferSize - 1, _start._pNode - 1);
+        }
+        ++_size;
+        *(_start._cur) = std::move(x);
+    }
+
     template <typename T>
     void Deque<T>::expand()
     {

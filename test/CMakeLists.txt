@@ -2,7 +2,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
 
 # 添加源文件
-set(source test_algorithms.cpp)
+set(source test_deque.cpp)
 
 # 指定库的位置为项目根目录下的lib目录
 LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/build/lib)

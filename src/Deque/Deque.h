@@ -60,6 +60,8 @@ namespace CZ
         // 动态操作接口
         void push_back(const T &x);
         void push_back(T &&x);
+        void push_front(const T &x);
+        void push_front(T &&x);
     private:
         Rank _bufferSize;
         Rank _mapSize;
