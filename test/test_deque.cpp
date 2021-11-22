@@ -66,24 +66,39 @@ int main(int argc, char const *argv[])
     // dqs1.print_info("dqs1");
 
     // 测试 push_front
-    dq1.push_front(1);
-    dq1.print_info("dq1");
-    for (int i = 0; i < 25; ++i)
+    // dq1.push_front(1);
+    // dq1.print_info("dq1");
+    // for (int i = 0; i < 25; ++i)
+    // {
+    //     dq1.push_front(i);
+    // }
+    // dq1.print_info("dq1");
+    // for (int i = 0; i < 100; ++i)
+    // {
+    //     dq2.push_front(i);
+    // }
+    // dq2.print_info("dq2");
+    // Deque<CZString> dqs1;
+    // CZString s = "hello";
+    // for (int i = 0; i < 20; ++i)
+    // {
+    //     dqs1.push_front(s + (i + '0'));
+    // }
+    // dqs1.print_info("dqs1");
+
+    // 测试 insert
+    dq2.print_info("dq2");
+    for (int i = 0; i < 5; i++)
     {
-        dq1.push_front(i);
-    }
-    dq1.print_info("dq1");
-    for (int i = 0; i < 100; ++i)
-    {
-        dq2.push_front(i);
+        auto it = dq2.end();
+        dq2.insert(it, i);
     }
     dq2.print_info("dq2");
-    Deque<CZString> dqs1;
-    CZString s = "hello";
-    for (int i = 0; i < 20; ++i)
+    auto it = dq2.end();
+    for (int i = 0; i < 16; i++)
     {
-        dqs1.push_front(s + (i + '0'));
+        it = dq2.insert(it, i + 100);;
     }
-    dqs1.print_info("dqs1");
+    dq2.print_info("dq2");
     return 0;
 }

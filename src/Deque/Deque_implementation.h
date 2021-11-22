@@ -250,7 +250,6 @@ namespace CZ
             }
             _finish.init(*(_finish._pNode + 1), *(_finish._pNode + 1), *(_finish._pNode + 1) + _bufferSize - 1, _finish._pNode + 1);
         }
-
     }
 
     template <typename T>
@@ -276,7 +275,7 @@ namespace CZ
         }
     }
 
-    template<typename T>
+    template <typename T>
     void Deque<T>::push_front(const T &x)
     {
         if (_start._first < _start._cur)
@@ -298,8 +297,7 @@ namespace CZ
         *(_start._cur) = x;
     }
 
-
-    template<typename T>
+    template <typename T>
     void Deque<T>::push_front(T &&x)
     {
         if (_start._first < _start._cur)
@@ -359,6 +357,98 @@ namespace CZ
 
         _bufferMap = newBufferMap;
         _mapSize = newMapSize;
+    }
+
+    template <typename T>
+    typename Deque<T>::Iterator Deque<T>::insert(Iterator itPos, const T &x)
+    {
+        Iterator it = move_backward(itPos, 1);
+        ++_size;
+        *it = x;
+        return it;
+    }
+
+    template <typename T>
+    typename Deque<T>::Iterator Deque<T>::insert(Iterator itPos, T &&x)
+    {
+        Iterator it = move_backward(itPos, 1);
+        ++_size;
+        *it = std::move(x);
+        return it;
+    }
+
+    template <typename T>
+    typename Deque<T>::Iterator Deque<T>::move_backward(Iterator startIt, typename Deque<T>::Rank n)
+    {
+        Rank resInLastBuffer = _finish._last - _finish._cur; // 最后一个 buffer 还可以往后移动几个
+        Rank bufferNumDelta = 0; // 最后一个元素会跨越几次 buffer
+        if (n > resInLastBuffer)
+        {
+            bufferNumDelta = (n - resInLastBuffer) % _bufferSize == 0 ? (n - resInLastBuffer) / _bufferSize : (n - resInLastBuffer) / _bufferSize + 1;
+        }
+
+        Iterator newFinish; // 新的 finish 迭代器
+        if (bufferNumDelta > 0)
+        {
+            // 会跨 buffer
+            Rank resBufferNum = _mapSize - (_finish._pNode - _bufferMap) - 1; // 剩下的 buffer 数
+            if (resBufferNum < bufferNumDelta)
+            {
+                // 剩下的 buffer 数不够了，需要扩容
+                Rank newMapSize = _mapSize + bufferNumDelta - resBufferNum;
+                Node *newBufferMap = new Node[newMapSize];
+                for (Rank i = 0; i < newMapSize; i++)
+                {
+                    if (i < _mapSize)
+                    {
+                        newBufferMap[i] = _bufferMap[i];
+                        if (_bufferMap + i == _start._pNode)
+                        {
+                            _start._pNode = newBufferMap + i;
+                        }
+                        if (_bufferMap + i == _finish._pNode)
+                        {
+                            _finish._pNode = newBufferMap + i;
+                        }
+                        if (_bufferMap + i == startIt._pNode)
+                        {
+                            startIt._pNode = newBufferMap + i;
+                        }
+                    }
+                    else
+                    {
+                        newBufferMap[i] = new T[_bufferSize];
+                    }
+                }
+
+                // 释放原 bufferMap
+                delete[] _bufferMap;
+
+                _bufferMap = newBufferMap;
+                _mapSize = newMapSize;
+            }
+
+            Node *newPNode = _finish._pNode + bufferNumDelta;
+            newFinish.init(*newPNode + (n - resInLastBuffer - 1) % _bufferSize, *newPNode, *newPNode + _bufferSize - 1, newPNode);
+        }
+        else
+        {
+            newFinish.init(_finish._cur + n, _finish._first, _finish._last, _finish._pNode);
+        }
+
+        // 移动元素
+        Iterator res = newFinish;
+        for (Iterator it1 = _finish, it2 = newFinish;; --it1, --it2)
+        {
+            *it2 = *it1;
+            if (it1 == startIt)
+            {
+                res = it2;
+                break;
+            }
+        }
+        _finish = newFinish;
+        return res - n;
     }
 }
 

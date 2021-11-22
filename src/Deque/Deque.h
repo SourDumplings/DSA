@@ -62,6 +62,10 @@ namespace CZ
         void push_back(T &&x);
         void push_front(const T &x);
         void push_front(T &&x);
+        Iterator insert(Iterator itPos, const T &x);
+        Iterator insert(Iterator itPos, T &&x);
+        // Iterator insert(Iterator itPos, const T *b, const T *e);
+        // Iterator insert(Iterator itPos, const Iterator &b, const Iterator &e);
     private:
         Rank _bufferSize;
         Rank _mapSize;
@@ -72,7 +76,10 @@ namespace CZ
 
         template<typename It>
         void init_from(const It &begin, const It &end, Rank bufferSize_ = 10);
-        void expand();
+        
+        void expand(); // 双向伸展 2 倍扩容
+        // 将 startIt 之后的所有元素向后移动 n 位，必要时扩容，返回由于后移形成的第一个空位的迭代器
+        Iterator move_backward(Iterator startIt, Rank n); 
 
         static const Rank MIN_BUFFER_SIZE = 5;
     };
