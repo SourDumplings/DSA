@@ -378,8 +378,52 @@ namespace CZ
     }
 
     template <typename T>
+    typename Deque<T>::Iterator Deque<T>::insert(Iterator itPos, const T *b, const T *e)
+    {
+        Rank n = e - b;
+        if (n == 0)
+        {
+            return itPos;
+        }
+        
+        Iterator it0 = move_backward(itPos, n);
+        Iterator it = it0;
+        _size += n;
+        for (T *p = b; p < e; ++p)
+        {
+            *(it++) = *p;
+        }
+        return it0;
+    }
+
+    template <typename T>
+    typename Deque<T>::Iterator Deque<T>::insert(Iterator itPos, const Iterator &b, const Iterator &e)
+    { 
+        Rank n = e - b;
+        if (n == 0)
+        {
+            return itPos;
+        }
+        
+        Iterator it0 = move_backward(itPos, n);
+        Iterator it = it0;
+        _size += n;
+        for (Iterator itTemp = b; itTemp < e; ++itTemp)
+        {
+            *(it++) = *itTemp;
+        }
+        return it0;
+    }
+
+    template <typename T>
     typename Deque<T>::Iterator Deque<T>::move_backward(Iterator startIt, typename Deque<T>::Rank n)
     {
+        if (n <= 0)
+        {
+            printf("Error from Deque::move_backward: invalid parameter n");
+            throw std::exception();
+        }
+        
         Rank resInLastBuffer = _finish._last - _finish._cur; // 最后一个 buffer 还可以往后移动几个
         Rank bufferNumDelta = 0; // 最后一个元素会跨越几次 buffer
         if (n > resInLastBuffer)
@@ -387,7 +431,7 @@ namespace CZ
             bufferNumDelta = (n - resInLastBuffer) % _bufferSize == 0 ? (n - resInLastBuffer) / _bufferSize : (n - resInLastBuffer) / _bufferSize + 1;
         }
 
-        Iterator newFinish; // 新的 finish 迭代器
+        Iterator newFinish = _finish; // 新的 finish 迭代器
         if (bufferNumDelta > 0)
         {
             // 会跨 buffer

@@ -87,18 +87,34 @@ int main(int argc, char const *argv[])
     // dqs1.print_info("dqs1");
 
     // 测试 insert
-    dq2.print_info("dq2");
-    for (int i = 0; i < 5; i++)
+    // dq2.print_info("dq2");
+    // for (int i = 0; i < 5; i++)
+    // {
+    //     auto it = dq2.end();
+    //     dq2.insert(it, i);
+    // }
+    // dq2.print_info("dq2");
+    // auto it = dq2.end();
+    // for (int i = 0; i < 16; i++)
+    // {
+    //     it = dq2.insert(it, i + 100);
+    // }
+    // dq2.print_info("dq2");
+    // dq2.insert(dq2.end(), dq61.begin() + 1, dq61.end() - 2);
+    // dq2.insert(dq2.end(), dq1.begin() + 1, dq1.end());
+    // dq2.insert(dq2.end(), dq1.begin() + 10, dq1.end());
+    // dq2.print_info("dq2");
+    // dq1.print_info("dq1");
+    // dq1.insert(dq1.begin(), dq61.begin(), dq61.end() - 10);
+    // dq1.insert(dq1.begin(), dq61.begin(), dq61.end() - 11);
+    // dq1.insert(dq1.begin(), dq61.begin() + 1, dq61.end());
+    // dq1.insert(dq1.begin() + 11, dq61.begin() + 1, dq61.end());
+    dq1.print_info("dq1");
+    auto it = dq1.begin();
+    for (int i = 0; i < 5; ++i)
     {
-        auto it = dq2.end();
-        dq2.insert(it, i);
+        it = dq1.insert(it, dq5.begin(), dq5.end());
+        dq1.print_info("dq1");
     }
-    dq2.print_info("dq2");
-    auto it = dq2.end();
-    for (int i = 0; i < 16; i++)
-    {
-        it = dq2.insert(it, i + 100);;
-    }
-    dq2.print_info("dq2");
     return 0;
 }

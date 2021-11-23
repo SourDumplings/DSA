@@ -165,9 +165,12 @@ namespace CZ
         else
         {
             typename Deque<T>::Rank bufferSize = lhs._last - lhs._first + 1;
-            typename Deque<T>::Rank bufferNumDelta = (n - (lhs._cur - lhs._first)) / bufferSize + 1;
+            typename Deque<T>::Rank resInBuffer = lhs._cur - lhs._first;
+            typename Deque<T>::Rank bufferNumDelta = (n - resInBuffer) % bufferSize == 0 ?
+                (n - resInBuffer) / bufferSize : (n - resInBuffer) / bufferSize + 1;
             typename Deque<T>::Node *newPNode = lhs._pNode - bufferNumDelta;
-            res.init(*newPNode + bufferSize - (n - (lhs._cur - lhs._first)) % bufferSize, *newPNode, *newPNode + bufferSize - 1, newPNode);
+            typename Deque<T>::Rank posInBuffer = (n - resInBuffer) % bufferSize == 0 ? 0 : bufferSize - (n - resInBuffer) % bufferSize;
+            res.init(*newPNode + posInBuffer, *newPNode, *newPNode + bufferSize - 1, newPNode);
         }
         return res;
     }
@@ -189,9 +192,12 @@ namespace CZ
         else
         {
             typename Deque<T>::Rank bufferSize = lhs._last - lhs._first + 1;
-            typename Deque<T>::Rank bufferNumDelta = (n - (lhs._last - lhs._cur)) / bufferSize + 1;
+            typename Deque<T>::Rank resInBuffer = lhs._last - lhs._cur;
+            typename Deque<T>::Rank bufferNumDelta = (n - resInBuffer) % bufferSize == 0 ?
+                (n - resInBuffer) / bufferSize : (n - resInBuffer) / bufferSize + 1;
             typename Deque<T>::Node *newPNode = lhs._pNode + bufferNumDelta;
-            res.init(*newPNode + (n - (lhs._last - lhs._cur)) % bufferSize, *newPNode, *newPNode + bufferSize - 1, newPNode);
+            typename Deque<T>::Rank posInBuffer = (n - resInBuffer) % bufferSize == 0 ? bufferSize - 1 : (n - resInBuffer) % bufferSize - 1;
+            res.init(*newPNode + posInBuffer, *newPNode, *newPNode + bufferSize - 1, newPNode);
         }
         
         return res;

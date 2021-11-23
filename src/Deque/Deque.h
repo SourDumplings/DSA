@@ -64,8 +64,8 @@ namespace CZ
         void push_front(T &&x);
         Iterator insert(Iterator itPos, const T &x);
         Iterator insert(Iterator itPos, T &&x);
-        // Iterator insert(Iterator itPos, const T *b, const T *e);
-        // Iterator insert(Iterator itPos, const Iterator &b, const Iterator &e);
+        Iterator insert(Iterator itPos, const T *b, const T *e);
+        Iterator insert(Iterator itPos, const Iterator &b, const Iterator &e);
     private:
         Rank _bufferSize;
         Rank _mapSize;
