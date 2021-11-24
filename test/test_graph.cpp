@@ -87,7 +87,7 @@ int main(int argc, char const *argv[])
     // G1.add_edge(2, 5, true);
     // G1.add_edge(3, 4, true);
     // G1.add_edge(4, 7, true);
-    // for (unsigned i = 0; i < 8; ++i)
+    // for (int32_t i = 0; i < 8; ++i)
     // {
     //     G1.set_vertice_data(i, i);
     // }
@@ -99,7 +99,7 @@ int main(int argc, char const *argv[])
     // G2.add_edge(2, 5, true);
     // G2.add_edge(3, 4, true);
     // G2.add_edge(4, 7, true);
-    // for (unsigned i = 0; i < 8; ++i)
+    // for (int32_t i = 0; i < 8; ++i)
     // {
     //     G2.set_vertice_data(i, i*2);
     // }
@@ -215,18 +215,18 @@ int main(int argc, char const *argv[])
     // // G1.Floyd(distA, pathA, 99999);
     // G2.Floyd(distA, pathA, 99999);
     // printf("for distA: \n");
-    // for (unsigned i = 0; i < 8; ++i)
+    // for (int32_t i = 0; i < 8; ++i)
     // {
-    //     for (unsigned j = 0; j < 8; ++j)
+    //     for (int32_t j = 0; j < 8; ++j)
     //     {
     //         printf("%8d", distA[i][j]);
     //     }
     //     putchar('\n');
     // }
     // printf("for pathA: \n");
-    // for (unsigned i = 0; i < 8; ++i)
+    // for (int32_t i = 0; i < 8; ++i)
     // {
-    //     for (unsigned j = 0; j < 8; ++j)
+    //     for (int32_t j = 0; j < 8; ++j)
     //     {
     //         printf("%4d", pathA[i][j]);
     //     }

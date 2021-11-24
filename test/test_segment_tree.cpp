@@ -5,9 +5,9 @@
     * @date 2021/2/25 22:18
 */
 
-#include "SegmemtTree.h"
-#include "../../Vector/Vector.h"
-#include "../../CZString/CZString.h"
+#include "Tree/BinTree/SegmemtTree.h"
+#include "Vector/Vector.h"
+#include "CZString/CZString.h"
 #include <functional>
 #include <cstdio>
 

@@ -23,7 +23,7 @@
 
 namespace CZ
 {
-    using MatchRank = uint32_t;
+    using MatchRank = int32_t;
 
     enum MatchMethod
     {
@@ -33,7 +33,7 @@ namespace CZ
 
     template <typename It>
     MatchRank doMatch(const It &TBegin, const It &TEnd, const It &PBegin, const It &PEnd,
-        const MatchMethod &method = KMP, const unsigned &version = 0)
+        const MatchMethod &method = KMP, const int32_t &version = 0)
     {
         if (TEnd <= TBegin || PEnd <= PBegin)
         {
@@ -63,7 +63,7 @@ namespace CZ
         template <typename It>
         inline MatchRank test_iterator_for_match(const It &TBegin, const It &TEnd, const It &PBegin,
             const It &PEnd, random_iterator_tag, const MatchMethod &method = KMP,
-            const unsigned &version = 0)
+            const int32_t &version = 0)
         {
             return doMatch(TBegin, TEnd, PBegin, PEnd, method, version);
         }
@@ -71,7 +71,7 @@ namespace CZ
         template <typename It>
         inline MatchRank test_iterator_for_match(const It &TBegin, const It &TEnd, const It &PBegin,
             const It &PEnd, seq_iterator_tag, const MatchMethod &method = KMP,
-            const unsigned &version = 0)
+            const int32_t &version = 0)
         {
             throw "iterator is seq_iterator, should be random_iterator";
             return 0;
@@ -80,7 +80,7 @@ namespace CZ
         template <typename It>
         inline MatchRank test_iterator_for_match(const It &TBegin, const It &TEnd, const It &PBegin,
             const It &PEnd, bi_iterator_tag, const MatchMethod &method = KMP,
-            const unsigned &version = 0)
+            const int32_t &version = 0)
         {
             throw "iterator is bi_iterator, should be random_iterator";
             return 0;
@@ -89,7 +89,7 @@ namespace CZ
 
     template <typename It>
     MatchRank Match(const It &TBegin, const It &TEnd, const It &PBegin, const It &PEnd,
-        const MatchMethod &method = KMP, const unsigned &version = 0)
+        const MatchMethod &method = KMP, const int32_t &version = 0)
     {
         MatchRank ret;
         try

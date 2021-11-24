@@ -17,7 +17,7 @@ KMP算法，通过构建next表，“充分利用成功匹配的成功经验”�
 
 namespace CZ
 {
-    using MatchRank = uint32_t;
+    using MatchRank = int32_t;
 
     /******************************************************************************************
      Text :.........|.......|..P(j - t, j)..x.....................................
@@ -107,7 +107,7 @@ namespace CZ
 
     template <typename It>
     MatchRank KMP_match(const It &TBegin, const MatchRank &tL, const It &PBegin, const MatchRank &pL,
-        const unsigned &version = 0)
+        const int32_t &version = 0)
     {
         Vector<MatchRank> next(pL);
         switch (version)

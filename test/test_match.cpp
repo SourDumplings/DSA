@@ -66,7 +66,7 @@ int main(int argc, char const *argv[])
     pos3 = Match(begin(cs), end(cs)-1, begin(p3), end(p3)-1, KMP, 0);
 
     printf("s.length() = %u\n", s.length());
-    printf("cs.length() = %u\n", (unsigned)strlen(cs));
+    printf("cs.length() = %u\n", (int32_t)strlen(cs));
     printf("pos1 is %u, res = %s\n", pos1, s.substr(pos1, p1.end() - p1.begin()).c_str());
     printf("pos2 is %u, res = %s\n", pos2, s.substr(pos2, p2.end() - p2.begin()).c_str());
     // printf("pos3 is %u, res = %s\n", pos3, CZString(cs).substr(pos3, 4).c_str());

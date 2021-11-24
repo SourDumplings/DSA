@@ -22,10 +22,10 @@ namespace CZ
 
     template <typename It, typename E, typename Cmp>
     It Fib_search(const It &begin, const It &end, const E &value,
-        const Cmp &cmp, const unsigned version =  0)
+        const Cmp &cmp, const int32_t version =  0)
     {
-        unsigned lo = 0, hi = end - begin;
-        unsigned mi;
+        int32_t lo = 0, hi = end - begin;
+        int32_t mi;
         Fib fib(hi - lo); // 用O(log_phi(n = hi - lo)时间创建Fib数列
 
         switch (version)

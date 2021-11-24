@@ -24,12 +24,12 @@ using namespace CZ;
 int main(int argc, char const *argv[])
 {
     BinaryIndexTree<int> bit(10);
-    for (unsigned i = 0; i < 10; ++i)
+    for (int32_t i = 0; i < 10; ++i)
     {
         bit.add(i, i+1);
     }
     bit.print_info("bit");
-    for (unsigned i = 0; i < 11; ++i)
+    for (int32_t i = 0; i < 11; ++i)
     {
         printf("The first %d elements' sum is %d\n", i, bit.sum(i));
     }

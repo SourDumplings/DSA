@@ -19,7 +19,7 @@ namespace CZ
 {
     template <typename It, typename E, typename Cmp>
     It Seq_search(const It &begin, const It &end, const E &value, const Cmp &cmp,
-        const unsigned version = 0)
+        const int32_t version = 0)
     {
         // printf("using Seq Search version 0...\n");
         for (It it = begin; it != end; ++it)

@@ -47,7 +47,7 @@ namespace CZ
             void operator()(const VD&) const { return; }
         };
     public:
-        using Rank = uint32_t;
+        using Rank = int32_t;
 
         Graph(bool directed_ = true, const GraphType &graphType_ = ADJACENCY_LIST,
             Rank Nv_ = 0, bool vHasData_ = false);

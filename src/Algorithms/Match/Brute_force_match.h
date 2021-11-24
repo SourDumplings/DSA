@@ -14,7 +14,7 @@
 
 namespace CZ
 {
-    using MatchRank = uint32_t;
+    using MatchRank = int32_t;
 
     /******************************************************************************************
      Text : 0 1 2 . . . i-j . . . . i . . n-1
@@ -78,7 +78,7 @@ namespace CZ
 
     template <typename It>
     MatchRank Brute_force_match(const It &TBegin, const MatchRank &tL, const It &PBegin,
-        const MatchRank &pL, const unsigned &version)
+        const MatchRank &pL, const int32_t &version)
     {
         MatchRank ret;
         switch (version)

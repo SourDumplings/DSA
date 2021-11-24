@@ -93,7 +93,7 @@ namespace CZ
     }
 
     template <typename It, typename Cmp>
-    void Shell_sort(It begin, Rank_shell_sort N, const Cmp &cmp, const unsigned version = 0)
+    void Shell_sort(It begin, Rank_shell_sort N, const Cmp &cmp, const int32_t version = 0)
     {
         switch (version)
         {

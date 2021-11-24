@@ -22,7 +22,7 @@ int main(int argc, char const *argv[])
 {
     Queue<string> Qs;
     Qs.print_info("Qs");
-    for (unsigned i = 0; i < 10; ++i)
+    for (int32_t i = 0; i < 10; ++i)
     {
         Qs.push("hello" + to_string(i));
     }

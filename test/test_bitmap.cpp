@@ -34,7 +34,7 @@ int main(int argc, char const *argv[])
         b.set(c - 'a');
     }
     printf("results are: ");
-    for (unsigned i = 0; i < ASCIINUM; ++i)
+    for (int32_t i = 0; i < ASCIINUM; ++i)
     {
         if(b.test(i))
         {

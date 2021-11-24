@@ -49,7 +49,7 @@ namespace CZ
 
     template <typename T>
     template <typename Cmp>
-    void List<T>::sort(const Cmp &cmp, const unsigned version)
+    void List<T>::sort(const Cmp &cmp, const int32_t version)
     {
         if (empty())
         {
@@ -61,7 +61,7 @@ namespace CZ
             {
                 // 冒泡排序，对元素值进行操作
                 bool isSorted = false;
-                unsigned unSortedNum = _size, checkedNum;
+                int32_t unSortedNum = _size, checkedNum;
                 while (!isSorted)
                 {
                     isSorted = true;

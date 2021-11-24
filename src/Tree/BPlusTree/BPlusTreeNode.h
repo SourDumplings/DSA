@@ -26,7 +26,7 @@ class BPlusTreeNode
     friend class BPlusTree<K, V>;
 
 public:
-    using Rank = uint32_t;
+    using Rank = int32_t;
 
     explicit BPlusTreeNode(const K &key,
                            BPlusTreeNode<K, V> *father_ = nullptr,

@@ -20,7 +20,7 @@ namespace CZ
     using Rank_heap_sort = int64_t;
 
     template <typename It, typename Cmp>
-    void Heap_sort(It begin, Rank_heap_sort N, const Cmp &cmp, const unsigned version = 0)
+    void Heap_sort(It begin, Rank_heap_sort N, const Cmp &cmp, const int32_t version = 0)
     {
         using DataType = typename std::remove_reference<decltype(*begin)>::type;
         Heap<DataType, Cmp> H(begin, begin+N, cmp);

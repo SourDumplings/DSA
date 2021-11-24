@@ -138,7 +138,7 @@ namespace CZ
     }
 
     template <typename T>
-    const T& Vector<T>::at(RankPlus index) const
+    const T& Vector<T>::at(Rank index) const
     {
         if (index >= 0)
         {
@@ -149,7 +149,7 @@ namespace CZ
     }
 
     template <typename T>
-    T& Vector<T>::at(RankPlus index)
+    T& Vector<T>::at(Rank index)
     { return const_cast<T&>(static_cast<const Vector<T>&>(*this).at(index)); }
 }
 

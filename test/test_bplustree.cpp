@@ -48,13 +48,13 @@ int main(int argc, char const *argv[])
 //    CZString target = "Kat";
 //    printf("search %s we get %s\n", target.c_str(), bp.search(target)->c_str());
     // 随机数引擎
-//     uniform_int_distribution<unsigned> u(0, size - 1);
+//     uniform_int_distribution<int32_t> u(0, size - 1);
 //     default_random_engine e; // 生成无符号随机整数
     // 单个查询
 //        for (int i = 0; i < size; ++i)
 //        {
 //            //生成 0 到 size - 1 之间（包含）均匀分布的随机数
-//            unsigned subPos = u(e);
+//            int32_t subPos = u(e);
 //            CZString key = s[subPos].substr(0, subStrLen);
 //            printf("search %s we get %s\n", key.c_str(), bp.search(key)->c_str());
 //        }
@@ -63,8 +63,8 @@ int main(int argc, char const *argv[])
 //    Sort(sSorted.begin(), sSorted.end());
 //    for (int i = 0; i < size; ++i)
 //    {
-//        unsigned subPos1 = u(e);
-//        unsigned subPos2 = (int) rand() % (size - subPos1) + subPos1 - 1;
+//        int32_t subPos1 = u(e);
+//        int32_t subPos2 = (int) rand() % (size - subPos1) + subPos1 - 1;
 //        subPos2 = subPos2 < subPos1 ? subPos2 + 1 : subPos2;
 //        printf("subPos1 = %d, subPos2 = %d\n", subPos1, subPos2);
 //        CZString minKey = sSorted[subPos1].substr(0, subStrLen);
@@ -83,12 +83,12 @@ int main(int argc, char const *argv[])
 
     // 3.测试删除
     // 随机数引擎
-//    uniform_int_distribution<unsigned> u(0, l - 1);
+//    uniform_int_distribution<int32_t> u(0, l - 1);
 //    default_random_engine e; // 生成无符号随机整数
 //    for (int i = 0; i < size * 2; ++i)
 //    {
 //        //生成 0 到 size - 1 之间（包含）均匀分布的随机数
-//        unsigned subPos = u(e);
+//        int32_t subPos = u(e);
 //        CZString key = s[subPos].substr(0, subStrLen);
 //        printf("we are going to remove %s\n", key.c_str());
 //        bp.remove(key);

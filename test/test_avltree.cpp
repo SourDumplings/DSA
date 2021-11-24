@@ -28,10 +28,10 @@ int main(int argc, char const *argv[])
 {
     // 插入测试
     Vector<AVLTreeNode<int>*> van;
-    const unsigned num = 10;
+    const int32_t num = 10;
     van.resize(num);
     // srand(time(nullptr));
-    for (unsigned i = 0; i < num; ++i)
+    for (int32_t i = 0; i < num; ++i)
     {
         van[i] = new AVLTreeNode<int>(rand() % 10);
     }
@@ -42,7 +42,7 @@ int main(int argc, char const *argv[])
     putchar('\n');
 
     AVLTree<int> aT;
-    for (unsigned i = 0; i < num; ++i)
+    for (int32_t i = 0; i < num; ++i)
     {
         aT.insert(van[i]);
     }

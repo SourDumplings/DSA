@@ -21,7 +21,7 @@ namespace CZ
     {
         init();
         ListNode<T> *last = _head;
-        for (unsigned i = 0; i != n; ++i)
+        for (int32_t i = 0; i != n; ++i)
         {
             last = last->insert_as_next(data);
             last->_prev->_next = last;

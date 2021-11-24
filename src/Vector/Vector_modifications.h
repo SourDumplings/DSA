@@ -80,7 +80,7 @@ namespace CZ
             }
             ++_size;
             expand();
-            for (unsigned i = _size - 1; i != r; --i)
+            for (int32_t i = _size - 1; i != r; --i)
             {
                 _elem[i] = _elem[i-1];
             }
@@ -106,7 +106,7 @@ namespace CZ
             }
             ++_size;
             expand();
-            for (unsigned i = _size - 1; i != r; --i)
+            for (int32_t i = _size - 1; i != r; --i)
             {
                 _elem[i] = _elem[i-1];
             }
@@ -139,7 +139,7 @@ namespace CZ
             typename Vector<T>::Rank n = e - b;
             _size += n;
             expand();
-            for (unsigned i = _size - 1; n < i && i != r - 1; --i)
+            for (int32_t i = _size - 1; n < i && i != r - 1; --i)
             {
                 _elem[i] = _elem[i-n];
             }
@@ -173,7 +173,7 @@ namespace CZ
             {
                 throw "Invalid pos Iterator";
             }
-            for (unsigned i = r; i != _size - 1; ++i)
+            for (int32_t i = r; i != _size - 1; ++i)
             {
                 _elem[i] = _elem[i+1];
             }
@@ -203,7 +203,7 @@ namespace CZ
                 throw "Invalid Iterator range";
             }
             typename Vector<T>::Rank n = itEnd - itBegin;
-            for (unsigned i = rB; i != rE; ++i)
+            for (int32_t i = rB; i != rE; ++i)
             {
                 _elem[i] = _elem[i+n];
             }

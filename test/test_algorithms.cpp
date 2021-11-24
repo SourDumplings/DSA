@@ -79,7 +79,7 @@ int main(int argc, char const *argv[])
     // printf("f1 = %lld\n", f1.get());
     // f2.next(); f2.next();
     // printf("f2 = %lld\n", f2.get());
-    // for (unsigned i = 0; i < 10; ++i)
+    // for (int32_t i = 0; i < 10; ++i)
     // {
     //     try
     //     {

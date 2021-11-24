@@ -148,12 +148,12 @@ int main(int argc, char const *argv[])
     // vc1.print_info("vc1");
 
     // v1.print_info("v1");
-    // for (unsigned i = 0; i < 10; ++i)
+    // for (int32_t i = 0; i < 10; ++i)
     // {
     //     v1.push_back(i + 4);
     // }
     // v1.print_info("v1");
-    // for (unsigned i = 0; i < 11; ++i)
+    // for (int32_t i = 0; i < 11; ++i)
     // {
     //     v1.pop_back();
     // }

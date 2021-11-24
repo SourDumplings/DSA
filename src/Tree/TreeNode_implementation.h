@@ -112,7 +112,7 @@ namespace CZ
     { return _children; }
 
     template <typename T>
-    void TreeNode<T>::update_height_above(const unsigned version)
+    void TreeNode<T>::update_height_above(const int32_t version)
     {
         TreeNode<T> *f = _father;
         switch (version)

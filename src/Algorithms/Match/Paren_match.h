@@ -21,7 +21,7 @@ namespace CZ
 {
     enum ParenMatchVersion { RECURSION_PAREN_MATCH, NONRECURSION_PAREN_MATCH };
 
-    using ParenMatchRank = uint32_t;
+    using ParenMatchRank = int32_t;
     namespace ParenMatch
     {
         bool recursion_paren_match(const char exp[], ParenMatchRank b, ParenMatchRank e,
@@ -160,7 +160,7 @@ namespace CZ
                 }
 
                 // 元素为右括号，则栈顶若非对应的左括号则返回true，否则弹出栈顶
-                for (unsigned j = 1; j < l; j += 2)
+                for (int32_t j = 1; j < l; j += 2)
                 {
                     if (exp[i] == paren[j])
                     {

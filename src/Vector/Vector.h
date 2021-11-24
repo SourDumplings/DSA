@@ -23,8 +23,7 @@ namespace CZ
     class Vector
     {
     public:
-        using Rank = uint32_t;
-        using RankPlus = int32_t;
+        using Rank = int32_t;
         using Iterator = RandomIterator<T>;
 
         // 构造函数
@@ -59,8 +58,8 @@ namespace CZ
         const T& front() const;
         T& front();
         bool empty() const;
-        const T& at(RankPlus index) const;
-        T& at(RankPlus index);
+        const T& at(Rank index) const;
+        T& at(Rank index);
 
         // 动态操作
         virtual void clear();

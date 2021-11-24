@@ -87,9 +87,9 @@ namespace CZ
         return op == '!';
     }
 
-    unsigned Expression::get_operator_index(const char op) const
+    int32_t Expression::get_operator_index(const char op) const
     {
-        unsigned ret;
+        int32_t ret;
         try
         {
             switch (op)
@@ -138,13 +138,13 @@ namespace CZ
 
     inline char Expression::compare_operator(const char nowOp, const char sOp) const
     {
-        unsigned nowI = get_operator_index(nowOp), sI = get_operator_index(sOp);
+        int32_t nowI = get_operator_index(nowOp), sI = get_operator_index(sOp);
         return priTable[sI][nowI];
     }
 
     inline char Expression::reverse_compare_operator(const char nowOp, const char sOp) const
     {
-        unsigned nowI = get_operator_index(nowOp), sI = get_operator_index(sOp);
+        int32_t nowI = get_operator_index(nowOp), sI = get_operator_index(sOp);
         return priTableReverse[sI][nowI];
     }
 

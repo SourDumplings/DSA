@@ -20,7 +20,7 @@ namespace CZ
 {
     template <typename It, typename E, typename Cmp>
     It Binary_search(const It &begin, const It &end, const E &value,
-        const Cmp &cmp, const unsigned version =  0)
+        const Cmp &cmp, const int32_t version =  0)
     {
         long long b = 0, e = end - begin;
         long long mi;

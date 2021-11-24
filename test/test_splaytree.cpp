@@ -36,7 +36,7 @@ int main(int argc, char const *argv[])
     // }
     // SplayTree<int> sT(nr);
     // sT.print_info("sT");
-    // for (unsigned i = 0; i < 7; ++i)
+    // for (int32_t i = 0; i < 7; ++i)
     // {
     //     printf("for i = %d\n", i);
     //     auto n = sT.search(v[i]);
@@ -46,12 +46,12 @@ int main(int argc, char const *argv[])
     // }
     // 测试插入算法
     // SplayTree<int> sT;
-    // for (unsigned i = 0; i < 7; ++i)
+    // for (int32_t i = 0; i < 7; ++i)
     // {
         // sT.insert(v[i]);
     // }
     // sT.print_info("sT");
-    // for (unsigned i = 0; i < 7; ++i)
+    // for (int32_t i = 0; i < 7; ++i)
     // {
         // printf("trying to insert %d\n", v[i]);
         // sT.insert(v[i]);
@@ -62,7 +62,7 @@ int main(int argc, char const *argv[])
 
     // 测试删除算法
     SplayTree<int> sT;
-    for (unsigned i = 0; i < 7; ++i)
+    for (int32_t i = 0; i < 7; ++i)
     {
         sT.insert(v[i]);
     }

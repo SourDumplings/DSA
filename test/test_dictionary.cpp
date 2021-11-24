@@ -27,7 +27,7 @@ int main(int argc, char const *argv[])
     // d.print_info("d");
 
     // 测试插入操作
-    // for (unsigned i = 0; i < 12; ++i)
+    // for (int32_t i = 0; i < 12; ++i)
     // {
     //     d.insert(i+3);
     // }

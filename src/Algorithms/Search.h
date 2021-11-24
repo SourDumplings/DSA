@@ -30,7 +30,7 @@ namespace CZ
 
     template <typename It, typename E, typename Cmp>
     It Search(const It &begin, const It &end, const E &value, const Cmp &cmp,
-        const SearchMethod &method = SEQ_SEARCH, const unsigned version = 0)
+        const SearchMethod &method = SEQ_SEARCH, const int32_t version = 0)
     {
         try
         {
@@ -58,7 +58,7 @@ namespace CZ
 
     template <typename It, typename E>
     It Search(const It &begin, const It &end, const E &value,
-        const SearchMethod &method = SEQ_SEARCH, const unsigned version = 0)
+        const SearchMethod &method = SEQ_SEARCH, const int32_t version = 0)
     {
         switch (method)
         {
