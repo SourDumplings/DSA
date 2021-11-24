@@ -109,12 +109,26 @@ int main(int argc, char const *argv[])
     // dq1.insert(dq1.begin(), dq61.begin(), dq61.end() - 11);
     // dq1.insert(dq1.begin(), dq61.begin() + 1, dq61.end());
     // dq1.insert(dq1.begin() + 11, dq61.begin() + 1, dq61.end());
-    dq1.print_info("dq1");
-    auto it = dq1.begin();
-    for (int i = 0; i < 5; ++i)
+    // dq1.print_info("dq1");
+    // auto it = dq1.begin();
+    // for (int i = 0; i < 5; ++i)
+    // {
+    //     it = dq1.insert(it, dq5.begin(), dq5.end());
+    //     dq1.print_info("dq1");
+    // }
+
+    // 测试 pop
+    for (size_t i = 0; i < 50; i++)
     {
-        it = dq1.insert(it, dq5.begin(), dq5.end());
-        dq1.print_info("dq1");
+        dq2.push_back(i);
     }
+    dq2.print_info("dq2");
+    for (size_t i = 0; i < 50; i++)
+    {
+        // dq2.pop_back();
+        dq2.pop_front();
+        dq2.print_info("dq2");
+    }
+    
     return 0;
 }

@@ -58,6 +58,7 @@ namespace CZ
         Deque<T>& operator=(const Deque<T> &dq);
 
         // 动态操作接口
+        // 增加元素的接口，必要时会扩容
         void push_back(const T &x);
         void push_back(T &&x);
         void push_front(const T &x);
@@ -66,6 +67,9 @@ namespace CZ
         Iterator insert(Iterator itPos, T &&x);
         Iterator insert(Iterator itPos, const T *b, const T *e);
         Iterator insert(Iterator itPos, const Iterator &b, const Iterator &e);
+        // 删除元素的接口，必要时会缩容
+        void pop_back();
+        void pop_front();
     private:
         Rank _bufferSize;
         Rank _mapSize;
@@ -77,7 +81,10 @@ namespace CZ
         template<typename It>
         void init_from(const It &begin, const It &end, Rank bufferSize_ = 10);
         
-        void expand(); // 双向伸展 2 倍扩容
+        void expand(); // 双向伸展，2 倍扩容
+        bool need_shrink() const; // 判断是否需要缩容，如果有元素的 buffer 数小于总 buffer 数（bufferMap 的大小）的一半就返回 true
+        void shrink(); // 双向收缩，2 倍缩容，会判断是否需要缩容
+
         // 将 startIt 之后的所有元素向后移动 n 位，必要时扩容，返回由于后移形成的第一个空位的迭代器
         Iterator move_backward(Iterator startIt, Rank n); 
 

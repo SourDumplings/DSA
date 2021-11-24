@@ -494,6 +494,105 @@ namespace CZ
         _finish = newFinish;
         return res - n;
     }
+
+    template <typename T>
+    void Deque<T>::pop_back()
+    {
+        if (empty())
+        {
+            printf("Error from Deque::pop_back: empty deque");
+            throw std::exception();
+        }
+        
+        --_size;
+        if (_finish._cur != _finish._first)
+        {
+            --_finish._cur;
+        }
+        else
+        {
+            // 需要转移到前一个 buffer
+            Node *newPNode = _finish._pNode - 1;
+            _finish.init(*newPNode + _bufferSize - 1, *newPNode, *newPNode + _bufferSize - 1, newPNode);
+            shrink();
+        }
+    }
+
+    template <typename T>
+    void Deque<T>::pop_front()
+    {
+        if (empty())
+        {
+            printf("Error from Deque::pop_front: empty deque");
+            throw std::exception();
+        }
+        
+        --_size;
+        if (_start._cur != _start._last)
+        {
+            ++_start._cur;
+        }
+        else
+        {
+            // 需要转移到后一个 buffer
+            Node *newPNode = _start._pNode + 1;
+            _start.init(*newPNode, *newPNode, *newPNode + _bufferSize - 1, newPNode);
+            shrink();
+        }
+    }
+
+    template <typename T>
+    bool Deque<T>::need_shrink() const
+    { 
+        return _finish._pNode - _start._pNode + 1 < _mapSize / 2;
+    }
+
+    template <typename T>
+    void Deque<T>::shrink()
+    { 
+        if (!need_shrink())
+        {
+            return;
+        }
+        
+        /* 缩容方法：2 倍缩容
+            即将 bufferMap 大小变为原来的一半，把原来的 Node 的值移到中心，如：
+            奇数 mapSize 情况：0 0 0 1 1 0 0 -> 1 1 0
+            偶数 mapSize 情况：0 1 1 0 0 0 0 0 ->  0 1 1 0
+         */
+        Rank newMapSize = _mapSize / 2;
+        Node *newBufferMap = new Node[newMapSize];
+        Rank newIndex = 0;
+        Rank beginIndex = _start._pNode - _bufferMap - newMapSize / 2 + 1;
+        Rank endIndex = beginIndex + newMapSize;
+        for (Rank i = 0; i < _mapSize; i++)
+        {
+            if (i < beginIndex || endIndex <= i)
+            {
+                // 释放旧 buffer
+                delete[] _bufferMap[i];
+            }
+            else
+            {
+                newBufferMap[newIndex] = _bufferMap[i];
+                if (_bufferMap + i == _start._pNode)
+                {
+                    _start._pNode = newBufferMap + newIndex;
+                }
+                if (_bufferMap + i == _finish._pNode)
+                {
+                    _finish._pNode = newBufferMap + newIndex;
+                }
+                ++newIndex;
+            }
+        }
+
+        // 释放原 bufferMap
+        delete[] _bufferMap;
+
+        _bufferMap = newBufferMap;
+        _mapSize = newMapSize;
+    }
 }
 
 #endif
