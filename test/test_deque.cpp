@@ -118,17 +118,55 @@ int main(int argc, char const *argv[])
     // }
 
     // 测试 pop
+    // for (size_t i = 0; i < 50; i++)
+    // {
+    //     dq2.push_back(i);
+    // }
+    // dq2.print_info("dq2");
+    // for (size_t i = 0; i < 50; i++)
+    // {
+    //     // dq2.pop_back();
+    //     dq2.pop_front();
+    //     dq2.print_info("dq2");
+    // }
+
+    // 测试 erase
+    // dq61.print_info("dq61");
+    // dq61.erase(dq61.end() - 1);
+    // dq61.print_info("dq61");
+    // dq6.print_info("dq6");
+    // dq6.erase(dq6.end() - 2);
+    // dq6.print_info("dq6");
     for (size_t i = 0; i < 50; i++)
     {
         dq2.push_back(i);
     }
     dq2.print_info("dq2");
-    for (size_t i = 0; i < 50; i++)
+    auto it = dq2.begin();
+    // for (size_t i = 0; i < 50; i++)
+    // {
+    //     it = dq2.erase(it);
+    //     dq2.print_info("dq2");
+    // }
+    // for (size_t i = 0; i < 10; i++)
+    // {
+    //     it = dq2.erase(it, it + 5);
+    //     dq2.print_info("dq2");
+    // }
+    for (size_t i = 0; i < 2; i++)
     {
-        // dq2.pop_back();
-        dq2.pop_front();
+        it = dq2.erase(it, it + 25);
         dq2.print_info("dq2");
     }
+    // auto it = dq2.end();
+    // for (size_t i = 0; i < 5; i++)
+    // {
+        // it = dq2.erase(it - 10, it);
+        // it = dq2.erase(it - 3, it);
+    //     it = dq2.erase(it - 7, it - 1);
+    //     dq2.print_info("dq2");
+    // }
     
+
     return 0;
 }

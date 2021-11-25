@@ -120,6 +120,18 @@ namespace CZ
             return temp;
         }
 
+        DequeIterator<T>& operator+=(const DequeIteratorRank n)
+        {
+            *this = *this + n;
+            return *this;
+        }
+
+        DequeIterator<T>& operator-=(const DequeIteratorRank n)
+        {
+            *this = *this - n;
+            return *this;
+        }
+
     private:
         T *_cur;                         // 当前元素
         T *_first;                           // 当前元素所在的缓冲区中第一个位置

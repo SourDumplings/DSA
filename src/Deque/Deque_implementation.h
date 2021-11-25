@@ -420,7 +420,7 @@ namespace CZ
     {
         if (n <= 0)
         {
-            printf("Error from Deque::move_backward: invalid parameter n");
+            printf("Error from Deque::move_backward: invalid parameter n\n");
             throw std::exception();
         }
         
@@ -500,7 +500,7 @@ namespace CZ
     {
         if (empty())
         {
-            printf("Error from Deque::pop_back: empty deque");
+            printf("Error from Deque::pop_back: empty deque\n");
             throw std::exception();
         }
         
@@ -523,7 +523,7 @@ namespace CZ
     {
         if (empty())
         {
-            printf("Error from Deque::pop_front: empty deque");
+            printf("Error from Deque::pop_front: empty deque\n");
             throw std::exception();
         }
         
@@ -592,6 +592,65 @@ namespace CZ
 
         _bufferMap = newBufferMap;
         _mapSize = newMapSize;
+    }
+
+    template <typename T>
+    typename Deque<T>::Iterator Deque<T>::erase(Iterator itPos)
+    {
+        if (itPos < _start || _finish <= itPos)
+        {
+            printf("Error from Deque::erase: invalid iterator\n");
+            throw std::exception();
+        }
+
+        if (empty())
+        {
+            printf("Error from Deque::erase: empty deque\n");
+            throw std::exception();
+        }
+
+        --_size;
+        return move_forward(itPos + 1, 1);
+    }
+
+    template <typename T>
+    typename Deque<T>::Iterator Deque<T>::erase(const Iterator &b, const Iterator &e)
+    { 
+        if (b < _start || _finish < e || e < b)
+        {
+            printf("Error from Deque::erase: invalid iterator range\n");
+            throw std::exception();
+        }
+
+        Rank n = e - b;
+        if (_size < n)
+        {
+            printf("Error from Deque::erase: insufficient size\n");
+            throw std::exception();
+        }
+
+        _size -= n;
+        return move_forward(e, n);
+    }
+
+    template <typename T>
+    typename Deque<T>::Iterator Deque<T>::move_forward(Iterator startIt, Rank n)
+    {
+        if (n < 0 || startIt - n < _start || _finish < startIt)
+        {
+            printf("Error from Deque::move_forward: invalid parameter\n");
+            throw std::exception();
+        }
+        
+        // 移动元素
+        for (Iterator it = startIt; it != _finish; ++it)
+        {
+            *(it - n) = *it;
+        }
+        Rank temp = _finish - startIt;
+        _finish -= n;
+        shrink();
+        return _finish - temp;
     }
 }
 

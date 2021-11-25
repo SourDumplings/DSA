@@ -70,6 +70,9 @@ namespace CZ
         // 删除元素的接口，必要时会缩容
         void pop_back();
         void pop_front();
+        Iterator erase(Iterator itPos);
+        Iterator erase(const Iterator &b, const Iterator &e);
+
     private:
         Rank _bufferSize;
         Rank _mapSize;
@@ -85,8 +88,12 @@ namespace CZ
         bool need_shrink() const; // 判断是否需要缩容，如果有元素的 buffer 数小于总 buffer 数（bufferMap 的大小）的一半就返回 true
         void shrink(); // 双向收缩，2 倍缩容，会判断是否需要缩容
 
-        // 将 startIt 之后的所有元素向后移动 n 位，必要时扩容，返回由于后移形成的第一个空位的迭代器
-        Iterator move_backward(Iterator startIt, Rank n); 
+        // 将 startIt 之后的所有元素向后移动 n 位（包括 startIt 所指向的元素），必要时扩容，返回由于后移形成的第一个空位的迭代器
+        Iterator move_backward(Iterator startIt, Rank n);
+        // 将 startIt 之后的所有元素向前移动 n 位（包括 startIt 所指向的元素），必要时缩容，返回被迁移的第一个元素的迭代器
+        // 注意前移不会扩容，即前移不会超过第一个元素的位置
+        // 前移元素会覆盖之前的元素
+        Iterator move_forward(Iterator startIt, Rank n);
 
         static const Rank MIN_BUFFER_SIZE = 5;
     };
