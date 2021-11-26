@@ -20,7 +20,7 @@
 
 namespace CZ
 {
-    static const int32_t OPERTAOR_NUM = 9;
+    static const uint32_t OPERTAOR_NUM = 9;
 
     class Expression
     {
@@ -47,7 +47,7 @@ namespace CZ
         ValueType calc(const ValueType &lhs, const char op, const ValueType &rhs) const;
         ValueType calc(const ValueType &operand, const char op) const;
         bool is_one_element_operator(const char op) const;
-        int32_t get_operator_index(const char op) const;
+        uint32_t get_operator_index(const char op) const;
         char *_exp = nullptr, _delimiter = ' ';
 
         static const char priTable[OPERTAOR_NUM][OPERTAOR_NUM]; // 运算符优先级表

@@ -34,7 +34,7 @@ namespace CZ
 
     template <typename It, typename Cmp>
     void doStable_sort(It begin, It end, const Cmp &cmp,
-        const StableSortMethod &method = MERGE_SORT, const int32_t version = 0)
+        const StableSortMethod &method = MERGE_SORT, const uint32_t version = 0)
     {
         try
         {
@@ -78,7 +78,7 @@ namespace CZ
         template <typename It, typename Cmp>
         void test_iterator_for_stable_sort(const It &begin, const It &end,
             random_iterator_tag,
-            const Cmp &cmp, const StableSortMethod &method = MERGE_SORT, const int32_t version = 0)
+            const Cmp &cmp, const StableSortMethod &method = MERGE_SORT, const uint32_t version = 0)
         {
             doStable_sort(begin, end, cmp, method, version);
             return;
@@ -87,7 +87,7 @@ namespace CZ
         template <typename It, typename Cmp>
         void test_iterator_for_stable_sort(const It &begin, const It &end,
             seq_iterator_tag,
-            const Cmp &cmp, const StableSortMethod &method = MERGE_SORT, const int32_t version = 0)
+            const Cmp &cmp, const StableSortMethod &method = MERGE_SORT, const uint32_t version = 0)
         {
             throw "iterator is seq_iterator, should be random_iterator";
             return;
@@ -96,7 +96,7 @@ namespace CZ
         template <typename It, typename Cmp>
         void test_iterator_for_stable_sort(const It &begin, const It &end,
             bi_iterator_tag,
-            const Cmp &cmp, const StableSortMethod &method = MERGE_SORT, const int32_t version = 0)
+            const Cmp &cmp, const StableSortMethod &method = MERGE_SORT, const uint32_t version = 0)
         {
             throw "iterator is bi_iterator, should be random_iterator";
             return;
@@ -105,7 +105,7 @@ namespace CZ
 
     template <typename It, typename Cmp>
     void Stable_sort(It begin, It end, const Cmp &cmp,
-        const StableSortMethod &method = MERGE_SORT, const int32_t version = 0)
+        const StableSortMethod &method = MERGE_SORT, const uint32_t version = 0)
     {
         try
         {
@@ -123,7 +123,7 @@ namespace CZ
 
     template <typename It>
     void Stable_sort(It begin, It end,
-        const StableSortMethod &method = MERGE_SORT, const int32_t version = 0)
+        const StableSortMethod &method = MERGE_SORT, const uint32_t version = 0)
     {
         Stable_sort(begin, end, std::less<decltype(*begin)>(), method, version);
         return;

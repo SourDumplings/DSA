@@ -29,7 +29,7 @@ namespace CZ
                 _capacity >>= 1;
             }
             _elem = new T[_capacity];
-            for (int32_t i = 0; i < _size; ++i)
+            for (uint32_t i = 0; i < _size; ++i)
             {
                 _elem[i] = oldElem[i];
             }

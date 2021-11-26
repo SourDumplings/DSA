@@ -28,7 +28,7 @@ namespace CZ
     class BinaryIndexTree
     {
     public:
-        using Rank = int32_t;
+        using Rank = uint32_t;
 
         BinaryIndexTree(const Rank size = 0); // 传入管理多少个元素，实际树状数组中多一个元素
 

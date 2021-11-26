@@ -138,13 +138,13 @@ namespace CZ
 
     inline char Expression::compare_operator(const char nowOp, const char sOp) const
     {
-        int32_t nowI = get_operator_index(nowOp), sI = get_operator_index(sOp);
+        uint32_t nowI = get_operator_index(nowOp), sI = get_operator_index(sOp);
         return priTable[sI][nowI];
     }
 
     inline char Expression::reverse_compare_operator(const char nowOp, const char sOp) const
     {
-        int32_t nowI = get_operator_index(nowOp), sI = get_operator_index(sOp);
+        uint32_t nowI = get_operator_index(nowOp), sI = get_operator_index(sOp);
         return priTableReverse[sI][nowI];
     }
 

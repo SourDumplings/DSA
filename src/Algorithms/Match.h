@@ -23,7 +23,7 @@
 
 namespace CZ
 {
-    using MatchRank = int32_t;
+    using MatchRank = uint32_t;
 
     enum MatchMethod
     {

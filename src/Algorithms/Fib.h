@@ -68,7 +68,7 @@ namespace CZ
     };
 
     // 得到斐波那契数列的第n项，2个版本的方法
-    long long get_fib(int n, int32_t version = 0)
+    long long get_fib(int n, uint32_t version = 0)
     {
         long long lastItem = 1, thisItem = 0;
         switch (version)

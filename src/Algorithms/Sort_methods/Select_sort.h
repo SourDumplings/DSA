@@ -22,7 +22,7 @@ namespace CZ
     using Rank_select_sort = int64_t;
 
     template <typename It, typename Cmp>
-    void Select_sort(It begin, Rank_select_sort N, const Cmp &cmp, const int32_t version = 0)
+    void Select_sort(It begin, Rank_select_sort N, const Cmp &cmp, const uint32_t version = 0)
     {
         switch (version)
         {
@@ -59,7 +59,7 @@ namespace CZ
     }
 
     template <typename It>
-    void Select_sort(It begin, Rank_select_sort N, const int32_t version = 0)
+    void Select_sort(It begin, Rank_select_sort N, const uint32_t version = 0)
     {
         Select_sort(begin, N, std::less<decltype(*begin)>(), version);
         return;

@@ -36,14 +36,14 @@ namespace CZ
     It Median_of_two_seq(const It &begin1, const It &end1, const It &begin2, const It &end2,
         const Cmp &cmp)
     {
-        int32_t s1 = 0, d1 = end1 - begin1 - 1, s2 = 0, d2 = end2 - begin2 - 1;
+        uint32_t s1 = 0, d1 = end1 - begin1 - 1, s2 = 0, d2 = end2 - begin2 - 1;
         if (d1 != d2)
         {
             printf("Error from Median_of_two_seq: The lengths of the two seqs are not equal.\n");
             throw std::exception();
         }
 
-        int32_t m1, m2;
+        uint32_t m1, m2;
         while (s1 != d1)
         {
             m1 = (s1 + d1) >> 1;

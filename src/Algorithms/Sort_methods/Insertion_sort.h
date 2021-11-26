@@ -21,7 +21,7 @@ namespace CZ
 
     template <typename It, typename Cmp>
     void Insertion_sort(It begin, Rank_insertion_sort N, const Rank_insertion_sort steps,
-        const Cmp &cmp, const int32_t version = 0)
+        const Cmp &cmp, const uint32_t version = 0)
     {
         // printf("using Insertion sort, steps = %d\n", steps);
         for (Rank_insertion_sort i = steps; i < N; i += steps)

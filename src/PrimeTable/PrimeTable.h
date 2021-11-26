@@ -27,7 +27,7 @@ namespace CZ
 class PrimeTable
 {
 public:
-    using Rank = int32_t;
+    using Rank = uint32_t;
 
     // 构造存放最大素数不超过upperLimit_的素数表
     PrimeTable(Rank upperLimit_);

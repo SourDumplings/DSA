@@ -123,7 +123,7 @@ namespace CZ
     }
 
     template <typename It, typename Cmp>
-    void Quick_sort(It begin, Rank_quick_sort N, const Cmp &cmp, const int32_t version = 0)
+    void Quick_sort(It begin, Rank_quick_sort N, const Cmp &cmp, const uint32_t version = 0)
     {
         // 两个版本区别在于对于重复元素的态度不同，
         // 想像极端情况，若是全是重复，则第一个版本就遇到了最坏情况，变成线性递归

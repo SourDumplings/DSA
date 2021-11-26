@@ -25,7 +25,8 @@ namespace CZ
     class List
     {
     public:
-        using Rank = int32_t;
+        using Rank = uint32_t;
+        using RankPlus = int32_t;
         using Iterator = ListIterator<T>;
 
 		// 构造函数
@@ -54,8 +55,8 @@ namespace CZ
         const T& front() const;
         T& back();
         const T& back() const;
-        T& at(Rank index);
-        const T& at(Rank index) const;
+        T& at(RankPlus index);
+        const T& at(RankPlus index) const;
 
         // 打印列表信息
         void print_info(const char *name = "") const;
@@ -81,7 +82,7 @@ namespace CZ
         // 列表元素的排序算法，version 0为冒泡排序，对元素值进行操作，适用于元素值体积小的情况
         // version 1为插入排序，对链表结点进行操作，适用于元素体积较大的情况
         template <typename Cmp = std::less<const T&>>
-        void sort(const Cmp &cmp = std::less<const T&>(), const int32_t version = 0);
+        void sort(const Cmp &cmp = std::less<const T&>(), const uint32_t version = 0);
         // 有序列表去重，可根据列表是否已经排好序选择不同的算法
         // 对于排好序的列表，算法时间复杂度为O(n)，否则为O(n^2)
         template <typename Cmp = std::equal_to<const T&>>

@@ -136,7 +136,7 @@ namespace CZ
     inline std::ostream& operator<<(std::ostream &os, const List<T> &l) { return os; }
 
     template <typename T>
-    const T& List<T>::at(typename List<T>::Rank index) const
+    const T& List<T>::at(typename List<T>::RankPlus index) const
     {
         Iterator it = begin();
         if (index >= 0)
@@ -146,7 +146,7 @@ namespace CZ
                 printf("Error from List at: index is too large\n");
                 throw std::exception();
             }
-            for (Rank i = 0; i < index; ++i)
+            for (RankPlus i = 0; i < index; ++i)
             {
                 ++it;
             }
@@ -167,7 +167,7 @@ namespace CZ
 
             // // 方法二：间接法，亦适用于单链表
             // Iterator temp = it;
-            // for (Rank i = 0; i < -index; ++i)
+            // for (RankPlus i = 0; i < -index; ++i)
             // {
             //     ++temp;
             // }
@@ -181,7 +181,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline T& List<T>::at(Rank index)
+    inline T& List<T>::at(RankPlus index)
     { return const_cast<T&>(static_cast<const List<T>&>(*this).at(index)); }
 
 } // CZ

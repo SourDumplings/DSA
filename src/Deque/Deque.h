@@ -24,7 +24,7 @@ namespace CZ
     class Deque
     {
     public:
-        using Rank = int32_t;
+        using Rank = uint32_t;
         using Iterator = DequeIterator<T>;
         using Node = T*;
 
