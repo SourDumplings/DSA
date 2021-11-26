@@ -385,7 +385,7 @@ namespace CZ
         {
             return itPos;
         }
-        
+
         Iterator it0 = move_backward(itPos, n);
         Iterator it = it0;
         _size += n;
@@ -398,13 +398,13 @@ namespace CZ
 
     template <typename T>
     typename Deque<T>::Iterator Deque<T>::insert(Iterator itPos, const Iterator &b, const Iterator &e)
-    { 
+    {
         Rank n = e - b;
         if (n == 0)
         {
             return itPos;
         }
-        
+
         Iterator it0 = move_backward(itPos, n);
         Iterator it = it0;
         _size += n;
@@ -423,9 +423,9 @@ namespace CZ
             printf("Error from Deque::move_backward: invalid parameter n\n");
             throw std::exception();
         }
-        
+
         Rank resInLastBuffer = _finish._last - _finish._cur; // 最后一个 buffer 还可以往后移动几个
-        Rank bufferNumDelta = 0; // 最后一个元素会跨越几次 buffer
+        Rank bufferNumDelta = 0;                             // 最后一个元素会跨越几次 buffer
         if (n > resInLastBuffer)
         {
             bufferNumDelta = (n - resInLastBuffer) % _bufferSize == 0 ? (n - resInLastBuffer) / _bufferSize : (n - resInLastBuffer) / _bufferSize + 1;
@@ -503,7 +503,7 @@ namespace CZ
             printf("Error from Deque::pop_back: empty deque\n");
             throw std::exception();
         }
-        
+
         --_size;
         if (_finish._cur != _finish._first)
         {
@@ -526,7 +526,7 @@ namespace CZ
             printf("Error from Deque::pop_front: empty deque\n");
             throw std::exception();
         }
-        
+
         --_size;
         if (_start._cur != _start._last)
         {
@@ -543,18 +543,18 @@ namespace CZ
 
     template <typename T>
     bool Deque<T>::need_shrink() const
-    { 
+    {
         return _finish._pNode - _start._pNode + 1 < _mapSize / 2;
     }
 
     template <typename T>
     void Deque<T>::shrink()
-    { 
+    {
         if (!need_shrink())
         {
             return;
         }
-        
+
         /* 缩容方法：2 倍缩容
             即将 bufferMap 大小变为原来的一半，把原来的 Node 的值移到中心，如：
             奇数 mapSize 情况：0 0 0 1 1 0 0 -> 1 1 0
@@ -615,7 +615,7 @@ namespace CZ
 
     template <typename T>
     typename Deque<T>::Iterator Deque<T>::erase(const Iterator &b, const Iterator &e)
-    { 
+    {
         if (b < _start || _finish < e || e < b)
         {
             printf("Error from Deque::erase: invalid iterator range\n");
@@ -641,7 +641,7 @@ namespace CZ
             printf("Error from Deque::move_forward: invalid parameter\n");
             throw std::exception();
         }
-        
+
         // 移动元素
         for (Iterator it = startIt; it != _finish; ++it)
         {
@@ -652,6 +652,72 @@ namespace CZ
         shrink();
         return _finish - temp;
     }
+
+    template <typename T>
+    const T &Deque<T>::back() const
+    {
+        if (empty())
+        {
+            printf("Error from Deque::back: empty queue\n");
+            throw std::exception();
+        }
+
+        return *((_finish - 1)._cur);
+    }
+
+    template <typename T>
+    inline T &Deque<T>::back()
+    {
+        return const_cast<T &>(static_cast<const Deque<T> &>(*this).back());
+    }
+
+    template <typename T>
+    const T &Deque<T>::front() const
+    {
+        if (empty())
+        {
+            printf("Error from Deque::front: empty queue\n");
+            throw std::exception();
+        }
+
+        return *(_start._cur);
+    }
+
+    template <typename T>
+    inline T &Deque<T>::front()
+    {
+        return const_cast<T &>(static_cast<const Deque<T> &>(*this).front());
+    }
+
+    // template <typename T>
+    // const T &Deque<T>::at(Rank index) const
+    // { 
+    //     try
+    //     {
+    //         if (index < 0)
+    //         {
+    //             if (index < -_size)
+    //             {
+    //                 throw "invalid index";
+    //             }
+    //             return *((_finish - (-index))._cur);
+    //         }
+    //         else
+    //         {
+    //             if (_size <= index))
+    //             {
+    //                 throw "invalid index";
+    //             }
+    //             return *((_start + index)._cur);
+    //         }
+    //     }
+    //     catch (const char *errMsg)
+    //     {
+    //         printf("Warning from Deque::at: %s, ", errMsg);
+    //         printf("rank = %"PRId32", size = %"PRId32"\n", index, _size);
+    //         throw std::exception();
+    //     }
+    // }
 }
 
 #endif

@@ -53,9 +53,17 @@ namespace CZ
         Iterator end() const;
         Rank size() const;
         bool empty() const;
+        const T& back() const;
+        T& back();
+        const T& front() const;
+        T& front();
+        // const T& at(Rank index) const;
+        // T& at(Rank index);
 
         // 操作符
         Deque<T>& operator=(const Deque<T> &dq);
+        // const T& operator[](Rank index) const;
+        // T& operator[](Rank index);
 
         // 动态操作接口
         // 增加元素的接口，必要时会扩容

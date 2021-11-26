@@ -137,12 +137,12 @@ int main(int argc, char const *argv[])
     // dq6.print_info("dq6");
     // dq6.erase(dq6.end() - 2);
     // dq6.print_info("dq6");
-    for (size_t i = 0; i < 50; i++)
-    {
-        dq2.push_back(i);
-    }
-    dq2.print_info("dq2");
-    auto it = dq2.begin();
+    // for (size_t i = 0; i < 50; i++)
+    // {
+    //     dq2.push_back(i);
+    // }
+    // dq2.print_info("dq2");
+    // auto it = dq2.begin();
     // for (size_t i = 0; i < 50; i++)
     // {
     //     it = dq2.erase(it);
@@ -153,11 +153,11 @@ int main(int argc, char const *argv[])
     //     it = dq2.erase(it, it + 5);
     //     dq2.print_info("dq2");
     // }
-    for (size_t i = 0; i < 2; i++)
-    {
-        it = dq2.erase(it, it + 25);
-        dq2.print_info("dq2");
-    }
+    // for (size_t i = 0; i < 2; i++)
+    // {
+    //     it = dq2.erase(it, it + 25);
+    //     dq2.print_info("dq2");
+    // }
     // auto it = dq2.end();
     // for (size_t i = 0; i < 5; i++)
     // {
@@ -167,6 +167,15 @@ int main(int argc, char const *argv[])
     //     dq2.print_info("dq2");
     // }
     
+    // 测试 back、front
+    printf("dq1.front() = %d\n", dq1.front());
+    printf("dq1.back() = %d\n", dq1.back());
+    const Deque<CZString> dqs1({"abc", "def", "hello", "world"});
+    printf("dqs1.front().c_str() = %s\n", dqs1.front().c_str());
+    printf("dqs1.back().c_str() = %s\n", dqs1.back().c_str());
+    Deque<CZString> dqs2(dqs1);
+    printf("dqs2.front().c_str() = %s\n", dqs2.front().c_str());
+    printf("dqs2.back().c_str() = %s\n", dqs2.back().c_str());
 
     return 0;
 }
