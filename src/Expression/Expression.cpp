@@ -87,7 +87,7 @@ namespace CZ
         return op == '!';
     }
 
-    int32_t Expression::get_operator_index(const char op) const
+    uint32_t Expression::get_operator_index(const char op) const
     {
         int32_t ret;
         try
