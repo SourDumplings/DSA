@@ -17,6 +17,7 @@
 
 #include <initializer_list>
 #include "DequeIterator.h"
+#include "../CZString/CZString.h"
 
 namespace CZ
 {
@@ -25,6 +26,7 @@ namespace CZ
     {
     public:
         using Rank = uint32_t;
+        using RankPlus = int32_t;
         using Iterator = DequeIterator<T>;
         using Node = T*;
 
@@ -57,13 +59,14 @@ namespace CZ
         T& back();
         const T& front() const;
         T& front();
-        // const T& at(Rank index) const;
-        // T& at(Rank index);
+        const T& at(RankPlus index) const;
+        T& at(RankPlus index);
 
         // 操作符
         Deque<T>& operator=(const Deque<T> &dq);
-        // const T& operator[](Rank index) const;
-        // T& operator[](Rank index);
+        Deque<T>& operator=(Deque<T> &&dq);
+        const T& operator[](Rank index) const;
+        T& operator[](Rank index);
 
         // 动态操作接口
         // 增加元素的接口，必要时会扩容
@@ -80,6 +83,8 @@ namespace CZ
         void pop_front();
         Iterator erase(Iterator itPos);
         Iterator erase(const Iterator &b, const Iterator &e);
+        void clear(); // 清理 Deque 容器，不会改变 bufferSize
+        void remove(const T &value); // 移除所有值为 value 的元素
 
     private:
         Rank _bufferSize;
@@ -91,6 +96,8 @@ namespace CZ
 
         template<typename It>
         void init_from(const It &begin, const It &end, Rank bufferSize_ = 10);
+
+        void free();
         
         void expand(); // 双向伸展，2 倍扩容
         bool need_shrink() const; // 判断是否需要缩容，如果有元素的 buffer 数小于总 buffer 数（bufferMap 的大小）的一半就返回 true

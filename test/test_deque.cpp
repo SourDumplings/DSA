@@ -168,14 +168,58 @@ int main(int argc, char const *argv[])
     // }
     
     // 测试 back、front
-    printf("dq1.front() = %d\n", dq1.front());
-    printf("dq1.back() = %d\n", dq1.back());
-    const Deque<CZString> dqs1({"abc", "def", "hello", "world"});
-    printf("dqs1.front().c_str() = %s\n", dqs1.front().c_str());
-    printf("dqs1.back().c_str() = %s\n", dqs1.back().c_str());
-    Deque<CZString> dqs2(dqs1);
-    printf("dqs2.front().c_str() = %s\n", dqs2.front().c_str());
-    printf("dqs2.back().c_str() = %s\n", dqs2.back().c_str());
+    // printf("dq1.front() = %d\n", dq1.front());
+    // printf("dq1.back() = %d\n", dq1.back());
+    // const Deque<CZString> dqs1({"abc", "def", "hello", "world"});
+    // printf("dqs1.front().c_str() = %s\n", dqs1.front().c_str());
+    // printf("dqs1.back().c_str() = %s\n", dqs1.back().c_str());
+    // Deque<CZString> dqs2(dqs1);
+    // printf("dqs2.front().c_str() = %s\n", dqs2.front().c_str());
+    // printf("dqs2.back().c_str() = %s\n", dqs2.back().c_str());
 
+    // 测试索引接口
+    // for (uint32_t i = 0; i < dq61.size(); i++)
+    // {
+    //     printf("dq61[%d] = %d, dq61.at(%d) = %d\n", i, dq61[i], i, dq61.at(i));
+    // }
+
+    // for (uint32_t i = 0; i < 100; ++i)
+    // {
+    //     dq2.push_back(i);
+    // }
+    // dq2.print_info("dq2");
+    // for (int i = -1; -i <= dq2.size(); i--)
+    // {
+    //     printf("dq2.at(%d): %d\n", i, dq2.at(i));
+    // }
+
+    // 测试赋值
+    // dq1.print_info("dq1");
+    // dq1 = dq6;
+    // dq1.print_info("dq1");
+    // dq6.print_info("dq6");
+    // dq61.print_info("dq61");
+    // dq1 = dq6 = dq61;
+    // dq6.print_info("dq6");
+    // dq1.print_info("dq1");
+    // dq5.print_info("dq5");
+    // dq1 = std::move(dq5);
+    // dq1.print_info("dq1");
+    // printf("dq5.size() = %u\n", dq5.size());
+
+    // 测试 remove
+    dq1.print_info("dq1");
+    dq1.remove(5);
+    dq1.print_info("dq1");
+    for (size_t i = 0; i < 100; i++)
+    {
+        dq2.push_back(rand() % 10);
+    }
+    dq2.print_info("dq2");
+    dq2.remove(3);
+    dq2.print_info("dq2");
+    dq2.remove(11);
+    dq2.print_info("dq2");
+    
     return 0;
 }

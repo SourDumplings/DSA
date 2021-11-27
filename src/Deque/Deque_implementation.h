@@ -10,7 +10,9 @@
 #define DEQUE_IMPLEMENTATION_H
 
 #include "Deque.h"
+
 #include <cstdio>
+#include <cinttypes>
 #include <iostream>
 #include <stdexcept>
 
@@ -105,11 +107,7 @@ namespace CZ
     template <typename T>
     Deque<T>::~Deque()
     {
-        for (Rank i = 0; i < _mapSize; ++i)
-        {
-            delete[] _bufferMap[i];
-        }
-        delete[] _bufferMap;
+        free();
     }
 
     template <typename T>
@@ -689,35 +687,141 @@ namespace CZ
         return const_cast<T &>(static_cast<const Deque<T> &>(*this).front());
     }
 
-    // template <typename T>
-    // const T &Deque<T>::at(Rank index) const
-    // { 
-    //     try
-    //     {
-    //         if (index < 0)
-    //         {
-    //             if (index < -_size)
-    //             {
-    //                 throw "invalid index";
-    //             }
-    //             return *((_finish - (-index))._cur);
-    //         }
-    //         else
-    //         {
-    //             if (_size <= index))
-    //             {
-    //                 throw "invalid index";
-    //             }
-    //             return *((_start + index)._cur);
-    //         }
-    //     }
-    //     catch (const char *errMsg)
-    //     {
-    //         printf("Warning from Deque::at: %s, ", errMsg);
-    //         printf("rank = %"PRId32", size = %"PRId32"\n", index, _size);
-    //         throw std::exception();
-    //     }
-    // }
+    template <typename T>
+    const T &Deque<T>::at(RankPlus index) const
+    {
+        try
+        {
+            if (index < 0)
+            {
+                if (index < -_size)
+                {
+                    throw "invalid index";
+                }
+                return *((_finish - (-index))._cur);
+            }
+            else
+            {
+                if (_size <= index)
+                {
+                    throw "invalid index";
+                }
+                return *((_start + index)._cur);
+            }
+        }
+        catch (const char *errMsg)
+        {
+            printf("Warning from Deque::at: %s, ", errMsg);
+            printf("rank = %" PRId32 ", size = %u\n", index, _size);
+            throw std::exception();
+        }
+    }
+
+    template <typename T>
+    inline T &Deque<T>::at(RankPlus index)
+    {
+        return const_cast<T &>(static_cast<const Deque<T> &>(*this).at(index));
+    }
+
+    template <typename T>
+    const T &Deque<T>::operator[](Rank index) const
+    {
+        if (_size <= index)
+        {
+            printf("Error from Deque::operator[]：invalid index");
+            throw std::exception();
+        }
+        return *(_start + index);
+    }
+
+    template <typename T>
+    inline T &Deque<T>::operator[](Rank index)
+    {
+        return const_cast<T &>(static_cast<const Deque<T> &>(*this)[index]);
+    }
+
+    template <typename T>
+    Deque<T> &Deque<T>::operator=(const Deque<T> &dq)
+    {
+        if (&dq != this)
+        {
+            free();
+            init_from(dq.begin(), dq.end(), dq._bufferSize);
+        }
+        return *this;
+    }
+
+    template <typename T>
+    Deque<T> &Deque<T>::operator=(Deque<T> &&dq)
+    {
+        if (&dq != this)
+        {
+            free();
+            _bufferMap = dq._bufferMap;
+            _size = dq._size;
+            _bufferSize = dq._bufferSize;
+            _mapSize = dq._mapSize;
+            _start = dq._start;
+            _finish = dq._finish;
+            dq._bufferMap = nullptr;
+            dq._size = 0;
+            dq._mapSize = dq._bufferSize = 0;
+            dq._start.init(nullptr, nullptr, nullptr, nullptr);
+            dq._finish = _start;
+        }
+        return *this;
+    }
+
+    template <typename T>
+    void Deque<T>::free()
+    {
+        for (Rank i = 0; i < _mapSize; ++i)
+        {
+            delete[] _bufferMap[i];
+        }
+        delete[] _bufferMap;
+    }
+
+    template <typename T>
+    void Deque<T>::clear()
+    {
+        if (empty())
+        {
+            return;
+        }
+
+        Node *newBufferMap = new Node[2];
+        newBufferMap[0] = new T[_bufferSize];
+        newBufferMap[1] = new T[_bufferSize];
+        _start.init(newBufferMap[0], newBufferMap[0], newBufferMap[0] + _bufferSize - 1, newBufferMap);
+        _finish = _start;
+        free();
+        _bufferMap = newBufferMap;
+        _size = 0;
+    }
+
+    template <typename T>
+    void Deque<T>::remove(const T& value)
+    {
+        Iterator itNew = _start;
+        for (Iterator it = _start; it != _finish; ++it)
+        {
+            if (*it != value)
+            {
+                *(itNew++) = *it;
+            }
+        }
+        _finish = itNew;
+        _size = _finish - _start;
+        shrink();
+    }
+
+    template <typename T>
+    std::ostream &operator<<(std::ostream &os, const Deque<T> &dq)
+    {
+        return os;
+    }
+
 }
 
 #endif
