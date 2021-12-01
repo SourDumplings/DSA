@@ -79,10 +79,16 @@ namespace CZ
         virtual void merge(List<T> &&l);
         // 交换函数模板
         void swap(Iterator pos1, Iterator pos2);
-        // 列表元素的排序算法，version 0为冒泡排序，对元素值进行操作，适用于元素值体积小的情况
-        // version 1为插入排序，对链表结点进行操作，适用于元素体积较大的情况
+        /* 
+        列表的排序算法：
+        1. 列表元素的排序算法，version 0 为冒泡排序，对元素值进行操作，适用于元素值体积小的情况
+        2. version 1 为插入排序，对链表结点进行操作，适用于元素体积较大的情况
+        3. version 2 和 3 为归并排序，对链表结点进行操作，能够在实现 O(nlogn) 的时间复杂度，空间复杂度 version 2 为 O(n)，version 3 为 O(1)
+        4. 考虑到最佳性能，默认采用 version 3
+        5. 传入的比较函数 Cmp 必须是二元函数，返回 bool，当第一个参数比第二个参数小时返回 true
+         */
         template <typename Cmp = std::less<const T&>>
-        void sort(const Cmp &cmp = std::less<const T&>(), const uint32_t version = 0);
+        void sort(const Cmp &cmp = std::less<const T&>(), const uint32_t version = 3);
         // 有序列表去重，可根据列表是否已经排好序选择不同的算法
         // 对于排好序的列表，算法时间复杂度为O(n)，否则为O(n^2)
         template <typename Cmp = std::equal_to<const T&>>
@@ -102,6 +108,14 @@ namespace CZ
         void init();
         void init_from(const T *begin, const T *end);
         void init_from(Iterator begin, Iterator end);
+
+        // 归并排序
+        template <typename Cmp>
+        void listMergeSort1(ListNode<T> *pHead, ListNode<T> *pEnd, typename List<T>::Rank n, const Cmp& cmp);
+        template <typename Cmp>
+        void listMergeSort2(ListNode<T> *pHead, ListNode<T> *pEnd, typename List<T>::Rank n, const Cmp& cmp);
+        template <typename Cmp>
+        void mergeListForSort(ListNode<T> *pHead1, ListNode<T> *pHead2, ListNode<T> *pEnd, const Cmp& cmp);
 
     private:
         Rank _size = 0;

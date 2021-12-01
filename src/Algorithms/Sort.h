@@ -7,6 +7,7 @@
 
 /*
 排除函数模板接口，传入的迭代器必须是支持随机访问的
+传入的比较函数 Cmp 必须是二元函数，返回 bool，当第一个参数比第二个参数小时返回 true
  */
 
 #ifndef SORT_H
@@ -153,6 +154,31 @@ namespace CZ
     {
         Stable_sort(begin, end, cmp, method, version);
         return;
+    }
+
+    template <typename It>
+    bool isSorted(It begin, It end)
+    {
+        return isSorted(begin, end, std::less<decltype(*begin)>());
+    }
+
+    template <typename It, typename Cmp>
+    bool isSorted(It begin, It end, const Cmp &cmp)
+    {
+        for (It it = begin; it != end; ++it)
+        {
+            It temp = it;
+            ++temp;
+            if (temp == end) 
+            {
+                break;
+            }
+            if (cmp(*temp, *it))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 } // CZ
 

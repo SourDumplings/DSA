@@ -9,7 +9,7 @@
 ## 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：4.1.1，与 CMakeLists.txt 同步
+版本号：4.2.0，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -28,13 +28,17 @@
 2. 去掉非 const 的 size() 方法
 已完成
 3. 实现 Deque
-4. 实现空间复杂度为O(1)的归并排序，参考：https://leetcode-cn.com/problems/sort-list/solution/
+已完成
+4. 实现空间复杂度为O(1)的归并排序，参考：https://leetcode-cn.com/problems/sort-list/solution/pai-xu-lian-biao-by-leetcode-solution/
+只有链表可以，一般的不行
 5. 实现树状数组（区间）
 6. 实现 kd 树
 7. 实现多叉树的非递归遍历
 8. 实现堆的插入
 9. 实现前缀树 Trie
 10. 将非模板类的头文件和源文件分离并编译成库
+已完成
+11. List 的归并排序，参考：https://leetcode-cn.com/problems/sort-list/solution/pai-xu-lian-biao-by-leetcode-solution/
 已完成
 
 ## 通用算法（模板）：

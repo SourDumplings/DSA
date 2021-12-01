@@ -6,7 +6,7 @@
 */
 
 /*
-归并排序，时间复杂度为O(nlogn)，稳定排序
+归并排序，时间复杂度为O(nlogn)，空间复杂度为 O(n)，稳定排序
  */
 
 #ifndef MERGE_SORT_H
