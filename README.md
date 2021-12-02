@@ -9,7 +9,7 @@
 ## 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：4.2.0，与 CMakeLists.txt 同步
+版本号：4.2.1，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -34,12 +34,16 @@
 5. 实现树状数组（区间）
 6. 实现 kd 树
 7. 实现多叉树的非递归遍历
+无意义，放弃
 8. 实现堆的插入
+已实现
 9. 实现前缀树 Trie
 10. 将非模板类的头文件和源文件分离并编译成库
 已完成
 11. List 的归并排序，参考：https://leetcode-cn.com/problems/sort-list/solution/pai-xu-lian-biao-by-leetcode-solution/
 已完成
+12. 实现 Map
+13. 修正 Set 的接口，使其规范化
 
 ## 通用算法（模板）：
 1. ### 字典序比较操作符
