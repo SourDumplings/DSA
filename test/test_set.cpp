@@ -26,15 +26,18 @@ int main(int argc, char const *argv[])
 {
     Set<int> s1({1, 1, 3, 4, 5, 2, 2});
     s1.print_info("s1");
-    s1.insert(1);
-    s1.insert(10);
+    printf("s1.insert(1) = %d\n", s1.insert(1));
+    printf("s1.insert(10) = %d\n", s1.insert(10));
     s1.print_info("s1");
-    Set<int> s2(s1.begin(), s1.last());
+    Set<int> s2(s1.begin(), s1.end());
     s2.print_info("s2");
 
-    s1.remove(2);
-    s1.remove(4);
+    printf("s1.remove(2) = %d\n", s1.remove(2));
+    printf("s1.remove(6) = %d\n", s1.remove(6));
+    printf("s1.remove(4) = %d\n", s1.remove(4));
     s1.print_info("s1");
+    
+    printf("s1.front() = %d, s1.back() = %d\n", s1.front(), s1.back());
 
     (s1+s2).print_info("s1+s2");
     (s1-s2).print_info("s1-s2");

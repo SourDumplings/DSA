@@ -49,12 +49,15 @@ namespace CZ
         bool has_this_element(const T &value) const;
         Iterator begin();
         Iterator begin() const;
-        // 注意Set没有尾后迭代器end()，取而代之的是最后一个元素的迭代器last()
-        Iterator last();
-        Iterator last() const;
+        Iterator end();
+        Iterator end() const;
+        T& front();
+        const T& front() const;
+        T& back();
+        const T& back() const;
 
-        // 插入，如果该值已经存在则替换
-        void insert(const T &value);
+        // 插入，如果该值已经存在则插入失败，即什么都不做，返回 false
+        bool insert(const T &value);
         // 删除，成功返回true，失败返回false或者抛出异常
         bool remove(const T &value, bool nonexcept = true);
 

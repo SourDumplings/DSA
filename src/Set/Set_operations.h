@@ -23,15 +23,11 @@ namespace CZ
         {
             return false;
         }
-        for (typename Set<T>::Iterator itL = lhs.begin(), itR = rhs.begin();; ++itL, ++itR)
+        for (typename Set<T>::Iterator itL = lhs.begin(), itR = rhs.begin(); itL != lhs.end(); ++itL, ++itR)
         {
             if (*itL != *itR)
             {
                 return false;
-            }
-            if (itL == lhs.last())
-            {
-                break;
             }
         }
         return true;
@@ -44,13 +40,9 @@ namespace CZ
     Set<T> operator+(const Set<T> &lhs, const Set<T> &rhs)
     {
         Set<T> sumSet(lhs);
-        for (typename Set<T>::Iterator it = rhs.begin();; ++it)
+        for (typename Set<T>::Iterator it = rhs.begin(); it != rhs.end(); ++it)
         {
             sumSet.insert(*it);
-            if (it == rhs.last())
-            {
-                break;
-            }
         }
         return sumSet;
     }
@@ -59,17 +51,11 @@ namespace CZ
     Set<T> operator-(const Set<T> &lhs, const Set<T> &rhs)
     {
         Set<T> retSet(lhs);
-        for (typename Set<T>::Iterator it = retSet.begin();;)
+        for (typename Set<T>::Iterator it = lhs.begin(); it != lhs.end(); ++it)
         {
-            typename Set<T>::Iterator tempIt = it;
-            ++it;
-            if (rhs.has_this_element(*tempIt))
+            if (rhs.has_this_element(*it))
             {
-                retSet.remove(*tempIt);
-            }
-            if (!it.get())
-            {
-                break;
+                retSet.remove(*it);
             }
         }
         return retSet;

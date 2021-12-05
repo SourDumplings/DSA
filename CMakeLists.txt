@@ -14,11 +14,11 @@ set(CMAKE_CXX_FLAGS -g -Wall)
 string(REPLACE ";" " " CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin/)
 
-# 版本号管理，如果项目版本号为 a.b.c，则 version = a.c，api_version = b
+# 版本号管理，如果项目版本号为 a.b.c，则 version = a.b.c，api_version = a.b
 # 动态库版本
-set(version 4.1)
+set(version 4.3.0)
 # API 版本
-set(api_version 2)
+set(api_version 4.3)
 
 message(STATUS "source dir: " ${PROJECT_SOURCE_DIR})
 message(STATUS "binary dir: " ${PROJECT_BINARY_DIR})
