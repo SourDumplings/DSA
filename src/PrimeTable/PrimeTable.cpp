@@ -38,7 +38,7 @@ PrimeTable::Rank PrimeTable::get_prime(PrimeTable::Rank n) const
         printf("Error from PrimeTable get_prime: this table doesn't have so many primes\n");
         throw std::exception();
     }
-    PrimeTable::Rank ret;
+    PrimeTable::Rank ret = 0;
     for (PrimeTable::Rank i = 2, count = 0; i <= _upperLimit; ++i)
     {
         if (_table[i])

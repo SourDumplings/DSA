@@ -63,7 +63,7 @@ namespace CZ
             throw std::exception();
         }
 
-        Factorial_Impl::ValueType ret;
+        Factorial_Impl::ValueType ret = 0;
         switch (version)
         {
             case NONRECURSION_FACT: ret = Factorial_Impl::non_recursion_fact(x); break;
