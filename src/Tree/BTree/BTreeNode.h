@@ -6,7 +6,7 @@
 */
 
 /*
-B树结点模板类
+B树结点类模板
  */
 
 #ifndef B_TREE_NODE_H

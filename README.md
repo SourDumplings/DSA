@@ -9,7 +9,7 @@
 ## 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：4.3.1，与 CMakeLists.txt 同步
+版本号：4.3.2，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -38,7 +38,7 @@
 8. 实现堆的插入
 已实现
 9. 实现前缀树 Trie
-10. 将非模板类的头文件和源文件分离并编译成库
+10. 将非类模板的头文件和源文件分离并编译成库
 已完成
 11. List 的归并排序，参考：https://leetcode-cn.com/problems/sort-list/solution/pai-xu-lian-biao-by-leetcode-solution/
 已完成
@@ -95,6 +95,7 @@
 11. ### 词典
 	- #### 哈希表
 	- #### 键值对Pair
+	- #### Map
 12. ### 堆
 	- #### 普通堆
 	- #### 左式堆

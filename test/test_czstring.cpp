@@ -6,7 +6,7 @@
 */
 
 /*
-测试字符串模板类
+测试字符串类模板
  */
 
 #include "CZString/CZString.h"

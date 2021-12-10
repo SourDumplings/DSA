@@ -3,7 +3,7 @@
  * @Date: 2020-01-30 17:26:38
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com
- * @Description: B+树结点模板类
+ * @Description: B+树结点类模板
  * 
  * 模板参数：K关键码类型，V数据类型
  */

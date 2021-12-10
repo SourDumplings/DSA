@@ -6,7 +6,7 @@
 */
 
 /*
-List模板类的复制构造函数
+List类模板的复制构造函数
  */
 
 #ifndef LIST_COPY_CONSTRUCTOR_H

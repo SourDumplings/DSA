@@ -6,7 +6,7 @@
 */
 
 /*
-打印列表模板类的信息
+打印列表类模板的信息
  */
 
 #ifndef LIST_PRINT_INFO_H

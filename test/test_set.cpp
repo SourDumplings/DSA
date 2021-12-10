@@ -43,14 +43,14 @@ int main(int argc, char const *argv[])
     (s1-s2).print_info("s1-s2");
     (Set<int>::intersection(s1, s2)).print_info("intersection(s1, s2)");
 
-    if (s1.has_this_element(11))
+    if (s1.contains(11))
     {
         printf("s1 has 11\n");
     }
     else
         printf("s1 doesn't have 11\n");
 
-    if (s1.has_this_element(10))
+    if (s1.contains(10))
     {
         printf("s1 has 10\n");
     }

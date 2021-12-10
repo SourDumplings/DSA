@@ -6,7 +6,7 @@
 */
 
 /*
-并查集模板类
+并查集类模板
  */
 
 #ifndef UNION_FIND_SET_H

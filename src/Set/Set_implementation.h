@@ -50,7 +50,7 @@ namespace CZ
     inline bool Set<T>::empty() const { return _T.empty(); }
 
     template <typename T>
-    inline bool Set<T>::has_this_element(const T &value) const
+    inline bool Set<T>::contains(const T &value) const
     {
         return _T.search(value);
     }
@@ -71,7 +71,7 @@ namespace CZ
     template <typename T>
     bool Set<T>::remove(const T &value, bool nonexcept)
     {
-        if (has_this_element(value))
+        if (contains(value))
         {
             _T.remove(value);
         }
@@ -190,7 +190,7 @@ namespace CZ
         Set<T> ret;
         for (Iterator it = s1.begin(); it != s1.end(); ++it)
         {
-            if (s2.has_this_element(*it))
+            if (s2.contains(*it))
             {
                 ret.insert(*it);
             }

@@ -3,7 +3,7 @@
  * @Date: 2021-10-31 14:03:24
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com
- * @Description: 双向队列模板类
+ * @Description: 双向队列类模板
  */
 
 /*

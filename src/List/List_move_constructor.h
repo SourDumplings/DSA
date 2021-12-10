@@ -6,7 +6,7 @@
 */
 
 /*
-List模板类的移动构造函数
+List类模板的移动构造函数
  */
 
 #ifndef LIST_MOVE_CONSTRUCTOR_H

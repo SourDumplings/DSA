@@ -6,7 +6,7 @@
 */
 
 /*
-并查集模板类的实现
+并查集类模板的实现
  */
 
 #ifndef UNION_FIND_SET_IMPLEMENTATION_H

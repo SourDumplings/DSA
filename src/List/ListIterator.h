@@ -6,7 +6,7 @@
 */
 
 /*
-双向列表迭代器模板类
+双向列表迭代器类模板
  */
 
 #ifndef LISTITERATOR_H

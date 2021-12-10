@@ -6,7 +6,7 @@
 */
 
 /*
-堆栈模板类的实现
+堆栈类模板的实现
  */
 
 #ifndef STACK_IMPLEMENTATION_H

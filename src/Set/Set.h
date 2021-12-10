@@ -13,7 +13,6 @@
 #define SET_H
 
 #include "../Tree/BinTree/RedBlackTree.h"
-#include "../Iterator/SeqIterator.h"
 #include "SetIterator.h"
 
 namespace CZ
@@ -46,7 +45,7 @@ namespace CZ
         // 数据访问接口
         Rank size() const;
         bool empty() const;
-        bool has_this_element(const T &value) const;
+        bool contains(const T &value) const;
         Iterator begin();
         Iterator begin() const;
         Iterator end();

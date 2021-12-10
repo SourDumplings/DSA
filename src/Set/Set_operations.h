@@ -53,7 +53,7 @@ namespace CZ
         Set<T> retSet(lhs);
         for (typename Set<T>::Iterator it = lhs.begin(); it != lhs.end(); ++it)
         {
-            if (rhs.has_this_element(*it))
+            if (rhs.contains(*it))
             {
                 retSet.remove(*it);
             }

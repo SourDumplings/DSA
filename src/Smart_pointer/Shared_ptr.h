@@ -6,7 +6,7 @@
 */
 
 /*
-智能指针模板类Shared_ptr
+智能指针类模板Shared_ptr
  */
 
 #ifndef SHARED_PTR_H

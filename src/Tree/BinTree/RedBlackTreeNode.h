@@ -52,7 +52,7 @@ namespace CZ
         { return reinterpret_cast<RedBlackTreeNode<T>*>(BSTNode<T>::father()); }
 
     private:
-        // 树结点本身不负责旋转，旋转交给AVL树模板类，故直接继承BST的算法即可
+        // 树结点本身不负责旋转，旋转交给AVL树类模板，故直接继承BST的算法即可
         RedBlackTreeNode* remove_child(RedBlackTreeNode *node)
         { return reinterpret_cast<RedBlackTreeNode<T>*>(BSTNode<T>::remove_child(node)); }
         RedBlackTreeNode* remove_child(const T &data)
