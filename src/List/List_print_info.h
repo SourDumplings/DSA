@@ -31,8 +31,7 @@ namespace CZ
             {
                 putchar(' ');
             }
-            // std::cout << *it;
-            std::cout << it->data();
+            std::cout << *it;
         }
         printf("\n\n");
         return;

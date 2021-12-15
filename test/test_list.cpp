@@ -23,40 +23,40 @@ using CZ::List;
 int main(int argc, char const *argv[])
 {
     // 测试构造函数
-    // int a[]{1, 3, 6, 7, 8, 10, 100};
-    // List<int> l1, l2(5), l3(6, 3), l4(a, a+5);
-    // List<int> l5(l4.begin(), l4.end());
+    int a[]{1, 3, 6, 7, 8, 10, 100};
+    List<int> l1, l2(5), l3(6, 3), l4(a, a+5);
+    List<int> l5(l4.begin(), l4.end());
 
-    // l1.print_info("l1");
-    // l2.print_info("l2");
-    // l3.print_info("l3");
-    // l4.print_info("l4");
-    // l4.print_info("l5");
+    l1.print_info("l1");
+    l2.print_info("l2");
+    l3.print_info("l3");
+    l4.print_info("l4");
+    l4.print_info("l5");
 
-    // List<int> l6(l4), l7(std::move(l2));
-    // l6.print_info("l6");
-    // l4.print_info("l4");
-    // l7.print_info("l7");
-    // l2.print_info("l2");
+    List<int> l6(l4), l7(std::move(l2));
+    l6.print_info("l6");
+    l4.print_info("l4");
+    l7.print_info("l7");
+    l2.print_info("l2");
 
     // 测试赋值和比较
-    // List<string> ls1({"abs", "ab", "cde"}), ls2({"abs", "ab"}), ls3({"cd", "aa"}), ls4(ls3);
+    List<string> ls1({"abs", "ab", "cde"}), ls2({"abs", "ab"}), ls3({"cd", "aa"}), ls4(ls3);
 
-    // printf("ls1 == ls2 ? %d\n", ls1 == ls2);
-    // printf("ls1 > ls2 ? %d\n", ls1 > ls2);
-    // printf("ls1 < ls3 ? %d\n", ls1 < ls3);
-    // printf("ls2 <= ls3 ? %d\n", ls2 <= ls3);
+    printf("ls1 == ls2 ? %d\n", ls1 == ls2);
+    printf("ls1 > ls2 ? %d\n", ls1 > ls2);
+    printf("ls1 < ls3 ? %d\n", ls1 < ls3);
+    printf("ls2 <= ls3 ? %d\n", ls2 <= ls3);
 
-    // ls1.print_info("ls1");
-    // printf("ls1.front() = %s, ls1.back() = %s\n", ls1.front().c_str(), ls2.back().c_str());
-    // ls1 = ls2;
-    // ls1.print_info("ls1");
-    // printf("ls1.front() = %s, ls1.back() = %s\n", ls1.front().c_str(), ls2.back().c_str());
+    ls1.print_info("ls1");
+    printf("ls1.front() = %s, ls1.back() = %s\n", ls1.front().c_str(), ls2.back().c_str());
+    ls1 = ls2;
+    ls1.print_info("ls1");
+    printf("ls1.front() = %s, ls1.back() = %s\n", ls1.front().c_str(), ls2.back().c_str());
 
-    // ls4.print_info("ls4");
-    // ls1 = std::move(ls4);
-    // ls1.print_info("ls1");
-    // ls4.print_info("ls4");
+    ls4.print_info("ls4");
+    ls1 = std::move(ls4);
+    ls1.print_info("ls1");
+    ls4.print_info("ls4");
 
     // 测试访问接口
     // printf("for ls1: \n");
@@ -194,46 +194,46 @@ int main(int argc, char const *argv[])
         time used for 2: 20000
         time used for 3: 20000
      */
-    List<int> l9, l10, l11, l12;
-    const int size = 10000;
-    for (int i = 0; i < size; i++)
-    {
-        l9.push_back(rand());
-    }
-    l10 = l11 = l12 = l9;
-    printf("----- Before sorting ------\n");
-    printf("l9.size() = %d, isSorted: %d\n", l9.size(), isSorted(l9.begin(), l9.end()));
-    printf("l10.size() = %d, isSorted: %d\n", l10.size(), isSorted(l10.begin(), l10.end()));
-    printf("l11.size() = %d, isSorted: %d\n", l11.size(), isSorted(l11.begin(), l11.end()));
-    printf("l12.size() = %d, isSorted: %d\n", l12.size(), isSorted(l12.begin(), l12.end()));
+    // List<int> l9, l10, l11, l12;
+    // const int size = 10000;
+    // for (int i = 0; i < size; i++)
+    // {
+    //     l9.push_back(rand());
+    // }
+    // l10 = l11 = l12 = l9;
+    // printf("----- Before sorting ------\n");
+    // printf("l9.size() = %d, isSorted: %d\n", l9.size(), isSorted(l9.begin(), l9.end()));
+    // printf("l10.size() = %d, isSorted: %d\n", l10.size(), isSorted(l10.begin(), l10.end()));
+    // printf("l11.size() = %d, isSorted: %d\n", l11.size(), isSorted(l11.begin(), l11.end()));
+    // printf("l12.size() = %d, isSorted: %d\n", l12.size(), isSorted(l12.begin(), l12.end()));
 
-    clock_t begin0 = clock();
-    l9.sort(std::less<int>(), 0);
-    clock_t end0 = clock();
+    // clock_t begin0 = clock();
+    // l9.sort(std::less<int>(), 0);
+    // clock_t end0 = clock();
 
-    clock_t begin1 = clock();
-    l10.sort(std::less<int>(), 1);
-    clock_t end1 = clock();
+    // clock_t begin1 = clock();
+    // l10.sort(std::less<int>(), 1);
+    // clock_t end1 = clock();
 
-    clock_t begin2 = clock();
-    l11.sort(std::less<int>(), 2);
-    clock_t end2 = clock();
+    // clock_t begin2 = clock();
+    // l11.sort(std::less<int>(), 2);
+    // clock_t end2 = clock();
 
-    clock_t begin3 = clock();
-    // l12.sort(std::less<int>(), 3);
-    l12.sort();
-    clock_t end3 = clock();
+    // clock_t begin3 = clock();
+    // // l12.sort(std::less<int>(), 3);
+    // l12.sort();
+    // clock_t end3 = clock();
 
-    printf("----- After sorting ------\n");
-    printf("l9.size() = %d, isSorted: %d\n", l9.size(), isSorted(l9.begin(), l9.end()));
-    printf("l10.size() = %d, isSorted: %d\n", l10.size(), isSorted(l10.begin(), l10.end()));
-    printf("l11.size() = %d, isSorted: %d\n", l11.size(), isSorted(l11.begin(), l11.end()));
-    printf("l12.size() = %d, isSorted: %d\n", l12.size(), isSorted(l12.begin(), l12.end()));
+    // printf("----- After sorting ------\n");
+    // printf("l9.size() = %d, isSorted: %d\n", l9.size(), isSorted(l9.begin(), l9.end()));
+    // printf("l10.size() = %d, isSorted: %d\n", l10.size(), isSorted(l10.begin(), l10.end()));
+    // printf("l11.size() = %d, isSorted: %d\n", l11.size(), isSorted(l11.begin(), l11.end()));
+    // printf("l12.size() = %d, isSorted: %d\n", l12.size(), isSorted(l12.begin(), l12.end()));
 
-    // l12.print_info("l12");
-    printf("time used for 0: %ld\n", end0 - begin0);
-    printf("time used for 1: %ld\n", end1 - begin1);
-    printf("time used for 2: %ld\n", end2 - begin2);
-    printf("time used for 3: %ld\n", end3 - begin3);
+    // // l12.print_info("l12");
+    // printf("time used for 0: %ld\n", end0 - begin0);
+    // printf("time used for 1: %ld\n", end1 - begin1);
+    // printf("time used for 2: %ld\n", end2 - begin2);
+    // printf("time used for 3: %ld\n", end3 - begin3);
     return 0;
 }

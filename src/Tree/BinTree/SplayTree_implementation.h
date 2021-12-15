@@ -23,7 +23,7 @@ namespace CZ
     template <typename T>
     SplayTree<T>::SplayTree(std::nullptr_t): BST<T>(nullptr) {}
     template <typename T>
-    SplayTree<T>::SplayTree(SplayTreeNode<T> *root): BST<T>(root) {}
+    SplayTree<T>::SplayTree(SplayTreeNode<T> *root, bool isAllowRepeatKey_): BST<T>(root, isAllowRepeatKey_) {}
     template <typename T>
     SplayTree<T>::SplayTree(const SplayTree<T> &t): BST<T>(t) {}
     template <typename T>
@@ -39,7 +39,7 @@ namespace CZ
     template <typename T>
     void SplayTree<T>::print_info(const char *name) const
     {
-        printf("for splaytree %s\n", name);
+        printf("for splaytree %s, is_allow_repeat_key() = %d\n", name, BST<T>::is_allow_repeat_key());
         printf("it contains %u nodes(including root) and height is %u\n",
             Tree<T>::size(), Tree<T>::height());
         printf("its pre_order_traversal is: \n");
@@ -123,15 +123,18 @@ namespace CZ
     }
 
     template <typename T>
-    void SplayTree<T>::insert(SplayTreeNode<T> *node)
+    bool SplayTree<T>::insert(SplayTreeNode<T> *node)
     {
-        BST<T>::insert(node);
+        if (!BST<T>::insert(node))
+        {
+            return false;
+        }
         splay(node);
-        return;
+        return true;
     }
 
     template <typename T>
-    inline void SplayTree<T>::insert(const T &data) { return insert(new SplayTreeNode<T>(data)); }
+    inline bool SplayTree<T>::insert(const T &data) { return insert(new SplayTreeNode<T>(data)); }
 
     template <typename T>
     SplayTreeNode<T>* SplayTree<T>::remove(SplayTreeNode<T> *node)

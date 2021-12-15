@@ -3,7 +3,7 @@
  * @Date: 2021-12-01 18:21:07
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com
- * @Description: Map 类模板，底层采用红黑树实现，key 可以重复
+ * @Description: Map 类模板，底层采用红黑树实现，key 不可重复
  */
 
 #ifndef MAP_H
@@ -11,7 +11,7 @@
 
 #include "../Tree/BinTree/RedBlackTree.h"
 #include "MapIterator.h"
-#include "Pair.h"
+#include "KVPair.h"
 
 namespace CZ
 {
@@ -31,13 +31,17 @@ namespace CZ
         Iterator end();
         Iterator end() const;
         bool empty() const;
+        Rank size() const;
+        bool containsKey(const K& key) const;
 
-        void insert(const Pair<K, V> &p);
+        bool insert(const KVPair<K, V> &pair); // 插入元素，若值发生了替换则返回 false
+        const V& operator[](const K &key) const;
+        V& operator[](const K &key);
 
         void print_info(const char *name = "") const;
 
     private:
-        RedBlackTree<Pair<K, V>> _T;
+        RedBlackTree<KVPair<K, V>> _T;
     };
 }
 

@@ -20,7 +20,7 @@
 namespace CZ
 {
     template <typename T>
-    Set<T>::Set() = default;
+    Set<T>::Set() : _T(nullptr, false) {}
 
     template <typename T>
     template <typename It>
@@ -35,10 +35,10 @@ namespace CZ
 
     template <typename T>
     template <typename It>
-    Set<T>::Set(const It &begin, const It &end) { _construct_from(begin, end); }
+    Set<T>::Set(const It &begin, const It &end) : Set() { _construct_from(begin, end); }
 
     template <typename T>
-    Set<T>::Set(T *begin, T *end) { _construct_from(begin, end); }
+    Set<T>::Set(T *begin, T *end) : Set() { _construct_from(begin, end); }
 
     template <typename T>
     Set<T>::Set(const std::initializer_list<T> &l) : Set(l.begin(), l.end()) {}
@@ -56,16 +56,9 @@ namespace CZ
     }
 
     template <typename T>
-    bool Set<T>::insert(const T &value)
+    inline bool Set<T>::insert(const T &value)
     {
-        RedBlackTreeNode<T> *p = _T.search(value);
-        if (p)
-        {
-            return false;
-        }
-
-        _T.insert(value);
-        return true;
+        return _T.insert(value);
     }
 
     template <typename T>

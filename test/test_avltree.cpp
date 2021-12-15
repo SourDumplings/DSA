@@ -63,6 +63,8 @@ int main(int argc, char const *argv[])
     // aT.print_info("aT");
     auto n4 = aT.remove(aT.root()); delete n4;
     aT.print_info("aT");
+    aT.remove_all(3);
+    aT.print_info("aT");
     return 0;
 }
 

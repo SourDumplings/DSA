@@ -21,7 +21,7 @@ namespace CZ
     template <typename T>
     AVLTree<T>::AVLTree(std::nullptr_t): BST<T>(nullptr) {}
     template <typename T>
-    AVLTree<T>::AVLTree(AVLTreeNode<T> *root): BST<T>(root) {}
+    AVLTree<T>::AVLTree(AVLTreeNode<T> *root, bool isAllowRepeatKey_): BST<T>(root, isAllowRepeatKey_) {}
     template <typename T>
     AVLTree<T>::AVLTree(const AVLTree<T> &t): BST<T>(t) {}
     template <typename T>
@@ -39,7 +39,7 @@ namespace CZ
     template <typename T>
     void AVLTree<T>::print_info(const char *name) const
     {
-        printf("for AVLTree %s\n", name);
+        printf("for AVLTree %s, is_allow_repeat_key() = %d\n", name, BST<T>::is_allow_repeat_key());
         printf("it contains %u nodes(including root) and height is %u\n",
             Tree<T>::size(), Tree<T>::height());
         printf("its pre_order_traversal is: \n");
@@ -53,14 +53,19 @@ namespace CZ
     }
 
     template <typename T>
-    void AVLTree<T>::insert(AVLTreeNode<T> *node)
+    bool AVLTree<T>::insert(AVLTreeNode<T> *node)
     {
+        if (!BST<T>::is_allow_repeat_key() && search(node->data()))
+        {
+            return false;
+        }
+
         BST<T>::insert(node);
         AVLTreeNode<T> *f = node->father();
         if (!f)
         {
             // 从空树插入一个结点为根结点的情况无需调整
-            return;
+            return true;
         }
 
         // 如果其父亲结点的高度升高则其祖父结点就有可能失衡
@@ -74,10 +79,11 @@ namespace CZ
                 break; // 只要调整了一次，那么全树都会平衡
             }
         }
+        return true;
     }
 
     template <typename T>
-    inline void AVLTree<T>::insert(const T &data)
+    inline bool AVLTree<T>::insert(const T &data)
     { return insert(new AVLTreeNode<T>(data)); }
 
     template <typename T>

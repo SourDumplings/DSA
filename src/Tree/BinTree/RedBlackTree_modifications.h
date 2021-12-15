@@ -44,21 +44,27 @@ namespace CZ
     }
 
     template <typename T>
-    void RedBlackTree<T>::insert(RedBlackTreeNode<T> *v)
+    bool RedBlackTree<T>::insert(RedBlackTreeNode<T> *v)
     {
-        BST<T>::insert(v);
+        if (!BST<T>::insert(v))
+        {
+            return false;
+        }
         // 新插入结点有可能会出现父子结点都是红色的情况，故需要双红修正
         solve_double_red(v);
-        return;
+        return true;
     }
 
     template <typename T>
-    void RedBlackTree<T>::insert(const T &data)
+    bool RedBlackTree<T>::insert(const T &data)
     {
         RedBlackTreeNode<T> *v = new RedBlackTreeNode<T>(data);
-        BST<T>::insert(v);
+        if (!BST<T>::insert(v))
+        {
+            return false;
+        }
         solve_double_red(v);
-        return;
+        return true;
     }
 
     template <typename T>

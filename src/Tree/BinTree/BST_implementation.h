@@ -21,13 +21,13 @@
 namespace CZ
 {
     template <typename T>
-    BST<T>::BST(std::nullptr_t): BinTree<T>(nullptr) {}
+    BST<T>::BST(std::nullptr_t): BinTree<T>(nullptr), _isAllowRepeatKey(true) {}
     template <typename T>
-    BST<T>::BST(BSTNode<T> *root): BinTree<T>(root) {}
+    BST<T>::BST(BSTNode<T> *root, bool isAllowRepeatKey_): BinTree<T>(root), _isAllowRepeatKey(isAllowRepeatKey_) {}
     template <typename T>
-    BST<T>::BST(const BST<T> &t): BinTree<T>(t) {}
+    BST<T>::BST(const BST<T> &t): BinTree<T>(t), _isAllowRepeatKey(t._isAllowRepeatKey) {}
     template <typename T>
-    BST<T>::BST(BST<T> &&t): BinTree<T>(std::move(t)) {}
+    BST<T>::BST(BST<T> &&t): BinTree<T>(std::move(t)), _isAllowRepeatKey(t._isAllowRepeatKey) {}
 
     template <typename T>
     inline BSTNode<T>* BST<T>::root() const
@@ -39,7 +39,7 @@ namespace CZ
     template <typename T>
     void BST<T>::print_info(const char *name) const
     {
-        printf("for bst %s\n", name);
+        printf("for bst %s, is_allow_repeat_key() = %d\n", name, _isAllowRepeatKey);
         printf("it contains %u nodes(including root) and height is %u\n",
             Tree<T>::size(), Tree<T>::height());
         printf("its pre_order_traversal is: \n");
@@ -118,12 +118,26 @@ namespace CZ
 
 
     template <typename T>
-    inline void BST<T>::insert(const T &data)
-    { do_recursion_insert(root(), new BSTNode<T>(data)); }
+    bool BST<T>::insert(const T &data)
+    {
+        if (!_isAllowRepeatKey && search(data))
+        {
+            return false;
+        }
+        do_recursion_insert(root(), new BSTNode<T>(data));
+        return true;
+    }
 
     template <typename T>
-    inline void BST<T>::insert(BSTNode<T> *node)
-    { do_recursion_insert(root(), node); }
+    bool BST<T>::insert(BSTNode<T> *node)
+    { 
+        if (!_isAllowRepeatKey && search(node->data()))
+        {
+            return false;
+        }
+        do_recursion_insert(root(), node);
+        return true;
+    }
 
     template <typename T>
     inline BSTNode<T>* BST<T>::secede(BSTNode<T> *node)
@@ -209,6 +223,11 @@ namespace CZ
     template <typename T>
     BSTNode<T>* BST<T>::remove(BSTNode<T> *node)
     {
+        if (!node)
+        {
+            return nullptr;
+        }
+
         try
         {
             if (!Tree<T>::has_this_node(node))
@@ -229,25 +248,32 @@ namespace CZ
 
 
     template <typename T>
-    BSTNode<T>* BST<T>::remove(const T &data)
+    BSTNode<T>* BST<T>::remove(const T &data) noexcept
     {
         BSTNode<T> *node = search(data);
-        try
-        {
-            if (!node)
-            {
-                throw "this value is not in this BST";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from BST remove: %s\n", errMsg);
-            std::cout << "target is " << data << std::endl;
-            throw std::exception();
-        }
-
         return remove(node);
     }
+
+    template <typename T>
+    bool BST<T>::remove_all(const T &data) noexcept
+    {
+        bool res = false;
+        while (true)
+        {
+            BSTNode<T> *node = remove(data);
+            if (!node)
+            {
+                break;
+            }
+            delete node;
+            res = true;
+        }
+        return res;
+    }
+
+    template <typename T>
+    inline bool BST<T>::is_allow_repeat_key() const
+    { return _isAllowRepeatKey; }
 } // CZ
 
 #endif // BST_IMPLEMENTATION_H

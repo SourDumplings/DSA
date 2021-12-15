@@ -16,7 +16,7 @@
 #define HASHTABLE_H
 
 #include "../Vector/Vector.h"
-#include "Pair.h"
+#include "KVPair.h"
 
 namespace CZ
 {
@@ -67,7 +67,7 @@ namespace CZ
     private:
         // 用Vector存储数据对，数据及是否有效的标志
         // 无效指该位置没有放数据或者被懒惰删除了
-        Vector<Pair<T, bool>> _data;
+        Vector<KVPair<T, bool>> _data;
         Rank _tableSize, _size;
         ProbingMethod _probingMethod;
         // 探测方法， 如果探测不到空位则返回-1

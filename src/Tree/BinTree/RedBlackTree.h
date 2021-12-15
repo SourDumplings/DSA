@@ -6,12 +6,12 @@
 */
 
 /*
-红黑树模板
+红黑树类模板
 红黑树在AVL树的基础上对平衡进一步放宽
 所采用的“适度平衡”标准，可大致表述为： 任一节点左、右子树的高度，相差不得超过两倍
 通过为节点指定颜色，并巧妙地动态调整，红黑树可保证：
 在每次插入或删除操作之后的重平衡过程中，全树拓扑结构的更新仅涉及常数个节点。尽管最坏
-情况下需对多达Ω(logn)个节点重染色，但就分摊意义而言仅为O(1)个
+情况下需对多达 Ω(logn) 个节点重染色，但就分摊意义而言仅为 O(1) 个
 
 红黑树规则：
 (1)树根始终为黑色
@@ -35,7 +35,7 @@ namespace CZ
         using Rank = typename BST<T>::Rank;
 
         RedBlackTree(std::nullptr_t);
-        RedBlackTree(RedBlackTreeNode<T> *root = nullptr);
+        RedBlackTree(RedBlackTreeNode<T> *root = nullptr, bool isAllowRepeatKey_ = true);
         RedBlackTree(const RedBlackTree<T> &t);
         RedBlackTree(RedBlackTree<T> &&t);
 
@@ -51,8 +51,9 @@ namespace CZ
         void print_info(const char *name = "") const override;
 
         // 红黑树的插入与删除
-        void insert(RedBlackTreeNode<T> *node);
-        void insert(const T &data);
+        // 成功插入则返回 true
+        bool insert(RedBlackTreeNode<T> *node);
+        bool insert(const T &data);
         RedBlackTreeNode<T>* remove(const T &data);
         RedBlackTreeNode<T>* remove(RedBlackTreeNode<T> *node);
 

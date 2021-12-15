@@ -82,7 +82,7 @@ namespace CZ
             return merge(lHeap2, lHeap1, cmp);
         }
 
-        BinTreeNode<Pair<T, typename LeftHeap<T, Cmp>::Rank>> *r = lHeap2._T.root();
+        BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *r = lHeap2._T.root();
         lHeap2._T.root() = nullptr;
         lHeap2._T.update_size();
 
@@ -92,9 +92,9 @@ namespace CZ
     }
 
     template <typename T, typename Cmp>
-    BinTreeNode<Pair<T, typename LeftHeap<T, Cmp>::Rank>>*
-    LeftHeap<T, Cmp>::_do_merge(BinTreeNode<Pair<T, typename LeftHeap<T, Cmp>::Rank>> *a,
-        BinTreeNode<Pair<T, typename LeftHeap<T, Cmp>::Rank>> *b, const Cmp &cmp)
+    BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>>*
+    LeftHeap<T, Cmp>::_do_merge(BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *a,
+        BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *b, const Cmp &cmp)
     {
         if (!a) return b;
         if (!b) return a;
@@ -104,7 +104,7 @@ namespace CZ
             Swap(a, b);
         }
 
-        BinTreeNode<Pair<T, typename LeftHeap<T, Cmp>::Rank>> *rc = a->right_child();
+        BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *rc = a->right_child();
         a->remove_right_child();
         a->insert_as_right_child(_do_merge(rc, b, cmp));
 
@@ -129,22 +129,22 @@ namespace CZ
             throw std::exception();
         }
 
-        BinTreeNode<Pair<T, Rank>> *lr = _T.root()->left_child(), *rr = _T.root()->right_child();
+        BinTreeNode<KVPair<T, Rank>> *lr = _T.root()->left_child(), *rr = _T.root()->right_child();
         if (lr) lr->father() = nullptr;
         if (rr) rr->father() = nullptr;
         delete _T.root();
 
-        BinTreeNode<Pair<T, Rank>> *r = _do_merge(lr, rr, cmp);
-        _T = BinTree<Pair<T, Rank>>(r);
+        BinTreeNode<KVPair<T, Rank>> *r = _do_merge(lr, rr, cmp);
+        _T = BinTree<KVPair<T, Rank>>(r);
         return;
     }
 
     template <typename T, typename Cmp>
     void LeftHeap<T, Cmp>::insert(const T &value, const Cmp &cmp)
     {
-        BinTreeNode<Pair<T, Rank>> *node = new BinTreeNode<Pair<T, Rank>>(Pair<T, Rank>(value, 1));
-        BinTreeNode<Pair<T, Rank>> *r = _do_merge(_T.root(), node, cmp);
-        _T = BinTree<Pair<T, Rank>>(r);
+        BinTreeNode<KVPair<T, Rank>> *node = new BinTreeNode<KVPair<T, Rank>>(KVPair<T, Rank>(value, 1));
+        BinTreeNode<KVPair<T, Rank>> *r = _do_merge(_T.root(), node, cmp);
+        _T = BinTree<KVPair<T, Rank>>(r);
         return;
     }
 

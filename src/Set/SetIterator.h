@@ -43,13 +43,13 @@ namespace CZ
         {
             return _it->data();
         }
-        BiIterator<RedBlackTreeNode<T>> operator->()
+        T* operator->()
         {
-            return _it;
+            return const_cast<T*>(&(_it->data()));
         }
-        const BiIterator<RedBlackTreeNode<T>> operator->() const
+        const T* operator->() const
         {
-            return _it;
+            return &(_it->data());
         }
 
         SetIterator<T> &operator++()

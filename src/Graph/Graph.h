@@ -15,7 +15,7 @@
 #define GRAPH_H
 
 #include "../Vector/Vector.h"
-#include "../Dictionary/Pair.h"
+#include "../Dictionary/KVPair.h"
 #include <limits.h>
 #include <cstdio>
 

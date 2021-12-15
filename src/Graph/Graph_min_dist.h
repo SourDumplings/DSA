@@ -43,11 +43,11 @@ namespace CZ
         Vector<bool> &visited) const
     {
         // 堆，元素类型为键值对，键为边值，值为边目的端的秩
-        Heap<Pair<ED, Rank>, std::greater<const Pair<ED, Rank>&>> H;
-        H.insert(Pair<ED, Rank>(dist[s], s));
+        Heap<KVPair<ED, Rank>, std::greater<const KVPair<ED, Rank>&>> H;
+        H.insert(KVPair<ED, Rank>(dist[s], s));
         while (!H.empty())
         {
-            Pair<ED, Rank> eVP = H.top(); H.pop();
+            KVPair<ED, Rank> eVP = H.top(); H.pop();
             Rank v = eVP.value();
             if (eVP.key() == dist[v])
             {
@@ -61,7 +61,7 @@ namespace CZ
                         {
                             dist[w] = edge_data(v, w) + dist[v];
                             path[w] = v;
-                            H.insert(Pair<ED, Rank>(dist[w], w));
+                            H.insert(KVPair<ED, Rank>(dist[w], w));
                         }
                     }
                 }
@@ -75,7 +75,7 @@ namespace CZ
                         {
                             dist[w] = e.data() + dist[v];
                             path[w] = v;
-                            H.insert(Pair<ED, Rank>(dist[w], w));
+                            H.insert(KVPair<ED, Rank>(dist[w], w));
                         }
                     }
                 }

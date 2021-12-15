@@ -63,6 +63,12 @@ int main(int argc, char const *argv[])
     delete n7;
     // delete n8;
 
+    bst1.remove_all(2);
+    bst1.print_info("bst1");
+    bst1.remove_all(3);
+    bst1.print_info("bst1");
+
+    
 
     return 0;
 }

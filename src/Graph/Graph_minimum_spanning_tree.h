@@ -15,7 +15,7 @@
 #include "Graph.h"
 #include <stdexcept>
 #include "../Heap/Heap.h"
-#include "../Dictionary/Pair.h"
+#include "../Dictionary/KVPair.h"
 #include <functional>
 
 namespace CZ
@@ -125,7 +125,7 @@ namespace CZ
     template <typename ED, typename VD>
     ED Graph<ED, VD>::_Kruskal(Vector<Rank> &MST, const ED &maxDist, const ED &minDist) const
     {
-        Heap<Pair<ED, Edge<ED>>, std::greater<Pair<ED, Edge<ED>>>> H;
+        Heap<KVPair<ED, Edge<ED>>, std::greater<KVPair<ED, Edge<ED>>>> H;
         Vector<Rank> s(_Nv), gangNum(_Nv); // 并查集和记录每个根结点为首的并查集的节点数
         // 将所有的边无重复地插入到堆中，并初始化MST和gangNum
         for (Rank i = 0; i != _Nv; ++i)
@@ -140,7 +140,7 @@ namespace CZ
                     if (i < e.destination())
                     {
                         // 确保边不会重复
-                        H.insert(Pair<ED, Edge<ED>>(e.data(), e));
+                        H.insert(KVPair<ED, Edge<ED>>(e.data(), e));
                     }
                 }
             }
@@ -151,7 +151,7 @@ namespace CZ
                     if (has_edge(i, j))
                     {
                         ED eD = edge_data(i, j);
-                        H.insert(Pair<ED, Edge<ED>>(eD, Edge<ED>(i, j, eD)));
+                        H.insert(KVPair<ED, Edge<ED>>(eD, Edge<ED>(i, j, eD)));
                     }
                 }
             }

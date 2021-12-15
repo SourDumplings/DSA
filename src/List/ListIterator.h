@@ -41,10 +41,10 @@ namespace CZ
         { return _it->data(); }
         const T& operator*() const
         { return _it->data(); }
-        BiIterator<ListNode<T>> operator->()
-        { return _it; }
-        const BiIterator<ListNode<T>> operator->() const
-        { return _it; }
+        T* operator->()
+        { return const_cast<T*>(&(_it->data())); }
+        const T* operator->() const
+        { return &(_it->data()); }
 
         ListIterator<T>& operator++()
         {

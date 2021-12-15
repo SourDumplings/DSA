@@ -19,7 +19,7 @@ namespace CZ
     template <typename T>
     RedBlackTree<T>::RedBlackTree(std::nullptr_t): BST<T>(nullptr) {}
     template <typename T>
-    RedBlackTree<T>::RedBlackTree(RedBlackTreeNode<T> *root): BST<T>(root) {}
+    RedBlackTree<T>::RedBlackTree(RedBlackTreeNode<T> *root, bool isAllowRepeatKey_): BST<T>(root, isAllowRepeatKey_) {}
     template <typename T>
     RedBlackTree<T>::RedBlackTree(const RedBlackTree<T> &t): BST<T>(t) {}
     template <typename T>

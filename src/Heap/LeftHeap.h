@@ -17,7 +17,7 @@
 #include <functional>
 #include "../Tree/BinTree/BinTree.h"
 #include <initializer_list>
-#include "../Dictionary/Pair.h"
+#include "../Dictionary/KVPair.h"
 
 namespace CZ
 {
@@ -48,14 +48,14 @@ namespace CZ
 
     private:
         // 以二叉树存储数据，每个二叉树结点还要存储其npl值
-        BinTree<Pair<T, Rank>> _T;
+        BinTree<KVPair<T, Rank>> _T;
 
         // 空结点路径长度，即到外部结点的最近距离，也是以node为根的最大满子树的高度
         // 左式堆的npl取决于右孩子，但不意味着左孩子的高度高于右孩子
         Rank _get_npl(BinTreeNode<T> *node) const;
         // 在二叉树级别上执行合并操作，由上层调用者更新树的size
-        static BinTreeNode<Pair<T, Rank>>* _do_merge(BinTreeNode<Pair<T, Rank>> *a,
-            BinTreeNode<Pair<T, Rank>> *b, const Cmp &cmp = Cmp());
+        static BinTreeNode<KVPair<T, Rank>>* _do_merge(BinTreeNode<KVPair<T, Rank>> *a,
+            BinTreeNode<KVPair<T, Rank>> *b, const Cmp &cmp = Cmp());
 
         template <typename It>
         void _build_heap(const It &begin, const It &end, const Cmp &cmp = Cmp()); // floyd算法建堆还不会，用逐个插入法建堆

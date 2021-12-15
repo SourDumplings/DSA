@@ -42,7 +42,7 @@ namespace CZ
         {
             for (Rank i = 0; i != _Nv; ++i)
             {
-                Vector<Pair<bool, ED>> *pVi = new Vector<Pair<bool, ED>>(_Nv);
+                Vector<KVPair<bool, ED>> *pVi = new Vector<KVPair<bool, ED>>(_Nv);
                 for (auto &p : *pVi)
                 {
                     p.key() = false;
@@ -76,8 +76,8 @@ namespace CZ
         {
             for (Rank i = 0; i != _Nv; ++i)
             {
-                _dataE[i] = new Vector<Pair<bool, ED>>
-                (*reinterpret_cast<Vector<Pair<bool, ED>>*>(g._dataE[i]));
+                _dataE[i] = new Vector<KVPair<bool, ED>>
+                (*reinterpret_cast<Vector<KVPair<bool, ED>>*>(g._dataE[i]));
             }
         }
     }
@@ -105,7 +105,7 @@ namespace CZ
         {
             for (Rank i = 0; i != _Nv; ++i)
             {
-                delete reinterpret_cast<Vector<Pair<bool, ED>>*>(_dataE[i]);
+                delete reinterpret_cast<Vector<KVPair<bool, ED>>*>(_dataE[i]);
             }
         }
     }

@@ -18,7 +18,7 @@
 #define B_PLUS_TREE_H
 
 #include "BPlusTreeNode.h"
-#include "../../Dictionary/Pair.h"
+#include "../../Dictionary/KVPair.h"
 
 namespace CZ
 {
@@ -32,7 +32,7 @@ public:
     BPlusTree(const BPlusTree &bt);
     BPlusTree(BPlusTree &&bt);
     // bottom-up 地批量建立 B+ 树索引，注意输入的 indexDataV 必须是按照索引排好序的
-    BPlusTree(const Vector<Pair<K, V *>> &indexDataV, Rank order_ = 3);
+    BPlusTree(const Vector<KVPair<K, V *>> &indexDataV, Rank order_ = 3);
     ~BPlusTree();
 
     Rank order() const;

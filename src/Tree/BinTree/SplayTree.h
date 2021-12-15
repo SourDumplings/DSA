@@ -22,7 +22,7 @@ namespace CZ
     {
     public:
         SplayTree(std::nullptr_t);
-        SplayTree(SplayTreeNode<T> *root = nullptr);
+        SplayTree(SplayTreeNode<T> *root = nullptr, bool isAllowRepeatKey_ = true);
         SplayTree(const SplayTree<T> &t);
         SplayTree(SplayTree<T> &&t);
 
@@ -32,8 +32,9 @@ namespace CZ
         // 伸展树的查找算法，将找到的目标结点伸展至树根以备频繁访问
         SplayTreeNode<T>* search(const T &data) const;
         // 伸展树的插入算法，先按照BST插入再将其伸展至树根
-        void insert(SplayTreeNode<T> *node);
-        void insert(const T &data);
+        // 插入成功则返回 true
+        bool insert(SplayTreeNode<T> *node);
+        bool insert(const T &data);
         // 摘除子树的算法和BST一样
         SplayTreeNode<T>* secede(SplayTreeNode<T> *node);
         SplayTreeNode<T>* secede(const T &data);

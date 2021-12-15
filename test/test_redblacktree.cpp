@@ -48,6 +48,8 @@ int main(int argc, char const *argv[])
     rt1.print_info("rt1");
     rt1.remove(5);
     rt1.print_info("rt1");
+    rt1.remove_all(7);
+    rt1.print_info("rt1");
     return 0;
 }
 

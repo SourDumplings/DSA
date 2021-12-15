@@ -61,7 +61,7 @@ BPlusTree<K, V>::BPlusTree(BPlusTree<K, V> &&bt)
 }
 
 template<typename K, typename V>
-BPlusTree<K, V>::BPlusTree(const Vector<Pair<K, V *>> &indexDataV, Rank order_)
+BPlusTree<K, V>::BPlusTree(const Vector<KVPair<K, V *>> &indexDataV, Rank order_)
     : BPlusTree(order_)
 {
     if (indexDataV.empty())
@@ -77,7 +77,7 @@ BPlusTree<K, V>::BPlusTree(const Vector<Pair<K, V *>> &indexDataV, Rank order_)
     Rank childNumOfInnerNode = (_order + (_order + 1) / 2) / 2;
 
     // 建立叶结点
-    typename Vector<Pair<K, V *>>::Rank i = 0;
+    typename Vector<KVPair<K, V *>>::Rank i = 0;
     BPlusTreeNode<K, V> *lastLeaf = nullptr;
     BPlusTreeNode<K, V> *node = nullptr;
 
@@ -88,7 +88,7 @@ BPlusTree<K, V>::BPlusTree(const Vector<Pair<K, V *>> &indexDataV, Rank order_)
         Rank keyNumOfLeaf = childNumOfLeaf - 1;
         for (Rank j = 0; i < _size && j < keyNumOfLeaf; ++j)
         {
-            const Pair<K, V *> &p = indexDataV[i++];
+            const KVPair<K, V *> &p = indexDataV[i++];
             node->_keys.push_back(p.key());
             node->_children.push_back(p.value());
         }

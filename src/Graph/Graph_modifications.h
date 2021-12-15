@@ -51,7 +51,7 @@ namespace CZ
         {
             for (Rank i = 0; i != _Nv; ++i)
             {
-                Vector<Pair<bool, ED>> *pVi = new Vector<Pair<bool, ED>>(_Nv);
+                Vector<KVPair<bool, ED>> *pVi = new Vector<KVPair<bool, ED>>(_Nv);
                 for (auto &p : *pVi)
                 {
                     p.key() = false;
@@ -101,7 +101,7 @@ namespace CZ
         else
         {
             // 注意对于邻接矩阵法，两结点之间的边最多只能有一条
-            Pair<bool, ED> &eP = (*(reinterpret_cast<Vector<Pair<bool, ED>>*>(_dataE[s])))[d];
+            KVPair<bool, ED> &eP = (*(reinterpret_cast<Vector<KVPair<bool, ED>>*>(_dataE[s])))[d];
             eP.value() = eData;
             if (!eP.key())
             {
@@ -162,7 +162,7 @@ namespace CZ
         }
         else
         {
-            Pair<bool, ED> &eP = (*(reinterpret_cast<Vector<Pair<bool, ED>>*>(_dataE[s])))[d];
+            KVPair<bool, ED> &eP = (*(reinterpret_cast<Vector<KVPair<bool, ED>>*>(_dataE[s])))[d];
             if (eP.key())
             {
                 eP.key() = false;

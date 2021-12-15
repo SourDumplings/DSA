@@ -24,7 +24,7 @@ namespace CZ
         using Rank = typename BST<T>::Rank;
 
         AVLTree(std::nullptr_t);
-        AVLTree(AVLTreeNode<T> *root = nullptr);
+        AVLTree(AVLTreeNode<T> *root = nullptr, bool isAllowRepeatKey_ = true);
         AVLTree(const AVLTree<T> &t);
         AVLTree(AVLTree<T> &&t);
 
@@ -35,10 +35,14 @@ namespace CZ
         // 在AVLTree中查找值为data的结点，找不到返回nullptr
         AVLTreeNode<T>* search(const T &data) const;
 
-        void insert(AVLTreeNode<T> *node);
-        void insert(const T &data);
+        // 插入结点或者值，成功插入则返回 true
+        bool insert(AVLTreeNode<T> *node);
+        bool insert(const T &data);
         AVLTreeNode<T>* secede(AVLTreeNode<T> *node);
         AVLTreeNode<T>* secede(const T &data);
+        // 删除单个结点的方法，返回实际被删除的结点的指针
+        // 注意被删的结点的内存就不再受树的管理了，需要另外释放
+        // 删除一个值对应的一个结点，注意如果存在重复值则只会删除一个
         AVLTreeNode<T>* remove(const T &data);
         AVLTreeNode<T>* remove(AVLTreeNode<T> *node);
     };

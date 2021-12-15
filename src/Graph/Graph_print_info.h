@@ -48,7 +48,7 @@ namespace CZ
         {
             for (auto &pEV : _dataE)
             {
-                Vector<Pair<bool, ED>> *pEV_use = reinterpret_cast<Vector<Pair<bool, ED>>*>(pEV);
+                Vector<KVPair<bool, ED>> *pEV_use = reinterpret_cast<Vector<KVPair<bool, ED>>*>(pEV);
                 for (auto &eP : *pEV_use)
                 {
                     if (eP.key())

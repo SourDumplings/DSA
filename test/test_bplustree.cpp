@@ -97,18 +97,18 @@ int main(int argc, char const *argv[])
 //    }
 
     // 4.测试 bottom-up 构建
-    Vector<Pair<CZString, CZString *>> indexDataV;
+    Vector<KVPair<CZString, CZString *>> indexDataV;
     for (int i = 0; i < size; ++i)
     {
         CZString &str = s[i];
-        indexDataV.push_back(Pair<CZString, CZString *>(str.substr(0,
+        indexDataV.push_back(KVPair<CZString, CZString *>(str.substr(0,
                                                                    subStrLen),
                                                         &str));
     }
     Sort(indexDataV.begin(),
          indexDataV.end(),
-         [](const Pair<CZString, CZString *> &p1,
-            const Pair<CZString, CZString *> &p2)
+         [](const KVPair<CZString, CZString *> &p1,
+            const KVPair<CZString, CZString *> &p2)
          { return p1.key() < p2.key(); });
     BPlusTree<CZString, CZString> bp1(indexDataV, 4);
     bp1.print_info("bp1");

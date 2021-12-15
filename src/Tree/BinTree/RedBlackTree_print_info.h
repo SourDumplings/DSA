@@ -19,7 +19,7 @@ namespace CZ
     template <typename T>
     void RedBlackTree<T>::print_info(const char *name) const
     {
-        printf("for RedBlackTree %s:\n", name);
+        printf("for RedBlackTree %s, is_allow_repeat_key() = %d\n", name, BST<T>::is_allow_repeat_key());
         printf("it contains %u nodes(including root) and height is %u\n",
             Tree<T>::size(), Tree<T>::height());
         printf("its pre_order_traversal is: \n");

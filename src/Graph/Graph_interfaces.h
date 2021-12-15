@@ -63,7 +63,7 @@ namespace CZ
         }
         else
         {
-            Vector<Pair<bool, ED>> *pEV = reinterpret_cast<Vector<Pair<bool, ED>>*>(_dataE[s]);
+            Vector<KVPair<bool, ED>> *pEV = reinterpret_cast<Vector<KVPair<bool, ED>>*>(_dataE[s]);
             ret = (*pEV)[d].key();
         }
         return ret;
@@ -104,7 +104,7 @@ namespace CZ
         }
         else
         {
-            Vector<Pair<bool, ED>> *pEV = reinterpret_cast<Vector<Pair<bool, ED>>*>(_dataE[s]);
+            Vector<KVPair<bool, ED>> *pEV = reinterpret_cast<Vector<KVPair<bool, ED>>*>(_dataE[s]);
             pRet = &((*pEV)[d].value());
         }
         return *pRet;
