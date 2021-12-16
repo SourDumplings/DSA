@@ -28,6 +28,14 @@ int main(int argc, char const *argv[])
     printf("m1[\"cz\"].c_str() = %s\n", m1["cz"].c_str());
     m1["cz"] = "456";
     m1.print_info("m1");
+    m1.remove("cz");
+    m1.print_info("m1");
+    m1.remove("czz");
+    m1.print_info("m1");
+    m1.remove("world");
+    m1.print_info("m1");
+    m1.remove("hello");
+    m1.print_info("m1");
     return 0;
 }
 

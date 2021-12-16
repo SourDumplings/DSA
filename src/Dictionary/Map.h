@@ -34,7 +34,8 @@ namespace CZ
         Rank size() const;
         bool containsKey(const K& key) const;
 
-        bool insert(const KVPair<K, V> &pair); // 插入元素，若值发生了替换则返回 false
+        bool insert(const KVPair<K, V> &pair); // 插入键值对，若值发生了替换则返回 false
+        bool remove(const K& key, bool nonexcept = true); // 删除键值对，若确实成功删除了元素则返回 true，失败时返回 false 或抛出异常
         const V& operator[](const K &key) const;
         V& operator[](const K &key);
 

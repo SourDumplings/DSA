@@ -81,7 +81,7 @@ namespace CZ
         RedBlackTreeNode<KVPair<K, V>> *p = _T.search(pair);
         if (p)
         {
-            const_cast<V&>(p->data().value()) = pair.value();
+            const_cast<V &>(p->data().value()) = pair.value();
             return false;
         }
 
@@ -112,6 +112,24 @@ namespace CZ
     V &Map<K, V>::operator[](const K &key)
     {
         return const_cast<V &>(static_cast<const Map<K, V> &>(*this)[key]);
+    }
+
+    template <typename K, typename V>
+    bool Map<K, V>::remove(const K &key, bool nonexcept)
+    {
+        try
+        {
+            _T.remove(KVPair<K, V>(key, V()));
+        }
+        catch(const std::exception& e)
+        {
+            if (!nonexcept)
+            {
+                printf("Error from Map::remove: no such key.\n");
+            }
+            return false;
+        }
+        return true;
     }
 }
 
