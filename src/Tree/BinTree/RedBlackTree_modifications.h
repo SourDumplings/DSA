@@ -68,12 +68,12 @@ namespace CZ
     }
 
     template <typename T>
-    RedBlackTreeNode<T>* RedBlackTree<T>::do_remove(RedBlackTreeNode<T> *node)
+    RedBlackTreeNode<T> *RedBlackTree<T>::do_remove(RedBlackTreeNode<T> *node)
     {
         RedBlackTreeNode<T> *actualRemoved = node, *hot = node->father();
         RedBlackTreeNode<T> *succ =
-            reinterpret_cast<RedBlackTreeNode<T>*>(BST<T>::remove_at((BSTNode<T>*&)(actualRemoved),
-            (BSTNode<T>*&)(hot)));
+            reinterpret_cast<RedBlackTreeNode<T> *>(BST<T>::remove_at((BSTNode<T> *&)(actualRemoved),
+                                                                      (BSTNode<T> *&)(hot)));
         if (!Tree<T>::_size)
         {
             return actualRemoved;
@@ -82,8 +82,8 @@ namespace CZ
         if (!hot)
         {
             // 如果刚刚被删除的是根结点，则需要将根结点染黑并更新黑高度
-            reinterpret_cast<RedBlackTreeNode<T>*>(Tree<T>::_root)->_red = false;
-            ++reinterpret_cast<RedBlackTreeNode<T>*>(Tree<T>::_root)->_blackHeight;
+            reinterpret_cast<RedBlackTreeNode<T> *>(Tree<T>::_root)->_red = false;
+            ++reinterpret_cast<RedBlackTreeNode<T> *>(Tree<T>::_root)->_blackHeight;
         }
         else
         {
@@ -111,7 +111,7 @@ namespace CZ
     }
 
     template <typename T>
-    RedBlackTreeNode<T>* RedBlackTree<T>::remove(const T &data)
+    RedBlackTreeNode<T> *RedBlackTree<T>::remove(const T &data)
     {
         // 按照BST删除
         RedBlackTreeNode<T> *node = search(data);
@@ -131,7 +131,7 @@ namespace CZ
     }
 
     template <typename T>
-    RedBlackTreeNode<T>* RedBlackTree<T>::remove(RedBlackTreeNode<T> *node)
+    RedBlackTreeNode<T> *RedBlackTree<T>::remove(RedBlackTreeNode<T> *node)
     {
         // 按照BST删除
         try
@@ -149,6 +149,25 @@ namespace CZ
         return do_remove(node);
     }
 
+    template <typename T>
+    RedBlackTree<T> &RedBlackTree<T>::operator=(const RedBlackTree<T> &t)
+    {
+        if (&t != this)
+        {
+            BST<T>::operator=(t);
+        }
+        return *this;
+    }
+
+    template <typename T>
+    RedBlackTree<T> &RedBlackTree<T>::operator=(RedBlackTree<T> &&t)
+    {
+        if (&t != this)
+        {
+            BST<T>::operator=(std::move(t));
+        }
+        return *this;
+    }
 } // CZ
 
 #endif // RED_BLACK_TREE_MODIFICATIONS_H

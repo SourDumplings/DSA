@@ -17,6 +17,33 @@ namespace CZ
     Map<K, V>::Map() : _T(nullptr, false) {}
 
     template <typename K, typename V>
+    template <typename It>
+    void Map<K, V>::_construct_from(const It &begin, const It &end)
+    {
+        for (It it = begin; it != end; ++it)
+        {
+            insert(*it);
+        }
+        return;
+    }
+
+    template <typename K, typename V>
+    template <typename It>
+    Map<K, V>::Map(const It &begin, const It &end) : Map() { _construct_from(begin, end); }
+
+    template <typename K, typename V>
+    Map<K, V>::Map(const KVPair<K, V> *begin, const KVPair<K, V> *end) : Map() { _construct_from(begin, end); }
+
+    template <typename K, typename V>
+    Map<K, V>::Map(const std::initializer_list<KVPair<K, V>> &l) : Map(l.begin(), l.end()) {}
+
+    template <typename K, typename V>
+    Map<K, V>::Map(const Map<K, V> &m) { _construct_from(m.begin(), m.end()); }
+
+    template <typename K, typename V>
+    Map<K, V>::Map(Map<K, V> &&m) { _T = std::move(m._T); }
+
+    template <typename K, typename V>
     void Map<K, V>::print_info(const char *name) const
     {
         printf("for map %s, it has %u elements\n", name, size());
@@ -90,6 +117,9 @@ namespace CZ
     }
 
     template <typename K, typename V>
+    inline void Map<K, V>::clear() { _T.clear(); }
+
+    template <typename K, typename V>
     inline bool Map<K, V>::containsKey(const K &key) const
     {
         return _T.search(KVPair<K, V>(key, V())) != nullptr;
@@ -121,7 +151,7 @@ namespace CZ
         {
             _T.remove(KVPair<K, V>(key, V()));
         }
-        catch(const std::exception& e)
+        catch (const std::exception &e)
         {
             if (!nonexcept)
             {
@@ -130,6 +160,26 @@ namespace CZ
             return false;
         }
         return true;
+    }
+
+    template <typename K, typename V>
+    Map<K, V>& Map<K, V>::operator=(const Map<K, V> &m)
+    {
+        if (&m != this)
+        {
+            _T = m._T;
+        }
+        return *this;
+    }
+
+    template <typename K, typename V>
+    Map<K, V>& Map<K, V>::operator=(Map<K, V> &&m)
+    {
+        if (&m != this)
+        {
+            _T = std::move(m._T);
+        }
+        return *this;
     }
 }
 

@@ -25,6 +25,12 @@ namespace CZ
         using Iterator = MapIterator<K, V>;
 
         Map();
+        Map(const KVPair<K, V> *begin, const KVPair<K, V> *end);
+        template <typename It>
+        Map(const It &begin, const It &end);
+        Map(const std::initializer_list<KVPair<K, V>> &l);
+        Map(const Map<K, V> &m);
+        Map(Map<K, V> &&m);
 
         Iterator begin();
         Iterator begin() const;
@@ -36,13 +42,20 @@ namespace CZ
 
         bool insert(const KVPair<K, V> &pair); // 插入键值对，若值发生了替换则返回 false
         bool remove(const K& key, bool nonexcept = true); // 删除键值对，若确实成功删除了元素则返回 true，失败时返回 false 或抛出异常
+        void clear();
+        
         const V& operator[](const K &key) const;
         V& operator[](const K &key);
+        Map<K, V>& operator=(const Map<K, V> &m);
+        Map<K, V>& operator=(Map<K, V> &&m);
 
         void print_info(const char *name = "") const;
 
     private:
         RedBlackTree<KVPair<K, V>> _T;
+
+        template <typename It>
+        void _construct_from(const It &begin, const It &end);
     };
 }
 

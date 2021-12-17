@@ -52,6 +52,9 @@ namespace CZ
         BSTNode<T>* remove(const T &data) noexcept;
         // 删除一个值对应的所有结点，会释放掉被删的树结点的内存，如果有结点被删除则返回 true
         bool remove_all(const T &data) noexcept;
+
+        BST<T>& operator=(const BST<T> &t);
+        BST<T>& operator=(BST<T> &&t);
     protected:
         // 旋转操作不能由用户控制
         BSTNode<T>* rotate_at(BSTNode<T> *v);

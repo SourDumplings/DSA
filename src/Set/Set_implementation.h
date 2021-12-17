@@ -38,10 +38,16 @@ namespace CZ
     Set<T>::Set(const It &begin, const It &end) : Set() { _construct_from(begin, end); }
 
     template <typename T>
-    Set<T>::Set(T *begin, T *end) : Set() { _construct_from(begin, end); }
+    Set<T>::Set(const T *begin, const T *end) : Set() { _construct_from(begin, end); }
 
     template <typename T>
     Set<T>::Set(const std::initializer_list<T> &l) : Set(l.begin(), l.end()) {}
+
+    template <typename T>
+    Set<T>::Set(const Set<T> &s) { _construct_from(s.begin(), s.end()); }
+
+    template <typename T>
+    Set<T>::Set(Set<T> &&s) { _T = std::move(s._T); }
 
     template <typename T>
     inline typename Set<T>::Rank Set<T>::size() const { return _T.size(); }
@@ -82,6 +88,9 @@ namespace CZ
         }
         return true;
     }
+
+    template <typename T>
+    inline void Set<T>::clear() { _T.clear(); }
 
     template <typename T>
     typename Set<T>::Iterator Set<T>::begin() const
@@ -189,6 +198,26 @@ namespace CZ
             }
         }
         return ret;
+    }
+
+    template <typename T>
+    Set<T>& Set<T>::operator=(const Set<T> &s)
+    {
+        if (&s != this)
+        {
+            _T = s._T;
+        }
+        return *this;
+    }
+
+    template <typename T>
+    Set<T>& Set<T>::operator=(Set<T> &&s)
+    {
+        if (&s != this)
+        {
+            _T = std::move(s._T);
+        }
+        return *this;
     }
 } // CZ
 

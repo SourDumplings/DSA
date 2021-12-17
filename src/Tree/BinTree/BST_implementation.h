@@ -274,6 +274,29 @@ namespace CZ
     template <typename T>
     inline bool BST<T>::is_allow_repeat_key() const
     { return _isAllowRepeatKey; }
+
+    template <typename T>
+    BST<T>& BST<T>::operator=(const BST<T> &t)
+    {
+        if (&t != this)
+        {
+            BinTree<T>::operator=(t);
+            _isAllowRepeatKey = t._isAllowRepeatKey;
+        }
+        return *this;
+
+    }
+
+    template <typename T>
+    BST<T>& BST<T>::operator=(BST<T> &&t)
+    {
+        if (&t != this)
+        {
+            BinTree<T>::operator=(std::move(t));
+            _isAllowRepeatKey = t._isAllowRepeatKey;
+        }
+        return *this;
+    }
 } // CZ
 
 #endif // BST_IMPLEMENTATION_H

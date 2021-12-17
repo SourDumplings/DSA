@@ -74,6 +74,20 @@ int main(int argc, char const *argv[])
     s3.insert(2);
     s3.insert(2);
     s3.print_info("s3");
+
+    Set<int> s4(s3);
+    s3.print_info("s3");
+    s4.print_info("s4");
+    Set<int> s5(std::move(s4));
+    s5.print_info("s5");
+    s4.print_info("s4");
+    Set<int> s6, s7;
+    s6.print_info("s6");
+    s6 = s5;
+    s6.print_info("s6");
+    s7 = std::move(s6);
+    s7.print_info("s7");
+    s6.print_info("s6");
     return 0;
 }
 

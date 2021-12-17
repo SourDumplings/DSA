@@ -38,9 +38,11 @@ namespace CZ
 
         Set();
         Set(const std::initializer_list<T> &l);
-        Set(T *begin, T *end);
+        Set(const T *begin, const T *end);
         template <typename It>
         Set(const It &begin, const It &end);
+        Set(const Set<T> &s);
+        Set(Set<T> &&s);
 
         // 数据访问接口
         Rank size() const;
@@ -59,6 +61,10 @@ namespace CZ
         bool insert(const T &value);
         // 删除，成功返回true，失败返回false或者抛出异常
         bool remove(const T &value, bool nonexcept = true);
+        void clear();
+
+        Set<T>& operator=(const Set<T>& s);
+        Set<T>& operator=(Set<T>&& s);
 
         void print_info(const char *name = "") const;
 
