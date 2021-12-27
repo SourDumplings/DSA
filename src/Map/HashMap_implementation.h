@@ -6,13 +6,13 @@
 */
 
 /*
-哈希表模板的实现
+HashMap 类模板的实现
  */
 
-#ifndef HASHTABLE_IMPLEMENTATION_H
-#define HASHTABLE_IMPLEMENTATION_H
+#ifndef HASH_MAP_IMPLEMENTATION_H
+#define HASH_MAP_IMPLEMENTATION_H
 
-#include "HashTable.h"
+#include "HashMap.h"
 #include <stdexcept>
 #include <cctype>
 #include <iostream>
@@ -20,7 +20,7 @@
 namespace CZ
 {
     template <typename T, typename H>
-    HashTable<T, H>::HashTable(const Rank tableSize_, const ProbingMethod probingMethod_):
+    HashMap<T, H>::HashMap(const Rank tableSize_, const ProbingMethod probingMethod_):
         _tableSize(tableSize_), _size(0), _probingMethod(probingMethod_)
     {
         _data.resize(_tableSize);
@@ -32,7 +32,7 @@ namespace CZ
     }
 
     template <typename T, typename H>
-    const T& HashTable<T, H>::get(const Rank pos) const
+    const T& HashMap<T, H>::get(const Rank pos) const
     {
         try
         {
@@ -43,26 +43,26 @@ namespace CZ
         }
         catch (const char *errMsg)
         {
-            printf("Error from HashTable get: %s, pos is %d\n", errMsg, pos);
+            printf("Error from HashMap get: %s, pos is %d\n", errMsg, pos);
             throw std::exception();
         }
         return _data[pos].key();
     }
 
     template <typename T, typename H>
-    inline typename HashTable<T, H>::Rank HashTable<T, H>::size() const
+    inline typename HashMap<T, H>::Rank HashMap<T, H>::size() const
     { return _size; }
 
     template <typename T, typename H>
-    inline typename HashTable<T, H>::Rank HashTable<T, H>::table_size() const
+    inline typename HashMap<T, H>::Rank HashMap<T, H>::table_size() const
     { return _tableSize; }
 
     template <typename T, typename H>
-    typename HashTable<T, H>::Rank
-        HashTable<T, H>::_linear_probing(const typename HashTable<T, H>::Rank h) const
+    typename HashMap<T, H>::Rank
+        HashMap<T, H>::_linear_probing(const typename HashMap<T, H>::Rank h) const
     {
-        typename HashTable<T, H>::Rank ret = -1;
-        for (typename HashTable<T, H>::Rank i = h, count = 0; count != _tableSize;
+        typename HashMap<T, H>::Rank ret = -1;
+        for (typename HashMap<T, H>::Rank i = h, count = 0; count != _tableSize;
             ++count, i = (i + 1) % _tableSize)
         {
             if (!_data[i].value())
@@ -75,11 +75,11 @@ namespace CZ
     }
 
     template <typename T, typename H>
-    typename HashTable<T, H>::Rank
-        HashTable<T, H>::_square_probing(const typename HashTable<T, H>::Rank h) const
+    typename HashMap<T, H>::Rank
+        HashMap<T, H>::_square_probing(const typename HashMap<T, H>::Rank h) const
     {
-        typename HashTable<T, H>::Rank ret = -1;
-        for (typename HashTable<T, H>::Rank i = h, count = 0; count != _tableSize; ++count)
+        typename HashMap<T, H>::Rank ret = -1;
+        for (typename HashMap<T, H>::Rank i = h, count = 0; count != _tableSize; ++count)
         {
             i = (i + count * count) % _tableSize;
             if (!_data[i].value())
@@ -92,12 +92,12 @@ namespace CZ
     }
 
     template <typename T, typename H>
-    typename HashTable<T, H>::Rank
-        HashTable<T, H>::_linear_search(const typename HashTable<T, H>::Rank h,
+    typename HashMap<T, H>::Rank
+        HashMap<T, H>::_linear_search(const typename HashMap<T, H>::Rank h,
             const T &v) const
     {
-        typename HashTable<T, H>::Rank ret = -1;
-        for (typename HashTable<T, H>::Rank i = h, count = 0; count != _tableSize; ++count)
+        typename HashMap<T, H>::Rank ret = -1;
+        for (typename HashMap<T, H>::Rank i = h, count = 0; count != _tableSize; ++count)
         {
             i = (i + count * count) % _tableSize;
             if (!_data[i].value())
@@ -114,12 +114,12 @@ namespace CZ
     }
 
     template <typename T, typename H>
-    typename HashTable<T, H>::Rank
-        HashTable<T, H>::_square_search(const typename HashTable<T, H>::Rank h,
+    typename HashMap<T, H>::Rank
+        HashMap<T, H>::_square_search(const typename HashMap<T, H>::Rank h,
             const T &v) const
     {
-        typename HashTable<T, H>::Rank ret = -1;
-        for (typename HashTable<T, H>::Rank i = h, count = 0; count != _tableSize; ++count)
+        typename HashMap<T, H>::Rank ret = -1;
+        for (typename HashMap<T, H>::Rank i = h, count = 0; count != _tableSize; ++count)
         {
             i = (i + count * count) % _tableSize;
             if (!_data[i].value())
@@ -136,9 +136,9 @@ namespace CZ
     }
 
     template <typename T, typename H>
-    typename HashTable<T, H>::Rank HashTable<T, H>::search(const T &value) const
+    typename HashMap<T, H>::Rank HashMap<T, H>::search(const T &value) const
     {
-        Rank h = H()(value, _tableSize), pos;
+        Rank h = H()(value, _tableSize), pos = Rank();
         switch (_probingMethod)
         {
             case LINEAR_PROBING: pos = _linear_search(h, value); break;
@@ -148,9 +148,9 @@ namespace CZ
     }
 
     template <typename T, typename H>
-    bool HashTable<T, H>::insert(const T &v, const bool nonexcept, const bool repeatable)
+    bool HashMap<T, H>::insert(const T &v, const bool nonexcept, const bool repeatable)
     {
-        Rank h = H()(v, _tableSize), pos;
+        Rank h = H()(v, _tableSize), pos = Rank();
         if (!repeatable && search(v) != -1)
         {
             if (nonexcept)
@@ -159,7 +159,7 @@ namespace CZ
             }
             else
             {
-                printf("Error from HashTable insert: repeat is not allowed!");
+                printf("Error from HashMap insert: repeat is not allowed!");
                 throw std::exception();
             }
         }
@@ -178,7 +178,7 @@ namespace CZ
             }
             else
             {
-                printf("Error from HashTable insert: HashTable is full\n");
+                printf("Error from HashMap insert: HashMap is full\n");
                 throw std::exception();
             }
         }
@@ -192,7 +192,7 @@ namespace CZ
     }
 
     template <typename T, typename H>
-    bool HashTable<T, H>::remove(const T &value, const bool nonexcept)
+    bool HashMap<T, H>::remove(const T &value, const bool nonexcept)
     {
         Rank pos = search(value);
         if (pos == -1)
@@ -203,7 +203,7 @@ namespace CZ
             }
             else
             {
-                printf("Error from HashTable remove: this value doesn't exist\n");
+                printf("Error from HashMap remove: this value doesn't exist\n");
                 throw std::exception();
             }
         }
@@ -217,9 +217,9 @@ namespace CZ
     }
 
     template <typename T, typename H>
-    void HashTable<T, H>::print_info(const char *name) const
+    void HashMap<T, H>::print_info(const char *name) const
     {
-        printf("for HashTable %s: \n", name);
+        printf("for HashMap %s: \n", name);
         printf("size is %d, table size is %d\n", _size, _tableSize);
         printf("it contains:");
         for (Rank i = 0; i != _tableSize; ++i)
@@ -232,6 +232,6 @@ namespace CZ
     }
 } // CZ
 
-#endif // HASHTABLE_IMPLEMENTATION_H
+#endif // HASH_MAP_IMPLEMENTATION_H
 
 

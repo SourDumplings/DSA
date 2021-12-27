@@ -3,22 +3,22 @@
  * @Date: 2021-12-09 12:30:19
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com
- * @Description: Map 类模板的实现
+ * @Description: TreeMap 类模板的实现
  */
 
-#ifndef MAP_IMPLEMENTATION_H
-#define MAP_IMPLEMENTATION_H
+#ifndef TREE_MAP_IMPLEMENTATION_H
+#define TREE_MAP_IMPLEMENTATION_H
 
-#include "Map.h"
+#include "TreeMap.h"
 
 namespace CZ
 {
     template <typename K, typename V>
-    Map<K, V>::Map() : _T(nullptr, false) {}
+    TreeMap<K, V>::TreeMap() : _T(nullptr, false) {}
 
     template <typename K, typename V>
     template <typename It>
-    void Map<K, V>::_construct_from(const It &begin, const It &end)
+    void TreeMap<K, V>::_construct_from(const It &begin, const It &end)
     {
         for (It it = begin; it != end; ++it)
         {
@@ -29,41 +29,41 @@ namespace CZ
 
     template <typename K, typename V>
     template <typename It>
-    Map<K, V>::Map(const It &begin, const It &end) : Map() { _construct_from(begin, end); }
+    TreeMap<K, V>::TreeMap(const It &begin, const It &end) : TreeMap() { _construct_from(begin, end); }
 
     template <typename K, typename V>
-    Map<K, V>::Map(const KVPair<K, V> *begin, const KVPair<K, V> *end) : Map() { _construct_from(begin, end); }
+    TreeMap<K, V>::TreeMap(const KVPair<K, V> *begin, const KVPair<K, V> *end) : TreeMap() { _construct_from(begin, end); }
 
     template <typename K, typename V>
-    Map<K, V>::Map(const std::initializer_list<KVPair<K, V>> &l) : Map(l.begin(), l.end()) {}
+    TreeMap<K, V>::TreeMap(const std::initializer_list<KVPair<K, V>> &l) : TreeMap(l.begin(), l.end()) {}
 
     template <typename K, typename V>
-    Map<K, V>::Map(const Map<K, V> &m) { _construct_from(m.begin(), m.end()); }
+    TreeMap<K, V>::TreeMap(const TreeMap<K, V> &m) { _construct_from(m.begin(), m.end()); }
 
     template <typename K, typename V>
-    Map<K, V>::Map(Map<K, V> &&m) { _T = std::move(m._T); }
+    TreeMap<K, V>::TreeMap(TreeMap<K, V> &&m) { _T = std::move(m._T); }
 
     template <typename K, typename V>
-    void Map<K, V>::print_info(const char *name) const
+    void TreeMap<K, V>::print_info(const char *name) const
     {
-        printf("for map %s, it has %u elements\n", name, size());
-        printf("it contains:");
-        for (Iterator it = begin(); it != end(); ++it)
-        {
-            std::cout << " {" << it->key() << ": " << it->value() << "}";
-        }
+            printf("for TreeMap %s, it has %u elements\n", name, size());
+            printf("it contains:");
+            for (Iterator it = begin(); it != end(); ++it)
+            {
+                std::cout << " {" << it->key() << ": " << it->value() << "}";
+            }
 
-        printf("\n\n");
+            printf("\n\n");
     }
 
     template <typename K, typename V>
-    typename Map<K, V>::Iterator Map<K, V>::begin()
+    typename TreeMap<K, V>::Iterator TreeMap<K, V>::begin()
     {
-        return static_cast<const Map<K, V> &>(*this).begin();
+        return static_cast<const TreeMap<K, V> &>(*this).begin();
     }
 
     template <typename K, typename V>
-    typename Map<K, V>::Iterator Map<K, V>::begin() const
+    typename TreeMap<K, V>::Iterator TreeMap<K, V>::begin() const
     {
         if (empty())
         {
@@ -79,31 +79,31 @@ namespace CZ
     }
 
     template <typename K, typename V>
-    typename Map<K, V>::Iterator Map<K, V>::end()
+    typename TreeMap<K, V>::Iterator TreeMap<K, V>::end()
     {
-        return static_cast<const Map<K, V> &>(*this).end();
+        return static_cast<const TreeMap<K, V> &>(*this).end();
     }
 
     template <typename K, typename V>
-    typename Map<K, V>::Iterator Map<K, V>::end() const
+    typename TreeMap<K, V>::Iterator TreeMap<K, V>::end() const
     {
         return Iterator(_T.root(), true, &_T);
     }
 
     template <typename K, typename V>
-    bool Map<K, V>::empty() const
+    bool TreeMap<K, V>::empty() const
     {
         return _T.empty();
     }
 
     template <typename K, typename V>
-    typename Map<K, V>::Rank Map<K, V>::size() const
+    typename TreeMap<K, V>::Rank TreeMap<K, V>::size() const
     {
         return _T.size();
     }
 
     template <typename K, typename V>
-    bool Map<K, V>::insert(const KVPair<K, V> &pair)
+    bool TreeMap<K, V>::insert(const KVPair<K, V> &pair)
     {
         RedBlackTreeNode<KVPair<K, V>> *p = _T.search(pair);
         if (p)
@@ -117,35 +117,35 @@ namespace CZ
     }
 
     template <typename K, typename V>
-    inline void Map<K, V>::clear() { _T.clear(); }
+    inline void TreeMap<K, V>::clear() { _T.clear(); }
 
     template <typename K, typename V>
-    inline bool Map<K, V>::containsKey(const K &key) const
+    inline bool TreeMap<K, V>::containsKey(const K &key) const
     {
         return _T.search(KVPair<K, V>(key, V())) != nullptr;
     }
 
     template <typename K, typename V>
-    const V &Map<K, V>::operator[](const K &key) const
+    const V &TreeMap<K, V>::operator[](const K &key) const
     {
         KVPair<K, V> tempKVPair(key, V());
         RedBlackTreeNode<KVPair<K, V>> *p = _T.search(tempKVPair);
         if (!p)
         {
-            printf("Error from Map::operator[]: this map doesn't contain this key\n");
+            printf("Error from TreeMap::operator[]: this Treemap doesn't contain this key\n");
             throw std::exception();
         }
         return p->data().value();
     }
 
     template <typename K, typename V>
-    V &Map<K, V>::operator[](const K &key)
+    V &TreeMap<K, V>::operator[](const K &key)
     {
-        return const_cast<V &>(static_cast<const Map<K, V> &>(*this)[key]);
+        return const_cast<V &>(static_cast<const TreeMap<K, V> &>(*this)[key]);
     }
 
     template <typename K, typename V>
-    bool Map<K, V>::remove(const K &key, bool nonexcept)
+    bool TreeMap<K, V>::remove(const K &key, bool nonexcept)
     {
         try
         {
@@ -155,7 +155,7 @@ namespace CZ
         {
             if (!nonexcept)
             {
-                printf("Error from Map::remove: no such key.\n");
+                printf("Error from TreeMap::remove: no such key.\n");
             }
             return false;
         }
@@ -163,7 +163,7 @@ namespace CZ
     }
 
     template <typename K, typename V>
-    Map<K, V>& Map<K, V>::operator=(const Map<K, V> &m)
+    TreeMap<K, V>& TreeMap<K, V>::operator=(const TreeMap<K, V> &m)
     {
         if (&m != this)
         {
@@ -173,7 +173,7 @@ namespace CZ
     }
 
     template <typename K, typename V>
-    Map<K, V>& Map<K, V>::operator=(Map<K, V> &&m)
+    TreeMap<K, V>& TreeMap<K, V>::operator=(TreeMap<K, V> &&m)
     {
         if (&m != this)
         {

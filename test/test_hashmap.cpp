@@ -6,7 +6,7 @@
 */
 
 /*
-词典模板的测试
+HashMap 类模板的测试
  */
 
 #include <iostream>
@@ -15,15 +15,15 @@
 #include <cctype>
 #include <ctime>
 
-#include "Dictionary/HashTable.h"
+#include "Map/HashMap.h"
 
 using namespace std;
 using namespace CZ;
 
 int main(int argc, char const *argv[])
 {
-    // HashTable<int> d(10);
-    HashTable<int> d(10, SQUARE_PROBING);
+    // HashMap<int> d(10);
+    HashMap<int> d(10, SQUARE_PROBING);
     // d.print_info("d");
 
     // 测试插入操作

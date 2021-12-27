@@ -6,14 +6,14 @@
 */
 
 /*
-哈希表类模板
-默认使用Vector作为数据容器
+HashMap 类模板
+默认使用 Vector 作为数据容器
 支持哈希函数定制(接受值和哈希表大小两个参数)，内置线性和平方探测法
 内置了取余的哈希函数，因此如果存放非数值类则必须定制哈希函数
  */
 
-#ifndef HASHTABLE_H
-#define HASHTABLE_H
+#ifndef HASH_MAP_H
+#define HASH_MAP_H
 
 #include "../Vector/Vector.h"
 #include "KVPair.h"
@@ -41,13 +41,13 @@ namespace CZ
     };
 
     template <typename T, typename H = Dict::ModHash<T>>
-    class HashTable
+    class HashMap
     {
     public:
         using Rank = Dict::Rank;
 
         // 构造函数，默认大小10000，使用取模作为哈希函数，采用线性探测法
-        HashTable(const Rank tableSize_ = 10000,
+        HashMap(const Rank tableSize_ = 10000,
             const ProbingMethod probingMethod_ = LINEAR_PROBING);
 
         // 查找函数，返回所在的秩，如果元素不存在则返回-1
@@ -79,8 +79,8 @@ namespace CZ
     };
 } // CZ
 
-#include "HashTable_implementation.h"
+#include "HashMap_implementation.h"
 
-#endif // HASHTABLE_H
+#endif // HASH_MAP_H
 
 

@@ -3,10 +3,10 @@
  * @Date: 2021-12-13 18:57:10
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com
- * @Description: Map 类模板的测试
+ * @Description: TreeMap 类模板的测试
  */
 
-#include "Dictionary/Map.h"
+#include "Map/TreeMap.h"
 #include "CZString/CZString.h"
 #include <cstdio>
 #include <iostream>
@@ -16,7 +16,7 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    Map<CZString, CZString> m1;
+    TreeMap<CZString, CZString> m1;
     m1.print_info("m1");
     m1.insert(KVPair<CZString, CZString>("hello", "world"));
     m1.insert(KVPair<CZString, CZString>("world", "hello"));
@@ -39,16 +39,16 @@ int main(int argc, char const *argv[])
 
     KVPair<int, CZString> p1(1, "cz"), p2(3, "ztt"), p3(4, "dd"), p4(10, "hello"), p5(123, "world");
     KVPair<int, CZString> pa[]{p1, p2, p3, p4, p5};
-    Map<int, CZString> m2(pa + 1, pa + 4), m3(m2.begin(), m2.end());
+    TreeMap<int, CZString> m2(pa + 1, pa + 4), m3(m2.begin(), m2.end());
     m2.print_info("m2");
     m3.print_info("m3");
-    Map<int, CZString> m4(m2), m5(std::move(m3));
+    TreeMap<int, CZString> m4(m2), m5(std::move(m3));
     m4.print_info("m4");
     m5.print_info("m5");
     m3.print_info("m3");
     m5.clear();
     m5.print_info("m5");
-    Map<int, CZString> m6, m7;
+    TreeMap<int, CZString> m6, m7;
     m6.print_info("m6");
     m6 = m4;
     m6.print_info("m6");

@@ -35,7 +35,7 @@ INSTALL(DIRECTORY BinaryIndexTree/ DESTINATION ${dist_dir}/include/BinaryIndexTr
 INSTALL(FILES Bitmap/Bitmap.h DESTINATION ${dist_dir}/include/Bitmap)
 INSTALL(DIRECTORY CZString/ DESTINATION ${dist_dir}/include/CZString)
 INSTALL(DIRECTORY Deque/ DESTINATION ${dist_dir}/include/Deque)
-INSTALL(DIRECTORY Dictionary/ DESTINATION ${dist_dir}/include/Dictionary)
+INSTALL(DIRECTORY Map/ DESTINATION ${dist_dir}/include/Map)
 INSTALL(FILES Expression/Expression.h DESTINATION ${dist_dir}/include/Expression)
 INSTALL(DIRECTORY Graph/ DESTINATION ${dist_dir}/include/Graph)
 INSTALL(DIRECTORY Heap/ DESTINATION ${dist_dir}/include/Heap)
