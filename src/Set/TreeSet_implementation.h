@@ -9,10 +9,10 @@
 集合模板实现
  */
 
-#ifndef SET_IMPLEMENTATION_H
-#define SET_IMPLEMENTATION_H
+#ifndef TREE_SET_IMPLEMENTATION_H
+#define TREE_SET_IMPLEMENTATION_H
 
-#include "Set.h"
+#include "TreeSet.h"
 #include <stdexcept>
 #include <cstdio>
 #include <iostream>
@@ -20,11 +20,11 @@
 namespace CZ
 {
     template <typename T>
-    Set<T>::Set() : _T(nullptr, false) {}
+    TreeSet<T>::TreeSet() : _T(nullptr, false) {}
 
     template <typename T>
     template <typename It>
-    void Set<T>::_construct_from(const It &begin, const It &end)
+    void TreeSet<T>::_construct_from(const It &begin, const It &end)
     {
         for (It it = begin; it != end; ++it)
         {
@@ -35,40 +35,40 @@ namespace CZ
 
     template <typename T>
     template <typename It>
-    Set<T>::Set(const It &begin, const It &end) : Set() { _construct_from(begin, end); }
+    TreeSet<T>::TreeSet(const It &begin, const It &end) : TreeSet() { _construct_from(begin, end); }
 
     template <typename T>
-    Set<T>::Set(const T *begin, const T *end) : Set() { _construct_from(begin, end); }
+    TreeSet<T>::TreeSet(const T *begin, const T *end) : TreeSet() { _construct_from(begin, end); }
 
     template <typename T>
-    Set<T>::Set(const std::initializer_list<T> &l) : Set(l.begin(), l.end()) {}
+    TreeSet<T>::TreeSet(const std::initializer_list<T> &l) : TreeSet(l.begin(), l.end()) {}
 
     template <typename T>
-    Set<T>::Set(const Set<T> &s) { _construct_from(s.begin(), s.end()); }
+    TreeSet<T>::TreeSet(const TreeSet<T> &s) : _T(s._T) {}
 
     template <typename T>
-    Set<T>::Set(Set<T> &&s) { _T = std::move(s._T); }
+    TreeSet<T>::TreeSet(TreeSet<T> &&s) : _T(std::move(s._T)) {}
 
     template <typename T>
-    inline typename Set<T>::Rank Set<T>::size() const { return _T.size(); }
+    inline typename TreeSet<T>::Rank TreeSet<T>::size() const { return _T.size(); }
 
     template <typename T>
-    inline bool Set<T>::empty() const { return _T.empty(); }
+    inline bool TreeSet<T>::empty() const { return _T.empty(); }
 
     template <typename T>
-    inline bool Set<T>::contains(const T &value) const
+    inline bool TreeSet<T>::contains(const T &value) const
     {
         return _T.search(value);
     }
 
     template <typename T>
-    inline bool Set<T>::insert(const T &value)
+    inline bool TreeSet<T>::insert(const T &value)
     {
         return _T.insert(value);
     }
 
     template <typename T>
-    bool Set<T>::remove(const T &value, bool nonexcept)
+    bool TreeSet<T>::remove(const T &value, bool nonexcept)
     {
         if (contains(value))
         {
@@ -82,7 +82,7 @@ namespace CZ
             }
             else
             {
-                printf("Error from Set remove: this value is not in this set\n");
+                printf("Error from TreeSet remove: this value is not in this Treeset\n");
                 throw std::exception();
             }
         }
@@ -90,10 +90,10 @@ namespace CZ
     }
 
     template <typename T>
-    inline void Set<T>::clear() { _T.clear(); }
+    inline void TreeSet<T>::clear() { _T.clear(); }
 
     template <typename T>
-    typename Set<T>::Iterator Set<T>::begin() const
+    typename TreeSet<T>::Iterator TreeSet<T>::begin() const
     {
         if (empty())
         {
@@ -109,29 +109,29 @@ namespace CZ
     }
 
     template <typename T>
-    inline typename Set<T>::Iterator Set<T>::begin()
+    inline typename TreeSet<T>::Iterator TreeSet<T>::begin()
     {
-        return static_cast<const Set<T> &>(*this).begin();
+        return static_cast<const TreeSet<T> &>(*this).begin();
     }
 
     template <typename T>
-    inline typename Set<T>::Iterator Set<T>::end() const
+    inline typename TreeSet<T>::Iterator TreeSet<T>::end() const
     {
         return Iterator(_T.root(), true, &_T);
     }
 
     template <typename T>
-    inline typename Set<T>::Iterator Set<T>::end()
+    inline typename TreeSet<T>::Iterator TreeSet<T>::end()
     {
-        return static_cast<const Set<T> &>(*this).end();
+        return static_cast<const TreeSet<T> &>(*this).end();
     }
 
     template <typename T>
-    const T &Set<T>::back() const
+    const T &TreeSet<T>::back() const
     {
         if (empty())
         {
-            printf("Error from Set::front(): empty set.\n");
+            printf("Error from TreeSet::front(): empty Treeset.\n");
             throw std::exception();
         }
 
@@ -144,17 +144,17 @@ namespace CZ
     }
 
     template <typename T>
-    inline T &Set<T>::back()
+    inline T &TreeSet<T>::back()
     {
-        return const_cast<T &>(static_cast<const Set<T> &>(*this).back());
+        return const_cast<T &>(static_cast<const TreeSet<T> &>(*this).back());
     }
 
     template <typename T>
-    const T &Set<T>::front() const
+    const T &TreeSet<T>::front() const
     {
         if (empty())
         {
-            printf("Error from Set::front(): empty set.\n");
+            printf("Error from TreeSet::front(): empty Treeset.\n");
             throw std::exception();
         }
 
@@ -167,15 +167,15 @@ namespace CZ
     }
 
     template <typename T>
-    inline T &Set<T>::front()
+    inline T &TreeSet<T>::front()
     {
-        return const_cast<T &>(static_cast<const Set<T> &>(*this).front());
+        return const_cast<T &>(static_cast<const TreeSet<T> &>(*this).front());
     }
 
     template <typename T>
-    void Set<T>::print_info(const char *name) const
+    void TreeSet<T>::print_info(const char *name) const
     {
-        printf("for set %s, it has %u elements\n", name, size());
+        printf("for TreeSet %s, it has %u elements\n", name, size());
         printf("it contains:");
         for (Iterator it = begin(); it != end(); ++it)
         {
@@ -187,9 +187,9 @@ namespace CZ
     }
 
     template <typename T>
-    Set<T> Set<T>::intersection(const Set<T> &s1, const Set<T> &s2)
+    TreeSet<T> TreeSet<T>::intersection(const TreeSet<T> &s1, const TreeSet<T> &s2)
     {
-        Set<T> ret;
+        TreeSet<T> ret;
         for (Iterator it = s1.begin(); it != s1.end(); ++it)
         {
             if (s2.contains(*it))
@@ -201,7 +201,7 @@ namespace CZ
     }
 
     template <typename T>
-    Set<T>& Set<T>::operator=(const Set<T> &s)
+    TreeSet<T> &TreeSet<T>::operator=(const TreeSet<T> &s)
     {
         if (&s != this)
         {
@@ -211,7 +211,7 @@ namespace CZ
     }
 
     template <typename T>
-    Set<T>& Set<T>::operator=(Set<T> &&s)
+    TreeSet<T> &TreeSet<T>::operator=(TreeSet<T> &&s)
     {
         if (&s != this)
         {
@@ -221,4 +221,4 @@ namespace CZ
     }
 } // CZ
 
-#endif // SET_IMPLEMENTATION_H
+#endif // TreeSET_IMPLEMENTATION_H

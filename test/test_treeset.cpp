@@ -17,19 +17,19 @@
 #include <memory>
 #include <stdexcept>
 
-#include "Set/Set.h"
+#include "Set/TreeSet.h"
 
 using namespace std;
 using namespace CZ;
 
 int main(int argc, char const *argv[])
 {
-    Set<int> s1({1, 1, 3, 4, 5, 2, 2});
+    TreeSet<int> s1({1, 1, 3, 4, 5, 2, 2});
     s1.print_info("s1");
     printf("s1.insert(1) = %d\n", s1.insert(1));
     printf("s1.insert(10) = %d\n", s1.insert(10));
     s1.print_info("s1");
-    Set<int> s2(s1.begin(), s1.end());
+    TreeSet<int> s2(s1.begin(), s1.end());
     s2.print_info("s2");
 
     printf("s1.remove(2) = %d\n", s1.remove(2));
@@ -41,7 +41,7 @@ int main(int argc, char const *argv[])
 
     (s1+s2).print_info("s1+s2");
     (s1-s2).print_info("s1-s2");
-    (Set<int>::intersection(s1, s2)).print_info("intersection(s1, s2)");
+    (TreeSet<int>::intersection(s1, s2)).print_info("intersection(s1, s2)");
 
     if (s1.contains(11))
     {
@@ -58,7 +58,7 @@ int main(int argc, char const *argv[])
         printf("s1 doesn't have 10\n");
 
     int a[] = {2, 3, 6, 7, 3, 2, 0};
-    Set<int> s3(a, a+4);
+    TreeSet<int> s3(a, a+4);
     s3.print_info("s3");
 
     Vector<void*> vs;
@@ -67,7 +67,7 @@ int main(int argc, char const *argv[])
     vs.push_back(&s3);
     for (int32_t i = 0; i < 3; ++i)
     {
-        reinterpret_cast<Set<int>*>(vs[i])->print_info(to_string(i+1).c_str());
+        reinterpret_cast<TreeSet<int>*>(vs[i])->print_info(to_string(i+1).c_str());
     }
 
     s3.insert(1);
@@ -75,13 +75,13 @@ int main(int argc, char const *argv[])
     s3.insert(2);
     s3.print_info("s3");
 
-    Set<int> s4(s3);
+    TreeSet<int> s4(s3);
     s3.print_info("s3");
     s4.print_info("s4");
-    Set<int> s5(std::move(s4));
+    TreeSet<int> s5(std::move(s4));
     s5.print_info("s5");
     s4.print_info("s4");
-    Set<int> s6, s7;
+    TreeSet<int> s6, s7;
     s6.print_info("s6");
     s6 = s5;
     s6.print_info("s6");

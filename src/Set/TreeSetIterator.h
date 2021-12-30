@@ -9,8 +9,8 @@
 集合迭代器类模板
  */
 
-#ifndef SET_ITERATOR_H
-#define SET_ITERATOR_H
+#ifndef TREE_SET_ITERATOR_H
+#define TREE_SET_ITERATOR_H
 
 #include "../Iterator/BiIterator.h"
 #include "../Tree/BinTree/RedBlackTreeNode.h"
@@ -18,25 +18,25 @@
 namespace CZ
 {
     template <typename T>
-    class SetIterator;
+    class TreeSetIterator;
 
     template <typename T>
-    bool operator==(const SetIterator<T> &lhs, const SetIterator<T> &rhs);
+    bool operator==(const TreeSetIterator<T> &lhs, const TreeSetIterator<T> &rhs);
     template <typename T>
-    bool operator!=(const SetIterator<T> &lhs, const SetIterator<T> &rhs);
+    bool operator!=(const TreeSetIterator<T> &lhs, const TreeSetIterator<T> &rhs);
 
     template <typename T>
-    class SetIterator
+    class TreeSetIterator
     {
-        friend bool operator==<T>(const SetIterator<T> &lhs, const SetIterator<T> &rhs);
-        friend bool operator!=<T>(const SetIterator<T> &lhs, const SetIterator<T> &rhs);
+        friend bool operator==<T>(const TreeSetIterator<T> &lhs, const TreeSetIterator<T> &rhs);
+        friend bool operator!=<T>(const TreeSetIterator<T> &lhs, const TreeSetIterator<T> &rhs);
 
     public:
         typedef bi_iterator_tag iterator_category;
 
         // 构造函数
         // 如果是尾后迭代器，isEnd 为 true，随便传一个 node 的指针即可
-        SetIterator(RedBlackTreeNode<T> *pNode_, bool isEnd_, const RedBlackTree<T> *pRBT_) : _it(pNode_), _isEnd(isEnd_), _pRBT(pRBT_) {}
+        TreeSetIterator(RedBlackTreeNode<T> *pNode_, bool isEnd_, const RedBlackTree<T> *pRBT_) : _it(pNode_), _isEnd(isEnd_), _pRBT(pRBT_) {}
 
         // 操作符
         const T &operator*() const
@@ -52,11 +52,11 @@ namespace CZ
             return &(_it->data());
         }
 
-        SetIterator<T> &operator++()
+        TreeSetIterator<T> &operator++()
         {
             if (_isEnd)
             {
-                printf("Error from SetIterator::operator++: cannot move forward from end iterator.\n");
+                printf("Error from TreeSetIterator::operator++: cannot move forward from end iterator.\n");
                 throw std::exception();
             }
 
@@ -72,15 +72,15 @@ namespace CZ
             }
             return *this;
         }
-        SetIterator<T> operator++(int)
+        TreeSetIterator<T> operator++(int)
         {
             if (_isEnd)
             {
-                printf("Error from SetIterator::operator++: cannot move forward from end iterator.\n");
+                printf("Error from TreeSetIterator::operator++: cannot move forward from end iterator.\n");
                 throw std::exception();
             }
 
-            SetIterator<T> temp = *this;
+            TreeSetIterator<T> temp = *this;
             if (!_it->next())
             {
                 // 红黑树最右侧结点再前移即为尾后迭代器
@@ -93,7 +93,7 @@ namespace CZ
             }
             return temp;
         }
-        SetIterator<T> &operator--()
+        TreeSetIterator<T> &operator--()
         {
             if (_isEnd)
             {
@@ -106,9 +106,9 @@ namespace CZ
             }
             return *this;
         }
-        SetIterator<T> operator--(int)
+        TreeSetIterator<T> operator--(int)
         {
-            SetIterator<T> temp = *this;
+            TreeSetIterator<T> temp = *this;
             if (_isEnd)
             {
                 _it = BiIterator<RedBlackTreeNode<T>>(lastNode());
@@ -148,15 +148,15 @@ namespace CZ
     };
 
     template <typename T>
-    bool operator==(const SetIterator<T> &lhs, const SetIterator<T> &rhs)
+    bool operator==(const TreeSetIterator<T> &lhs, const TreeSetIterator<T> &rhs)
     {
         return lhs._it == rhs._it && lhs._pRBT == rhs._pRBT && lhs._isEnd == rhs._isEnd;
     }
     template <typename T>
-    bool operator!=(const SetIterator<T> &lhs, const SetIterator<T> &rhs)
+    bool operator!=(const TreeSetIterator<T> &lhs, const TreeSetIterator<T> &rhs)
     {
         return !(lhs == rhs);
     }
 } // CZ
 
-#endif // SET_ITERATOR_H
+#endif // TREE_TreeSET_ITERATOR_H
