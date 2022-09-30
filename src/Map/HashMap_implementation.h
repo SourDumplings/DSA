@@ -138,7 +138,7 @@ namespace CZ
     template <typename T, typename H>
     typename HashMap<T, H>::Rank HashMap<T, H>::search(const T &value) const
     {
-        Rank h = H()(value, _tableSize), pos = Rank();
+        Rank h = H()(value) % _tableSize, pos = Rank();
         switch (_probingMethod)
         {
             case LINEAR_PROBING: pos = _linear_search(h, value); break;
@@ -150,7 +150,7 @@ namespace CZ
     template <typename T, typename H>
     bool HashMap<T, H>::insert(const T &v, const bool nonexcept, const bool repeatable)
     {
-        Rank h = H()(v, _tableSize), pos = Rank();
+        Rank h = H()(v) % _tableSize, pos = Rank();
         if (!repeatable && search(v) != -1)
         {
             if (nonexcept)
@@ -220,7 +220,7 @@ namespace CZ
     void HashMap<T, H>::print_info(const char *name) const
     {
         printf("for HashMap %s: \n", name);
-        printf("size is %d, table size is %d\n", _size, _tableSize);
+        printf("size is %lu, table size is %lu\n", _size, _tableSize);
         printf("it contains:");
         for (Rank i = 0; i != _tableSize; ++i)
         {

@@ -18,50 +18,106 @@ namespace CZ
 
     // 默认哈希算法
     template <typename T>
-    HashRank Hash(const T &value)
+    class Hash
     {
-        return value.hash();
-    }
+    public:
+        HashRank operator()(const T &value) const
+        {
+            return value.hash();
+        }
+    };
 
     // 针对一些特定类型的哈希算法
-    template <>
-    HashRank Hash<bool>(const bool &value);
+    template<>
+    class Hash<bool>
+    {
+    public:
+        HashRank operator()(const bool &value) const;
+    };
 
-    template <>
-    HashRank Hash<nullptr_t>(const nullptr_t &value);
+    template<>
+    class Hash<nullptr_t>
+    {
+    public:
+        HashRank operator()(const nullptr_t &value) const;
+    };
 
-    template <>
-    HashRank Hash<char>(const char &value);
+    template<>
+    class Hash<char>
+    {
+    public:
+        HashRank operator()(const char &value) const;
+    };
 
-    template <>
-    HashRank Hash<int8_t>(const int8_t &value);
+    template<>
+    class Hash<int8_t>
+    {
+    public:
+        HashRank operator()(const int8_t &value) const;
+    };
 
-    template <>
-    HashRank Hash<uint8_t>(const uint8_t &value);
+    template<>
+    class Hash<uint8_t>
+    {
+    public:
+        HashRank operator()(const uint8_t &value) const;
+    };
 
-    template <>
-    HashRank Hash<int16_t>(const int16_t &value);
+    template<>
+    class Hash<int16_t>
+    {
+    public:
+        HashRank operator()(const int16_t &value) const;
+    };
 
-    template <>
-    HashRank Hash<uint16_t>(const uint16_t &value);
+    template<>
+    class Hash<uint16_t>
+    {
+    public:
+        HashRank operator()(const uint16_t &value) const;
+    };
 
-    template <>
-    HashRank Hash<int32_t>(const int32_t &value);
+    template<>
+    class Hash<int32_t>
+    {
+    public:
+        HashRank operator()(const int32_t &value) const;
+    };
 
-    template <>
-    HashRank Hash<uint32_t>(const uint32_t &value);
+    template<>
+    class Hash<uint32_t>
+    {
+    public:
+        HashRank operator()(const uint32_t &value) const;
+    };
 
-    template <>
-    HashRank Hash<int64_t>(const int64_t &value);
+    template<>
+    class Hash<int64_t>
+    {
+    public:
+        HashRank operator()(const int64_t &value) const;
+    };
 
-    template <>
-    HashRank Hash<uint64_t>(const uint64_t &value);
+    template<>
+    class Hash<uint64_t>
+    {
+    public:
+        HashRank operator()(const uint64_t &value) const;
+    };
 
-    template <>
-    HashRank Hash<float>(const float &value);
+    template<>
+    class Hash<float>
+    {
+    public:
+        HashRank operator()(const float &value) const;
+    };
 
-    template <>
-    HashRank Hash<double>(const double &value);
+    template<>
+    class Hash<double>
+    {
+    public:
+        HashRank operator()(const double &value) const;
+    };
 }
 
 #endif

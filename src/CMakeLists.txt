@@ -4,7 +4,8 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
 ADD_DEFINITIONS(-std=c++11)
 
 # 添加库源文件
-SET(lib_source  Algorithms/Algorithms.cpp
+SET(lib_source  Algorithms/Swap.cpp
+                Algorithms/Hash.cpp
                 Bitmap/Bitmap.cpp
                 CZString/CZString.cpp
                 Expression/Expression.cpp

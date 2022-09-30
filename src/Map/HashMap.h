@@ -17,22 +17,10 @@ HashMap 类模板
 
 #include "../Vector/Vector.h"
 #include "KVPair.h"
+#include "../Algorithms/Hash.h"
 
 namespace CZ
 {
-    namespace Dict
-    {
-        using Rank = uint32_t;
-
-        // 哈希函数，取模法
-        template <typename T>
-        class ModHash
-        {
-        public:
-            Rank operator()(const T &value, const Rank size) const { return value % size; }
-        };
-    }
-
     // 探测方法
     enum ProbingMethod
     {
@@ -40,11 +28,11 @@ namespace CZ
         SQUARE_PROBING
     };
 
-    template <typename T, typename H = Dict::ModHash<T>>
+    template <typename T, typename H = Hash<T>>
     class HashMap
     {
     public:
-        using Rank = Dict::Rank;
+        using Rank = uint64_t;
 
         // 构造函数，默认大小10000，使用取模作为哈希函数，采用线性探测法
         HashMap(const Rank tableSize_ = 10000,
