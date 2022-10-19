@@ -20,7 +20,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin/)
 
 # 版本号管理，如果项目版本号为 a.b.c，则 version = a.b.c，api_version = a.b
 # 动态库版本
-set(version 4.8.1)
+set(version 4.8.2)
 # API 版本
 set(api_version 4.8)
 
@@ -28,9 +28,9 @@ message(STATUS "source dir: " ${PROJECT_SOURCE_DIR})
 message(STATUS "binary dir: " ${PROJECT_BINARY_DIR})
 message(STATUS "output dir: " ${PROJECT_BINARY_DIR}/${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
-# 添加子目录, 并指定指定中间二进制和目标二进制存放的位置
-ADD_SUBDIRECTORY(src bin)
-ADD_SUBDIRECTORY(test test)
+# 添加子目录
+ADD_SUBDIRECTORY(src)
+ADD_SUBDIRECTORY(test)
 
 set(dist_dir ${PROJECT_SOURCE_DIR}/dist)
 
