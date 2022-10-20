@@ -6,4 +6,5 @@
  # @Description: 运行测试程序，必须要先构建
 ### 
 
-../build/test/bin/dsa-test
+project_base_dir=$(cd $(dirname $0)/..;pwd)
+$project_base_dir/build/test/bin/dsa-test
