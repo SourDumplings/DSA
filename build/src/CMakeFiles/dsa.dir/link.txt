@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../lib/libdsa.a  CMakeFiles/dsa.dir/Algorithms/Swap.cpp.o CMakeFiles/dsa.dir/Algorithms/Hash.cpp.o CMakeFiles/dsa.dir/Bitmap/Bitmap.cpp.o CMakeFiles/dsa.dir/CZString/CZString.cpp.o CMakeFiles/dsa.dir/Expression/Expression.cpp.o CMakeFiles/dsa.dir/PrimeTable/PrimeTable.cpp.o
+/usr/bin/ranlib ../lib/libdsa.a
