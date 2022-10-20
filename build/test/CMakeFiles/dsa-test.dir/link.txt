@@ -1,1 +1,0 @@
-c++  -Og -Wall -g  -rdynamic CMakeFiles/dsa-test.dir/test_algorithms.cpp.o  -o bin/dsa-test   -L/root/DSA/build/lib  -Wl,-rpath,/root/DSA/build/lib -ldsa 
