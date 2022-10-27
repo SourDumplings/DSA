@@ -7,7 +7,7 @@
 ### 
 
 project_base_dir=$(cd $(dirname $0)/..;pwd)
-sh $project_base_dir/script/clean.sh
+# sh $project_base_dir/script/clean.sh
 
 echo "project_base_dir: $project_base_dir" 
 

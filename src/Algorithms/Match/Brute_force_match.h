@@ -58,7 +58,7 @@ namespace CZ
     MatchRank Brute_force_match_2(const It &TBegin, const MatchRank &tL, const It &PBegin,
         const MatchRank &pL)
     {
-        MatchRank i, j;
+        MatchRank i = 0, j = 0;
         for (i = 0; i < tL - pL + 1; ++i)
         {
             for (j = 0; j < pL; ++j)
@@ -80,7 +80,7 @@ namespace CZ
     MatchRank Brute_force_match(const It &TBegin, const MatchRank &tL, const It &PBegin,
         const MatchRank &pL, const int32_t &version)
     {
-        MatchRank ret;
+        MatchRank ret = 0;
         switch (version)
         {
             case 0: ret = Brute_force_match_1(TBegin, tL, PBegin, pL);

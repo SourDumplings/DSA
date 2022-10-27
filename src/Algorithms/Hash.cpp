@@ -74,4 +74,14 @@ namespace CZ
     {
         return Hash<uint64_t>()(*reinterpret_cast<const uint64_t *>(&value));
     }
+
+    HashRank Hash<std::string>::operator()(const std::string &value) const
+    {
+        HashRank res = 0;
+        for (char c : value)
+        {
+            res = (res + Hash<char>()(c)) % CZ_MAX_HASH_VALUE;
+        }
+        return res;
+    }
 }

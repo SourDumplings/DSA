@@ -8,7 +8,7 @@
 /*
 容器的字典序比较算法
 要求：
-1.容器必须支持单向访问迭代器，具有size()方法
+1.容器必须支持单向访问迭代器，具有 size() 方法
 2.容器内元素支持比较操作符
  */
 
@@ -18,7 +18,7 @@
 namespace CZ
 {
     template <typename C>
-    bool operator==(const C &lhs, const C &rhs) noexcept
+    bool Dict_equal(const C &lhs, const C &rhs) noexcept
     {
         if (lhs.size() != rhs.size())
         {
@@ -36,13 +36,13 @@ namespace CZ
     }
 
     template <typename C>
-    inline bool operator!=(const C &lhs, const C &rhs) noexcept
+    inline bool Dict_unequal(const C &lhs, const C &rhs) noexcept
     {
         return !(lhs == rhs);
     }
 
     template <typename C>
-    bool operator<(const C &lhs, const C &rhs) noexcept
+    bool Dict_less(const C &lhs, const C &rhs) noexcept
     {
         if (lhs.size() == 0)
         {
@@ -73,19 +73,19 @@ namespace CZ
     }
 
     template <typename C>
-    inline bool operator<=(const C &lhs, const C &rhs) noexcept
+    inline bool Dict_less_or_equal(const C &lhs, const C &rhs) noexcept
     {
         return lhs < rhs || lhs == rhs;
     }
 
     template <typename C>
-    inline bool operator>(const C &lhs, const C &rhs) noexcept
+    inline bool Dict_greater(const C &lhs, const C &rhs) noexcept
     {
         return !(lhs <= rhs);
     }
 
     template <typename C>
-    inline bool operator>=(const C &lhs, const C &rhs) noexcept
+    inline bool Dict_greater_or_equal(const C &lhs, const C &rhs) noexcept
     {
         return lhs > rhs || lhs == rhs;
     }

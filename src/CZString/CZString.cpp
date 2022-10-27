@@ -21,12 +21,16 @@
 
 namespace CZ
 {
-    CZString::CZString(const char *str_): Vector<char>(str_, str_ + strlen(str_)) {}
-    CZString::CZString(const std::string &str_): CZString(str_.c_str()) {}
+    CZString::CZString(const char *str_) : Vector<char>(str_, str_ + strlen(str_)) {}
+    CZString::CZString(const std::string &str_) : CZString(str_.c_str()) {}
 
-    CZString::~CZString() { if (_tempStr) delete [] _tempStr; }
+    CZString::~CZString()
+    {
+        if (_tempStr)
+            delete[] _tempStr;
+    }
 
-    CZString::CZString(const CZString &CZstring): Vector<char>(CZstring)
+    CZString::CZString(const CZString &CZstring) : Vector<char>(CZstring)
     {
         _tempStr = nullptr;
     }
@@ -36,7 +40,7 @@ namespace CZ
         Vector<char>::clear();
         if (_tempStr)
         {
-            delete [] _tempStr;
+            delete[] _tempStr;
         }
         _tempStr = nullptr;
         return;
@@ -53,15 +57,15 @@ namespace CZ
         return;
     }
 
-    inline CZString::Rank CZString::length() const { return size(); }
+    CZString::Rank CZString::length() const { return size(); }
 
-    const char* CZString::c_str() const
+    const char *CZString::c_str() const
     {
         if (_tempStr)
         {
-            delete [] _tempStr;
+            delete[] _tempStr;
         }
-        _tempStr = new char[length()+1];
+        _tempStr = new char[length() + 1];
         strncpy(_tempStr, &front(), length());
         _tempStr[length()] = '\0';
         return _tempStr;
@@ -81,16 +85,18 @@ namespace CZ
             printf("Error from CZString substr: %s %u\n", errMsg, length());
             throw std::exception();
         }
-        char temp[l+1];
-        strncpy(temp, &front()+pos, l);
+        char temp[l + 1];
+        strncpy(temp, &front() + pos, l);
         temp[l] = '\0';
         return CZString(temp);
     }
 
-    inline CZString CZString::substr(Rank pos) const
-    { return substr(pos, length() - pos); }
+    CZString CZString::substr(Rank pos) const
+    {
+        return substr(pos, length() - pos);
+    }
 
-    inline CZString CZString::prefix(Rank l) const
+    CZString CZString::prefix(Rank l) const
     {
         if (length() < l)
         {
@@ -100,7 +106,7 @@ namespace CZ
         return substr(0, l);
     }
 
-    inline CZString CZString::suffix(Rank l) const
+    CZString CZString::suffix(Rank l) const
     {
         Rank len = length();
         if (len < l)
@@ -111,14 +117,20 @@ namespace CZ
         return substr(len - l, l);
     }
 
-    inline CZString::Rank CZString::index_of(const CZString &s) const
-    { return static_cast<CZString::Rank>(Match(begin(), end(), s.begin(), s.end())); }
+    CZString::Rank CZString::index_of(const CZString &s) const
+    {
+        return static_cast<CZString::Rank>(Match(begin(), end(), s.begin(), s.end()));
+    }
 
-    inline CZString::operator const char*() const
-    { return c_str(); }
+    CZString::operator const char *() const
+    {
+        return c_str();
+    }
 
-    inline CZString::operator const std::string() const
-    { return std::string(c_str()); }
+    CZString::operator const std::string() const
+    {
+        return std::string(c_str());
+    }
 
     const CZString operator+(const CZString &lhs, const char rhs)
     {
@@ -134,28 +146,31 @@ namespace CZ
         return temp;
     }
 
-    CZString& CZString::operator=(const CZString &s)
+    CZString &CZString::operator=(const CZString &s)
     {
         Vector<char>::operator=(static_cast<Vector<char>>(s));
         return *this;
     }
 
-    CZString& CZString::operator=(CZString &&s)
+    CZString &CZString::operator=(CZString &&s)
     {
         Vector<char>::operator=(static_cast<Vector<char>>(s));
         return *this;
     }
 
-    CZString& CZString::operator+=(const char rhs)
-    { *this = *this + rhs; return *this; }
+    CZString &CZString::operator+=(const char rhs)
+    {
+        *this = *this + rhs;
+        return *this;
+    }
 
-    CZString& CZString::operator+=(const CZString &rhs)
-    { *this = *this + rhs; return *this; }
+    CZString &CZString::operator+=(const CZString &rhs)
+    {
+        *this = *this + rhs;
+        return *this;
+    }
 
-    std::ostream& operator<<(std::ostream &os, const CZString &rhs)
-    { return os << rhs.c_str(); }
-
-    std::istream& operator>>(std::istream &is, CZString &rhs)
+    std::istream &operator>>(std::istream &is, CZString &rhs)
     {
         std::string s;
         is >> s;
@@ -165,6 +180,3 @@ namespace CZ
 } // CZ
 
 #endif // CZ_STRING_IMPLEMENTATION_H
-
-
-

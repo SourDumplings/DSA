@@ -47,17 +47,11 @@ namespace CZ
     }
 
     template <typename T>
-    inline bool List<T>::empty() const
-    {
-        return _head->_next == _head;
-    }
-
-    template <typename T>
     T& List<T>::front()
     {
         try
         {
-            if (!empty())
+            if (!this->empty())
             {
                 return _head->_next->_data;
             }
@@ -77,7 +71,7 @@ namespace CZ
     {
         try
         {
-            if (!empty())
+            if (!this->empty())
             {
                 return _head->_next->_data;
             }
@@ -97,7 +91,7 @@ namespace CZ
     {
         try
         {
-            if (!empty())
+            if (!this->empty())
             {
                 return _head->_prev->_data;
             }
@@ -117,7 +111,7 @@ namespace CZ
     {
         try
         {
-            if (!empty())
+            if (!this->empty())
             {
                 return _head->_prev->_data;
             }

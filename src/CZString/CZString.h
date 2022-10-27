@@ -24,17 +24,16 @@ namespace CZ
     // 操作符函数的声明
     const CZString operator+(const CZString &lhs, const char rhs);
     const CZString operator+(const CZString &lhs, const CZString &rhs);
-    std::ostream& operator<<(std::ostream &os, const CZString &rhs);
-    std::istream& operator>>(std::istream &is, CZString &rhs);
+    std::istream &operator>>(std::istream &is, CZString &rhs);
 
-    class CZString: public Vector<char>
+    class CZString : public Vector<char>
     {
     public:
-        using Rank = Vector<char>::Rank;
+        using Rank = typename Vector<char>::Rank;
 
         CZString(const char *str_ = "");
         CZString(const std::string &str_);
-        ~CZString();
+        ~CZString() override;
 
         void clear() override;
 
@@ -42,24 +41,24 @@ namespace CZ
 
         void print_info(const char *name = "") const override;
 
-        const char* c_str() const;
+        const char *c_str() const override;
         Rank length() const;
 
         CZString substr(Rank pos = 0) const;
         CZString substr(Rank pos, Rank l) const;
-        // 返回长度为l的前、后缀
+        // 返回长度为 l 的前、后缀
         CZString prefix(Rank l) const;
         CZString suffix(Rank l) const;
-        // 若s是当前字符串的一个子串，则返回子串起始位置，否则返回length()
+        // 若s是当前字符串的一个子串，则返回子串起始位置，否则返回 length()
         Rank index_of(const CZString &s) const;
 
-        operator const char*() const;
+        operator const char *() const;
         operator const std::string() const;
 
-        CZString& operator=(const CZString &s);
-        CZString& operator=(CZString &&s);
-        CZString& operator+=(const char rhs);
-        CZString& operator+=(const CZString &rhs);
+        CZString &operator=(const CZString &s);
+        CZString &operator=(CZString &&s);
+        CZString &operator+=(const char rhs);
+        CZString &operator+=(const CZString &rhs);
 
     private:
         mutable char *_tempStr = nullptr;
@@ -67,5 +66,3 @@ namespace CZ
 } // CZ
 
 #endif // CZSTRING_H
-
-

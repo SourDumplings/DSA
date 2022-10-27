@@ -6,6 +6,7 @@ ADD_DEFINITIONS(-std=c++11)
 # 添加库源文件
 SET(lib_source  Algorithms/Swap.cpp
                 Algorithms/Hash.cpp
+                Base/AbstractBaseEntity.cpp
                 Bitmap/Bitmap.cpp
                 CZString/CZString.cpp
                 Expression/Expression.cpp
@@ -32,6 +33,7 @@ set(dist_dir ${PROJECT_SOURCE_DIR}/dist)
 
 # 安装头文件
 INSTALL(DIRECTORY Algorithms/ DESTINATION ${dist_dir}/include/Algorithms)
+INSTALL(DIRECTORY Base/ DESTINATION ${dist_dir}/include/Base)
 INSTALL(DIRECTORY BinaryIndexTree/ DESTINATION ${dist_dir}/include/BinaryIndexTree)
 INSTALL(FILES Bitmap/Bitmap.h DESTINATION ${dist_dir}/include/Bitmap)
 INSTALL(DIRECTORY CZString/ DESTINATION ${dist_dir}/include/CZString)

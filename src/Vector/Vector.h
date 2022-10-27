@@ -14,18 +14,19 @@
 #define VECTOR_H
 
 #include <initializer_list>
+#include "../Base/AbstractIterableContainer.h"
 #include "../Iterator/RandomIterator.h"
 #include "../Algorithms/Dict_compare.h"
 
 namespace CZ
 {
     template <typename T>
-    class Vector
+    class Vector : public AbstractIterableContainer<T, RandomIterator<T>>
     {
     public:
-        using Rank = uint32_t;
-        using RankPlus = int32_t;
         using Iterator = RandomIterator<T>;
+        using Rank = typename AbstractIterableContainer<T, RandomIterator<T>>::Rank;
+        using RankPlus = typename AbstractIterableContainer<T, RandomIterator<T>>::RankPlus;
 
         // 构造函数
         // 构造函数 1：容量为 c = 2 * s，规模为 s，所有元素初始为 v
@@ -41,24 +42,23 @@ namespace CZ
         Vector(Vector<T> &&V);
 
         // 析构函数
-        virtual ~Vector();
+        ~Vector() override;
 
         // 打印所有元素，空格隔开，末尾换行，及容量和规模
         virtual void print_info(const char *name = "") const;
 
         // 数据访问接口
-        Iterator begin();
-        Iterator end();
-        Iterator begin() const;
-        Iterator end() const;
-        Rank size() const;
+        Iterator begin() override;
+        Iterator end()  override;
+        Iterator begin() const override;
+        Iterator end() const override;
+        Rank size() const override;
         Rank capacity();
         Rank capacity() const;
         const T& back() const;
         T& back();
         const T& front() const;
         T& front();
-        bool empty() const;
         const T& at(RankPlus index) const;
         T& at(RankPlus index);
 

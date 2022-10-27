@@ -11,10 +11,12 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <string>
 
 namespace CZ
 {
     using HashRank = uint64_t;
+    const HashRank CZ_MAX_HASH_VALUE = UINT64_MAX;
 
     // 默认哈希算法
     template <typename T>
@@ -117,6 +119,13 @@ namespace CZ
     {
     public:
         HashRank operator()(const double &value) const;
+    };
+
+    template<>
+    class Hash<std::string>
+    {
+    public:
+        HashRank operator()(const std::string &value) const;
     };
 }
 

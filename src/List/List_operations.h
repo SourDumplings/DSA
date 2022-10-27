@@ -14,14 +14,11 @@ List类模板的操作符函数模板
 
 #include "List.h"
 
-// 字典序的比较函数
-#include "../Algorithms/Dict_compare.h"
-
 namespace CZ
 {
     // 赋值操作符
     template <typename T>
-    List<T>& List<T>::operator=(const List &l)
+    List<T> &List<T>::operator=(const List &l)
     {
         if (l != *this)
         {
@@ -32,7 +29,7 @@ namespace CZ
     }
 
     template <typename T>
-    List<T>& List<T>::operator=(List &&l)
+    List<T> &List<T>::operator=(List &&l)
     {
         if (l != *this)
         {
@@ -45,5 +42,3 @@ namespace CZ
 } // CZ
 
 #endif // LIST_OPERATIONS_H
-
-

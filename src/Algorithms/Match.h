@@ -47,7 +47,7 @@ namespace CZ
             throw std::exception();
         }
 
-        MatchRank ret;
+        MatchRank ret = 0;
         switch (method)
         {
             // 蛮力算法

@@ -82,7 +82,7 @@ namespace CZ
         return;
     }
 
-    bool inline Expression::is_one_element_operator(const char op) const
+    bool Expression::is_one_element_operator(const char op) const
     {
         return op == '!';
     }
@@ -136,13 +136,13 @@ namespace CZ
         return ret;
     }
 
-    inline char Expression::compare_operator(const char nowOp, const char sOp) const
+    char Expression::compare_operator(const char nowOp, const char sOp) const
     {
         uint32_t nowI = get_operator_index(nowOp), sI = get_operator_index(sOp);
         return priTable[sI][nowI];
     }
 
-    inline char Expression::reverse_compare_operator(const char nowOp, const char sOp) const
+    char Expression::reverse_compare_operator(const char nowOp, const char sOp) const
     {
         uint32_t nowI = get_operator_index(nowOp), sI = get_operator_index(sOp);
         return priTableReverse[sI][nowI];
@@ -447,5 +447,5 @@ namespace CZ
         return PN;
     }
 
-    inline std::ostream &operator<<(std::ostream &os, const Expression &e) { return os; }
+    std::ostream &operator<<(std::ostream &os, const Expression &e) { return os; }
 } // CZ

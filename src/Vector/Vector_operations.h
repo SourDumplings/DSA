@@ -16,13 +16,10 @@ Vector本身所支持的操作
 #include <stdexcept>
 #include <iostream>
 
-// 字典序的比较函数
-#include "../Algorithms/Dict_compare.h"
-
 namespace CZ
 {
     template <typename T>
-    const T& Vector<T>::operator[](const Vector<T>::Rank i) const
+    const T &Vector<T>::operator[](const Vector<T>::Rank i) const
     {
         // printf("const version of [] is called\n");
         try
@@ -42,25 +39,25 @@ namespace CZ
     }
 
     template <typename T>
-    inline T& Vector<T>::operator[](const Vector<T>::Rank i)
+    inline T &Vector<T>::operator[](const Vector<T>::Rank i)
     {
-        return const_cast<T&>(static_cast<const Vector<T>&>(*this)[i]);
+        return const_cast<T &>(static_cast<const Vector<T> &>(*this)[i]);
     }
 
     template <typename T>
-    Vector<T>& Vector<T>::operator=(const Vector<T> &V)
+    Vector<T> &Vector<T>::operator=(const Vector<T> &V)
     {
         if (this != &V)
         {
             T *temp = _elem;
             init_from(V.begin(), V.end());
-            delete [] temp;
+            delete[] temp;
         }
         return *this;
     }
 
     template <typename T>
-    Vector<T>& Vector<T>::operator=(Vector<T> &&V)
+    Vector<T> &Vector<T>::operator=(Vector<T> &&V)
     {
         if (this != &V)
         {
@@ -74,12 +71,6 @@ namespace CZ
         }
         return *this;
     }
-
-    template <typename T>
-    inline std::ostream& operator<<(std::ostream &os, const Vector<T> &v) { return os; }
 }
 
-
 #endif // VECTOR_OPERATIONS_H
-
-

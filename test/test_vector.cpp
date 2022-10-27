@@ -35,7 +35,14 @@ int main(int argc, char const *argv[])
     printf("v6.at(-3) = %d\n", v6.at(-3));
     printf("v3.at(1) = %d\n", v3.at(1));
 
-    // Vector<string> vs1(20), vs2(3, "abc"), vs3({"123", "abx", "sada1"});
+    // 测试 c_str 和 hash
+    printf("v6.c_str() = %s, v6.hash() = %lu\n", v6.c_str(), v6.hash());
+    std::cout << "v2: " << v2 << std::endl;
+    std::cout << "v5: " << v5 << std::endl;
+    std::cout << "v6.c_str(): " << v6.c_str() << std::endl;
+    std::cout << "v6: " << v6 << std::endl;
+
+    Vector<string> vs1(20), vs2(3, "abc"), vs3({"123", "abx", "sada1"});
 
     // v1.print_info("v1");
     // v2.print_info("v2");
@@ -57,12 +64,12 @@ int main(int argc, char const *argv[])
 
     // // printf("v6.front() = %d, v6.back() = %d\n", v6.front(), v6.back());
     // // printf("vs3.front() = %s, vs3.back() = %s\n", vs3.front().c_str(), vs3.back().c_str());
-    // printf("v1 is empty? %d\n", v1.empty());
-    // printf("v2 is empty? %d\n", v2.empty());
-    // printf("vs2 is empty? %d\n", vs2.empty());
-    // vs2.clear();
-    // printf("after clear, vs2 is empty? %d\n", vs2.empty());
-    // printf("finish\n");
+    printf("v1 is empty? %d\n", v1.empty());
+    printf("v2 is empty? %d\n", v2.empty());
+    printf("vs2 is empty? %d\n", vs2.empty());
+    vs2.clear();
+    printf("after clear, vs2 is empty? %d\n", vs2.empty());
+    printf("finish\n");
 
     // 测试迭代器函数和比较函数
     // Vector<int> v1({1, 2, 3, 4, 5}), v2({1, 2, 3, 4}), v3({3, 6, 7}), v4({3, 6, 7});

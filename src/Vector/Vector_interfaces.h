@@ -132,12 +132,6 @@ namespace CZ
     }
 
     template <typename T>
-    inline bool Vector<T>::empty() const
-    {
-        return _size == 0;
-    }
-
-    template <typename T>
     const T& Vector<T>::at(RankPlus index) const
     {
         if (index >= 0)

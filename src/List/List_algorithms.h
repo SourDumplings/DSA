@@ -154,7 +154,7 @@ namespace CZ
     template <typename Cmp>
     void List<T>::sort(const Cmp &cmp, const uint32_t version)
     {
-        if (empty())
+        if (this->empty())
         {
             return;
         }
@@ -226,7 +226,7 @@ namespace CZ
     template <typename Cmp>
     void List<T>::unique(bool sorted, const Cmp &cmp)
     {
-        if (empty())
+        if (this->empty())
         {
             return;
         }
@@ -259,7 +259,7 @@ namespace CZ
     template <typename T>
     void List<T>::reverse()
     {
-        if (!empty())
+        if (!this->empty())
         {
             // 将除了头结点外的其它结点摘出，
             // 再用头插法把结点一个一个插进去

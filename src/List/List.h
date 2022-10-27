@@ -16,17 +16,19 @@
 
 #include <functional>
 #include <initializer_list>
+
+#include "../Base/AbstractIterableContainer.h"
 #include "ListNode.h"
 #include "ListIterator.h"
 
 namespace CZ
 {
     template <typename T>
-    class List
+    class List : public AbstractIterableContainer<T, ListIterator<T>>
     {
     public:
-        using Rank = uint32_t;
-        using RankPlus = int32_t;
+        using Rank = typename AbstractIterableContainer<T, ListIterator<T>>::Rank;
+        using RankPlus = typename AbstractIterableContainer<T, ListIterator<T>>::RankPlus;
         using Iterator = ListIterator<T>;
 
 		// 构造函数
@@ -45,12 +47,11 @@ namespace CZ
         virtual ~List();
 
 		// 数据访问接口
-		Rank size() const;
-		bool empty() const;
-        Iterator begin();
-        Iterator begin() const;
-        Iterator end();
-        Iterator end() const;
+		Rank size() const override;
+        Iterator begin() override;
+        Iterator begin() const override;
+        Iterator end() override;
+        Iterator end() const override;
         T& front();
         const T& front() const;
         T& back();
@@ -74,7 +75,7 @@ namespace CZ
         Iterator erase(Iterator pos);
         Iterator erase(Iterator b, Iterator e);
         void remove(const T &value); // 删除所有value值
-        void clear();
+        void clear() override;
         virtual void merge(const List<T> &l);
         virtual void merge(List<T> &&l);
         // 交换函数模板
