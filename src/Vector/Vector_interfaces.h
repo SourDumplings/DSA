@@ -60,7 +60,7 @@ namespace CZ
     }
 
     template <typename T>
-    const T& Vector<T>::back() const
+    const T &Vector<T>::back() const
     {
         try
         {
@@ -74,11 +74,11 @@ namespace CZ
             printf("Error from Vector back: %s\n", errMsg);
             throw std::exception();
         }
-        return _elem[_size-1];
+        return _elem[_size - 1];
     }
 
     template <typename T>
-    T& Vector<T>::back()
+    T &Vector<T>::back()
     {
         try
         {
@@ -92,11 +92,11 @@ namespace CZ
             printf("Error: %s\n", errMsg);
             throw std::exception();
         }
-        return _elem[_size-1];
+        return _elem[_size - 1];
     }
 
     template <typename T>
-    const T& Vector<T>::front() const
+    const T &Vector<T>::front() const
     {
         try
         {
@@ -114,7 +114,7 @@ namespace CZ
     }
 
     template <typename T>
-    T& Vector<T>::front()
+    T &Vector<T>::front()
     {
         try
         {
@@ -132,7 +132,7 @@ namespace CZ
     }
 
     template <typename T>
-    const T& Vector<T>::at(RankPlus index) const
+    const T &Vector<T>::at(RankPlus index) const
     {
         if (index >= 0)
         {
@@ -143,13 +143,16 @@ namespace CZ
     }
 
     template <typename T>
-    T& Vector<T>::at(RankPlus index)
-    { return const_cast<T&>(static_cast<const Vector<T>&>(*this).at(index)); }
+    T &Vector<T>::at(RankPlus index)
+    {
+        return const_cast<T &>(static_cast<const Vector<T> &>(*this).at(index));
+    }
+
+    template <typename T>
+    inline const char *Vector<T>::get_container_name() const
+    {
+        return "Vector";
+    }
 }
 
-
-
 #endif // VECTOR_INTERFACES_H
-
-
-

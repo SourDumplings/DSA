@@ -36,6 +36,10 @@ int main(int argc, char const *argv[])
     }
     h1.print_info("h1");
 
+    std::cout << "h1: " << h1 << std::endl;
+    std::cout << "h1.hash(): " << h1.hash() << std::endl;
+    std::cout << "h1.c_str(): " << h1.c_str() << std::endl;
+
     // 测试删除
     for (int i = 0; i < 12; ++i)
     {
@@ -51,6 +55,9 @@ int main(int argc, char const *argv[])
             h1.print_info("h1");
         }
     }
+
+    std::cout << "h2: " << h2 << std::endl;
+    h2.clear();
+    std::cout << "h2: " << h2 << std::endl;
     return 0;
 }
-

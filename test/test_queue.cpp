@@ -36,6 +36,9 @@ int main(int argc, char const *argv[])
     Qs2.print_info("Qs2");
     printf("Qs2 is empty? %d\n", Qs2.empty());
     printf("Qs is empty? %d\n", Qs.empty());
+    std::cout << "Qs: " << Qs << std::endl;
+    std::cout << "Qs.hash(): " << Qs.hash() << std::endl;
+    std::cout << "Qs.c_str(): " << Qs.c_str() << std::endl;
     return 0;
 }
 

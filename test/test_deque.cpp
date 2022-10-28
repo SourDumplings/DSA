@@ -3,7 +3,7 @@
  * @Date: 2021-10-31 20:22:19
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com
- * @Description: 
+ * @Description:
  */
 
 #include "Deque/Deque.h"
@@ -13,7 +13,7 @@ using namespace CZ;
 
 int main(int argc, char const *argv[])
 {
-    
+
     Deque<int> dq1(20, 5);
     Deque<int> dq2;
     Deque<int> dq3(dq1.begin(), dq1.end());
@@ -26,6 +26,10 @@ int main(int argc, char const *argv[])
     Deque<int> dq7(dq6);
     Deque<int> dq8(dq61.end() - 3, dq61.end());
     Deque<int> dq81(dq61.begin(), dq61.end() - 8, 4);
+
+    std::cout << "dq6: " << dq6 << std::endl;
+    std::cout << "dq6.hash(): " << dq6.hash() << std::endl;
+    std::cout << "dq6.c_str(): " << dq6.c_str() << std::endl;
 
     // 测试构造函数
     // dq1.print_info("dq1");
@@ -161,12 +165,12 @@ int main(int argc, char const *argv[])
     // auto it = dq2.end();
     // for (size_t i = 0; i < 5; i++)
     // {
-        // it = dq2.erase(it - 10, it);
-        // it = dq2.erase(it - 3, it);
+    // it = dq2.erase(it - 10, it);
+    // it = dq2.erase(it - 3, it);
     //     it = dq2.erase(it - 7, it - 1);
     //     dq2.print_info("dq2");
     // }
-    
+
     // 测试 back、front
     // printf("dq1.front() = %d\n", dq1.front());
     // printf("dq1.back() = %d\n", dq1.back());
@@ -220,6 +224,6 @@ int main(int argc, char const *argv[])
     dq2.print_info("dq2");
     dq2.remove(11);
     dq2.print_info("dq2");
-    
+
     return 0;
 }

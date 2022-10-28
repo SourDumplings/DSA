@@ -17,18 +17,19 @@
 
 #include <initializer_list>
 #include "DequeIterator.h"
+#include "../Base/AbstractIterableContainer.h"
 #include "../CZString/CZString.h"
 
 namespace CZ
 {
     template <typename T>
-    class Deque
+    class Deque : public AbstractIterableContainer<T, DequeIterator<T>>
     {
     public:
-        using Rank = uint32_t;
-        using RankPlus = int32_t;
+        using Rank = typename AbstractIterableContainer<T, DequeIterator<T>>::Rank;
+        using RankPlus = typename AbstractIterableContainer<T, DequeIterator<T>>::RankPlus;
         using Iterator = DequeIterator<T>;
-        using Node = T*;
+        using Node = T *;
 
         // 构造函数
         // 构造函数 1：容量为 c，规模为 s，所有元素初始为 v，缓冲区大小为 bufferSize_
@@ -53,20 +54,19 @@ namespace CZ
         Iterator begin() const;
         Iterator end();
         Iterator end() const;
-        Rank size() const;
-        bool empty() const;
-        const T& back() const;
-        T& back();
-        const T& front() const;
-        T& front();
-        const T& at(RankPlus index) const;
-        T& at(RankPlus index);
+        Rank size() const override;
+        const T &back() const;
+        T &back();
+        const T &front() const;
+        T &front();
+        const T &at(RankPlus index) const;
+        T &at(RankPlus index);
 
         // 操作符
-        Deque<T>& operator=(const Deque<T> &dq);
-        Deque<T>& operator=(Deque<T> &&dq);
-        const T& operator[](Rank index) const;
-        T& operator[](Rank index);
+        Deque<T> &operator=(const Deque<T> &dq);
+        Deque<T> &operator=(Deque<T> &&dq);
+        const T &operator[](Rank index) const;
+        T &operator[](Rank index);
 
         // 动态操作接口
         // 增加元素的接口，必要时会扩容
@@ -83,25 +83,28 @@ namespace CZ
         void pop_front();
         Iterator erase(Iterator itPos);
         Iterator erase(const Iterator &b, const Iterator &e);
-        void clear(); // 清理 Deque 容器，不会改变 bufferSize
+        void clear() override;       // 清理 Deque 容器，不会改变 bufferSize
         void remove(const T &value); // 移除所有值为 value 的元素
+
+    protected:
+        const char *get_container_name() const override;
 
     private:
         Rank _bufferSize;
         Rank _mapSize;
-        Node* _bufferMap; // 缓冲区 map，默认左右都要有一个空隙
-        Rank _size; // 元素个数
-        Iterator _start; // 首元素迭代器，其中 cur 指向首元素
+        Node *_bufferMap; // 缓冲区 map，默认左右都要有一个空隙
+        Rank _size;       // 元素个数
+        Iterator _start;  // 首元素迭代器，其中 cur 指向首元素
         Iterator _finish; // 尾元素迭代器，其中 cur 指向尾元素的后一个元素
 
-        template<typename It>
+        template <typename It>
         void init_from(const It &begin, const It &end, Rank bufferSize_ = 10);
 
         void free();
-        
-        void expand(); // 双向伸展，2 倍扩容
+
+        void expand();            // 双向伸展，2 倍扩容
         bool need_shrink() const; // 判断是否需要缩容，如果有元素的 buffer 数小于总 buffer 数（bufferMap 的大小）的一半就返回 true
-        void shrink(); // 双向收缩，2 倍缩容，会判断是否需要缩容
+        void shrink();            // 双向收缩，2 倍缩容，会判断是否需要缩容
 
         // 将 startIt 之后的所有元素向后移动 n 位（包括 startIt 所指向的元素），必要时扩容，返回由于后移形成的第一个空位的迭代器
         Iterator move_backward(Iterator startIt, Rank n);

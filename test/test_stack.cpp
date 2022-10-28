@@ -49,6 +49,9 @@ int main(int argc, char const *argv[])
     Ss2.print_info("Ss2");
     printf("Ss2 is empty? %d\n", Ss2.empty());
     printf("Ss is empty? %d\n", Ss.empty());
+    std::cout << "Ss: " << Ss << std::endl;
+    std::cout << "Ss.hash(): " << Ss.hash() << std::endl;
+    std::cout << "Ss.c_str(): " << Ss.c_str() << std::endl;
     return 0;
 }
 

@@ -12,27 +12,34 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
+#include "../Base/AbstractBaseContainer.h"
 #include "../List/List.h"
 
 namespace CZ
 {
     template <typename T, typename C = List<T>>
-    class Queue
+    class Queue : public AbstractBaseContainer<T>
     {
     public:
-        using Rank = uint32_t;
+        using Rank = typename AbstractBaseContainer<T>::Rank;
 
-        bool empty() const;
-        Rank size() const;
-        const T& front() const;
-        T& front();
+        Rank size() const override;
+        const T &front() const;
+        T &front();
 
         void push(const T &x);
         void push(T &&x);
         void pop();
-        void clear();
+        void clear() override;
+
+        HashRank hash() const override;
+        const char *c_str() const override;
 
         void print_info(const char *name = "") const;
+
+    protected:
+        const char *get_container_name() const override;
+
     private:
         C _data;
     };
@@ -41,5 +48,3 @@ namespace CZ
 #include "Queue_implementation.h"
 
 #endif // QUEUE_H
-
-

@@ -16,9 +16,13 @@ namespace CZ
     AbstractBaseEntity::AbstractBaseEntity() : _pStr(nullptr) {}
 
     AbstractBaseEntity::AbstractBaseEntity(const AbstractBaseEntity &entity)
-        : _pStr(static_cast<char *>(malloc(sizeof(char) * (strlen(entity._pStr) + 1))))
+        : _pStr(nullptr)
     {
-        strcpy(_pStr, entity._pStr);
+        if (entity._pStr)
+        {
+            _pStr = static_cast<char *>(malloc(sizeof(char) * (strlen(entity._pStr) + 1)));
+            strcpy(_pStr, entity._pStr);
+        }
     }
 
     AbstractBaseEntity::AbstractBaseEntity(AbstractBaseEntity &&entity)
@@ -48,8 +52,15 @@ namespace CZ
             {
                 free(_pStr);
             }
-            _pStr = static_cast<char *>(malloc(sizeof(char) * (strlen(rhs._pStr) + 1)));
-            strcpy(_pStr, rhs._pStr);
+            if (rhs._pStr)
+            {
+                _pStr = static_cast<char *>(malloc(sizeof(char) * (strlen(rhs._pStr) + 1)));
+                strcpy(_pStr, rhs._pStr);
+            }
+            else
+            {
+                _pStr = nullptr;
+            }
         }
         return *this;
     }

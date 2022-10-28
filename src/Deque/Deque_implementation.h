@@ -156,12 +156,6 @@ namespace CZ
     }
 
     template <typename T>
-    bool Deque<T>::empty() const
-    {
-        return _size == 0;
-    }
-
-    template <typename T>
     template <typename It>
     void Deque<T>::init_from(const It &begin, const It &end, Rank bufferSize_)
     {
@@ -496,7 +490,7 @@ namespace CZ
     template <typename T>
     void Deque<T>::pop_back()
     {
-        if (empty())
+        if (this->empty())
         {
             printf("Error from Deque::pop_back: empty deque\n");
             throw std::exception();
@@ -519,7 +513,7 @@ namespace CZ
     template <typename T>
     void Deque<T>::pop_front()
     {
-        if (empty())
+        if (this->empty())
         {
             printf("Error from Deque::pop_front: empty deque\n");
             throw std::exception();
@@ -601,7 +595,7 @@ namespace CZ
             throw std::exception();
         }
 
-        if (empty())
+        if (this->empty())
         {
             printf("Error from Deque::erase: empty deque\n");
             throw std::exception();
@@ -654,7 +648,7 @@ namespace CZ
     template <typename T>
     const T &Deque<T>::back() const
     {
-        if (empty())
+        if (this->empty())
         {
             printf("Error from Deque::back: empty queue\n");
             throw std::exception();
@@ -672,7 +666,7 @@ namespace CZ
     template <typename T>
     const T &Deque<T>::front() const
     {
-        if (empty())
+        if (this->empty())
         {
             printf("Error from Deque::front: empty queue\n");
             throw std::exception();
@@ -728,7 +722,7 @@ namespace CZ
     {
         if (_size <= index)
         {
-            printf("Error from Deque::operator[]：invalid index");
+            printf("Error from Deque::operator[]: invalid index");
             throw std::exception();
         }
         return *(_start + index);
@@ -785,7 +779,7 @@ namespace CZ
     template <typename T>
     void Deque<T>::clear()
     {
-        if (empty())
+        if (this->empty())
         {
             return;
         }
@@ -817,11 +811,10 @@ namespace CZ
     }
 
     template <typename T>
-    std::ostream &operator<<(std::ostream &os, const Deque<T> &dq)
+    inline const char *Deque<T>::get_container_name() const
     {
-        return os;
+        return "Deque";
     }
-
 }
 
 #endif

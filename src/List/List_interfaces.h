@@ -47,7 +47,7 @@ namespace CZ
     }
 
     template <typename T>
-    T& List<T>::front()
+    T &List<T>::front()
     {
         try
         {
@@ -67,7 +67,7 @@ namespace CZ
     }
 
     template <typename T>
-    const T& List<T>::front() const
+    const T &List<T>::front() const
     {
         try
         {
@@ -87,7 +87,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline T& List<T>::back()
+    inline T &List<T>::back()
     {
         try
         {
@@ -107,7 +107,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline const T& List<T>::back() const
+    inline const T &List<T>::back() const
     {
         try
         {
@@ -127,10 +127,10 @@ namespace CZ
     }
 
     template <typename T>
-    inline std::ostream& operator<<(std::ostream &os, const List<T> &l) { return os; }
+    inline std::ostream &operator<<(std::ostream &os, const List<T> &l) { return os; }
 
     template <typename T>
-    const T& List<T>::at(typename List<T>::RankPlus index) const
+    const T &List<T>::at(typename List<T>::RankPlus index) const
     {
         Iterator it = begin();
         if (index >= 0)
@@ -175,11 +175,17 @@ namespace CZ
     }
 
     template <typename T>
-    inline T& List<T>::at(RankPlus index)
-    { return const_cast<T&>(static_cast<const List<T>&>(*this).at(index)); }
+    inline T &List<T>::at(RankPlus index)
+    {
+        return const_cast<T &>(static_cast<const List<T> &>(*this).at(index));
+    }
+
+    template <typename T>
+    inline const char *List<T>::get_container_name() const
+    {
+        return "List";
+    }
 
 } // CZ
 
 #endif // LIST_INTERFACES_H
-
-

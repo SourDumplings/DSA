@@ -25,6 +25,10 @@ namespace CZ
         virtual Rank size() const = 0;
 
         virtual void clear() = 0;
+
+    protected:
+        // 容器必须有名字
+        virtual const char *get_container_name() const = 0;
     };
 
     template <typename T>

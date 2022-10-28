@@ -13,25 +13,25 @@
 #define QUEUE_IMPLEMENTATION_H
 
 #include "Queue.h"
+
+#include "../CZString/CZString.h"
 #include <stdexcept>
 #include <cstdio>
 #include <utility>
 #include <iostream>
+#include <sstream>
 
 namespace CZ
 {
     template <typename T, typename C>
-    inline bool Queue<T, C>::empty() const { return _data.empty(); }
-
-    template <typename T, typename C>
     inline typename Queue<T, C>::Rank Queue<T, C>::size() const { return _data.size(); }
 
     template <typename T, typename C>
-    const T& Queue<T, C>::front() const
+    const T &Queue<T, C>::front() const
     {
         try
         {
-            if (empty())
+            if (this->empty())
             {
                 throw "empty queue";
             }
@@ -45,28 +45,34 @@ namespace CZ
     }
 
     template <typename T, typename C>
-    inline T& Queue<T, C>::front()
-    { return const_cast<T&>(static_cast<const Queue<T, C>&>(*this).front()); }
+    inline T &Queue<T, C>::front()
+    {
+        return const_cast<T &>(static_cast<const Queue<T, C> &>(*this).front());
+    }
 
     template <typename T, typename C>
     inline void Queue<T, C>::push(const T &x)
-    { return _data.push_back(x); }
+    {
+        return _data.push_back(x);
+    }
 
     template <typename T, typename C>
     inline void Queue<T, C>::push(T &&x)
-    { return _data.push_back(std::move(x)); }
+    {
+        return _data.push_back(std::move(x));
+    }
 
     template <typename T, typename C>
     void Queue<T, C>::pop()
     {
         try
         {
-            if (empty())
+            if (this->empty())
             {
                 throw "empty queue";
             }
         }
-        catch(const char *errMsg)
+        catch (const char *errMsg)
         {
             printf("Error: %s\n", errMsg);
             throw std::exception();
@@ -91,8 +97,37 @@ namespace CZ
         return;
     }
 
-    template <typename T>
-    inline std::ostream& operator<<(std::ostream &os, const Queue<T> &q) { return os; }
+    template <typename T, typename C>
+    inline const char *Queue<T, C>::get_container_name() const
+    {
+        return "Queue";
+    }
+
+    template <typename T, typename C>
+    inline HashRank Queue<T, C>::hash() const
+    {
+        return (CZString(get_container_name()).hash() + _data.hash()) % CZ_MAX_HASH_VALUE;
+    }
+
+    template <typename T, typename C>
+    const char *Queue<T, C>::c_str() const
+    {
+        std::ostringstream oss;
+        oss << get_container_name() << "[";
+        for (auto it = _data.begin(); it != _data.end(); ++it)
+        {
+            if (it != _data.begin())
+            {
+                oss << ", ";
+            }
+            oss << *it;
+        }
+        oss << "]";
+        this->_pStr = static_cast<char *>(malloc(sizeof(char) * (oss.str().length() + 1)));
+        strcpy(this->_pStr, oss.str().c_str());
+        return this->_pStr;
+    }
+
 } // CZ
 
 #endif // QUEUE_IMPLEMENTATION_H

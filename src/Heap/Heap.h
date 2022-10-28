@@ -15,6 +15,7 @@
 #ifndef HEAP_H
 #define HEAP_H
 
+#include "../Base/AbstractBaseContainer.h"
 #include "../Vector/Vector.h"
 #include <initializer_list>
 
@@ -22,11 +23,11 @@ namespace CZ
 {
     using std::less;
 
-    template <typename T, typename Cmp = less<const T&>>
-    class Heap
+    template <typename T, typename Cmp = less<const T &>>
+    class Heap : public AbstractBaseContainer<T>
     {
     public:
-        using Rank = uint32_t;
+        using Rank = typename AbstractBaseContainer<T>::Rank;
 
         Heap();
         Heap(const std::initializer_list<T> &l, const Cmp &cmp = Cmp());
@@ -35,25 +36,31 @@ namespace CZ
         Heap(const It &begin, const It &end, const Cmp &cmp = Cmp());
 
         // 数据访问接口
-        Rank size() const;
-        const T& top() const;
-        bool empty() const;
+        Rank size() const override;
+        const T &top() const;
 
         // 插入和删除
         void insert(const T &value, const Cmp &cmp = Cmp());
         void pop(const Cmp &cmp = Cmp());
+        void clear() override;
 
         void print_info(const char *name = "") const;
+
+        HashRank hash() const override;
+        const char *c_str() const override;
+
+    protected:
+        const char *get_container_name() const override;
+
     private:
         Vector<T> _data;
 
-        void _build_heap(const Cmp &cmp = Cmp()); // 采用Floyd算法进行建堆，使得_data中的元素满足偏序化，时间复杂度O(n)
+        void _build_heap(const Cmp &cmp = Cmp());        // 采用Floyd算法进行建堆，使得_data中的元素满足偏序化，时间复杂度O(n)
         void _perc_down(Rank i, const Cmp &cmp = Cmp()); // 下滤，即将_data[i]为根的子堆调整为最大堆
-        void _perc_up(Rank i, const Cmp &cmp = Cmp()); // 将_data[i]元素进行上滤
+        void _perc_up(Rank i, const Cmp &cmp = Cmp());   // 将_data[i]元素进行上滤
     };
 } // CZ
 
 #include "Heap_implementation.h"
 
 #endif // HEAP_H
-

@@ -13,10 +13,12 @@
 #define HEAP_IMPLEMENTATION_H
 
 #include "Heap.h"
+
 #include <iostream>
 #include <cstdio>
 #include <stdexcept>
 #include "../Algorithms/Swap.h"
+#include "../CZString/CZString.h"
 
 namespace CZ
 {
@@ -36,11 +38,10 @@ namespace CZ
     }
 
     template <typename T, typename Cmp>
-    Heap<T, Cmp>::Heap(T *begin, T *end, const Cmp &cmp): _data(begin, end) { _build_heap(cmp); }
+    Heap<T, Cmp>::Heap(T *begin, T *end, const Cmp &cmp) : _data(begin, end) { _build_heap(cmp); }
 
     template <typename T, typename Cmp>
-    Heap<T, Cmp>::Heap(const std::initializer_list<T> &l, const Cmp &cmp):
-        _data(l.begin(), l.end()) { _build_heap(cmp); }
+    Heap<T, Cmp>::Heap(const std::initializer_list<T> &l, const Cmp &cmp) : _data(l.begin(), l.end()) { _build_heap(cmp); }
 
     template <typename T, typename Cmp>
     void Heap<T, Cmp>::_build_heap(const Cmp &cmp)
@@ -49,7 +50,7 @@ namespace CZ
         {
             return;
         }
-        for (Rank i = (size() - 2) / 2; -1 < i; --i)
+        for (Rank i = (size() - 2) / 2; - 1 < i; --i)
         {
             // 从最后一个结点的父结点开始
             _perc_down(i, cmp);
@@ -66,7 +67,7 @@ namespace CZ
         {
             c = (f << 1) + 1;
             // 取较大的子结点
-            if (c < size() - 1 && cmp(_data[c], _data[c+1]))
+            if (c < size() - 1 && cmp(_data[c], _data[c + 1]))
             {
                 ++c;
             }
@@ -91,7 +92,7 @@ namespace CZ
     {
         // 插入元素，将元素插入到末尾再上滤
         _data.push_back(value);
-        _perc_up(_data.size()-1, cmp);
+        _perc_up(_data.size() - 1, cmp);
         return;
     }
 
@@ -99,7 +100,7 @@ namespace CZ
     void Heap<T, Cmp>::_perc_up(typename Heap<T, Cmp>::Rank i, const Cmp &cmp)
     {
         T x = _data[i];
-        for (; 0 < i && cmp(_data[( i - 1 ) / 2], x); i = (i - 1) / 2)
+        for (; 0 < i && cmp(_data[(i - 1) / 2], x); i = (i - 1) / 2)
         {
             _data[i] = _data[(i - 1) / 2];
         }
@@ -110,7 +111,7 @@ namespace CZ
     template <typename T, typename Cmp>
     void Heap<T, Cmp>::pop(const Cmp &cmp)
     {
-        if (empty())
+        if (this->empty())
         {
             printf("Error from Heap pop: empty Heap cannot pop\n");
             throw std::exception();
@@ -119,7 +120,7 @@ namespace CZ
         // 然后把刚刚换到根结点的元素做下滤
         Swap(_data.front(), _data.back());
         _data.pop_back();
-        if (!empty())
+        if (!this->empty())
         {
             _perc_down(0, cmp);
         }
@@ -131,10 +132,7 @@ namespace CZ
     inline typename Heap<T, Cmp>::Rank Heap<T, Cmp>::size() const { return _data.size(); }
 
     template <typename T, typename Cmp>
-    inline const T& Heap<T, Cmp>::top() const { return _data.front(); }
-
-    template <typename T, typename Cmp>
-    inline bool Heap<T, Cmp>::empty() const { return size() == 0; }
+    inline const T &Heap<T, Cmp>::top() const { return _data.front(); }
 
     template <typename T, typename Cmp>
     void Heap<T, Cmp>::print_info(const char *name) const
@@ -150,9 +148,43 @@ namespace CZ
         return;
     }
 
+    template <typename T, typename Cmp>
+    inline const char *Heap<T, Cmp>::get_container_name() const
+    {
+        return "Heap";
+    }
+
+    template <typename T, typename Cmp>
+    inline HashRank Heap<T, Cmp>::hash() const
+    {
+        return (CZString(get_container_name()).hash() + _data.hash()) % CZ_MAX_HASH_VALUE;
+    }
+
+    template <typename T, typename Cmp>
+    const char *Heap<T, Cmp>::c_str() const
+    {
+        std::ostringstream oss;
+        oss << get_container_name() << "[";
+        for (auto it = _data.begin(); it != _data.end(); ++it)
+        {
+            if (it != _data.begin())
+            {
+                oss << ", ";
+            }
+            oss << *it;
+        }
+        oss << "]";
+        this->_pStr = static_cast<char *>(malloc(sizeof(char) * (oss.str().length() + 1)));
+        strcpy(this->_pStr, oss.str().c_str());
+        return this->_pStr;
+    }
+
+    template <typename T, typename Cmp>
+    inline void Heap<T, Cmp>::clear()
+    {
+        _data.clear();
+    }
 
 } // CZ
 
 #endif // HEAP_IMPLEMENTATION_H
-
-

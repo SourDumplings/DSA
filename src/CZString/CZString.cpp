@@ -177,6 +177,11 @@ namespace CZ
         rhs = s;
         return is;
     }
+
+    const char *CZString::get_container_name() const
+    {
+        return "CZString";
+    }
 } // CZ
 
 #endif // CZ_STRING_IMPLEMENTATION_H

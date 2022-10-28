@@ -42,6 +42,7 @@ namespace CZ
         void print_info(const char *name = "") const override;
 
         const char *c_str() const override;
+        const char *get_container_name() const override;
         Rank length() const;
 
         CZString substr(Rank pos = 0) const;

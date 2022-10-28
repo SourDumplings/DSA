@@ -12,27 +12,34 @@
 #ifndef STACK_H
 #define STACK_H
 
+#include "../Base/AbstractBaseContainer.h"
 #include "../Vector/Vector.h"
 
 namespace CZ
 {
     template <typename T, typename C = Vector<T>>
-    class Stack
+    class Stack : public AbstractBaseContainer<T>
     {
     public:
-        using Rank = uint32_t;
+        using Rank = typename AbstractBaseContainer<T>::Rank;
 
-        const T& top() const;
-        T& top();
-        Rank size() const;
-        bool empty() const;
+        const T &top() const;
+        T &top();
+        Rank size() const override;
 
         void push(const T &x);
         void push(T &&x);
         void pop();
-        void clear();
+        void clear() override;
+
+        HashRank hash() const override;
+        const char *c_str() const override;
 
         void print_info(const char *name = "") const;
+
+    protected:
+        const char *get_container_name() const override;
+
     private:
         C _data;
     };
