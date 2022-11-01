@@ -87,7 +87,7 @@ namespace CZ
         void remove(const T &value); // 移除所有值为 value 的元素
 
     protected:
-        const char *get_container_name() const override;
+        const char *get_entity_name() const override;
 
     private:
         Rank _bufferSize;

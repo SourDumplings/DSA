@@ -50,7 +50,7 @@ namespace CZ
         const char *c_str() const override;
 
     protected:
-        const char *get_container_name() const override;
+        const char *get_entity_name() const override;
 
     private:
         Vector<T> _data;

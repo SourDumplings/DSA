@@ -13,6 +13,9 @@
 #define TREE_IMPLEMENTATION_H
 
 #include "Tree.h"
+
+#include "../CZString/CZString.h"
+#include <sstream>
 #include <stdexcept>
 #include <iostream>
 #include <utility>
@@ -20,10 +23,10 @@
 namespace CZ
 {
     template <typename T>
-    Tree<T>::Tree(std::nullptr_t): Tree<T>() {}
+    Tree<T>::Tree(std::nullptr_t) : Tree<T>() {}
 
     template <typename T>
-    Tree<T>::Tree(TreeNode<T> *root_): _root(root_)
+    Tree<T>::Tree(TreeNode<T> *root_) : _root(root_)
     {
         if (root_)
         {
@@ -56,7 +59,7 @@ namespace CZ
     }
 
     template <typename T>
-    TreeNode<T>* Tree<T>::copy_from(TreeNode<T> *root)
+    TreeNode<T> *Tree<T>::copy_from(TreeNode<T> *root)
     {
         if (!root)
         {
@@ -80,17 +83,17 @@ namespace CZ
     }
 
     template <typename T>
-    Tree<T>::Tree(const Tree<T> &t): _root(copy_from(t._root)), _size(t._size) {}
+    Tree<T>::Tree(const Tree<T> &t) : _root(copy_from(t._root)), _size(t._size) {}
 
     template <typename T>
-    Tree<T>::Tree(Tree<T> &&t): _root(t._root), _size(t._size)
+    Tree<T>::Tree(Tree<T> &&t) : _root(t._root), _size(t._size)
     {
         t._root = nullptr;
         t._size = 0;
     }
 
     template <typename T>
-    Tree<T>& Tree<T>::operator=(const Tree<T> &t)
+    Tree<T> &Tree<T>::operator=(const Tree<T> &t)
     {
         if (&t != this)
         {
@@ -102,7 +105,7 @@ namespace CZ
     }
 
     template <typename T>
-    Tree<T>& Tree<T>::operator=(Tree<T> &&t)
+    Tree<T> &Tree<T>::operator=(Tree<T> &&t)
     {
         if (&t != this)
         {
@@ -119,16 +122,13 @@ namespace CZ
     Tree<T>::~Tree() { clear(); }
 
     template <typename T>
-    inline bool Tree<T>::empty() const { return _size == 0; }
-
-    template <typename T>
     inline typename Tree<T>::Rank Tree<T>::size() const { return _size; }
 
     template <typename T>
-    inline TreeNode<T>* Tree<T>::root() const { return _root; }
+    inline TreeNode<T> *Tree<T>::root() const { return _root; }
 
     template <typename T>
-    inline TreeNode<T>*& Tree<T>::root() { return _root; }
+    inline TreeNode<T> *&Tree<T>::root() { return _root; }
 
     template <typename T>
     inline typename Tree<T>::Rank Tree<T>::height() const
@@ -138,7 +138,9 @@ namespace CZ
 
     template <typename T>
     inline bool Tree<T>::has_this_node(const TreeNode<T> *node) const
-    { return _root == node->get_root(); }
+    {
+        return _root == node->get_root();
+    }
 
     template <typename T>
     typename Tree<T>::Rank Tree<T>::depth(const TreeNode<T> *node) const
@@ -159,7 +161,7 @@ namespace CZ
     }
 
     template <typename T>
-    TreeNode<T>* Tree<T>::LCA(TreeNode<T> *a, TreeNode<T> *b) const
+    TreeNode<T> *Tree<T>::LCA(TreeNode<T> *a, TreeNode<T> *b) const
     {
         Rank dA, dB;
         try
@@ -215,7 +217,6 @@ namespace CZ
                 throw "this node has already had a father";
             }
 
-
             if (_root)
             {
                 if (father->get_root() != _root)
@@ -243,7 +244,7 @@ namespace CZ
     }
 
     template <typename T>
-    TreeNode<T>* Tree<T>::secede(TreeNode<T> *node)
+    TreeNode<T> *Tree<T>::secede(TreeNode<T> *node)
     {
         if (!node)
         {
@@ -272,9 +273,9 @@ namespace CZ
         // 同时找到要删除的目标结点的位置的迭代器
         typename TreeNode<T>::Rank maxChildHeight = 0;
         TreeNode<T> *tallestChild, *f = node->father();
-        typename List<TreeNode<T>*>::Iterator nodePos;
+        typename List<TreeNode<T> *>::Iterator nodePos;
 
-        for (typename List<TreeNode<T>*>::Iterator it = f->children().begin(); it != f->children().end(); ++it)
+        for (typename List<TreeNode<T> *>::Iterator it = f->children().begin(); it != f->children().end(); ++it)
         {
             if (*it == node)
             {
@@ -318,7 +319,7 @@ namespace CZ
     }
 
     template <typename T>
-    void Tree<T>::OutPut::operator() (const T &data) const
+    void Tree<T>::OutPut::operator()(const T &data) const
     {
         std::cout << data << " ";
         return;
@@ -326,19 +327,67 @@ namespace CZ
 
     template <typename T>
     inline bool operator==(const Tree<T> &lhs, const Tree<T> &rhs)
-    { return lhs._root == rhs._root; }
+    {
+        if (lhs._root == nullptr)
+        {
+            return rhs._root == nullptr;
+        }
+        if (rhs._root == nullptr)
+        {
+            return lhs._root == nullptr;
+        }
+
+        return *(lhs._root) == *(rhs._root);
+    }
 
     template <typename T>
     inline bool operator!=(const Tree<T> &lhs, const Tree<T> &rhs)
-    { return !(lhs == rhs); }
+    {
+        return !(lhs == rhs);
+    }
 
     template <typename T>
     inline bool Tree<T>::equivalent(const Tree<T> &lhs, const Tree<T> &rhs)
-    { return TreeNode<T>::equivalent(*lhs.root(), *rhs.root()); }
+    {
+        return TreeNode<T>::equivalent(*lhs.root(), *rhs.root());
+    }
 
     template <typename T>
-    inline std::ostream& operator<<(std::ostream &os, const Tree<T> &t)
-    { return os; }
+    inline const char *Tree<T>::get_entity_name() const
+    {
+        return "Tree";
+    }
+
+    template <typename T>
+    HashRank Tree<T>::hash() const
+    {
+        HashRank res = Hash<CZString>()(get_entity_name());
+        if (_root)
+        {
+            res = (res + Hash<TreeNode<T>>()(*_root)) % CZ_MAX_HASH_VALUE;
+        }
+        return res;
+    }
+
+    template <typename T>
+    const char *Tree<T>::c_str() const
+    {
+        std::ostringstream oss;
+        oss << get_entity_name() << "[";
+        Rank count = 0;
+        level_order_traversal(_root, [&](const T &data)
+                              {
+                                if (0 < count)
+                                {
+                                    oss << ", ";
+                                }
+                                oss << data;
+                                ++count; });
+        oss << "]";
+        this->_pStr = static_cast<char *>(malloc(sizeof(char) * (oss.str().length() + 1)));
+        strcpy(this->_pStr, oss.str().c_str());
+        return this->_pStr;
+    }
 } // CZ
 
 #include "Tree_traversal.h"

@@ -149,7 +149,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline const char *Vector<T>::get_container_name() const
+    inline const char *Vector<T>::get_entity_name() const
     {
         return "Vector";
     }

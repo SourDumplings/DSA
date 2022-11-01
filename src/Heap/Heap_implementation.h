@@ -149,7 +149,7 @@ namespace CZ
     }
 
     template <typename T, typename Cmp>
-    inline const char *Heap<T, Cmp>::get_container_name() const
+    inline const char *Heap<T, Cmp>::get_entity_name() const
     {
         return "Heap";
     }
@@ -157,14 +157,14 @@ namespace CZ
     template <typename T, typename Cmp>
     inline HashRank Heap<T, Cmp>::hash() const
     {
-        return (CZString(get_container_name()).hash() + _data.hash()) % CZ_MAX_HASH_VALUE;
+        return (CZString(get_entity_name()).hash() + _data.hash()) % CZ_MAX_HASH_VALUE;
     }
 
     template <typename T, typename Cmp>
     const char *Heap<T, Cmp>::c_str() const
     {
         std::ostringstream oss;
-        oss << get_container_name() << "[";
+        oss << get_entity_name() << "[";
         for (auto it = _data.begin(); it != _data.end(); ++it)
         {
             if (it != _data.begin())

@@ -178,7 +178,7 @@ namespace CZ
         return is;
     }
 
-    const char *CZString::get_container_name() const
+    const char *CZString::get_entity_name() const
     {
         return "CZString";
     }

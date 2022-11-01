@@ -37,7 +37,7 @@ namespace CZ
     const char *AbstractIterableContainer<T, It>::c_str() const
     {
         std::ostringstream oss;
-        oss << this->get_container_name() << "[";
+        oss << this->get_entity_name() << "[";
         for (It it = begin(); it != end(); ++it)
         {
             if (it != begin())
@@ -56,7 +56,7 @@ namespace CZ
     HashRank AbstractIterableContainer<T, It>::hash() const
     {
         HashRank hashValue = 0;
-        const char *containerName = this->get_container_name();
+        const char *containerName = this->get_entity_name();
         for (const char *p = containerName; p && *p != '\0'; ++p)
         {
             hashValue = (hashValue + Hash<char>()(*p)) % CZ_MAX_HASH_VALUE;

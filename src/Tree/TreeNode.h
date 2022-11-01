@@ -13,6 +13,7 @@
 #ifndef TREE_NODE_H
 #define TREE_NODE_H
 
+#include "../Base/AbstractBaseEntity.h"
 #include "../List/List.h"
 
 namespace CZ
@@ -20,11 +21,11 @@ namespace CZ
     template <typename T> class Tree;
 
     template <typename T>
-    class TreeNode
+    class TreeNode : public AbstractBaseEntity
     {
         friend class Tree<T>;
     public:
-        using Rank = uint32_t;
+        using Rank = typename List<T>::Rank;
 
         TreeNode(const T &data_ = T(), TreeNode<T> *father_ = nullptr, Rank height_ = 1);
         virtual ~TreeNode();
@@ -57,8 +58,13 @@ namespace CZ
         // 版本0为简单版，针对孩子的高度增加的情况
         // 版本1为复杂版，针对孩子的高度减少的情况，也可处理孩子高度的增加
         virtual void update_height_above(const uint32_t version = 0);
+
+        const char *c_str() const override;
+        HashRank hash() const override;
     protected:
         List<TreeNode<T>*> _children;
+
+        const char *get_entity_name() const override;
     private:
         T _data;
         // 以该结点为根的子树的高度，单结点的高度为1

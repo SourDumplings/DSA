@@ -109,7 +109,7 @@ namespace CZ
         void init();
         void init_from(const T *begin, const T *end);
         void init_from(Iterator begin, Iterator end);
-        const char *get_container_name() const override;
+        const char *get_entity_name() const override;
 
         // 归并排序
         template <typename Cmp>

@@ -181,7 +181,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline const char *List<T>::get_container_name() const
+    inline const char *List<T>::get_entity_name() const
     {
         return "List";
     }

@@ -93,7 +93,7 @@ namespace CZ
         bool expand();
         // 装填因子过小时缩容
         bool shrink();
-        const char *get_container_name() const override;
+        const char *get_entity_name() const override;
 
     private:
         Rank _size; // 规模
