@@ -147,6 +147,26 @@ namespace CZ
             return Hash<HashRank>()(*reinterpret_cast<const HashRank *const>(value));
         }
     };
+
+    template <typename T>
+    class Hash<T *const>
+    {
+    public:
+        HashRank operator()(const T *const &value) const
+        {
+            return Hash<HashRank>()(*reinterpret_cast<const HashRank *const>(value));
+        }
+    };
+
+    template <typename T>
+    class Hash<const T *const>
+    {
+    public:
+        HashRank operator()(const T *const &value) const
+        {
+            return Hash<HashRank>()(*reinterpret_cast<const HashRank *const>(value));
+        }
+    };
 }
 
 #endif

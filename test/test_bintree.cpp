@@ -158,6 +158,9 @@ int main(int argc, char const *argv[])
     BinTree<CZString>::level_order_traversal(t1r);
     printf("\n\n");
 
+    cout << "t1: " << t1 << endl;
+    cout << "t1.hash(): " << t1.hash() << endl;
+
     // // 测试删除操作
     // t1.print_info("t1 before seceding\n");
     // BinTree<CZString> tw(t1.secede(t1r->right_child()));

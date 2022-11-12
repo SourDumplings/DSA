@@ -23,7 +23,7 @@ namespace CZ
     {
         friend class BST<T>;
     public:
-        using Rank = typename BSTNode<T>::Rank;
+        using Rank = typename BinTreeNode<T>::Rank;
 
         // 构造函数不能传入子女，只能传入数据和父结点
         BSTNode(const T &data = T(), BSTNode *father_ = nullptr);
@@ -51,6 +51,9 @@ namespace CZ
         BSTNode* remove_child(const T &data);
         BSTNode* zig(); // 顺时针旋转, 返回旋转后的原来位置的结点指针
         BSTNode* zag(); // 逆时针旋转, 返回旋转后的原来位置的结点指针
+
+        const char *get_entity_name() const override;
+
     private:
         // 将二叉树结点指定左右的动态操作隐藏
         void insert_as_left_child(BSTNode *newChild);

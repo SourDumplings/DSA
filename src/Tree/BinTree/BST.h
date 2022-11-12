@@ -55,9 +55,13 @@ namespace CZ
 
         BST<T>& operator=(const BST<T> &t);
         BST<T>& operator=(BST<T> &&t);
+
+        const char *get_entity_name() const override;
+
     protected:
         // 旋转操作不能由用户控制
         BSTNode<T>* rotate_at(BSTNode<T> *v);
+
         // 删除单个结点的方法的实现
         // 传入的两个参数分别为要摘除的结点的指针的引用以及敏感结点指针的引用
         // 所谓敏感结点是指实际被摘除的结点的父结点，因为这个结点在摘除后有可能失衡需要调整

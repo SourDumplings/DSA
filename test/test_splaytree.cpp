@@ -66,11 +66,15 @@ int main(int argc, char const *argv[])
     {
         sT.insert(v[i]);
     }
+    cout << "sT: " << sT << endl;
+    cout << "sT.hash(): " << sT.hash() << endl;
     sT.print_info("sT");
     sT.search(1);
     // sT.remove(1);
     // sT.remove(4);
     sT.secede(2);
+    cout << "sT: " << sT << endl;
+    cout << "sT.hash(): " << sT.hash() << endl;
     sT.print_info("sT");
     return 0;
 }

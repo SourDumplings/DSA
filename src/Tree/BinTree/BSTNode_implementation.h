@@ -146,7 +146,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline BSTNode<T>* BSTNode<T>::remove_child(BSTNode *node)
+    BSTNode<T>* BSTNode<T>::remove_child(BSTNode *node)
     {
         if (!node)
         {
@@ -174,6 +174,12 @@ namespace CZ
             throw std::exception();
         }
         return ret;
+    }
+
+    template <typename T>
+    inline const char *BSTNode<T>::get_entity_name() const
+    {
+        return "BSTNode";
     }
 } // CZ
 

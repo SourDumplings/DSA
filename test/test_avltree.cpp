@@ -27,7 +27,7 @@ using namespace CZ;
 int main(int argc, char const *argv[])
 {
     // 插入测试
-    Vector<AVLTreeNode<int>*> van;
+    Vector<AVLTreeNode<int> *> van;
     const int32_t num = 10;
     van.resize(num);
     // srand(time(nullptr));
@@ -61,10 +61,14 @@ int main(int argc, char const *argv[])
     // aT.print_info("aT");
     // auto n0 = aT.remove(0); delete n0;
     // aT.print_info("aT");
-    auto n4 = aT.remove(aT.root()); delete n4;
+    auto n4 = aT.remove(aT.root());
+    delete n4;
+    cout << "aT: " << aT << endl;
+    cout << "aT.hash(): " << aT.hash() << endl;
     aT.print_info("aT");
     aT.remove_all(3);
+    cout << "aT: " << aT << endl;
+    cout << "aT.hash(): " << aT.hash() << endl;
     aT.print_info("aT");
     return 0;
 }
-

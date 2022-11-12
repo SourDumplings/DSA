@@ -84,6 +84,9 @@ namespace CZ
         const T& operator[](Rank i) const;
         Vector<T>& operator=(const Vector<T> &V);
         Vector<T>& operator=(Vector<T> &&V);
+
+        const char *get_entity_name() const override;
+
     protected:
         //迭代器区间的复制
         void init_from(const Iterator &begin, const Iterator &end);
@@ -93,7 +96,6 @@ namespace CZ
         bool expand();
         // 装填因子过小时缩容
         bool shrink();
-        const char *get_entity_name() const override;
 
     private:
         Rank _size; // 规模

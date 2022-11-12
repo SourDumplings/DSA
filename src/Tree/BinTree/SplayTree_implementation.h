@@ -188,6 +188,12 @@ namespace CZ
     template <typename T>
     inline SplayTreeNode<T>* SplayTree<T>::secede(const T &data)
     { return reinterpret_cast<SplayTreeNode<T>*>(BST<T>::secede(data)); }
+
+    template <typename T>
+    const char *SplayTree<T>::get_entity_name() const
+    {
+        return "SplayTree";
+    }
 } // CZ
 
 #endif // SPLAY_TREE_IMPLEMENTATION_H

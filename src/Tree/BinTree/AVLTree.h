@@ -45,6 +45,8 @@ namespace CZ
         // 删除一个值对应的一个结点，注意如果存在重复值则只会删除一个
         AVLTreeNode<T>* remove(const T &data);
         AVLTreeNode<T>* remove(AVLTreeNode<T> *node);
+
+        const char *get_entity_name() const override;
     };
 } // CZ
 

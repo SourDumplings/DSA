@@ -29,9 +29,9 @@ namespace CZ
         AbstractBaseEntity &operator=(const AbstractBaseEntity &rhs);
         AbstractBaseEntity &operator=(AbstractBaseEntity &&rhs);
 
-    protected:
         virtual const char *get_entity_name() const = 0;
 
+    protected:
         mutable char *_pStr; // 存储字符串信息的指针
     };
 

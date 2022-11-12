@@ -27,6 +27,12 @@ namespace CZ
     template <typename T>
     inline bool BinTree<T>::equivalent(const BinTree<T> &lhs, const BinTree<T> &rhs)
     { return Tree<T>::equivalent(lhs, rhs); }
+
+    template <typename T>
+    inline const char *BinTree<T>::get_entity_name() const
+    {
+        return "BinTree";
+    }
 } // CZ
 
 #endif // BIN_TREE_INTERFACES_H

@@ -41,6 +41,9 @@ namespace CZ
         // 伸展树的删除节点算法，先将目标结点伸展至树根摘除后将后继结点伸展出来作为新树根
         SplayTreeNode<T>* remove(SplayTreeNode<T> *node);
         SplayTreeNode<T>* remove(const T &data);
+
+        const char *get_entity_name() const override;
+
     protected:
         // 伸展调整算法，将目标结点v伸展至树根
         // 采用双层伸展算法，每次访问最深的叶结点伸展完毕后，树的高度接近折半

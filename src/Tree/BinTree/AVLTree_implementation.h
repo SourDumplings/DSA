@@ -182,6 +182,12 @@ namespace CZ
         }
         return remove(node);
     }
+
+    template <typename T>
+    inline const char *AVLTree<T>::get_entity_name() const
+    {
+        return "AVLTree";
+    }
 } // CZ
 
 #endif // AVL_TREE_IMPLEMENTATION_H

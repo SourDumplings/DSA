@@ -26,19 +26,9 @@ namespace CZ
         NONRECURSION_TRAVERSAL4
     };
 
-    template <typename T> class BinTree;
-
-    template <typename T>
-    bool operator==(const BinTree<T> &lhs, const BinTree<T> &rhs);
-
-    template <typename T>
-    bool operator!=(const BinTree<T> &lhs, const BinTree<T> &rhs);
-
     template <typename T>
     class BinTree: public Tree<T>
     {
-        friend bool operator==<T>(const BinTree<T> &lhs, const BinTree<T> &rhs);
-        friend bool operator!=<T>(const BinTree<T> &lhs, const BinTree<T> &rhs);
     public:
         using Rank = typename Tree<T>::Rank;
 
@@ -90,6 +80,9 @@ namespace CZ
         // 旋转，返回旋转后局部子树树根的位置，借助3+4重构算法实现
         // 需传入非空孙辈结点
         BinTreeNode<T>* rotate_at(BinTreeNode<T> *v);
+
+        const char *get_entity_name() const override;
+        
     protected:
         // 3+4重构算法，返回重组之后局部子树根节点的位置，即b
         // 可用于AVL树和RedBlack树的平衡调整

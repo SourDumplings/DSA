@@ -42,7 +42,7 @@ namespace CZ
         void print_info(const char *name = "") const override;
 
         const char *c_str() const override;
-        const char *get_entity_name() const override;
+        
         Rank length() const;
 
         CZString substr(Rank pos = 0) const;
@@ -60,6 +60,8 @@ namespace CZ
         CZString &operator=(CZString &&s);
         CZString &operator+=(const char rhs);
         CZString &operator+=(const CZString &rhs);
+
+        const char *get_entity_name() const override;
 
     private:
         mutable char *_tempStr = nullptr;

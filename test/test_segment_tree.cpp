@@ -10,6 +10,7 @@
 #include "CZString/CZString.h"
 #include <functional>
 #include <cstdio>
+#include <iostream>
 
 using namespace std;
 using namespace CZ;
@@ -21,8 +22,12 @@ int main(int argc, char const *argv[])
 
     // 测试
     SegmentTree<int> T(v);
+    cout << "T: " << T << endl;
+    cout << "T.hash(): " << T.hash() << endl;
     printf("sumRange[0, 3] = %d\n", T.range_res(0, 3, 0));
     T.update(2, 3);
+    cout << "T: " << T << endl;
+    cout << "T.hash(): " << T.hash() << endl;
     printf("sumRange[1, 5] = %d\n", T.range_res(1, 5, 0));
     // 测试不同的运算
 //    SegmentTree<int, std::multiplies<int>> T1(v);

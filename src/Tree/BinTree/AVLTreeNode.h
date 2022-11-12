@@ -65,6 +65,8 @@ namespace CZ
         AVLTreeNode* father() const
         { return reinterpret_cast<AVLTreeNode<T>*>(BSTNode<T>::father()); }
 
+        const char *get_entity_name() const override { return "AVLTreeNode"; }
+
     private:
         // 树结点本身不负责旋转，旋转交给AVL树类模板，故直接继承BST的算法即可
         AVLTreeNode* remove_child(AVLTreeNode *node)

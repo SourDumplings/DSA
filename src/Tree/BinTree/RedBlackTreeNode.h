@@ -51,6 +51,11 @@ namespace CZ
         RedBlackTreeNode* father() const
         { return reinterpret_cast<RedBlackTreeNode<T>*>(BSTNode<T>::father()); }
 
+        const char *get_entity_name() const override
+        {
+            return "RedBlackTreeNode";
+        }
+
     private:
         // 树结点本身不负责旋转，旋转交给AVL树类模板，故直接继承BST的算法即可
         RedBlackTreeNode* remove_child(RedBlackTreeNode *node)

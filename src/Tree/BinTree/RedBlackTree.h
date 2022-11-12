@@ -63,6 +63,9 @@ namespace CZ
 
         RedBlackTree<T>& operator=(const RedBlackTree<T> &t);
         RedBlackTree<T>& operator=(RedBlackTree<T> &&t);
+
+        const char *get_entity_name() const override;
+        
     private:
         // 判断目标结点是否需要更新黑高度，共三种情况是需要的
         // 1.左右孩子黑高度不等

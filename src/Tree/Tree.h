@@ -82,14 +82,14 @@ namespace CZ
         const char *c_str() const override;
         HashRank hash() const override;
 
+        const char *get_entity_name() const override;
+
     protected:
         TreeNode<T> *_root = nullptr;
         Rank _size = 0;
 
         TreeNode<T> *copy_from(TreeNode<T> *root);
         void free(TreeNode<T> *root);
-
-        const char *get_entity_name() const override;
     };
 } // CZ
 

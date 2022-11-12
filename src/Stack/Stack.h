@@ -37,7 +37,6 @@ namespace CZ
 
         void print_info(const char *name = "") const;
 
-    protected:
         const char *get_entity_name() const override;
 
     private:

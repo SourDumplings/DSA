@@ -49,7 +49,6 @@ namespace CZ
         HashRank hash() const override;
         const char *c_str() const override;
 
-    protected:
         const char *get_entity_name() const override;
 
     private:

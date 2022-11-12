@@ -49,6 +49,12 @@ namespace CZ
             );
     }
 
+    template <typename T>
+    const char *RedBlackTree<T>::get_entity_name() const
+    {
+        return "RedBlackTree";
+    }
+
 } // CZ
 
 #endif // RED_BLACK_TREE_INTERFACES_H

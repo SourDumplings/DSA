@@ -63,13 +63,16 @@ int main(int argc, char const *argv[])
     delete n7;
     // delete n8;
 
+    cout << "bst1: " << bst1 << endl;
+    cout << "bst1.hash(): " << bst1.hash() << endl;
     bst1.remove_all(2);
     bst1.print_info("bst1");
+    cout << "bst1: " << bst1 << endl;
+    cout << "bst1.hash(): " << bst1.hash() << endl;
     bst1.remove_all(3);
     bst1.print_info("bst1");
-
-    
+    cout << "bst1: " << bst1 << endl;
+    cout << "bst1.hash(): " << bst1.hash() << endl;
 
     return 0;
 }
-

@@ -24,14 +24,6 @@ namespace CZ
     template <typename T>
     inline BinTree<T>& BinTree<T>::operator=(BinTree<T> &&t)
     { return dynamic_cast<BinTree<T>&>(Tree<T>::operator=(static_cast<Tree<T>&&>(std::move(t)))); }
-
-    template <typename T>
-    inline bool operator==(const BinTree<T> &lhs, const BinTree<T> &rhs)
-    { return lhs.root() == rhs.root(); }
-
-    template <typename T>
-    inline bool operator!=(const BinTree<T> &lhs, const BinTree<T> &rhs)
-    { return !(lhs == rhs); }
 } // CZ
 
 #endif // BIN_TREE_OPERATORS_H

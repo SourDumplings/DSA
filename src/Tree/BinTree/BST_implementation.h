@@ -297,6 +297,12 @@ namespace CZ
         }
         return *this;
     }
+
+    template <typename T>
+    inline const char *BST<T>::get_entity_name() const
+    {
+        return "BST";
+    }
 } // CZ
 
 #endif // BST_IMPLEMENTATION_H

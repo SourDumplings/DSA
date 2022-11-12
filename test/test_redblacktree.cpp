@@ -36,11 +36,15 @@ int main(int argc, char const *argv[])
     rt1.insert(8);
     rt1.insert(9);
     rt1.print_info("rt1");
+    cout << "rt1: " << rt1 << endl;
+    cout << "rt1.hash(): " << rt1.hash() << endl;
 
     // 测试删除操作
     rt1.remove(1);
     rt1.print_info("rt1");
     rt1.remove(8);
+    cout << "rt1: " << rt1 << endl;
+    cout << "rt1.hash(): " << rt1.hash() << endl;
     rt1.print_info("rt1");
     rt1.remove(3);
     rt1.print_info("rt1");
@@ -52,4 +56,3 @@ int main(int argc, char const *argv[])
     rt1.print_info("rt1");
     return 0;
 }
-

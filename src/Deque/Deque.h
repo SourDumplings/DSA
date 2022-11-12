@@ -86,10 +86,11 @@ namespace CZ
         void clear() override;       // 清理 Deque 容器，不会改变 bufferSize
         void remove(const T &value); // 移除所有值为 value 的元素
 
-    protected:
         const char *get_entity_name() const override;
 
     private:
+        static const Rank MIN_BUFFER_SIZE = 5;
+
         Rank _bufferSize;
         Rank _mapSize;
         Node *_bufferMap; // 缓冲区 map，默认左右都要有一个空隙
@@ -112,8 +113,6 @@ namespace CZ
         // 注意前移不会扩容，即前移不会超过第一个元素的位置
         // 前移元素会覆盖之前的元素
         Iterator move_forward(Iterator startIt, Rank n);
-
-        static const Rank MIN_BUFFER_SIZE = 5;
     };
 }
 

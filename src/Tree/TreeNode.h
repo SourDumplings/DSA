@@ -61,10 +61,12 @@ namespace CZ
 
         const char *c_str() const override;
         HashRank hash() const override;
+
+        const char *get_entity_name() const override;
+
     protected:
         List<TreeNode<T>*> _children;
 
-        const char *get_entity_name() const override;
     private:
         T _data;
         // 以该结点为根的子树的高度，单结点的高度为1

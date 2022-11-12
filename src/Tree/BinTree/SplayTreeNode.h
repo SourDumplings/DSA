@@ -55,6 +55,9 @@ namespace CZ
         { return reinterpret_cast<SplayTreeNode<T>*>(BSTNode<T>::zig()); }
         SplayTreeNode* zag()  // 逆时针旋转, 返回旋转后的原来位置的结点指针
         { return reinterpret_cast<SplayTreeNode<T>*>(BSTNode<T>::zag()); }
+
+        const char *get_entity_name() const override
+        { return "SplayTreeNode"; }
     };
 } // CZ
 

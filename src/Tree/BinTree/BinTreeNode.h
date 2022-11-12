@@ -52,6 +52,8 @@ namespace CZ
         void insert_child() = delete;
 
         static bool equivalent(const BinTreeNode<T> &lhs, const BinTreeNode<T> &rhs);
+
+        const char *get_entity_name() const override;
     };
 } // CZ
 
