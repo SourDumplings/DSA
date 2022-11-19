@@ -272,7 +272,7 @@ namespace CZ
         // 找同父亲的兄弟姐妹结点中最高的
         // 同时找到要删除的目标结点的位置的迭代器
         typename TreeNode<T>::Rank maxChildHeight = 0;
-        TreeNode<T> *tallestChild, *f = node->father();
+        TreeNode<T> *tallestChild = nullptr, *f = node->father();
         typename List<TreeNode<T> *>::Iterator nodePos;
 
         for (typename List<TreeNode<T> *>::Iterator it = f->children().begin(); it != f->children().end(); ++it)

@@ -13,19 +13,14 @@
 #define UNION_FIND_SET_H
 
 #include <initializer_list>
+#include "../Base/AbstractBaseContainer.h"
 #include "../Tree/Tree.h"
 
 namespace CZ
 {
-    template <typename T> class UnionFindSet;
-    template <typename T> bool operator==(const UnionFindSet<T> &lhs, const UnionFindSet<T> &rhs);
-    template <typename T> bool operator!=(const UnionFindSet<T> &lhs, const UnionFindSet<T> &rhs);
-
     template <typename T>
-    class UnionFindSet
+    class UnionFindSet : public AbstractBaseContainer<T>
     {
-        friend bool operator==<T>(const UnionFindSet<T> &lhs, const UnionFindSet<T> &rhs);
-        friend bool operator!=<T>(const UnionFindSet<T> &lhs, const UnionFindSet<T> &rhs);
     public:
         using UnionFindSetNode = TreeNode<T>;
         using Rank = typename Tree<T>::Rank;
@@ -33,8 +28,7 @@ namespace CZ
         UnionFindSet(UnionFindSetNode *root = nullptr);
         UnionFindSet(const std::initializer_list<T> &l);
 
-        Rank size() const;
-        bool empty() const;
+        Rank size() const override;
         UnionFindSetNode* root() const;
         bool is_family(const UnionFindSetNode *node) const;
         void print_info(const char *name = "") const;
@@ -45,10 +39,14 @@ namespace CZ
         void insert(const T &newData);
         void insert(T &&newData);
         UnionFindSetNode* remove(UnionFindSetNode *node);
-        void clear();
+        void clear() override;
         void merge(UnionFindSet<T> &&u);
 
         static UnionFindSetNode* merge(UnionFindSetNode *node1, UnionFindSetNode *node2);
+
+        const char *get_entity_name() const override;
+        const char *c_str() const override;
+        HashRank hash() const override;
     private:
         Tree<T> _family;
     };
