@@ -34,8 +34,7 @@ BPlusTree<K, V>::construct_node_from(BPlusTreeNode<K, V> *f)
     for (Rank i = 0; i < cNum - 1; ++i)
     {
         BPlusTreeNode<K, V> *c =
-            construct_node_from(reinterpret_cast<BPlusTreeNode<K,
-                                                               V> *>(f->_children[i]));
+            construct_node_from(static_cast<BPlusTreeNode<K, V> *>(f->_children[i]));
         ret->_children[i] = c;
         if (c)
         {
@@ -148,9 +147,7 @@ BPlusTree<K, V>::BPlusTree(const Vector<KVPair<K, V *>> &indexDataV, Rank order_
     if (_root->_children.size() == 1)
     {
         // 根结点只有一个儿子
-        BPlusTreeNode<K, V> *temp =
-            reinterpret_cast<BPlusTreeNode<K,
-                                           V> *>(node->_children.front());
+        BPlusTreeNode<K, V> *temp = static_cast<BPlusTreeNode<K, V> *>(node->_children.front());
         delete _root;
         --_nodeNum;
         _root = temp;

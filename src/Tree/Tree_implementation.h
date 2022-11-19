@@ -36,13 +36,13 @@ namespace CZ
     }
 
     template <typename T>
-    void Tree<T>::free(TreeNode<T> *root)
+    void Tree<T>::free_node(TreeNode<T> *root)
     {
         if (root)
         {
             for (auto &c : root->children())
             {
-                free(c);
+                free_node(c);
             }
             delete root;
         }
@@ -52,7 +52,7 @@ namespace CZ
     template <typename T>
     void Tree<T>::clear()
     {
-        free(_root);
+        free_node(_root);
         _root = nullptr;
         _size = 0;
         return;
@@ -384,9 +384,7 @@ namespace CZ
                                 oss << data;
                                 ++count; });
         oss << "]";
-        this->_pStr = static_cast<char *>(malloc(sizeof(char) * (oss.str().length() + 1)));
-        strcpy(this->_pStr, oss.str().c_str());
-        return this->_pStr;
+        return this->get_c_str_from_stream(oss);
     }
 } // CZ
 

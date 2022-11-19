@@ -35,85 +35,127 @@ int main()
 #ifndef PAIR_H
 #define PAIR_H
 
+#include "../Base/AbstractBaseEntity.h"
+#include "../CZString/CZString.h"
 #include <iostream>
 
 namespace CZ
 {
-template<typename K, typename V>
-class KVPair;
-template<typename K, typename V>
-bool operator<(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
-template<typename K, typename V>
-bool operator>(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
-template<typename K, typename V>
-bool operator==(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
-template<typename K, typename V>
-bool operator!=(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
+    template <typename K, typename V>
+    class KVPair;
+    template <typename K, typename V>
+    bool operator<(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
+    template <typename K, typename V>
+    bool operator>(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
+    template <typename K, typename V>
+    bool operator==(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
+    template <typename K, typename V>
+    bool operator!=(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
 
-template<typename K, typename V>
-class KVPair
-{
-    friend bool operator< <K, V>(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
-    friend bool operator> <K, V>(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
-    friend bool operator==<K, V>(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
-    friend bool operator!=<K, V>(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
-public:
-    KVPair() = default;
-    KVPair(const K &key_, const V &value_) : _key(key_), _value(value_)
-    {};
-    // 成员模板复制构造函数，用于支持键值类为 K、V 子类的 KVPair
-    template<typename KD, typename VD>
-    KVPair(const KVPair<KD, VD> &p): _key(p.key()), _value(p.value())
-    {};
-
-    K &key()
-    { return _key; }
-    const K &key() const
-    { return _key; }
-    V &value()
-    { return _value; }
-    const V &value() const
-    { return _value; }
-
-    // 赋值操作符函数
-    template<typename KD, typename VD>
-    KVPair<K, V> &operator=(const KVPair<KD, VD> &p)
+    template <typename K, typename V>
+    class KVPair : public AbstractBaseEntity 
     {
-        if (reinterpret_cast<const KVPair<KD, VD>*>(this) != &p)
+        friend bool operator< <K, V>(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
+        friend bool operator><K, V>(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
+        friend bool operator==<K, V>(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
+        friend bool operator!=<K, V>(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
+
+    public:
+        KVPair() = default;
+        KVPair(const K &key_, const V &value_) : _key(key_), _value(value_){};
+        // 成员模板复制构造函数，用于支持键值类为 K、V 子类的 KVPair
+        template <typename KD, typename VD>
+        KVPair(const KVPair<KD, VD> &p) : _key(p.key()), _value(p.value()){};
+
+        K &key()
         {
-            _key = p.key();
-            _value = p.value();
+            return _key;
         }
-        return *this;
+        const K &key() const
+        {
+            return _key;
+        }
+        V &value()
+        {
+            return _value;
+        }
+        const V &value() const
+        {
+            return _value;
+        }
+
+        // 赋值操作符函数
+        template <typename KD, typename VD>
+        KVPair<K, V> &operator=(const KVPair<KD, VD> &p)
+        {
+            if (reinterpret_cast<const KVPair<KD, VD> *>(this) != &p)
+            {
+                _key = p.key();
+                _value = p.value();
+            }
+            return *this;
+        }
+
+        const char *c_str() const override;
+        HashRank hash() const override;
+        const char *get_entity_name() const override;
+
+    private:
+        K _key;
+        V _value;
+    };
+
+    template <typename K, typename V>
+    inline const char *KVPair<K, V>::get_entity_name() const
+    {
+        return "KVPair";
     }
-private:
-    K _key;
-    V _value;
-};
 
-template<typename K, typename V>
-std::ostream &operator<<(std::ostream &os, const KVPair<K, V> &p)
-{
-    os << "pair(" << p.key() << ", " << p.value() << ")";
-    return os;
-}
+    template <typename K, typename V>
+    inline HashRank KVPair<K, V>::hash() const
+    {
+        return (Hash<CZString>()(get_entity_name()) + Hash<K>()(_key) + Hash<V>()(_value)) % CZ_MAX_HASH_VALUE;
+    }
 
-// 键值数对的大小比较即相等判断都是比较key
-template<typename K, typename V>
-inline bool operator<(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs)
-{ return lhs._key < rhs._key; }
+    template <typename K, typename V>
+    const char *KVPair<K, V>::c_str() const
+    {
+        std::ostringstream oss;
+        oss << get_entity_name() << "(" << _key << ", " << _value << ")";
+        return this->get_c_str_from_stream(oss);
+    }
 
-template<typename K, typename V>
-inline bool operator>(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs)
-{ return lhs._key > rhs._key; }
+    template <typename K, typename V>
+    std::ostream &operator<<(std::ostream &os, const KVPair<K, V> &p)
+    {
+        os << "pair(" << p.key() << ", " << p.value() << ")";
+        return os;
+    }
 
-template<typename K, typename V>
-inline bool operator==(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs)
-{ return lhs._key == rhs._key; }
+    // 键值数对的大小比较即相等判断都是比较key
+    template <typename K, typename V>
+    inline bool operator<(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs)
+    {
+        return lhs._key < rhs._key;
+    }
 
-template<typename K, typename V>
-inline bool operator!=(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs)
-{ return lhs._key != rhs._key; }
+    template <typename K, typename V>
+    inline bool operator>(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs)
+    {
+        return lhs._key > rhs._key;
+    }
+
+    template <typename K, typename V>
+    inline bool operator==(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs)
+    {
+        return lhs._key == rhs._key;
+    }
+
+    template <typename K, typename V>
+    inline bool operator!=(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs)
+    {
+        return lhs._key != rhs._key;
+    }
 } // CZ
 
 #endif // PAIR_H

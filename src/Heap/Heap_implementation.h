@@ -50,7 +50,7 @@ namespace CZ
         {
             return;
         }
-        for (Rank i = (size() - 2) / 2; - 1 < i; --i)
+        for (Rank i = (size() - 2) / 2; 0 <= i; --i)
         {
             // 从最后一个结点的父结点开始
             _perc_down(i, cmp);
@@ -174,9 +174,7 @@ namespace CZ
             oss << *it;
         }
         oss << "]";
-        this->_pStr = static_cast<char *>(malloc(sizeof(char) * (oss.str().length() + 1)));
-        strcpy(this->_pStr, oss.str().c_str());
-        return this->_pStr;
+        return this->get_c_str_from_stream(oss);
     }
 
     template <typename T, typename Cmp>

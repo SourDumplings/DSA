@@ -17,18 +17,18 @@
 #include <functional>
 #include <initializer_list>
 
-#include "../Base/AbstractIterableContainer.h"
+#include "../Base/AbstractSeqIterableContainer.h"
 #include "ListNode.h"
 #include "ListIterator.h"
 
 namespace CZ
 {
     template <typename T>
-    class List : public AbstractIterableContainer<T, ListIterator<T>>
+    class List : public AbstractSeqIterableContainer<T, ListIterator<T>>
     {
     public:
-        using Rank = typename AbstractIterableContainer<T, ListIterator<T>>::Rank;
-        using RankPlus = typename AbstractIterableContainer<T, ListIterator<T>>::RankPlus;
+        using Rank = typename AbstractSeqIterableContainer<T, ListIterator<T>>::Rank;
+        using RankPlus = typename AbstractSeqIterableContainer<T, ListIterator<T>>::RankPlus;
         using Iterator = ListIterator<T>;
 
 		// 构造函数

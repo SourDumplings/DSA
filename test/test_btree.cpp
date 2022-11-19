@@ -35,16 +35,26 @@ int main(int argc, char const *argv[])
     b.insert(5);
     b.insert(6);
     b.insert(4);
+    cout << "b: " << b << endl;
+    cout << "b.hash(): " << b.hash() << endl;
     b.print_info("b");
     // 测试删除操作
     b.remove(6);
+    cout << "b: " << b << endl;
+    cout << "b.hash(): " << b.hash() << endl;
     b.print_info("b");
     // b.remove(5);
     // b.remove(1);
     b.remove(3);
+    cout << "b: " << b << endl;
+    cout << "b.hash(): " << b.hash() << endl;
     b.print_info("b");
     b.remove(2);
+    cout << "b: " << b << endl;
+    cout << "b.hash(): " << b.hash() << endl;
     b.print_info("b");
+    b.clear();
+    cout<< "b: " << b << endl;
+    cout << "b.hash(): " << b.hash() << endl;
     return 0;
 }
-

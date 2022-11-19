@@ -89,7 +89,7 @@ namespace CZ
         Rank _size = 0;
 
         TreeNode<T> *copy_from(TreeNode<T> *root);
-        void free(TreeNode<T> *root);
+        void free_node(TreeNode<T> *root);
     };
 } // CZ
 

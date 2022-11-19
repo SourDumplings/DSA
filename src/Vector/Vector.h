@@ -14,19 +14,19 @@
 #define VECTOR_H
 
 #include <initializer_list>
-#include "../Base/AbstractIterableContainer.h"
+#include "../Base/AbstractSeqIterableContainer.h"
 #include "../Iterator/RandomIterator.h"
 #include "../Algorithms/Dict_compare.h"
 
 namespace CZ
 {
     template <typename T>
-    class Vector : public AbstractIterableContainer<T, RandomIterator<T>>
+    class Vector : public AbstractSeqIterableContainer<T, RandomIterator<T>>
     {
     public:
         using Iterator = RandomIterator<T>;
-        using Rank = typename AbstractIterableContainer<T, RandomIterator<T>>::Rank;
-        using RankPlus = typename AbstractIterableContainer<T, RandomIterator<T>>::RankPlus;
+        using Rank = typename AbstractSeqIterableContainer<T, RandomIterator<T>>::Rank;
+        using RankPlus = typename AbstractSeqIterableContainer<T, RandomIterator<T>>::RankPlus;
 
         // 构造函数
         // 构造函数 1：容量为 c = 2 * s，规模为 s，所有元素初始为 v

@@ -1,8 +1,8 @@
 # 声明编译要求cmake最低版本
-CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.17)
 
 # 添加源文件
-set(source test_redblacktree.cpp)
+set(source test_vector.cpp)
 
 # 指定库的位置为项目根目录下的lib目录
 LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/build/lib/)

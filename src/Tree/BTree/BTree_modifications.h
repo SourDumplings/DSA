@@ -34,13 +34,13 @@ namespace CZ
             for (Rank i = 0; i < _order - s - 1; ++i)
             {
                 // 右侧的_order - s - 1个结点及关键码分裂为右侧结点right
-                right->_children.push_back((target->_children)[s+1]);
-                target->_children.erase(target->_children.begin()+s+1);
-                right->_keys.push_back((target->_keys)[s+1]);
-                target->_keys.erase(target->_keys.begin()+s+1);
+                right->_children.push_back((target->_children)[s + 1]);
+                target->_children.erase(target->_children.begin() + s + 1);
+                right->_keys.push_back((target->_keys)[s + 1]);
+                target->_keys.erase(target->_keys.begin() + s + 1);
             }
-            right->_children.push_back((target->_children)[s+1]);
-            target->_children.erase(target->_children.begin()+s+1);
+            right->_children.push_back((target->_children)[s + 1]);
+            target->_children.erase(target->_children.begin() + s + 1);
             // 移动最靠右的那个孩子
             for (auto &c : right->_children)
             {
@@ -61,7 +61,7 @@ namespace CZ
             }
 
             Rank r = Search(f->_keys.begin(), f->_keys.end(), (right->_keys)[0], BINARY_SEARCH, 2) -
-                    f->_keys.begin() + 1;
+                     f->_keys.begin() + 1;
             f->_keys.insert(f->_keys.begin() + r, (target->_keys)[s]); // 轴点关键码上升
             target->_keys.erase(target->_keys.begin() + s);
             f->_children.insert(f->_children.begin() + r + 1, right);
@@ -84,9 +84,9 @@ namespace CZ
                 _hot = _root;
             }
             Rank pos = Search(_hot->_keys.begin(), _hot->_keys.end(), data, BINARY_SEARCH, 2) -
-                    _hot->_keys.begin();
-            _hot->_keys.insert(_hot->_keys.begin()+(pos+1), data);
-            _hot->_children.insert(_hot->_children.begin()+(pos+2), nullptr);
+                       _hot->_keys.begin();
+            _hot->_keys.insert(_hot->_keys.begin() + (pos + 1), data);
+            _hot->_children.insert(_hot->_children.begin() + (pos + 2), nullptr);
             ++_size;
             // 如有必要，需做分裂
             solve_overflow(_hot);
@@ -123,18 +123,22 @@ namespace CZ
 
         // 确定target是第几个孩子，第r+1个
         typename Vector<T>::Rank r = 0;
-        while (f->_children[r] != target) { ++r; }
+        while (f->_children[r] != target)
+        {
+            ++r;
+        }
 
         if (0 < r)
         {
             // 情况1，向左兄弟借结点
             // 若target不是f的第一个孩子，左兄弟必然存在
-            BTreeNode<T> *l = f->_children[r-1];
+            BTreeNode<T> *l = f->_children[r - 1];
             if ((_order + 1) / 2 < static_cast<Rank>(l->_children.size()))
             {
                 // 左兄弟足够胖，即借出一个结点后也不会下溢
-                target->_keys.insert(target->_keys.begin(), (f->_keys)[r-1]);
-                f->_keys[r-1] = l->_keys.back(); l->_keys.pop_back();
+                target->_keys.insert(target->_keys.begin(), (f->_keys)[r - 1]);
+                f->_keys[r - 1] = l->_keys.back();
+                l->_keys.pop_back();
                 target->_children.insert(target->_children.begin(), l->_children.back());
                 l->_children.pop_back();
                 if (target->_children[0])
@@ -149,7 +153,7 @@ namespace CZ
         {
             // 情况2，向右兄弟借结点
             // 若target不是f的倒数第一个孩子，右兄弟必然存在
-            BTreeNode<T> *right = (f->_children)[r+1];
+            BTreeNode<T> *right = (f->_children)[r + 1];
             if ((_order + 1) / 2 < static_cast<Rank>(right->_children.size()))
             {
                 // 右兄弟足够胖，即借出一个结点后也不会下溢
@@ -171,10 +175,10 @@ namespace CZ
         {
             // 与左兄弟合并
             // f的r-1号关键码转入左兄弟，target不再是r号孩子
-            BTreeNode<T> *l = f->_children[r-1];
-            l->_keys.push_back((f->_keys)[r-1]);
-            f->_keys.erase(f->_keys.begin()+r-1);
-            f->_children.erase(f->_children.begin()+r);
+            BTreeNode<T> *l = f->_children[r - 1];
+            l->_keys.push_back((f->_keys)[r - 1]);
+            f->_keys.erase(f->_keys.begin() + r - 1);
+            f->_children.erase(f->_children.begin() + r);
             // target的最左孩子过继给l作为最右孩子
             l->_children.push_back(target->_children.front());
             target->_children.erase(target->_children.begin());
@@ -200,10 +204,10 @@ namespace CZ
         else
         {
             // 与右兄弟合并
-            BTreeNode<T> *right = (f->_children)[r+1];
+            BTreeNode<T> *right = (f->_children)[r + 1];
             right->_keys.insert(right->_keys.begin(), (f->_keys)[r]);
-            f->_keys.erase(f->_keys.begin()+r);
-            f->_children.erase(f->_children.begin()+r);
+            f->_keys.erase(f->_keys.begin() + r);
+            f->_children.erase(f->_children.begin() + r);
             // target的最右孩子过继给r作为最左孩子
             right->_children.insert(right->_children.begin(), target->_children.back());
             target->_children.pop_back();
@@ -214,7 +218,8 @@ namespace CZ
             while (!target->_keys.empty())
             {
                 // target中的剩余关键码和孩子都转入r中
-                right->_keys.insert(right->_keys.begin(), target->_keys.back()); target->_keys.pop_back();
+                right->_keys.insert(right->_keys.begin(), target->_keys.back());
+                target->_keys.pop_back();
                 right->_children.insert(right->_children.begin(), target->_children.back());
                 target->_children.pop_back();
                 if (right->_children.front())
@@ -241,7 +246,7 @@ namespace CZ
         if (v->_children[0])
         {
             // 如果v并非叶结点，则data的后继一定在叶结点中
-            BTreeNode<T> *succ = v->_children[r+1];
+            BTreeNode<T> *succ = v->_children[r + 1];
             while (succ->_children[0])
             {
                 succ = succ->_children[0];
@@ -259,7 +264,30 @@ namespace CZ
         solve_underflow(v);
         return true;
     }
+
+    template <typename T>
+    void BTree<T>::clear()
+    {
+        free_node(_root);
+        _root = nullptr;
+        _size = 0;
+        _hot = nullptr;
+    }
+
+    template <typename T>
+    void BTree<T>::free_node(BTreeNode<T> *target)
+    {
+        if (!target)
+        {
+            return;
+        }
+        for (auto &c : target->_children)
+        {
+            free_node(c);
+        }
+        delete target;
+        return;
+    }
 } // CZ
 
 #endif // B_TREE_MODIFICATIONS_H
-

@@ -18,7 +18,6 @@ namespace CZ
 template<typename K, typename V>
 void BPlusTree<K, V>::print_info(const char *name) const
 {
-
     printf("for bPlustree %s: \n", name);
     if (empty())
     {
@@ -47,7 +46,7 @@ void BPlusTree<K, V>::print_info(const char *name) const
         putchar(' ');
         for (void *c : p->_children)
         {
-            Q.push(reinterpret_cast<BPlusTreeNode<K, V> *>(c));
+            Q.push(static_cast<BPlusTreeNode<K, V> *>(c));
         }
     }
 
@@ -57,7 +56,7 @@ void BPlusTree<K, V>::print_info(const char *name) const
     {
         print_keys_in_node(p);
         putchar(' ');
-        p = reinterpret_cast<BPlusTreeNode<K, V> *>(p->_children.back());
+        p = static_cast<BPlusTreeNode<K, V> *>(p->_children.back());
     }
     printf("\n\n");
 }

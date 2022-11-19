@@ -245,17 +245,15 @@ namespace CZ
     {
         std::ostringstream oss;
         oss << get_entity_name() << "(" << _data << ")";
-        this->_pStr = static_cast<char *>(malloc(sizeof(char) * (oss.str().length() + 1)));
-        strcpy(this->_pStr, oss.str().c_str());
-        return this->_pStr;
+        return this->get_c_str_from_stream(oss);
     }
 
     template <typename T>
     HashRank TreeNode<T>::hash() const
     {
-        // 树结点的哈希是综合了该结点的数据、孩子多少和所有子结点的哈希值
+        // 树结点的哈希是综合了该结点的数据、孩子多少、结点高度和所有子结点的哈希值
         // 即树结点的哈希值由结点的数据和结构两方面决定
-        HashRank res = Hash<CZString>()(c_str() + _children.size());
+        HashRank res = Hash<CZString>()(c_str() + _children.size() + _height);
         for (TreeNode<T> * const &pc : _children)
         {
             if (pc)

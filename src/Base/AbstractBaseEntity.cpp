@@ -88,4 +88,15 @@ namespace CZ
     {
         return !(lhs == rhs);
     }
+
+    const char *AbstractBaseEntity::get_c_str_from_stream(const std::ostringstream &oss) const
+    {
+        if (_pStr)
+        {
+            free(_pStr);
+        }
+        this->_pStr = static_cast<char *>(malloc(sizeof(char) * (oss.str().length() + 1)));
+        strcpy(this->_pStr, oss.str().c_str());
+        return _pStr;
+    }
 }

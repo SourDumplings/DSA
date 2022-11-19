@@ -12,6 +12,7 @@
 #include "../Algorithms/Hash.h"
 
 #include <iostream>
+#include <sstream>
 
 namespace CZ
 {
@@ -24,6 +25,7 @@ namespace CZ
         virtual ~AbstractBaseEntity();
 
         virtual const char *c_str() const = 0;
+
         virtual HashRank hash() const = 0;
 
         AbstractBaseEntity &operator=(const AbstractBaseEntity &rhs);
@@ -32,6 +34,9 @@ namespace CZ
         virtual const char *get_entity_name() const = 0;
 
     protected:
+        const char *get_c_str_from_stream(const std::ostringstream &oss) const;
+
+    private:
         mutable char *_pStr; // 存储字符串信息的指针
     };
 

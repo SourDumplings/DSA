@@ -9,14 +9,16 @@
 ## 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：5.3.0，与 CMakeLists.txt 同步
+版本号：5.4.0，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
 
 我自己实现的各种数据结构和算法的模板，采用 C++（C++11）语言实现，统一在 CZ 命名空间中
 
-在编译器 gcc version 4.8.5 20150623 (Red Hat 4.8.5-44) 下测试通过
+在编译器 gcc version 8.3.1 20190311 (Red Hat 8.3.1-3) (GCC) 下测试通过
+
+调试推荐：GNU gdb (GDB) 10.2
 
 ## 使用说明
 ### 开发和构建
@@ -70,7 +72,7 @@
 见 23
 21. 给 BST 增加强制 insert 的方法，例如 force_insert，能够按 key 实现替换元素，并扩展到其子类和利用其实现的容器，如 TreeSet 等
 22. 给 BST 及其依赖容器模板类，如 RBTree、TreeMap 等增加自定义比较函数的功能
-23. 添加基础基类 AbstractBaseEntity, AbstractBaseContainer, AbstractIterableContainer，并将容器类模板继承自其
+23. 添加基础基类 AbstractBaseEntity, AbstractBaseContainer, AbstractIterableContainer，AbstractSeqIterableContainer 并将容器类模板继承自其
 实现中
 24. 对内存分配失败等情况抛异常
 25. 画出 UML 图等文档放在 doc 下

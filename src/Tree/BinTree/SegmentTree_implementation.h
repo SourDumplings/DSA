@@ -122,9 +122,7 @@ namespace CZ
             ++count;
         }
         oss << "]";
-        this->_pStr = static_cast<char *>(malloc(sizeof(char) * (oss.str().length() + 1)));
-        strcpy(this->_pStr, oss.str().c_str());
-        return this->_pStr;
+        return this->get_c_str_from_stream(oss);
     }
 
     template <typename T, typename F>

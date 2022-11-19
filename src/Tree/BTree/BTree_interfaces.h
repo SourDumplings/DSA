@@ -13,7 +13,9 @@ B树数据的访问接口
 #define B_TREE_INTERFACES_H
 
 #include "BTree.h"
+
 #include "../../Algorithms/Search.h"
+#include "../../Queue/Queue.h"
 
 namespace CZ
 {
@@ -24,10 +26,7 @@ namespace CZ
     inline typename BTree<T>::Rank BTree<T>::size() const { return _size; }
 
     template <typename T>
-    inline bool BTree<T>::empty() const { return _size == 0; }
-
-    template <typename T>
-    inline BTreeNode<T>* BTree<T>::root() const { return _root; }
+    inline BTreeNode<T> *BTree<T>::root() const { return _root; }
 
     template <typename T>
     inline typename BTree<T>::Rank BTree<T>::height() const { return get_height(_root); }
@@ -76,7 +75,7 @@ namespace CZ
     }
 
     template <typename T>
-    BTreeNode<T>* BTree<T>::search(const T &data) const
+    BTreeNode<T> *BTree<T>::search(const T &data) const
     {
         BTreeNode<T> *v = _root; // 从根结点开始
         _hot = nullptr;
@@ -99,7 +98,67 @@ namespace CZ
         }
         return nullptr; // 查找失败，抵达外部结点
     }
+
+    template <typename T>
+    const char *BTree<T>::c_str() const
+    {
+        std::ostringstream oss;
+
+        oss << get_entity_name() << "[";
+        Queue<BTreeNode<T> *> Q;
+        if (_root)
+            Q.push(_root);
+        while (!Q.empty())
+        {
+            BTreeNode<T> *v = Q.front();
+            Q.pop();
+            
+            oss << '(';
+            bool first = true;
+            for (typename Vector<T>::Rank i = 0; i < v->_keys.size(); ++i)
+            {
+                if (!first)
+                {
+                    oss << ' ';
+                }
+                oss << (v->_keys)[i];
+                first = false;
+                if ((v->_children)[i])
+                {
+                    Q.push((v->_children)[i]);
+                }
+            }
+            if (v->_children.back())
+            {
+                Q.push(v->_children.back());
+            }
+            oss << ')';
+            if (!Q.empty())
+            {
+                oss << ", ";
+            }
+        }
+        oss << "]";
+        return this->get_c_str_from_stream(oss);
+    }
+
+    template <typename T>
+    HashRank BTree<T>::hash() const
+    {
+        HashRank res = Hash<CZString>()(get_entity_name()) + _order;
+        if (_root)
+        {
+            res = (res + _root->hash()) % CZ_MAX_HASH_VALUE;
+        }
+        
+        return res;
+    }
+
+    template <typename T>
+    inline const char *BTree<T>::get_entity_name() const
+    {
+        return "BTree";
+    }
 } // CZ
 
 #endif // B_TREE_INTERFACES_H
-

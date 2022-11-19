@@ -17,17 +17,17 @@
 
 #include <initializer_list>
 #include "DequeIterator.h"
-#include "../Base/AbstractIterableContainer.h"
+#include "../Base/AbstractSeqIterableContainer.h"
 #include "../CZString/CZString.h"
 
 namespace CZ
 {
     template <typename T>
-    class Deque : public AbstractIterableContainer<T, DequeIterator<T>>
+    class Deque : public AbstractSeqIterableContainer<T, DequeIterator<T>>
     {
     public:
-        using Rank = typename AbstractIterableContainer<T, DequeIterator<T>>::Rank;
-        using RankPlus = typename AbstractIterableContainer<T, DequeIterator<T>>::RankPlus;
+        using Rank = typename AbstractSeqIterableContainer<T, DequeIterator<T>>::Rank;
+        using RankPlus = typename AbstractSeqIterableContainer<T, DequeIterator<T>>::RankPlus;
         using Iterator = DequeIterator<T>;
         using Node = T *;
 

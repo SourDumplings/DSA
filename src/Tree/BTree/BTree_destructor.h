@@ -17,22 +17,7 @@ B树的析构函数
 namespace CZ
 {
     template <typename T>
-    void BTree<T>::free(BTreeNode<T> *target)
-    {
-        if (!target)
-        {
-            return;
-        }
-        for (auto &c : target->_children)
-        {
-            free(c);
-        }
-        delete target;
-        return;
-    }
-
-    template <typename T>
-    BTree<T>::~BTree() { free(_root); }
+    BTree<T>::~BTree() { clear(); }
 } // CZ
 
 #endif // B_TREE_DESTRUCTORS_H

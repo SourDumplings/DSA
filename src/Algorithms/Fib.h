@@ -13,7 +13,6 @@
 #define FIB_H
 
 #include <cstdio>
-#include <stdexcept>
 
 namespace CZ
 {
@@ -57,7 +56,7 @@ namespace CZ
             catch (const char *errMsg)
             {
                 printf("%s\n", errMsg);
-                throw std::runtime_error("cannot prev any more.");
+                throw "cannot prev any more.";
             }
             return thisItem;
         }

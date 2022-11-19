@@ -24,7 +24,7 @@ void BPlusTree<K, V>::free_node(BPlusTreeNode <K, V> *target)
     {
         for (void *c : target->_children)
         {
-            free_node(reinterpret_cast<BPlusTreeNode<K, V> *>(c));
+            free_node(static_cast<BPlusTreeNode<K, V> *>(c));
         }
     }
 //    target->print_info("going to free");
