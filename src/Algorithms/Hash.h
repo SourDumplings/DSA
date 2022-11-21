@@ -128,13 +128,14 @@ namespace CZ
         HashRank operator()(const std::string &value) const;
     };
 
+    // 对于指针，直接将其底层位模式按照 HashRank 解释即可
     template <typename T>
     class Hash<T *>
     {
     public:
         HashRank operator()(T *const &value) const
         {
-            return Hash<HashRank>()(*reinterpret_cast<HashRank *const>(value));
+            return Hash<HashRank>()(reinterpret_cast<HashRank>(value));
         }
     };
 
@@ -144,7 +145,7 @@ namespace CZ
     public:
         HashRank operator()(const T *const &value) const
         {
-            return Hash<HashRank>()(*reinterpret_cast<const HashRank *const>(value));
+            return Hash<HashRank>()(reinterpret_cast<const HashRank>(value));
         }
     };
 
@@ -154,7 +155,7 @@ namespace CZ
     public:
         HashRank operator()(const T *const &value) const
         {
-            return Hash<HashRank>()(*reinterpret_cast<const HashRank *const>(value));
+            return Hash<HashRank>()(reinterpret_cast<const HashRank>(value));
         }
     };
 
@@ -164,7 +165,7 @@ namespace CZ
     public:
         HashRank operator()(const T *const &value) const
         {
-            return Hash<HashRank>()(*reinterpret_cast<const HashRank *const>(value));
+            return Hash<HashRank>()(reinterpret_cast<const HashRank>(value));
         }
     };
 }

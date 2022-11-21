@@ -25,13 +25,11 @@ namespace CZ
         virtual ~AbstractBaseEntity();
 
         virtual const char *c_str() const = 0;
-
         virtual HashRank hash() const = 0;
+        virtual const char *get_entity_name() const = 0;
 
         AbstractBaseEntity &operator=(const AbstractBaseEntity &rhs);
         AbstractBaseEntity &operator=(AbstractBaseEntity &&rhs);
-
-        virtual const char *get_entity_name() const = 0;
 
     protected:
         const char *get_c_str_from_stream(const std::ostringstream &oss) const;
