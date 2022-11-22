@@ -16,18 +16,25 @@
 
 namespace CZ
 {
-    template <typename T> class RandomIterator;
+    template <typename T>
+    class RandomIterator;
     using RandomIteratorRank = int64_t;
 
-    template <typename T> bool operator==(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs);
-    template <typename T> bool operator!=(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs);
-    template <typename T> bool operator<(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs);
-    template <typename T> bool operator<=(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs);
-    template <typename T> bool operator>(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs);
-    template <typename T> bool operator>=(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs);
+    template <typename T>
+    bool operator==(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs);
+    template <typename T>
+    bool operator!=(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs);
+    template <typename T>
+    bool operator<(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs);
+    template <typename T>
+    bool operator<=(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs);
+    template <typename T>
+    bool operator>(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs);
+    template <typename T>
+    bool operator>=(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs);
     template <typename T>
     RandomIteratorRank operator-(const RandomIterator<T> &lhs,
-        const RandomIterator<T> &rhs);
+                                 const RandomIterator<T> &rhs);
     template <typename T>
     RandomIterator<T> operator+(const RandomIterator<T> &lhs, const RandomIteratorRank n);
     template <typename T>
@@ -36,10 +43,10 @@ namespace CZ
     RandomIterator<T> operator+(const RandomIteratorRank n, const RandomIterator<T> &rhs);
 
     template <typename T>
-    class RandomIterator: public BiIterator<T>
+    class RandomIterator : public BiIterator<T>
     {
         friend RandomIteratorRank operator-<T>(const RandomIterator<T> &lhs,
-            const RandomIterator<T> &rhs);
+                                               const RandomIterator<T> &rhs);
         friend RandomIterator<T> operator+<T>(const RandomIterator<T> &lhs, const RandomIteratorRank n);
         friend RandomIterator<T> operator-<T>(const RandomIterator<T> &lhs, const RandomIteratorRank n);
         friend RandomIterator<T> operator+<T>(const RandomIteratorRank n, const RandomIterator<T> &rhs);
@@ -49,79 +56,103 @@ namespace CZ
         friend bool operator<=<T>(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs);
         friend bool operator><T>(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs);
         friend bool operator>=<T>(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs);
+
     public:
         using iterator_category = random_iterator_tag;
         using Rank = RandomIteratorRank;
 
-        RandomIterator(const T *p_ = nullptr): BiIterator<T>(p_) {}
+        RandomIterator(const T *p_ = nullptr) : BiIterator<T>(p_) {}
 
         virtual ~RandomIterator() = default;
 
-        virtual const T& operator[](const Rank index) const
+        virtual const T &operator[](const Rank index) const
         {
             return *(SeqIterator<T>::_p + index);
         }
 
-        virtual T& operator[](const Rank index)
+        virtual T &operator[](const Rank index)
         {
-            return const_cast<T&>(static_cast<const RandomIterator<T>&>(*this)[index]);
+            return const_cast<T &>(static_cast<const RandomIterator<T> &>(*this)[index]);
         }
 
-        virtual RandomIterator<T>& operator+=(Rank n)
+        virtual RandomIterator<T> &operator+=(Rank n)
         {
             SeqIterator<T>::_p += n;
             return *this;
         }
 
-        virtual RandomIterator<T>& operator-=(Rank n)
+        virtual RandomIterator<T> &operator-=(Rank n)
         {
             SeqIterator<T>::_p -= n;
             return *this;
+        }
+
+        const char *get_entity_name() const override
+        {
+            return "RandomIterator";
         }
     };
 
     template <typename T>
     inline bool operator==(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs)
-    { return lhs._p == rhs._p; }
+    {
+        return lhs._p == rhs._p;
+    }
 
     template <typename T>
     inline bool operator!=(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs)
-    { return !(lhs == rhs); }
+    {
+        return !(lhs == rhs);
+    }
 
     template <typename T>
     inline bool operator<(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs)
-    { return lhs._p < rhs._p; }
+    {
+        return lhs._p < rhs._p;
+    }
 
     template <typename T>
     inline bool operator<=(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs)
-    { return lhs == rhs || lhs < rhs; }
+    {
+        return lhs == rhs || lhs < rhs;
+    }
 
     template <typename T>
     inline bool operator>(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs)
-    { return lhs._p > rhs._p; }
+    {
+        return lhs._p > rhs._p;
+    }
 
     template <typename T>
     inline bool operator>=(const RandomIterator<T> &lhs, const RandomIterator<T> &rhs)
-    { return lhs > rhs || lhs == rhs; }
+    {
+        return lhs > rhs || lhs == rhs;
+    }
 
     template <typename T>
     inline RandomIteratorRank operator-(const RandomIterator<T> &lhs,
-        const RandomIterator<T> &rhs)
-    { return lhs._p - rhs._p; }
+                                        const RandomIterator<T> &rhs)
+    {
+        return lhs._p - rhs._p;
+    }
 
     template <typename T>
     inline RandomIterator<T> operator+(const RandomIterator<T> &lhs, const RandomIteratorRank n)
-    { return RandomIterator<T>(lhs._p + n); }
+    {
+        return RandomIterator<T>(lhs._p + n);
+    }
 
     template <typename T>
     inline RandomIterator<T> operator-(const RandomIterator<T> &lhs, const RandomIteratorRank n)
-    { return RandomIterator<T>(lhs._p - n); }
+    {
+        return RandomIterator<T>(lhs._p - n);
+    }
 
     template <typename T>
     inline RandomIterator<T> operator+(const RandomIteratorRank n, const RandomIterator<T> &rhs)
-    { return RandomIterator<T>(rhs._p + n); }
+    {
+        return RandomIterator<T>(rhs._p + n);
+    }
 } // CZ
 
 #endif // RANDOM_ITERATOR_H
-
-

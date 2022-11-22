@@ -53,7 +53,10 @@ namespace CZ
     inline typename TreeSet<T>::Rank TreeSet<T>::size() const { return _T.size(); }
 
     template <typename T>
-    inline bool TreeSet<T>::empty() const { return _T.empty(); }
+    inline const char *TreeSet<T>::get_entity_name() const
+    {
+        return "TreeSet";
+    }
 
     template <typename T>
     inline bool TreeSet<T>::contains(const T &value) const
@@ -95,7 +98,7 @@ namespace CZ
     template <typename T>
     typename TreeSet<T>::Iterator TreeSet<T>::begin() const
     {
-        if (empty())
+        if (this->empty())
         {
             return Iterator(_T.root(), true, &_T);
         }
@@ -129,7 +132,7 @@ namespace CZ
     template <typename T>
     const T &TreeSet<T>::back() const
     {
-        if (empty())
+        if (this->empty())
         {
             printf("Error from TreeSet::front(): empty Treeset.\n");
             throw std::exception();
@@ -152,7 +155,7 @@ namespace CZ
     template <typename T>
     const T &TreeSet<T>::front() const
     {
-        if (empty())
+        if (this->empty())
         {
             printf("Error from TreeSet::front(): empty Treeset.\n");
             throw std::exception();

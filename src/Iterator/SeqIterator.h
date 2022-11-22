@@ -12,6 +12,7 @@
 #ifndef SEQ_ITERATOR_H
 #define SEQ_ITERATOR_H
 
+#include "../Base/AbstractBaseEntity.h"
 #include "Iterator_traits.h"
 #include <iostream>
 
@@ -26,29 +27,38 @@ namespace CZ
     bool operator!=(const SeqIterator<T> &lhs, const SeqIterator<T> &rhs);
 
     template <typename T>
-    class SeqIterator
+    class SeqIterator : public AbstractBaseEntity
     {
         friend bool operator==<T>(const SeqIterator<T> &lhs, const SeqIterator<T> &rhs);
         friend bool operator!=<T>(const SeqIterator<T> &lhs, const SeqIterator<T> &rhs);
+
     public:
         typedef seq_iterator_tag iterator_category;
 
         // 构造函数
-        SeqIterator(const T *p_ = nullptr): _p(const_cast<T*>(p_)) {}
+        SeqIterator(const T *p_ = nullptr) : _p(const_cast<T *>(p_)) {}
 
         virtual ~SeqIterator() = default;
 
         // 操作符
-        virtual T& operator*()
-        { return *_p; }
-        virtual const T& operator*() const
-        { return *_p; }
-        virtual T* operator->()
-        { return _p; }
-        virtual const T* operator->() const
-        { return _p; }
+        virtual T &operator*()
+        {
+            return *_p;
+        }
+        virtual const T &operator*() const
+        {
+            return *_p;
+        }
+        virtual T *operator->()
+        {
+            return _p;
+        }
+        virtual const T *operator->() const
+        {
+            return _p;
+        }
 
-        virtual SeqIterator<T>& operator++()
+        virtual SeqIterator<T> &operator++()
         {
             ++_p;
             return *this;
@@ -60,8 +70,27 @@ namespace CZ
             return temp;
         }
 
-        T* get() { return _p; }
-        T* get() const { return _p; }
+        T *get() { return _p; }
+        T *get() const { return _p; }
+
+        const char *c_str() const override
+        {
+            std::ostringstream oss;
+            oss << this->get_entity_name() << "(" << *_p << ")";
+            
+            return this->get_c_str_from_stream(oss);
+        }
+
+        HashRank hash() const override
+        {
+            return (Hash<const char *>()(get_entity_name()) + Hash<T *>()(_p)) % CZ_MAX_HASH_VALUE;
+        }
+
+        const char *get_entity_name() const override
+        {
+            return "SeqIterator";
+        }
+
     protected:
         T *_p;
     };
@@ -78,9 +107,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline std::ostream& operator<<(std::ostream &os, const SeqIterator<T> &it) { return os; }
+    inline std::ostream &operator<<(std::ostream &os, const SeqIterator<T> &it) { return os; }
 } // CZ
 
 #endif // SEQ_ITERATOR_H
-
-

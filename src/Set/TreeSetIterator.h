@@ -12,6 +12,7 @@
 #ifndef TREE_SET_ITERATOR_H
 #define TREE_SET_ITERATOR_H
 
+#include "../Base/AbstractBaseEntity.h"
 #include "../Iterator/BiIterator.h"
 #include "../Tree/BinTree/RedBlackTreeNode.h"
 
@@ -26,7 +27,7 @@ namespace CZ
     bool operator!=(const TreeSetIterator<T> &lhs, const TreeSetIterator<T> &rhs);
 
     template <typename T>
-    class TreeSetIterator
+    class TreeSetIterator : public AbstractBaseEntity
     {
         friend bool operator==<T>(const TreeSetIterator<T> &lhs, const TreeSetIterator<T> &rhs);
         friend bool operator!=<T>(const TreeSetIterator<T> &lhs, const TreeSetIterator<T> &rhs);
@@ -43,11 +44,11 @@ namespace CZ
         {
             return _it->data();
         }
-        T* operator->()
+        T *operator->()
         {
-            return const_cast<T*>(&(_it->data()));
+            return const_cast<T *>(&(_it->data()));
         }
-        const T* operator->() const
+        const T *operator->() const
         {
             return &(_it->data());
         }
@@ -130,6 +131,23 @@ namespace CZ
         }
 
         operator BiIterator<RedBlackTreeNode<T>>() { return _it; }
+
+        virtual const char *c_str() const
+        {
+            std::ostringstream oss;
+            oss << this->get_entity_name() << "(" << *_it << ")";
+            return this->get_c_str_from_stream(oss);
+        }
+
+        virtual HashRank hash() const
+        {
+            return (Hash<RedBlackTreeNode<T>>()(*_it) + Hash<bool>()(_isEnd) + Hash<const RedBlackTree<T> *>()(_pRBT)) % CZ_MAX_HASH_VALUE;
+        }
+
+        const char *get_entity_name() const override
+        {
+            return "TreeSetIterator";
+        }
 
     private:
         BiIterator<RedBlackTreeNode<T>> _it;

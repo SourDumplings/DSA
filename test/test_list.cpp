@@ -24,14 +24,16 @@ int main(int argc, char const *argv[])
 {
     // 测试构造函数
     int a[]{1, 3, 6, 7, 8, 10, 100};
-    List<int> l1, l2(5), l3(6, 3), l4(a, a+5);
+    List<int> l1, l2(5), l3(6, 3), l4(a, a + 5);
     List<int> l5(l4.begin(), l4.end());
 
     l1.print_info("l1");
     l2.print_info("l2");
     l3.print_info("l3");
     l4.print_info("l4");
-    l4.print_info("l5");
+    l5.print_info("l5");
+    cout << "l5: " << l5 << endl;
+    cout << "l5.hash(): " << l5.hash() << endl;
 
     List<int> l6(l4), l7(std::move(l2));
     l6.print_info("l6");
@@ -48,6 +50,8 @@ int main(int argc, char const *argv[])
     printf("ls2 <= ls3 ? %d\n", ls2 <= ls3);
 
     ls1.print_info("ls1");
+    cout << "ls1: " << ls1 << endl;
+    cout << "ls1.hash(): " << ls1.hash() << endl;
     printf("ls1.front() = %s, ls1.back() = %s\n", ls1.front().c_str(), ls2.back().c_str());
     ls1 = ls2;
     ls1.print_info("ls1");
@@ -144,7 +148,7 @@ int main(int argc, char const *argv[])
     // 列表排序算法性能比较测试
     /*
     size = 1000 时，输出结果为：
-        [root@VM-0-11-centos script]# sh run_test.sh 
+        [root@VM-0-11-centos script]# sh run_test.sh
         ----- Before sorting ------
         l9.size() = 1000, isSorted: 0
         l10.size() = 1000, isSorted: 0
@@ -159,9 +163,9 @@ int main(int argc, char const *argv[])
         time used for 1: 10000
         time used for 2: 0
         time used for 3: 0
-    
+
     size = 10000 时，输出结果为：
-        [root@VM-0-11-centos script]# sh run_test.sh 
+        [root@VM-0-11-centos script]# sh run_test.sh
         ----- Before sorting ------
         l9.size() = 10000, isSorted: 0
         l10.size() = 10000, isSorted: 0
@@ -178,7 +182,7 @@ int main(int argc, char const *argv[])
         time used for 3: 0
 
     size = 50000 时，输出结果为：
-        [root@VM-0-11-centos script]# sh run_test.sh 
+        [root@VM-0-11-centos script]# sh run_test.sh
         ----- Before sorting ------
         l9.size() = 50000, isSorted: 0
         l10.size() = 50000, isSorted: 0

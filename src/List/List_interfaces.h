@@ -127,9 +127,6 @@ namespace CZ
     }
 
     template <typename T>
-    inline std::ostream &operator<<(std::ostream &os, const List<T> &l) { return os; }
-
-    template <typename T>
     const T &List<T>::at(typename List<T>::RankPlus index) const
     {
         Iterator it = begin();

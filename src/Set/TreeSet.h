@@ -12,6 +12,7 @@
 #ifndef TREE_SET_H
 #define TREE_SET_H
 
+#include "../Base/AbstractIterableContainer.h"
 #include "../Tree/BinTree/RedBlackTree.h"
 #include "TreeSetIterator.h"
 
@@ -25,7 +26,7 @@ namespace CZ
     template <typename T> TreeSet<T> operator-(const TreeSet<T> &lhs, const TreeSet<T> &rhs);
 
     template <typename T>
-    class TreeSet
+    class TreeSet : public AbstractIterableContainer<T, TreeSetIterator<T>>
     {
         friend bool operator==<T>(const TreeSet<T> &lhs, const TreeSet<T> &rhs);
         friend bool operator!=<T>(const TreeSet<T> &lhs, const TreeSet<T> &rhs);
@@ -33,7 +34,7 @@ namespace CZ
         friend TreeSet<T> operator-<T>(const TreeSet<T> &lhs, const TreeSet<T> &rhs);
         friend class TreeSetIterator<T>;
     public:
-        using Rank = uint32_t;
+        using Rank = typename AbstractIterableContainer<T, TreeSetIterator<T>>::Rank;
         using Iterator = TreeSetIterator<T>;
 
         TreeSet();
@@ -45,13 +46,12 @@ namespace CZ
         TreeSet(TreeSet<T> &&s);
 
         // 数据访问接口
-        Rank size() const;
-        bool empty() const;
+        Rank size() const override;
         bool contains(const T &value) const;
-        Iterator begin();
-        Iterator begin() const;
-        Iterator end();
-        Iterator end() const;
+        Iterator begin() override;
+        Iterator begin() const override;
+        Iterator end() override;
+        Iterator end() const override;
         T& front();
         const T& front() const;
         T& back();
@@ -61,7 +61,7 @@ namespace CZ
         bool insert(const T &value);
         // 删除，成功返回true，失败返回false或者抛出异常
         bool remove(const T &value, bool nonexcept = true);
-        void clear();
+        void clear() override;
 
         TreeSet<T>& operator=(const TreeSet<T>& s);
         TreeSet<T>& operator=(TreeSet<T>&& s);
@@ -69,6 +69,8 @@ namespace CZ
         void print_info(const char *name = "") const;
 
         static TreeSet<T> intersection(const TreeSet<T> &s1, const TreeSet<T> &s2);
+
+        const char *get_entity_name() const;
     private:
         RedBlackTree<T> _T;
 

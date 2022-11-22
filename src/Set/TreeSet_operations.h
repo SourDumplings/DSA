@@ -17,26 +17,6 @@ TreeSet所相关的一些运算符函数模板
 namespace CZ
 {
     template <typename T>
-    bool operator==(const TreeSet<T> &lhs, const TreeSet<T> &rhs)
-    {
-        if (lhs.size() != rhs.size())
-        {
-            return false;
-        }
-        for (typename TreeSet<T>::Iterator itL = lhs.begin(), itR = rhs.begin(); itL != lhs.end(); ++itL, ++itR)
-        {
-            if (*itL != *itR)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    template <typename T>
-    inline bool operator!=(const TreeSet<T> &lhs, const TreeSet<T> &rhs) { return !(lhs == rhs); }
-
-    template <typename T>
     TreeSet<T> operator+(const TreeSet<T> &lhs, const TreeSet<T> &rhs)
     {
         TreeSet<T> sumTreeSet(lhs);

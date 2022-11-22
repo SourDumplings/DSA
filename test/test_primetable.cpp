@@ -20,8 +20,16 @@ int main(int argc, char const *argv[])
 {
     PrimeTable p1(10), p2(100), p3(1000);
     p1.print_info("p1");
+    cout << "p1: " << p1 << endl;
+    cout << "p1.hash(): " << p1.hash() << endl;
+
     p2.print_info("p2");
+    cout << "p2: " << p2 << endl;
+    cout << "p2.hash(): " << p2.hash() << endl;
+
     p3.print_info("p3");
+    cout << "p3: " << p3 << endl;
+    cout << "p3.hash(): " << p3.hash() << endl;
 
     if (p1.is_prime(2))
     {
@@ -54,4 +62,3 @@ int main(int argc, char const *argv[])
     // cout << p1.get_prime(7) << endl;
     return 0;
 }
-
