@@ -22,9 +22,13 @@ int main(int argc, char const *argv[])
     LeftHeap<int> lH1({6, 13, 12, 17, 11}), lH2({15, 10, 8});
     lH1.print_info("lH1");
     lH2.print_info("lH2");
+    cout << "lH2: " << lH2 << endl;
+    cout << "lH2.hash(): " << lH2.hash() << endl;
 
     LeftHeap<int> lHm = LeftHeap<int>::merge(lH2, lH1);
     lHm.print_info("lHm");
+    cout << "lHm: " << lHm << endl;
+    cout << "lHm.hash(): " << lHm.hash() << endl;
 
     printf("lHm.top() = %d\n", lHm.top());
     lHm.pop();
@@ -34,4 +38,3 @@ int main(int argc, char const *argv[])
     lHm.print_info("lHm");
     return 0;
 }
-

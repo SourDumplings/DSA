@@ -72,7 +72,7 @@ namespace CZ
     {
         RedBlackTreeNode<T> *actualRemoved = node, *hot = node->father();
         RedBlackTreeNode<T> *succ =
-            reinterpret_cast<RedBlackTreeNode<T> *>(BST<T>::remove_at((BSTNode<T> *&)(actualRemoved),
+            static_cast<RedBlackTreeNode<T> *>(BST<T>::remove_at((BSTNode<T> *&)(actualRemoved),
                                                                       (BSTNode<T> *&)(hot)));
         if (!Tree<T>::_size)
         {
@@ -82,8 +82,8 @@ namespace CZ
         if (!hot)
         {
             // 如果刚刚被删除的是根结点，则需要将根结点染黑并更新黑高度
-            reinterpret_cast<RedBlackTreeNode<T> *>(Tree<T>::_root)->_red = false;
-            ++reinterpret_cast<RedBlackTreeNode<T> *>(Tree<T>::_root)->_blackHeight;
+            static_cast<RedBlackTreeNode<T> *>(Tree<T>::_root)->_red = false;
+            ++static_cast<RedBlackTreeNode<T> *>(Tree<T>::_root)->_blackHeight;
         }
         else
         {

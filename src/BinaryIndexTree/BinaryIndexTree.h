@@ -20,21 +20,22 @@
 #ifndef BINARY_INDEX_TREE_H
 #define BINARY_INDEX_TREE_H
 
+#include "../Base/AbstractBaseContainer.h"
 #include "../Vector/Vector.h"
 
 namespace CZ
 {
     template <typename T>
-    class BinaryIndexTree
+    class BinaryIndexTree : public AbstractBaseContainer<T>
     {
     public:
-        using Rank = uint32_t;
+        using Rank = typename AbstractBaseContainer<T>::Rank;
 
         BinaryIndexTree(const Rank size = 0); // 传入管理多少个元素，实际树状数组中多一个元素
 
-        bool empty() const;
-        Rank size() const;
-        T sum(Rank l) const; // 返回原数组前l项的和
+        Rank size() const override;
+
+        T sum(Rank l) const;         // 返回原数组前l项的和
         T sum(Rank b, Rank e) const; // 返回原数组[b, e)的和
         T operator[](Rank pos) const;
 
@@ -43,6 +44,12 @@ namespace CZ
         void resize(const Rank size);
         // 将原数组的pos位加x
         void add(const Rank pos, const T &x);
+
+        const char *c_str() const override;
+        HashRank hash() const override;
+        const char *get_entity_name() const override;
+        void clear() override;
+
     private:
         Vector<T> _data;
         // 返回x的二进制形式中，从右起第一位的1保留，其余位全为0所对应的数

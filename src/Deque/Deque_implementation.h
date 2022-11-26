@@ -811,7 +811,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline const char *Deque<T>::get_entity_name() const
+    const char *Deque<T>::get_entity_name() const
     {
         return "Deque";
     }

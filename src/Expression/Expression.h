@@ -15,6 +15,7 @@
 #ifndef EXPRESSION_H
 #define EXPRESSION_H
 
+#include "../Base/AbstractBaseEntity.h"
 #include "../CZString/CZString.h"
 #include <string>
 
@@ -22,7 +23,7 @@ namespace CZ
 {
     static const uint32_t OPERTAOR_NUM = 9;
 
-    class Expression
+    class Expression : public AbstractBaseEntity
     {
     public:
         using ValueType = double;
@@ -39,6 +40,10 @@ namespace CZ
         CZString to_PN() const;
         CZString to_RPN() const;
 
+        const char *c_str() const override;
+        HashRank hash() const override;
+        const char *get_entity_name() const override;
+
     private:
         ValueType read_num(const char *&p) const;
         ValueType reverse_read_num(const char *&p) const;
@@ -50,11 +55,9 @@ namespace CZ
         uint32_t get_operator_index(const char op) const;
         char *_exp = nullptr, _delimiter = ' ';
 
-        static const char priTable[OPERTAOR_NUM][OPERTAOR_NUM]; // 运算符优先级表
+        static const char priTable[OPERTAOR_NUM][OPERTAOR_NUM];        // 运算符优先级表
         static const char priTableReverse[OPERTAOR_NUM][OPERTAOR_NUM]; // 运算符优先级逆表
     };
 } // CZ
 
 #endif // EXPRESSION_H
-
-

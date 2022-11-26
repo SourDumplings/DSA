@@ -42,17 +42,17 @@ namespace CZ
             {
                 throw "this node is not in this BinTree";
             }
-            BinTreeNode<T> *f = reinterpret_cast<BinTreeNode<T>*>(v->father());
+            BinTreeNode<T> *f = static_cast<BinTreeNode<T>*>(v->father());
             if (!f)
             {
                 throw "this node doesn't have father";
             }
-            BinTreeNode<T> *g = reinterpret_cast<BinTreeNode<T>*>(f->father());
+            BinTreeNode<T> *g = static_cast<BinTreeNode<T>*>(f->father());
             if (!g)
             {
                 throw "this node doesn't have grandfather";
             }
-            BinTreeNode<T> *z = reinterpret_cast<BinTreeNode<T>*>(g->father()); // 记录曾祖父结点
+            BinTreeNode<T> *z = static_cast<BinTreeNode<T>*>(g->father()); // 记录曾祖父结点
 
             if (f == g->left_child())
             {

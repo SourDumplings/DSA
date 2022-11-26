@@ -48,8 +48,8 @@ namespace CZ
         {
             for (auto &pEV : _dataE)
             {
-                Vector<KVPair<bool, ED>> *pEV_use = reinterpret_cast<Vector<KVPair<bool, ED>>*>(pEV);
-                for (auto &eP : *pEV_use)
+                const Vector<KVPair<bool, ED>> &EV_use = *static_cast<Vector<KVPair<bool, ED>>*>(pEV);
+                for (auto &eP : EV_use)
                 {
                     if (eP.key())
                     {
@@ -65,7 +65,7 @@ namespace CZ
         {
             for (Rank s = 0; s != _Nv; ++s)
             {
-                Vector<Edge<ED>> &eV = *(reinterpret_cast<Vector<Edge<ED>>*>(_dataE[s]));
+                const Vector<Edge<ED>> &eV = *(static_cast<Vector<Edge<ED>>*>(_dataE[s]));
                 printf("%u as source:", s);
                 for (auto &e : eV)
                 {

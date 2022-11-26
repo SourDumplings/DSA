@@ -13,14 +13,15 @@
 #define BINARY_INDEX_TREE_IMPLEMENTATION_H
 
 #include "BinaryIndexTree.h"
+
+#include "../CZString/CZString.h"
 #include <stdexcept>
 #include <iostream>
 
 namespace CZ
 {
     template <typename T>
-    BinaryIndexTree<T>::BinaryIndexTree(const typename BinaryIndexTree<T>::Rank size):
-        _data(size + 1) {}
+    BinaryIndexTree<T>::BinaryIndexTree(const typename BinaryIndexTree<T>::Rank size) : _data(size + 1) {}
 
     template <typename T>
     inline typename BinaryIndexTree<T>::Rank BinaryIndexTree<T>::_low_bit(
@@ -32,14 +33,15 @@ namespace CZ
 
     template <typename T>
     inline void BinaryIndexTree<T>::resize(const typename BinaryIndexTree<T>::Rank size)
-    { return _data.resize(size + 1); }
+    {
+        return _data.resize(size + 1);
+    }
 
     template <typename T>
     inline typename BinaryIndexTree<T>::Rank BinaryIndexTree<T>::size() const
-    { return _data.size() - 1; }
-
-    template <typename T>
-    inline bool BinaryIndexTree<T>::empty() const { return _data.size() == 1; }
+    {
+        return _data.size() - 1;
+    }
 
     template <typename T>
     void BinaryIndexTree<T>::add(const typename BinaryIndexTree<T>::Rank pos, const T &x)
@@ -77,7 +79,7 @@ namespace CZ
 
     template <typename T>
     T BinaryIndexTree<T>::sum(typename BinaryIndexTree<T>::Rank b,
-        typename BinaryIndexTree<T>::Rank e) const
+                              typename BinaryIndexTree<T>::Rank e) const
     {
         if (e < b)
         {
@@ -102,13 +104,50 @@ namespace CZ
     void BinaryIndexTree<T>::print_info(const char *name) const
     {
         printf("for BinaryIndexTree %s:\n", name);
-        printf("it manages %u elements, which are:", size());
-        for (Rank i = 0; i != size(); ++i)
+        Rank s = size();
+        printf("it manages %u elements, which are:", s);
+        for (Rank i = 0; i != s; ++i)
         {
             std::cout << " " << operator[](i);
         }
         printf("\n\n");
         return;
+    }
+
+    template <typename T>
+    const char *BinaryIndexTree<T>::c_str() const
+    {
+        std::ostringstream oss;
+        oss << this->get_entity_name() << "[";
+        Rank s = size();
+        for (Rank i = 0; i < s; ++i)
+        {
+            if (0 < i)
+            {
+                oss << ", ";
+            }
+            oss << operator[](i);
+        }
+        oss << "]";
+        return this->get_c_str_from_stream(oss);
+    }
+
+    template <typename T>
+    HashRank BinaryIndexTree<T>::hash() const
+    {
+        return (Hash<CZString>()(get_entity_name()) + _data.hash()) % CZ_MAX_HASH_VALUE;
+    }
+
+    template <typename T>
+    const char *BinaryIndexTree<T>::get_entity_name() const
+    {
+        return "BinaryIndexTree";
+    }
+
+    template <typename T>
+    inline void BinaryIndexTree<T>::clear()
+    {
+        resize(0);
     }
 } // CZ
 

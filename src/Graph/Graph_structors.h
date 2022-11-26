@@ -69,7 +69,7 @@ namespace CZ
             for (Rank i = 0; i != _Nv; ++i)
             {
                 _dataE[i] = new Vector<Edge<ED>>
-                (*reinterpret_cast<Vector<Edge<ED>>*>(g._dataE[i]));
+                (*static_cast<Vector<Edge<ED>>*>(g._dataE[i]));
             }
         }
         else
@@ -77,7 +77,7 @@ namespace CZ
             for (Rank i = 0; i != _Nv; ++i)
             {
                 _dataE[i] = new Vector<KVPair<bool, ED>>
-                (*reinterpret_cast<Vector<KVPair<bool, ED>>*>(g._dataE[i]));
+                (*static_cast<Vector<KVPair<bool, ED>>*>(g._dataE[i]));
             }
         }
     }
@@ -98,14 +98,14 @@ namespace CZ
         {
             for (Rank i = 0; i != _Nv; ++i)
             {
-                delete reinterpret_cast<Vector<Edge<ED>>*>(_dataE[i]);
+                delete static_cast<Vector<Edge<ED>>*>(_dataE[i]);
             }
         }
         else
         {
             for (Rank i = 0; i != _Nv; ++i)
             {
-                delete reinterpret_cast<Vector<KVPair<bool, ED>>*>(_dataE[i]);
+                delete static_cast<Vector<KVPair<bool, ED>>*>(_dataE[i]);
             }
         }
     }

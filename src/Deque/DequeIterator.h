@@ -9,6 +9,7 @@
 #ifndef DEQUEITERATOR_H
 #define DEQUEITERATOR_H
 
+#include "../CZString/CZString.h"
 #include "../Iterator/RandomIterator.h"
 #include "Deque.h"
 
@@ -38,7 +39,7 @@ namespace CZ
     DequeIterator<T> operator+(const DequeIteratorRank n, const DequeIterator<T> &rhs);
 
     template <typename T>
-    class DequeIterator
+    class DequeIterator : public AbstractBaseEntity
     {
         friend class Deque<T>;
 
@@ -120,22 +121,39 @@ namespace CZ
             return temp;
         }
 
-        DequeIterator<T>& operator+=(const DequeIteratorRank n)
+        DequeIterator<T> &operator+=(const DequeIteratorRank n)
         {
             *this = *this + n;
             return *this;
         }
 
-        DequeIterator<T>& operator-=(const DequeIteratorRank n)
+        DequeIterator<T> &operator-=(const DequeIteratorRank n)
         {
             *this = *this - n;
             return *this;
         }
 
+        const char *c_str() const override
+        {
+            std::ostringstream oss;
+            oss << this->get_entity_name() << "(" << *_cur << ")";
+            return this->get_c_str_from_stream(oss);
+        }
+
+        HashRank hash() const override
+        {
+            return (Hash<CZString>()(get_entity_name()) + Hash<T*>()(_cur)) % CZ_MAX_HASH_VALUE;
+        }
+
+        const char *get_entity_name() const override
+        {
+            return "DequeIterator";
+        }
+
     private:
         T *_cur;                         // 当前元素
-        T *_first;                           // 当前元素所在的缓冲区中第一个位置
-        T *_last;                           // 当前元素所在的缓冲区中最后一个位置
+        T *_first;                       // 当前元素所在的缓冲区中第一个位置
+        T *_last;                        // 当前元素所在的缓冲区中最后一个位置
         typename Deque<T>::Node *_pNode; // 指向缓冲区 map 中的 node 的指针
 
         void init(T *cur_, T *first_, T *last_, typename Deque<T>::Node *pNode_)
@@ -178,8 +196,7 @@ namespace CZ
         {
             typename Deque<T>::Rank bufferSize = lhs._last - lhs._first + 1;
             typename Deque<T>::Rank resInBuffer = lhs._cur - lhs._first;
-            typename Deque<T>::Rank bufferNumDelta = (n - resInBuffer) % bufferSize == 0 ?
-                (n - resInBuffer) / bufferSize : (n - resInBuffer) / bufferSize + 1;
+            typename Deque<T>::Rank bufferNumDelta = (n - resInBuffer) % bufferSize == 0 ? (n - resInBuffer) / bufferSize : (n - resInBuffer) / bufferSize + 1;
             typename Deque<T>::Node *newPNode = lhs._pNode - bufferNumDelta;
             typename Deque<T>::Rank posInBuffer = (n - resInBuffer) % bufferSize == 0 ? 0 : bufferSize - (n - resInBuffer) % bufferSize;
             res.init(*newPNode + posInBuffer, *newPNode, *newPNode + bufferSize - 1, newPNode);
@@ -205,13 +222,12 @@ namespace CZ
         {
             typename Deque<T>::Rank bufferSize = lhs._last - lhs._first + 1;
             typename Deque<T>::Rank resInBuffer = lhs._last - lhs._cur;
-            typename Deque<T>::Rank bufferNumDelta = (n - resInBuffer) % bufferSize == 0 ?
-                (n - resInBuffer) / bufferSize : (n - resInBuffer) / bufferSize + 1;
+            typename Deque<T>::Rank bufferNumDelta = (n - resInBuffer) % bufferSize == 0 ? (n - resInBuffer) / bufferSize : (n - resInBuffer) / bufferSize + 1;
             typename Deque<T>::Node *newPNode = lhs._pNode + bufferNumDelta;
             typename Deque<T>::Rank posInBuffer = (n - resInBuffer) % bufferSize == 0 ? bufferSize - 1 : (n - resInBuffer) % bufferSize - 1;
             res.init(*newPNode + posInBuffer, *newPNode, *newPNode + bufferSize - 1, newPNode);
         }
-        
+
         return res;
     }
 

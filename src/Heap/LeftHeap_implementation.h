@@ -13,11 +13,13 @@
 #define LEFT_HEAP_IMPLEMENTATION_H
 
 #include "LeftHeap.h"
+
 #include <iostream>
 #include <cstdio>
 #include <stdexcept>
 #include "../Algorithms/Min.h"
 #include "../Algorithms/Swap.h"
+#include "../CZString/CZString.h"
 
 namespace CZ
 {
@@ -27,15 +29,21 @@ namespace CZ
     template <typename T, typename Cmp>
     template <typename It>
     LeftHeap<T, Cmp>::LeftHeap(const It &begin, const It &end, const Cmp &cmp)
-        { _build_heap(begin, end, cmp); }
+    {
+        _build_heap(begin, end, cmp);
+    }
 
     template <typename T, typename Cmp>
     LeftHeap<T, Cmp>::LeftHeap(T *begin, T *end, const Cmp &cmp)
-        { _build_heap(begin, end, cmp); }
+    {
+        _build_heap(begin, end, cmp);
+    }
 
     template <typename T, typename Cmp>
     LeftHeap<T, Cmp>::LeftHeap(const std::initializer_list<T> &l, const Cmp &cmp)
-        { _build_heap(l.begin(), l.end(), cmp); }
+    {
+        _build_heap(l.begin(), l.end(), cmp);
+    }
 
     template <typename T, typename Cmp>
     template <typename It>
@@ -53,10 +61,7 @@ namespace CZ
     inline typename LeftHeap<T, Cmp>::Rank LeftHeap<T, Cmp>::size() const { return _T.size(); }
 
     template <typename T, typename Cmp>
-    inline bool LeftHeap<T, Cmp>::empty() const { return size() == 0; }
-
-    template <typename T, typename Cmp>
-    inline const T& LeftHeap<T, Cmp>::top() const { return _T.root()->data().key(); }
+    inline const T &LeftHeap<T, Cmp>::top() const { return _T.root()->data().key(); }
 
     template <typename T, typename Cmp>
     typename LeftHeap<T, Cmp>::Rank LeftHeap<T, Cmp>::_get_npl(BinTreeNode<T> *node) const
@@ -70,11 +75,13 @@ namespace CZ
     }
 
     template <typename T, typename Cmp>
-    LeftHeap<T, Cmp>& LeftHeap<T, Cmp>::merge(LeftHeap<T, Cmp> &lHeap1, LeftHeap<T, Cmp> &lHeap2,
-        const Cmp &cmp)
+    LeftHeap<T, Cmp> &LeftHeap<T, Cmp>::merge(LeftHeap<T, Cmp> &lHeap1, LeftHeap<T, Cmp> &lHeap2,
+                                              const Cmp &cmp)
     {
-        if (lHeap1.empty()) return lHeap2;
-        if (lHeap2.empty()) return lHeap1;
+        if (lHeap1.empty())
+            return lHeap2;
+        if (lHeap2.empty())
+            return lHeap1;
 
         if (cmp(lHeap1.top(), lHeap2.top()))
         {
@@ -92,12 +99,14 @@ namespace CZ
     }
 
     template <typename T, typename Cmp>
-    BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>>*
+    BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *
     LeftHeap<T, Cmp>::_do_merge(BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *a,
-        BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *b, const Cmp &cmp)
+                                BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *b, const Cmp &cmp)
     {
-        if (!a) return b;
-        if (!b) return a;
+        if (!a)
+            return b;
+        if (!b)
+            return a;
 
         if (cmp(a->data().key(), b->data().key()))
         {
@@ -110,7 +119,7 @@ namespace CZ
 
         if (!a->left_child() ||
             (a->right_child() &&
-                (a->left_child()->data().value() < a->right_child()->data().value())))
+             (a->left_child()->data().value() < a->right_child()->data().value())))
         {
             // 保证右子堆的npl不大
             Swap(a->left_child(), a->right_child());
@@ -123,15 +132,17 @@ namespace CZ
     template <typename T, typename Cmp>
     void LeftHeap<T, Cmp>::pop(const Cmp &cmp)
     {
-        if (empty())
+        if (this->empty())
         {
             printf("Error from LeftHeap pop: empty LeftHeap cannot pop\n");
             throw std::exception();
         }
 
         BinTreeNode<KVPair<T, Rank>> *lr = _T.root()->left_child(), *rr = _T.root()->right_child();
-        if (lr) lr->father() = nullptr;
-        if (rr) rr->father() = nullptr;
+        if (lr)
+            lr->father() = nullptr;
+        if (rr)
+            rr->father() = nullptr;
         delete _T.root();
 
         BinTreeNode<KVPair<T, Rank>> *r = _do_merge(lr, rr, cmp);
@@ -154,6 +165,32 @@ namespace CZ
         printf("for LeftHeap %s, it contains a BinTree\n", name);
         _T.print_info("_T");
         return;
+    }
+
+    template <typename T, typename Cmp>
+    inline void LeftHeap<T, Cmp>::clear()
+    {
+        _T.clear();
+    }
+
+    template <typename T, typename Cmp>
+    HashRank LeftHeap<T, Cmp>::hash() const
+    {
+        return (Hash<CZString>()(get_entity_name()) + _T.hash()) % CZ_MAX_HASH_VALUE;
+    }
+
+    template <typename T, typename Cmp>
+    const char *LeftHeap<T, Cmp>::c_str() const
+    {
+        std::ostringstream oss;
+        oss << this->get_entity_name() << "[" << _T << "]";
+        return this->get_c_str_from_stream(oss);
+    }
+
+    template <typename T, typename Cmp>
+    const char *LeftHeap<T, Cmp>::get_entity_name() const
+    {
+        return "LeftHeap";
     }
 } // CZ
 

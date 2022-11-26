@@ -31,7 +31,7 @@ namespace CZ
 
     template <typename T>
     inline BSTNode<T>* BST<T>::root() const
-    { return reinterpret_cast<BSTNode<T>*>(BinTree<T>::root()); }
+    { return static_cast<BSTNode<T>*>(BinTree<T>::root()); }
     template <typename T>
     inline BSTNode<T>*& BST<T>::root()
     { return (BSTNode<T>*&)(BinTree<T>::root()); }
@@ -141,7 +141,7 @@ namespace CZ
 
     template <typename T>
     inline BSTNode<T>* BST<T>::secede(BSTNode<T> *node)
-    { return reinterpret_cast<BSTNode<T>*>(BinTree<T>::secede(node)); }
+    { return static_cast<BSTNode<T>*>(BinTree<T>::secede(node)); }
 
     template <typename T>
     BSTNode<T>* BST<T>::secede(const T &data)
@@ -165,7 +165,7 @@ namespace CZ
 
     template <typename T>
     inline BSTNode<T>* BST<T>::rotate_at(BSTNode<T> *v)
-    { return reinterpret_cast<BSTNode<T>*>(BinTree<T>::rotate_at(v)); }
+    { return static_cast<BSTNode<T>*>(BinTree<T>::rotate_at(v)); }
 
     template <typename T>
     BSTNode<T>* BST<T>::remove_at(BSTNode<T> *&target, BSTNode<T> *&hot)
@@ -299,7 +299,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline const char *BST<T>::get_entity_name() const
+    const char *BST<T>::get_entity_name() const
     {
         return "BST";
     }

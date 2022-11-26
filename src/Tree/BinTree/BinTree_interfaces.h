@@ -18,7 +18,7 @@ namespace CZ
 {
     template <typename T>
     inline BinTreeNode<T>* BinTree<T>::root() const
-    { return reinterpret_cast<BinTreeNode<T>*>(Tree<T>::root()); }
+    { return static_cast<BinTreeNode<T>*>(Tree<T>::root()); }
 
     template <typename T>
     inline BinTreeNode<T>*& BinTree<T>::root()
@@ -29,7 +29,7 @@ namespace CZ
     { return Tree<T>::equivalent(lhs, rhs); }
 
     template <typename T>
-    inline const char *BinTree<T>::get_entity_name() const
+    const char *BinTree<T>::get_entity_name() const
     {
         return "BinTree";
     }

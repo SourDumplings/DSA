@@ -146,7 +146,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline const char *UnionFindSet<T>::get_entity_name() const
+    const char *UnionFindSet<T>::get_entity_name() const
     {
         return "UnionFindSet";
     }

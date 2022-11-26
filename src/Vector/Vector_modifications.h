@@ -13,6 +13,8 @@ Vector类模板的动态操作方法
 #define VECTOR_MODIFICATIONS_H
 
 #include "Vector.h"
+
+#include "../Algorithms/Swap.h"
 #include <stdexcept>
 #include <utility>
 
@@ -264,6 +266,15 @@ namespace CZ
         _size -= k;
         shrink();
         return;
+    }
+
+    template <typename T>
+    void Vector<T>::reverse()
+    {
+        for (Rank i = 0; i < _size / 2; ++i)
+        {
+            Swap(_elem[i], _elem[_size - i - 1]);
+        }
     }
 }
 

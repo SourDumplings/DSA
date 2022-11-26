@@ -155,7 +155,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline const char *BTree<T>::get_entity_name() const
+    const char *BTree<T>::get_entity_name() const
     {
         return "BTree";
     }

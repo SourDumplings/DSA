@@ -29,6 +29,8 @@ int main(int argc, char const *argv[])
         bit.add(i, i+1);
     }
     bit.print_info("bit");
+    cout << "bit: " << bit << endl;
+    cout << "bit.hash(): " << bit.hash() << endl;
     for (int32_t i = 0; i < 11; ++i)
     {
         printf("The first %d elements' sum is %d\n", i, bit.sum(i));

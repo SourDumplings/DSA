@@ -31,10 +31,10 @@ namespace CZ
     inline AVLTreeNode<T>*& AVLTree<T>::root() { return (AVLTreeNode<T>*&)(BST<T>::root()); }
     template <typename T>
     inline AVLTreeNode<T>* AVLTree<T>::root() const
-    { return reinterpret_cast<AVLTreeNode<T>*>(BST<T>::root()); }
+    { return static_cast<AVLTreeNode<T>*>(BST<T>::root()); }
     template <typename T>
     inline AVLTreeNode<T>* AVLTree<T>::search(const T &data) const
-    { return reinterpret_cast<AVLTreeNode<T>*>(BST<T>::search(data)); }
+    { return static_cast<AVLTreeNode<T>*>(BST<T>::search(data)); }
 
     template <typename T>
     void AVLTree<T>::print_info(const char *name) const
@@ -152,7 +152,7 @@ namespace CZ
 
         AVLTreeNode<T> *hot = node->father();
         BST<T>::remove_at((BSTNode<T>*&)(node), (BSTNode<T>*&)(hot));
-        for (AVLTreeNode<T> *f = reinterpret_cast<AVLTreeNode<T>*>(hot); f; f = f->father())
+        for (AVLTreeNode<T> *f = static_cast<AVLTreeNode<T>*>(hot); f; f = f->father())
         {
             if (!f->is_balance())
             {
@@ -184,7 +184,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline const char *AVLTree<T>::get_entity_name() const
+    const char *AVLTree<T>::get_entity_name() const
     {
         return "AVLTree";
     }

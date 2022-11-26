@@ -50,10 +50,10 @@ namespace CZ
         virtual void print_info(const char *name = "") const;
 
         // 数据访问接口
-        Iterator begin();
-        Iterator begin() const;
-        Iterator end();
-        Iterator end() const;
+        Iterator begin() override;
+        Iterator begin() const override;
+        Iterator end() override;
+        Iterator end() const override;
         Rank size() const override;
         const T &back() const;
         T &back();

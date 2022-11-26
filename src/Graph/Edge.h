@@ -13,30 +13,55 @@
 #define EDGE_H
 
 #include <iostream>
+#include "../Base/AbstractBaseEntity.h"
+#include "../CZString/CZString.h"
 
 namespace CZ
 {
-    template <typename T> class Edge;
-    template <typename ED, typename VD> class Graph;
+    template <typename T>
+    class Edge;
+    template <typename ED, typename VD>
+    class Graph;
 
     template <typename T>
-    class Edge
+    class Edge : public AbstractBaseEntity
     {
-        template <typename ED, typename VD> friend class Graph;
+        template <typename ED, typename VD>
+        friend class Graph;
+
     public:
         using Rank = uint32_t;
 
-        Edge(Rank s_ = 0, Rank d_ = 0, const T &data_ = T()):
-            _s(s_), _d(d_), _data(data_), _valid(false) {}
+        Edge(Rank s_ = 0, Rank d_ = 0, const T &data_ = T()) : _s(s_), _d(d_), _data(data_), _valid(false) {}
 
         Rank source() const { return _s; }
         Rank destination() const { return _d; }
-        const T& data() const { return _data; }
-        T& data() { return _data; }
+        const T &data() const { return _data; }
+        T &data() { return _data; }
 
-        void set_valid() { _valid = true; return; }
-        void set_invalid() { _valid = false; return; }
+        void set_valid()
+        {
+            _valid = true;
+            return;
+        }
+        void set_invalid()
+        {
+            _valid = false;
+            return;
+        }
         bool valid() const { return _valid; }
+
+        const char *c_str() const override;
+
+        HashRank hash() const override
+        {
+            return (Hash<CZString>()(get_entity_name()) + Hash<T>()(_data) + Hash<Rank>()(_s) + Hash<Rank>()(_d) + Hash<bool>()(_valid)) % CZ_MAX_HASH_VALUE;
+        }
+
+        const char *get_entity_name() const override
+        {
+            return "Edge";
+        }
 
     private:
         Rank _s, _d;
@@ -45,12 +70,12 @@ namespace CZ
     };
 
     template <typename T>
-    std::ostream& operator<<(std::ostream &os, const Edge<T> &e)
+    const char *Edge<T>::c_str() const
     {
-        os << e.data() << "(" << e.source() << ", " << e.destination() << ")";
-        return os;
+        std::ostringstream oss;
+        oss << this->get_entity_name() << "(" << source() << ", " << destination() << ")";
+        return this->get_c_str_from_stream(oss);
     }
 } // CZ
 
 #endif // EDGE_H
-

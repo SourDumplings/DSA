@@ -44,39 +44,39 @@ namespace CZ
         }
 
         AVLTreeNode* left_child() const
-        { return reinterpret_cast<AVLTreeNode<T>*>(BSTNode<T>::left_child()); }
+        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::left_child()); }
         AVLTreeNode*& left_child()
         { return (AVLTreeNode*&)(BSTNode<T>::left_child()); }
         AVLTreeNode* right_child() const
-        { return reinterpret_cast<AVLTreeNode<T>*>(BSTNode<T>::right_child()); }
+        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::right_child()); }
         AVLTreeNode*& right_child()
         { return (AVLTreeNode*&)(BSTNode<T>::right_child()); }
         AVLTreeNode* brother() const
-        { return reinterpret_cast<AVLTreeNode<T>*>(BSTNode<T>::brother()); }
+        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::brother()); }
         AVLTreeNode* uncle() const
-        { return reinterpret_cast<AVLTreeNode<T>*>(BSTNode<T>::uncle()); }
+        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::uncle()); }
         // 中序遍历下的直接前驱和后继
         AVLTreeNode* prev() const
-        { return reinterpret_cast<AVLTreeNode<T>*>(BSTNode<T>::prev()); }
+        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::prev()); }
         AVLTreeNode* next() const
-        { return reinterpret_cast<AVLTreeNode<T>*>(BSTNode<T>::next()); }
+        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::next()); }
         AVLTreeNode*& father()
         { return (AVLTreeNode<T>*&)(BSTNode<T>::father()); }
         AVLTreeNode* father() const
-        { return reinterpret_cast<AVLTreeNode<T>*>(BSTNode<T>::father()); }
+        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::father()); }
 
         const char *get_entity_name() const override { return "AVLTreeNode"; }
 
     private:
         // 树结点本身不负责旋转，旋转交给AVL树类模板，故直接继承BST的算法即可
         AVLTreeNode* remove_child(AVLTreeNode *node)
-        { return reinterpret_cast<AVLTreeNode<T>*>(BSTNode<T>::remove_child(node)); }
+        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::remove_child(node)); }
         AVLTreeNode* remove_child(const T &data)
-        { return reinterpret_cast<AVLTreeNode<T>*>(BSTNode<T>::remove_child(data)); }
+        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::remove_child(data)); }
         AVLTreeNode* zig() // 顺时针旋转, 返回旋转后的原来位置的结点指针
-        { return reinterpret_cast<AVLTreeNode<T>*>(BSTNode<T>::zig()); }
+        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::zig()); }
         AVLTreeNode* zag() // 逆时针旋转, 返回旋转后的原来位置的结点指针
-        { return reinterpret_cast<AVLTreeNode<T>*>(BSTNode<T>::zag()); }
+        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::zag()); }
         void remove_left_child() { return BSTNode<T>::remove_left_child(); }
         void remove_right_child() { return BSTNode<T>::remove_right_child(); }
     };

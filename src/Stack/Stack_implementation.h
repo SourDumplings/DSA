@@ -105,13 +105,13 @@ namespace CZ
     }
 
     template <typename T, typename C>
-    inline const char *Stack<T, C>::get_entity_name() const
+    const char *Stack<T, C>::get_entity_name() const
     {
         return "Stack";
     }
 
     template <typename T, typename C>
-    inline HashRank Stack<T, C>::hash() const
+    HashRank Stack<T, C>::hash() const
     {
         return (CZString(get_entity_name()).hash() + _data.hash()) % CZ_MAX_HASH_VALUE;
     }

@@ -21,10 +21,10 @@ namespace CZ
     { return (RedBlackTreeNode<T>*&)(BST<T>::root()); }
     template <typename T>
     inline RedBlackTreeNode<T>* RedBlackTree<T>::root() const
-    { return reinterpret_cast<RedBlackTreeNode<T>*>(BST<T>::root()); }
+    { return static_cast<RedBlackTreeNode<T>*>(BST<T>::root()); }
     template <typename T>
     inline RedBlackTreeNode<T>* RedBlackTree<T>::search(const T &data) const
-    { return reinterpret_cast<RedBlackTreeNode<T>*>(BST<T>::search(data)); }
+    { return static_cast<RedBlackTreeNode<T>*>(BST<T>::search(data)); }
 
     template <typename T>
     inline bool RedBlackTree<T>::is_red(RedBlackTreeNode<T> *v) const { return v ? v->_red : false; }

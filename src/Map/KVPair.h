@@ -88,7 +88,7 @@ namespace CZ
         template <typename KD, typename VD>
         KVPair<K, V> &operator=(const KVPair<KD, VD> &p)
         {
-            if (reinterpret_cast<const KVPair<KD, VD> *>(this) != &p)
+            if (static_cast<const KVPair<KD, VD> *>(this) != &p)
             {
                 _key = p.key();
                 _value = p.value();
@@ -106,13 +106,13 @@ namespace CZ
     };
 
     template <typename K, typename V>
-    inline const char *KVPair<K, V>::get_entity_name() const
+    const char *KVPair<K, V>::get_entity_name() const
     {
         return "KVPair";
     }
 
     template <typename K, typename V>
-    inline HashRank KVPair<K, V>::hash() const
+    HashRank KVPair<K, V>::hash() const
     {
         return (Hash<CZString>()(get_entity_name()) + Hash<K>()(_key) + Hash<V>()(_value)) % CZ_MAX_HASH_VALUE;
     }

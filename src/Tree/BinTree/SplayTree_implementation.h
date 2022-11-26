@@ -31,7 +31,7 @@ namespace CZ
 
     template <typename T>
     inline SplayTreeNode<T>* SplayTree<T>::root() const
-    { return reinterpret_cast<SplayTreeNode<T>*>(BST<T>::root()); }
+    { return static_cast<SplayTreeNode<T>*>(BST<T>::root()); }
     template <typename T>
     inline SplayTreeNode<T>*& SplayTree<T>::root()
     { return (SplayTreeNode<T>*&)(BST<T>::root()); }
@@ -105,7 +105,7 @@ namespace CZ
     template <typename T>
     SplayTreeNode<T>* SplayTree<T>::search(const T &data) const
     {
-        SplayTreeNode<T> *v = reinterpret_cast<SplayTreeNode<T>*>(BST<T>::search(data));
+        SplayTreeNode<T> *v = static_cast<SplayTreeNode<T>*>(BST<T>::search(data));
         try
         {
             if (!v)
@@ -180,14 +180,14 @@ namespace CZ
 
     template <typename T>
     inline SplayTreeNode<T>* SplayTree<T>::remove(const T &data)
-    { return remove(reinterpret_cast<SplayTreeNode<T>*>(BST<T>::search(data))); }
+    { return remove(static_cast<SplayTreeNode<T>*>(BST<T>::search(data))); }
 
     template <typename T>
     inline SplayTreeNode<T>* SplayTree<T>::secede(SplayTreeNode<T> *node)
-    { return reinterpret_cast<SplayTreeNode<T>*>(BST<T>::secede(node)); }
+    { return static_cast<SplayTreeNode<T>*>(BST<T>::secede(node)); }
     template <typename T>
     inline SplayTreeNode<T>* SplayTree<T>::secede(const T &data)
-    { return reinterpret_cast<SplayTreeNode<T>*>(BST<T>::secede(data)); }
+    { return static_cast<SplayTreeNode<T>*>(BST<T>::secede(data)); }
 
     template <typename T>
     const char *SplayTree<T>::get_entity_name() const

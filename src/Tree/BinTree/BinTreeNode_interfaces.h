@@ -18,7 +18,7 @@ namespace CZ
 {
     template <typename T>
     inline BinTreeNode<T>* BinTreeNode<T>::left_child() const
-    { return reinterpret_cast<BinTreeNode<T>*>(this->_children.front()); }
+    { return static_cast<BinTreeNode<T>*>(this->_children.front()); }
 
     template <typename T>
     inline BinTreeNode<T>*& BinTreeNode<T>::left_child()
@@ -26,7 +26,7 @@ namespace CZ
 
     template <typename T>
     inline BinTreeNode<T>* BinTreeNode<T>::right_child() const
-    { return reinterpret_cast<BinTreeNode<T>*>(this->_children.back()); }
+    { return static_cast<BinTreeNode<T>*>(this->_children.back()); }
 
     template <typename T>
     inline BinTreeNode<T>*& BinTreeNode<T>::right_child()
@@ -38,7 +38,7 @@ namespace CZ
 
     template <typename T>
     inline BinTreeNode<T>* BinTreeNode<T>::father() const
-    { return reinterpret_cast<BinTreeNode<T>*>(TreeNode<T>::father()); }
+    { return static_cast<BinTreeNode<T>*>(TreeNode<T>::father()); }
 
     template <typename T>
     BinTreeNode<T>* BinTreeNode<T>::brother() const
@@ -134,7 +134,7 @@ namespace CZ
     { return TreeNode<T>::equivalent(lhs, rhs); }
 
     template <typename T>
-    inline const char *BinTreeNode<T>::get_entity_name() const
+    const char *BinTreeNode<T>::get_entity_name() const
     {
         return "BinTreeNode";
     }

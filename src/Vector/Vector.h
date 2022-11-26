@@ -78,6 +78,7 @@ namespace CZ
         void assign(const Iterator &begin, const Iterator &end);
         // 删除所有值为value的元素
         void remove(const T &value);
+        void reverse();
 
         // 操作符函数
         T& operator[](Rank i);

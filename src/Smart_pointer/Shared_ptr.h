@@ -211,7 +211,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline const char *Shared_ptr<T>::get_entity_name() const
+    const char *Shared_ptr<T>::get_entity_name() const
     {
         return "Shared_ptr";
     }

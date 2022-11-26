@@ -38,9 +38,10 @@ namespace CZ
     {
         std::ostringstream oss;
         oss << this->get_entity_name() << "[";
-        for (It it = begin(); it != end(); ++it)
+        It b = begin(), e = end();
+        for (It it = b; it != e; ++it)
         {
-            if (it != begin())
+            if (it != b)
             {
                 oss << ", ";
             }
@@ -59,7 +60,8 @@ namespace CZ
         {
             hashValue = (hashValue + Hash<char>()(*p)) % CZ_MAX_HASH_VALUE;
         }
-        for (It it = begin(); it != end(); ++it)
+        It e = end();
+        for (It it = begin(); it != e; ++it)
         {
             hashValue = (hashValue + Hash<T>()(*it)) % CZ_MAX_HASH_VALUE;
         }

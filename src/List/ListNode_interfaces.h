@@ -31,7 +31,7 @@ namespace CZ
     inline const T &ListNode<T>::data() const { return _data; }
 
     template <typename T>
-    inline const char *ListNode<T>::get_entity_name() const
+    const char *ListNode<T>::get_entity_name() const
     {
         return "ListNode";
     }

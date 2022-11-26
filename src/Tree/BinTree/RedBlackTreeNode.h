@@ -30,26 +30,26 @@ namespace CZ
             BSTNode<T>(data, father_), _red(true), _blackHeight(0) {}
 
         RedBlackTreeNode* left_child() const
-        { return reinterpret_cast<RedBlackTreeNode<T>*>(BSTNode<T>::left_child()); }
+        { return static_cast<RedBlackTreeNode<T>*>(BSTNode<T>::left_child()); }
         RedBlackTreeNode*& left_child()
         { return (RedBlackTreeNode*&)(BSTNode<T>::left_child()); }
         RedBlackTreeNode* right_child() const
-        { return reinterpret_cast<RedBlackTreeNode<T>*>(BSTNode<T>::right_child()); }
+        { return static_cast<RedBlackTreeNode<T>*>(BSTNode<T>::right_child()); }
         RedBlackTreeNode*& right_child()
         { return (RedBlackTreeNode*&)(BSTNode<T>::right_child()); }
         RedBlackTreeNode* brother() const
-        { return reinterpret_cast<RedBlackTreeNode<T>*>(BSTNode<T>::brother()); }
+        { return static_cast<RedBlackTreeNode<T>*>(BSTNode<T>::brother()); }
         RedBlackTreeNode* uncle() const
-        { return reinterpret_cast<RedBlackTreeNode<T>*>(BSTNode<T>::uncle()); }
+        { return static_cast<RedBlackTreeNode<T>*>(BSTNode<T>::uncle()); }
         // 中序遍历下的直接前驱和后继
         RedBlackTreeNode* prev() const
-        { return reinterpret_cast<RedBlackTreeNode<T>*>(BSTNode<T>::prev()); }
+        { return static_cast<RedBlackTreeNode<T>*>(BSTNode<T>::prev()); }
         RedBlackTreeNode* next() const
-        { return reinterpret_cast<RedBlackTreeNode<T>*>(BSTNode<T>::next()); }
+        { return static_cast<RedBlackTreeNode<T>*>(BSTNode<T>::next()); }
         RedBlackTreeNode*& father()
         { return (RedBlackTreeNode<T>*&)(BSTNode<T>::father()); }
         RedBlackTreeNode* father() const
-        { return reinterpret_cast<RedBlackTreeNode<T>*>(BSTNode<T>::father()); }
+        { return static_cast<RedBlackTreeNode<T>*>(BSTNode<T>::father()); }
 
         const char *get_entity_name() const override
         {
@@ -59,13 +59,13 @@ namespace CZ
     private:
         // 树结点本身不负责旋转，旋转交给AVL树类模板，故直接继承BST的算法即可
         RedBlackTreeNode* remove_child(RedBlackTreeNode *node)
-        { return reinterpret_cast<RedBlackTreeNode<T>*>(BSTNode<T>::remove_child(node)); }
+        { return static_cast<RedBlackTreeNode<T>*>(BSTNode<T>::remove_child(node)); }
         RedBlackTreeNode* remove_child(const T &data)
-        { return reinterpret_cast<RedBlackTreeNode<T>*>(BSTNode<T>::remove_child(data)); }
+        { return static_cast<RedBlackTreeNode<T>*>(BSTNode<T>::remove_child(data)); }
         RedBlackTreeNode* zig() // 顺时针旋转, 返回旋转后的原来位置的结点指针
-        { return reinterpret_cast<RedBlackTreeNode<T>*>(BSTNode<T>::zig()); }
+        { return static_cast<RedBlackTreeNode<T>*>(BSTNode<T>::zig()); }
         RedBlackTreeNode* zag() // 逆时针旋转, 返回旋转后的原来位置的结点指针
-        { return reinterpret_cast<RedBlackTreeNode<T>*>(BSTNode<T>::zag()); }
+        { return static_cast<RedBlackTreeNode<T>*>(BSTNode<T>::zag()); }
         void remove_left_child() { return BSTNode<T>::remove_left_child(); }
         void remove_right_child() { return BSTNode<T>::remove_right_child(); }
 

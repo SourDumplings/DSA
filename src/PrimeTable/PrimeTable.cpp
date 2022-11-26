@@ -143,12 +143,12 @@ namespace CZ
         return this->get_c_str_from_stream(oss);
     }
 
-    inline HashRank PrimeTable::hash() const
+    HashRank PrimeTable::hash() const
     {
         return (Hash<CZString>()(get_entity_name()) + _table.hash()) % CZ_MAX_HASH_VALUE;
     }
 
-    inline const char *PrimeTable::get_entity_name() const
+    const char *PrimeTable::get_entity_name() const
     {
         return "PrimeTable";
     }

@@ -28,21 +28,21 @@ int main(int argc, char const *argv[])
     // Vector<int> v4(v3);
     // Vector<int> v5(a, a+3);
     // Vector<int> v6({1, 4, 7, 8, 3, 2, 8});
-    
+
     // printf("v6.at(1) = %d\n", v6.at(1));
     // printf("v6.at(4) = %d\n", v6.at(4));
     // printf("v6.at(-1) = %d\n", v6.at(-1));
     // printf("v6.at(-3) = %d\n", v6.at(-3));
     // printf("v3.at(1) = %d\n", v3.at(1));
 
-    // // 测试 c_str 和 hash
+    // 测试 c_str 和 hash
     // printf("v6.c_str() = %s, v6.hash() = %lu\n", v6.c_str(), v6.hash());
     // std::cout << "v2: " << v2 << std::endl;
     // std::cout << "v5: " << v5 << std::endl;
     // std::cout << "v6.c_str(): " << v6.c_str() << std::endl;
     // std::cout << "v6: " << v6 << std::endl;
 
-    // Vector<string> vs1(20), vs2(3, "abc"), vs3({"123", "abx", "sada1"});
+    Vector<string> vs1(20), vs2(3, "abc"), vs3({"123", "abx", "sada1"});
 
     // v1.print_info("v1");
     // v2.print_info("v2");
@@ -50,9 +50,17 @@ int main(int argc, char const *argv[])
     // v4.print_info("v4");
     // v5.print_info("v5");
     // v6.print_info("v6");
-    // vs1.print_info("vs1");
-    // vs2.print_info("vs2");
-    // vs3.print_info("vs3");
+    vs1.print_info("vs1");
+    std::cout << "vs1: " << vs1 << std::endl;
+    std::cout << "vs1.hash(): " << vs1.hash() << std::endl;
+
+    vs2.print_info("vs2");
+    std::cout << "vs2: " << vs2 << std::endl;
+    std::cout << "vs2.hash(): " << vs2.hash() << std::endl;
+
+    vs3.print_info("vs3");
+    std::cout << "vs3: " << vs3 << std::endl;
+    std::cout << "vs3.hash(): " << vs3.hash() << std::endl;
 
     // Vector<int> v7(std::move(v6));
     // Vector<string> vs4(std::move(vs3));
@@ -72,47 +80,46 @@ int main(int argc, char const *argv[])
     // printf("finish\n");
 
     // 测试迭代器函数和比较函数
-    Vector<int> v1({1, 2, 3, 4, 5}), v2({1, 2, 3, 4}), v3({3, 6, 7}), v4({3, 6, 7});
-    Vector<string> vs1({"abc", "def"}), vs2({"abc", "abe"}), vs3({"abc"}),
-    vs4({"abc", "def"});
+    // Vector<int> v1({1, 2, 3, 4, 5}), v2({1, 2, 3, 4}), v3({3, 6, 7}), v4({3, 6, 7});
+    // Vector<string> vs1({"abc", "def"}), vs2({"abc", "abe"}), vs3({"abc"}),
+    // vs4({"abc", "def"});
 
-    printf("v1 has: ");
-    for (Vector<int>::Iterator it = v1.begin(); it < v1.end(); ++it)
-    {
-        printf("%d ", *it);
-    }
-    putchar('\n');
+    // printf("v1 has: ");
+    // for (Vector<int>::Iterator it = v1.begin(); it < v1.end(); ++it)
+    // {
+    //     printf("%d ", *it);
+    // }
+    // putchar('\n');
 
-    printf("\nv2 has: ");
-    for (auto it = v2.begin(); it < v2.end(); ++it)
-    {
-        printf("%d ", *it);
-    }
-    putchar('\n');
+    // printf("\nv2 has: ");
+    // for (auto it = v2.begin(); it < v2.end(); ++it)
+    // {
+    //     printf("%d ", *it);
+    // }
+    // putchar('\n');
 
-    printf("\nvs1 has: ");
-    for (auto &s : vs1)
-    {
-        std::cout << s << " ";
-    }
-    putchar('\n');
+    // printf("\nvs1 has: ");
+    // for (auto &s : vs1)
+    // {
+    //     std::cout << s << " ";
+    // }
+    // putchar('\n');
 
-    putchar('\n');
-    printf("v1 == v2? %s\n", v1 == v2 ? "true" : "false");
-    printf("v2 != v3? %s\n", v2 != v3 ? "true" : "false");
-    printf("v3 == v4? %s\n", v3 == v4 ? "true" : "false");
-    printf("v3 <= v4? %s\n", v3 <= v4 ? "true" : "false");
-    printf("v3 < v4? %s\n", v3 < v4 ? "true" : "false");
-    printf("v1 <= v2? %s\n", v1 <= v2 ? "true" : "false");
-    printf("v1 > v2? %s\n", v1 > v2 ? "true" : "false");
-    printf("v2 < v3? %s\n", v2 < v3 ? "true" : "false");
-    printf("vs1 == vs4? %s\n", vs1 == vs4 ? "true" : "false");
-    printf("vs1 == vs2? %s\n", vs1 == vs2 ? "true" : "false");
-    printf("vs1 >= vs3? %s\n", vs1 >= vs3 ? "true" : "false");
-    printf("vs3 >= vs4? %s\n", vs3 >= vs4 ? "true" : "false");
-    printf("vs2 < vs1? %s\n", vs2 < vs1 ? "true" : "false");
-    putchar('\n');
-
+    // putchar('\n');
+    // printf("v1 == v2? %s\n", v1 == v2 ? "true" : "false");
+    // printf("v2 != v3? %s\n", v2 != v3 ? "true" : "false");
+    // printf("v3 == v4? %s\n", v3 == v4 ? "true" : "false");
+    // printf("v3 <= v4? %s\n", v3 <= v4 ? "true" : "false");
+    // printf("v3 < v4? %s\n", v3 < v4 ? "true" : "false");
+    // printf("v1 <= v2? %s\n", v1 <= v2 ? "true" : "false");
+    // printf("v1 > v2? %s\n", v1 > v2 ? "true" : "false");
+    // printf("v2 < v3? %s\n", v2 < v3 ? "true" : "false");
+    // printf("vs1 == vs4? %s\n", vs1 == vs4 ? "true" : "false");
+    // printf("vs1 == vs2? %s\n", vs1 == vs2 ? "true" : "false");
+    // printf("vs1 >= vs3? %s\n", vs1 >= vs3 ? "true" : "false");
+    // printf("vs3 >= vs4? %s\n", vs3 >= vs4 ? "true" : "false");
+    // printf("vs2 < vs1? %s\n", vs2 < vs1 ? "true" : "false");
+    // putchar('\n');
 
     // 测试赋值操作符和索引操作符
     // Vector<int> v1({1, 2, 3}), v2({2, 3, 5}), v3({6, 7});
@@ -142,8 +149,6 @@ int main(int argc, char const *argv[])
     // printf("v1[0] = %d, v1[1] = %d\n", v1[0], v1[1]);
     // printf("vs1[0] = %s, vs1[1] = %s\n", vs1[0].c_str(), vs1[1].c_str());
     // // printf("v2[3] = %d\n", v2[3]);
-
-
 
     // 测试动态操作
     // Vector<char> vc1({'a', 'b', 'c'});
@@ -206,4 +211,3 @@ int main(int argc, char const *argv[])
     // vs2.print_info("vs2");
     return 0;
 }
-

@@ -149,13 +149,13 @@ namespace CZ
     }
 
     template <typename T, typename Cmp>
-    inline const char *Heap<T, Cmp>::get_entity_name() const
+    const char *Heap<T, Cmp>::get_entity_name() const
     {
         return "Heap";
     }
 
     template <typename T, typename Cmp>
-    inline HashRank Heap<T, Cmp>::hash() const
+    HashRank Heap<T, Cmp>::hash() const
     {
         return (CZString(get_entity_name()).hash() + _data.hash()) % CZ_MAX_HASH_VALUE;
     }

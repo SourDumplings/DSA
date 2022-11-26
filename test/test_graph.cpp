@@ -205,6 +205,8 @@ int main(int argc, char const *argv[])
     G2.add_edge(2, 6, 2);
     G2.add_edge(4, 5, 3);
     G2.print_info("G2");
+    cout << "G2: " << G2 << endl;
+    cout << "G2.hash(): " << G2.hash() << endl;
     // // // G2.Dijkstra(2, dist, path, 99999, 0, true);
     // // G2.Dijkstra(2, dist, path, 99999, 0, false);
     // // dist.print_info("dist");

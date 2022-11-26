@@ -29,40 +29,40 @@ namespace CZ
     // 继承来的方法的一些小修改
     template <typename T>
     inline BSTNode<T>* BSTNode<T>::left_child() const
-    { return reinterpret_cast<BSTNode*>(BinTreeNode<T>::left_child()); }
+    { return static_cast<BSTNode*>(BinTreeNode<T>::left_child()); }
     template <typename T>
     inline BSTNode<T>*&BSTNode<T>::left_child()
     { return (BSTNode*&)(BinTreeNode<T>::left_child()); }
     template <typename T>
     inline BSTNode<T>* BSTNode<T>::right_child() const
-    { return reinterpret_cast<BSTNode*>(BinTreeNode<T>::right_child()); }
+    { return static_cast<BSTNode*>(BinTreeNode<T>::right_child()); }
     template <typename T>
     inline BSTNode<T>*&BSTNode<T>::right_child()
     { return (BSTNode*&)(BinTreeNode<T>::right_child()); }
     template <typename T>
     inline BSTNode<T>* BSTNode<T>::brother() const
-    { return reinterpret_cast<BSTNode*>(BinTreeNode<T>::brother()); }
+    { return static_cast<BSTNode*>(BinTreeNode<T>::brother()); }
     template <typename T>
     inline BSTNode<T>* BSTNode<T>::uncle() const
-    { return reinterpret_cast<BSTNode*>(BinTreeNode<T>::uncle()); }
+    { return static_cast<BSTNode*>(BinTreeNode<T>::uncle()); }
     template <typename T>
     inline BSTNode<T>* BSTNode<T>::prev() const
-    { return reinterpret_cast<BSTNode*>(BinTreeNode<T>::prev()); }
+    { return static_cast<BSTNode*>(BinTreeNode<T>::prev()); }
     template <typename T>
     inline BSTNode<T>* BSTNode<T>::next() const
-    { return reinterpret_cast<BSTNode*>(BinTreeNode<T>::next()); }
+    { return static_cast<BSTNode*>(BinTreeNode<T>::next()); }
     template <typename T>
     BSTNode<T>* BSTNode<T>::zig()
-    { return reinterpret_cast<BSTNode*>(BinTreeNode<T>::zig()); }
+    { return static_cast<BSTNode*>(BinTreeNode<T>::zig()); }
     template <typename T>
     BSTNode<T>* BSTNode<T>::zag()
-    { return reinterpret_cast<BSTNode*>(BinTreeNode<T>::zag()); }
+    { return static_cast<BSTNode*>(BinTreeNode<T>::zag()); }
     template <typename T>
     inline BSTNode<T>*& BSTNode<T>::father()
     { return (BSTNode<T>*&)(BinTreeNode<T>::father()); }
     template <typename T>
     inline BSTNode<T>* BSTNode<T>::father() const
-    { return reinterpret_cast<BSTNode<T>*>(BinTreeNode<T>::father()); }
+    { return static_cast<BSTNode<T>*>(BinTreeNode<T>::father()); }
 
     template <typename T>
     inline const T& BSTNode<T>::data() const { return BinTreeNode<T>::data(); }
@@ -177,7 +177,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline const char *BSTNode<T>::get_entity_name() const
+    const char *BSTNode<T>::get_entity_name() const
     {
         return "BSTNode";
     }

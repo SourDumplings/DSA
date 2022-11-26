@@ -9,7 +9,7 @@
 ## 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：5.7.0，与 CMakeLists.txt 同步
+版本号：5.8.0，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -73,10 +73,11 @@
 21. 给 BST 增加强制 insert 的方法，例如 force_insert，能够按 key 实现替换元素，并扩展到其子类和利用其实现的容器，如 TreeSet 等
 22. 给 BST 及其依赖容器模板类，如 RBTree、TreeMap 等增加自定义比较函数的功能
 23. 添加基础基类 AbstractBaseEntity, AbstractBaseContainer, AbstractIterableContainer，AbstractSeqIterableContainer 并将容器类模板继承自其
-实现中
+已实现
 24. 对内存分配失败等情况抛异常
 25. 画出 UML 图等文档放在 doc 下
 26. 使用可变模板参数机制实现 Tuple
+27. 给析构函数加 noexcept 关键字告诉编译器其不会抛出异常，别的不抛异常的函数做同样的处理
 ## 通用算法（模板）：
 1. ### 字典序比较操作符
 2. ### 区间内最大值与最小值的查找算法

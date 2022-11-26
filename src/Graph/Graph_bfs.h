@@ -59,7 +59,7 @@ namespace CZ
             }
             else
             {
-                Vector<Edge<ED>> &eV = *reinterpret_cast<Vector<Edge<ED>>*>(_dataE[v]);
+                Vector<Edge<ED>> &eV = *static_cast<Vector<Edge<ED>>*>(_dataE[v]);
                 for (auto &e : eV)
                 {
                     Rank w = e.destination();
@@ -116,7 +116,7 @@ namespace CZ
             }
             else
             {
-                Vector<Edge<ED>> &eV = *reinterpret_cast<Vector<Edge<ED>>*>(_dataE[v]);
+                Vector<Edge<ED>> &eV = *static_cast<Vector<Edge<ED>>*>(_dataE[v]);
                 for (auto &e : eV)
                 {
                     Rank w = e.destination();

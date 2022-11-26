@@ -43,6 +43,9 @@ int main(int argc, char const *argv[])
     }
     putchar('\n');
     b.print_info("b");
+    cout << "b: " << b << endl;
+    cout << "b.hash(): " << b.hash() << endl;
+
     return 0;
 }
 

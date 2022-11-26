@@ -15,14 +15,15 @@
 #define LEFT_HEAP_H
 
 #include <functional>
+#include "../Base/AbstractBaseContainer.h"
 #include "../Tree/BinTree/BinTree.h"
 #include <initializer_list>
-#include "../Dictionary/KVPair.h"
+#include "../Map/KVPair.h"
 
 namespace CZ
 {
-    template <typename T, typename Cmp = std::less<const T&>>
-    class LeftHeap
+    template <typename T, typename Cmp = std::less<const T &>>
+    class LeftHeap : public AbstractBaseContainer<T>
     {
     public:
         using Rank = uint32_t;
@@ -34,17 +35,22 @@ namespace CZ
         LeftHeap(const It &begin, const It &end, const Cmp &cmp = Cmp());
 
         // 数据访问接口
-        Rank size() const;
-        const T& top() const;
-        bool empty() const;
+        Rank size() const override;
+        const T &top() const;
 
         // 插入和删除，基于合并操作实现
         void insert(const T &value, const Cmp &cmp = Cmp());
         void pop(const Cmp &cmp = Cmp()); // Pop会负责根结点的内存释放
+        void clear() override;
+
         // 合并，会清空右堆，返回左堆的引用
-        static LeftHeap& merge(LeftHeap &lHeap1, LeftHeap &lHeap2, const Cmp &cmp = Cmp());
+        static LeftHeap &merge(LeftHeap &lHeap1, LeftHeap &lHeap2, const Cmp &cmp = Cmp());
 
         void print_info(const char *name = "") const;
+
+        HashRank hash() const override;
+        const char *c_str() const override;
+        const char *get_entity_name() const override;
 
     private:
         // 以二叉树存储数据，每个二叉树结点还要存储其npl值
@@ -54,8 +60,8 @@ namespace CZ
         // 左式堆的npl取决于右孩子，但不意味着左孩子的高度高于右孩子
         Rank _get_npl(BinTreeNode<T> *node) const;
         // 在二叉树级别上执行合并操作，由上层调用者更新树的size
-        static BinTreeNode<KVPair<T, Rank>>* _do_merge(BinTreeNode<KVPair<T, Rank>> *a,
-            BinTreeNode<KVPair<T, Rank>> *b, const Cmp &cmp = Cmp());
+        static BinTreeNode<KVPair<T, Rank>> *_do_merge(BinTreeNode<KVPair<T, Rank>> *a,
+                                                       BinTreeNode<KVPair<T, Rank>> *b, const Cmp &cmp = Cmp());
 
         template <typename It>
         void _build_heap(const It &begin, const It &end, const Cmp &cmp = Cmp()); // floyd算法建堆还不会，用逐个插入法建堆
@@ -65,5 +71,3 @@ namespace CZ
 #include "LeftHeap_implementation.h"
 
 #endif // LEFT_HEAP_H
-
-

@@ -53,7 +53,7 @@ namespace CZ
     inline typename TreeSet<T>::Rank TreeSet<T>::size() const { return _T.size(); }
 
     template <typename T>
-    inline const char *TreeSet<T>::get_entity_name() const
+    const char *TreeSet<T>::get_entity_name() const
     {
         return "TreeSet";
     }

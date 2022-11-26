@@ -35,8 +35,6 @@ namespace CZ
         CZString(const std::string &str_);
         ~CZString() override;
 
-        void clear() override;
-
         CZString(const CZString &CZstring);
 
         void print_info(const char *name = "") const override;
@@ -62,9 +60,6 @@ namespace CZ
         CZString &operator+=(const CZString &rhs);
 
         const char *get_entity_name() const override;
-
-    private:
-        mutable char *_tempStr = nullptr;
     };
 } // CZ
 

@@ -16,7 +16,7 @@
 namespace CZ
 {
     using HashRank = uint64_t;
-    const HashRank CZ_MAX_HASH_VALUE = UINT64_MAX;
+    constexpr HashRank CZ_MAX_HASH_VALUE = UINT64_MAX;
 
     // 默认哈希算法
     template <typename T>

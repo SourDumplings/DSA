@@ -44,7 +44,7 @@ namespace CZ
             results.push_back(v);
             if (_graphType == ADJACENCY_LIST)
             {
-                Vector<Edge<ED>> eVC(*reinterpret_cast<Vector<Edge<ED>>*>(_dataE[v]));
+                Vector<Edge<ED>> eVC(*static_cast<Vector<Edge<ED>>*>(_dataE[v]));
                 Sort(eVC.begin(), eVC.end(), [] (const Edge<ED> &e1, const Edge<ED> &e2)
                     { return e1.destination() < e2.destination(); });
                 for (auto &e : eVC)

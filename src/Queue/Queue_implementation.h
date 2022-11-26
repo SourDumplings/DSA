@@ -98,13 +98,13 @@ namespace CZ
     }
 
     template <typename T, typename C>
-    inline const char *Queue<T, C>::get_entity_name() const
+    const char *Queue<T, C>::get_entity_name() const
     {
         return "Queue";
     }
 
     template <typename T, typename C>
-    inline HashRank Queue<T, C>::hash() const
+    HashRank Queue<T, C>::hash() const
     {
         return (CZString(get_entity_name()).hash() + _data.hash()) % CZ_MAX_HASH_VALUE;
     }

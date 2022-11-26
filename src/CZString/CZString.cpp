@@ -13,6 +13,7 @@
 #define CZ_STRING_IMPLEMENTATION_H
 
 #include "CZString.h"
+
 #include <cstring>
 #include <cstdio>
 #include <stdexcept>
@@ -26,24 +27,10 @@ namespace CZ
 
     CZString::~CZString()
     {
-        if (_tempStr)
-            delete[] _tempStr;
     }
 
     CZString::CZString(const CZString &CZstring) : Vector<char>(CZstring)
     {
-        _tempStr = nullptr;
-    }
-
-    void CZString::clear()
-    {
-        Vector<char>::clear();
-        if (_tempStr)
-        {
-            delete[] _tempStr;
-        }
-        _tempStr = nullptr;
-        return;
     }
 
     void CZString::print_info(const char *name) const
@@ -61,14 +48,12 @@ namespace CZ
 
     const char *CZString::c_str() const
     {
-        if (_tempStr)
+        std::ostringstream oss;
+        for (Iterator it = begin(); it != end(); ++it)
         {
-            delete[] _tempStr;
+            oss << *it;
         }
-        _tempStr = new char[length() + 1];
-        strncpy(_tempStr, &front(), length());
-        _tempStr[length()] = '\0';
-        return _tempStr;
+        return this->get_c_str_from_stream(oss);
     }
 
     CZString CZString::substr(Rank pos, Rank l) const

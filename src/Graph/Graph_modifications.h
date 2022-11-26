@@ -78,7 +78,7 @@ namespace CZ
 
         if (_graphType == ADJACENCY_LIST)
         {
-            Vector<Edge<ED>> &eV = *reinterpret_cast<Vector<Edge<ED>>*>(_dataE[s]);
+            Vector<Edge<ED>> &eV = *static_cast<Vector<Edge<ED>>*>(_dataE[s]);
             bool has_this_edge = false;
             for (auto &e : eV)
             {
@@ -95,13 +95,13 @@ namespace CZ
                 e.set_valid();
                 ++_inDegree[d];
                 ++_outDegree[s];
-                reinterpret_cast<Vector<Edge<ED>>*>(_dataE[s])->push_back(e);
+                static_cast<Vector<Edge<ED>>*>(_dataE[s])->push_back(e);
             }
         }
         else
         {
             // 注意对于邻接矩阵法，两结点之间的边最多只能有一条
-            KVPair<bool, ED> &eP = (*(reinterpret_cast<Vector<KVPair<bool, ED>>*>(_dataE[s])))[d];
+            KVPair<bool, ED> &eP = (*(static_cast<Vector<KVPair<bool, ED>>*>(_dataE[s])))[d];
             eP.value() = eData;
             if (!eP.key())
             {
@@ -149,7 +149,7 @@ namespace CZ
         bool success = false;
         if (_graphType == ADJACENCY_LIST)
         {
-            Vector<Edge<ED>> &eV = *reinterpret_cast<Vector<Edge<ED>>*>(_dataE[s]);
+            Vector<Edge<ED>> &eV = *static_cast<Vector<Edge<ED>>*>(_dataE[s]);
             for (typename Vector<Edge<ED>>::Iterator it = eV.begin(); it != eV.end(); ++it)
             {
                 if (it->valid() && it->destination() == d)
@@ -162,7 +162,7 @@ namespace CZ
         }
         else
         {
-            KVPair<bool, ED> &eP = (*(reinterpret_cast<Vector<KVPair<bool, ED>>*>(_dataE[s])))[d];
+            KVPair<bool, ED> &eP = (*(static_cast<Vector<KVPair<bool, ED>>*>(_dataE[s])))[d];
             if (eP.key())
             {
                 eP.key() = false;

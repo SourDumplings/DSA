@@ -13,9 +13,9 @@
 #define GRAPH_MINIMUM_SPANNING_TREE_H
 
 #include "Graph.h"
+
 #include <stdexcept>
 #include "../Heap/Heap.h"
-#include "../Dictionary/KVPair.h"
 #include <functional>
 
 namespace CZ
@@ -47,7 +47,7 @@ namespace CZ
 
             if (_graphType == ADJACENCY_LIST)
             {
-                Vector<Edge<ED>> &eV = *reinterpret_cast<Vector<Edge<ED>>*>(_dataE[v]);
+                Vector<Edge<ED>> &eV = *static_cast<Vector<Edge<ED>>*>(_dataE[v]);
                 for (auto &e : eV)
                 {
                     Rank w = e.destination();
@@ -134,7 +134,7 @@ namespace CZ
             gangNum[i] = 0;
             if (_graphType == ADJACENCY_LIST)
             {
-                Vector<Edge<ED>> &eV = *reinterpret_cast<Vector<Edge<ED>>*>(_dataE[i]);
+                Vector<Edge<ED>> &eV = *static_cast<Vector<Edge<ED>>*>(_dataE[i]);
                 for (auto &e : eV)
                 {
                     if (i < e.destination())
