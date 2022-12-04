@@ -41,7 +41,7 @@
 已完成
 18. 扩展 HashTable 为 HashMap，使其支持多种元素（实现通用的 hash 算法，参照侯捷课程万用的 hash function），以及拉链法，Set 也类似
 待 23 实现
-19. 增加异常管理类 Exception
+19. 为异常情况 assert
 20. "许多容器定义了print_info方法，故元素必须支持 << 运算符" 这条规则太僵硬，换一种方式解决这个问题，例如定义一个通用函数，来改造 print_info 的实现，使其不依赖于 << 的定义
 见 23 已实现
 21. 给 BST 增加强制 insert 的方法，例如 force_insert，能够按 key 实现替换元素，并扩展到其子类和利用其实现的容器，如 TreeSet 等
