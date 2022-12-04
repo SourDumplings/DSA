@@ -14,6 +14,6 @@ echo "project_base_dir: $project_base_dir"
 cd $project_base_dir
 mkdir build
 cd build
-cmake ..
+cmake .. -DBUILD_TYPE=Debug
 make
 make install
