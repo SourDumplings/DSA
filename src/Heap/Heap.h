@@ -21,9 +21,7 @@
 
 namespace CZ
 {
-    using std::less;
-
-    template <typename T, typename Cmp = less<const T &>>
+    template <typename T, typename Cmp = std::less<const T &>>
     class Heap : public AbstractBaseContainer<T>
     {
     public:

@@ -15,7 +15,7 @@
 #include <functional>
 #include <cstdio>
 
-namespace CZ
+namespace CZ::SearchAccessories
 {
     template <typename It, typename E, typename Cmp>
     It Seq_search(const It &begin, const It &end, const E &value, const Cmp &cmp,

@@ -18,7 +18,7 @@ namespace CZ
     {
     public:
         using Rank = uint32_t;
-        using RankPlus = int32_t;
+        using RankPlus = int64_t;
 
         bool empty() const;
 

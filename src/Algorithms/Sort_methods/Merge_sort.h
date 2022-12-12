@@ -15,7 +15,7 @@
 #include "../../Vector/Vector.h"
 #include <type_traits>
 
-namespace CZ
+namespace CZ::SortAccessories
 {
     using Rank_merge_sort = int64_t;
 
@@ -82,7 +82,7 @@ namespace CZ
         MergeSort::merge(begin, mi, N, cmp);
         return;
     }
-} // CZ
+} // CZ::SortAccessories
 
 #endif // MERGE_SORT_H
 

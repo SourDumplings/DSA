@@ -13,7 +13,7 @@ Vector本身所支持的操作
 #define VECTOR_OPERATIONS_H
 
 #include "Vector.h"
-#include <stdexcept>
+#include <cassert>
 #include <iostream>
 
 namespace CZ
@@ -21,20 +21,7 @@ namespace CZ
     template <typename T>
     const T &Vector<T>::operator[](const Vector<T>::Rank i) const
     {
-        // printf("const version of [] is called\n");
-        try
-        {
-            if (_size <= i)
-            {
-                throw "index out of range";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Warning from Vector []: %s, ", errMsg);
-            printf("rank = %u, size = %u\n", i, _size);
-            throw std::exception();
-        }
+        assert(i < _size);
         return _elem[i];
     }
 

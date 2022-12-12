@@ -15,7 +15,7 @@
 
 #include <cstdio>
 
-namespace CZ
+namespace CZ::SortAccessories
 {
     using Rank_insertion_sort = int64_t;
 
@@ -36,6 +36,6 @@ namespace CZ
         }
         return;
     }
-} // CZ
+} // CZ::SortAccessories
 
 #endif // INSERTION_SORT_H

@@ -15,9 +15,9 @@
 #include "../../Heap/Heap.h"
 #include <type_traits>
 
-namespace CZ
+namespace CZ::SortAccessories
 {
-    using Rank_heap_sort = int64_t;
+    using Rank_heap_sort = typename Heap<int>::Rank;
 
     template <typename It, typename Cmp>
     void Heap_sort(It begin, Rank_heap_sort N, const Cmp &cmp, const uint32_t version = 0)
@@ -32,7 +32,7 @@ namespace CZ
         return;
     }
 
-} // CZ
+} // CZ::SortAccessories
 
 #endif // HEAP_SORT_H
 

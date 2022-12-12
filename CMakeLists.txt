@@ -16,9 +16,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # -gz=zlib 用于压缩二进制文件大小，这个选项只压缩符号表，不影响性能。唯一的影响是 gdb 二进制文件启动时解压符号表会慢
 # -fsanitize=address 启动 asan 内存检测工具
 if(${BUILD_TYPE} STREQUAL Release)
-    set(CMAKE_CXX_FLAGS -gz=zlib -Og -g -Wall)
+    # set(CMAKE_CXX_FLAGS -gz=zlib -Og -g -Wall)
+    set(CMAKE_CXX_FLAGS -gz=zlib -O0 -g -Wall)
 elseif(${BUILD_TYPE} STREQUAL Debug)
-    set(CMAKE_CXX_FLAGS -gz=zlib -Og -g -Wall -fsanitize=address)
+    set(CMAKE_CXX_FLAGS -gz=zlib -O0 -g -Wall -fsanitize=address)
 endif()
 
 string(REPLACE ";" " " CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
@@ -26,9 +27,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin/)
 
 # 版本号管理，如果项目版本号为 a.b.c，则 version = a.b.c，api_version = a.b
 # 动态库版本
-set(version 6.0.1)
+set(version 6.1.0)
 # API 版本
-set(api_version 6.0)
+set(api_version 6.1)
 
 # PROJECT_SOURCE_DIR 即项目根目录，即脚本中的 project_base_dir
 message(STATUS "build_type: " ${BUILD_TYPE})

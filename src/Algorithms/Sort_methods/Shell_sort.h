@@ -16,80 +16,77 @@
 #include <cmath>
 #include "../../Vector/Vector.h"
 
-namespace CZ
+namespace CZ::SortAccessories
 {
     using Rank_shell_sort = int64_t;
 
-    namespace ShellSort
+    Vector<Rank_shell_sort> deltaSeq;
+
+    void produce_Sedgewick_seq(Rank_shell_sort N)
     {
-        Vector<Rank_shell_sort> deltaSeq;
-
-        void produce_Sedgewick_seq(Rank_shell_sort N)
+        Rank_shell_sort delta = 1;
+        for (Rank_shell_sort i = 0;; ++i)
         {
-            Rank_shell_sort delta = 1;
-            for (Rank_shell_sort i = 0;; ++i)
+            delta = 9 * pow(4, i) - 9 * pow(2, i) + 1;
+            if (N <= delta)
             {
-                delta = 9 * pow(4, i) - 9 * pow(2, i) + 1;
+                break;
+            }
+            deltaSeq.push_back(delta);
+        }
+        return;
+    }
+
+    void produce_Pratt_seq(Rank_shell_sort N)
+    {
+        Rank_shell_sort delta = 1;
+        for (Rank_shell_sort i = 0;; ++i)
+        {
+            for (Rank_shell_sort j = 0; j <= i; ++j)
+            {
+                delta = pow(2, i) * pow(3, j);
                 if (N <= delta)
                 {
                     break;
                 }
                 deltaSeq.push_back(delta);
             }
-            return;
-        }
-
-        void produce_Pratt_seq(Rank_shell_sort N)
-        {
-            Rank_shell_sort delta = 1;
-            for (Rank_shell_sort i = 0;; ++i)
+            if (N <= delta)
             {
-                for (Rank_shell_sort j = 0; j <= i; ++j)
-                {
-                    delta = pow(2, i) * pow(3, j);
-                    if (N <= delta)
-                    {
-                        break;
-                    }
-                    deltaSeq.push_back(delta);
-                }
-                if (N <= delta)
-                {
-                    break;
-                }
+                break;
             }
-            return;
         }
+        return;
+    }
 
-        void produce_Papernov_Stasevic_seq(Rank_shell_sort N)
+    void produce_Papernov_Stasevic_seq(Rank_shell_sort N)
+    {
+        Rank_shell_sort delta = 1;
+        for (Rank_shell_sort i = 1;; ++i)
         {
-            Rank_shell_sort delta = 1;
-            for (Rank_shell_sort i = 1;; ++i)
+            delta = pow(2, i) - 1;
+            if (N <= delta)
             {
-                delta = pow(2, i) - 1;
-                if (N <= delta)
-                {
-                    break;
-                }
-                deltaSeq.push_back(delta);
+                break;
             }
-            return;
+            deltaSeq.push_back(delta);
         }
+        return;
+    }
 
-        void produce_Shell_seq(Rank_shell_sort N)
+    void produce_Shell_seq(Rank_shell_sort N)
+    {
+        Rank_shell_sort delta = 1;
+        for (Rank_shell_sort i = 0;; ++i)
         {
-            Rank_shell_sort delta = 1;
-            for (Rank_shell_sort i = 0;; ++i)
+            delta = pow(2, i);
+            if (N <= delta)
             {
-                delta = pow(2, i);
-                if (N <= delta)
-                {
-                    break;
-                }
-                deltaSeq.push_back(delta);
+                break;
             }
-            return;
+            deltaSeq.push_back(delta);
         }
+        return;
     }
 
     template <typename It, typename Cmp>
@@ -97,24 +94,30 @@ namespace CZ
     {
         switch (version)
         {
-            // 不同版本的增量序列
-            case 0 : ShellSort::produce_Sedgewick_seq(N); break;
-            case 1 : ShellSort::produce_Pratt_seq(N); break;
-            case 2 : ShellSort::produce_Papernov_Stasevic_seq(N); break;
-            case 3 : ShellSort::produce_Shell_seq(N); break;
+        // 不同版本的增量序列
+        case 0:
+            produce_Sedgewick_seq(N);
+            break;
+        case 1:
+            produce_Pratt_seq(N);
+            break;
+        case 2:
+            produce_Papernov_Stasevic_seq(N);
+            break;
+        case 3:
+            produce_Shell_seq(N);
+            break;
         }
 
-        for (Rank_shell_sort i = ShellSort::deltaSeq.size() - 1; -1 < i; --i)
+        for (Rank_shell_sort i = deltaSeq.size() - 1; -1 < i; --i)
         {
-            for (Rank_shell_sort j = 0; j < ShellSort::deltaSeq[i]; ++j)
+            for (Rank_shell_sort j = 0; j < deltaSeq[i]; ++j)
             {
-                Insertion_sort(begin+j, N-j, ShellSort::deltaSeq[i], cmp, 0);
+                Insertion_sort(begin + j, N - j, deltaSeq[i], cmp, 0);
             }
         }
         return;
     }
-} // CZ
+} // CZ::SortAccessories
 
 #endif // SHELL_SORT_H
-
-

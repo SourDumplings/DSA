@@ -15,7 +15,7 @@
 #include "../Swap.h"
 #include <cstdio>
 
-namespace CZ
+namespace CZ::SortAccessories
 {
     using Rank_bubble_sort = int64_t;
 
@@ -67,7 +67,7 @@ namespace CZ
         return;
     }
 
-} // CZ
+} // CZ::SortAccessories
 
 #endif // BUBBLE_SORT_H
 

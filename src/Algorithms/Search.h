@@ -23,9 +23,9 @@ namespace CZ
 {
     enum SearchMethod
     {
-        SEQ_SEARCH,
-        BINARY_SEARCH,
-        FIB_SEARCH
+        SEQ_SEARCH = 0,
+        BINARY_SEARCH = 1,
+        FIB_SEARCH = 2
     };
 
     template <typename It, typename E, typename Cmp>
@@ -41,11 +41,11 @@ namespace CZ
             switch (method)
             {
                 case SEQ_SEARCH:
-                    return Seq_search(begin, end, value, cmp, version);
+                    return SearchAccessories::Seq_search(begin, end, value, cmp, version);
                 case BINARY_SEARCH:
-                    return Binary_search(begin, end, value, cmp, version);
+                    return SearchAccessories::Binary_search(begin, end, value, cmp, version);
                 case FIB_SEARCH:
-                    return Fib_search(begin, end, value, cmp, version);
+                    return SearchAccessories::Fib_search(begin, end, value, cmp, version);
             }
         }
         catch (const char *errMsg)

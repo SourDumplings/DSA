@@ -54,6 +54,11 @@ namespace CZ
         {
             // 从最后一个结点的父结点开始
             _perc_down(i, cmp);
+            if (i == 0)
+            {
+                break;
+            }
+            
         }
         return;
     }

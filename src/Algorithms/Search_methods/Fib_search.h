@@ -16,7 +16,7 @@
 #include <cstdio>
 #include "../Fib.h"
 
-namespace CZ
+namespace CZ::SearchAccessories
 {
     // 一共有两个版本的斐波那契查找
 

@@ -22,6 +22,8 @@
 #include "Algorithms/Fib.h"
 #include "Algorithms/Sort.h"
 #include "Algorithms/Gcd.h"
+#include "Algorithms/Pow.h"
+#include "Algorithms/TopK.h"
 
 using namespace std;
 using namespace CZ;
@@ -32,10 +34,10 @@ int main(int argc, char const *argv[])
     // Vector<int> v1({1, 5, 7, 88, -3});
     // auto r1 = Search(v1.begin(), v1.end(), 5), r2 = Search(v1.begin() + 3, v1.end(), -3);
     // auto r3 = Search(v1.begin(), v1.end() - 1, -3), r4 = Search(v1.begin(), v1.end(), -3);
-    // printf("The search result for r1: pos %lld\n", r1 - v1.begin());
-    // printf("The search result for r2: pos %lld\n", r2 - v1.begin());
-    // printf("The search result for r3: pos %lld\n", r3 - v1.begin());
-    // printf("The search result for r4: pos %lld\n", r4 - v1.begin());
+    // printf("The search result for r1: pos %ld\n", r1 - v1.begin());
+    // printf("The search result for r2: pos %ld\n", r2 - v1.begin());
+    // printf("The search result for r3: pos %ld\n", r3 - v1.begin());
+    // printf("The search result for r4: pos %ld\n", r4 - v1.begin());
     // Sort(v1.begin(), v1.end());
     // v1.print_info("v1");
     // auto r101 = Search(v1.begin(), v1.end(), 10),
@@ -144,21 +146,21 @@ int main(int argc, char const *argv[])
     // Sort(vs1.begin(), vs1.end(), SHELL_SORT);
     // vs1.print_info("vs1");
     // Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-        // { return s1.length() < s2.length(); }, SELECT_SORT, 0);
+    // { return s1.length() < s2.length(); }, SELECT_SORT, 0);
     // Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-        // { return s1.length() < s2.length(); }, INSERTION_SORT, 0);
+    // { return s1.length() < s2.length(); }, INSERTION_SORT, 0);
     // Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
     //     { return s1.length() < s2.length(); }, MERGE_SORT, 0);
     // Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-        // { return s1.length() < s2.length(); }, BUBBLE_SORT, 0);
+    // { return s1.length() < s2.length(); }, BUBBLE_SORT, 0);
     // Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-        // { return s1.length() < s2.length(); });
+    // { return s1.length() < s2.length(); });
     // Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-        // { return s1.length() < s2.length(); }, QUICK_SORT, 1);
+    // { return s1.length() < s2.length(); }, QUICK_SORT, 1);
     // Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
     //     { return s1.length() < s2.length(); }, HEAP_SORT);
     // Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-        // { return s1.length() < s2.length(); }, SHELL_SORT, 2);
+    // { return s1.length() < s2.length(); }, SHELL_SORT, 2);
     // vs2.print_info("vs2");
     //
     // 测试最大公约数算法
@@ -180,14 +182,34 @@ int main(int argc, char const *argv[])
     // l.print_info("l");
 
     // 测试交换算法
-    CZString s1 = "hello", s2 = "world";
-    int i1 = 1, i2 = 99;
-    printf("s1 = %s, s2 = %s\n", s1.c_str(), s2.c_str());
-    Swap(s1, s2);
-    printf("s1 = %s, s2 = %s\n", s1.c_str(), s2.c_str());
-    printf("i1 = %d, i2 = %d\n", i1, i2);
-    Swap(i1, i2);
-    printf("i1 = %d, i2 = %d\n", i1, i2);
+    // CZString s1 = "hello", s2 = "world";
+    // int i1 = 1, i2 = 99;
+    // printf("s1 = %s, s2 = %s\n", s1.c_str(), s2.c_str());
+    // Swap(s1, s2);
+    // printf("s1 = %s, s2 = %s\n", s1.c_str(), s2.c_str());
+    // printf("i1 = %d, i2 = %d\n", i1, i2);
+    // Swap(i1, i2);
+    // printf("i1 = %d, i2 = %d\n", i1, i2);
+
+    // 测试整数幂算法
+    // cout << "Pow(2, 5) = " << Pow(2, 5) << endl;
+    // cout << "Pow(2, -5) = " << Pow(2, -5) << endl;
+    // cout << "Pow(10, 3) = " << Pow(10, 3) << endl;
+    // cout << "Pow(10, -3) = " << Pow(10, -3) << endl;
+
+    // 测试 TopK 算法
+    Vector<int> v = {1, 2, 4, 6, 7, 9, 10, 12, 15, 16, 18};
+    Vector<int> vp(v);
+    Sort(vp.begin(), vp.end());
+    cout << "v: " << v << endl;
+    cout << "vp: " << vp << endl;
+    cout << "top3: " << TopK<decltype(v.begin()), int>(v.begin(), v.end(), 3) << endl;
+    cout << "top5: " << TopK<decltype(v.begin()), int>(v.begin(), v.end(), 5) << endl;
+    cout << "top3: " << TopK<decltype(v.begin()), int>(v.begin(), v.end(), 3, HEAP_SORT_METHOD) << endl;
+    cout << "top5: " << TopK<decltype(v.begin()), int>(v.begin(), v.end(), 5, HEAP_SORT_METHOD) << endl;
+    cout << "top3: " << TopK<decltype(v.begin()), int, std::greater<int>>(v.begin(), v.end(), 3, std::greater<int>()) << endl;
+    cout << "top5: " << TopK<decltype(v.begin()), int, std::greater<int>>(v.begin(), v.end(), 5, std::greater<int>()) << endl;
+    cout << "top3: " << TopK<decltype(v.begin()), int, std::greater<int>>(v.begin(), v.end(), 3, std::greater<int>(), HEAP_SORT_METHOD) << endl;
+    cout << "top5: " << TopK<decltype(v.begin()), int, std::greater<int>>(v.begin(), v.end(), 5, std::greater<int>(), HEAP_SORT_METHOD) << endl;
     return 0;
 }
-
