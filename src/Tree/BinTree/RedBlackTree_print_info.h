@@ -21,17 +21,17 @@ namespace CZ
     {
         printf("for RedBlackTree %s, is_allow_repeat_key() = %d\n", name, BST<T>::is_allow_repeat_key());
         printf("it contains %u nodes(including root) and height is %u\n",
-            Tree<T>::size(), Tree<T>::height());
+               this->size(), this->height());
         printf("its pre_order_traversal is: \n");
-        _pre_order_traversal(root(), OutPut());
+        _pre_order_traversal(dynamic_cast<RedBlackTreeNode<T> *>(this->root()), RedBlackTree<T>::OutPut());
         printf("\nits in_order_traversal is: \n");
-        _in_order_traversal(root(), OutPut());
+        _in_order_traversal(dynamic_cast<RedBlackTreeNode<T> *>(this->root()), RedBlackTree<T>::OutPut());
         printf("\n\n");
         return;
     }
 
     template <typename T>
-    void RedBlackTree<T>::OutPut::operator() (const T &data, const bool red) const
+    void RedBlackTree<T>::OutPut::operator()(const T &data, const bool red) const
     {
         std::cout << data;
         printf("(%c) ", red ? 'r' : 'b');
@@ -39,29 +39,28 @@ namespace CZ
     }
 
     template <typename T>
-    void RedBlackTree<T>::_pre_order_traversal(RedBlackTreeNode<T> *v, const OutPut& process) const
+    void RedBlackTree<T>::_pre_order_traversal(RedBlackTreeNode<T> *v, const OutPut &process) const
     {
         if (v)
         {
             process(v->data(), v->_red);
-            _pre_order_traversal(v->left_child(), process);
-            _pre_order_traversal(v->right_child(), process);
+            _pre_order_traversal(dynamic_cast<RedBlackTreeNode<T>*>(v->left_child()), process);
+            _pre_order_traversal(dynamic_cast<RedBlackTreeNode<T>*>(v->right_child()), process);
         }
         return;
     }
 
     template <typename T>
-    void RedBlackTree<T>::_in_order_traversal(RedBlackTreeNode<T> *v, const OutPut& process) const
+    void RedBlackTree<T>::_in_order_traversal(RedBlackTreeNode<T> *v, const OutPut &process) const
     {
         if (v)
         {
-            _in_order_traversal(v->left_child(), process);
+            _in_order_traversal(dynamic_cast<RedBlackTreeNode<T>*>(v->left_child()), process);
             process(v->data(), v->_red);
-            _in_order_traversal(v->right_child(), process);
+            _in_order_traversal(dynamic_cast<RedBlackTreeNode<T>*>(v->right_child()), process);
         }
         return;
     }
 } // CZ
 
 #endif // RED_BLACK_TREE_PRINT_INFO_H
-

@@ -19,58 +19,87 @@ AVL树模板的实现
 namespace CZ
 {
     template <typename T>
-    AVLTree<T>::AVLTree(std::nullptr_t): BST<T>(nullptr) {}
+    AVLTree<T>::AVLTree(std::nullptr_t) : BST<T>(nullptr) {}
     template <typename T>
-    AVLTree<T>::AVLTree(AVLTreeNode<T> *root, bool isAllowRepeatKey_): BST<T>(root, isAllowRepeatKey_) {}
+    AVLTree<T>::AVLTree(AVLTreeNode<T> *root, bool isAllowRepeatKey_) : BST<T>(root, isAllowRepeatKey_) {}
     template <typename T>
-    AVLTree<T>::AVLTree(const AVLTree<T> &t): BST<T>(t) {}
-    template <typename T>
-    AVLTree<T>::AVLTree(AVLTree<T> &&t): BST<T>(std::move(t)) {}
+    AVLTree<T>::AVLTree(const AVLTree<T> &t)
+    {
+        this->_pRoot = copy_from(t.root());
+        this->_size = t.size();
+        this->_isAllowRepeatKey = t._isAllowRepeatKey;
+    }
 
     template <typename T>
-    inline AVLTreeNode<T>*& AVLTree<T>::root() { return (AVLTreeNode<T>*&)(BST<T>::root()); }
+    AVLTree<T>::AVLTree(AVLTree<T> &&t) : BST<T>(std::move(t)) {}
+
     template <typename T>
-    inline AVLTreeNode<T>* AVLTree<T>::root() const
-    { return static_cast<AVLTreeNode<T>*>(BST<T>::root()); }
-    template <typename T>
-    inline AVLTreeNode<T>* AVLTree<T>::search(const T &data) const
-    { return static_cast<AVLTreeNode<T>*>(BST<T>::search(data)); }
+    AVLTreeNode<T> *AVLTree<T>::copy_from(TreeNode<T> *pRoot) noexcept
+    {
+        if (pRoot == nullptr)
+        {
+            return nullptr;
+        }
+        AVLTreeNode<T> *pAVLNode = dynamic_cast<AVLTreeNode<T> *>(pRoot);
+        ASSERT_DEBUG(pAVLNode, "error pRoot");
+        AVLTreeNode<T> *pCopiedRoot = new AVLTreeNode<T>(pAVLNode->data());
+        ASSERT_RELEASE(pCopiedRoot, "copy root error");
+        AVLTreeNode<T> *pLC = dynamic_cast<AVLTreeNode<T>*>(pAVLNode->left_child());
+        AVLTreeNode<T> *pLCopied = this->copy_from(pLC);
+        AVLTreeNode<T> *pRC = dynamic_cast<AVLTreeNode<T>*>(pAVLNode->right_child());
+        AVLTreeNode<T> *pRCopied = this->copy_from(pRC);
+        pCopiedRoot->insert_as_left_child(pLCopied);
+        pCopiedRoot->insert_as_right_child(pRCopied);
+        return pCopiedRoot;
+    }
 
     template <typename T>
     void AVLTree<T>::print_info(const char *name) const
     {
         printf("for AVLTree %s, is_allow_repeat_key() = %d\n", name, BST<T>::is_allow_repeat_key());
         printf("it contains %u nodes(including root) and height is %u\n",
-            Tree<T>::size(), Tree<T>::height());
+               this->size(), this->height());
         printf("its pre_order_traversal is: \n");
-        BinTree<T>::pre_order_traversal(root(), typename Tree<T>::OutPut(),
-            NONRECURSION_TRAVERSAL2);
+        BinTree<T>::pre_order_traversal(dynamic_cast<BinTreeNode<T> *>(this->root()), typename AVLTree<T>::OutPut(),
+                                        NONRECURSION_TRAVERSAL2);
         printf("\nits in_order_traversal is: \n");
-        BinTree<T>::in_order_traversal(root(), typename Tree<T>::OutPut(),
-            NONRECURSION_TRAVERSAL2);
+        BinTree<T>::in_order_traversal(dynamic_cast<BinTreeNode<T> *>(this->root()), typename AVLTree<T>::OutPut(),
+                                       NONRECURSION_TRAVERSAL2);
         printf("\n\n");
-        return;
     }
 
     template <typename T>
-    bool AVLTree<T>::insert(AVLTreeNode<T> *node)
+    bool AVLTree<T>::insert_data(const T &data) noexcept
     {
-        if (!BST<T>::is_allow_repeat_key() && search(node->data()))
+        AVLTreeNode<T> *pNode = new AVLTreeNode<T>(data);
+        if (this->insert(pNode) == nullptr && pNode)
         {
+            delete pNode;
             return false;
         }
+        
+        return true;
+    }
 
-        BST<T>::insert(node);
-        AVLTreeNode<T> *f = node->father();
-        if (!f)
+    template <typename T>
+    BSTNode<T> *AVLTree<T>::insert(BSTNode<T> *pNode) noexcept
+    {
+        if (!this->is_allow_repeat_key() && this->search_data(pNode->data()))
+        {
+            return nullptr;
+        }
+
+        BSTNode<T> *ret = BST<T>::insert(pNode);
+        AVLTreeNode<T> *f = dynamic_cast<AVLTreeNode<T> *>(pNode->father());
+        if (f == nullptr)
         {
             // 从空树插入一个结点为根结点的情况无需调整
-            return true;
+            return ret;
         }
 
         // 如果其父亲结点的高度升高则其祖父结点就有可能失衡
         // 只需要做对多1次调整即可
-        for (AVLTreeNode<T> *g = f->father(); g; g = g->father())
+        for (AVLTreeNode<T> *g = dynamic_cast<AVLTreeNode<T> *>(f->father()); g; g = dynamic_cast<AVLTreeNode<T> *>(g->father()))
         {
             if (!g->is_balance())
             {
@@ -79,114 +108,71 @@ namespace CZ
                 break; // 只要调整了一次，那么全树都会平衡
             }
         }
-        return true;
+        return ret;
     }
 
     template <typename T>
-    inline bool AVLTree<T>::insert(const T &data)
-    { return insert(new AVLTreeNode<T>(data)); }
-
-    template <typename T>
-    AVLTreeNode<T>* AVLTree<T>::secede(AVLTreeNode<T> *node)
+    TreeNode<T> *AVLTree<T>::secede(TreeNode<T> *pNode) noexcept
     {
-        if (!node)
+        if (pNode == nullptr)
         {
             return nullptr;
         }
-        AVLTreeNode<T> *f = node->father();
-        BST<T>::secede(node);
-        if (!f)
+        AVLTreeNode<T> *f = dynamic_cast<AVLTreeNode<T> *>(pNode->father());
+        BinTree<T>::secede(pNode);
+        if (f == nullptr)
         {
             // 移除了根结点，不需要再调整了
-            return node;
+            return pNode;
         }
 
         // 原结点的父亲结点和祖先结点都有可能失衡
         // 需要做Ω(logn)次调整
-        for (AVLTreeNode<T> *hot = f; hot; hot = hot->father())
+        for (AVLTreeNode<T> *hot = f; hot; hot = dynamic_cast<AVLTreeNode<T> *>(hot->father()))
         {
             if (!hot->is_balance())
             {
                 // 一旦发现失衡，则采用3+4重构算法调整，并将子树重新接回原树
-                BinTree<T>::rotate_at(hot->taller_child()->taller_child());
+                this->rotate_at(hot->taller_child()->taller_child());
             }
         }
-        return node;
+        return pNode;
     }
 
     template <typename T>
-    AVLTreeNode<T>* AVLTree<T>::secede(const T &data)
+    BSTNode<T> *AVLTree<T>::remove(BSTNode<T> *pNode) noexcept
     {
-        AVLTreeNode<T> *node = search(data);
-        try
+        if (pNode == nullptr)
         {
-            if (!node)
-            {
-                throw "this value is not in this AVLTree";
-            }
+            return nullptr;
         }
-        catch (const char *errMsg)
-        {
-            printf("Error from AVLTree secede: %s\n");
-            std::cout << "target value is " << data << std::endl;
-            throw std::exception();
-        }
-        return secede(node);
-    }
+        
+        ASSERT_DEBUG(this->has_this_node(pNode), "this node is not in this AVLTree");
 
-    template <typename T>
-    AVLTreeNode<T>* AVLTree<T>::remove(AVLTreeNode<T> *node)
-    {
-        try
-        {
-            if (!Tree<T>::has_this_node(node))
-            {
-                throw "this node is not in this AVLTree";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from AVLTree remove: %s\n", errMsg);
-            throw std::exception();
-        }
-
-        AVLTreeNode<T> *hot = node->father();
-        BST<T>::remove_at((BSTNode<T>*&)(node), (BSTNode<T>*&)(hot));
-        for (AVLTreeNode<T> *f = static_cast<AVLTreeNode<T>*>(hot); f; f = f->father())
+        AVLTreeNode<T> *hot = dynamic_cast<AVLTreeNode<T> *>(pNode->father());
+        this->remove_at((BSTNode<T> *&)(pNode), (BSTNode<T> *&)(hot));
+        for (AVLTreeNode<T> *f = dynamic_cast<AVLTreeNode<T> *>(hot); f; f = dynamic_cast<AVLTreeNode<T> *>(f->father()))
         {
             if (!f->is_balance())
             {
                 // 一旦发现失衡，则采用3+4重构算法调整，并将子树重新接回原树
-                BinTree<T>::rotate_at(hot->taller_child()->taller_child());
+                this->rotate_at(hot->taller_child()->taller_child());
             }
         }
-        return node;
-    }
-
-    template <typename T>
-    AVLTreeNode<T>* AVLTree<T>::remove(const T &data)
-    {
-        AVLTreeNode<T> *node = search(data);
-        try
-        {
-            if (!node)
-            {
-                throw "this value is not in this AVLTree";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from AVLTree secede: %s\n", errMsg);
-            std::cout << "target value is " << data << std::endl;
-            throw std::exception();
-        }
-        return remove(node);
+        return pNode;
     }
 
     template <typename T>
     const char *AVLTree<T>::get_entity_name() const
     {
         return "AVLTree";
+    }
+
+    template <typename T>
+    void AVLTree<T>::OutPut::operator()(const T &data) const
+    {
+        std::cout << data << "(" << &data << ")" << " ";
+        return;
     }
 } // CZ
 

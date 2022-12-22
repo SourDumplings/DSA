@@ -62,7 +62,7 @@ namespace CZ
         void set_Nv(Rank Nv_);
         // 增加一条边
         void add_edge(Rank s, Rank d, const ED &eData = ED(), bool has_added = false);
-        // 删除一条边，可以选择在删除失败（边不存在时）是返回false还是抛出异常
+        // 删除一条边，可以选择在删除失败（边不存在时）是返回 false 还是抛出异常中断
         bool delete_edge(Rank s, Rank d, bool has_deleted = false, bool nonexcept = true);
         void set_vertice_data(Rank i, const VD &vData);
 

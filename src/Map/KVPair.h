@@ -88,7 +88,7 @@ namespace CZ
         template <typename KD, typename VD>
         KVPair<K, V> &operator=(const KVPair<KD, VD> &p)
         {
-            if (static_cast<const KVPair<KD, VD> *>(this) != &p)
+            if (reinterpret_cast<const KVPair<KD, VD> *>(this) != &p)
             {
                 _key = p.key();
                 _value = p.value();
@@ -123,13 +123,6 @@ namespace CZ
         std::ostringstream oss;
         oss << get_entity_name() << "(" << _key << ", " << _value << ")";
         return this->get_c_str_from_stream(oss);
-    }
-
-    template <typename K, typename V>
-    std::ostream &operator<<(std::ostream &os, const KVPair<K, V> &p)
-    {
-        os << "pair(" << p.key() << ", " << p.value() << ")";
-        return os;
     }
 
     // 键值数对的大小比较即相等判断都是比较key

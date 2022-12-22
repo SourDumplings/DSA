@@ -15,7 +15,7 @@
 #include <vector>
 #include <algorithm>
 #include <memory>
-#include <stdexcept>
+
 
 #include "Algorithms/Reverse.h"
 #include "Vector/Vector.h"

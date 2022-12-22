@@ -12,7 +12,7 @@
 #include <iostream>
 #include <string>
 #include <utility>
-#include <stdexcept>
+
 #include "Vector/Vector.h"
 
 using CZ::Vector;

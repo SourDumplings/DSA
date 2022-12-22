@@ -14,7 +14,6 @@
 #include <cstdio>
 #include <cinttypes>
 #include <iostream>
-#include <stdexcept>
 
 namespace CZ
 {
@@ -161,11 +160,7 @@ namespace CZ
     {
         _bufferSize = bufferSize_ < MIN_BUFFER_SIZE ? MIN_BUFFER_SIZE : bufferSize_;
 
-        if (end < begin)
-        {
-            printf("Error from Deque init_from: invalid iterator range for end < begin.\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(begin <= end, "Error from Deque init_from: invalid iterator range for end < begin.");
 
         _size = end - begin;
         _mapSize = _size % _bufferSize == 0 ? _size / _bufferSize + 2 : _size / _bufferSize + 3; // 左右各多一个 node
@@ -410,12 +405,6 @@ namespace CZ
     template <typename T>
     typename Deque<T>::Iterator Deque<T>::move_backward(Iterator startIt, typename Deque<T>::Rank n)
     {
-        if (n <= 0)
-        {
-            printf("Error from Deque::move_backward: invalid parameter n\n");
-            throw std::exception();
-        }
-
         Rank resInLastBuffer = _finish._last - _finish._cur; // 最后一个 buffer 还可以往后移动几个
         Rank bufferNumDelta = 0;                             // 最后一个元素会跨越几次 buffer
         if (n > resInLastBuffer)
@@ -490,11 +479,7 @@ namespace CZ
     template <typename T>
     void Deque<T>::pop_back()
     {
-        if (this->empty())
-        {
-            printf("Error from Deque::pop_back: empty deque\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(!this->empty(), "Error from Deque::pop_back: empty deque");
 
         --_size;
         if (_finish._cur != _finish._first)
@@ -513,11 +498,7 @@ namespace CZ
     template <typename T>
     void Deque<T>::pop_front()
     {
-        if (this->empty())
-        {
-            printf("Error from Deque::pop_front: empty deque\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(!this->empty(), "Error from Deque::pop_front: empty deque");
 
         --_size;
         if (_start._cur != _start._last)
@@ -589,18 +570,8 @@ namespace CZ
     template <typename T>
     typename Deque<T>::Iterator Deque<T>::erase(Iterator itPos)
     {
-        if (itPos < _start || _finish <= itPos)
-        {
-            printf("Error from Deque::erase: invalid iterator\n");
-            throw std::exception();
-        }
-
-        if (this->empty())
-        {
-            printf("Error from Deque::erase: empty deque\n");
-            throw std::exception();
-        }
-
+        ASSERT_DEBUG(_start <= itPos && itPos < _finish, "Error from Deque::erase: invalid iterator");
+        ASSERT_DEBUG(!this->empty(), "Error from Deque::erase: empty deque");
         --_size;
         return move_forward(itPos + 1, 1);
     }
@@ -608,18 +579,10 @@ namespace CZ
     template <typename T>
     typename Deque<T>::Iterator Deque<T>::erase(const Iterator &b, const Iterator &e)
     {
-        if (b < _start || _finish < e || e < b)
-        {
-            printf("Error from Deque::erase: invalid iterator range\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(_start <= b && e <= _finish && b <= e, "Error from Deque::erase: invalid iterator range");
 
         Rank n = e - b;
-        if (_size < n)
-        {
-            printf("Error from Deque::erase: insufficient size\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(n <= _size, "Error from Deque::erase: insufficient size");
 
         _size -= n;
         return move_forward(e, n);
@@ -628,11 +591,7 @@ namespace CZ
     template <typename T>
     typename Deque<T>::Iterator Deque<T>::move_forward(Iterator startIt, Rank n)
     {
-        if (n < 0 || startIt - n < _start || _finish < startIt)
-        {
-            printf("Error from Deque::move_forward: invalid parameter\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(0 <= n && _start <= startIt - n && startIt <= _finish, "Error from Deque::move_forward: invalid parameter");
 
         // 移动元素
         for (Iterator it = startIt; it != _finish; ++it)
@@ -648,12 +607,7 @@ namespace CZ
     template <typename T>
     const T &Deque<T>::back() const
     {
-        if (this->empty())
-        {
-            printf("Error from Deque::back: empty queue\n");
-            throw std::exception();
-        }
-
+        ASSERT_DEBUG(!this->empty(), "Error from Deque::back: empty queue");
         return *((_finish - 1)._cur);
     }
 
@@ -666,12 +620,7 @@ namespace CZ
     template <typename T>
     const T &Deque<T>::front() const
     {
-        if (this->empty())
-        {
-            printf("Error from Deque::front: empty queue\n");
-            throw std::exception();
-        }
-
+        ASSERT_DEBUG(!this->empty(), "Error from Deque::front: empty queue");
         return *(_start._cur);
     }
 
@@ -684,30 +633,15 @@ namespace CZ
     template <typename T>
     const T &Deque<T>::at(RankPlus index) const
     {
-        try
+        if (index < 0)
         {
-            if (index < 0)
-            {
-                if (index < -_size)
-                {
-                    throw "invalid index";
-                }
-                return *((_finish - (-index))._cur);
-            }
-            else
-            {
-                if (_size <= index)
-                {
-                    throw "invalid index";
-                }
-                return *((_start + index)._cur);
-            }
+            ASSERT_DEBUG(-_size <= index, "invalid index");
+            return *((_finish - (-index))._cur);
         }
-        catch (const char *errMsg)
+        else
         {
-            printf("Warning from Deque::at: %s, ", errMsg);
-            printf("rank = %" PRId32 ", size = %u\n", index, _size);
-            throw std::exception();
+            ASSERT_DEBUG(index < _size, "invalid index");
+            return *((_start + index)._cur);
         }
     }
 
@@ -720,11 +654,7 @@ namespace CZ
     template <typename T>
     const T &Deque<T>::operator[](Rank index) const
     {
-        if (_size <= index)
-        {
-            printf("Error from Deque::operator[]: invalid index");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(index < _size, "Error from Deque::operator[]: invalid index(%u), size(%u)", index, _size);
         return *(_start + index);
     }
 

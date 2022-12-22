@@ -21,36 +21,21 @@ namespace CZ
     BinTreeNode<T>::BinTreeNode(const T &data, BinTreeNode<T> *lChild_, BinTreeNode<T> *rChild_,
         BinTreeNode<T> *father_): TreeNode<T>(data)
     {
-        try
+        if (father_)
         {
-            if (father_)
+            ASSERT_DEBUG(father_->left_child() == nullptr || father_->right_child() == nullptr, "father has two children, cannot have more");
+            if (father_->left_child() == nullptr)
             {
-                if (!father_->left_child())
-                {
-                    father_->insert_as_left_child(this);
-                }
-                else if (!father_->right_child())
-                {
-                    father_->insert_as_right_child(this);
-                }
-                else
-                {
-                    throw "father has two children, cannot have more";
-                }
+                father_->insert_as_left_child(this);
+            }
+            else if (father_->right_child() == nullptr)
+            {
+                father_->insert_as_right_child(this);
             }
         }
-        catch (const char *errMsg)
-        {
-            printf("Error from BinTreeNode's constructor: %s\n", errMsg);
-            throw std::exception();
-        }
 
-        TreeNode<T>::_children.push_back(lChild_);
-        TreeNode<T>::_children.push_back(rChild_);
-
-        Rank leftHeight = lChild_ ? lChild_->height() : 0;
-        Rank rightHeight = rChild_ ? rChild_->height() : 0;
-        TreeNode<T>::height() = Max(leftHeight, rightHeight) + 1;
+        TreeNode<T>::children().push_back(lChild_);
+        TreeNode<T>::children().push_back(rChild_);
     }
 } // CZ
 

@@ -13,7 +13,7 @@
 #define GRAPH_DFS_H
 
 #include "Graph.h"
-#include <stdexcept>
+
 
 namespace CZ
 {
@@ -22,11 +22,7 @@ namespace CZ
     void Graph<ED, VD>::dfs(Rank s, Vector<Rank> &results, const EF &processE,
         const VF &processV) const
     {
-        if (_Nv <= s)
-        {
-            printf("Error from Graph dfs: invalid source, the _Nv is %u\n", _Nv);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(s < _Nv, "Error from Graph dfs: invalid source, the _Nv is %u", _Nv);
 
         Vector<bool> visited(_Nv);
         for (auto &i : visited)
@@ -42,11 +38,7 @@ namespace CZ
     void Graph<ED, VD>::dfs(Rank s, Vector<Rank> &results, const EF &processE,
         const VF &processV)
     {
-        if (_Nv <= s)
-        {
-            printf("Error from Graph dfs: invalid source, the _Nv is %u\n", _Nv);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(s < _Nv, "Error from Graph dfs: invalid source, the _Nv is %u", _Nv);
 
         Vector<bool> visited(_Nv);
         for (auto &i : visited)

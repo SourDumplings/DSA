@@ -13,7 +13,7 @@
 #define TREE_SET_IMPLEMENTATION_H
 
 #include "TreeSet.h"
-#include <stdexcept>
+
 #include <cstdio>
 #include <iostream>
 
@@ -85,8 +85,7 @@ namespace CZ
             }
             else
             {
-                printf("Error from TreeSet remove: this value is not in this Treeset\n");
-                throw std::exception();
+                ASSERT_DEBUG(false, "Error from TreeSet remove: this value is not in this Treeset");
             }
         }
         return true;
@@ -132,11 +131,7 @@ namespace CZ
     template <typename T>
     const T &TreeSet<T>::back() const
     {
-        if (this->empty())
-        {
-            printf("Error from TreeSet::front(): empty Treeset.\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(!this->empty(), "Error from TreeSet::front(): empty Treeset.");
 
         RedBlackTreeNode<T> *pNode = _T.root();
         while (pNode->right_child())
@@ -155,11 +150,7 @@ namespace CZ
     template <typename T>
     const T &TreeSet<T>::front() const
     {
-        if (this->empty())
-        {
-            printf("Error from TreeSet::front(): empty Treeset.\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(!this->empty(), "Error from TreeSet::front(): empty Treeset.");
 
         RedBlackTreeNode<T> *pNode = _T.root();
         while (pNode->left_child())

@@ -13,9 +13,9 @@ a不比b小，b不比a小即认为a和b相等
 #ifndef MEDIAN_H
 #define MEDIAN_H
 
-#include <stdexcept>
 #include <cstdio>
 #include <functional>
+#include "../Base/Assert.h"
 
 namespace CZ
 {
@@ -37,11 +37,7 @@ namespace CZ
         const Cmp &cmp)
     {
         uint32_t s1 = 0, d1 = end1 - begin1 - 1, s2 = 0, d2 = end2 - begin2 - 1;
-        if (d1 != d2)
-        {
-            printf("Error from Median_of_two_seq: The lengths of the two seqs are not equal.\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(d1 == d2, "Error from Median_of_two_seq: The lengths of the two seqs are not equal.");
 
         uint32_t m1, m2;
         while (s1 != d1)

@@ -15,7 +15,7 @@
 #include "Graph.h"
 
 #include "../CZString/CZString.h"
-#include <stdexcept>
+
 
 namespace CZ
 {
@@ -38,21 +38,9 @@ namespace CZ
     bool Graph<ED, VD>::has_edge(typename Graph<ED, VD>::Rank s,
                                  typename Graph<ED, VD>::Rank d) const
     {
-        if (_Nv <= s)
-        {
-            printf("Error from Graph has_edge: invalid source, s = %u, _Nv = %u\n", s, _Nv);
-            throw std::exception();
-        }
-        if (_Nv <= d)
-        {
-            printf("Error from Graph has_edge: invalid destination, d = %u, _Nv = %u\n", d, _Nv);
-            throw std::exception();
-        }
-        if (_dataE[s] == nullptr)
-        {
-            printf("Error from Graph has_edge: empty edge, Graph is not ready\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(s < _Nv, "Error from Graph has_edge: invalid source, s = %u, _Nv = %u", s, _Nv);
+        ASSERT_DEBUG(d < _Nv, "Error from Graph has_edge: invalid destination, d = %u, _Nv = %u", d, _Nv);
+        ASSERT_DEBUG(_dataE[s], "Error from Graph has_edge: empty edge, Graph is not ready");
 
         bool ret = false;
         if (_graphType == ADJACENCY_LIST)
@@ -79,11 +67,7 @@ namespace CZ
     const ED &Graph<ED, VD>::edge_data(typename Graph<ED, VD>::Rank s,
                                        typename Graph<ED, VD>::Rank d) const
     {
-        if (!has_edge(s, d))
-        {
-            printf("Error from Graph edge_data: this edge (%u, %u) doesn't exist\n", s, d);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(has_edge(s, d), "Error from Graph edge_data: this edge (%u, %u) doesn't exist", s, d);
 
         const ED *pRet = nullptr;
         if (_graphType == ADJACENCY_LIST)
@@ -95,16 +79,9 @@ namespace CZ
             {
                 if (e.valid() && e.destination() == d)
                 {
-                    if (!oneEdge)
-                    {
-                        printf("Error from Graph edge_data: cannot deal with multi edges\n");
-                        throw std::exception();
-                    }
-                    else
-                    {
-                        oneEdge = false;
-                        pRet = &e.data();
-                    }
+                    ASSERT_DEBUG(oneEdge, "Error from Graph edge_data: cannot deal with multi edges");
+                    oneEdge = false;
+                    pRet = &e.data();
                 }
             }
         }
@@ -126,22 +103,14 @@ namespace CZ
     template <typename ED, typename VD>
     typename Graph<ED, VD>::Rank Graph<ED, VD>::indegree(typename Graph<ED, VD>::Rank i) const
     {
-        if (_Nv <= i)
-        {
-            printf("Error from Graph indegree: i is too large\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(i < _Nv, "Error from Graph indegree: i(%u) is too large", i);
         return _inDegree[i];
     }
 
     template <typename ED, typename VD>
     typename Graph<ED, VD>::Rank Graph<ED, VD>::outdegree(typename Graph<ED, VD>::Rank i) const
     {
-        if (_Nv <= i)
-        {
-            printf("Error from Graph outdegree: i is too large\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(i < _Nv, "Error from Graph outdegree: i(%u) is too large", i);
         return _outDegree[i];
     }
 

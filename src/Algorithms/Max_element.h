@@ -15,35 +15,24 @@
 
 #include <cstdio>
 #include <functional>
-#include <stdexcept>
+#include "../Base/Assert.h"
+
 
 namespace CZ
 {
     template <typename It, typename Cmp>
     It Max_element(const It &begin, const It &end, const Cmp &cmp)
     {
-        try
+        ASSERT_DEBUG(begin != end, "no elements");
+        It maxItemIt = begin;
+        for (auto it = begin; it != end; ++it)
         {
-            if (begin == end)
+            if (cmp(*maxItemIt, *it))
             {
-                throw "no elements";
+                maxItemIt = it;
             }
-            It maxItemIt = begin;
-            for (auto it = begin; it != end; ++it)
-            {
-                if (cmp(*maxItemIt, *it))
-                {
-                    maxItemIt = it;
-                }
-            }
-            return maxItemIt;
         }
-        catch (const char *errMsg)
-        {
-            printf("%s\n", errMsg);
-            throw std::exception();
-        }
-        return end;
+        return maxItemIt;
     }
 
     template <typename It>

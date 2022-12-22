@@ -9,9 +9,9 @@
 #ifndef H_TOPK
 #define H_TOPK
 
+#include "../Base/Assert.h"
 #include "../Heap/Heap.h"
 #include "../Vector/Vector.h"
-#include <cassert>
 
 namespace CZ
 {
@@ -52,7 +52,7 @@ namespace CZ
             // 先检查迭代器范围
             Vector<E> elems(begin, end);
             Rank elemNum = elems.size();
-            assert(k <= elemNum);
+            ASSERT_DEBUG(k <= elemNum, "wrong iterator range");
 
             Rank m = 0, b = 0, e = elemNum;
             E targetElem = *end;
@@ -88,7 +88,7 @@ namespace CZ
             for (Rank i = 0; i < k - 1; i++)
             {
                 // k 超过 [begin, end) 范围
-                assert(1 < heap.size());
+                ASSERT_DEBUG(1 < heap.size(), "wrong iterator range");
 
                 heap.pop();
             }

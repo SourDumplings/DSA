@@ -18,8 +18,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 if(${BUILD_TYPE} STREQUAL Release)
     # set(CMAKE_CXX_FLAGS -gz=zlib -Og -g -Wall)
     set(CMAKE_CXX_FLAGS -gz=zlib -O0 -g -Wall)
+    add_compile_definitions(RELEASE)
 elseif(${BUILD_TYPE} STREQUAL Debug)
-    set(CMAKE_CXX_FLAGS -gz=zlib -O0 -g -Wall -fsanitize=address)
+    set(CMAKE_CXX_FLAGS -gz=zlib -O0 -g -Wall -fsanitize=address -fno-omit-frame-pointer -fno-optimize-sibling-calls)
+    add_compile_definitions(DEBUG)
 endif()
 
 string(REPLACE ";" " " CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
@@ -27,9 +29,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin/)
 
 # 版本号管理，如果项目版本号为 a.b.c，则 version = a.b.c，api_version = a.b
 # 动态库版本
-set(version 6.1.0)
+set(version 7.0.0)
 # API 版本
-set(api_version 6.1)
+set(api_version 7.0)
 
 # PROJECT_SOURCE_DIR 即项目根目录，即脚本中的 project_base_dir
 message(STATUS "build_type: " ${BUILD_TYPE})

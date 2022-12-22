@@ -63,18 +63,7 @@ namespace CZ
     template <typename T, typename F>
     T SegmentTree<T, F>::range_res(Rank lo, Rank hi, T start_val)
     {
-        try
-        {
-            if (hi < lo)
-            {
-                throw "invalid range";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from segmenttree range_res: %s", errMsg);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(lo <= hi, "invalid range");
 
         T res = start_val;
         // 定位到对应叶结点的索引

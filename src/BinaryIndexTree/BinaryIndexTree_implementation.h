@@ -15,7 +15,7 @@
 #include "BinaryIndexTree.h"
 
 #include "../CZString/CZString.h"
-#include <stdexcept>
+
 #include <iostream>
 
 namespace CZ
@@ -46,28 +46,19 @@ namespace CZ
     template <typename T>
     void BinaryIndexTree<T>::add(const typename BinaryIndexTree<T>::Rank pos, const T &x)
     {
-        if (size() <= pos)
-        {
-            printf("Error from BinaryIndexTree add: invalid pos rank\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(pos < size(), "Error from BinaryIndexTree add: invalid pos rank");
 
         Rank p = pos + 1;
         for (; p <= size(); p += _low_bit(p))
         {
             _data[p] += x;
         }
-        return;
     }
 
     template <typename T>
     T BinaryIndexTree<T>::sum(typename BinaryIndexTree<T>::Rank l) const
     {
-        if (size() < l)
-        {
-            printf("Error from BinaryIndexTree sum: there is no so many elements\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(l <= size(), "Error from BinaryIndexTree sum: there is no so many elements");
 
         T ret = T();
         for (; 0 < l; l -= _low_bit(l))
@@ -81,16 +72,8 @@ namespace CZ
     T BinaryIndexTree<T>::sum(typename BinaryIndexTree<T>::Rank b,
                               typename BinaryIndexTree<T>::Rank e) const
     {
-        if (e < b)
-        {
-            printf("Error from BinaryIndexTree sum: invalid rank range\n");
-            throw std::exception();
-        }
-        if (size() < e)
-        {
-            printf("Error from BinaryIndexTree sum: the end rank is too large\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(b <= e, "Error from BinaryIndexTree sum: invalid rank range");
+        ASSERT_DEBUG(e <= size(), "Error from BinaryIndexTree sum: the end rank is too large");
         return sum(e) - sum(b);
     }
 

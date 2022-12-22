@@ -10,6 +10,7 @@
 #define B_PLUS_TREE_MODIFICATIONS_H
 
 #include "BPlusTree.h"
+
 #include "../../Algorithms/Search.h"
 #include "../../Algorithms/Swap.h"
 
@@ -51,24 +52,13 @@ namespace CZ
 
         typename Vector<K>::Rank keysNum = keys.size();
         typename Vector<K>::Rank i = 0;
-        try
+        for (; i < keysNum; ++i)
         {
-            for (; i < keysNum; ++i)
+            ASSERT_DEBUG(key != keys[i], "this key already exists");
+            if (key < keys[i])
             {
-                if (key == keys[i])
-                {
-                    throw "this key already exists";
-                }
-                else if (key < keys[i])
-                {
-                    break;
-                }
+                break;
             }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from BPlusTree insert in node: %s\n", errMsg);
-            throw std::exception();
         }
 
         keys.insert(keys.begin() + i, key);

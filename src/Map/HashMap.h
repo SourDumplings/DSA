@@ -32,7 +32,7 @@ namespace CZ
     class HashMap
     {
     public:
-        using Rank = uint64_t;
+        using Rank = int64_t;
 
         // 构造函数，默认大小10000，使用取模作为哈希函数，采用线性探测法
         HashMap(const Rank tableSize_ = 10000,

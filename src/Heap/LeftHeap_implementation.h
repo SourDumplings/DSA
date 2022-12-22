@@ -16,7 +16,7 @@
 
 #include <iostream>
 #include <cstdio>
-#include <stdexcept>
+
 #include "../Algorithms/Min.h"
 #include "../Algorithms/Swap.h"
 #include "../CZString/CZString.h"
@@ -132,11 +132,7 @@ namespace CZ
     template <typename T, typename Cmp>
     void LeftHeap<T, Cmp>::pop(const Cmp &cmp)
     {
-        if (this->empty())
-        {
-            printf("Error from LeftHeap pop: empty LeftHeap cannot pop\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(!this->empty(), "Error from LeftHeap pop: empty LeftHeap cannot pop");
 
         BinTreeNode<KVPair<T, Rank>> *lr = _T.root()->left_child(), *rr = _T.root()->right_child();
         if (lr)

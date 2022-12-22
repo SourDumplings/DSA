@@ -30,26 +30,26 @@ namespace CZ
             // 结点并非红结点，直接返回
             return;
         }
-        if (v == Tree<T>::_root)
+        if (v == dynamic_cast<RedBlackTreeNode<T> *>(this->root()))
         {
             // 如果已经（递归）到树根，则将其转黑，增加黑高度
             v->_red = false;
             ++v->_blackHeight;
             return;
         }
-        RedBlackTreeNode<T> *f = v->father();
-        if (!v->father()->_red)
+        RedBlackTreeNode<T> *f = dynamic_cast<RedBlackTreeNode<T> *>(v->father());
+        if (!dynamic_cast<RedBlackTreeNode<T> *>(v->father())->_red)
         {
             // v的父结点是黑结点，不用调整
             return;
         }
 
-        RedBlackTreeNode<T> *g = f->father(); // 既然父结点是红结点，则祖父结点一定存在
-        RedBlackTreeNode<T> *u = v->uncle();
+        RedBlackTreeNode<T> *g = dynamic_cast<RedBlackTreeNode<T> *>(f->father()); // 既然父结点是红结点，则祖父结点一定存在
+        RedBlackTreeNode<T> *u = dynamic_cast<RedBlackTreeNode<T> *>(v->uncle());
         if (!is_red(u))
         {
             // u为黑色，即RR-1情况
-            if ((v == f->left_child()) == (f == g->left_child()))
+            if ((v == dynamic_cast<RedBlackTreeNode<T> *>(f->left_child())) == (f == dynamic_cast<RedBlackTreeNode<T> *>(g->left_child())))
             {
                 // v和f属于同侧
                 f->_red = false; // 父结点转黑
@@ -63,16 +63,18 @@ namespace CZ
             }
             g->_red = true; // 祖父染红
             --g->_blackHeight;
-            BinTree<T>::rotate_at(v); // 3+4重构
+            this->rotate_at(v); // 3+4重构
             return;
         }
         else
         {
             // u为红色，即RR-2情况
             // f和u染黑
-            f->_red = false; u->_red = false;
-            ++f->_blackHeight; ++u->_blackHeight;
-            if (g != Tree<T>::_root)
+            f->_red = false;
+            u->_red = false;
+            ++f->_blackHeight;
+            ++u->_blackHeight;
+            if (g != dynamic_cast<RedBlackTreeNode<T> *>(this->root()))
             {
                 g->_red = true; // 如果g不是根结点则染红
             }
@@ -80,7 +82,7 @@ namespace CZ
         }
     }
 
-    /* 双黑修正：解决被实际摘除的结点和接替者被实际删除的结点都是黑色的问题
+    /* 双黑修正：解决被实际摘除的结点和被实际摘除的结点接替者都是黑色的问题
     分为三大类共四种情冴：
         BB-1（黑b有红子c）： 2次颜色翻转， 2次黑高度更新， 1~2次旋转，无需递归
         BB-2R（黑b无红子，f红）： 2次颜色翻转， 2次黑高度更新， 0次旋转，无需递归
@@ -90,33 +92,36 @@ namespace CZ
     template <typename T>
     void RedBlackTree<T>::solve_double_black(RedBlackTreeNode<T> *v, RedBlackTreeNode<T> *hot)
     {
-        RedBlackTreeNode<T> *f = v ? v->father() : hot;
-        if (!f)
+        RedBlackTreeNode<T> *f = v ? dynamic_cast<RedBlackTreeNode<T> *>(v->father()) : hot;
+        if (f == nullptr)
         {
             return;
         }
-        RedBlackTreeNode<T> *b = (v == f->left_child()) ? f->right_child() : f->left_child();
+        RedBlackTreeNode<T> *b = dynamic_cast<RedBlackTreeNode<T> *>((v == f->left_child()) ? f->right_child() : f->left_child());
+
+        ASSERT_DEBUG(b, "error rb tree node");
+
         if (is_red(b))
         {
             // BB-3
             b->_red = false;
             f->_red = true;
             // 取c与其父f同侧
-            RedBlackTreeNode<T> *c = (b == f->left_child()) ? b->left_child() : b->right_child();
+            RedBlackTreeNode<T> *c = dynamic_cast<RedBlackTreeNode<T> *>((b == f->left_child()) ? b->left_child() : b->right_child());
             hot = f;
-            BinTree<T>::rotate_at(c);
+            this->rotate_at(c);
             solve_double_black(v, hot); // 继续对v处进行双黑修正，但f已经转红，故只可能是BB-1或BB-2
         }
         else
         {
             RedBlackTreeNode<T> *c = nullptr; // b的红孩子
-            if (b->left_child() && b->left_child()->_red)
+            if (b->left_child() && dynamic_cast<RedBlackTreeNode<T> *>(b->left_child())->_red)
             {
-                c = b->left_child();
+                c = dynamic_cast<RedBlackTreeNode<T> *>(b->left_child());
             }
-            else if (b->right_child() && b->right_child()->_red)
+            else if (b->right_child() && dynamic_cast<RedBlackTreeNode<T> *>(b->right_child())->_red)
             {
-                c = b->right_child();
+                c = dynamic_cast<RedBlackTreeNode<T> *>(b->right_child());
             }
 
             if (c)
@@ -124,16 +129,16 @@ namespace CZ
                 // BB-1，黑b有红孩子
                 bool oldColor = f->_red; // 备份f的颜色
                 // 重构，并将新子树的左右孩子结点染黑
-                BinTree<T>::rotate_at(c);
+                this->rotate_at(c);
                 if (b->left_child())
                 {
-                    b->left_child()->_red = false;
-                    update_black_height(b->left_child());
+                    dynamic_cast<RedBlackTreeNode<T> *>(b->left_child())->_red = false;
+                    update_black_height(dynamic_cast<RedBlackTreeNode<T> *>(b->left_child()));
                 }
                 if (b->right_child())
                 {
-                    b->right_child()->_red = false;
-                    update_black_height(b->right_child());
+                    dynamic_cast<RedBlackTreeNode<T> *>(b->right_child())->_red = false;
+                    update_black_height(dynamic_cast<RedBlackTreeNode<T> *>(b->right_child()));
                 }
                 // 新子树结点继承原根节点
                 b->_red = oldColor;
@@ -142,7 +147,8 @@ namespace CZ
             else
             {
                 // BB-2，黑b无红孩子
-                b->_red = true; --b->_blackHeight; // b转红
+                b->_red = true;
+                --b->_blackHeight; // b转红
                 if (is_red(f))
                 {
                     // BB-2R
@@ -156,9 +162,7 @@ namespace CZ
                 }
             }
         }
-        return;
     }
 } // CZ
 
 #endif // RED_BLACK_TREE_ADJUSTMENT_H
-

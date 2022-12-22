@@ -18,7 +18,7 @@ AVL树类模板
 namespace CZ
 {
     template <typename T>
-    class AVLTree: public BST<T>
+    class AVLTree : public BST<T>
     {
     public:
         using Rank = typename BST<T>::Rank;
@@ -28,30 +28,36 @@ namespace CZ
         AVLTree(const AVLTree<T> &t);
         AVLTree(AVLTree<T> &&t);
 
-        AVLTreeNode<T>*& root();
-        AVLTreeNode<T>* root() const;
-
         void print_info(const char *name = "") const override;
-        // 在AVLTree中查找值为data的结点，找不到返回nullptr
-        AVLTreeNode<T>* search(const T &data) const;
 
+        bool insert_data(const T &data) noexcept override;
+
+        TreeNode<T> *secede(TreeNode<T> *pNode) noexcept override;
+
+        const char *get_entity_name() const override;
+
+        // 输出树结点的数据和结点数据的地址到标准输出
+        class OutPut
+        {
+            // 输出数据的可调用类，作为默认结点数据处理函数
+        public:
+            void operator()(const T &data) const;
+        };
+
+    protected:
         // 插入结点或者值，成功插入则返回 true
-        bool insert(AVLTreeNode<T> *node);
-        bool insert(const T &data);
-        AVLTreeNode<T>* secede(AVLTreeNode<T> *node);
-        AVLTreeNode<T>* secede(const T &data);
+        BSTNode<T> *insert(BSTNode<T> *pNode) noexcept override;
+
         // 删除单个结点的方法，返回实际被删除的结点的指针
         // 注意被删的结点的内存就不再受树的管理了，需要另外释放
         // 删除一个值对应的一个结点，注意如果存在重复值则只会删除一个
-        AVLTreeNode<T>* remove(const T &data);
-        AVLTreeNode<T>* remove(AVLTreeNode<T> *node);
+        BSTNode<T> *remove(BSTNode<T> *pNode) noexcept override;
 
-        const char *get_entity_name() const override;
+    private:
+        AVLTreeNode<T> *copy_from(TreeNode<T> *pNode) noexcept;
     };
 } // CZ
 
 #include "AVLTree_implementation.h"
 
 #endif // AVL_TREE_H
-
-

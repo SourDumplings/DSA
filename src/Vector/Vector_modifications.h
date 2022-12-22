@@ -15,7 +15,6 @@ Vector类模板的动态操作方法
 #include "Vector.h"
 
 #include "../Algorithms/Swap.h"
-#include <stdexcept>
 #include <utility>
 
 namespace CZ
@@ -51,22 +50,10 @@ namespace CZ
     template <typename T>
     void Vector<T>::pop_back()
     {
-        try
-        {
-            if (_size == 0)
-            {
-                throw "no elements";
-            }
-            --_size;
-            // 如有必要则缩容
-            shrink();
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from Vector pop_back: %s\n", errMsg);
-            throw std::exception();
-        }
-        return;
+        ASSERT_DEBUG(_size != 0, "no elements");
+        --_size;
+        // 如有必要则缩容
+        shrink();
     }
 
     // 插入一个元素到指定位置之前，返回指向插入的元素的迭代器
@@ -74,25 +61,14 @@ namespace CZ
     typename Vector<T>::Iterator Vector<T>::insert(typename Vector<T>::Iterator itPos, const T &x)
     {
         typename Vector<T>::Rank r = itPos - begin();
-        try
+        ASSERT_DEBUG(itPos <= end() && itPos >= begin(), "Invalid pos Iterator");
+        ++_size;
+        expand();
+        for (uint32_t i = _size - 1; i != r; --i)
         {
-            if (!(itPos <= end() && itPos >= begin()))
-            {
-                throw "Invalid pos Iterator";
-            }
-            ++_size;
-            expand();
-            for (uint32_t i = _size - 1; i != r; --i)
-            {
-                _elem[i] = _elem[i-1];
-            }
-            _elem[r] = x;
+            _elem[i] = _elem[i-1];
         }
-        catch (const char *errMsg)
-        {
-            printf("Error from Vector insert: %s\n", errMsg);
-            throw std::exception();
-        }
+        _elem[r] = x;
         return begin() + r;
     }
 
@@ -100,25 +76,14 @@ namespace CZ
     typename Vector<T>::Iterator Vector<T>::insert(typename Vector<T>::Iterator itPos, T &&x)
     {
         typename Vector<T>::Rank r = itPos - begin();
-        try
+        ASSERT_DEBUG(itPos <= end() && itPos >= begin(), "Invalid pos Iterator");
+        ++_size;
+        expand();
+        for (uint32_t i = _size - 1; i != r; --i)
         {
-            if (!(itPos <= end() && itPos >= begin()))
-            {
-                throw "Invalid pos Iterator";
-            }
-            ++_size;
-            expand();
-            for (uint32_t i = _size - 1; i != r; --i)
-            {
-                _elem[i] = _elem[i-1];
-            }
-            _elem[r] = std::move(x);
+            _elem[i] = _elem[i-1];
         }
-        catch (const char *errMsg)
-        {
-            printf("Error from Vector insert: %s\n", errMsg);
-            throw std::exception();
-        }
+        _elem[r] = std::move(x);
         return begin() + r;
     }
 
@@ -128,33 +93,19 @@ namespace CZ
         const T *b, const T *e)
     {
         typename Vector<T>::Rank r = itPos - begin();
-        try
+        ASSERT_DEBUG(itPos <= end() && itPos >= begin(), "Invalid pos Iterator");
+        ASSERT_DEBUG(b <= e, "Invalid Iterator range");
+        typename Vector<T>::Rank n = e - b;
+        _size += n;
+        expand();
+        for (uint32_t i = _size - 1; n < i && i != r - 1; --i)
         {
-            if (!(itPos <= end() && itPos >= begin()))
-            {
-                throw "Invalid pos Iterator";
-            }
-            if (!(b <= e))
-            {
-                throw "Invalid Iterator range";
-            }
-            typename Vector<T>::Rank n = e - b;
-            _size += n;
-            expand();
-            for (uint32_t i = _size - 1; n < i && i != r - 1; --i)
-            {
-                _elem[i] = _elem[i-n];
-            }
-            typename Vector<T>::Rank rTemp = r;
-            for (const T *it = b; it != e; ++it)
-            {
-                _elem[rTemp++] = *it;
-            }
+            _elem[i] = _elem[i-n];
         }
-        catch (const char *errMsg)
+        typename Vector<T>::Rank rTemp = r;
+        for (const T *it = b; it != e; ++it)
         {
-            printf("Error from Vector insert: %s\n", errMsg);
-            throw std::exception();
+            _elem[rTemp++] = *it;
         }
         return begin() + r;
     }
@@ -169,24 +120,13 @@ namespace CZ
     typename Vector<T>::Iterator Vector<T>::erase(typename Vector<T>::Iterator itPos)
     {
         typename Vector<T>::Rank r = itPos - begin();
-        try
+        ASSERT_DEBUG(itPos < end() && itPos >= begin(), "Invalid pos Iterator");
+        for (uint32_t i = r; i != _size - 1; ++i)
         {
-            if (!(itPos < end() && itPos >= begin()))
-            {
-                throw "Invalid pos Iterator";
-            }
-            for (uint32_t i = r; i != _size - 1; ++i)
-            {
-                _elem[i] = _elem[i+1];
-            }
-            --_size;
-            shrink();
+            _elem[i] = _elem[i+1];
         }
-        catch (const char *errMsg)
-        {
-            printf("Error from Vector erase: %s\n", errMsg);
-            throw std::exception();
-        }
+        --_size;
+        shrink();
         return begin() + r;
     }
 
@@ -196,27 +136,16 @@ namespace CZ
         typename Vector<T>::Iterator itEnd)
     {
         typename Vector<T>::Rank rB = itBegin - begin(), rE = itEnd - begin();
-        try
+        ASSERT_DEBUG(((itBegin >= begin() && itBegin <= end()) &&
+            (itEnd > begin() && itEnd <= end()) &&
+            itBegin <= itEnd), "Invalid Iterator range");
+        typename Vector<T>::Rank n = itEnd - itBegin;
+        for (uint32_t i = rB; i != rE; ++i)
         {
-            if (!((itBegin >= begin() && itBegin <= end()) &&
-                (itEnd > begin() && itEnd <= end()) &&
-                itBegin <= itEnd))
-            {
-                throw "Invalid Iterator range";
-            }
-            typename Vector<T>::Rank n = itEnd - itBegin;
-            for (uint32_t i = rB; i != rE; ++i)
-            {
-                _elem[i] = _elem[i+n];
-            }
-            _size -= n;
-            shrink();
+            _elem[i] = _elem[i+n];
         }
-        catch (const char *errMsg)
-        {
-            printf("Error from Vector erase: %s\n", errMsg);
-            throw std::exception();
-        }
+        _size -= n;
+        shrink();
         return begin() + rB;
     }
 

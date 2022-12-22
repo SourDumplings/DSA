@@ -13,9 +13,8 @@
 #ifndef STABLE_SORT_H
 #define STABLE_SORT_H
 
-#include <stdexcept>
 #include <functional>
-
+#include "../Base/Assert.h"
 #include "./Sort_methods/Bubble_sort.h"
 #include "./Sort_methods/Insertion_sort.h"
 #include "./Sort_methods/Merge_sort.h"
@@ -39,41 +38,26 @@ namespace CZ
         void doStable_sort(It begin, It end, const Cmp &cmp,
                            const StableSortMethod &method = MERGE_SORT, const uint32_t version = 0)
         {
-            try
+            Rank_sort N = end - begin;
+            ASSERT_DEBUG(0 < N, "invalid iterator range");
+            switch (method)
             {
-                Rank_sort N = end - begin;
-                if (N < 0)
-                {
-                    throw "invalid iterator range";
-                }
-                else if (N >= 1)
-                {
-                    switch (method)
-                    {
-                    case BUBBLE_SORT:
-                    {
-                        Bubble_sort(begin, N, cmp, version);
-                        break;
-                    }
-                    case INSERTION_SORT:
-                    {
-                        Insertion_sort(begin, N, 1, cmp, version);
-                        break;
-                    }
-                    case MERGE_SORT:
-                    {
-                        Merge_sort(begin, N, cmp, version);
-                        break;
-                    }
-                    }
-                }
-            }
-            catch (const char *errMsg)
+            case BUBBLE_SORT:
             {
-                printf("%s\n", errMsg);
-                throw std::exception();
+                Bubble_sort(begin, N, cmp, version);
+                break;
             }
-            return;
+            case INSERTION_SORT:
+            {
+                Insertion_sort(begin, N, 1, cmp, version);
+                break;
+            }
+            case MERGE_SORT:
+            {
+                Merge_sort(begin, N, cmp, version);
+                break;
+            }
+            }
         }
 
         template <typename It, typename Cmp>
@@ -82,7 +66,6 @@ namespace CZ
                                            const Cmp &cmp, const StableSortMethod &method = MERGE_SORT, const uint32_t version = 0)
         {
             doStable_sort(begin, end, cmp, method, version);
-            return;
         }
 
         template <typename It, typename Cmp>
@@ -90,8 +73,7 @@ namespace CZ
                                            seq_iterator_tag,
                                            const Cmp &cmp, const StableSortMethod &method = MERGE_SORT, const uint32_t version = 0)
         {
-            throw "iterator is seq_iterator, should be random_iterator";
-            return;
+            ASSERT_DEBUG(false, "iterator is seq_iterator, should be random_iterator");
         }
 
         template <typename It, typename Cmp>
@@ -99,35 +81,24 @@ namespace CZ
                                            bi_iterator_tag,
                                            const Cmp &cmp, const StableSortMethod &method = MERGE_SORT, const uint32_t version = 0)
         {
-            throw "iterator is bi_iterator, should be random_iterator";
-            return;
+            ASSERT_DEBUG(false, "iterator is bi_iterator, should be random_iterator");
         }
     }
 
     template <typename It, typename Cmp>
-    void Stable_sort(It begin, It end, const Cmp &cmp,
-                     const StableSortMethod &method = MERGE_SORT, const uint32_t version = 0)
+    inline void Stable_sort(It begin, It end, const Cmp &cmp,
+                            const StableSortMethod &method = MERGE_SORT, const uint32_t version = 0)
     {
-        try
-        {
-            SortAccessories::test_iterator_for_stable_sort(begin, end,
-                                                        typename Iterator_traits<It>::iterator_category(),
-                                                        cmp, method, version);
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from stable sort: %s\n", errMsg);
-            throw std::exception();
-        }
-        return;
+        SortAccessories::test_iterator_for_stable_sort(begin, end,
+                                                       typename Iterator_traits<It>::iterator_category(),
+                                                       cmp, method, version);
     }
 
     template <typename It>
-    void Stable_sort(It begin, It end,
+    inline void Stable_sort(It begin, It end,
                      const StableSortMethod &method = MERGE_SORT, const uint32_t version = 0)
     {
         Stable_sort(begin, end, std::less<decltype(*begin)>(), method, version);
-        return;
     }
 } // CZ
 

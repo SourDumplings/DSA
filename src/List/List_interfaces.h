@@ -13,7 +13,8 @@ List类模板的访问接口函数
 #define LIST_INTERFACES_H
 
 #include "List.h"
-#include <stdexcept>
+
+#include "../Base/Assert.h"
 #include <iostream>
 
 namespace CZ
@@ -47,83 +48,29 @@ namespace CZ
     }
 
     template <typename T>
-    T &List<T>::front()
-    {
-        try
-        {
-            if (!this->empty())
-            {
-                return _head->_next->_data;
-            }
-            else
-                throw "empty list";
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from List front: %s\n", errMsg);
-            throw std::exception();
-        }
-        return _head->_data;
-    }
-
-    template <typename T>
     const T &List<T>::front() const
     {
-        try
-        {
-            if (!this->empty())
-            {
-                return _head->_next->_data;
-            }
-            else
-                throw "empty list";
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from List front: %s\n", errMsg);
-            throw std::exception();
-        }
-        return _head->_data;
+        ASSERT_DEBUG(!this->empty(), "empty list");
+        return _head->_next->_data;
     }
 
     template <typename T>
-    inline T &List<T>::back()
+    inline T &List<T>::front()
     {
-        try
-        {
-            if (!this->empty())
-            {
-                return _head->_prev->_data;
-            }
-            else
-                throw "empty list";
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from List back: %s\n", errMsg);
-            throw std::exception();
-        }
-        return _head->_data;
+        return const_cast<T&>(static_cast<const List<T>&>(*this).front());
     }
 
     template <typename T>
     inline const T &List<T>::back() const
     {
-        try
-        {
-            if (!this->empty())
-            {
-                return _head->_prev->_data;
-            }
-            else
-                throw "empty list";
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from List back: %s\n", errMsg);
-            throw std::exception();
-        }
-        return _head->_data;
+        ASSERT_DEBUG(!this->empty(), "empty list");
+        return _head->_prev->_data;
+    }
+
+    template <typename T>
+    inline T &List<T>::back()
+    {
+        return const_cast<T&>(static_cast<const List<T>&>(*this).back());
     }
 
     template <typename T>
@@ -132,11 +79,7 @@ namespace CZ
         Iterator it = begin();
         if (index >= 0)
         {
-            if (static_cast<Rank>(index) >= _size)
-            {
-                printf("Error from List at: index is too large\n");
-                throw std::exception();
-            }
+            ASSERT_DEBUG(_size < static_cast<Rank>(index), "Error from List at: index is too large");
             for (RankPlus i = 0; i < index; ++i)
             {
                 ++it;
@@ -144,11 +87,7 @@ namespace CZ
         }
         else
         {
-            if (static_cast<Rank>(-index) > _size)
-            {
-                printf("Error from List at: the negative index is too small");
-                throw std::exception();
-            }
+            ASSERT_DEBUG(_size <= static_cast<Rank>(-index), "Error from List at: the negative index is too small");
 
             // 方法一：直接法，仅适用于双链表
             for (int i = 0; i < -index + 1; ++i)

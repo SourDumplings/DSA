@@ -17,47 +17,40 @@
 namespace CZ
 {
     template <typename T>
-    inline BinTreeNode<T>* BinTreeNode<T>::left_child() const
-    { return static_cast<BinTreeNode<T>*>(this->_children.front()); }
+    BinTreeNode<T> *BinTreeNode<T>::left_child() const
+    {
+        ASSERT_DEBUG(this->children().size() == 2, "wrong children num %u for bintree", this->children());
+        return dynamic_cast<BinTreeNode<T> *>(this->children().front());
+    }
 
     template <typename T>
-    inline BinTreeNode<T>*& BinTreeNode<T>::left_child()
-    { return (BinTreeNode<T>*&)(this->_children.front()); }
+    BinTreeNode<T> *BinTreeNode<T>::right_child() const
+    {
+        ASSERT_DEBUG(this->children().size() == 2, "wrong children num %u for bintree", this->children());
+        return dynamic_cast<BinTreeNode<T> *>(this->children().back());
+    }
 
     template <typename T>
-    inline BinTreeNode<T>* BinTreeNode<T>::right_child() const
-    { return static_cast<BinTreeNode<T>*>(this->_children.back()); }
-
-    template <typename T>
-    inline BinTreeNode<T>*& BinTreeNode<T>::right_child()
-    { return (BinTreeNode<T>*&)(this->_children.back()); }
-
-    template <typename T>
-    inline BinTreeNode<T>*& BinTreeNode<T>::father()
-    { return (BinTreeNode<T>*&)(TreeNode<T>::father()); }
-
-    template <typename T>
-    inline BinTreeNode<T>* BinTreeNode<T>::father() const
-    { return static_cast<BinTreeNode<T>*>(TreeNode<T>::father()); }
-
-    template <typename T>
-    BinTreeNode<T>* BinTreeNode<T>::brother() const
+    BinTreeNode<T> *BinTreeNode<T>::brother() const
     {
         BinTreeNode<T> *ret = nullptr;
         if (TreeNode<T>::father())
         {
-            ret = (this == this->father()->left_child()) ?
-                this->father()->right_child() : this->father()->left_child();
+            ret = (this == dynamic_cast<BinTreeNode<T> *>(this->father())->left_child())
+                      ? dynamic_cast<BinTreeNode<T> *>(this->father())->right_child()
+                      : dynamic_cast<BinTreeNode<T> *>(this->father())->left_child();
         }
         return ret;
     }
 
     template <typename T>
-    inline BinTreeNode<T>* BinTreeNode<T>::uncle() const
-    { return this->father()->brother(); }
+    inline BinTreeNode<T> *BinTreeNode<T>::uncle() const
+    {
+        return dynamic_cast<BinTreeNode<T> *>(this->father())->brother();
+    }
 
     template <typename T>
-    BinTreeNode<T>* BinTreeNode<T>::prev() const
+    BinTreeNode<T> *BinTreeNode<T>::prev() const
     {
         BinTreeNode<T> *ret = nullptr;
         if (left_child())
@@ -92,7 +85,7 @@ namespace CZ
     }
 
     template <typename T>
-    BinTreeNode<T>* BinTreeNode<T>::next() const
+    BinTreeNode<T> *BinTreeNode<T>::next() const
     {
         BinTreeNode<T> *ret = nullptr;
         if (right_child())
@@ -108,12 +101,12 @@ namespace CZ
         else if (TreeNode<T>::father())
         {
             // 没有右孩子的话就是该结点的把该结点包含在左子树的最低的祖先
-            ret = const_cast<BinTreeNode<T>*>(this);
-            BinTreeNode<T> *f = ret->father();
+            ret = const_cast<BinTreeNode<T> *>(this);
+            BinTreeNode<T> *f = dynamic_cast<BinTreeNode<T> *>(ret->father());
             while (f && ret == f->right_child())
             {
                 ret = f;
-                f = f->father();
+                f = dynamic_cast<BinTreeNode<T> *>(f->father());
             }
             if (f)
             {
@@ -131,7 +124,9 @@ namespace CZ
 
     template <typename T>
     inline bool equivalent(const BinTreeNode<T> &lhs, const BinTreeNode<T> &rhs)
-    { return TreeNode<T>::equivalent(lhs, rhs); }
+    {
+        return TreeNode<T>::equivalent(lhs, rhs);
+    }
 
     template <typename T>
     const char *BinTreeNode<T>::get_entity_name() const
@@ -141,4 +136,3 @@ namespace CZ
 } // CZ
 
 #endif // BIN_TREE_NODE_INTERFACES_H
-

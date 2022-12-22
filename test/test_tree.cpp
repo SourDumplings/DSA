@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <cstdio>
-#include <stdexcept>
+
 #include "Tree/Tree.h"
 
 using namespace std;
@@ -73,8 +73,6 @@ int main(int argc, char const *argv[])
     std::cout << "T: " << T << std::endl;
 
     // 测试树的相等
-    Tree<CZString> T1, T2, T3;
-
     /*
     T1:
                     hello
@@ -87,12 +85,12 @@ int main(int argc, char const *argv[])
     TreeNode<CZString> *N12 = new TreeNode<CZString>("hi");
     TreeNode<CZString> *N13 = new TreeNode<CZString>("fuck");
     TreeNode<CZString> *N14 = new TreeNode<CZString>("you");
-    // TreeNode<CZString> *N15 = new TreeNode<CZString>("we");
+    TreeNode<CZString> *N15 = new TreeNode<CZString>("we");
     TreeNode<CZString> *N16 = new TreeNode<CZString>("I");
     TreeNode<CZString> *N17 = new TreeNode<CZString>("me");
     TreeNode<CZString> *N18 = new TreeNode<CZString>("him");
     TreeNode<CZString> *N19 = new TreeNode<CZString>("her");
-    T1.root() = N10;
+    Tree<CZString> T1(N10);
     N10->insert_child(N11);
     N10->insert_child(N12);
     N10->insert_child(N13);
@@ -101,6 +99,7 @@ int main(int argc, char const *argv[])
     N14->insert_child(N17);
     N14->insert_child(N18);
     N14->insert_child(N19);
+    delete N15;
 
     /*
     T2:
@@ -119,7 +118,7 @@ int main(int argc, char const *argv[])
     TreeNode<CZString> *N27 = new TreeNode<CZString>("me");
     TreeNode<CZString> *N28 = new TreeNode<CZString>("him");
     TreeNode<CZString> *N29 = new TreeNode<CZString>("her");
-    T2.root() = N20;
+    Tree<CZString> T2(N20);
     N20->insert_child(N21);
     N20->insert_child(N22);
     N20->insert_child(N23);
@@ -141,12 +140,12 @@ int main(int argc, char const *argv[])
     TreeNode<CZString> *N32 = new TreeNode<CZString>("hi");
     TreeNode<CZString> *N33 = new TreeNode<CZString>("fuck");
     TreeNode<CZString> *N34 = new TreeNode<CZString>("you");
-    // TreeNode<CZString> *N35 = new TreeNode<CZString>("we");
+    TreeNode<CZString> *N35 = new TreeNode<CZString>("we");
     TreeNode<CZString> *N36 = new TreeNode<CZString>("I");
     TreeNode<CZString> *N37 = new TreeNode<CZString>("me");
     TreeNode<CZString> *N38 = new TreeNode<CZString>("him");
     TreeNode<CZString> *N39 = new TreeNode<CZString>("her");
-    T3.root() = N30;
+    Tree<CZString> T3(N30);
     N30->insert_child(N31);
     N30->insert_child(N32);
     N30->insert_child(N33);
@@ -155,6 +154,7 @@ int main(int argc, char const *argv[])
     N31->insert_child(N37);
     N31->insert_child(N38);
     N31->insert_child(N39);
+    delete N35;
 
     std::cout << "T1.hash(): " << T1.hash() << std::endl;
     std::cout << "T2.hash(): " << T2.hash() << std::endl;
@@ -169,67 +169,78 @@ int main(int argc, char const *argv[])
     printf("T == T3: %d\n", T == T3);
     printf("T != T3: %d\n", T != T3);
 
-    // auto tW = Tree<CZString>(T.secede(wN));
-    // printf("T.size() = %u\n", T.size());
-    // printf("T.height() = %u\n", T.height());
-    // printf("tW.size() = %u\n", tW.size());
-    // printf("tW.height() = %u\n", tW.height());
+    auto tW = Tree<CZString>(T.secede(wN));
+    printf("T.size() = %u\n", T.size());
+    printf("T.height() = %u\n", T.height());
+    printf("tW.size() = %u\n", tW.size());
+    printf("tW.height() = %u\n", tW.height());
 
-    // printf("pre_order_traversal from root: \n");
-    // Tree<CZString>::pre_order_traversal(root);
-    // putchar('\n');
-    // printf("post_order_traversal from root: \n");
-    // Tree<CZString>::post_order_traversal(T.root());
-    // putchar('\n');
-    // printf("level_order_traversal from root: \n");
-    // Tree<CZString>::level_order_traversal(root);
-    // putchar('\n');
-    // printf("pre_order_traversal from tW.root(): \n");
-    // Tree<CZString>::pre_order_traversal(tW.root());
-    // putchar('\n');
-    // printf("post_order_traversal from tW.root(): \n");
-    // Tree<CZString>::post_order_traversal(tW.root());
-    // putchar('\n');
-    // printf("level_order_traversal from tW.root(): \n");
-    // Tree<CZString>::level_order_traversal(tW.root());
-    // putchar('\n');
+    printf("pre_order_traversal from root: \n");
+    Tree<CZString>::pre_order_traversal(root);
+    putchar('\n');
+    printf("post_order_traversal from root: \n");
+    Tree<CZString>::post_order_traversal(T.root());
+    putchar('\n');
+    printf("level_order_traversal from root: \n");
+    Tree<CZString>::level_order_traversal(root);
+    putchar('\n');
+    printf("pre_order_traversal from tW.root(): \n");
+    Tree<CZString>::pre_order_traversal(tW.root());
+    putchar('\n');
+    printf("post_order_traversal from tW.root(): \n");
+    Tree<CZString>::post_order_traversal(tW.root());
+    putchar('\n');
+    printf("level_order_traversal from tW.root(): \n");
+    Tree<CZString>::level_order_traversal(tW.root());
+    putchar('\n');
 
-    // printf("wN in T? %d\n", T.has_this_node(wN));
-    // printf("wN in tW? %d\n", tW.has_this_node(wN));
+    printf("wN in T? %d\n", T.has_this_node(wN));
+    printf("wN in tW? %d\n", tW.has_this_node(wN));
 
-    // printf("tW.size() = %u, tW.height = %u\n", tW.size(), tW.height());
-    // tW.clear();
-    // printf("tW.size() = %u, tW.height = %u\n", tW.size(), tW.height());
+    printf("tW.size() = %u, tW.height = %u\n", tW.size(), tW.height());
+    tW.clear();
+    printf("tW.size() = %u, tW.height = %u\n", tW.size(), tW.height());
 
-    // printf("T.size() = %u, T.height = %u\n", T.size(), T.height());
-    // T.clear();
-    // printf("T.size() = %u, T.height = %u\n", T.size(), T.height());
+    printf("T.size() = %u, T.height = %u\n", T.size(), T.height());
+    T.clear();
+    printf("T.size() = %u, T.height = %u\n", T.size(), T.height());
 
     // 测试LCA算法
-    // TreeNode<int> *nr(new TreeNode<int>(0)), *n1(new TreeNode<int>(1)), *n2(new TreeNode<int>(2)),
-    //     *n3(new TreeNode<int>(3)), *n4(new TreeNode<int>(4)), *n5(new TreeNode<int>(5)),
-    //     *n6(new TreeNode<int>(6)), *n7(new TreeNode<int>(7));
-    // Tree<int> T(nr);
-    // nr->insert_child(n1);
-    // nr->insert_child(n2);
-    // nr->insert_child(n3);
-    // n1->insert_child(n4);
-    // n2->insert_child(n5);
-    // n5->insert_child(n6);
-    // n6->insert_child(n7);
-    // printf("pre_order_traversal of T: \n");
-    // Tree<int>::pre_order_traversal(T.root());
-    // putchar('\n');
-    // printf("post_order_traversal of T: \n");
-    // Tree<int>::post_order_traversal(T.root());
-    // putchar('\n');
-    // printf("level_order_traversal of T: \n");
-    // Tree<int>::level_order_traversal(T.root());
-    // putchar('\n');
-    // printf("LCA of 3 and 6 is %d\n", T.LCA(n3, n6)->data());
-    // printf("LCA of 1 and 5 is %d\n", T.LCA(n1, n5)->data());
-    // printf("LCA of 7 and 6 is %d\n", T.LCA(n7, n6)->data());
-    // printf("LCA of 7 and 2 is %d\n", T.LCA(n7, n2)->data());
+    /* 
+              0
+            / | \
+           1  2  3
+          /  /
+         4  5
+           /
+          6
+         /
+        7  
+     */
+    TreeNode<int> *nr(new TreeNode<int>(0)), *n1(new TreeNode<int>(1)), *n2(new TreeNode<int>(2)),
+        *n3(new TreeNode<int>(3)), *n4(new TreeNode<int>(4)), *n5(new TreeNode<int>(5)),
+        *n6(new TreeNode<int>(6)), *n7(new TreeNode<int>(7));
+    Tree<int> Tl(nr);
+    nr->insert_child(n1);
+    nr->insert_child(n2);
+    nr->insert_child(n3);
+    n1->insert_child(n4);
+    n2->insert_child(n5);
+    n5->insert_child(n6);
+    n6->insert_child(n7);
+    printf("pre_order_traversal of Tl: \n");
+    Tree<int>::pre_order_traversal(Tl.root());
+    putchar('\n');
+    printf("post_order_traversal of Tl: \n");
+    Tree<int>::post_order_traversal(Tl.root());
+    putchar('\n');
+    printf("level_order_traversal of Tl: \n");
+    Tree<int>::level_order_traversal(Tl.root());
+    putchar('\n');
+    printf("LCA of 3 and 6 is %d\n", Tl.LCA(n3, n6)->data());
+    printf("LCA of 1 and 5 is %d\n", Tl.LCA(n1, n5)->data());
+    printf("LCA of 7 and 6 is %d\n", Tl.LCA(n7, n6)->data());
+    printf("LCA of 7 and 2 is %d\n", Tl.LCA(n7, n2)->data());
 
     // 测试树的相等与不等
 

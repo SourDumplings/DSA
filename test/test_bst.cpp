@@ -14,7 +14,7 @@
 #include <string>
 #include <algorithm>
 #include <memory>
-#include <stdexcept>
+
 
 #include "Tree/BinTree/BST.h"
 #include "Vector/Vector.h"
@@ -30,39 +30,41 @@ int main(int argc, char const *argv[])
     bst1.print_info("bst1");
     for (auto &i : v1)
     {
-        bst1.insert(i);
+        bst1.insert_data(i);
     }
-    bst1.insert(new BSTNode<int>(7));
+    bst1.insert_data(7);
     bst1.print_info("bst1");
+    /* bst1: 
+        1
+          \
+           5
+        /    \
+       3       7
+      / \     / \
+     2   3   6  10
+    /   /     \
+   2   4       7      
+     */
 
     // 查找测试
-    printf("3 is in bst1? %d\n", static_cast<bool>(bst1.search(3)));
-    printf("8 is in bst1? %d\n", static_cast<bool>(bst1.search(8)));
+    printf("3 is in bst1? %d\n", static_cast<bool>(bst1.search_data(3)));
+    printf("8 is in bst1? %d\n", static_cast<bool>(bst1.search_data(8)));
 
     // 测试secede
-    // BST<int> bst2(bst1.secede(bst1.search(7)));
+    // // BST<int> bst2(dynamic_cast<BSTNode<int>*>(bst1.secede(bst1.search_data(6))));
+    // BST<int> bst2(bst1.secede_data(7));
     // bst1.print_info("bst1");
     // bst2.print_info("bst2");
-    // // bst2.root()->remove_child(6);
-    // bst2.root()->remove_left_child();
+    // BSTNode<int> *pC = dynamic_cast<BSTNode<int>*>(dynamic_cast<BSTNode<int>*>(bst2.root())->remove_left_child());
+    // delete pC;
     // bst2.print_info("bst2");
     //
     // 测试remove
-    // BSTNode<int> *n5 = bst1.remove(5);
-    // if (n5->left_child() || n5->right_child())
-    // {
-    //     printf("n5 is not isolated\n");
-    // }
-    // bst1.print_info("bst1");
-    auto n7 = bst1.remove(bst1.search(7));
     bst1.print_info("bst1");
-    auto n1 = bst1.remove(1);
+    delete bst1.remove_data(7);
     bst1.print_info("bst1");
-    // auto n8 = bst1.remove(8);
-    delete n1;
-    delete n7;
-    // delete n8;
-
+    delete bst1.remove_data(1);
+    bst1.print_info("bst1");
     cout << "bst1: " << bst1 << endl;
     cout << "bst1.hash(): " << bst1.hash() << endl;
     bst1.remove_all(2);

@@ -14,7 +14,6 @@
 
 #include "Graph.h"
 #include "../Queue/Queue.h"
-#include <stdexcept>
 #include "../Algorithms/Sort.h"
 
 namespace CZ
@@ -22,11 +21,7 @@ namespace CZ
     template <typename ED, typename VD>
     void Graph<ED, VD>::top_sort(Vector<Rank> &results) const
     {
-        if (!_directed)
-        {
-            printf("Error from Graph top_sort: cannot deal with undirected Graph\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(_directed, "Error from Graph top_sort: cannot deal with undirected Graph");
 
         Queue<Rank> Q;
         Vector<Rank> inD(_inDegree);
@@ -68,11 +63,7 @@ namespace CZ
             }
         }
 
-        if (results.size() != _Nv)
-        {
-            printf("Error from Graph top_sort: this Graph may have circuits\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(results.size() == _Nv, "Error from Graph top_sort: this Graph may have circuits");
         return;
     }
 } // CZ

@@ -46,11 +46,7 @@ namespace CZ
 
         TreeMapIterator<K, V> &operator++()
         {
-            if (_isEnd)
-            {
-                printf("Error from TreeMapIterator::operator++: cannot move forward from end iterator.\n");
-                throw std::exception();
-            }
+            ASSERT_DEBUG(!_isEnd, "Error from TreeMapIterator::operator++: cannot move forward from end iterator.");
 
             if (!_bIt->next())
             {
@@ -66,11 +62,7 @@ namespace CZ
         }
         TreeMapIterator<K, V> operator++(int)
         {
-            if (_isEnd)
-            {
-                printf("Error from TreeMapIterator::operator++: cannot move forward from end iterator.\n");
-                throw std::exception();
-            }
+            ASSERT_DEBUG(!_isEnd, "Error from TreeMapIterator::operator++: cannot move forward from end iterator.");
 
             TreeMapIterator<K, V> temp = *this;
             if (!_bIt->next())

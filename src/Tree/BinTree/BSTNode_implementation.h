@@ -13,7 +13,6 @@
 #define BST_NODE_IMPLEMENTATION_H
 
 #include "BSTNode.h"
-#include <stdexcept>
 
 namespace CZ
 {
@@ -26,153 +25,78 @@ namespace CZ
         }
     }
 
-    // 继承来的方法的一些小修改
-    template <typename T>
-    inline BSTNode<T>* BSTNode<T>::left_child() const
-    { return static_cast<BSTNode*>(BinTreeNode<T>::left_child()); }
-    template <typename T>
-    inline BSTNode<T>*&BSTNode<T>::left_child()
-    { return (BSTNode*&)(BinTreeNode<T>::left_child()); }
-    template <typename T>
-    inline BSTNode<T>* BSTNode<T>::right_child() const
-    { return static_cast<BSTNode*>(BinTreeNode<T>::right_child()); }
-    template <typename T>
-    inline BSTNode<T>*&BSTNode<T>::right_child()
-    { return (BSTNode*&)(BinTreeNode<T>::right_child()); }
-    template <typename T>
-    inline BSTNode<T>* BSTNode<T>::brother() const
-    { return static_cast<BSTNode*>(BinTreeNode<T>::brother()); }
-    template <typename T>
-    inline BSTNode<T>* BSTNode<T>::uncle() const
-    { return static_cast<BSTNode*>(BinTreeNode<T>::uncle()); }
-    template <typename T>
-    inline BSTNode<T>* BSTNode<T>::prev() const
-    { return static_cast<BSTNode*>(BinTreeNode<T>::prev()); }
-    template <typename T>
-    inline BSTNode<T>* BSTNode<T>::next() const
-    { return static_cast<BSTNode*>(BinTreeNode<T>::next()); }
-    template <typename T>
-    BSTNode<T>* BSTNode<T>::zig()
-    { return static_cast<BSTNode*>(BinTreeNode<T>::zig()); }
-    template <typename T>
-    BSTNode<T>* BSTNode<T>::zag()
-    { return static_cast<BSTNode*>(BinTreeNode<T>::zag()); }
-    template <typename T>
-    inline BSTNode<T>*& BSTNode<T>::father()
-    { return (BSTNode<T>*&)(BinTreeNode<T>::father()); }
-    template <typename T>
-    inline BSTNode<T>* BSTNode<T>::father() const
-    { return static_cast<BSTNode<T>*>(BinTreeNode<T>::father()); }
-
     template <typename T>
     inline const T& BSTNode<T>::data() const { return BinTreeNode<T>::data(); }
 
     template <typename T>
-    inline void BSTNode<T>::insert_as_left_child(BSTNode<T> *node)
-    { return BinTreeNode<T>::insert_as_left_child(node); }
-    template <typename T>
-    inline void BSTNode<T>::insert_as_right_child(BSTNode<T> *node)
-    { return BinTreeNode<T>::insert_as_right_child(node); }
-
-    template <typename T>
-    inline void BSTNode<T>::insert_child(const T &data)
-    { return insert_child(new BSTNode<T>(data)); }
-
-    template <typename T>
-    void BSTNode<T>::insert_child(BSTNode *node)
-    {
-        if (!node)
+    bool BSTNode<T>::insert_child_by_data(const T &data) noexcept
+    { 
+        BSTNode<T> *pNode = new BSTNode<T>(data);
+        TreeNode<T> *pRes = insert_child(pNode);
+        if (pNode && pRes == nullptr)
         {
-            return;
+            delete pNode;
+            return false;
         }
-        try
-        {
-            if (node->data() < data() || node->data() == data())
-            {
-                if (left_child())
-                {
-                    throw "this node has a left child, cannot have more";
-                }
-                else
-                {
-                    insert_as_left_child(node);
-                }
-            }
-            else if (data() < node->data())
-            {
-                if (right_child())
-                {
-                    throw "this node has a right child, cannot have more";
-                }
-                else
-                {
-                    insert_as_right_child(node);
-                }
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from BSTNode insert_child: %s\n", errMsg);
-            throw std::exception();
-        }
-        return;
+        return true;
     }
 
     template <typename T>
-    BSTNode<T>* BSTNode<T>::remove_child(const T &data)
+    TreeNode<T> *BSTNode<T>::insert_child(TreeNode<T> *pNode) noexcept
+    {
+        if (pNode == nullptr)
+        {
+            return nullptr;
+        }
+        if (pNode->data() <= data() && this->left_child() == nullptr)
+        {
+            // 相等的数据结点优先作为左孩子
+            this->insert_as_left_child(dynamic_cast<BSTNode<T>*>(pNode));
+            return pNode;
+        }
+        else if (data() <= pNode->data() && this->right_child() == nullptr)
+        {
+            this->insert_as_right_child(dynamic_cast<BSTNode<T>*>(pNode));
+            return pNode;
+        }
+        return nullptr;
+    }
+
+    template <typename T>
+    BSTNode<T>* BSTNode<T>::remove_child_by_data(const T &data) noexcept
     {
         BSTNode<T> *ret = nullptr;
-        try
+        if (this->left_child() && data == this->left_child()->data())
         {
-            if (left_child() && data == left_child()->data())
-            {
-                ret = left_child();
-                BinTreeNode<T>::remove_left_child();
-            }
-            else if (right_child() && data == right_child()->data())
-            {
-                ret = right_child();
-                BinTreeNode<T>::remove_right_child();
-            }
-            else
-                throw "this node doesn't have child with this data";
+            ret = dynamic_cast<BSTNode<T>*>(this->remove_left_child());
         }
-        catch (const char *errMsg)
+        else if (this->right_child() && data == this->right_child()->data())
         {
-            printf("Error from BSTNode remove_child: %s\n", errMsg);
-            throw std::exception();
+            ret = dynamic_cast<BSTNode<T>*>(this->remove_right_child());
         }
+        else
+            ASSERT_DEBUG(false, "this node doesn't have child with this data");
         return ret;
     }
 
     template <typename T>
-    BSTNode<T>* BSTNode<T>::remove_child(BSTNode *node)
+    BSTNode<T>* BSTNode<T>::remove_child(BSTNode *pNode)
     {
-        if (!node)
+        if (pNode == nullptr)
         {
             return nullptr;
         }
         BSTNode<T> *ret = nullptr;
-        try
+        if (this->left_child() && pNode == this->left_child())
         {
-            if (left_child() && node == left_child())
-            {
-                ret = left_child();
-                BinTreeNode<T>::remove_left_child();
-            }
-            else if (right_child() && node == right_child())
-            {
-                ret = right_child();
-                BinTreeNode<T>::remove_right_child();
-            }
-            else
-                throw "this node doesn't have that child";
+            ret = dynamic_cast<BSTNode<T>*>(this->remove_left_child());
         }
-        catch (const char *errMsg)
+        else if (this->right_child() && pNode == this->right_child())
         {
-            printf("Error from BSTNode remove_child: %s\n", errMsg);
-            throw std::exception();
+            ret = dynamic_cast<BSTNode<T>*>(this->remove_right_child());
         }
+        else
+            ASSERT_DEBUG(false, "this node doesn't have that child");
         return ret;
     }
 

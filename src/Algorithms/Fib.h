@@ -12,7 +12,7 @@
 #ifndef FIB_H
 #define FIB_H
 
-#include <cstdio>
+#include "../Base/Assert.h"
 
 namespace CZ
 {
@@ -43,21 +43,9 @@ namespace CZ
         long long prev()
         {
             // 获取并转至前一个斐波那契项
-            try
-            {
-                if (thisItem > 0)
-                {
-                    lastItem = thisItem - lastItem;
-                    thisItem -= lastItem;
-                }
-                else
-                    throw "prev failure";
-            }
-            catch (const char *errMsg)
-            {
-                printf("%s\n", errMsg);
-                throw "cannot prev any more.";
-            }
+            ASSERT_DEBUG(0 < thisItem, "cannot prev anymore");
+            lastItem = thisItem - lastItem;
+            thisItem -= lastItem;
             return thisItem;
         }
 

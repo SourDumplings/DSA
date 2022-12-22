@@ -13,97 +13,74 @@
 #define BIN_TREE_MODIFICATIONS_H
 
 #include "BinTree.h"
-#include <stdexcept>
+
 
 namespace CZ
 {
 
     template <typename T>
-    void BinTree<T>::insert(BinTreeNode<T> *father, BinTreeNode<T> *node)
+    void BinTree<T>::insert(TreeNode<T> *pFather, TreeNode<T> *pNode)
     {
-        try
+        ASSERT_DEBUG(pNode, "node is nullptr, cannot be a child");
+        ASSERT_DEBUG(pNode->father() == nullptr, "this node has already had a father");
+
+        if (this->root())
         {
-            if (!node)
-            {
-                throw "node is nullptr, cannot be a child";
-            }
-            if (node->father())
-            {
-                throw "this node has already had a father";
-            }
+            BinTreeNode<T>* pBinTreeNodeFather = dynamic_cast<BinTreeNode<T>*>(pFather);
+            ASSERT_DEBUG(pBinTreeNodeFather, "father is nullptr, cannot be a father");
+            ASSERT_DEBUG(pBinTreeNodeFather->get_root() == this->root(), "this father is not a node in this tree");
 
-            if (Tree<T>::root())
+            if (pBinTreeNodeFather->left_child() == nullptr)
             {
-                if (!father)
-                {
-                    throw "father is nullptr, cannot be a father";
-                }
-                if (father->get_root() != Tree<T>::root())
-                {
-                    throw "this father is not a node in this tree";
-                }
-
-                if (!father->left_child())
-                {
-                    father->insert_as_left_child(node);
-                }
-                else if (!father->right_child())
-                {
-                    father->insert_as_right_child(node);
-                }
-                else
-                {
-                    throw "this father has two children, cannot have more";
-                }
+                pBinTreeNodeFather->insert_as_left_child(dynamic_cast<BinTreeNode<T>*>(pNode));
+            }
+            else if (pBinTreeNodeFather->right_child() == nullptr)
+            {
+                pBinTreeNodeFather->insert_as_right_child(dynamic_cast<BinTreeNode<T>*>(pNode));
             }
             else
             {
-                if (father)
-                {
-                    throw "root node cannot have father";
-                }
-                Tree<T>::root() = node;
+                ASSERT_DEBUG(false, "this father has two children, cannot have more");
             }
-            Tree<T>::_size += node->get_size();
         }
-        catch (const char *errMsg)
+        else
         {
-            printf("Error from BinTree's insert: %s\n", errMsg);
-            std::exception();
+            ASSERT_DEBUG(pFather == nullptr, "root node cannot have father");
+            this->_pRoot = pNode;
         }
-        return;
+        this->_size += pNode->get_size();
     }
 
     template <typename T>
-    BinTreeNode<T>* BinTree<T>::secede(BinTreeNode<T> *node)
+    TreeNode<T> *BinTree<T>::secede(TreeNode<T> *pNode)
     {
-        if (!node)
+        if (pNode == nullptr)
         {
             return nullptr;
         }
 
-        try
-        {
-            if (node->get_root() != Tree<T>::root())
-            {
-                throw "this node is not in this tree";
-            }
-            if (node == Tree<T>::root())
-            {
-                throw "cannot remove root";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error: %s\n", errMsg);
-            throw std::exception();
-        }
-        BinTreeNode<T> *f = node->father();
+        ASSERT_DEBUG(pNode->get_root() == this->root(), "this node is not in this tree");
+        ASSERT_DEBUG(pNode != this->root(), "cannot secede root");
 
-        (node == f->left_child()) ? f->remove_left_child() : f->remove_right_child();
-        Tree<T>::_size -= node->get_size();
+        BinTreeNode<T> *pBinTreeNode = dynamic_cast<BinTreeNode<T>*>(pNode);
+        ASSERT_RELEASE(pBinTreeNode, "wrong node pointer");
 
-        return node;
+        BinTreeNode<T> *f = dynamic_cast<BinTreeNode<T>*>(pBinTreeNode->father());
+        if (f->left_child() == pBinTreeNode)
+        {
+            f->set_left_child(nullptr);
+        }
+        else if (f->right_child() == pBinTreeNode)
+        {
+            f->set_right_child(nullptr);
+        }
+        typename TreeNode<T>::Rank sizeLess = pBinTreeNode->get_size();
+        this->_size -= sizeLess;
+
+        // 被删掉的目标结点解除其与父亲的关系
+        pBinTreeNode->set_father(nullptr);
+
+        return pBinTreeNode;
     }
 } // CZ
 

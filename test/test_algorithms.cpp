@@ -12,7 +12,7 @@
 #include <iostream>
 #include <cstdio>
 #include <string>
-#include <stdexcept>
+
 #include <functional>
 
 #include "CZString/CZString.h"
@@ -198,7 +198,7 @@ int main(int argc, char const *argv[])
     // cout << "Pow(10, -3) = " << Pow(10, -3) << endl;
 
     // 测试 TopK 算法
-    Vector<int> v = {1, 2, 4, 6, 7, 9, 10, 12, 15, 16, 18};
+    Vector<int> v = {6, 2, 4, 1, 7, 16, 10, 12, 15, 8, 18};
     Vector<int> vp(v);
     Sort(vp.begin(), vp.end());
     cout << "v: " << v << endl;

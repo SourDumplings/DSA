@@ -15,7 +15,7 @@
 #include <vector>
 #include <algorithm>
 #include <memory>
-#include <stdexcept>
+
 
 #include "Tree/BinTree/BinTree.h"
 #include "Vector/Vector.h"
@@ -27,7 +27,7 @@ int main(int argc, char const *argv[])
 {
     Vector<BinTreeNode<int>*> vn;
     vn.resize(12);
-    for (int i = 0; i < 12; ++i)
+    for (int i = 1; i < 12; ++i)
     {
         vn[i] = new BinTreeNode<int>(i);
     }

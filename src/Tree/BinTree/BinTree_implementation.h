@@ -18,7 +18,6 @@
 
 #include "BinTree_traversal.h"
 #include "BinTree_modifications.h"
-#include "BinTree_operators.h"
 #include "BinTree_print_info.h"
 
 #include "BinTree_reconstruct.h"

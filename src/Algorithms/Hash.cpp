@@ -67,12 +67,12 @@ namespace CZ
 
     HashRank Hash<float>::operator()(const float &value) const
     {
-        return Hash<uint64_t>()(*reinterpret_cast<const uint64_t *>(&value));
+        return Hash<uint64_t>()(reinterpret_cast<uint64_t>(&value));
     }
 
     HashRank Hash<double>::operator()(const double &value) const
     {
-        return Hash<uint64_t>()(*reinterpret_cast<const uint64_t *>(&value));
+        return Hash<uint64_t>()(reinterpret_cast<uint64_t>(&value));
     }
 
     HashRank Hash<std::string>::operator()(const std::string &value) const

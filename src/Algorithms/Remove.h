@@ -14,75 +14,62 @@ Remove算法，类似于STL中的remove，将待删除的元素移到后面，�
 #ifndef REMOVE_H
 #define REMOVE_H
 
+#include "../Base/Assert.h"
 #include "../Iterator/Iterator_traits.h"
-
-#include <stdexcept>
 #include <utility>
 
 namespace CZ
 {
-    template <typename It, typename F>
-    It doRemove(const It begin, const It end, const F &is_remove)
-    {
-        using Rank = uint32_t;
-        It it = begin;
-        Rank i = 0;
-        for (; it != end; ++it)
-        {
-            if (!is_remove(*it))
-            {
-                *(begin + i) = *it;
-                ++i;
-            }
-        }
-        return begin + i;
-    }
-
-    namespace TestIterator
+    namespace RemoveAccessories
     {
         template <typename It, typename F>
+        It doRemove(const It begin, const It end, const F &is_remove)
+        {
+            using Rank = uint32_t;
+            It it = begin;
+            Rank i = 0;
+            for (; it != end; ++it)
+            {
+                if (!is_remove(*it))
+                {
+                    *(begin + i) = *it;
+                    ++i;
+                }
+            }
+            return begin + i;
+        }
+
+        template <typename It, typename F>
         It test_iterator_for_remove(const It &begin, const It &end,
-            random_iterator_tag, const F &is_remove)
+                                    random_iterator_tag, const F &is_remove)
         {
             return doRemove(begin, end, is_remove);
         }
 
         template <typename It, typename F>
         It test_iterator_for_remove(const It &begin, const It &end,
-            seq_iterator_tag, const F &is_remove)
+                                    seq_iterator_tag, const F &is_remove)
         {
-            throw "iterator is seq_iterator, should be random_iterator";
+            ASSERT_DEBUG(false, "iterator is seq_iterator, should be random_iterator");
             return nullptr;
         }
 
         template <typename It, typename F>
         It test_iterator_for_remove(const It &begin, const It &end,
-            bi_iterator_tag, const F &is_remove)
+                                    bi_iterator_tag, const F &is_remove)
         {
-            throw "iterator is bi_iterator, should be random_iterator";
+            ASSERT_DEBUG(false, "iterator is bi_iterator, should be random_iterator");
             return nullptr;
         }
-    } // TestIterator
+    }
 
     template <typename It, typename F>
-    It Remove(const It begin, const It end, const F &is_remove)
+    inline It Remove(const It begin, const It end, const F &is_remove)
     {
-        It ret(nullptr);
-        try
-        {
-            ret = TestIterator::test_iterator_for_remove(begin, end,
-                typename Iterator_traits<It>::iterator_category(),
-                is_remove);
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from Remove: %s\n", errMsg);
-            throw std::exception();
-        }
-        return ret;
+        return RemoveAccessories::test_iterator_for_remove(begin, end,
+                                                           typename Iterator_traits<It>::iterator_category(),
+                                                           is_remove);
     }
 }
 
 #endif // REMOVE_H
-
-

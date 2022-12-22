@@ -17,35 +17,28 @@
 namespace CZ
 {
     template <typename T>
-    inline RedBlackTreeNode<T>*& RedBlackTree<T>::root()
-    { return (RedBlackTreeNode<T>*&)(BST<T>::root()); }
-    template <typename T>
-    inline RedBlackTreeNode<T>* RedBlackTree<T>::root() const
-    { return static_cast<RedBlackTreeNode<T>*>(BST<T>::root()); }
-    template <typename T>
-    inline RedBlackTreeNode<T>* RedBlackTree<T>::search(const T &data) const
-    { return static_cast<RedBlackTreeNode<T>*>(BST<T>::search(data)); }
-
-    template <typename T>
     inline bool RedBlackTree<T>::is_red(RedBlackTreeNode<T> *v) const { return v ? v->_red : false; }
 
     template <typename T>
     inline typename RedBlackTree<T>::Rank
-        RedBlackTree<T>::get_black_height(RedBlackTreeNode<T> *v) const
-    { return v ? v->_blackHeight : 0; }
+    RedBlackTree<T>::get_black_height(RedBlackTreeNode<T> *v) const
+    {
+        return v ? v->_blackHeight : 0;
+    }
 
     template <typename T>
     bool RedBlackTree<T>::is_black_balanced(RedBlackTreeNode<T> *v) const
     {
-        if (!v)
+        if (v == nullptr)
         {
             // 空结点当然不需要高度更新
             return false;
         }
-        return (get_black_height(v->left_child()) == get_black_height(v->right_child())) &&
-            (
-                v->_blackHeight ==
-                (is_red(v) ? get_black_height(v->left_child()) : get_black_height(v->right_child()) + 1)
+        return (get_black_height(dynamic_cast<RedBlackTreeNode<T>*>(v->left_child())) == get_black_height(dynamic_cast<RedBlackTreeNode<T>*>(v->right_child())))
+            && (v->_blackHeight ==
+                    (is_red(v) ? get_black_height(dynamic_cast<RedBlackTreeNode<T>*>(v->left_child()))
+                        : get_black_height(dynamic_cast<RedBlackTreeNode<T>*>(v->right_child())) + 1
+                    )
             );
     }
 
@@ -58,5 +51,3 @@ namespace CZ
 } // CZ
 
 #endif // RED_BLACK_TREE_INTERFACES_H
-
-

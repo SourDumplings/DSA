@@ -13,7 +13,7 @@ List的一些特有算法
 #define LIST_ALGORITHMS_H
 
 #include "List.h"
-#include <stdexcept>
+
 
 namespace CZ
 {

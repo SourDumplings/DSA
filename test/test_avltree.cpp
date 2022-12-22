@@ -15,7 +15,7 @@
 #include <vector>
 #include <algorithm>
 #include <memory>
-#include <stdexcept>
+
 // #include <ctime>
 
 #include "Tree/BinTree/AVLTree.h"
@@ -44,25 +44,66 @@ int main(int argc, char const *argv[])
     AVLTree<int> aT;
     for (int32_t i = 0; i < num; ++i)
     {
-        aT.insert(van[i]);
+        aT.insert_data(van[i]->data());
+        delete van[i];
     }
+    van.clear();
     aT.print_info("aT");
+    /* 
+        不设置随机数种子，aT：
+                3
+            /       \
+           3         6
+         /        /     \
+        2        5       7
+       /        / \        \
+      1        5   6        9 
+     */
+
 
     // 删除测试
     AVLTree<int> aT2(aT);
     aT2.print_info("aT2");
-    AVLTreeNode<int> *n8 = aT2.root()->right_child();
+    AVLTreeNode<int> *n8 = dynamic_cast<AVLTreeNode<int>*>(dynamic_cast<AVLTreeNode<int>*>(aT2.root())->right_child());
     printf("n8 = %d\n", n8->data());
-    // n8->remove_left_child();
-    aT2.secede(n8);
+    TreeNode<int> *pN8 = aT2.secede(n8);
+    delete pN8;
     aT2.print_info("aT2");
+    /* 
+        aT2:
+            3
+           / \
+          2   5
+         /   / \
+        1   3   5
+     */
 
-    // auto n7 = aT.remove(7); delete n7;
-    // aT.print_info("aT");
-    // auto n0 = aT.remove(0); delete n0;
-    // aT.print_info("aT");
-    auto n4 = aT.remove(aT.root());
-    delete n4;
+    auto n7 = aT.remove_data(7); delete n7;
+    aT.print_info("aT");
+    /* aT:
+            5
+          /   \
+         3     6
+        / \   / \
+       2   5 6   9
+      /   /
+     1   3 
+     */
+
+
+    auto n0 = aT.remove_data(0); delete n0;
+    aT.print_info("aT");
+    /* aT:
+            5
+          /   \
+         3     6
+        / \   / \
+       2   5 6   9
+      /   /
+     1   3    
+     */
+
+
     cout << "aT: " << aT << endl;
     cout << "aT.hash(): " << aT.hash() << endl;
     aT.print_info("aT");
@@ -70,5 +111,24 @@ int main(int argc, char const *argv[])
     cout << "aT: " << aT << endl;
     cout << "aT.hash(): " << aT.hash() << endl;
     aT.print_info("aT");
+    /* aT:
+             5
+           /   \
+          2     6
+         / \   / \
+        1   5 6   9
+     */
+
+    aT.remove_all(5);
+    aT.print_info("aT");
+    /* aT:
+             6
+           /   \
+          2     6
+         /       \
+        1         9
+     */
+
+
     return 0;
 }

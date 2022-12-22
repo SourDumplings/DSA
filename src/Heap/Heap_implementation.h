@@ -16,7 +16,6 @@
 
 #include <iostream>
 #include <cstdio>
-#include <stdexcept>
 #include "../Algorithms/Swap.h"
 #include "../CZString/CZString.h"
 
@@ -116,11 +115,7 @@ namespace CZ
     template <typename T, typename Cmp>
     void Heap<T, Cmp>::pop(const Cmp &cmp)
     {
-        if (this->empty())
-        {
-            printf("Error from Heap pop: empty Heap cannot pop\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(!this->empty(), "Error from Heap pop: empty Heap cannot pop");
         // 删除结点即就是将堆顶元素与最后一个元素互换，弹出最后一个元素（最大元素）
         // 然后把刚刚换到根结点的元素做下滤
         Swap(_data.front(), _data.back());

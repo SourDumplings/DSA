@@ -13,6 +13,8 @@
 #define BIN_TREE_CONSTRUCTORS_H
 
 #include "BinTree.h"
+
+#include "../../Algorithms/Max.h"
 #include <utility>
 
 namespace CZ
@@ -24,10 +26,34 @@ namespace CZ
     BinTree<T>::BinTree(BinTreeNode<T> *root): Tree<T>(root) {}
 
     template <typename T>
-    BinTree<T>::BinTree(const BinTree<T> &t): Tree<T>(t) {}
+    BinTree<T>::BinTree(const BinTree<T> &t)
+    {
+        this->_pRoot = dynamic_cast<BinTreeNode<T>*>(copy_from(t._pRoot));
+        this->_size = t._size;
+    }
 
     template <typename T>
     BinTree<T>::BinTree(BinTree<T> &&t): Tree<T>(std::move(t)) {}
+
+    template <typename T>
+    BinTreeNode<T> *BinTree<T>::copy_from(TreeNode<T> *pRoot)
+    {
+        if (pRoot == nullptr)
+        {
+            return nullptr;
+        }
+        BinTreeNode<T> *pBinTreeRoot = dynamic_cast<BinTreeNode<T>*>(pRoot);
+        ASSERT_DEBUG(pBinTreeRoot, "error pRoot");
+        BinTreeNode<T> *pCopiedRoot = new BinTreeNode<T>(pBinTreeRoot->data());
+        ASSERT_RELEASE(pCopiedRoot, "copy root error");
+        BinTreeNode<T> *pLC = pBinTreeRoot->left_child();
+        BinTreeNode<T> *pLCopied = this->copy_from(pLC);
+        BinTreeNode<T> *pRC = pBinTreeRoot->right_child();
+        BinTreeNode<T> *pRCopied = this->copy_from(pRC);
+        pCopiedRoot->insert_as_left_child(pLCopied);
+        pCopiedRoot->insert_as_right_child(pRCopied);
+        return pCopiedRoot;
+    }
 } // CZ
 
 #endif // BIN_TREE_CONSTRUCTORS_H

@@ -12,14 +12,13 @@
 #ifndef FACTORIAL_H
 #define FACTORIAL_H
 
-#include <stdexcept>
-#include <cstdio>
+#include "../Base/Assert.h"
 
 namespace CZ
 {
     enum FactorialVersion { RECURSION_FACT, NONRECURSION_FACT };
 
-    namespace Factorial_Impl
+    namespace FactorialAccessories
     {
         using ValueType = int64_t;
 
@@ -47,27 +46,16 @@ namespace CZ
         }
     }
 
-    Factorial_Impl::ValueType Factorial(const Factorial_Impl::ValueType x,
+    FactorialAccessories::ValueType Factorial(const FactorialAccessories::ValueType x,
         const FactorialVersion &version = NONRECURSION_FACT)
     {
-        try
-        {
-            if (x < 0)
-            {
-                throw "order n is negative";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error: %s\n", errMsg);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(0 <= x, "Order n should be non-negative.");
 
-        Factorial_Impl::ValueType ret = 0;
+        FactorialAccessories::ValueType ret = 0;
         switch (version)
         {
-            case NONRECURSION_FACT: ret = Factorial_Impl::non_recursion_fact(x); break;
-            case RECURSION_FACT: ret = Factorial_Impl::recursion_fact(x); break;
+            case NONRECURSION_FACT: ret = FactorialAccessories::non_recursion_fact(x); break;
+            case RECURSION_FACT: ret = FactorialAccessories::recursion_fact(x); break;
         }
         return ret;
     }

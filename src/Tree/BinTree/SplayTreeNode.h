@@ -17,49 +17,31 @@
 namespace CZ
 {
     template <typename T>
-    class SplayTreeNode: public BSTNode<T>
+    class SplayTreeNode : public BSTNode<T>
     {
     public:
         using Rank = typename BSTNode<T>::Rank;
 
         // 构造函数不能传入子女，只能传入数据和父结点
-        SplayTreeNode(const T &data = T(), SplayTreeNode *father_ = nullptr):
-            BSTNode<T>(data, father_) {}
-
-        SplayTreeNode* left_child() const
-        { return static_cast<SplayTreeNode<T>*>(BSTNode<T>::left_child()); }
-        SplayTreeNode*& left_child()
-        { return (SplayTreeNode<T>*&)(BSTNode<T>::left_child()); }
-        SplayTreeNode* right_child() const
-        { return static_cast<SplayTreeNode<T>*>(BSTNode<T>::right_child()); }
-        SplayTreeNode*& right_child()
-        { return (SplayTreeNode<T>*&)(BSTNode<T>::right_child()); }
-        SplayTreeNode* brother() const
-        { return static_cast<SplayTreeNode<T>*>(BSTNode<T>::brother()); }
-        SplayTreeNode* uncle() const
-        { return static_cast<SplayTreeNode<T>*>(BSTNode<T>::uncle()); }
-        // 中序遍历下的直接前驱和后继
-        SplayTreeNode* prev() const
-        { return static_cast<SplayTreeNode<T>*>(BSTNode<T>::prev()); }
-        SplayTreeNode* next() const
-        { return static_cast<SplayTreeNode<T>*>(BSTNode<T>::next()); }
-        SplayTreeNode*& father()
-        { return (SplayTreeNode<T>*&)(BSTNode<T>::father()); }
-        SplayTreeNode* father() const
-        { return static_cast<SplayTreeNode<T>*>(BSTNode<T>::father()); }
-        SplayTreeNode* remove_child(SplayTreeNode *node)
-        { return static_cast<SplayTreeNode<T>*>(BSTNode<T>::remove_child(node)); }
-        SplayTreeNode* remove_child(const T &data)
-        { return static_cast<SplayTreeNode<T>*>(BSTNode<T>::remove_child(data)); }
-        SplayTreeNode* zig()  // 顺时针旋转, 返回旋转后的原来位置的结点指针
-        { return static_cast<SplayTreeNode<T>*>(BSTNode<T>::zig()); }
-        SplayTreeNode* zag()  // 逆时针旋转, 返回旋转后的原来位置的结点指针
-        { return static_cast<SplayTreeNode<T>*>(BSTNode<T>::zag()); }
+        SplayTreeNode(const T &data = T(), SplayTreeNode *father_ = nullptr) : BSTNode<T>(data, father_) {}
 
         const char *get_entity_name() const override
-        { return "SplayTreeNode"; }
+        {
+            return "SplayTreeNode";
+        }
+
+        bool insert_child_by_data(const T &data) noexcept override
+        {
+            SplayTreeNode<T> *pNode = new SplayTreeNode<T>(data);
+            TreeNode<T> *pRes = this->insert_child(pNode);
+            if (pNode && pRes == nullptr)
+            {
+                delete pNode;
+                return false;
+            }
+            return true;
+        }
     };
 } // CZ
 
 #endif // SPLAY_TREE_NODE_H
-

@@ -12,96 +12,94 @@
 #ifndef BIN_TREE_NODE_MODIFICATIONS_H
 #define BIN_TREE_NODE_MODIFICATIONS_H
 
-#include "BinTree.h"
+#include "BinTreeNode.h"
+
 #include "../../Algorithms/Max.h"
-#include <stdexcept>
 
 namespace CZ
 {
     template <typename T>
+    BinTreeNode<T> *BinTreeNode<T>::set_left_child(BinTreeNode<T> *pNode)
+    {
+        BinTreeNode<T> *pOldChild = left_child();
+        this->children().front() = pNode;
+        if (pNode)
+        {
+            ASSERT_DEBUG(pNode != right_child(), "this node is right child");
+            pNode->set_father(this);
+        }
+        return pOldChild;
+    }
+
+    template <typename T>
+    BinTreeNode<T> *BinTreeNode<T>::set_right_child(BinTreeNode<T> *pNode)
+    {   
+        BinTreeNode<T> *pOldChild = right_child();
+        this->children().back() = pNode;
+        if (pNode)
+        {
+            ASSERT_DEBUG(pNode != left_child(), "this node is left child");
+            pNode->set_father(this);
+        }
+        return pOldChild;
+    }
+
+    template <typename T>
     void BinTreeNode<T>::insert_as_left_child(BinTreeNode<T> *newChild)
     {
-        try
-        {
-            if (left_child())
-            {
-                throw "left child position is occupied";
-            }
-            if (newChild->father())
-            {
-                throw "this node has a father";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from BinTreeNode's insert_as_left_child: %s\n", errMsg);
-            throw std::exception();
-        }
-
-        left_child() = newChild;
-        newChild->father() = this;
-        newChild->update_height_above(0);
-        return;
+        ASSERT_DEBUG(left_child() == nullptr, "left child position is occupied");
+        
+        set_left_child(newChild);
     }
 
     template <typename T>
     void BinTreeNode<T>::insert_as_right_child(BinTreeNode<T> *newChild)
     {
-        try
-        {
-            if (right_child())
-            {
-                throw "right child position is occupied";
-            }
-            if (newChild->father())
-            {
-                throw "this node has a father";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from BinTreeNode's insert_as_right_child: %s\n", errMsg);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(right_child() == nullptr, "right child position is occupied");
 
-        right_child() = newChild;
-        newChild->father() = this;
-        newChild->update_height_above(0);
-        return;
+        set_right_child(newChild);
     }
 
     template <typename T>
-    void BinTreeNode<T>::remove_left_child()
+    TreeNode<T> *BinTreeNode<T>::insert_child(TreeNode<T> *pNode) noexcept
+    {
+        if (left_child() == nullptr)
+        {
+            insert_as_left_child(dynamic_cast<BinTreeNode<T>*>(pNode));
+            return pNode;
+        }
+        else if (right_child() == nullptr)
+        {
+            insert_as_right_child(dynamic_cast<BinTreeNode<T>*>(pNode));
+            return pNode;
+        }
+        return nullptr;
+    }
+
+    template <typename T>
+    BinTreeNode<T>* BinTreeNode<T>::remove_left_child()
     {
         if (!left_child())
         {
-            return;
+            return nullptr;
         }
-        Rank tempHeight = left_child()->height();
-        left_child()->height() = 0;
-        left_child()->update_height_above(1);
-        left_child()->height() = tempHeight;
-        left_child()->father() = nullptr;
-
-        left_child() = nullptr;
-        return;
+        BinTreeNode<T> *pChild = dynamic_cast<BinTreeNode<T>*>(this->children().front());
+        pChild->set_father(nullptr);
+        this->children().front() = nullptr;
+        return pChild;
     }
 
     template <typename T>
-    void BinTreeNode<T>::remove_right_child()
+    BinTreeNode<T>* BinTreeNode<T>::remove_right_child()
     {
         if (!right_child())
         {
-            return;
+            return nullptr;
         }
-        Rank tempHeight = right_child()->height();
-        right_child()->height() = 0;
-        right_child()->update_height_above(1);
-        right_child()->height() = tempHeight;
-        right_child()->father() = nullptr;
-
-        right_child() = nullptr;
-        return;
+        BinTreeNode<T> *pChild = dynamic_cast<BinTreeNode<T>*>(this->children().back());
+        pChild->set_father(nullptr);
+        this->children().back() = nullptr;
+        return pChild;
     }
 } // CZ
 

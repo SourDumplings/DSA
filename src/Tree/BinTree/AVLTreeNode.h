@@ -18,67 +18,47 @@ AVL树结点类模板
 
 namespace CZ
 {
-    template <typename T> class AVLTree;
+    template <typename T>
+    class AVLTree;
 
     template <typename T>
-    class AVLTreeNode: public BSTNode<T>
+    class AVLTreeNode : public BSTNode<T>
     {
         friend class AVLTree<T>;
+
     public:
         using Rank = typename BSTNode<T>::Rank;
 
-        AVLTreeNode(const T &data = T(), AVLTreeNode *father_ = nullptr):
-            BSTNode<T>(data, father_) {}
+        AVLTreeNode(const T &data = T(), AVLTreeNode *father_ = nullptr) : BSTNode<T>(data, father_) {}
 
         bool is_balance() const
         {
-            Rank lH = left_child() ? left_child()->height() : 0,
-                rH = right_child() ? right_child()->height() : 0;
-            return Abs(static_cast<int>(lH - rH)) < 2;
-        }
-        AVLTreeNode<T>* taller_child() const
-        {
-            Rank lH = left_child() ? left_child()->height() : 0,
-                rH = right_child() ? right_child()->height() : 0;
-            return lH < rH ? right_child() : left_child();
+            Rank lH = this->left_child() ? this->left_child()->height() : 0,
+                 rH = this->right_child() ? this->right_child()->height() : 0;
+            return Abs(static_cast<int64_t>(lH - rH)) < 2;
         }
 
-        AVLTreeNode* left_child() const
-        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::left_child()); }
-        AVLTreeNode*& left_child()
-        { return (AVLTreeNode*&)(BSTNode<T>::left_child()); }
-        AVLTreeNode* right_child() const
-        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::right_child()); }
-        AVLTreeNode*& right_child()
-        { return (AVLTreeNode*&)(BSTNode<T>::right_child()); }
-        AVLTreeNode* brother() const
-        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::brother()); }
-        AVLTreeNode* uncle() const
-        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::uncle()); }
-        // 中序遍历下的直接前驱和后继
-        AVLTreeNode* prev() const
-        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::prev()); }
-        AVLTreeNode* next() const
-        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::next()); }
-        AVLTreeNode*& father()
-        { return (AVLTreeNode<T>*&)(BSTNode<T>::father()); }
-        AVLTreeNode* father() const
-        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::father()); }
+        AVLTreeNode<T> *taller_child() const
+        {
+            Rank lH = this->left_child() ? this->left_child()->height() : 0,
+                 rH = this->right_child() ? this->right_child()->height() : 0;
+            return lH < rH ? dynamic_cast<AVLTreeNode<T> *>(this->right_child())
+                           : dynamic_cast<AVLTreeNode<T> *>(this->left_child());
+        }
+
+        bool insert_child_by_data(const T &data) noexcept override
+        {
+            AVLTreeNode<T> *pNode = new AVLTreeNode<T>(data);
+            TreeNode<T> *pRes = this->insert_child(pNode);
+            if (pNode && pRes == nullptr)
+            {
+                delete pNode;
+                return false;
+            }
+            return true;
+        }
 
         const char *get_entity_name() const override { return "AVLTreeNode"; }
-
-    private:
-        // 树结点本身不负责旋转，旋转交给AVL树类模板，故直接继承BST的算法即可
-        AVLTreeNode* remove_child(AVLTreeNode *node)
-        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::remove_child(node)); }
-        AVLTreeNode* remove_child(const T &data)
-        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::remove_child(data)); }
-        AVLTreeNode* zig() // 顺时针旋转, 返回旋转后的原来位置的结点指针
-        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::zig()); }
-        AVLTreeNode* zag() // 逆时针旋转, 返回旋转后的原来位置的结点指针
-        { return static_cast<AVLTreeNode<T>*>(BSTNode<T>::zag()); }
-        void remove_left_child() { return BSTNode<T>::remove_left_child(); }
-        void remove_right_child() { return BSTNode<T>::remove_right_child(); }
     };
 } // CZ
 

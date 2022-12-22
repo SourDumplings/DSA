@@ -15,7 +15,7 @@
 #include <vector>
 #include <algorithm>
 #include <memory>
-#include <stdexcept>
+
 #include "Algorithms/Match/Paren_match.h"
 #include "Algorithms/Match.h"
 #include "Vector/Vector.h"

@@ -13,7 +13,6 @@
 #define BIN_TREE_ROTATION_H
 
 #include "BinTree.h"
-#include <stdexcept>
 #include "../../Algorithms/Max.h"
 
 namespace CZ
@@ -36,81 +35,62 @@ namespace CZ
         }
 
         BinTreeNode<T> *ret = nullptr;
-        try
+        ASSERT_DEBUG(this->has_this_node(v), "this node is not in this BinTree");
+        BinTreeNode<T> *f = static_cast<BinTreeNode<T>*>(v->father());
+        ASSERT_DEBUG(f, "this node doesn't have father");
+        BinTreeNode<T> *g = static_cast<BinTreeNode<T>*>(f->father());
+        ASSERT_DEBUG(g, "this node doesn't have grandfather");
+        BinTreeNode<T> *z = static_cast<BinTreeNode<T>*>(g->father()); // 记录曾祖父结点
+
+        if (f == g->left_child())
         {
-            if (!Tree<T>::has_this_node(v))
+            if (v == f->left_child())
             {
-                throw "this node is not in this BinTree";
-            }
-            BinTreeNode<T> *f = static_cast<BinTreeNode<T>*>(v->father());
-            if (!f)
-            {
-                throw "this node doesn't have father";
-            }
-            BinTreeNode<T> *g = static_cast<BinTreeNode<T>*>(f->father());
-            if (!g)
-            {
-                throw "this node doesn't have grandfather";
-            }
-            BinTreeNode<T> *z = static_cast<BinTreeNode<T>*>(g->father()); // 记录曾祖父结点
-
-            if (f == g->left_child())
-            {
-                if (v == f->left_child())
-                {
-                    // printf("case 1\n");
-                    // 情况1
-                    ret = connect34(v, f, g,
-                        v->left_child(), v->right_child(), f->right_child(), g->right_child());
-                }
-                else
-                {
-                    // printf("case 2\n");
-                    // 情况2
-                    ret = connect34(f, v, g,
-                        f->left_child(), v->left_child(), v->right_child(), g->right_child());
-                }
+                // printf("case 1\n");
+                // 情况1
+                ret = connect34(v, f, g,
+                    v->left_child(), v->right_child(), f->right_child(), g->right_child());
             }
             else
             {
-                if (v == f->left_child())
-                {
-                    // printf("case 3\n");
-                    // 情况3
-                    ret = connect34(g, v, f,
-                        g->left_child(), v->left_child(), v->right_child(), f->right_child());
-                }
-                else
-                {
-                    // 情况4
-                    // printf("case 4\n");
-                    ret = connect34(g, f, v,
-                        g->left_child(), f->left_child(), v->left_child(), v->right_child());
-                }
-            }
-
-            // 建立重构之后新的根节点和曾祖父结点之间的父子关系，并且更新高度
-            if (z)
-            {
-                (z->left_child() == g ? z->left_child() : z->right_child()) = ret;
-                ret->father() = z;
-                ret->update_height_above(1);
-            }
-            else
-            {
-                ret->father() = nullptr;
-                Tree<T>::root() = ret;
+                // printf("case 2\n");
+                // 情况2
+                ret = connect34(f, v, g,
+                    f->left_child(), v->left_child(), v->right_child(), g->right_child());
             }
         }
-        catch (const char *errMsg)
+        else
         {
-            printf("Error from bintree rotate_at: %s\n", errMsg);
-            throw std::exception();
+            if (v == f->left_child())
+            {
+                // printf("case 3\n");
+                // 情况3
+                ret = connect34(g, v, f,
+                    g->left_child(), v->left_child(), v->right_child(), f->right_child());
+            }
+            else
+            {
+                // 情况4
+                // printf("case 4\n");
+                ret = connect34(g, f, v,
+                    g->left_child(), f->left_child(), v->left_child(), v->right_child());
+            }
+        }
+
+        // 建立重构之后新的根节点和曾祖父结点之间的父子关系
+        if (z)
+        {
+            (z->left_child() == g ? z->set_left_child(ret) : z->set_right_child(ret));
+        }
+        else
+        {
+            ret->set_father(nullptr);
+            this->_pRoot = ret;
         }
         return ret;
     }
 
-    /* 3+4重构算法
+    /* 3+4 重构算法
         将传入的3个结点及4个子树的拓扑结构统一为
                          b
                        /   \
@@ -122,53 +102,16 @@ namespace CZ
     BinTreeNode<T>* BinTree<T>::connect34(BinTreeNode<T> *a, BinTreeNode<T> *b, BinTreeNode<T> *c,
             BinTreeNode<T> *T0, BinTreeNode<T> *T1, BinTreeNode<T> *T2, BinTreeNode<T> *T3)
     {
-        try
-        {
-            if (!(a && b && c))
-            {
-                throw "a or b or c cannot be nullptr";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from bintree connect34: %s\n", errMsg);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(a && b && c, "a or b or c cannot be nullptr");
 
-        Rank h0 = 0, h1 = 0, h2 = 0, h3 = 0;
-        a->left_child() = T0;
-        if (T0)
-        {
-            T0->father() = a;
-            h0 = T0->height();
-        }
-        a->right_child() = T1;
-        if (T1)
-        {
-            T1->father() = a;
-            h1 = T1->height();
-        }
-        a->height() = Max(h0, h1) + 1;
+        a->set_left_child(T0);
+        a->set_right_child(T1);
 
-        c->left_child() = T2;
-        if (T2)
-        {
-            T2->father() = c;
-            h2 = T2->height();
-        }
-        c->right_child() = T3;
-        if (T3)
-        {
-            T3->father() = c;
-            h3 = T3->height();
-        }
-        c->height() = Max(h2, h3) + 1;
+        c->set_left_child(T2);
+        c->set_right_child(T3);
 
-        b->left_child() = a;
-        a->father() = b;
-        b->right_child() = c;
-        c->father() = b;
-        b->height() = Max(a->height(), c->height()) + 1;
+        b->set_left_child(a);
+        b->set_right_child(c);
         return b;
     }
 } // CZ

@@ -21,7 +21,7 @@
 #include "Sort_methods/Shell_sort.h"
 
 #include <functional>
-#include <stdexcept>
+
 #include <typeinfo>
 
 namespace CZ
@@ -42,121 +42,92 @@ namespace CZ
         void doSort(It begin, It end, const Cmp &cmp, const UnStableSortMethod &method = QUICK_SORT,
                     const uint32_t version = 0)
         {
-            try
+            Rank_sort N = end - begin;
+            ASSERT_DEBUG(0 < N, "invalid iterator range");
+            switch (method)
             {
-                Rank_sort N = end - begin;
-                if (N < 0)
-                {
-                    throw "invalid iterator range";
-                }
-                else if (N >= 1)
-                {
-                    switch (method)
-                    {
-                    case SELECT_SORT:
-                    {
-                        Select_sort(begin, N, cmp, version);
-                        break;
-                    }
-                    case QUICK_SORT:
-                    {
-                        Quick_sort(begin, N, cmp, version);
-                        break;
-                    }
-                    case HEAP_SORT:
-                    {
-                        Heap_sort(begin, N, cmp, version);
-                        break;
-                    }
-                    case SHELL_SORT:
-                    {
-                        Shell_sort(begin, N, cmp, version);
-                        break;
-                    }
-                    }
-                }
-            }
-            catch (const char *errMsg)
+            case SELECT_SORT:
             {
-                printf("%s\n", errMsg);
-                throw std::exception();
+                Select_sort(begin, N, cmp, version);
+                break;
             }
-            return;
+            case QUICK_SORT:
+            {
+                Quick_sort(begin, N, cmp, version);
+                break;
+            }
+            case HEAP_SORT:
+            {
+                Heap_sort(begin, N, cmp, version);
+                break;
+            }
+            case SHELL_SORT:
+            {
+                Shell_sort(begin, N, cmp, version);
+                break;
+            }
+            }
         }
         template <typename It, typename Cmp>
-        void test_iterator_for_sort(const It &begin, const It &end,
+        inline void test_iterator_for_sort(const It &begin, const It &end,
                                     random_iterator_tag,
                                     const Cmp &cmp, const UnStableSortMethod &method = QUICK_SORT, const uint32_t version = 0)
         {
             doSort(begin, end, cmp, method, version);
-            return;
+
         }
 
         template <typename It, typename Cmp>
-        void test_iterator_for_sort(const It &begin, const It &end,
+        inline void test_iterator_for_sort(const It &begin, const It &end,
                                     seq_iterator_tag,
                                     const Cmp &cmp, const UnStableSortMethod &method = QUICK_SORT, const uint32_t version = 0)
         {
-            throw "iterator is seq_iterator, should be random_iterator";
-            return;
+            ASSERT_DEBUG(false, "iterator is seq_iterator, should be random_iterator");
         }
 
         template <typename It, typename Cmp>
-        void test_iterator_for_sort(const It &begin, const It &end,
+        inline void test_iterator_for_sort(const It &begin, const It &end,
                                     bi_iterator_tag,
                                     const Cmp &cmp, const UnStableSortMethod &method = QUICK_SORT, const uint32_t version = 0)
         {
-            throw "iterator is bi_iterator, should be random_iterator";
-            return;
+            ASSERT_DEBUG(false, "iterator is bi_iterator, should be random_iterator");
         }
     }
 
     template <typename It, typename Cmp>
-    void Sort(It begin, It end, const Cmp &cmp, const UnStableSortMethod &method = QUICK_SORT,
-              const uint32_t version = 0)
+    inline void Sort(It begin, It end, const Cmp &cmp, const UnStableSortMethod &method = QUICK_SORT,
+                     const uint32_t version = 0)
     {
-        try
-        {
-            SortAccessories::test_iterator_for_sort(begin, end,
-                                                 typename Iterator_traits<It>::iterator_category(),
-                                                 cmp, method, version);
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from Sort: %s\n", errMsg);
-            throw std::exception();
-        }
-        return;
+        SortAccessories::test_iterator_for_sort(begin, end,
+                                                typename Iterator_traits<It>::iterator_category(),
+                                                cmp, method, version);
     }
 
     template <typename It>
-    void Sort(It begin, It end, const UnStableSortMethod &method = QUICK_SORT,
+    inline void Sort(It begin, It end, const UnStableSortMethod &method = QUICK_SORT,
               const uint32_t version = 0)
     {
         Sort(begin, end, std::less<decltype(*begin)>(), method, version);
-        return;
     }
 
     // 稳定排序情况：默认比较函数
     template <typename It>
-    void Sort(It begin, It end, const StableSortMethod &method,
+    inline void Sort(It begin, It end, const StableSortMethod &method,
               const uint32_t version = 0)
     {
         Stable_sort(begin, end, std::less<decltype(*begin)>(), method, version);
-        return;
     }
 
     // 稳定排序情况：指定比较函数
     template <typename It, typename Cmp>
-    void Sort(It begin, It end, const Cmp &cmp, const StableSortMethod &method,
+    inline void Sort(It begin, It end, const Cmp &cmp, const StableSortMethod &method,
               const uint32_t version = 0)
     {
         Stable_sort(begin, end, cmp, method, version);
-        return;
     }
 
     template <typename It>
-    bool isSorted(It begin, It end)
+    inline bool isSorted(It begin, It end)
     {
         return isSorted(begin, end, std::less<decltype(*begin)>());
     }

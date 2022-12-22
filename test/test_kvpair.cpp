@@ -24,13 +24,33 @@ class K
 {
 public:
     int k;
+
+    HashRank hash() const
+    {
+        return Hash<int>()(k);
+    }
 };
+
+ostream& operator<<(ostream &os, const K &k)
+{
+    return os << k.k;
+}
 
 class V
 {
 public:
     CZString v;
+
+    HashRank hash() const
+    {
+        return v.hash();
+    }
 };
+
+ostream& operator<<(ostream &os, const V &v)
+{
+    return os << v.v;
+}
 
 class KD: public K
 {

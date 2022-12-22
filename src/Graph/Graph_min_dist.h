@@ -129,11 +129,7 @@ namespace CZ
     void Graph<ED, VD>::Dijkstra(Rank s, Vector<ED> &dist, Vector<Rank> &path,
         const ED &maxDist, const ED &minDist, bool heapOptimize) const
     {
-        if (_Nv <= s)
-        {
-            printf("Error from Graph Dijkstra: invalid source Rank\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(s < _Nv, "Error from Graph Dijkstra: invalid source Rank");
 
         // 准备工作
         Vector<bool> visited(_Nv);

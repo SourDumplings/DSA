@@ -6,7 +6,7 @@
 */
 
 /*
-树类模板
+树类模板，注意树会托管根结点的生命周期，clear 以及析构的时候会对 _root 执行 delete
  */
 
 #ifndef TREE_H
@@ -36,28 +36,29 @@ namespace CZ
         void clear() override;
 
         Tree(std::nullptr_t);
-        Tree(TreeNode<T> *root = nullptr);
+        Tree(TreeNode<T> *pRoot = nullptr);
         Tree(const Tree<T> &t);
         Tree(Tree<T> &&t);
         virtual ~Tree();
 
-        Tree<T> &operator=(const Tree &t);
-        Tree<T> &operator=(Tree &&t);
+        Tree<T> &operator=(const Tree &t) = delete;
+        Tree<T> &operator=(Tree &&t) = delete;
 
         Rank size() const override;
         TreeNode<T> *root() const;
-        TreeNode<T> *&root();
-        Rank height() const; // 树的高度，单结点为1，空树高度为0
+        Rank height() const; // 树的高度，单结点为 1，空树高度为 0
         // 判断一个结点在不在这棵树中
         bool has_this_node(const TreeNode<T> *node) const;
         Rank depth(const TreeNode<T> *node) const;              // 得到某个结点在树中的深度，根结点为1
         TreeNode<T> *LCA(TreeNode<T> *a, TreeNode<T> *b) const; // 最低公共祖先
 
-        // 将结点node作为father结点的小儿子插入
-        void insert(TreeNode<T> *father, TreeNode<T> *node);
+        // 将结点 node 作为 father 结点的小儿子插入
+        virtual void insert(TreeNode<T> *pFather, TreeNode<T> *pNode);
+
         // 移除树中的某个结点及其孩子，返回该目标结点
-        // 注意该方法返回的结点以及它的孩子的内存空间就不再受树的控制了
-        TreeNode<T> *secede(TreeNode<T> *node);
+        // 注意该方法返回的结点以及它的孩子的生命周期就不再受树的控制了
+        virtual TreeNode<T> *secede(TreeNode<T> *pNode);
+
         // 调用根结点的get_size()方法更新全树的_size
         void update_size();
 
@@ -71,11 +72,11 @@ namespace CZ
             void operator()(const T &data) const;
         };
         template <typename F = OutPut>
-        static void pre_order_traversal(TreeNode<T> *root, const F &visit = F());
+        static void pre_order_traversal(TreeNode<T> *pRoot, const F &visit = F());
         template <typename F = OutPut>
-        static void post_order_traversal(TreeNode<T> *root, const F &visit = F());
+        static void post_order_traversal(TreeNode<T> *pRoot, const F &visit = F());
         template <typename F = OutPut>
-        static void level_order_traversal(TreeNode<T> *root, const F &visit = F());
+        static void level_order_traversal(TreeNode<T> *pRoot, const F &visit = F());
 
         static bool equivalent(const Tree<T> &lhs, const Tree<T> &rhs);
 
@@ -85,11 +86,11 @@ namespace CZ
         const char *get_entity_name() const override;
 
     protected:
-        TreeNode<T> *_root = nullptr;
-        Rank _size = 0;
+        TreeNode<T> *_pRoot;
+        Rank _size;
 
-        TreeNode<T> *copy_from(TreeNode<T> *root);
-        void free_node(TreeNode<T> *root);
+    private:
+        TreeNode<T> *copy_from(TreeNode<T> *pRoot);
     };
 } // CZ
 

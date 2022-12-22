@@ -41,16 +41,24 @@
 已完成
 18. 扩展 HashTable 为 HashMap，使其支持多种元素（实现通用的 hash 算法，参照侯捷课程万用的 hash function），以及拉链法，Set 也类似
 待 23 实现
-19. 为异常情况 assert
+19. 为异常情况 assert，使用自己定义的 assert，并重构树操作接口，更好实现 OOP
+实现中 TODO 见 `/test/CMakeList.txt`
 20. "许多容器定义了print_info方法，故元素必须支持 << 运算符" 这条规则太僵硬，换一种方式解决这个问题，例如定义一个通用函数，来改造 print_info 的实现，使其不依赖于 << 的定义
 见 23 已实现
 21. 给 BST 增加强制 insert 的方法，例如 force_insert，能够按 key 实现替换元素，并扩展到其子类和利用其实现的容器，如 TreeSet 等
 22. 给 BST 及其依赖容器模板类，如 RBTree、TreeMap 等增加自定义比较函数的功能
 23. 添加基础基类 AbstractBaseEntity, AbstractBaseContainer, AbstractIterableContainer，AbstractSeqIterableContainer 并将容器类模板继承自其
 已实现
-24. 对内存分配失败等情况抛异常
+24. 对内存分配失败等情况抛异常，直接 assert
+待 19 实现
 25. 画出 UML 图等文档放在 doc 下
 26. 使用可变模板参数机制实现 Tuple
 27. 给析构函数加 noexcept 关键字告诉编译器其不会抛出异常，别的不抛异常的函数做同样的处理
 28. 引入 Asan 进行编译
 已实现
+29. 将 nonexcept 参数都去掉，换成 ASSERT
+待 19 实现
+30. （高优）调试 BinTree 遍历算法中先中序 NONRECURSION_TRAVERSAL4 再后序 NONRECURSION_TRAVERSAL1 的死循环情况，见 test_bintree.cpp
+待 19 实现
+31. 优化 AVLTreeNode 的 height() 方法，记录在结点上
+待 19 实现

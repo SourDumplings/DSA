@@ -14,7 +14,7 @@
 
 #include "Graph.h"
 
-#include <stdexcept>
+
 #include "../Heap/Heap.h"
 #include <functional>
 
@@ -79,11 +79,7 @@ namespace CZ
                 ++count;
             }
         }
-        if (count != _Nv)
-        {
-            printf("Error from Graph minimum_spanning_tree Prim: MST doesn't exist\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(count == _Nv, "Error from Graph minimum_spanning_tree Prim: MST doesn't exist");
         return ret;
     }
 
@@ -175,11 +171,7 @@ namespace CZ
                 ret += e.data();
             }
         }
-        if (collected < _Nv - 1)
-        {
-            printf("Error from Graph Kruskal: MST doesn't exist\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(_Nv - 1 <= collected, "Error from Graph Kruskal: MST doesn't exist");
         return ret;
     }
 
@@ -187,11 +179,7 @@ namespace CZ
     ED Graph<ED, VD>::minimum_spanning_tree(Vector<Rank> &MST, const MSTMethod &method,
         const ED &maxDist, const ED &minDist) const
     {
-        if (_directed)
-        {
-            printf("Error from Graph minimum_spanning_tree: cannot deal with directed Graph\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(!_directed, "Error from Graph minimum_spanning_tree: cannot deal with directed Graph");
 
         MST.resize(_Nv);
         ED ret;

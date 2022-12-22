@@ -15,7 +15,6 @@
 
 #include "../../Stack/Stack.h"
 #include <cstring>
-#include <stdexcept>
 
 namespace CZ
 {
@@ -39,18 +38,7 @@ namespace CZ
         const char *paren = "(){}[]<>")
     {
         ParenMatchRank maxL = strlen(exp);
-        try
-        {
-            if (length > maxL)
-            {
-                throw "the max length for that string is";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error: length %u is too large, %s %u\n", length, errMsg, maxL);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(maxL <= length, "the max length for that string is %u", maxL);
 
         if (version == NONRECURSION_PAREN_MATCH)
         {

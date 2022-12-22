@@ -30,6 +30,12 @@ namespace CZ
     template <typename T>
     bool operator<(const DequeIterator<T> &lhs, const DequeIterator<T> &rhs);
     template <typename T>
+    bool operator<=(const DequeIterator<T> &lhs, const DequeIterator<T> &rhs);
+    template <typename T>
+    bool operator>(const DequeIterator<T> &lhs, const DequeIterator<T> &rhs);
+    template <typename T>
+    bool operator>=(const DequeIterator<T> &lhs, const DequeIterator<T> &rhs);
+    template <typename T>
     DequeIteratorRank operator-(const DequeIterator<T> &lhs, const DequeIterator<T> &rhs);
     template <typename T>
     DequeIterator<T> operator-(const DequeIterator<T> &lhs, const DequeIteratorRank n);
@@ -208,6 +214,24 @@ namespace CZ
     inline bool operator<(const DequeIterator<T> &lhs, const DequeIterator<T> &rhs)
     {
         return lhs._pNode == rhs._pNode ? lhs._cur < rhs._cur : lhs._pNode < rhs._pNode;
+    }
+
+    template <typename T>
+    inline bool operator<=(const DequeIterator<T> &lhs, const DequeIterator<T> &rhs)
+    {
+        return lhs < rhs || lhs == rhs;
+    }
+
+    template <typename T>
+    inline bool operator>(const DequeIterator<T> &lhs, const DequeIterator<T> &rhs)
+    {
+        return lhs._pNode == rhs._pNode ? lhs._cur > rhs._cur : lhs._pNode > rhs._pNode;
+    }
+
+    template <typename T>
+    inline bool operator>=(const DequeIterator<T> &lhs, const DequeIterator<T> &rhs)
+    {
+        return lhs > rhs || lhs == rhs;
     }
 
     template <typename T>

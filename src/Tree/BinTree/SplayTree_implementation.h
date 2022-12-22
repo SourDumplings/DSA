@@ -14,53 +14,72 @@
 
 #include "SplayTree.h"
 
-#include <stdexcept>
 #include <cstdio>
 #include <iostream>
 
 namespace CZ
 {
     template <typename T>
-    SplayTree<T>::SplayTree(std::nullptr_t): BST<T>(nullptr) {}
+    SplayTree<T>::SplayTree(std::nullptr_t) : BST<T>(nullptr) {}
     template <typename T>
-    SplayTree<T>::SplayTree(SplayTreeNode<T> *root, bool isAllowRepeatKey_): BST<T>(root, isAllowRepeatKey_) {}
-    template <typename T>
-    SplayTree<T>::SplayTree(const SplayTree<T> &t): BST<T>(t) {}
-    template <typename T>
-    SplayTree<T>::SplayTree(SplayTree<T> &&t): BST<T>(std::move(t)) {}
+    SplayTree<T>::SplayTree(SplayTreeNode<T> *root, bool isAllowRepeatKey_) : BST<T>(root, isAllowRepeatKey_) {}
 
     template <typename T>
-    inline SplayTreeNode<T>* SplayTree<T>::root() const
-    { return static_cast<SplayTreeNode<T>*>(BST<T>::root()); }
+    SplayTree<T>::SplayTree(const SplayTree<T> &t)
+    {
+        this->_pRoot = copy_from(t.root());
+        this->_size = t.size();
+        this->_isAllowRepeatKey = t._isAllowRepeatKey;
+    }
+
     template <typename T>
-    inline SplayTreeNode<T>*& SplayTree<T>::root()
-    { return (SplayTreeNode<T>*&)(BST<T>::root()); }
+    SplayTree<T>::SplayTree(SplayTree<T> &&t) : BST<T>(std::move(t)) {}
+
+    template <typename T>
+    SplayTreeNode<T> *SplayTree<T>::copy_from(TreeNode<T> *pRoot) noexcept
+    {
+        if (pRoot == nullptr)
+        {
+            return nullptr;
+        }
+        SplayTreeNode<T> *pSplayTreeNode = dynamic_cast<SplayTreeNode<T> *>(pRoot);
+        ASSERT_DEBUG(pSplayTreeNode, "error pRoot");
+        SplayTreeNode<T> *pCopiedRoot = new SplayTreeNode<T>(pSplayTreeNode->data());
+        ASSERT_RELEASE(pCopiedRoot, "copy root error");
+        SplayTreeNode<T> *pLC = dynamic_cast<SplayTreeNode<T> *>(pSplayTreeNode->left_child());
+        SplayTreeNode<T> *pLCopied = this->copy_from(pLC);
+        SplayTreeNode<T> *pRC = dynamic_cast<SplayTreeNode<T> *>(pSplayTreeNode->right_child());
+        SplayTreeNode<T> *pRCopied = this->copy_from(pRC);
+        pCopiedRoot->insert_as_left_child(pLCopied);
+        pCopiedRoot->insert_as_right_child(pRCopied);
+        return pCopiedRoot;
+    }
 
     template <typename T>
     void SplayTree<T>::print_info(const char *name) const
     {
         printf("for splaytree %s, is_allow_repeat_key() = %d\n", name, BST<T>::is_allow_repeat_key());
         printf("it contains %u nodes(including root) and height is %u\n",
-            Tree<T>::size(), Tree<T>::height());
+               this->size(), this->height());
         printf("its pre_order_traversal is: \n");
-        BinTree<T>::pre_order_traversal(root(), typename Tree<T>::OutPut(),
-            NONRECURSION_TRAVERSAL2);
+        BinTree<T>::pre_order_traversal(dynamic_cast<SplayTreeNode<T> *>(this->root()), typename Tree<T>::OutPut(),
+                                        NONRECURSION_TRAVERSAL2);
         printf("\nits in_order_traversal is: \n");
-        BinTree<T>::in_order_traversal(root(), typename Tree<T>::OutPut(),
-            NONRECURSION_TRAVERSAL2);
+        BinTree<T>::in_order_traversal(dynamic_cast<SplayTreeNode<T> *>(this->root()), typename Tree<T>::OutPut(),
+                                       NONRECURSION_TRAVERSAL2);
         printf("\n\n");
         return;
     }
 
     template <typename T>
-    SplayTreeNode<T>* SplayTree<T>::splay(SplayTreeNode<T> *v)
+    SplayTreeNode<T> *SplayTree<T>::splay(SplayTreeNode<T> *v) noexcept
     {
-        if (!v)
+        if (v == nullptr)
         {
             return nullptr;
         }
-        SplayTreeNode<T> *f, *g;
-        while ((f = v->father()) && (g = f->father()))
+        SplayTreeNode<T> *f = nullptr, *g = nullptr;
+        while ((f = dynamic_cast<SplayTreeNode<T> *>(v->father())) && (g = dynamic_cast<SplayTreeNode<T> *>(f->father())))
         {
             if (v == f->left_child())
             {
@@ -98,70 +117,59 @@ namespace CZ
             v == f->left_child() ? f->zig() : f->zag();
         }
 
-        Tree<T>::_root = v;
+        this->_pRoot = v;
         return v;
     }
 
     template <typename T>
-    SplayTreeNode<T>* SplayTree<T>::search(const T &data) const
+    BSTNode<T> *SplayTree<T>::search_data(const T &data) const noexcept
     {
-        SplayTreeNode<T> *v = static_cast<SplayTreeNode<T>*>(BST<T>::search(data));
-        try
-        {
-            if (!v)
-            {
-                throw "this value is not in this splaytree";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from splaytree search: %s", errMsg);
-            std::cout << "target value is " << data << std::endl;
-            throw std::exception();
-        }
-        return const_cast<SplayTree<T>*>(this)->splay(v);
+        SplayTreeNode<T> *v = dynamic_cast<SplayTreeNode<T> *>(BST<T>::search_data(data));
+        return const_cast<SplayTree<T> *>(this)->splay(v);
     }
 
     template <typename T>
-    bool SplayTree<T>::insert(SplayTreeNode<T> *node)
+    BSTNode<T> *SplayTree<T>::insert(BSTNode<T> *node) noexcept
     {
-        if (!BST<T>::insert(node))
+        SplayTreeNode<T> *ret = dynamic_cast<SplayTreeNode<T> *>(BST<T>::insert(node));
+        if (ret == nullptr)
         {
+            return nullptr;
+        }
+        splay(dynamic_cast<SplayTreeNode<T> *>(node));
+        return ret;
+    }
+
+    template <typename T>
+    bool SplayTree<T>::insert_data(const T &data) noexcept
+    {
+        SplayTreeNode<T> *pNode = new SplayTreeNode<T>(data);
+        if (this->insert(pNode) == nullptr && pNode)
+        {
+            delete pNode;
             return false;
         }
-        splay(node);
+
         return true;
     }
 
     template <typename T>
-    inline bool SplayTree<T>::insert(const T &data) { return insert(new SplayTreeNode<T>(data)); }
-
-    template <typename T>
-    SplayTreeNode<T>* SplayTree<T>::remove(SplayTreeNode<T> *node)
+    BSTNode<T> *SplayTree<T>::remove(BSTNode<T> *pNode) noexcept
     {
-        if (!node)
+        if (pNode == nullptr)
         {
             return nullptr;
         }
 
-        try
-        {
-            if (!Tree<T>::has_this_node(node))
-            {
-                throw "this node is not in this SplayTree";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from SplayTree remove: %s\n", errMsg);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(this->has_this_node(pNode), "this node is not in this SplayTree");
 
-        splay(node);
-        SplayTreeNode<T> *lC = node->left_child(), *rC = node->right_child(), *next = node->next();
-        node->remove_left_child();
-        node->remove_right_child();
-        --Tree<T>::_size;
+        splay(dynamic_cast<SplayTreeNode<T> *>(pNode));
+        SplayTreeNode<T> *lC = dynamic_cast<SplayTreeNode<T> *>(pNode->left_child());
+        SplayTreeNode<T> *rC = dynamic_cast<SplayTreeNode<T> *>(pNode->right_child());
+        SplayTreeNode<T> *next = dynamic_cast<SplayTreeNode<T> *>(pNode->next());
+        pNode->remove_left_child();
+        pNode->remove_right_child();
+        --this->_size;
 
         if (rC)
         {
@@ -170,24 +178,13 @@ namespace CZ
             sT.splay(next);
             next->insert_child(lC);
 
-            sT._root = nullptr;
+            sT._pRoot = nullptr;
             sT._size = 0;
         }
 
-        root() = next;
-        return node;
+        this->_pRoot = next;
+        return pNode;
     }
-
-    template <typename T>
-    inline SplayTreeNode<T>* SplayTree<T>::remove(const T &data)
-    { return remove(static_cast<SplayTreeNode<T>*>(BST<T>::search(data))); }
-
-    template <typename T>
-    inline SplayTreeNode<T>* SplayTree<T>::secede(SplayTreeNode<T> *node)
-    { return static_cast<SplayTreeNode<T>*>(BST<T>::secede(node)); }
-    template <typename T>
-    inline SplayTreeNode<T>* SplayTree<T>::secede(const T &data)
-    { return static_cast<SplayTreeNode<T>*>(BST<T>::secede(data)); }
 
     template <typename T>
     const char *SplayTree<T>::get_entity_name() const
@@ -197,5 +194,3 @@ namespace CZ
 } // CZ
 
 #endif // SPLAY_TREE_IMPLEMENTATION_H
-
-

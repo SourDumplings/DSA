@@ -8,6 +8,7 @@
 /*
 树结点类模板
 用指针列表存储孩子结点
+注意树结点会管理孩子结点的生命周期，即析构时会 delete 所有孩子的指针
  */
 
 #ifndef TREE_NODE_H
@@ -27,11 +28,10 @@ namespace CZ
     public:
         using Rank = typename List<T>::Rank;
 
-        TreeNode(const T &data_ = T(), TreeNode<T> *father_ = nullptr, Rank height_ = 1);
+        TreeNode(const T &data_ = T(), TreeNode<T> *father_ = nullptr);
         virtual ~TreeNode();
 
         TreeNode<T>* father() const;
-        TreeNode<T>*& father();
         TreeNode<T>* get_root() const;
         // 返回以这个结点为根结点的家族共有多少成员，没有孩子则返回1
         Rank get_size() const;
@@ -48,16 +48,11 @@ namespace CZ
 
         static bool are_brother(const TreeNode<T> *node1, const TreeNode<T> *node2);
 
-        const Rank& height() const;
-        Rank& height();
+        Rank height() const;
 
-        void insert_child(TreeNode<T> *node);
+        virtual TreeNode<T>* insert_child(TreeNode<T> *pNode) noexcept;
 
         static bool equivalent(const TreeNode<T> &lhs, const TreeNode<T> &rhs);
-        // 向上更新高度，默认自己的高度已经更新好了
-        // 版本0为简单版，针对孩子的高度增加的情况
-        // 版本1为复杂版，针对孩子的高度减少的情况，也可处理孩子高度的增加
-        virtual void update_height_above(const uint32_t version = 0);
 
         const char *c_str() const override;
         HashRank hash() const override;
@@ -65,13 +60,14 @@ namespace CZ
         const char *get_entity_name() const override;
 
     protected:
-        List<TreeNode<T>*> _children;
+        // 设置新的父结点，返回原父结点指针 
+        TreeNode<T>* set_father(TreeNode<T> *pNode);
 
     private:
+        List<TreeNode<T>*> _children;
         T _data;
-        // 以该结点为根的子树的高度，单结点的高度为1
-        Rank _height = 1;
-        TreeNode<T> *_father = nullptr;
+
+        TreeNode<T> *_father;
     };
 
 } // CZ

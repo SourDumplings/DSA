@@ -14,27 +14,15 @@
 
 #include "RedBlackTree.h"
 #include "../../Algorithms/Max.h"
-#include <stdexcept>
 
 namespace CZ
 {
     template <typename T>
     void RedBlackTree<T>::update_black_height(RedBlackTreeNode<T> *v)
     {
-        try
-        {
-            if (!v)
-            {
-                throw "empty node cannot update black height";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from RedBlackTree update_black_height: %s\n", errMsg);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(v, "empty node cannot update black height");
 
-        v->_blackHeight = Max(get_black_height(v->left_child()), get_black_height(v->right_child()));
+        v->_blackHeight = Max(get_black_height(dynamic_cast<RedBlackTreeNode<T> *>(v->left_child())), get_black_height(dynamic_cast<RedBlackTreeNode<T> *>(v->right_child())));
         if (!v->_red)
         {
             // 若当前结点为黑结点，则计入黑高度
@@ -44,50 +32,57 @@ namespace CZ
     }
 
     template <typename T>
-    bool RedBlackTree<T>::insert(RedBlackTreeNode<T> *v)
+    BSTNode<T> *RedBlackTree<T>::insert(BSTNode<T> *pNode) noexcept
     {
-        if (!BST<T>::insert(v))
+        RedBlackTreeNode<T> *ret = dynamic_cast<RedBlackTreeNode<T> *>(BST<T>::insert(pNode));
+        if (ret == nullptr)
         {
-            return false;
+            return nullptr;
         }
         // 新插入结点有可能会出现父子结点都是红色的情况，故需要双红修正
-        solve_double_red(v);
-        return true;
+        solve_double_red(ret);
+        return ret;
     }
 
     template <typename T>
-    bool RedBlackTree<T>::insert(const T &data)
+    bool RedBlackTree<T>::insert_data(const T &data) noexcept
     {
-        RedBlackTreeNode<T> *v = new RedBlackTreeNode<T>(data);
-        if (!BST<T>::insert(v))
+        RedBlackTreeNode<T> *pNode = new RedBlackTreeNode<T>(data);
+        if (this->insert(pNode) == nullptr && pNode)
         {
+            delete pNode;
             return false;
         }
-        solve_double_red(v);
+
         return true;
     }
 
     template <typename T>
-    RedBlackTreeNode<T> *RedBlackTree<T>::do_remove(RedBlackTreeNode<T> *node)
+    BSTNode<T> *RedBlackTree<T>::remove(BSTNode<T> *pNode) noexcept
     {
-        RedBlackTreeNode<T> *actualRemoved = node, *hot = node->father();
-        RedBlackTreeNode<T> *succ =
-            static_cast<RedBlackTreeNode<T> *>(BST<T>::remove_at((BSTNode<T> *&)(actualRemoved),
-                                                                      (BSTNode<T> *&)(hot)));
-        if (!Tree<T>::_size)
+        if (pNode == nullptr)
+        {
+            return nullptr;
+        }
+        ASSERT_DEBUG(this->has_this_node(pNode), "this node isn't in this tree");
+
+        BSTNode<T> *actualRemoved = pNode;
+        BSTNode<T> *hot = dynamic_cast<BSTNode<T> *>(pNode->father());
+        RedBlackTreeNode<T> *succ = dynamic_cast<RedBlackTreeNode<T> *>(this->remove_at(actualRemoved, hot));
+        if (this->size() == 0)
         {
             return actualRemoved;
         }
         // 红黑树的工作
-        if (!hot)
+        if (hot == nullptr)
         {
             // 如果刚刚被删除的是根结点，则需要将根结点染黑并更新黑高度
-            static_cast<RedBlackTreeNode<T> *>(Tree<T>::_root)->_red = false;
-            ++static_cast<RedBlackTreeNode<T> *>(Tree<T>::_root)->_blackHeight;
+            dynamic_cast<RedBlackTreeNode<T> *>(this->root())->_red = false;
+            ++dynamic_cast<RedBlackTreeNode<T> *>(this->root())->_blackHeight;
         }
         else
         {
-            if (is_black_balanced(hot))
+            if (is_black_balanced(dynamic_cast<RedBlackTreeNode<T> *>(hot)))
             {
                 // printf("hot is black balanced\n");
                 // 敏感结点黑高度无需更新，即平衡
@@ -104,69 +99,10 @@ namespace CZ
             else
             {
                 // 接任者为黑色，双黑调整
-                solve_double_black(succ, hot);
+                solve_double_black(succ, dynamic_cast<RedBlackTreeNode<T> *>(hot));
             }
         }
         return actualRemoved;
-    }
-
-    template <typename T>
-    RedBlackTreeNode<T> *RedBlackTree<T>::remove(const T &data)
-    {
-        // 按照BST删除
-        RedBlackTreeNode<T> *node = search(data);
-        try
-        {
-            if (!node)
-            {
-                throw "this value isn't in this tree";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from RedBlackTree remove: %s\n", errMsg);
-            throw std::exception();
-        }
-        return do_remove(node);
-    }
-
-    template <typename T>
-    RedBlackTreeNode<T> *RedBlackTree<T>::remove(RedBlackTreeNode<T> *node)
-    {
-        // 按照BST删除
-        try
-        {
-            if (!Tree<T>::has_this_node(node))
-            {
-                throw "this node isn't in this tree";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from RedBlackTree remove: %s\n", errMsg);
-            throw std::exception();
-        }
-        return do_remove(node);
-    }
-
-    template <typename T>
-    RedBlackTree<T> &RedBlackTree<T>::operator=(const RedBlackTree<T> &t)
-    {
-        if (&t != this)
-        {
-            BST<T>::operator=(t);
-        }
-        return *this;
-    }
-
-    template <typename T>
-    RedBlackTree<T> &RedBlackTree<T>::operator=(RedBlackTree<T> &&t)
-    {
-        if (&t != this)
-        {
-            BST<T>::operator=(std::move(t));
-        }
-        return *this;
     }
 } // CZ
 

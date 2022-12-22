@@ -14,8 +14,8 @@
 
 #include "TreeNode.h"
 
+#include "../Algorithms/Max.h"
 #include "../CZString/CZString.h"
-#include <stdexcept>
 #include <cstdio>
 #include <iostream>
 #include <sstream>
@@ -23,8 +23,7 @@
 namespace CZ
 {
     template <typename T>
-    TreeNode<T>::TreeNode(const T &data_, TreeNode<T> *father_,
-                          typename TreeNode<T>::Rank height_) : _data(data_), _height(height_), _father(father_)
+    TreeNode<T>::TreeNode(const T &data_, TreeNode<T> *father_) : _data(data_), _father(father_)
     {
         if (_father)
         {
@@ -33,16 +32,19 @@ namespace CZ
     }
 
     template <typename T>
-    TreeNode<T>::~TreeNode() = default;
-
-    template <typename T>
-    inline TreeNode<T> *TreeNode<T>::father() const
+    TreeNode<T>::~TreeNode()
     {
-        return _father;
+        for (TreeNode<T> *pC : _children)
+        {
+            if (pC)
+            {
+                delete pC;
+            }
+        }
     }
 
     template <typename T>
-    inline TreeNode<T> *&TreeNode<T>::father()
+    inline TreeNode<T> *TreeNode<T>::father() const
     {
         return _father;
     }
@@ -65,18 +67,7 @@ namespace CZ
     template <typename T>
     TreeNode<T> *TreeNode<T>::oldest_child() const
     {
-        try
-        {
-            if (_children.empty())
-            {
-                throw "no children";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error: %s\n", errMsg);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(!_children.empty(), "no children");
         return _children.front();
     }
 
@@ -106,10 +97,18 @@ namespace CZ
     }
 
     template <typename T>
-    inline const typename TreeNode<T>::Rank &TreeNode<T>::height() const { return _height; }
-
-    template <typename T>
-    inline typename TreeNode<T>::Rank &TreeNode<T>::height() { return _height; }
+    typename TreeNode<T>::Rank TreeNode<T>::height() const
+    {
+        Rank maxChildHeight = 0;
+        for (const TreeNode<T> *pC : _children)
+        {
+            if (pC)
+            {
+                maxChildHeight = Max(maxChildHeight, pC->height());
+            }
+        }
+        return maxChildHeight + 1;
+    }
 
     template <typename T>
     inline const List<TreeNode<T> *> &TreeNode<T>::children() const
@@ -124,60 +123,11 @@ namespace CZ
     }
 
     template <typename T>
-    void TreeNode<T>::update_height_above(const uint32_t version)
+    TreeNode<T>* TreeNode<T>::insert_child(TreeNode<T> *pNode) noexcept
     {
-        TreeNode<T> *f = _father;
-        switch (version)
-        {
-        case 0:
-        {
-            Rank changedChildHeight = _height;
-            while (f)
-            {
-                if (changedChildHeight >= f->_height)
-                {
-                    changedChildHeight = f->_height = changedChildHeight + 1;
-                    f = f->father();
-                }
-                else
-                    return;
-            }
-            break;
-        }
-        case 1:
-        {
-            while (f)
-            {
-                typename TreeNode<T>::Rank maxChildHeight = 0;
-                for (auto &c : f->children())
-                {
-                    if (c && c->_height > maxChildHeight)
-                    {
-                        maxChildHeight = c->_height;
-                    }
-                }
-
-                if (f->_height != maxChildHeight + 1)
-                {
-                    f->_height = maxChildHeight + 1;
-                    f = f->father();
-                }
-                else
-                    return;
-            }
-            break;
-        }
-        }
-        return;
-    }
-
-    template <typename T>
-    void TreeNode<T>::insert_child(TreeNode<T> *node)
-    {
-        _children.push_back(node);
-        node->_father = this;
-        node->update_height_above(0);
-        return;
+        _children.push_back(pNode);
+        pNode->_father = this;
+        return pNode;
     }
 
     template <typename T>
@@ -253,7 +203,7 @@ namespace CZ
     {
         // 树结点的哈希是综合了该结点的数据、孩子多少、结点高度和所有子结点的哈希值
         // 即树结点的哈希值由结点的数据和结构两方面决定
-        HashRank res = Hash<CZString>()(c_str() + _children.size() + _height);
+        HashRank res = Hash<CZString>()(c_str() + _children.size());
         for (TreeNode<T> * const &pc : _children)
         {
             if (pc)
@@ -262,6 +212,14 @@ namespace CZ
             }
         }
         return res;
+    }
+
+    template <typename T>
+    TreeNode<T> *TreeNode<T>::set_father(TreeNode<T> *pNode)
+    {
+        TreeNode<T> *pOldFather = _father;
+        _father = pNode;
+        return pOldFather;
     }
 } // CZ
 

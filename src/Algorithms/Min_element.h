@@ -14,36 +14,24 @@
 #define MIN_ELEMENT_H
 
 #include <cstdio>
-#include <stdexcept>
 #include <functional>
+#include "../Base/Assert.h"
 
 namespace CZ
 {
     template <typename It, typename Cmp>
     It Min_element(const It &begin, const It &end, const Cmp &cmp)
     {
-        try
+        ASSERT_DEBUG(begin != end, "no elements");
+        It minItemIt = begin;
+        for (auto it = begin; it != end; ++it)
         {
-            if (begin == end)
+            if (cmp(*it, *minItemIt))
             {
-                throw "no elements";
+                minItemIt = it;
             }
-            It minItemIt = begin;
-            for (auto it = begin; it != end; ++it)
-            {
-                if (cmp(*it, *minItemIt))
-                {
-                    minItemIt = it;
-                }
-            }
-            return minItemIt;
         }
-        catch (const char *errMsg)
-        {
-            printf("%s\n", errMsg);
-            throw std::exception();
-        }
-        return end;
+        return minItemIt;
     }
 
     template <typename It>

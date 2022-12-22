@@ -15,7 +15,7 @@
 #include "Queue.h"
 
 #include "../CZString/CZString.h"
-#include <stdexcept>
+
 #include <cstdio>
 #include <utility>
 #include <iostream>
@@ -29,18 +29,7 @@ namespace CZ
     template <typename T, typename C>
     const T &Queue<T, C>::front() const
     {
-        try
-        {
-            if (this->empty())
-            {
-                throw "empty queue";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error: %s\n", errMsg);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(!this->empty(), "empty queue");
         return _data.front();
     }
 
@@ -65,18 +54,7 @@ namespace CZ
     template <typename T, typename C>
     void Queue<T, C>::pop()
     {
-        try
-        {
-            if (this->empty())
-            {
-                throw "empty queue";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error: %s\n", errMsg);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(!this->empty(), "empty queue");
         return _data.pop_front();
     }
 

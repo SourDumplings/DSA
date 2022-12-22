@@ -13,7 +13,7 @@ HashMap 类模板的实现
 #define HASH_MAP_IMPLEMENTATION_H
 
 #include "HashMap.h"
-#include <stdexcept>
+
 #include <cctype>
 #include <iostream>
 
@@ -34,18 +34,7 @@ namespace CZ
     template <typename T, typename H>
     const T& HashMap<T, H>::get(const Rank pos) const
     {
-        try
-        {
-            if (!_data[pos].value())
-            {
-                throw "this position is empty";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from HashMap get: %s, pos is %d\n", errMsg, pos);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(_data[pos].value(), "this position is empty");
         return _data[pos].key();
     }
 
@@ -159,8 +148,7 @@ namespace CZ
             }
             else
             {
-                printf("Error from HashMap insert: repeat is not allowed!");
-                throw std::exception();
+                ASSERT_DEBUG(false, "Error from HashMap insert: repeat is not allowed!");
             }
         }
 
@@ -178,8 +166,7 @@ namespace CZ
             }
             else
             {
-                printf("Error from HashMap insert: HashMap is full\n");
-                throw std::exception();
+                ASSERT_DEBUG(false, "Error from HashMap insert: HashMap is full");
             }
         }
         else
@@ -203,8 +190,7 @@ namespace CZ
             }
             else
             {
-                printf("Error from HashMap remove: this value doesn't exist\n");
-                throw std::exception();
+                ASSERT_DEBUG(false, "Error from HashMap remove: this value doesn't exist");
             }
         }
         else

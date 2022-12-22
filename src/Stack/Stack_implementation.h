@@ -13,7 +13,7 @@
 #define STACK_IMPLEMENTATION_H
 
 #include <utility>
-#include <stdexcept>
+
 #include <cstdio>
 #include <iostream>
 #include <sstream>
@@ -27,18 +27,7 @@ namespace CZ
     template <typename T, typename C>
     const T &Stack<T, C>::top() const
     {
-        try
-        {
-            if (this->empty())
-            {
-                throw "empty stack";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error: %s\n", errMsg);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(!this->empty(), "empty stack");
         return _data.back();
     }
 
@@ -69,18 +58,7 @@ namespace CZ
     template <typename T, typename C>
     void Stack<T, C>::pop()
     {
-        try
-        {
-            if (this->empty())
-            {
-                throw "empty stack";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error: %s\n", errMsg);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(!this->empty(), "empty stack");
         return _data.pop_back();
     }
 

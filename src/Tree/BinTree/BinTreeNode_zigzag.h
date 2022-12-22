@@ -37,43 +37,22 @@ namespace CZ
     BinTreeNode<T>* BinTreeNode<T>::zig()
     {
         BinTreeNode<T> *lChild = left_child();
-        try
-        {
-            if (!lChild)
-            {
-                throw "this node doesn't have left child, cannot zig";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("%s\n", errMsg);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(lChild, "this node doesn't have left child, cannot zig");
 
-        lChild->father() = this->father();
-        BinTreeNode<T> *&f = (BinTreeNode<T>*&)(this->father());
+        lChild->set_father(this->father());
+        BinTreeNode<T> *f = dynamic_cast<BinTreeNode<T>*>(this->father());
         if (f)
         {
-            ((this == f->left_child()) ?
-                f->left_child() : f->right_child()) = lChild;
+            (this == f->left_child()) ? f->set_left_child(lChild) : f->set_right_child(lChild);
         }
-        left_child() = lChild->right_child();
+        set_left_child(lChild->right_child());
         if (left_child())
         {
-            left_child()->father() = this;
+            left_child()->set_father(this);
         }
-        lChild->right_child() = this;
-        this->father() = lChild;
+        lChild->set_right_child(this);
+        this->set_father(lChild);
 
-        // 更新这个结点的高度
-        Rank lH = left_child() ? left_child()->height() : 0;
-        Rank rH = right_child() ? right_child()->height() : 0;
-        this->height() = Max(lH, rH) + 1;
-        // 更新结点B的高度
-        lH = lChild->left_child() ? lChild->left_child()->height() : 0;
-        rH = lChild->right_child() ? lChild->right_child()->height() : 0;
-        lChild->height() = Max(lH, rH) + 1;
-        lChild->update_height_above(0); // 结点B的高度只可能增加
         return lChild;
     }
 
@@ -81,43 +60,22 @@ namespace CZ
     BinTreeNode<T>* BinTreeNode<T>::zag()
     {
         BinTreeNode<T> *rChild = right_child();
-        try
-        {
-            if (!rChild)
-            {
-                throw "this node doesn't have right child, cannot zag";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("%s\n", errMsg);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(rChild, "this node doesn't have right child, cannot zag");
 
-        rChild->father() = this->father();
-        BinTreeNode<T> *&f = (BinTreeNode<T>*&)(this->father());
+        rChild->set_father(this->father());
+        BinTreeNode<T> *f = dynamic_cast<BinTreeNode<T>*>(this->father());
         if (f)
         {
-            ((this == f->right_child()) ?
-                f->right_child() : f->left_child()) = rChild;
+            (this == f->right_child()) ? f->set_right_child(rChild) : f->set_left_child(rChild);
         }
-        right_child() = rChild->left_child();
+        set_right_child(rChild->left_child());
         if (right_child())
         {
-            right_child()->father() = this;
+            right_child()->set_father(this);
         }
-        rChild->left_child() = this;
-        this->father() = rChild;
+        rChild->set_left_child(this);
+        this->set_father(rChild);
 
-        // 更新这个结点的高度
-        Rank lH = left_child() ? left_child()->height() : 0;
-        Rank rH = right_child() ? right_child()->height() : 0;
-        this->height() = Max(lH, rH) + 1;
-        // 更新结点C的高度
-        lH = rChild->left_child() ? rChild->left_child()->height() : 0;
-        rH = rChild->right_child() ? rChild->right_child()->height() : 0;
-        rChild->height() = Max(lH, rH) + 1;
-        rChild->update_height_above(0); // 结点C的高度只可能增加
         return rChild;
     }
 } // CZ

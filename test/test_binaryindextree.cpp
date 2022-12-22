@@ -15,7 +15,7 @@
 #include <vector>
 #include <algorithm>
 #include <memory>
-#include <stdexcept>
+
 #include "BinaryIndexTree/BinaryIndexTree.h"
 
 using namespace std;

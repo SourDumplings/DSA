@@ -55,11 +55,7 @@ namespace CZ
 
         TreeSetIterator<T> &operator++()
         {
-            if (_isEnd)
-            {
-                printf("Error from TreeSetIterator::operator++: cannot move forward from end iterator.\n");
-                throw std::exception();
-            }
+            ASSERT_DEBUG(!_isEnd, "Error from TreeSetIterator::operator++: cannot move forward from end iterator.");
 
             if (!_it->next())
             {
@@ -75,11 +71,7 @@ namespace CZ
         }
         TreeSetIterator<T> operator++(int)
         {
-            if (_isEnd)
-            {
-                printf("Error from TreeSetIterator::operator++: cannot move forward from end iterator.\n");
-                throw std::exception();
-            }
+            ASSERT_DEBUG(!_isEnd, "Error from TreeSetIterator::operator++: cannot move forward from end iterator.");
 
             TreeSetIterator<T> temp = *this;
             if (!_it->next())

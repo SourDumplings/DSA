@@ -16,7 +16,6 @@
 
 #include <cstring>
 #include <cstdio>
-#include <stdexcept>
 #include <iostream>
 #include "../Algorithms/Match.h"
 
@@ -58,18 +57,7 @@ namespace CZ
 
     CZString CZString::substr(Rank pos, Rank l) const
     {
-        try
-        {
-            if (pos + l > length())
-            {
-                throw "wrong, the length of this string is";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from CZString substr: %s %u\n", errMsg, length());
-            throw std::exception();
-        }
+        ASSERT_DEBUG(pos + l <= length(), "wrong, the length of this string is %u", length());
         char temp[l + 1];
         strncpy(temp, &front() + pos, l);
         temp[l] = '\0';
@@ -83,22 +71,14 @@ namespace CZ
 
     CZString CZString::prefix(Rank l) const
     {
-        if (length() < l)
-        {
-            printf("Error from CZString prefix: prefix length is greater than full length\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(l <= length(), "Error from CZString prefix: prefix length is greater than full length");
         return substr(0, l);
     }
 
     CZString CZString::suffix(Rank l) const
     {
         Rank len = length();
-        if (len < l)
-        {
-            printf("Error from CZString suffix: suffix length is greater than full length\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(l <= len, "Error from CZString suffix: suffix length is greater than full length");
         return substr(len - l, l);
     }
 

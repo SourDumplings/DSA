@@ -13,18 +13,13 @@
 #define GRAPH_MODIFICATIONS_H
 
 #include "Graph.h"
-#include <stdexcept>
 
 namespace CZ
 {
     template <typename ED, typename VD>
     void Graph<ED, VD>::set_Nv(Rank Nv_)
     {
-        if (_Nv != 0)
-        {
-            printf("Error from set_Nv: _Nv has been seted, cannot set it again\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(_Nv == 0, "Error from set_Nv: _Nv has been set, cannot set it again");
 
         _Nv = Nv_;
         _dataE.resize(_Nv);
@@ -65,16 +60,8 @@ namespace CZ
     template <typename ED, typename VD>
     void Graph<ED, VD>::add_edge(Rank s, Rank d, const ED &eData, bool has_added)
     {
-        if (_Nv <= s)
-        {
-            printf("Error from Graph add_edge: invalid source, s = %u, _Nv = %u\n", s, _Nv);
-            throw std::exception();
-        }
-        if (_Nv <= d)
-        {
-            printf("Error from Graph add_edge: invalid destination, d = %u, _Nv = %u\n", d, _Nv);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(s < _Nv, "Error from Graph add_edge: invalid source, s = %u, _Nv = %u", s, _Nv);
+        ASSERT_DEBUG(d < _Nv, "Error from Graph add_edge: invalid destination, d = %u, _Nv = %u", d, _Nv);
 
         if (_graphType == ADJACENCY_LIST)
         {
@@ -116,35 +103,21 @@ namespace CZ
             // 如果是无向图，则需要再添加上反向边
             add_edge(d, s, eData, true);
         }
-        return;
     }
 
     template <typename ED, typename VD>
     void Graph<ED, VD>::set_vertice_data(typename Graph<ED, VD>::Rank i, const VD &vData)
     {
-        if (_Nv <= i)
-        {
-            printf("Error from Graph set_vertice_data: this vertice doesn't exist\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(i < _Nv, "Error from Graph set_vertice_data: this vertice doesn't exist");
         _dataV[i] = vData;
-        return;
     }
 
     template <typename ED, typename VD>
     bool Graph<ED, VD>::delete_edge(typename Graph<ED, VD>::Rank s, typename Graph<ED, VD>::Rank d,
         bool has_deleted, bool nonexcept)
     {
-        if (_Nv <= s)
-        {
-            printf("Error from Graph delete_edge: invalid source, s = %u, _Nv = %u\n", s, _Nv);
-            throw std::exception();
-        }
-        if (_Nv <= d)
-        {
-            printf("Error from Graph delete_edge: invalid destination, d = %u, _Nv = %u\n", d, _Nv);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(s < _Nv, "Error from Graph delete_edge: invalid source, s = %u, _Nv = %u", s, _Nv);
+        ASSERT_DEBUG(d < _Nv, "Error from Graph delete_edge: invalid destination, d = %u, _Nv = %u", d, _Nv);
 
         bool success = false;
         if (_graphType == ADJACENCY_LIST)
@@ -181,11 +154,7 @@ namespace CZ
         }
         else
         {
-            if (!nonexcept)
-            {
-                printf("Error from Graph delete_edge: this edge doesn't exist\n");
-                throw std::exception();
-            }
+            ASSERT_DEBUG(nonexcept, "Error from Graph delete_edge: this edge doesn't exist");
         }
         return success;
     }

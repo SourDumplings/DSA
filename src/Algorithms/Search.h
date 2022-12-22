@@ -13,8 +13,7 @@
 #define SEARCH_H
 
 #include <functional>
-#include <stdexcept>
-
+#include "../Base/Assert.h"
 #include "./Search_methods/Seq_search.h"
 #include "./Search_methods/Binary_search.h"
 #include "./Search_methods/Fib_search.h"
@@ -30,42 +29,32 @@ namespace CZ
 
     template <typename It, typename E, typename Cmp>
     It Search(const It &begin, const It &end, const E &value, const Cmp &cmp,
-        const SearchMethod &method = SEQ_SEARCH, const uint32_t version = 0)
+              const SearchMethod &method = SEQ_SEARCH, const uint32_t version = 0)
     {
-        try
+        ASSERT_DEBUG(0 <= end - begin, "Invalid iterator range");
+
+        switch (method)
         {
-            if (end - begin < 0)
-            {
-                throw "Invalid iterator range";
-            }
-            switch (method)
-            {
-                case SEQ_SEARCH:
-                    return SearchAccessories::Seq_search(begin, end, value, cmp, version);
-                case BINARY_SEARCH:
-                    return SearchAccessories::Binary_search(begin, end, value, cmp, version);
-                case FIB_SEARCH:
-                    return SearchAccessories::Fib_search(begin, end, value, cmp, version);
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("%s\n", errMsg);
-            throw std::exception();
+        case SEQ_SEARCH:
+            return SearchAccessories::Seq_search(begin, end, value, cmp, version);
+        case BINARY_SEARCH:
+            return SearchAccessories::Binary_search(begin, end, value, cmp, version);
+        case FIB_SEARCH:
+            return SearchAccessories::Fib_search(begin, end, value, cmp, version);
         }
         return end;
     }
 
     template <typename It, typename E>
     It Search(const It &begin, const It &end, const E &value,
-        const SearchMethod &method = SEQ_SEARCH, const uint32_t version = 0)
+              const SearchMethod &method = SEQ_SEARCH, const uint32_t version = 0)
     {
         switch (method)
         {
-            case SEQ_SEARCH:
-                return Search(begin, end, value, std::equal_to<const E&>(), method, version);
-            default:
-                return Search(begin, end, value, std::less<const E&>(), method, version);
+        case SEQ_SEARCH:
+            return Search(begin, end, value, std::equal_to<const E &>(), method, version);
+        default:
+            return Search(begin, end, value, std::less<const E &>(), method, version);
         }
         return end;
     }

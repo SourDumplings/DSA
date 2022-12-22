@@ -130,11 +130,7 @@ namespace CZ
     {
         KVPair<K, V> tempKVPair(key, V());
         RedBlackTreeNode<KVPair<K, V>> *p = _T.search(tempKVPair);
-        if (!p)
-        {
-            printf("Error from TreeMap::operator[]: this Treemap doesn't contain this key\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(p, "Error from TreeMap::operator[]: this Treemap doesn't contain this key");
         return p->data().value();
     }
 

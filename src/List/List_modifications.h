@@ -13,9 +13,10 @@ List类模板的动态操作
 #define LIST_MODIFICATIONS_H
 
 #include "List.h"
-#include <stdexcept>
+
 #include <utility>
 #include "../Algorithms/Swap.h"
+#include "../Base/Assert.h"
 
 namespace CZ
 {
@@ -74,25 +75,14 @@ namespace CZ
     template <typename T>
     typename List<T>::Iterator List<T>::erase(typename List<T>::Iterator pos)
     {
-        try
-        {
-            ListNode<T> *posGet = pos.get();
-            if (posGet == _head)
-            {
-                throw "head can not be erased!";
-            }
-            posGet->_next->_prev = posGet->_prev;
-            posGet->_prev->_next = posGet->_next;
-            posGet = posGet->_next;
-            delete pos.get();
-            --_size;
-            return ListIterator<T>(posGet);
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from List erase: %s\n", errMsg);
-            throw std::exception();
-        }
+        ListNode<T> *posGet = pos.get();
+        ASSERT_DEBUG(posGet != _head, "head can not be erased!");
+        posGet->_next->_prev = posGet->_prev;
+        posGet->_prev->_next = posGet->_next;
+        posGet = posGet->_next;
+        delete pos.get();
+        --_size;
+        return ListIterator<T>(posGet);
         return pos;
     }
 
@@ -100,25 +90,14 @@ namespace CZ
     typename List<T>::Iterator List<T>::erase(typename List<T>::Iterator b,
         typename List<T>::Iterator e)
     {
-        try
+        while (b != e)
         {
-            while (b != e)
-            {
-                ListNode<T> *posGet = b++.get();
-                if (posGet == _head)
-                {
-                    throw "head can not be erased!";
-                }
-                posGet->_next->_prev = posGet->_prev;
-                posGet->_prev->_next = posGet->_next;
-                delete posGet;
-                --_size;
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from List erase: %s\n", errMsg);
-            throw std::exception();
+            ListNode<T> *posGet = b++.get();
+            ASSERT_DEBUG(posGet != _head, "head can not be erased!");
+            posGet->_next->_prev = posGet->_prev;
+            posGet->_prev->_next = posGet->_next;
+            delete posGet;
+            --_size;
         }
         return e;
     }

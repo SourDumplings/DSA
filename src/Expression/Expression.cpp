@@ -12,10 +12,10 @@
 #include "Expression.h"
 
 #include <cctype>
-#include <stdexcept>
 #include <cmath>
 #include <cstring>
 #include <iostream>
+#include "../Base/Assert.h"
 #include "../CZString/CZString.h"
 #include "../Stack/Stack.h"
 #include "../Algorithms/Factorial.h"
@@ -91,48 +91,40 @@ namespace CZ
     uint32_t Expression::get_operator_index(const char op) const
     {
         int32_t ret;
-        try
+        switch (op)
         {
-            switch (op)
-            {
-            case '+':
-                ret = 0;
-                break;
-            case '-':
-                ret = 1;
-                break;
-            case '*':
-                ret = 2;
-                break;
-            case '/':
-                ret = 3;
-                break;
-            case '^':
-                ret = 4;
-                break;
-            case '!':
-                ret = 5;
-                break;
-            case '(':
-                ret = 6;
-                break;
-            case ')':
-                ret = 7;
-                break;
-            case '\0':
-                ret = 8;
-                break;
-            default:
-            {
-                throw "in function get_operator_index, unknown operator";
-                break;
-            }
-            }
+        case '+':
+            ret = 0;
+            break;
+        case '-':
+            ret = 1;
+            break;
+        case '*':
+            ret = 2;
+            break;
+        case '/':
+            ret = 3;
+            break;
+        case '^':
+            ret = 4;
+            break;
+        case '!':
+            ret = 5;
+            break;
+        case '(':
+            ret = 6;
+            break;
+        case ')':
+            ret = 7;
+            break;
+        case '\0':
+            ret = 8;
+            break;
+        default:
+        {
+            ASSERT_DEBUG(false, "in function get_operator_index, unknown operator");
+            break;
         }
-        catch (const char *errMsg)
-        {
-            printf("Error: %s: %c\n", errMsg, op);
-            throw std::exception();
         }
         return ret;
     }
@@ -171,36 +163,28 @@ namespace CZ
         const
     {
         ValueType ret;
-        try
+        switch (op)
         {
-            switch (op)
-            {
-            case '+':
-                ret = lhs + rhs;
-                break;
-            case '-':
-                ret = lhs - rhs;
-                break;
-            case '*':
-                ret = lhs * rhs;
-                break;
-            case '/':
-                ret = lhs / rhs;
-                break;
-            case '^':
-                ret = pow(lhs, rhs);
-                break;
-            default:
-            {
-                throw "in function calc, unknown operator";
-                break;
-            }
-            }
+        case '+':
+            ret = lhs + rhs;
+            break;
+        case '-':
+            ret = lhs - rhs;
+            break;
+        case '*':
+            ret = lhs * rhs;
+            break;
+        case '/':
+            ret = lhs / rhs;
+            break;
+        case '^':
+            ret = pow(lhs, rhs);
+            break;
+        default:
+        {
+            ASSERT_DEBUG(false, "in function calc, unknown operator");
+            break;
         }
-        catch (const char *errMsg)
-        {
-            printf("Error %s: %c\n", errMsg, op);
-            throw std::exception();
         }
         return ret;
     }
@@ -208,24 +192,16 @@ namespace CZ
     Expression::ValueType Expression::calc(const ValueType &operand, const char op) const
     {
         ValueType ret;
-        try
+        switch (op)
         {
-            switch (op)
-            {
-            case '!':
-                ret = Factorial(operand);
-                break;
-            default:
-            {
-                throw "in function calc, unknown operator";
-                break;
-            }
-            }
+        case '!':
+            ret = Factorial(operand);
+            break;
+        default:
+        {
+            ASSERT_DEBUG(false, "in function calc, unknown operator");
+            break;
         }
-        catch (const char *errMsg)
-        {
-            printf("Error %s: %c\n", errMsg, op);
-            throw std::exception();
         }
         return ret;
     }
@@ -239,68 +215,60 @@ namespace CZ
         const char *p = _exp + 1;
         while (!operatorS.empty())
         {
-            try
+            char c = *p;
+            if (c == _delimiter)
             {
-                char c = *p;
-                if (c == _delimiter)
-                {
-                    ++p;
-                    continue;
-                }
-                else if (isdigit(c))
-                {
-                    // 数的话读入数并进入运算数栈
-                    operandS.push(read_num(p));
-                }
-                else
-                {
-                    char sOp = operatorS.top(), nowOp = c;
-
-                    switch (compare_operator(nowOp, sOp))
-                    {
-                    case 'e':
-                    {
-                        throw "is not correct!";
-                        break;
-                    }
-                    case '=': // 栈顶元素与当前运算符优先级相等，需要单纯弹出栈顶符号不计算
-                    {
-                        operatorS.pop();
-                        ++p;
-                        break;
-                    }
-                    case '<': // 栈顶元素的优先级更高，弹栈计算，并将新的运算结果入运算数栈
-                    {
-                        if (is_one_element_operator(sOp))
-                        {
-                            ValueType operand = operandS.top();
-                            operandS.pop();
-                            operandS.push(calc(operand, sOp));
-                        }
-                        else
-                        {
-                            ValueType rhs = operandS.top();
-                            operandS.pop();
-                            ValueType lhs = operandS.top();
-                            operandS.pop();
-                            operandS.push(calc(lhs, sOp, rhs));
-                        }
-                        operatorS.pop();
-                        break;
-                    }
-                    case '>': // 当前元素的优先级更高，将当前运算符入栈
-                    {
-                        operatorS.push(nowOp);
-                        ++p;
-                        break;
-                    }
-                    }
-                }
+                ++p;
+                continue;
             }
-            catch (const char *errMsg)
+            else if (isdigit(c))
             {
-                printf("Error: the expression %s %s\n", _exp, errMsg);
-                throw std::exception();
+                // 数的话读入数并进入运算数栈
+                operandS.push(read_num(p));
+            }
+            else
+            {
+                char sOp = operatorS.top(), nowOp = c;
+
+                switch (compare_operator(nowOp, sOp))
+                {
+                case 'e':
+                {
+                    ASSERT_DEBUG(false, "Error: the expression %s is not correct!", _exp);
+                    break;
+                }
+                case '=': // 栈顶元素与当前运算符优先级相等，需要单纯弹出栈顶符号不计算
+                {
+                    operatorS.pop();
+                    ++p;
+                    break;
+                }
+                case '<': // 栈顶元素的优先级更高，弹栈计算，并将新的运算结果入运算数栈
+                {
+                    if (is_one_element_operator(sOp))
+                    {
+                        ValueType operand = operandS.top();
+                        operandS.pop();
+                        operandS.push(calc(operand, sOp));
+                    }
+                    else
+                    {
+                        ValueType rhs = operandS.top();
+                        operandS.pop();
+                        ValueType lhs = operandS.top();
+                        operandS.pop();
+                        operandS.push(calc(lhs, sOp, rhs));
+                    }
+                    operatorS.pop();
+                    break;
+                }
+                case '>': // 当前元素的优先级更高，将当前运算符入栈
+                {
+                    operatorS.push(nowOp);
+                    ++p;
+                    break;
+                }
+                }
             }
         }
         return operandS.top(); // 返回最终的运算结果
@@ -316,61 +284,53 @@ namespace CZ
         const char *p = _exp + 1;
         while (!operatorS.empty())
         {
-            try
+            char c = *p;
+            if (c == _delimiter)
             {
-                char c = *p;
-                if (c == _delimiter)
-                {
-                    ++p;
-                    continue;
-                }
-                else if (isdigit(c))
-                {
-                    // 数的话读入数并进入运算数栈，并加到逆波兰表达式的后面
-                    ValueType number = read_num(p);
-                    // 默认保留两位小数
-                    char temp[100];
-                    sprintf(temp, "%.2f%c", number, _delimiter);
-
-                    RPN += temp;
-                }
-                else
-                {
-                    char sOp = operatorS.top(), nowOp = c;
-
-                    switch (compare_operator(nowOp, sOp))
-                    {
-                    case 'e':
-                    {
-                        throw "is not correct!";
-                        break;
-                    }
-                    case '=': // 栈顶元素与当前运算符优先级相等，需要单纯弹出栈顶符号不计算
-                    {
-                        operatorS.pop();
-                        ++p;
-                        break;
-                    }
-                    case '<': // 栈顶元素的优先级更高，弹栈计算，并将新的运算结果入运算数栈
-                    {
-                        RPN += operatorS.top(); // 将运算符加到逆波兰表达式的末尾
-                        RPN += _delimiter;
-                        operatorS.pop();
-                        break;
-                    }
-                    case '>': // 当前元素的优先级更高，将当前运算符入栈
-                    {
-                        operatorS.push(nowOp);
-                        ++p;
-                        break;
-                    }
-                    }
-                }
+                ++p;
+                continue;
             }
-            catch (const char *errMsg)
+            else if (isdigit(c))
             {
-                printf("Error: the expression %s %s\n", _exp, errMsg);
-                throw std::exception();
+                // 数的话读入数并进入运算数栈，并加到逆波兰表达式的后面
+                ValueType number = read_num(p);
+                // 默认保留两位小数
+                char temp[100];
+                sprintf(temp, "%.2f%c", number, _delimiter);
+
+                RPN += temp;
+            }
+            else
+            {
+                char sOp = operatorS.top(), nowOp = c;
+
+                switch (compare_operator(nowOp, sOp))
+                {
+                case 'e':
+                {
+                    ASSERT_DEBUG(false, "Error: the expression %s is not correct!", _exp);
+                    break;
+                }
+                case '=': // 栈顶元素与当前运算符优先级相等，需要单纯弹出栈顶符号不计算
+                {
+                    operatorS.pop();
+                    ++p;
+                    break;
+                }
+                case '<': // 栈顶元素的优先级更高，弹栈计算，并将新的运算结果入运算数栈
+                {
+                    RPN += operatorS.top(); // 将运算符加到逆波兰表达式的末尾
+                    RPN += _delimiter;
+                    operatorS.pop();
+                    break;
+                }
+                case '>': // 当前元素的优先级更高，将当前运算符入栈
+                {
+                    operatorS.push(nowOp);
+                    ++p;
+                    break;
+                }
+                }
             }
         }
         return RPN;
@@ -387,62 +347,54 @@ namespace CZ
         const char *p = _exp + l;
         while (!operatorS.empty())
         {
-            try
+            char c = *p;
+            if (c == _delimiter)
             {
-                char c = *p;
-                if (c == _delimiter)
-                {
-                    --p;
-                    continue;
-                }
-                else if (isdigit(c))
-                {
-                    // 数的话读入数并进入运算数栈，并加到逆波兰表达式的后面
-                    ValueType number = reverse_read_num(p);
-                    // 默认保留两位小数
-                    char temp[100];
-                    sprintf(temp, "%.2f%c", number, _delimiter);
-
-                    PN = temp + PN;
-                }
-                else
-                {
-                    char sOp = operatorS.top(), nowOp = c;
-
-                    switch (reverse_compare_operator(nowOp, sOp))
-                    {
-                    case 'e':
-                    {
-                        throw "is not correct!";
-                        break;
-                    }
-                    case '=': // 栈顶元素与当前运算符优先级相等，需要单纯弹出栈顶符号不计算
-                    {
-                        operatorS.pop();
-                        --p;
-                        break;
-                    }
-                    case '<': // 栈顶元素的优先级更高，弹栈计算，并将新的运算结果入运算数栈
-                    {
-                        char temp[100];
-                        sprintf(temp, "%c%c", sOp, _delimiter);
-                        PN = temp + PN; // 将运算符加到波兰表达式的前端
-                        operatorS.pop();
-                        break;
-                    }
-                    case '>': // 当前元素的优先级更高，将当前运算符入栈
-                    {
-                        operatorS.push(nowOp);
-                        --p;
-                        break;
-                    }
-                    }
-                }
+                --p;
+                continue;
             }
-            catch (const char *errMsg)
+            else if (isdigit(c))
             {
-                printf("Error: the expression %s %s\n", _exp + 1, errMsg);
-                throw std::exception();
+                // 数的话读入数并进入运算数栈，并加到逆波兰表达式的后面
+                ValueType number = reverse_read_num(p);
+                // 默认保留两位小数
+                char temp[100];
+                sprintf(temp, "%.2f%c", number, _delimiter);
+
+                PN = temp + PN;
+            }
+            else
+            {
+                char sOp = operatorS.top(), nowOp = c;
+
+                switch (reverse_compare_operator(nowOp, sOp))
+                {
+                case 'e':
+                {
+                    ASSERT_DEBUG("Error: the expression %s is not correct!", _exp + 1);
+                    break;
+                }
+                case '=': // 栈顶元素与当前运算符优先级相等，需要单纯弹出栈顶符号不计算
+                {
+                    operatorS.pop();
+                    --p;
+                    break;
+                }
+                case '<': // 栈顶元素的优先级更高，弹栈计算，并将新的运算结果入运算数栈
+                {
+                    char temp[100];
+                    sprintf(temp, "%c%c", sOp, _delimiter);
+                    PN = temp + PN; // 将运算符加到波兰表达式的前端
+                    operatorS.pop();
+                    break;
+                }
+                case '>': // 当前元素的优先级更高，将当前运算符入栈
+                {
+                    operatorS.push(nowOp);
+                    --p;
+                    break;
+                }
+                }
             }
         }
         return PN;

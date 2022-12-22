@@ -14,6 +14,7 @@
 #define VECTOR_H
 
 #include <initializer_list>
+#include "../Base/Assert.h"
 #include "../Base/AbstractSeqIterableContainer.h"
 #include "../Iterator/RandomIterator.h"
 #include "../Algorithms/Dict_compare.h"

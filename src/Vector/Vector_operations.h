@@ -13,7 +13,8 @@ Vector本身所支持的操作
 #define VECTOR_OPERATIONS_H
 
 #include "Vector.h"
-#include <cassert>
+
+#include "../Base/Assert.h"
 #include <iostream>
 
 namespace CZ
@@ -21,7 +22,7 @@ namespace CZ
     template <typename T>
     const T &Vector<T>::operator[](const Vector<T>::Rank i) const
     {
-        assert(i < _size);
+        ASSERT_DEBUG(i < _size, "index i(%u) out of range, size(%u)", i, _size);
         return _elem[i];
     }
 

@@ -22,11 +22,7 @@ namespace CZ
     void Graph<ED, VD>::bfs(Rank s, Vector<Rank> &results, const EF &processE,
         const VF &processV) const
     {
-        if (_Nv <= s)
-        {
-            printf("Error from Graph bfs: invalid source, the _Nv is %u\n", _Nv);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(s < _Nv, "Error from Graph bfs: invalid source, the _Nv is %u", _Nv);
 
         Queue<Rank> Q;
         Vector<bool> visited(_Nv);
@@ -79,11 +75,7 @@ namespace CZ
     void Graph<ED, VD>::bfs(Rank s, Vector<Rank> &results, const EF &processE,
         const VF &processV)
     {
-        if (_Nv <= s)
-        {
-            printf("Error from Graph bfs: invalid source, the _Nv is %u\n", _Nv);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(s < _Nv, "Error from Graph bfs: invalid source, the _Nv is %u", _Nv);
 
         Queue<Rank> Q;
         Vector<bool> visited(_Nv);

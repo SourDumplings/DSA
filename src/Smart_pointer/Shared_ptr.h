@@ -13,7 +13,7 @@
 #define SHARED_PTR_H
 
 #include <cstdio>
-#include <stdexcept>
+
 #include <iostream>
 
 #include "Weak_ptr.h"
@@ -125,18 +125,7 @@ namespace CZ
     template <typename T>
     const T &Shared_ptr<T>::operator*() const
     {
-        try
-        {
-            if (_wPtr == nullptr)
-            {
-                throw "pointer is nullptr";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error: %s\n", errMsg);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(_wPtr, "pointer is nullptr");
         return *(_wPtr->_ptr);
     }
 
@@ -149,18 +138,7 @@ namespace CZ
     template <typename T>
     const T *Shared_ptr<T>::operator->() const
     {
-        try
-        {
-            if (!_wPtr)
-            {
-                throw "pointer is nullptr";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error: %s\n", errMsg);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(_wPtr, "pointer is nullptr");
         return _wPtr->_ptr;
     }
 

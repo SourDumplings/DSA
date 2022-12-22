@@ -8,7 +8,7 @@
 
 #include "PrimeTable.h"
 
-#include <stdexcept>
+
 #include <cstdio>
 #include <iostream>
 #include "../CZString/CZString.h"
@@ -33,11 +33,7 @@ namespace CZ
     // 返回第n个素数
     PrimeTable::Rank PrimeTable::get_prime(PrimeTable::Rank n) const
     {
-        if (n > _size)
-        {
-            printf("Error from PrimeTable get_prime: this table doesn't have so many primes\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(_size <= n, "Error from PrimeTable get_prime: this table doesn't have so many primes");
         PrimeTable::Rank ret = 0;
         for (PrimeTable::Rank i = 2, count = 0; i <= _upperLimit; ++i)
         {
@@ -56,11 +52,7 @@ namespace CZ
     // 判断素数
     bool PrimeTable::is_prime(PrimeTable::Rank num)
     {
-        if (num > _upperLimit)
-        {
-            printf("Error from PrimeTable get_prime: this number is too large\n");
-            throw std::exception();
-        }
+        ASSERT_DEBUG(_upperLimit <= num, "Error from PrimeTable get_prime: this number is too large");
         return _table[num];
     }
 

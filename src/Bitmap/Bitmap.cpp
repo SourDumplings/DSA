@@ -30,7 +30,6 @@ Bitmap类的实现
 #include <cstring>
 #include <cstdio>
 #include <string>
-#include <stdexcept>
 #include <iostream>
 
 namespace CZ
@@ -53,24 +52,10 @@ namespace CZ
     Bitmap::Bitmap(const char *file, Bitmap::Rank n_)
     {
         init(n_);
-        try
-        {
-            FILE *fp = fopen(file, "r");
-            if (fp)
-            {
-                fread(_m, sizeof(char), _charNum, fp);
-                fclose(fp);
-            }
-            else
-                throw "can't open this file";
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error: %s\n", errMsg);
-            throw std::exception();
-        }
-
-        return;
+        FILE *fp = fopen(file, "r");
+        ASSERT_DEBUG(fp, "can't open this file");
+        fread(_m, sizeof(char), _charNum, fp);
+        fclose(fp);
     }
 
     // 析构函数
@@ -99,23 +84,10 @@ namespace CZ
     // 访问接口函数
     void Bitmap::dump(const char *file) const
     {
-        try
-        {
-            FILE *fp = fopen(file, "w");
-            if (fp)
-            {
-                fwrite(_m, sizeof(char), _charNum, fp);
-                fclose(fp);
-            }
-            else
-                throw "can't open this file";
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error: %s\n", errMsg);
-            throw std::exception();
-        }
-        return;
+        FILE *fp = fopen(file, "w");
+        ASSERT_DEBUG(fp, "can't open this file");
+        fwrite(_m, sizeof(char), _charNum, fp);
+        fclose(fp);
     }
 
     CZString Bitmap::bits2czstring(typename Bitmap::Rank n_) const

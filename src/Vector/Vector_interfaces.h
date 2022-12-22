@@ -13,7 +13,6 @@ Vector类模板的数据访问接口方法
 #define VECTOR_INTERFACES_H
 
 #include "Vector.h"
-#include <stdexcept>
 
 namespace CZ
 {
@@ -62,72 +61,28 @@ namespace CZ
     template <typename T>
     const T &Vector<T>::back() const
     {
-        try
-        {
-            if (_size == 0)
-            {
-                throw "no elements";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from Vector back: %s\n", errMsg);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(_size != 0, "no elements");
         return _elem[_size - 1];
     }
 
     template <typename T>
     T &Vector<T>::back()
     {
-        try
-        {
-            if (_size == 0)
-            {
-                throw "no elements";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error: %s\n", errMsg);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(_size != 0, "no elements");
         return _elem[_size - 1];
     }
 
     template <typename T>
     const T &Vector<T>::front() const
     {
-        try
-        {
-            if (_size == 0)
-            {
-                throw "no elements";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from Vector front: %s\n", errMsg);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(_size != 0, "no elements");
         return _elem[0];
     }
 
     template <typename T>
     T &Vector<T>::front()
     {
-        try
-        {
-            if (_size == 0)
-            {
-                throw "no elements";
-            }
-        }
-        catch (const char *errMsg)
-        {
-            printf("Error from Vector front: %s\n", errMsg);
-            throw std::exception();
-        }
+        ASSERT_DEBUG(_size != 0, "no elements");
         return _elem[0];
     }
 
