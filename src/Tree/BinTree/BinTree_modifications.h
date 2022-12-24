@@ -14,7 +14,6 @@
 
 #include "BinTree.h"
 
-
 namespace CZ
 {
 
@@ -26,17 +25,17 @@ namespace CZ
 
         if (this->root())
         {
-            BinTreeNode<T>* pBinTreeNodeFather = dynamic_cast<BinTreeNode<T>*>(pFather);
+            BinTreeNode<T> *pBinTreeNodeFather = dynamic_cast<BinTreeNode<T> *>(pFather);
             ASSERT_DEBUG(pBinTreeNodeFather, "father is nullptr, cannot be a father");
             ASSERT_DEBUG(pBinTreeNodeFather->get_root() == this->root(), "this father is not a node in this tree");
 
             if (pBinTreeNodeFather->left_child() == nullptr)
             {
-                pBinTreeNodeFather->insert_as_left_child(dynamic_cast<BinTreeNode<T>*>(pNode));
+                pBinTreeNodeFather->insert_as_left_child(dynamic_cast<BinTreeNode<T> *>(pNode));
             }
             else if (pBinTreeNodeFather->right_child() == nullptr)
             {
-                pBinTreeNodeFather->insert_as_right_child(dynamic_cast<BinTreeNode<T>*>(pNode));
+                pBinTreeNodeFather->insert_as_right_child(dynamic_cast<BinTreeNode<T> *>(pNode));
             }
             else
             {
@@ -62,10 +61,10 @@ namespace CZ
         ASSERT_DEBUG(pNode->get_root() == this->root(), "this node is not in this tree");
         ASSERT_DEBUG(pNode != this->root(), "cannot secede root");
 
-        BinTreeNode<T> *pBinTreeNode = dynamic_cast<BinTreeNode<T>*>(pNode);
+        BinTreeNode<T> *pBinTreeNode = dynamic_cast<BinTreeNode<T> *>(pNode);
         ASSERT_RELEASE(pBinTreeNode, "wrong node pointer");
 
-        BinTreeNode<T> *f = dynamic_cast<BinTreeNode<T>*>(pBinTreeNode->father());
+        BinTreeNode<T> *f = dynamic_cast<BinTreeNode<T> *>(pBinTreeNode->father());
         if (f->left_child() == pBinTreeNode)
         {
             f->set_left_child(nullptr);
@@ -82,8 +81,30 @@ namespace CZ
 
         return pBinTreeNode;
     }
+
+    template <typename T>
+    BinTree<T> &BinTree<T>::operator=(const BinTree<T> &t) noexcept
+    {
+        if (&t != this)
+        {
+            this->_pRoot = copy_from(t._pRoot);
+            this->_size = t._size;
+        }
+        return *this;
+    }
+
+    template <typename T>
+    BinTree<T> &BinTree<T>::operator=(BinTree<T> &&t) noexcept
+    {
+        if (&t != this)
+        {
+            this->_pRoot = t._pRoot;
+            this->_size = t._size;
+            t._pRoot = nullptr;
+            t._size = 0;
+        }
+        return *this;
+    }
 } // CZ
 
 #endif // BIN_TREE_MODIFICATIONS_H
-
-

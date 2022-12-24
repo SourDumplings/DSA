@@ -41,9 +41,9 @@ namespace CZ
         ASSERT_DEBUG(pBSTNode, "error pRoot");
         BSTNode<T> *pCopiedRoot = new BSTNode<T>(pBSTNode->data());
         ASSERT_RELEASE(pCopiedRoot, "copy root error");
-        BSTNode<T> *pLC = dynamic_cast<BSTNode<T>*>(pBSTNode->left_child());
+        BSTNode<T> *pLC = dynamic_cast<BSTNode<T> *>(pBSTNode->left_child());
         BSTNode<T> *pLCopied = this->copy_from(pLC);
-        BSTNode<T> *pRC = dynamic_cast<BSTNode<T>*>(pBSTNode->right_child());
+        BSTNode<T> *pRC = dynamic_cast<BSTNode<T> *>(pBSTNode->right_child());
         BSTNode<T> *pRCopied = this->copy_from(pRC);
         pCopiedRoot->insert_as_left_child(pLCopied);
         pCopiedRoot->insert_as_right_child(pRCopied);
@@ -140,7 +140,7 @@ namespace CZ
             delete pNode;
             return false;
         }
-        
+
         return true;
     }
 
@@ -151,7 +151,7 @@ namespace CZ
         {
             return nullptr;
         }
-        
+
         if (!_isAllowRepeatKey && search_data(pNode->data()))
         {
             return nullptr;
@@ -184,12 +184,6 @@ namespace CZ
     }
 
     template <typename T>
-    inline BSTNode<T> *BST<T>::rotate_at(BSTNode<T> *v) noexcept
-    {
-        return dynamic_cast<BSTNode<T> *>(BinTree<T>::rotate_at(v));
-    }
-
-    template <typename T>
     BSTNode<T> *BST<T>::remove_at(BSTNode<T> *&target, BSTNode<T> *&hot) noexcept
     {
         if (target == nullptr)
@@ -208,7 +202,6 @@ namespace CZ
         {
             // 如果右子树为空，则对称处理
             // 注意此时左子树一定不空
-            ASSERT_DEBUG(target->left_child(), "empty target left child");
             succ = dynamic_cast<BSTNode<T> *>(target->left_child());
         }
         else
@@ -260,10 +253,16 @@ namespace CZ
     }
 
     template <typename T>
-    BSTNode<T> *BST<T>::remove_data(const T &data) noexcept
+    bool BST<T>::remove_data(const T &data) noexcept
     {
         BSTNode<T> *pNode = this->search_data(data);
-        return this->remove(pNode);
+        BSTNode<T> *pActualRemovedNode = this->remove(pNode);
+        if (pActualRemovedNode)
+        {
+            delete pActualRemovedNode;
+            return true;
+        }
+        return false;
     }
 
     template <typename T>
@@ -272,9 +271,8 @@ namespace CZ
         Rank count = 0;
         while (true)
         {
-            if (BSTNode<T> *pNode = this->remove_data(data))
+            if (this->remove_data(data))
             {
-                delete pNode;
                 ++count;
             }
             else
@@ -289,6 +287,32 @@ namespace CZ
     inline bool BST<T>::is_allow_repeat_key() const noexcept
     {
         return _isAllowRepeatKey;
+    }
+
+    template <typename T>
+    BST<T> &BST<T>::operator=(const BST<T> &t) noexcept
+    {
+        if (&t != this)
+        {
+            this->_pRoot = copy_from(t._pRoot);
+            this->_size = t._size;
+            this->_isAllowRepeatKey = t._isAllowRepeatKey;
+        }
+        return *this;
+    }
+
+    template <typename T>
+    BST<T> &BST<T>::operator=(BST<T> &&t) noexcept
+    {
+        if (&t != this)
+        {
+            this->_pRoot = t._pRoot;
+            this->_size = t._size;
+            this->_isAllowRepeatKey = t._isAllowRepeatKey;
+            t._pRoot = nullptr;
+            t._size = 0;
+        }
+        return *this;
     }
 
     template <typename T>

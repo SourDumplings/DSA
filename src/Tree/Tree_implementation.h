@@ -217,6 +217,30 @@ namespace CZ
     }
 
     template <typename T>
+    Tree<T> &Tree<T>::operator=(const Tree<T> &t) noexcept
+    {
+        if (&t != this)
+        {
+            _pRoot = copy_from(t._pRoot);
+            _size = t._size;
+        }
+        return *this;
+    }
+
+    template <typename T>
+    Tree<T> &Tree<T>::operator=(Tree<T> &&t) noexcept
+    {
+        if (&t != this)
+        {
+            _pRoot = t._pRoot;
+            _size = t._size;
+            t._pRoot = nullptr;
+            t._size = 0;
+        }
+        return *this;
+    }
+
+    template <typename T>
     inline bool operator==(const Tree<T> &lhs, const Tree<T> &rhs)
     {
         if (lhs._pRoot == nullptr)

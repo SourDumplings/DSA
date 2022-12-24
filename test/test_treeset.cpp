@@ -75,7 +75,7 @@ int main(int argc, char const *argv[])
     vs.push_back(&s3);
     for (int32_t i = 0; i < 3; ++i)
     {
-        reinterpret_cast<TreeSet<int> *>(vs[i])->print_info(to_string(i + 1).c_str());
+        static_cast<TreeSet<int> *>(vs[i])->print_info(to_string(i + 1).c_str());
     }
 
     s3.insert(1);

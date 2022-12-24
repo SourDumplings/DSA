@@ -187,6 +187,32 @@ namespace CZ
     }
 
     template <typename T>
+    SplayTree<T> &SplayTree<T>::operator=(const SplayTree<T> &t) noexcept
+    {
+        if (&t != this)
+        {
+            this->_pRoot = copy_from(t._pRoot);
+            this->_size = t._size;
+            this->_isAllowRepeatKey = t._isAllowRepeatKey;
+        }
+        return *this;
+    }
+
+    template <typename T>
+    SplayTree<T> &SplayTree<T>::operator=(SplayTree<T> &&t) noexcept
+    {
+        if (&t != this)
+        {
+            this->_pRoot = t._pRoot;
+            this->_size = t._size;
+            this->_isAllowRepeatKey = t._isAllowRepeatKey;
+            t._pRoot = nullptr;
+            t._size = 0;
+        }
+        return *this;
+    }
+
+    template <typename T>
     const char *SplayTree<T>::get_entity_name() const
     {
         return "SplayTree";

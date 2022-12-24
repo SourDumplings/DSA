@@ -33,7 +33,7 @@ namespace CZ
     // 返回第n个素数
     PrimeTable::Rank PrimeTable::get_prime(PrimeTable::Rank n) const
     {
-        ASSERT_DEBUG(_size <= n, "Error from PrimeTable get_prime: this table doesn't have so many primes");
+        ASSERT_DEBUG(n <= _size, "Error from PrimeTable get_prime: this table doesn't have so many primes");
         PrimeTable::Rank ret = 0;
         for (PrimeTable::Rank i = 2, count = 0; i <= _upperLimit; ++i)
         {
@@ -52,7 +52,7 @@ namespace CZ
     // 判断素数
     bool PrimeTable::is_prime(PrimeTable::Rank num)
     {
-        ASSERT_DEBUG(_upperLimit <= num, "Error from PrimeTable get_prime: this number is too large");
+        ASSERT_DEBUG(num <= _upperLimit, "Error from PrimeTable get_prime: this number is too large");
         return _table[num];
     }
 

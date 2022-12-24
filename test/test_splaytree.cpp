@@ -65,7 +65,7 @@ int main(int argc, char const *argv[])
     cout << "sT3.hash(): " << sT3.hash() << endl;
     sT3.print_info("sT3");
     sT3.search_data(1);
-    delete sT3.remove_data(1);
+    sT3.remove_data(1);
     sT3.print_info("sT3");
     /* sT3: 
             2

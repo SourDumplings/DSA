@@ -29,7 +29,7 @@ namespace CZ
     public:
         using Rank = typename BSTNode<T>::Rank;
 
-        AVLTreeNode(const T &data = T(), AVLTreeNode *father_ = nullptr) : BSTNode<T>(data, father_) {}
+        AVLTreeNode(const T &data = T(), AVLTreeNode *father_ = nullptr) : BSTNode<T>(data, father_), _height(1) {}
 
         bool is_balance() const
         {
@@ -55,10 +55,51 @@ namespace CZ
                 delete pNode;
                 return false;
             }
+            update_height();
             return true;
         }
 
+        typename TreeNode<T>::Rank height() const override
+        {
+            return _height;
+        }
+
+        // 从本节点开始更新高度
+        void update_height() noexcept
+        {
+            _height = BSTNode<T>::height();
+            this->update_height_here_above();
+        }
+
         const char *get_entity_name() const override { return "AVLTreeNode"; }
+
+    protected:
+        void set_height(Rank height_)
+        {
+            _height = height_;
+        }
+
+    private:
+        Rank _height; // 结点的高度，单个结点为 1
+
+        // 向上更新结点高度
+        void update_height_here_above() noexcept
+        {
+            if (this->father() == nullptr)
+            {
+                return;
+            }
+
+            AVLTreeNode<T> *f = dynamic_cast<AVLTreeNode<T> *>(this->father());
+            AVLTreeNode<T> *b = dynamic_cast<AVLTreeNode<T> *>(this->brother());
+            Rank thisH = this->height();
+            Rank bH = b ? b->height() : 0;
+            if (f && f->height() != Max(thisH, bH) + 1)
+            {
+                f->set_height(Max(thisH, bH) + 1);
+                f->update_height_here_above();
+            }
+        }
     };
 } // CZ
 

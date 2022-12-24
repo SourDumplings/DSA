@@ -57,7 +57,7 @@ int main(int argc, char const *argv[])
 
 
     // // 测试删除操作
-    delete rt1.remove_data(1);
+    rt1.remove_data(1);
     rt1.print_info("rt1");
     /* rt1： 
                 5b
@@ -71,7 +71,7 @@ int main(int argc, char const *argv[])
      */
 
 
-    delete rt1.remove_data(8);
+    rt1.remove_data(8);
     cout << "rt1: " << rt1 << endl;
     cout << "rt1.hash(): " << rt1.hash() << endl;
     rt1.print_info("rt1");
@@ -87,7 +87,7 @@ int main(int argc, char const *argv[])
      */
 
 
-    delete rt1.remove_data(3);
+    rt1.remove_data(3);
     rt1.print_info("rt1");
     /* rt1：
                 5b
@@ -100,7 +100,7 @@ int main(int argc, char const *argv[])
 
      */
 
-    delete rt1.remove_data(9);
+    rt1.remove_data(9);
     rt1.print_info("rt1");
     /* rT： 
                 5b
@@ -110,7 +110,7 @@ int main(int argc, char const *argv[])
          0b  4b    6b  7b          
      */
 
-    delete rt1.remove_data(5);
+    rt1.remove_data(5);
     rt1.print_info("rt1");
     /* rT： 
                 6b

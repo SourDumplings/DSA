@@ -78,7 +78,7 @@ namespace CZ
         char *oldM = _m;
         init(2 * k);
         memcpy(_m, oldM, oldN);
-        delete oldM;
+        delete[] oldM;
     }
 
     // 访问接口函数
@@ -98,13 +98,13 @@ namespace CZ
         {
             maxNum = sizeof(char) * _charNum * 8;
         }
-        
+
         res.resize(maxNum);
         for (Rank i = 0; i < maxNum; i++)
         {
             res[i] = test(i) ? '1' : '0';
         }
-        res.reverse();        
+        res.reverse();
         return res;
     }
 
@@ -114,7 +114,7 @@ namespace CZ
         {
             return false;
         }
-        
+
         return _m[k >> 3] & (0x80 >> (k & 0x07));
     }
 
@@ -135,7 +135,7 @@ namespace CZ
         {
             return;
         }
-        
+
         _m[k >> 3] &= ~(0x80 >> (k & 0x07));
     }
 

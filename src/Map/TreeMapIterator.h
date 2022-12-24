@@ -52,11 +52,11 @@ namespace CZ
             {
                 // 红黑树最右侧结点再前移即为尾后迭代器
                 _isEnd = true;
-                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(_pRBT->root());
+                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_pRBT->root()));
             }
             else
             {
-                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(_bIt->next());
+                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_bIt->next()));
             }
             return *this;
         }
@@ -69,11 +69,11 @@ namespace CZ
             {
                 // 红黑树最右侧结点再前移即为尾后迭代器
                 _isEnd = true;
-                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(_pRBT->root());
+                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_pRBT->root()));
             }
             else
             {
-                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(_bIt->next());
+                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_bIt->next()));
             }
             return temp;
         }
@@ -86,7 +86,7 @@ namespace CZ
             }
             else
             {
-                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(_bIt->prev());
+                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_bIt->prev()));
             }
             return *this;
         }
@@ -100,7 +100,7 @@ namespace CZ
             }
             else
             {
-                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(_bIt->prev());
+                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_bIt->prev()));
             }
             return temp;
         }
@@ -121,10 +121,10 @@ namespace CZ
 
         RedBlackTreeNode<KVPair<K, V>> *lastNode() const
         {
-            RedBlackTreeNode<KVPair<K, V>> *pLastNode = _pRBT->root();
+            RedBlackTreeNode<KVPair<K, V>> *pLastNode = dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_pRBT->root());
             while (pLastNode->right_child())
             {
-                pLastNode = pLastNode->right_child();
+                pLastNode = dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(pLastNode->right_child());
             }
             return pLastNode;
         }

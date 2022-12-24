@@ -61,9 +61,9 @@ int main(int argc, char const *argv[])
     //
     // 测试remove
     bst1.print_info("bst1");
-    delete bst1.remove_data(7);
+    bst1.remove_data(7);
     bst1.print_info("bst1");
-    delete bst1.remove_data(1);
+    bst1.remove_data(1);
     bst1.print_info("bst1");
     cout << "bst1: " << bst1 << endl;
     cout << "bst1.hash(): " << bst1.hash() << endl;

@@ -104,6 +104,32 @@ namespace CZ
         }
         return actualRemoved;
     }
+
+    template <typename T>
+    RedBlackTree<T> &RedBlackTree<T>::operator=(const RedBlackTree<T> &t) noexcept
+    {
+        if (&t != this)
+        {
+            this->_pRoot = copy_from(t._pRoot);
+            this->_size = t._size;
+            this->_isAllowRepeatKey = t._isAllowRepeatKey;
+        }
+        return *this;
+    }
+
+    template <typename T>
+    RedBlackTree<T> &RedBlackTree<T>::operator=(RedBlackTree<T> &&t) noexcept
+    {
+        if (&t != this)
+        {
+            this->_pRoot = t._pRoot;
+            this->_size = t._size;
+            this->_isAllowRepeatKey = t._isAllowRepeatKey;
+            t._pRoot = nullptr;
+            t._size = 0;
+        }
+        return *this;
+    }
 } // CZ
 
 #endif // RED_BLACK_TREE_MODIFICATIONS_H

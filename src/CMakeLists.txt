@@ -33,26 +33,8 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 set(dist_dir ${PROJECT_SOURCE_DIR}/dist)
 
 # 安装头文件
-INSTALL(DIRECTORY Algorithms/ DESTINATION ${dist_dir}/include/Algorithms)
-INSTALL(DIRECTORY Base/ DESTINATION ${dist_dir}/include/Base)
-INSTALL(DIRECTORY BinaryIndexTree/ DESTINATION ${dist_dir}/include/BinaryIndexTree)
-INSTALL(FILES Bitmap/Bitmap.h DESTINATION ${dist_dir}/include/Bitmap)
-INSTALL(DIRECTORY CZString/ DESTINATION ${dist_dir}/include/CZString)
-INSTALL(DIRECTORY Deque/ DESTINATION ${dist_dir}/include/Deque)
-INSTALL(DIRECTORY Map/ DESTINATION ${dist_dir}/include/Map)
-INSTALL(FILES Expression/Expression.h DESTINATION ${dist_dir}/include/Expression)
-INSTALL(DIRECTORY Graph/ DESTINATION ${dist_dir}/include/Graph)
-INSTALL(DIRECTORY Heap/ DESTINATION ${dist_dir}/include/Heap)
-INSTALL(DIRECTORY Iterator/ DESTINATION ${dist_dir}/include/Iterator)
-INSTALL(DIRECTORY List/ DESTINATION ${dist_dir}/include/List)
-INSTALL(FILES PrimeTable/PrimeTable.h DESTINATION ${dist_dir}/include/PrimeTable)
-INSTALL(DIRECTORY Queue/ DESTINATION ${dist_dir}/include/Queue)
-INSTALL(DIRECTORY Set/ DESTINATION ${dist_dir}/include/Set)
-INSTALL(DIRECTORY Smart_pointer/ DESTINATION ${dist_dir}/include/Smart_pointer)
-INSTALL(DIRECTORY Stack/ DESTINATION ${dist_dir}/include/Stack)
-INSTALL(DIRECTORY Tree/ DESTINATION ${dist_dir}/include/Tree)
-INSTALL(DIRECTORY UnionFindSet/ DESTINATION ${dist_dir}/include/UnionFindSet)
-INSTALL(DIRECTORY Vector/ DESTINATION ${dist_dir}/include/Vector)
+INSTALL(DIRECTORY ${PROJECT_SOURCE_DIR}/src DESTINATION ${dist_dir}/include
+    FILES_MATCHING PATTERN "*.h")
 
 # 安装库文件
 INSTALL(

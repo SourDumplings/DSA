@@ -27,20 +27,20 @@ namespace CZ
      T0 T1                 T1 T2                T1 T2                     T2 T3
          情况1              情况2                 情况3                  情况4 */
     template <typename T>
-    BinTreeNode<T>* BinTree<T>::rotate_at(BinTreeNode<T> *v)
+    BinTreeNode<T> *BinTree<T>::rotate_at(BinTreeNode<T> *v) noexcept
     {
-        if (!v)
+        if (v == nullptr)
         {
             return nullptr;
         }
 
         BinTreeNode<T> *ret = nullptr;
         ASSERT_DEBUG(this->has_this_node(v), "this node is not in this BinTree");
-        BinTreeNode<T> *f = static_cast<BinTreeNode<T>*>(v->father());
+        BinTreeNode<T> *f = static_cast<BinTreeNode<T> *>(v->father());
         ASSERT_DEBUG(f, "this node doesn't have father");
-        BinTreeNode<T> *g = static_cast<BinTreeNode<T>*>(f->father());
+        BinTreeNode<T> *g = static_cast<BinTreeNode<T> *>(f->father());
         ASSERT_DEBUG(g, "this node doesn't have grandfather");
-        BinTreeNode<T> *z = static_cast<BinTreeNode<T>*>(g->father()); // 记录曾祖父结点
+        BinTreeNode<T> *z = static_cast<BinTreeNode<T> *>(g->father()); // 记录曾祖父结点
 
         if (f == g->left_child())
         {
@@ -48,15 +48,15 @@ namespace CZ
             {
                 // printf("case 1\n");
                 // 情况1
-                ret = connect34(v, f, g,
-                    v->left_child(), v->right_child(), f->right_child(), g->right_child());
+                ret = this->connect34(v, f, g,
+                                v->left_child(), v->right_child(), f->right_child(), g->right_child());
             }
             else
             {
                 // printf("case 2\n");
                 // 情况2
-                ret = connect34(f, v, g,
-                    f->left_child(), v->left_child(), v->right_child(), g->right_child());
+                ret = this->connect34(f, v, g,
+                                f->left_child(), v->left_child(), v->right_child(), g->right_child());
             }
         }
         else
@@ -65,15 +65,15 @@ namespace CZ
             {
                 // printf("case 3\n");
                 // 情况3
-                ret = connect34(g, v, f,
-                    g->left_child(), v->left_child(), v->right_child(), f->right_child());
+                ret = this->connect34(g, v, f,
+                                g->left_child(), v->left_child(), v->right_child(), f->right_child());
             }
             else
             {
                 // 情况4
                 // printf("case 4\n");
-                ret = connect34(g, f, v,
-                    g->left_child(), f->left_child(), v->left_child(), v->right_child());
+                ret = this->connect34(g, f, v,
+                                g->left_child(), f->left_child(), v->left_child(), v->right_child());
             }
         }
 
@@ -99,8 +99,8 @@ namespace CZ
                     T0 T1 T2 T3
     */
     template <typename T>
-    BinTreeNode<T>* BinTree<T>::connect34(BinTreeNode<T> *a, BinTreeNode<T> *b, BinTreeNode<T> *c,
-            BinTreeNode<T> *T0, BinTreeNode<T> *T1, BinTreeNode<T> *T2, BinTreeNode<T> *T3)
+    BinTreeNode<T> *BinTree<T>::connect34(BinTreeNode<T> *a, BinTreeNode<T> *b, BinTreeNode<T> *c,
+                                          BinTreeNode<T> *T0, BinTreeNode<T> *T1, BinTreeNode<T> *T2, BinTreeNode<T> *T3) noexcept
     {
         ASSERT_DEBUG(a && b && c, "a or b or c cannot be nullptr");
 
@@ -117,4 +117,3 @@ namespace CZ
 } // CZ
 
 #endif // BIN_TREE_ROTATION_H
-

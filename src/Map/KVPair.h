@@ -46,17 +46,23 @@ namespace CZ
     template <typename K, typename V>
     bool operator<(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
     template <typename K, typename V>
+    bool operator<=(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
+    template <typename K, typename V>
     bool operator>(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
+    template <typename K, typename V>
+    bool operator>=(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
     template <typename K, typename V>
     bool operator==(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
     template <typename K, typename V>
     bool operator!=(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
 
     template <typename K, typename V>
-    class KVPair : public AbstractBaseEntity 
+    class KVPair : public AbstractBaseEntity
     {
         friend bool operator< <K, V>(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
+        friend bool operator<=<K, V>(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
         friend bool operator><K, V>(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
+        friend bool operator>=<K, V>(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
         friend bool operator==<K, V>(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
         friend bool operator!=<K, V>(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs);
 
@@ -148,6 +154,18 @@ namespace CZ
     inline bool operator!=(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs)
     {
         return lhs._key != rhs._key;
+    }
+
+    template <typename K, typename V>
+    inline bool operator<=(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs)
+    {
+        return lhs._key < rhs._key || lhs._key == rhs._key;
+    }
+
+    template <typename K, typename V>
+    inline bool operator>=(const KVPair<K, V> &lhs, const KVPair<K, V> &rhs)
+    {
+        return lhs._key > rhs._key || lhs._key == rhs._key;
     }
 } // CZ
 

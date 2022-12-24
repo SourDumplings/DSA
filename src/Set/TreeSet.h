@@ -20,16 +20,12 @@ namespace CZ
 {
     template <typename T> class TreeSet;
 
-    template <typename T> bool operator==(const TreeSet<T> &lhs, const TreeSet<T> &rhs);
-    template <typename T> bool operator!=(const TreeSet<T> &lhs, const TreeSet<T> &rhs);
     template <typename T> TreeSet<T> operator+(const TreeSet<T> &lhs, const TreeSet<T> &rhs);
     template <typename T> TreeSet<T> operator-(const TreeSet<T> &lhs, const TreeSet<T> &rhs);
 
     template <typename T>
     class TreeSet : public AbstractIterableContainer<T, TreeSetIterator<T>>
     {
-        friend bool operator==<T>(const TreeSet<T> &lhs, const TreeSet<T> &rhs);
-        friend bool operator!=<T>(const TreeSet<T> &lhs, const TreeSet<T> &rhs);
         friend TreeSet<T> operator+<T>(const TreeSet<T> &lhs, const TreeSet<T> &rhs);
         friend TreeSet<T> operator-<T>(const TreeSet<T> &lhs, const TreeSet<T> &rhs);
         friend class TreeSetIterator<T>;
@@ -59,8 +55,8 @@ namespace CZ
 
         // 插入，如果该值已经存在则插入失败，即什么都不做，返回 false
         bool insert(const T &value);
-        // 删除，成功返回true，失败返回false或者抛出异常
-        bool remove(const T &value, bool nonexcept = true);
+        // 删除，有元素被删除则返回 true
+        bool remove(const T &value);
         void clear() override;
 
         TreeSet<T>& operator=(const TreeSet<T>& s);

@@ -42,7 +42,7 @@
 18. 扩展 HashTable 为 HashMap，使其支持多种元素（实现通用的 hash 算法，参照侯捷课程万用的 hash function），以及拉链法，Set 也类似
 待 23 实现
 19. 为异常情况 assert，使用自己定义的 assert，并重构树操作接口，更好实现 OOP
-实现中 TODO 见 `/test/CMakeList.txt`
+已实现
 20. "许多容器定义了print_info方法，故元素必须支持 << 运算符" 这条规则太僵硬，换一种方式解决这个问题，例如定义一个通用函数，来改造 print_info 的实现，使其不依赖于 << 的定义
 见 23 已实现
 21. 给 BST 增加强制 insert 的方法，例如 force_insert，能够按 key 实现替换元素，并扩展到其子类和利用其实现的容器，如 TreeSet 等
@@ -61,4 +61,5 @@
 30. （高优）调试 BinTree 遍历算法中先中序 NONRECURSION_TRAVERSAL4 再后序 NONRECURSION_TRAVERSAL1 的死循环情况，见 test_bintree.cpp
 待 19 实现
 31. 优化 AVLTreeNode 的 height() 方法，记录在结点上
-待 19 实现
+已实现
+32. 实现 win 版本的控制脚本

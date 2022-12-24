@@ -40,8 +40,8 @@ namespace CZ
         RedBlackTreeNode<T> *pRBTreeNode = dynamic_cast<RedBlackTreeNode<T> *>(pRoot);
         ASSERT_DEBUG(pRBTreeNode, "error pRoot");
         RedBlackTreeNode<T> *pCopiedRoot = new RedBlackTreeNode<T>(pRBTreeNode->data());
-        pCopiedRoot->_red = pRoot->_red;
-        pCopiedRoot->_blackHeight = pRoot->_blackHeight;
+        pCopiedRoot->_red = pRBTreeNode->_red;
+        pCopiedRoot->_blackHeight = pRBTreeNode->_blackHeight;
         ASSERT_RELEASE(pCopiedRoot, "copy root error");
         RedBlackTreeNode<T> *pLC = dynamic_cast<RedBlackTreeNode<T> *>(pRBTreeNode->left_child());
         RedBlackTreeNode<T> *pLCopied = this->copy_from(pLC);

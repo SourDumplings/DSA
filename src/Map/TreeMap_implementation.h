@@ -46,14 +46,14 @@ namespace CZ
     template <typename K, typename V>
     void TreeMap<K, V>::print_info(const char *name) const
     {
-            printf("for TreeMap %s, it has %u elements\n", name, size());
-            printf("it contains:");
-            for (Iterator it = begin(); it != end(); ++it)
-            {
-                std::cout << " {" << it->key() << ": " << it->value() << "}";
-            }
+        printf("for TreeMap %s, it has %u elements\n", name, size());
+        printf("it contains:");
+        for (Iterator it = begin(); it != end(); ++it)
+        {
+            std::cout << " {" << it->key() << ": " << it->value() << "}";
+        }
 
-            printf("\n\n");
+        printf("\n\n");
     }
 
     template <typename K, typename V>
@@ -67,13 +67,13 @@ namespace CZ
     {
         if (empty())
         {
-            return Iterator(_T.root(), true, &_T);
+            return Iterator(dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_T.root()), true, &_T);
         }
 
-        RedBlackTreeNode<KVPair<K, V>> *pNode = _T.root();
+        RedBlackTreeNode<KVPair<K, V>> *pNode = dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_T.root());
         while (pNode->left_child())
         {
-            pNode = pNode->left_child();
+            pNode = dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(pNode->left_child());
         }
         return Iterator(pNode, false, &_T);
     }
@@ -87,7 +87,7 @@ namespace CZ
     template <typename K, typename V>
     typename TreeMap<K, V>::Iterator TreeMap<K, V>::end() const
     {
-        return Iterator(_T.root(), true, &_T);
+        return Iterator(dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_T.root()), true, &_T);
     }
 
     template <typename K, typename V>
@@ -105,14 +105,14 @@ namespace CZ
     template <typename K, typename V>
     bool TreeMap<K, V>::insert(const KVPair<K, V> &pair)
     {
-        RedBlackTreeNode<KVPair<K, V>> *p = _T.search(pair);
+        RedBlackTreeNode<KVPair<K, V>> *p = dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_T.search_data(pair));
         if (p)
         {
             const_cast<V &>(p->data().value()) = pair.value();
             return false;
         }
 
-        _T.insert(pair);
+        _T.insert_data(pair);
         return true;
     }
 
@@ -122,14 +122,14 @@ namespace CZ
     template <typename K, typename V>
     inline bool TreeMap<K, V>::containsKey(const K &key) const
     {
-        return _T.search(KVPair<K, V>(key, V())) != nullptr;
+        return _T.search_data(KVPair<K, V>(key, V())) != nullptr;
     }
 
     template <typename K, typename V>
     const V &TreeMap<K, V>::operator[](const K &key) const
     {
         KVPair<K, V> tempKVPair(key, V());
-        RedBlackTreeNode<KVPair<K, V>> *p = _T.search(tempKVPair);
+        RedBlackTreeNode<KVPair<K, V>> *p = dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_T.search_data(tempKVPair));
         ASSERT_DEBUG(p, "Error from TreeMap::operator[]: this Treemap doesn't contain this key");
         return p->data().value();
     }
@@ -141,25 +141,13 @@ namespace CZ
     }
 
     template <typename K, typename V>
-    bool TreeMap<K, V>::remove(const K &key, bool nonexcept)
+    inline bool TreeMap<K, V>::remove(const K &key) noexcept
     {
-        try
-        {
-            _T.remove(KVPair<K, V>(key, V()));
-        }
-        catch (const std::exception &e)
-        {
-            if (!nonexcept)
-            {
-                printf("Error from TreeMap::remove: no such key.\n");
-            }
-            return false;
-        }
-        return true;
+        return _T.remove_data(KVPair<K, V>(key, V()));
     }
 
     template <typename K, typename V>
-    TreeMap<K, V>& TreeMap<K, V>::operator=(const TreeMap<K, V> &m)
+    TreeMap<K, V> &TreeMap<K, V>::operator=(const TreeMap<K, V> &m)
     {
         if (&m != this)
         {
@@ -169,7 +157,7 @@ namespace CZ
     }
 
     template <typename K, typename V>
-    TreeMap<K, V>& TreeMap<K, V>::operator=(TreeMap<K, V> &&m)
+    TreeMap<K, V> &TreeMap<K, V>::operator=(TreeMap<K, V> &&m)
     {
         if (&m != this)
         {

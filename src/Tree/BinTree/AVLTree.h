@@ -34,6 +34,9 @@ namespace CZ
 
         TreeNode<T> *secede(TreeNode<T> *pNode) noexcept override;
 
+        AVLTree<T> &operator=(const AVLTree<T> &t) noexcept;
+        AVLTree<T> &operator=(AVLTree<T> &&t) noexcept;
+
         const char *get_entity_name() const override;
 
         // 输出树结点的数据和结点数据的地址到标准输出
@@ -53,6 +56,8 @@ namespace CZ
         // 删除一个值对应的一个结点，注意如果存在重复值则只会删除一个
         BSTNode<T> *remove(BSTNode<T> *pNode) noexcept override;
 
+        // 相对于 BinTree<T>::rotate，需要更新高度
+        BinTreeNode<T> *rotate_at(BinTreeNode<T> *v) noexcept override;
     private:
         AVLTreeNode<T> *copy_from(TreeNode<T> *pNode) noexcept;
     };

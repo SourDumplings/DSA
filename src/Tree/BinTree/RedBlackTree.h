@@ -50,6 +50,9 @@ namespace CZ
         // 成功插入则返回 true
         bool insert_data(const T &data) noexcept override;
 
+        RedBlackTree<T> &operator=(const RedBlackTree<T> &t) noexcept;
+        RedBlackTree<T> &operator=(RedBlackTree<T> &&t) noexcept;
+
         const char *get_entity_name() const override;
 
     protected:

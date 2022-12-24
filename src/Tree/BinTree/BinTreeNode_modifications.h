@@ -33,7 +33,7 @@ namespace CZ
 
     template <typename T>
     BinTreeNode<T> *BinTreeNode<T>::set_right_child(BinTreeNode<T> *pNode)
-    {   
+    {
         BinTreeNode<T> *pOldChild = right_child();
         this->children().back() = pNode;
         if (pNode)
@@ -48,7 +48,7 @@ namespace CZ
     void BinTreeNode<T>::insert_as_left_child(BinTreeNode<T> *newChild)
     {
         ASSERT_DEBUG(left_child() == nullptr, "left child position is occupied");
-        
+
         set_left_child(newChild);
     }
 
@@ -65,38 +65,38 @@ namespace CZ
     {
         if (left_child() == nullptr)
         {
-            insert_as_left_child(dynamic_cast<BinTreeNode<T>*>(pNode));
+            insert_as_left_child(dynamic_cast<BinTreeNode<T> *>(pNode));
             return pNode;
         }
         else if (right_child() == nullptr)
         {
-            insert_as_right_child(dynamic_cast<BinTreeNode<T>*>(pNode));
+            insert_as_right_child(dynamic_cast<BinTreeNode<T> *>(pNode));
             return pNode;
         }
         return nullptr;
     }
 
     template <typename T>
-    BinTreeNode<T>* BinTreeNode<T>::remove_left_child()
+    BinTreeNode<T> *BinTreeNode<T>::remove_left_child()
     {
         if (!left_child())
         {
             return nullptr;
         }
-        BinTreeNode<T> *pChild = dynamic_cast<BinTreeNode<T>*>(this->children().front());
+        BinTreeNode<T> *pChild = dynamic_cast<BinTreeNode<T> *>(this->children().front());
         pChild->set_father(nullptr);
         this->children().front() = nullptr;
         return pChild;
     }
 
     template <typename T>
-    BinTreeNode<T>* BinTreeNode<T>::remove_right_child()
+    BinTreeNode<T> *BinTreeNode<T>::remove_right_child()
     {
         if (!right_child())
         {
             return nullptr;
         }
-        BinTreeNode<T> *pChild = dynamic_cast<BinTreeNode<T>*>(this->children().back());
+        BinTreeNode<T> *pChild = dynamic_cast<BinTreeNode<T> *>(this->children().back());
         pChild->set_father(nullptr);
         this->children().back() = nullptr;
         return pChild;
@@ -104,5 +104,3 @@ namespace CZ
 } // CZ
 
 #endif // BIN_TREE_NODE_MODIFICATIONS_H
-
-

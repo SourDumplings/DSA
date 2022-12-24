@@ -61,11 +61,11 @@ namespace CZ
             {
                 // 红黑树最右侧结点再前移即为尾后迭代器
                 _isEnd = true;
-                _it = BiIterator<RedBlackTreeNode<T>>(_pRBT->root());
+                _it = BiIterator<RedBlackTreeNode<T>>(dynamic_cast<RedBlackTreeNode<T> *>(_pRBT->root()));
             }
             else
             {
-                _it = BiIterator<RedBlackTreeNode<T>>(_it->next());
+                _it = BiIterator<RedBlackTreeNode<T>>(dynamic_cast<RedBlackTreeNode<T> *>(_it->next()));
             }
             return *this;
         }
@@ -78,11 +78,11 @@ namespace CZ
             {
                 // 红黑树最右侧结点再前移即为尾后迭代器
                 _isEnd = true;
-                _it = BiIterator<RedBlackTreeNode<T>>(_pRBT->root());
+                _it = BiIterator<RedBlackTreeNode<T>>(dynamic_cast<RedBlackTreeNode<T> *>(_pRBT->root()));
             }
             else
             {
-                _it = BiIterator<RedBlackTreeNode<T>>(_it->next());
+                _it = BiIterator<RedBlackTreeNode<T>>(dynamic_cast<RedBlackTreeNode<T> *>(_it->next()));
             }
             return temp;
         }
@@ -95,7 +95,7 @@ namespace CZ
             }
             else
             {
-                _it = BiIterator<RedBlackTreeNode<T>>(_it->prev());
+                _it = BiIterator<RedBlackTreeNode<T>>(dynamic_cast<RedBlackTreeNode<T> *>(_it->prev()));
             }
             return *this;
         }
@@ -109,7 +109,7 @@ namespace CZ
             }
             else
             {
-                _it = BiIterator<RedBlackTreeNode<T>>(_it->prev());
+                _it = BiIterator<RedBlackTreeNode<T>>(dynamic_cast<RedBlackTreeNode<T> *>(_it->prev()));
             }
             return temp;
         }
@@ -148,10 +148,10 @@ namespace CZ
 
         RedBlackTreeNode<T> *lastNode() const
         {
-            RedBlackTreeNode<T> *pLastNode = _pRBT->root();
+            RedBlackTreeNode<T> *pLastNode = dynamic_cast<RedBlackTreeNode<T> *>(_pRBT->root());
             while (pLastNode->right_child())
             {
-                pLastNode = pLastNode->right_child();
+                pLastNode = dynamic_cast<RedBlackTreeNode<T> *>(pLastNode->right_child());
             }
             return pLastNode;
         }

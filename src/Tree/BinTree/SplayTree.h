@@ -33,6 +33,9 @@ namespace CZ
 
         bool insert_data(const T &data) noexcept override;
 
+        SplayTree<T> &operator=(const SplayTree<T> &t) noexcept;
+        SplayTree<T> &operator=(SplayTree<T> &&t) noexcept;
+
         const char *get_entity_name() const override;
 
     protected:

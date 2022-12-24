@@ -2,14 +2,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.17)
 
 # 添加源文件
-# TODO 待调试：
-# set(source test_bitmap.cpp)
-# set(source test_bplustree.cpp)
-# set(source test_primetable.cpp)
-# set(source test_treemap.cpp)
-# set(source test_treeset.cpp)
-
-set(source test_redblacktree.cpp)
+set(source test_splaytree.cpp)
 
 # 指定库的位置为项目根目录下的lib目录
 LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/build/lib/)

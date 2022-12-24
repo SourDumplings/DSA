@@ -43,10 +43,11 @@ namespace CZ
         AVLTreeNode<T> *pAVLNode = dynamic_cast<AVLTreeNode<T> *>(pRoot);
         ASSERT_DEBUG(pAVLNode, "error pRoot");
         AVLTreeNode<T> *pCopiedRoot = new AVLTreeNode<T>(pAVLNode->data());
+        pCopiedRoot->set_height(pAVLNode->height());
         ASSERT_RELEASE(pCopiedRoot, "copy root error");
-        AVLTreeNode<T> *pLC = dynamic_cast<AVLTreeNode<T>*>(pAVLNode->left_child());
+        AVLTreeNode<T> *pLC = dynamic_cast<AVLTreeNode<T> *>(pAVLNode->left_child());
         AVLTreeNode<T> *pLCopied = this->copy_from(pLC);
-        AVLTreeNode<T> *pRC = dynamic_cast<AVLTreeNode<T>*>(pAVLNode->right_child());
+        AVLTreeNode<T> *pRC = dynamic_cast<AVLTreeNode<T> *>(pAVLNode->right_child());
         AVLTreeNode<T> *pRCopied = this->copy_from(pRC);
         pCopiedRoot->insert_as_left_child(pLCopied);
         pCopiedRoot->insert_as_right_child(pRCopied);
@@ -77,7 +78,7 @@ namespace CZ
             delete pNode;
             return false;
         }
-        
+
         return true;
     }
 
@@ -89,7 +90,7 @@ namespace CZ
             return nullptr;
         }
 
-        BSTNode<T> *ret = BST<T>::insert(pNode);
+        AVLTreeNode<T> *ret = dynamic_cast<AVLTreeNode<T> *>(BST<T>::insert(pNode));
         AVLTreeNode<T> *f = dynamic_cast<AVLTreeNode<T> *>(pNode->father());
         if (f == nullptr)
         {
@@ -97,6 +98,7 @@ namespace CZ
             return ret;
         }
 
+        ret->update_height();
         // 如果其父亲结点的高度升高则其祖父结点就有可能失衡
         // 只需要做对多1次调整即可
         for (AVLTreeNode<T> *g = dynamic_cast<AVLTreeNode<T> *>(f->father()); g; g = dynamic_cast<AVLTreeNode<T> *>(g->father()))
@@ -104,7 +106,7 @@ namespace CZ
             if (!g->is_balance())
             {
                 // 一旦发现失衡，则采用3+4重构算法调整，并将子树重新接回原树
-                BinTree<T>::rotate_at(g->taller_child()->taller_child());
+                this->rotate_at(g->taller_child()->taller_child());
                 break; // 只要调整了一次，那么全树都会平衡
             }
         }
@@ -125,6 +127,7 @@ namespace CZ
             // 移除了根结点，不需要再调整了
             return pNode;
         }
+        f->update_height();
 
         // 原结点的父亲结点和祖先结点都有可能失衡
         // 需要做Ω(logn)次调整
@@ -146,16 +149,21 @@ namespace CZ
         {
             return nullptr;
         }
-        
+
         ASSERT_DEBUG(this->has_this_node(pNode), "this node is not in this AVLTree");
 
         AVLTreeNode<T> *hot = dynamic_cast<AVLTreeNode<T> *>(pNode->father());
-        this->remove_at((BSTNode<T> *&)(pNode), (BSTNode<T> *&)(hot));
+        AVLTreeNode<T> *succ = dynamic_cast<AVLTreeNode<T> *>(this->remove_at((BSTNode<T> *&)(pNode), (BSTNode<T> *&)(hot)));
+        if (succ)
+        {
+            succ->update_height();
+        }
+
         for (AVLTreeNode<T> *f = dynamic_cast<AVLTreeNode<T> *>(hot); f; f = dynamic_cast<AVLTreeNode<T> *>(f->father()))
         {
             if (!f->is_balance())
             {
-                // 一旦发现失衡，则采用3+4重构算法调整，并将子树重新接回原树
+                // 一旦发现失衡，则采用 3+4 重构算法调整，并将子树重新接回原树
                 this->rotate_at(hot->taller_child()->taller_child());
             }
         }
@@ -171,8 +179,28 @@ namespace CZ
     template <typename T>
     void AVLTree<T>::OutPut::operator()(const T &data) const
     {
-        std::cout << data << "(" << &data << ")" << " ";
-        return;
+        std::cout << data << "(" << &data << ")"
+                  << " ";
+    }
+
+    template <typename T>
+    BinTreeNode<T> *AVLTree<T>::rotate_at(BinTreeNode<T> *v) noexcept
+    {
+        AVLTreeNode<T> *ret = dynamic_cast<AVLTreeNode<T> *>(BinTree<T>::rotate_at(v));
+        if (ret == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (ret->left_child())
+        {
+            dynamic_cast<AVLTreeNode<T> *>(ret->left_child())->update_height();
+        }
+        if (ret->right_child())
+        {
+            dynamic_cast<AVLTreeNode<T> *>(ret->right_child())->update_height();
+        }
+        return ret;
     }
 } // CZ
 

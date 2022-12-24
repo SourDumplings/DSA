@@ -36,11 +36,16 @@ int main(int argc, char const *argv[])
     const int size = 5;
 
     // 1.测试插入
+    Vector<CZString> vs(size);
     for (int i = 0; i < size; ++i)
     {
-        bp.insert(s[i].substr(0, subStrLen), &s[i]);
-        //    printf("after inserting %s:\n", s[i].c_str());
-        //    bp.print_info("bp");
+        vs[i] = s[i].substr(0, subStrLen);
+    }
+    for (int i = 0; i < size; ++i)
+    {
+        bp.insert(vs[i], &s[i]);
+        printf("after inserting %s:\n", s[i].c_str());
+        bp.print_info("bp");
     }
 
     cout << "bp: " << bp << endl;

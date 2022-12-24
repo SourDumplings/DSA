@@ -75,6 +75,12 @@ namespace CZ
     }
 
     template <typename T, typename It>
+    bool operator!=(const AbstractIterableContainer<T, It> &lhs, const AbstractIterableContainer<T, It> &rhs)
+    {
+        return !(lhs == rhs);
+    }
+
+    template <typename T, typename It>
     bool operator<(const AbstractIterableContainer<T, It> &lhs, const AbstractIterableContainer<T, It> &rhs)
     {
         return Dict_less(lhs, rhs);

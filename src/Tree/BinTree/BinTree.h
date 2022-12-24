@@ -17,7 +17,8 @@
 
 namespace CZ
 {
-    template <typename T> class BinTreeNode;
+    template <typename T>
+    class BinTreeNode;
 
     enum BinTreeTraversalVersion
     {
@@ -73,10 +74,13 @@ namespace CZ
         static BinTree<T> reconstruct_from_in_post_traversal(It inB, It inE,
                                                              It postB, It postE);
 
+        BinTree<T> &operator=(const BinTree<T> &t) noexcept;
+        BinTree<T> &operator=(BinTree<T> &&t) noexcept;
+
         // 旋转与3+4重构
         // 旋转，返回旋转后局部子树树根的位置，借助3+4重构算法实现
         // 需传入非空孙辈结点
-        BinTreeNode<T> *rotate_at(BinTreeNode<T> *v);
+        virtual BinTreeNode<T> *rotate_at(BinTreeNode<T> *v) noexcept;
 
         const char *get_entity_name() const override;
 
@@ -86,7 +90,7 @@ namespace CZ
         // 对于调整好的子树的根结点与上层结点的双向链接由上层调用负责调整
         // 传入的a、b、c结点不能为空
         BinTreeNode<T> *connect34(BinTreeNode<T> *a, BinTreeNode<T> *b, BinTreeNode<T> *c,
-                                  BinTreeNode<T> *T0, BinTreeNode<T> *T1, BinTreeNode<T> *T2, BinTreeNode<T> *T3);
+                                          BinTreeNode<T> *T0, BinTreeNode<T> *T1, BinTreeNode<T> *T2, BinTreeNode<T> *T3) noexcept;
 
     private:
         BinTreeNode<T> *copy_from(TreeNode<T> *pRoot);

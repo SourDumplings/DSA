@@ -48,7 +48,7 @@ namespace CZ
 
         static bool are_brother(const TreeNode<T> *node1, const TreeNode<T> *node2);
 
-        Rank height() const;
+        virtual Rank height() const;
 
         virtual TreeNode<T>* insert_child(TreeNode<T> *pNode) noexcept;
 
@@ -56,6 +56,9 @@ namespace CZ
 
         const char *c_str() const override;
         HashRank hash() const override;
+
+        TreeNode<T>& operator=(const TreeNode<T>& rhs) noexcept = delete;
+        TreeNode<T>& operator=(TreeNode<T>&& rhs) noexcept = delete;
 
         const char *get_entity_name() const override;
 

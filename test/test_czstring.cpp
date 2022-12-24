@@ -69,5 +69,11 @@ int main(int argc, char const *argv[])
     // printf("vs[1].c_str() = %s\n", vs[1].c_str());
     // printf("vs[3].c_str() = %s\n", vs[3].c_str());
     // vs.print_info("vs");
+
+    // 测试比较与转换
+    CZString s1("abc123");
+    printf("s1 == abc123 ? %d\n", s1 == "abc123"); // s1 会转换为 const char *，故不相等
+    printf("s1 == abc123 ? %d\n", s1 == CZString("abc123"));
+    // printf("s1 == abc123 ? %d\n", s1 == std::string("abc123")); // 编译不通过
     return 0;
 }

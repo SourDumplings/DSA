@@ -61,34 +61,19 @@ namespace CZ
     template <typename T>
     inline bool TreeSet<T>::contains(const T &value) const
     {
-        return _T.search(value);
+        return _T.search_data(value);
     }
 
     template <typename T>
     inline bool TreeSet<T>::insert(const T &value)
     {
-        return _T.insert(value);
+        return _T.insert_data(value);
     }
 
     template <typename T>
-    bool TreeSet<T>::remove(const T &value, bool nonexcept)
+    inline bool TreeSet<T>::remove(const T &value)
     {
-        if (contains(value))
-        {
-            _T.remove(value);
-        }
-        else
-        {
-            if (nonexcept)
-            {
-                return false;
-            }
-            else
-            {
-                ASSERT_DEBUG(false, "Error from TreeSet remove: this value is not in this Treeset");
-            }
-        }
-        return true;
+        return _T.remove_data(value);
     }
 
     template <typename T>
@@ -99,13 +84,13 @@ namespace CZ
     {
         if (this->empty())
         {
-            return Iterator(_T.root(), true, &_T);
+            return Iterator(dynamic_cast<RedBlackTreeNode<T> *>(_T.root()), true, &_T);
         }
 
-        RedBlackTreeNode<T> *pNode = _T.root();
+        RedBlackTreeNode<T> *pNode = dynamic_cast<RedBlackTreeNode<T> *>(_T.root());
         while (pNode->left_child())
         {
-            pNode = pNode->left_child();
+            pNode = dynamic_cast<RedBlackTreeNode<T> *>(pNode->left_child());
         }
         return Iterator(pNode, false, &_T);
     }
@@ -119,7 +104,7 @@ namespace CZ
     template <typename T>
     inline typename TreeSet<T>::Iterator TreeSet<T>::end() const
     {
-        return Iterator(_T.root(), true, &_T);
+        return Iterator(dynamic_cast<RedBlackTreeNode<T> *>(_T.root()), true, &_T);
     }
 
     template <typename T>
@@ -133,10 +118,10 @@ namespace CZ
     {
         ASSERT_DEBUG(!this->empty(), "Error from TreeSet::front(): empty Treeset.");
 
-        RedBlackTreeNode<T> *pNode = _T.root();
+        RedBlackTreeNode<T> *pNode = dynamic_cast<RedBlackTreeNode<T> *>(_T.root());
         while (pNode->right_child())
         {
-            pNode = pNode->right_child();
+            pNode = dynamic_cast<RedBlackTreeNode<T> *>(pNode->right_child());
         }
         return pNode->data();
     }
@@ -152,10 +137,10 @@ namespace CZ
     {
         ASSERT_DEBUG(!this->empty(), "Error from TreeSet::front(): empty Treeset.");
 
-        RedBlackTreeNode<T> *pNode = _T.root();
+        RedBlackTreeNode<T> *pNode = dynamic_cast<RedBlackTreeNode<T> *>(_T.root());
         while (pNode->left_child())
         {
-            pNode = pNode->left_child();
+            pNode = dynamic_cast<RedBlackTreeNode<T> *>(pNode->left_child());
         }
         return pNode->data();
     }

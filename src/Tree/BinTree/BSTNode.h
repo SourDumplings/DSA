@@ -16,12 +16,14 @@
 
 namespace CZ
 {
-    template <typename T> class BST;
+    template <typename T>
+    class BST;
 
     template <typename T>
-    class BSTNode: public BinTreeNode<T>
+    class BSTNode : public BinTreeNode<T>
     {
         friend class BST<T>;
+
     public:
         using Rank = typename BinTreeNode<T>::Rank;
 
@@ -29,16 +31,16 @@ namespace CZ
         BSTNode(const T &data = T(), BSTNode *father_ = nullptr);
 
         // 对于 BSTNode，结点数据不允许修改
-        const T& data() const;
+        const T &data() const;
 
         // 二叉搜索树结点对于插入和删除孩子结点的操作
         // 只能插入和删除这个结点的某个孩子
-        TreeNode<T>* insert_child(TreeNode<T> *pNode) noexcept override;
+        TreeNode<T> *insert_child(TreeNode<T> *pNode) noexcept override;
         virtual bool insert_child_by_data(const T &data) noexcept;
 
         // 注意被删除后的孩子结点的生命周期将不再受父亲管理
-        BSTNode* remove_child(BSTNode *pNode);
-        BSTNode* remove_child_by_data(const T &data) noexcept;
+        BSTNode *remove_child(BSTNode *pNode);
+        BSTNode *remove_child_by_data(const T &data) noexcept;
 
         const char *get_entity_name() const override;
     };
@@ -47,5 +49,3 @@ namespace CZ
 #include "BSTNode_implementation.h"
 
 #endif // BST_NODE_H
-
-
