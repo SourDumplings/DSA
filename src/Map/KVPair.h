@@ -73,21 +73,17 @@ namespace CZ
         template <typename KD, typename VD>
         KVPair(const KVPair<KD, VD> &p) : _key(p.key()), _value(p.value()){};
 
-        K &key()
-        {
-            return _key;
-        }
         const K &key() const
         {
             return _key;
         }
-        V &value()
-        {
-            return _value;
-        }
         const V &value() const
         {
             return _value;
+        }
+        void set_value(const V &value_)
+        {
+            _value = value_;
         }
 
         // 赋值操作符函数

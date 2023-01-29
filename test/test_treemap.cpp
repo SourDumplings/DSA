@@ -55,6 +55,8 @@ int main(int argc, char const *argv[])
     m4.print_info("m4");
     m7.print_info("m7");
     m7 = std::move(m4);
+    cout << "m7: " << m7 << endl;
+    cout << "m7.hash(): " << m7.hash() << endl;
     m7.print_info("m7");
     m4.print_info("m4");
     m6.print_info("m6");

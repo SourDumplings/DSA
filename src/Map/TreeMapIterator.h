@@ -9,6 +9,7 @@
 #ifndef TREE_MAP_ITERATOR_H
 #define TREE_MAP_ITERATOR_H
 
+#include "Base/AbstractBaseEntity.h"
 #include "KVPair.h"
 #include "Iterator/BiIterator.h"
 
@@ -23,21 +24,19 @@ namespace CZ
     bool operator!=(const TreeMapIterator<K, V> &lhs, const TreeMapIterator<K, V> &rhs);
 
     template <typename K, typename V>
-    class TreeMapIterator
+    class TreeMapIterator : public AbstractBaseEntity
     {
         friend bool operator==<K, V>(const TreeMapIterator<K, V> &lhs, const TreeMapIterator<K, V> &rhs);
         friend bool operator!=<K, V>(const TreeMapIterator<K, V> &lhs, const TreeMapIterator<K, V> &rhs);
 
     public:
+        typedef bi_iterator_tag iterator_category;
+
         TreeMapIterator(RedBlackTreeNode<KVPair<K, V>> *pNode_, bool isEnd_, const RedBlackTree<KVPair<K, V>> *pRBT_) : _bIt(pNode_), _isEnd(isEnd_), _pRBT(pRBT_) {}
 
         const KVPair<K, V> &operator*() const
         {
             return _bIt->data();
-        }
-        KVPair<K, V> *operator->()
-        {
-            return const_cast<KVPair<K, V> *>(&(_bIt->data()));
         }
         const KVPair<K, V> *operator->() const
         {
@@ -52,11 +51,11 @@ namespace CZ
             {
                 // 红黑树最右侧结点再前移即为尾后迭代器
                 _isEnd = true;
-                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_pRBT->root()));
+                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(dynamic_cast<RedBlackTreeNode<KVPair<K, V>> *>(_pRBT->root()));
             }
             else
             {
-                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_bIt->next()));
+                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(dynamic_cast<RedBlackTreeNode<KVPair<K, V>> *>(_bIt->next()));
             }
             return *this;
         }
@@ -69,11 +68,11 @@ namespace CZ
             {
                 // 红黑树最右侧结点再前移即为尾后迭代器
                 _isEnd = true;
-                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_pRBT->root()));
+                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(dynamic_cast<RedBlackTreeNode<KVPair<K, V>> *>(_pRBT->root()));
             }
             else
             {
-                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_bIt->next()));
+                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(dynamic_cast<RedBlackTreeNode<KVPair<K, V>> *>(_bIt->next()));
             }
             return temp;
         }
@@ -86,7 +85,7 @@ namespace CZ
             }
             else
             {
-                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_bIt->prev()));
+                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(dynamic_cast<RedBlackTreeNode<KVPair<K, V>> *>(_bIt->prev()));
             }
             return *this;
         }
@@ -100,7 +99,7 @@ namespace CZ
             }
             else
             {
-                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_bIt->prev()));
+                _bIt = BiIterator<RedBlackTreeNode<KVPair<K, V>>>(dynamic_cast<RedBlackTreeNode<KVPair<K, V>> *>(_bIt->prev()));
             }
             return temp;
         }
@@ -114,6 +113,24 @@ namespace CZ
 
         operator BiIterator<RedBlackTreeNode<KVPair<K, V>>>() { return _bIt; }
 
+        const char *c_str() const noexcept override
+        {
+            std::ostringstream oss;
+            oss << this->get_entity_name() << "(" << _bIt->data() << ")";
+
+            return this->get_c_str_from_stream(oss);
+        }
+
+        HashRank hash() const noexcept override
+        {
+            return (Hash<const char *>()(get_entity_name()) + _bIt.hash() + Hash<const RedBlackTree<KVPair<K, V>> *>()(_pRBT)) % CZ_MAX_HASH_VALUE;
+        }
+
+        const char *get_entity_name() const noexcept override
+        {
+            return "TreeMapIterator";
+        }
+
     private:
         BiIterator<RedBlackTreeNode<KVPair<K, V>>> _bIt;
         bool _isEnd;                             // 是否是尾后迭代器
@@ -121,10 +138,10 @@ namespace CZ
 
         RedBlackTreeNode<KVPair<K, V>> *lastNode() const
         {
-            RedBlackTreeNode<KVPair<K, V>> *pLastNode = dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_pRBT->root());
+            RedBlackTreeNode<KVPair<K, V>> *pLastNode = dynamic_cast<RedBlackTreeNode<KVPair<K, V>> *>(_pRBT->root());
             while (pLastNode->right_child())
             {
-                pLastNode = dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(pLastNode->right_child());
+                pLastNode = dynamic_cast<RedBlackTreeNode<KVPair<K, V>> *>(pLastNode->right_child());
             }
             return pLastNode;
         }

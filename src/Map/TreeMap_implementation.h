@@ -57,15 +57,15 @@ namespace CZ
     }
 
     template <typename K, typename V>
-    typename TreeMap<K, V>::Iterator TreeMap<K, V>::begin()
+    typename TreeMap<K, V>::Iterator TreeMap<K, V>::begin() noexcept
     {
         return static_cast<const TreeMap<K, V> &>(*this).begin();
     }
 
     template <typename K, typename V>
-    typename TreeMap<K, V>::Iterator TreeMap<K, V>::begin() const
+    typename TreeMap<K, V>::Iterator TreeMap<K, V>::begin() const noexcept
     {
-        if (empty())
+        if (this->empty())
         {
             return Iterator(dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_T.root()), true, &_T);
         }
@@ -79,25 +79,19 @@ namespace CZ
     }
 
     template <typename K, typename V>
-    typename TreeMap<K, V>::Iterator TreeMap<K, V>::end()
+    typename TreeMap<K, V>::Iterator TreeMap<K, V>::end() noexcept
     {
         return static_cast<const TreeMap<K, V> &>(*this).end();
     }
 
     template <typename K, typename V>
-    typename TreeMap<K, V>::Iterator TreeMap<K, V>::end() const
+    typename TreeMap<K, V>::Iterator TreeMap<K, V>::end() const noexcept
     {
         return Iterator(dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_T.root()), true, &_T);
     }
 
     template <typename K, typename V>
-    bool TreeMap<K, V>::empty() const
-    {
-        return _T.empty();
-    }
-
-    template <typename K, typename V>
-    typename TreeMap<K, V>::Rank TreeMap<K, V>::size() const
+    typename TreeMap<K, V>::Rank TreeMap<K, V>::size() const noexcept
     {
         return _T.size();
     }
@@ -106,21 +100,19 @@ namespace CZ
     bool TreeMap<K, V>::insert(const KVPair<K, V> &pair)
     {
         RedBlackTreeNode<KVPair<K, V>> *p = dynamic_cast<RedBlackTreeNode<KVPair<K, V>>*>(_T.search_data(pair));
-        if (p)
+        if (p == nullptr)
         {
-            const_cast<V &>(p->data().value()) = pair.value();
-            return false;
+            _T.insert_data(pair);
+            return true;
         }
-
-        _T.insert_data(pair);
-        return true;
+        return false;
     }
 
     template <typename K, typename V>
-    inline void TreeMap<K, V>::clear() { _T.clear(); }
+    inline void TreeMap<K, V>::clear() noexcept { _T.clear(); }
 
     template <typename K, typename V>
-    inline bool TreeMap<K, V>::containsKey(const K &key) const
+    inline bool TreeMap<K, V>::contains(const K &key) const
     {
         return _T.search_data(KVPair<K, V>(key, V())) != nullptr;
     }
@@ -164,6 +156,12 @@ namespace CZ
             _T = std::move(m._T);
         }
         return *this;
+    }
+
+    template <typename K, typename V>
+    const char *TreeMap<K, V>::get_entity_name() const
+    {
+        return "TreeMap";
     }
 }
 

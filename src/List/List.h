@@ -59,6 +59,12 @@ namespace CZ
         T& at(RankPlus index);
         const T& at(RankPlus index) const;
 
+        // 顺序查找，找到第一个满足条件的，返回迭代器
+        template <typename Pred>
+        Iterator search_if(const Pred &predicate) const noexcept;
+
+        Iterator search(const T &value) const noexcept;
+
         // 打印列表信息
         void print_info(const char *name = "") const;
 
@@ -74,7 +80,12 @@ namespace CZ
         Iterator insert(Iterator pos, Iterator b, Iterator e);
         Iterator erase(Iterator pos);
         Iterator erase(Iterator b, Iterator e);
-        void remove(const T &value); // 删除所有value值
+
+        Rank remove(const T &value); // 删除所有value值，返回被删除的结点数
+
+        template <typename Pred>
+        Rank remove_if(const Pred &predicate) noexcept;
+
         void clear() override;
         virtual void merge(const List<T> &l);
         virtual void merge(List<T> &&l);

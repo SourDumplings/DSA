@@ -244,11 +244,15 @@ namespace CZ
         {
             for (ListNode<T> *last = _head->_next; last != _head; last = last->_next)
             {
-                for (ListNode<T> *p = last->_next; p != _head; p = p->_next)
+                for (ListNode<T> *p = last->_next; p != _head;)
                 {
                     if (cmp(p->data(), last->data()))
                     {
-                        erase(p);
+                        p = erase(Iterator(p)).get();
+                    }
+                    else
+                    {
+                        p = p->_next;
                     }
                 }
             }

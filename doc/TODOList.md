@@ -19,7 +19,7 @@
 5. 实现树状数组（区间）
 6. 实现 kd 树
 7. 实现多叉树的非递归遍历
-无意义，放弃
+已拒绝
 8. 实现堆的插入
 已实现
 9. 实现前缀树 Trie
@@ -39,20 +39,23 @@
 已完成
 17. 修正自定义迭代器的 -> 操作符
 已完成
-18. 扩展 HashTable 为 HashMap，使其支持多种元素（实现通用的 hash 算法，参照侯捷课程万用的 hash function），以及拉链法，Set 也类似
-待 23 实现
+18. 实现 HashSet、FlatHashSet，及对应的 Map 继承自 Set
+实现中
 19. 为异常情况 assert，使用自己定义的 assert，并重构树操作接口，更好实现 OOP
 已实现
 20. "许多容器定义了print_info方法，故元素必须支持 << 运算符" 这条规则太僵硬，换一种方式解决这个问题，例如定义一个通用函数，来改造 print_info 的实现，使其不依赖于 << 的定义
 见 23 已实现
 21. 给 BST 增加强制 insert 的方法，例如 force_insert，能够按 key 实现替换元素，并扩展到其子类和利用其实现的容器，如 TreeSet 等
+已拒绝
 22. 给 BST 及其依赖容器模板类，如 RBTree、TreeMap 等增加自定义比较函数的功能
+已拒绝，重载 < 即可
 23. 添加基础基类 AbstractBaseEntity, AbstractBaseContainer, AbstractIterableContainer，AbstractSeqIterableContainer 并将容器类模板继承自其
 已实现
 24. 对内存分配失败等情况抛异常，直接 assert
 待 19 实现
 25. 画出 UML 图等文档放在 doc 下
 26. 使用可变模板参数机制实现 Tuple
+已拒绝
 27. 给析构函数加 noexcept 关键字告诉编译器其不会抛出异常，别的不抛异常的函数做同样的处理
 28. 引入 Asan 进行编译
 已实现
@@ -63,3 +66,4 @@
 31. 优化 AVLTreeNode 的 height() 方法，记录在结点上
 已实现
 32. 实现 win 版本的控制脚本
+33. 修正容器迭代器区间构造函数，参照 HashSet

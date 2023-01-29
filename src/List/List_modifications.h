@@ -83,7 +83,6 @@ namespace CZ
         delete pos.get();
         --_size;
         return ListIterator<T>(posGet);
-        return pos;
     }
 
     template <typename T>
@@ -145,18 +144,27 @@ namespace CZ
     }
 
     template <typename T>
-    void List<T>::remove(const T &value)
+    template <typename Pred>
+    typename List<T>::Rank List<T>::remove_if(const Pred &predicate) noexcept
     {
+        Rank count = 0;
         for (auto it = begin(); it != end();)
         {
-            if (*it == value)
+            if (predicate(*it))
             {
                 it = erase(it);
+                ++count;
             }
             else
                 ++it;
         }
-        return;
+        return count;
+    }
+
+    template <typename T>
+    inline typename List<T>::Rank List<T>::remove(const T &value)
+    {
+        return remove_if([&](const T &data) { return data == value; });
     }
 } // CZ
 

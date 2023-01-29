@@ -6,13 +6,13 @@
 */
 
 /*
-集合类模板，由红黑树实现
+集合类模板，由红黑树实现，不允许重复元素
  */
 
 #ifndef TREE_SET_H
 #define TREE_SET_H
 
-#include "../Base/AbstractIterableContainer.h"
+#include "../Base/AbstractSeqIterableContainer.h"
 #include "../Tree/BinTree/RedBlackTree.h"
 #include "TreeSetIterator.h"
 
@@ -24,13 +24,13 @@ namespace CZ
     template <typename T> TreeSet<T> operator-(const TreeSet<T> &lhs, const TreeSet<T> &rhs);
 
     template <typename T>
-    class TreeSet : public AbstractIterableContainer<T, TreeSetIterator<T>>
+    class TreeSet : public AbstractSeqIterableContainer<T, TreeSetIterator<T>>
     {
         friend TreeSet<T> operator+<T>(const TreeSet<T> &lhs, const TreeSet<T> &rhs);
         friend TreeSet<T> operator-<T>(const TreeSet<T> &lhs, const TreeSet<T> &rhs);
         friend class TreeSetIterator<T>;
     public:
-        using Rank = typename AbstractIterableContainer<T, TreeSetIterator<T>>::Rank;
+        using Rank = typename AbstractSeqIterableContainer<T, TreeSetIterator<T>>::Rank;
         using Iterator = TreeSetIterator<T>;
 
         TreeSet();

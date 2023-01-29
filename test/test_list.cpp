@@ -122,12 +122,12 @@ int main(int argc, char const *argv[])
     // ls4.print_info("ls4");
     // ls3.print_info("ls3");
 
-    // List<string> ls5({"ashdj", "das", "asdsada", "das", "absxx", "wis", "ahd", "absxx", "das"}),
-    //     ls6(ls5);
-    // ls5.print_info("ls5");
-    // ls5.unique();
-    // ls5.print_info("ls5");
-    // ls6.print_info("ls6");
+    List<string> ls5({"ashdj", "das", "asdsada", "das", "absxx", "wis", "ahd", "absxx", "das"}),
+        ls6(ls5);
+    ls5.print_info("ls5");
+    ls5.unique();
+    ls5.print_info("ls5");
+    ls6.print_info("ls6");
     // ls6.unique(false, [] (const string &s1, const string &s2) { return s1.length() == s2.length(); });
     // ls6.print_info("ls6");
     // auto it2 = ls6.begin();
@@ -140,10 +140,10 @@ int main(int argc, char const *argv[])
     // ls6.print_info("ls6");
     // ls4.print_info("ls4");
 
-    // ls6.remove("das");
-    // ls6.print_info("ls6");
-    // ls6.remove("ss");
-    // ls6.print_info("ls6");
+    ls6.remove("das");
+    ls6.print_info("ls6");
+    ls6.remove("ss");
+    ls6.print_info("ls6");
 
     // 列表排序算法性能比较测试
     /*

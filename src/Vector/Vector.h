@@ -92,11 +92,16 @@ namespace CZ
     protected:
         //迭代器区间的复制
         void init_from(const Iterator &begin, const Iterator &end);
+
         // 析构辅助方法
         void free();
+
         // 搬到大房子中，即扩容操作
+        // 扩容后原来的元素都会保序复制到容器的前端，结果上看是往后拓展了空间
         bool expand();
+        
         // 装填因子过小时缩容
+        // 缩容后原来的元素都会保序尽可能复制到容器的前端，结果上看是从尾部截断了一段
         bool shrink();
 
     private:

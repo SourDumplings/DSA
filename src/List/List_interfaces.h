@@ -57,7 +57,7 @@ namespace CZ
     template <typename T>
     inline T &List<T>::front()
     {
-        return const_cast<T&>(static_cast<const List<T>&>(*this).front());
+        return const_cast<T &>(static_cast<const List<T>&>(*this).front());
     }
 
     template <typename T>
@@ -70,7 +70,7 @@ namespace CZ
     template <typename T>
     inline T &List<T>::back()
     {
-        return const_cast<T&>(static_cast<const List<T>&>(*this).back());
+        return const_cast<T &>(static_cast<const List<T>&>(*this).back());
     }
 
     template <typename T>
@@ -120,6 +120,26 @@ namespace CZ
     const char *List<T>::get_entity_name() const
     {
         return "List";
+    }
+
+    template <typename T>
+    template <typename Pred>
+    typename List<T>::Iterator List<T>::search_if(const Pred &predicate) const noexcept
+    {
+        for (Iterator it = begin(); it != end(); ++it)
+        {
+            if (predicate(*it))
+            {
+                return it;
+            }
+        }
+        return end();
+    }
+
+    template <typename T>
+    inline typename List<T>::Iterator List<T>::search(const T &value) const noexcept
+    {
+        return search_if([&](const T &data) { return data == value; });
     }
 
 } // CZ
