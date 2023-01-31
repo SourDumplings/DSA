@@ -55,7 +55,6 @@ namespace CZ
         Rank table_size() const noexcept;
 
         // 插入和删除
-        // 默认允许重复元素
         // 成功插入则返回 true
         bool insert(const T &data) noexcept;
         // 成功删除了元素返回 true
@@ -75,6 +74,12 @@ namespace CZ
 
         // 列出所有存在的元素
         void print_info(const char *name = "") const noexcept;
+
+    protected:
+        Iterator search(const T &data) const noexcept;
+
+        // 成功插入则返回被插入元素的迭代器，失败则返回尾后迭代器
+        Iterator insert_return_it(const T &data) noexcept;
 
     private:
         Vector<List<T>> _table;

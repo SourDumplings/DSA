@@ -22,41 +22,42 @@ using namespace CZ;
 
 int main(int argc, char const *argv[])
 {
-    // HashMap<int> d(10);
-    HashMap<int> d(10, SQUARE_PROBING);
-    // d.print_info("d");
+    HashMap<int, int> d(10);
+    d.print_info("d");
 
-    // 测试插入操作
-    // for (int32_t i = 0; i < 12; ++i)
-    // {
-    //     d.insert(i+3);
-    // }
-    // d.print_info("d");
-    // if(!d.insert(15))
-    //     printf("insert 15 failed\n");
-
-    // srand(time(0));
-    // for (int i = 0; i < 20; ++i)
-    // {
-    //     d.insert(rand() % 30);
-    // }
-    // d.print_info("d");
-
-    for (int i = 0; i < 13; ++i)
+    Vector<int> keys;
+    Vector<int> values;
+    for (int i = 0; i < 20; ++i)
     {
-        d.insert(i, true, false);
-        d.insert(i, true, false);
-        // d.insert(i);
-        // d.insert(i);
+        keys.push_back(rand() % 100);
+        values.push_back(rand() % 100);
+        d[keys.back()] = values.back();
     }
-    d.print_info("d");
 
-    // 测试删除操作
-    d.remove(5, false);
+    cout << "keys: " << keys << endl;
+    cout << "values: " << values << endl;
     d.print_info("d");
-    // d.insert(18);
-    d.insert(15);
-    d.print_info("d");
+    cout << "d: " << d << endl;
+
+    printf("d.contains(10) = %d\n", d.contains(10));
+    printf("d.contains(11) = %d\n", d.contains(11));
+    printf("d.contains(12) = %d\n", d.contains(12));
+
+    for (int i = 0; i < 10; ++i)
+    {
+        int removedKey = keys[rand() % 20];
+        d.remove(removedKey);
+        d.print_info((CZString("d after removing ") + to_string(removedKey)).c_str());
+    }
+
+    HashMap<CZString, int> ds({KVPair<CZString, int>("CZ", 1), KVPair<CZString, int>("ZTT", 123), KVPair<CZString, int>("Hello", 0), KVPair<CZString, int>("WW", 123456)});
+    ds.print_info("ds");
+    ds.remove("CZW");
+    ds.print_info("ds");
+    ds["CZ"] = 888;
+    ds.print_info("ds");
+    ds.remove("CZ");
+    ds.print_info("ds");
     return 0;
 }
 

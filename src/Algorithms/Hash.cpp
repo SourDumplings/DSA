@@ -27,7 +27,7 @@ namespace CZ
 
     HashRank Hash<int8_t>::operator()(const int8_t &value) const
     {
-        return value - INT8_MIN;
+        return value < 0 ? value - INT8_MIN : value;
     }
 
     HashRank Hash<uint8_t>::operator()(const uint8_t &value) const
@@ -37,7 +37,7 @@ namespace CZ
 
     HashRank Hash<int16_t>::operator()(const int16_t &value) const
     {
-        return value - INT16_MIN;
+        return value < 0 ? value - INT16_MIN : value;
     }
 
     HashRank Hash<uint16_t>::operator()(const uint16_t &value) const
@@ -47,7 +47,7 @@ namespace CZ
 
     HashRank Hash<int32_t>::operator()(const int32_t &value) const
     {
-        return value - INT32_MIN;
+        return value < 0 ? value - INT32_MIN : value;
     }
 
     HashRank Hash<uint32_t>::operator()(const uint32_t &value) const
@@ -57,7 +57,7 @@ namespace CZ
 
     HashRank Hash<int64_t>::operator()(const int64_t &value) const
     {
-        return value - INT64_MIN;
+        return value < 0 ? value - INT64_MIN : value;
     }
 
     HashRank Hash<uint64_t>::operator()(const uint64_t &value) const

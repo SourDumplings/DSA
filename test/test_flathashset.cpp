@@ -22,8 +22,8 @@ using namespace CZ;
 
 int main(int argc, char const *argv[])
 {
-    FlatHashSet<int> d(10);
-    // FlatHashSet<int> d(10, SQUARE_PROBING);
+    // FlatHashSet<int> d(10);
+    FlatHashSet<int> d(10, FlatHashSetAccessories::SQUARE_PROBING);
     d.print_info("d");
 
     // 测试插入操作

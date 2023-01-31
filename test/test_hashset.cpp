@@ -37,7 +37,7 @@ int main(int argc, char const *argv[])
     srand(time(nullptr));
     for (int i = 0; i < 100; ++i)
     {
-        int randNum = rand();
+        int randNum = rand() % 100;
         s2.insert(randNum);
         randNums.push_back(randNum);
     }

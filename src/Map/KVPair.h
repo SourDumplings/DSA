@@ -116,7 +116,7 @@ namespace CZ
     template <typename K, typename V>
     HashRank KVPair<K, V>::hash() const
     {
-        return (Hash<CZString>()(get_entity_name()) + Hash<K>()(_key) + Hash<V>()(_value)) % CZ_MAX_HASH_VALUE;
+        return (Hash<CZString>()(get_entity_name()) + Hash<K>()(_key)) % CZ_MAX_HASH_VALUE;
     }
 
     template <typename K, typename V>

@@ -1,5 +1,5 @@
 /*
- @Date    : 2018-07-27 21:26:43
+ @Date    : 2023-01-30 20:55:09
  @Author  : 酸饺子 (changzheng300@foxmail.com)
  @Link    : https://github.com/SourDumplings
  @Version : $Id$
@@ -14,207 +14,99 @@ HashMap 类模板的实现
 
 #include "HashMap.h"
 
-#include <cctype>
+#include "../CZString/CZString.h"
 #include <iostream>
 
 namespace CZ
 {
-    template <typename T, typename H>
-    HashMap<T, H>::HashMap(const Rank tableSize_, const ProbingMethod probingMethod_):
-        _tableSize(tableSize_), _size(0), _probingMethod(probingMethod_)
+    template <typename K, typename V>
+    HashMap<K, V>::HashMap(const Rank tableSize_) noexcept: HashSet<KVPair<K, V>>(tableSize_)
     {
-        _data.resize(_tableSize);
-        for (Rank i = 0; i < _tableSize; ++i)
-        {
-            // 所有位置置为无效，即表示这个位置为空
-            _data[i].value() = false;
-        }
     }
 
-    template <typename T, typename H>
-    const T& HashMap<T, H>::get(const Rank pos) const
+    template <typename K, typename V>
+    HashMap<K, V>::HashMap(const std::initializer_list<KVPair<K, V>> &l) noexcept
+        : HashSet<KVPair<K, V>>(l)
     {
-        ASSERT_DEBUG(_data[pos].value(), "this position is empty");
-        return _data[pos].key();
     }
 
-    template <typename T, typename H>
-    inline typename HashMap<T, H>::Rank HashMap<T, H>::size() const
-    { return _size; }
-
-    template <typename T, typename H>
-    inline typename HashMap<T, H>::Rank HashMap<T, H>::table_size() const
-    { return _tableSize; }
-
-    template <typename T, typename H>
-    typename HashMap<T, H>::Rank
-        HashMap<T, H>::_linear_probing(const typename HashMap<T, H>::Rank h) const
+    template <typename K, typename V>
+    HashMap<K, V>::HashMap(const KVPair<K, V> *begin, const KVPair<K, V> *end) noexcept
+        : HashSet<KVPair<K, V>>(begin, end)
     {
-        typename HashMap<T, H>::Rank ret = -1;
-        for (typename HashMap<T, H>::Rank i = h, count = 0; count != _tableSize;
-            ++count, i = (i + 1) % _tableSize)
-        {
-            if (!_data[i].value())
-            {
-                ret = i;
-                break;
-            }
-        }
-        return ret;
     }
 
-    template <typename T, typename H>
-    typename HashMap<T, H>::Rank
-        HashMap<T, H>::_square_probing(const typename HashMap<T, H>::Rank h) const
+    template <typename K, typename V>
+    template <typename It>
+    HashMap<K, V>::HashMap(const It &begin, const It &end) noexcept
+        : HashSet<KVPair<K, V>>(begin, end)
     {
-        typename HashMap<T, H>::Rank ret = -1;
-        for (typename HashMap<T, H>::Rank i = h, count = 0; count != _tableSize; ++count)
-        {
-            i = (i + count * count) % _tableSize;
-            if (!_data[i].value())
-            {
-                ret = i;
-                break;
-            }
-        }
-        return ret;
     }
 
-    template <typename T, typename H>
-    typename HashMap<T, H>::Rank
-        HashMap<T, H>::_linear_search(const typename HashMap<T, H>::Rank h,
-            const T &v) const
+    template <typename K, typename V>
+    bool HashMap<K, V>::remove(const K &key) noexcept
     {
-        typename HashMap<T, H>::Rank ret = -1;
-        for (typename HashMap<T, H>::Rank i = h, count = 0; count != _tableSize; ++count)
-        {
-            i = (i + count * count) % _tableSize;
-            if (!_data[i].value())
-            {
-                break;
-            }
-            else if (_data[i].key() == v)
-            {
-                ret = i;
-                break;
-            }
-        }
-        return ret;
+        return HashSet<KVPair<K, V>>::remove(KVPair<K, V>(key, V()));
     }
 
-    template <typename T, typename H>
-    typename HashMap<T, H>::Rank
-        HashMap<T, H>::_square_search(const typename HashMap<T, H>::Rank h,
-            const T &v) const
+    template <typename K, typename V>
+    bool HashMap<K, V>::contains(const K &key) const noexcept
     {
-        typename HashMap<T, H>::Rank ret = -1;
-        for (typename HashMap<T, H>::Rank i = h, count = 0; count != _tableSize; ++count)
-        {
-            i = (i + count * count) % _tableSize;
-            if (!_data[i].value())
-            {
-                break;
-            }
-            else if (_data[i].key() == v)
-            {
-                ret = i;
-                break;
-            }
-        }
-        return ret;
+        return HashSet<KVPair<K, V>>::contains(KVPair<K, V>(key, V()));
     }
 
-    template <typename T, typename H>
-    typename HashMap<T, H>::Rank HashMap<T, H>::search(const T &value) const
-    {
-        Rank h = H()(value) % _tableSize, pos = Rank();
-        switch (_probingMethod)
-        {
-            case LINEAR_PROBING: pos = _linear_search(h, value); break;
-            case SQUARE_PROBING: pos = _square_search(h, value); break;
-        }
-        return pos;
-    }
-
-    template <typename T, typename H>
-    bool HashMap<T, H>::insert(const T &v, const bool nonexcept, const bool repeatable)
-    {
-        Rank h = H()(v) % _tableSize, pos = Rank();
-        if (!repeatable && search(v) != -1)
-        {
-            if (nonexcept)
-            {
-                return false;
-            }
-            else
-            {
-                ASSERT_DEBUG(false, "Error from HashMap insert: repeat is not allowed!");
-            }
-        }
-
-        switch (_probingMethod)
-        {
-            case LINEAR_PROBING: pos = _linear_probing(h); break;
-            case SQUARE_PROBING: pos = _square_probing(h); break;
-        }
-
-        if (pos == -1)
-        {
-            if (nonexcept)
-            {
-                return false;
-            }
-            else
-            {
-                ASSERT_DEBUG(false, "Error from HashMap insert: HashMap is full");
-            }
-        }
-        else
-        {
-            _data[pos].value() = true;
-            _data[pos].key() = v;
-            ++_size;
-        }
-        return true;
-    }
-
-    template <typename T, typename H>
-    bool HashMap<T, H>::remove(const T &value, const bool nonexcept)
-    {
-        Rank pos = search(value);
-        if (pos == -1)
-        {
-            if (nonexcept)
-            {
-                return false;
-            }
-            else
-            {
-                ASSERT_DEBUG(false, "Error from HashMap remove: this value doesn't exist");
-            }
-        }
-        else
-        {
-            // 懒惰删除
-            _data[pos].value() = false;
-            --_size;
-        }
-        return true;
-    }
-
-    template <typename T, typename H>
-    void HashMap<T, H>::print_info(const char *name) const
+    template <typename K, typename V>
+    void HashMap<K, V>::print_info(const char *name) const noexcept
     {
         printf("for HashMap %s: \n", name);
-        printf("size is %lu, table size is %lu\n", _size, _tableSize);
+        printf("size is %u, table size is %u\n", this->size(), this->table_size());
         printf("it contains:");
-        for (Rank i = 0; i != _tableSize; ++i)
+        Rank count = 0;
+        for (const KVPair<K, V> &p : *this)
         {
-            std::cout << " [" << i << "]" << _data[i].key();
-            printf("(%s)", _data[i].value() ? "valid" : "invalid");
+            if (0 < count)
+            {
+                std::cout << ", ";
+            }
+            std::cout << "[" << p.key() << "](" << p.value() << ")";
+            ++count;
         }
-        printf("\n\n");
-        return;
+        printf("\n");
+    }
+
+    template <typename K, typename V>
+    const char *HashMap<K, V>::get_entity_name() const noexcept
+    {
+        return "HashMap";
+    }
+
+    template <typename K, typename V>
+    V &HashMap<K, V>::operator[](const K &key) noexcept
+    {
+        KVPair<K, V> tempP(key, V());
+        Iterator it = HashSet<KVPair<K, V>>::search(tempP);
+
+        if (it == HashSet<KVPair<K, V>>::end())
+        {
+            it = HashSet<KVPair<K, V>>::insert_return_it(tempP);
+        }
+        return const_cast<V&>(((*(it.get())).data()).value());
+    }
+
+    template <typename K, typename V>
+    const V &HashMap<K, V>::at(const K &key) const
+    {
+        if (contains(key))
+        {
+            return operator[](key);
+        }
+        throw std::out_of_range(CZString("no this key in map") + key.c_str());
+    }
+
+    template <typename K, typename V>
+    inline V &HashMap<K, V>::at(const K &key)
+    {
+        return const_cast<V&>(static_cast<const HashMap<K, V>&>(*this).at(key));
     }
 } // CZ
 

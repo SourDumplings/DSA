@@ -80,11 +80,17 @@ namespace CZ
     }
 
     template <typename T>
-    bool HashSet<T>::insert(const T &data) noexcept
+    inline bool HashSet<T>::insert(const T &data) noexcept
+    {
+        return insert_return_it(data) != end();
+    }
+
+    template <typename T>
+    typename HashSet<T>::Iterator HashSet<T>::insert_return_it(const T &data) noexcept
     {
         if (contains(data))
         {
-            return false;
+            return end();
         }
         HashRank h = Hash<T>()(data);
         Rank index = static_cast<Rank>(h % table_size());
@@ -109,8 +115,7 @@ namespace CZ
                 _lastNonEmptyBucketIndex = index;
             }
         }
-
-        return true;
+        return Iterator(this, index, --_table[index].end());
     }
 
     template <typename T>
@@ -138,17 +143,26 @@ namespace CZ
     }
 
     template <typename T>
-    bool HashSet<T>::contains(const T &data) const noexcept
+    inline bool HashSet<T>::contains(const T &data) const noexcept
+    {
+        return search(data) != end();
+    }
+
+    template <typename T>
+    typename HashSet<T>::Iterator HashSet<T>::search(const T &data) const noexcept
     {
         HashRank h = Hash<T>()(data);
-        if (table_size() == 0)
-        {
-            return false;
-        }
+
+        ASSERT_RELEASE(0 < table_size(), "empty table.");
 
         Rank index = static_cast<Rank>(h % table_size());
         const List<T> &rList = _table[index];
-        return rList.search(data) != rList.end();
+        typename List<T>::Iterator listIterator = rList.search(data);
+        if (listIterator == rList.end())
+        {
+            return end();
+        }
+        return Iterator(this, index, listIterator);
     }
 
     template <typename T>

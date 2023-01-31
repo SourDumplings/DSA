@@ -64,7 +64,6 @@ namespace CZ
         Rank table_size() const noexcept;
 
         // 插入和删除
-        // 默认允许重复元素
         // 成功插入则返回 true
         bool insert(const T &data) noexcept;
         // 成功删除了元素返回 true
