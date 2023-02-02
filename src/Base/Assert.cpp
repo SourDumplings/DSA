@@ -11,7 +11,7 @@
 
 namespace CZ
 {
-    void Assert(bool assertion, const char *fileName, int lineNo, const char *failMsgFmt, ...) noexcept
+    void Assert(bool assertion, const char *fileName, int lineNo, const char *failMsgFmt, ...)
     {
         if (!assertion)
         {

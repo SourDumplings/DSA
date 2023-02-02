@@ -23,10 +23,12 @@ int main(int argc, char const *argv[])
     m1.insert(KVPair<CZString, CZString>("cz", "ztt"));
     m1.insert(KVPair<CZString, CZString>("cz", "cz"));
     m1.print_info("m1");
-    m1.insert(KVPair<CZString, CZString>("cz", "123"));
+    m1.at("cz") = "123";
     m1.print_info("m1");
     printf("m1[\"cz\"].c_str() = %s\n", m1["cz"].c_str());
     m1["cz"] = "456";
+    m1["czt"] = "789";
+    m1["czz"] = "789";
     m1.print_info("m1");
     m1.remove("cz");
     m1.print_info("m1");

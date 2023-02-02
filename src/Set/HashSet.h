@@ -36,50 +36,50 @@ namespace CZ
         static const Rank INITIAL_TABLE_SIZE = 32; 
 
         // 构造函数，默认大小 32，使用取模作为哈希函数
-        HashSet(const std::initializer_list<T> &l) noexcept;
+        HashSet(const std::initializer_list<T> &l);
 
-        HashSet(const T *begin, const T *end) noexcept;
+        HashSet(const T *begin, const T *end);
 
         template <typename It>
-        HashSet(const It &begin, const It &end) noexcept;
+        HashSet(const It &begin, const It &end);
 
-        HashSet(const Rank tableSize_ = INITIAL_TABLE_SIZE) noexcept;
+        HashSet(const Rank tableSize_ = INITIAL_TABLE_SIZE);
 
-        HashSet(const HashSet<T> &rHashmap) noexcept;
+        HashSet(const HashSet<T> &rHashSet) = default;
 
-        HashSet(HashSet<T> &&rHashmap) noexcept;
+        HashSet(HashSet<T> &&rHashSet);
 
         // 数据访问接口
-        Rank size() const noexcept override;
-        bool contains(const T &data) const noexcept;
-        Rank table_size() const noexcept;
+        Rank size() const override;
+        bool contains(const T &data) const;
+        Rank table_size() const;
 
         // 插入和删除
         // 成功插入则返回 true
-        bool insert(const T &data) noexcept;
+        bool insert(const T &data);
         // 成功删除了元素返回 true
-        bool remove(const T &data) noexcept;
+        bool remove(const T &data);
 
-        void clear() noexcept override;
+        void clear() override;
 
-        HashSet<T> &operator=(const HashSet<T> &s) noexcept;
-        HashSet<T> &operator=(HashSet<T> &&s) noexcept;
+        HashSet<T> &operator=(const HashSet<T> &s);
+        HashSet<T> &operator=(HashSet<T> &&s);
 
-        Iterator begin() noexcept override;
-        Iterator end() noexcept override;
-        Iterator begin() const noexcept override;
-        Iterator end() const noexcept override;
+        Iterator begin() override;
+        Iterator end() override;
+        Iterator begin() const override;
+        Iterator end() const override;
 
-        const char *get_entity_name() const noexcept override;
+        const char *get_entity_name() const override;
 
         // 列出所有存在的元素
-        void print_info(const char *name = "") const noexcept;
+        void print_info(const char *name = "") const;
 
     protected:
-        Iterator search(const T &data) const noexcept;
+        Iterator search(const T &data) const;
 
         // 成功插入则返回被插入元素的迭代器，失败则返回尾后迭代器
-        Iterator insert_return_it(const T &data) noexcept;
+        Iterator insert_return_it(const T &data);
 
     private:
         Vector<List<T>> _table;
@@ -88,18 +88,18 @@ namespace CZ
         Rank _lastNonEmptyBucketIndex;
 
         // 哈希表的扩容和缩容，扩缩容倍率都是 2 倍，每次扩缩容完了都需要 rehash
-        bool _need_expand() const noexcept;
-        bool _need_shrink() const noexcept;
-        void _expand() noexcept;
-        void _shrink() noexcept;
-        void _rehash() noexcept;
+        bool _need_expand() const;
+        bool _need_shrink() const;
+        void _expand();
+        void _shrink();
+        void _rehash();
 
         template <typename It>
         void _construct_from(const It &begin, const It &end);
 
-        void _update_bucket_index_range() noexcept;
+        void _update_bucket_index_range();
 
-        Rank _get_suitable_table_size(Rank lowerLimit) const noexcept;
+        Rank _get_suitable_table_size(Rank lowerLimit) const;
     };
 } // CZ
 

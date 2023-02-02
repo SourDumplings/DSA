@@ -30,12 +30,12 @@ namespace CZ
 
         void print_info(const char *name = "") const override;
 
-        bool insert_data(const T &data) noexcept override;
+        bool insert_data(const T &data) override;
 
-        TreeNode<T> *secede(TreeNode<T> *pNode) noexcept override;
+        TreeNode<T> *secede(TreeNode<T> *pNode) override;
 
-        AVLTree<T> &operator=(const AVLTree<T> &t) noexcept;
-        AVLTree<T> &operator=(AVLTree<T> &&t) noexcept;
+        AVLTree<T> &operator=(const AVLTree<T> &t);
+        AVLTree<T> &operator=(AVLTree<T> &&t);
 
         const char *get_entity_name() const override;
 
@@ -49,17 +49,17 @@ namespace CZ
 
     protected:
         // 插入结点或者值，成功插入则返回 true
-        BSTNode<T> *insert(BSTNode<T> *pNode) noexcept override;
+        BSTNode<T> *insert(BSTNode<T> *pNode) override;
 
         // 删除单个结点的方法，返回实际被删除的结点的指针
         // 注意被删的结点的内存就不再受树的管理了，需要另外释放
         // 删除一个值对应的一个结点，注意如果存在重复值则只会删除一个
-        BSTNode<T> *remove(BSTNode<T> *pNode) noexcept override;
+        BSTNode<T> *remove(BSTNode<T> *pNode) override;
 
         // 相对于 BinTree<T>::rotate，需要更新高度
-        BinTreeNode<T> *rotate_at(BinTreeNode<T> *v) noexcept override;
+        BinTreeNode<T> *rotate_at(BinTreeNode<T> *v) override;
     private:
-        AVLTreeNode<T> *copy_from(TreeNode<T> *pNode) noexcept;
+        AVLTreeNode<T> *copy_from(TreeNode<T> *pNode);
     };
 } // CZ
 

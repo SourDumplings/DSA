@@ -31,10 +31,9 @@ namespace CZ
     }
 
     template <typename T>
-    void RedBlackTree<T>::OutPut::operator()(const T &data, const bool red) const
+    void RedBlackTree<T>::OutPut::operator()(const T &data, bool red, typename RedBlackTreeNode<T>::Rank blackHeight) const
     {
-        std::cout << data;
-        printf("(%c) ", red ? 'r' : 'b');
+        std::cout << data << "(" << (red ? 'r' : 'b') << ", " << blackHeight << ") ";
         return;
     }
 
@@ -43,7 +42,7 @@ namespace CZ
     {
         if (v)
         {
-            process(v->data(), v->_red);
+            process(v->data(), v->_red, v->_blackHeight);
             _pre_order_traversal(dynamic_cast<RedBlackTreeNode<T>*>(v->left_child()), process);
             _pre_order_traversal(dynamic_cast<RedBlackTreeNode<T>*>(v->right_child()), process);
         }
@@ -56,7 +55,7 @@ namespace CZ
         if (v)
         {
             _in_order_traversal(dynamic_cast<RedBlackTreeNode<T>*>(v->left_child()), process);
-            process(v->data(), v->_red);
+            process(v->data(), v->_red, v->_blackHeight);
             _in_order_traversal(dynamic_cast<RedBlackTreeNode<T>*>(v->right_child()), process);
         }
         return;

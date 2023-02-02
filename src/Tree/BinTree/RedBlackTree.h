@@ -41,24 +41,24 @@ namespace CZ
 
         // 颜色，默认空结点为黑色
         bool is_red(RedBlackTreeNode<T> *) const;
-        // 得到目标结点黑高度，因为默认空结点为黑，故空结点的黑高度为0，即认为与红结点一样
-        Rank get_black_height(RedBlackTreeNode<T> *) const;
+        // 得到目标结点黑高度，空结点的黑高度为 0
+        typename RedBlackTreeNode<T>::Rank get_black_height(RedBlackTreeNode<T> *) const;
 
         void print_info(const char *name = "") const override;
 
         // 红黑树的插入与删除
         // 成功插入则返回 true
-        bool insert_data(const T &data) noexcept override;
+        bool insert_data(const T &data) override;
 
-        RedBlackTree<T> &operator=(const RedBlackTree<T> &t) noexcept;
-        RedBlackTree<T> &operator=(RedBlackTree<T> &&t) noexcept;
+        RedBlackTree<T> &operator=(const RedBlackTree<T> &t);
+        RedBlackTree<T> &operator=(RedBlackTree<T> &&t);
 
         const char *get_entity_name() const override;
 
     protected:
-        BSTNode<T> *remove(BSTNode<T> *pNode) noexcept override;
+        BSTNode<T> *remove(BSTNode<T> *pNode) override;
 
-        BSTNode<T> *insert(BSTNode<T> *pNode) noexcept override;
+        BSTNode<T> *insert(BSTNode<T> *pNode) override;
 
     private:
         // 红黑树不允许摘除
@@ -76,14 +76,14 @@ namespace CZ
         void solve_double_red(RedBlackTreeNode<T> *);
         void solve_double_black(RedBlackTreeNode<T> *v, RedBlackTreeNode<T> *hot);
 
-        RedBlackTreeNode<T> *copy_from(TreeNode<T> *pRoot) noexcept;
+        RedBlackTreeNode<T> *copy_from(TreeNode<T> *pRoot);
 
         // 用于查看数据的辅助方法
         class OutPut
         {
             // 红黑树的输出数据的可调用类，作为默认结点数据处理函数
         public:
-            void operator()(const T &data, const bool red) const;
+            void operator()(const T &data, bool red, typename RedBlackTreeNode<T>::Rank blackHeight) const;
         };
         void _pre_order_traversal(RedBlackTreeNode<T> *v, const OutPut &process) const;
         void _in_order_traversal(RedBlackTreeNode<T> *v, const OutPut &process) const;

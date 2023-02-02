@@ -31,7 +31,7 @@ namespace CZ
     }
 
     template <typename T>
-    BSTNode<T> *BST<T>::copy_from(TreeNode<T> *pRoot) noexcept
+    BSTNode<T> *BST<T>::copy_from(TreeNode<T> *pRoot)
     {
         if (pRoot == nullptr)
         {
@@ -69,7 +69,7 @@ namespace CZ
     }
 
     template <typename T>
-    BSTNode<T> *BST<T>::do_recursion_search(const BSTNode<T> *pNowCheck, const T &data) const noexcept
+    BSTNode<T> *BST<T>::do_recursion_search(const BSTNode<T> *pNowCheck, const T &data) const
     {
         BSTNode<T> *ret = nullptr;
         if (pNowCheck)
@@ -91,13 +91,13 @@ namespace CZ
     }
 
     template <typename T>
-    inline BSTNode<T> *BST<T>::search_data(const T &data) const noexcept
+    inline BSTNode<T> *BST<T>::search_data(const T &data) const
     {
         return do_recursion_search(dynamic_cast<BSTNode<T> *>(this->root()), data);
     }
 
     template <typename T>
-    void BST<T>::do_recursion_insert(BSTNode<T> *pFather, BSTNode<T> *pNode) noexcept
+    void BST<T>::do_recursion_insert(BSTNode<T> *pFather, BSTNode<T> *pNode)
     {
         ASSERT_DEBUG(pFather, "pFather is nullptr");
         // if (father == nullptr)
@@ -132,7 +132,7 @@ namespace CZ
     }
 
     template <typename T>
-    bool BST<T>::insert_data(const T &data) noexcept
+    bool BST<T>::insert_data(const T &data)
     {
         BSTNode<T> *pNode = new BSTNode<T>(data);
         if (this->insert(pNode) == nullptr && pNode)
@@ -145,7 +145,7 @@ namespace CZ
     }
 
     template <typename T>
-    BSTNode<T> *BST<T>::insert(BSTNode<T> *pNode) noexcept
+    BSTNode<T> *BST<T>::insert(BSTNode<T> *pNode)
     {
         if (pNode == nullptr)
         {
@@ -170,7 +170,7 @@ namespace CZ
     }
 
     template <typename T>
-    BSTNode<T> *BST<T>::secede_data(const T &data) noexcept
+    BSTNode<T> *BST<T>::secede_data(const T &data)
     {
         BSTNode<T> *target = BST<T>::search_data(data);
         ASSERT_DEBUG(target, "this value doesn't in this BST");
@@ -178,13 +178,13 @@ namespace CZ
     }
 
     template <typename T>
-    TreeNode<T> *BST<T>::secede(TreeNode<T> *pNode) noexcept
+    TreeNode<T> *BST<T>::secede(TreeNode<T> *pNode)
     {
         return BinTree<T>::secede(pNode);
     }
 
     template <typename T>
-    BSTNode<T> *BST<T>::remove_at(BSTNode<T> *&target, BSTNode<T> *&hot) noexcept
+    BSTNode<T> *BST<T>::remove_at(BSTNode<T> *&target, BSTNode<T> *&hot)
     {
         if (target == nullptr)
         {
@@ -237,7 +237,7 @@ namespace CZ
     }
 
     template <typename T>
-    BSTNode<T> *BST<T>::remove(BSTNode<T> *node) noexcept
+    BSTNode<T> *BST<T>::remove(BSTNode<T> *node)
     {
         if (node == nullptr)
         {
@@ -253,7 +253,7 @@ namespace CZ
     }
 
     template <typename T>
-    bool BST<T>::remove_data(const T &data) noexcept
+    bool BST<T>::remove_data(const T &data)
     {
         BSTNode<T> *pNode = this->search_data(data);
         BSTNode<T> *pActualRemovedNode = this->remove(pNode);
@@ -266,7 +266,7 @@ namespace CZ
     }
 
     template <typename T>
-    typename BST<T>::Rank BST<T>::remove_all(const T &data) noexcept
+    typename BST<T>::Rank BST<T>::remove_all(const T &data)
     {
         Rank count = 0;
         while (true)
@@ -284,13 +284,13 @@ namespace CZ
     }
 
     template <typename T>
-    inline bool BST<T>::is_allow_repeat_key() const noexcept
+    inline bool BST<T>::is_allow_repeat_key() const
     {
         return _isAllowRepeatKey;
     }
 
     template <typename T>
-    BST<T> &BST<T>::operator=(const BST<T> &t) noexcept
+    BST<T> &BST<T>::operator=(const BST<T> &t)
     {
         if (&t != this)
         {
@@ -302,7 +302,7 @@ namespace CZ
     }
 
     template <typename T>
-    BST<T> &BST<T>::operator=(BST<T> &&t) noexcept
+    BST<T> &BST<T>::operator=(BST<T> &&t)
     {
         if (&t != this)
         {

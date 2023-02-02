@@ -21,7 +21,7 @@ HashSet 类模板的实现
 namespace CZ
 {
     template <typename T>
-    HashSet<T>::HashSet(const Rank tableSize_) noexcept: _size(0)
+    HashSet<T>::HashSet(const Rank tableSize_): _size(0)
     {
         _table.resize(tableSize_);
         _firstNonEmptyBucketIndex = 0;
@@ -29,14 +29,14 @@ namespace CZ
     }
 
     template <typename T>
-    HashSet<T>::HashSet(const std::initializer_list<T> &l) noexcept
+    HashSet<T>::HashSet(const std::initializer_list<T> &l)
         : _size(0), _firstNonEmptyBucketIndex(0), _lastNonEmptyBucketIndex(0)
     {
         _construct_from(l.begin(), l.end());
     }
 
     template <typename T>
-    HashSet<T>::HashSet(const T *begin, const T *end) noexcept
+    HashSet<T>::HashSet(const T *begin, const T *end)
         : _size(0), _firstNonEmptyBucketIndex(0), _lastNonEmptyBucketIndex(0)
     {
         _construct_from(begin, end);
@@ -44,7 +44,7 @@ namespace CZ
 
     template <typename T>
     template <typename It>
-    HashSet<T>::HashSet(const It &begin, const It &end) noexcept
+    HashSet<T>::HashSet(const It &begin, const It &end)
         : _size(0), _firstNonEmptyBucketIndex(0), _lastNonEmptyBucketIndex(0)
     {
         _construct_from(begin, end);
@@ -68,25 +68,64 @@ namespace CZ
     }
 
     template <typename T>
-    inline typename HashSet<T>::Rank HashSet<T>::size() const noexcept
+    HashSet<T>::HashSet(HashSet<T> &&rHashSet)
+    {
+        _table = std::move(rHashSet._table);
+        _firstNonEmptyBucketIndex = rHashSet._firstNonEmptyBucketIndex;
+        _lastNonEmptyBucketIndex = rHashSet._lastNonEmptyBucketIndex;
+        _size = rHashSet._size;
+        rHashSet._size = 0;
+        rHashSet._firstNonEmptyBucketIndex = rHashSet._lastNonEmptyBucketIndex = 0;
+    }
+
+    template <typename T>
+    HashSet<T> &HashSet<T>::operator=(const HashSet<T> &s)
+    {
+        if (&s != this)
+        {
+            _table = s._table;
+            _firstNonEmptyBucketIndex = s._firstNonEmptyBucketIndex;
+            _lastNonEmptyBucketIndex = s._lastNonEmptyBucketIndex;
+            _size = s._size;
+        }
+        return *this;
+    }
+
+    template <typename T>
+    HashSet<T> &HashSet<T>::operator=(HashSet<T> &&s)
+    {
+        if (&s != this)
+        {
+            _table = std::move(s._table);
+            _firstNonEmptyBucketIndex = s._firstNonEmptyBucketIndex;
+            _lastNonEmptyBucketIndex = s._lastNonEmptyBucketIndex;
+            _size = s._size;
+            s._size = 0;
+            s._firstNonEmptyBucketIndex = s._lastNonEmptyBucketIndex = 0;
+        }
+        return *this;
+    }
+
+    template <typename T>
+    inline typename HashSet<T>::Rank HashSet<T>::size() const
     {
         return _size;
     }
 
     template <typename T>
-    inline typename HashSet<T>::Rank HashSet<T>::table_size() const noexcept
+    inline typename HashSet<T>::Rank HashSet<T>::table_size() const
     {
         return _table.size();
     }
 
     template <typename T>
-    inline bool HashSet<T>::insert(const T &data) noexcept
+    inline bool HashSet<T>::insert(const T &data)
     {
         return insert_return_it(data) != end();
     }
 
     template <typename T>
-    typename HashSet<T>::Iterator HashSet<T>::insert_return_it(const T &data) noexcept
+    typename HashSet<T>::Iterator HashSet<T>::insert_return_it(const T &data)
     {
         if (contains(data))
         {
@@ -119,7 +158,7 @@ namespace CZ
     }
 
     template <typename T>
-    bool HashSet<T>::remove(const T &data) noexcept
+    bool HashSet<T>::remove(const T &data)
     {
         HashRank h = Hash<T>()(data);
         Rank index = static_cast<Rank>(h % table_size());
@@ -143,13 +182,13 @@ namespace CZ
     }
 
     template <typename T>
-    inline bool HashSet<T>::contains(const T &data) const noexcept
+    inline bool HashSet<T>::contains(const T &data) const
     {
         return search(data) != end();
     }
 
     template <typename T>
-    typename HashSet<T>::Iterator HashSet<T>::search(const T &data) const noexcept
+    typename HashSet<T>::Iterator HashSet<T>::search(const T &data) const
     {
         HashRank h = Hash<T>()(data);
 
@@ -166,19 +205,19 @@ namespace CZ
     }
 
     template <typename T>
-    bool HashSet<T>::_need_expand() const noexcept
+    bool HashSet<T>::_need_expand() const
     {
         return table_size() * 4 <= _size;
     }
 
     template <typename T>
-    bool HashSet<T>::_need_shrink() const noexcept
+    bool HashSet<T>::_need_shrink() const
     {
         return _size * 4 <= table_size();
     }
 
     template <typename T>
-    void HashSet<T>::_expand() noexcept
+    void HashSet<T>::_expand()
     {
         Rank oldTableSize = table_size();
         _table.resize(oldTableSize * 2);
@@ -186,7 +225,7 @@ namespace CZ
     }
 
     template <typename T>
-    void HashSet<T>::_shrink() noexcept
+    void HashSet<T>::_shrink()
     {
         Rank oldTableSize = table_size();
         _table.resize(oldTableSize / 2);
@@ -194,7 +233,7 @@ namespace CZ
     }
 
     template <typename T>
-    void HashSet<T>::_rehash() noexcept
+    void HashSet<T>::_rehash()
     {
         Rank tableSize = table_size();
         Vector<List<T>> needRehashDataVec(tableSize);
@@ -229,7 +268,7 @@ namespace CZ
     }
 
     template <typename T>
-    void HashSet<T>::print_info(const char *name) const noexcept
+    void HashSet<T>::print_info(const char *name) const
     {
         printf("for HashSet %s: \n", name);
         printf("size is %u, table size is %u\n", _size, table_size());
@@ -259,37 +298,37 @@ namespace CZ
     }
 
     template <typename T>
-    const char *HashSet<T>::get_entity_name() const noexcept
+    const char *HashSet<T>::get_entity_name() const
     {
         return "HashSet";
     }
 
     template <typename T>
-    typename HashSet<T>::Iterator HashSet<T>::begin() noexcept
+    typename HashSet<T>::Iterator HashSet<T>::begin()
     {
         return static_cast<const HashSet<T>&>(*this).begin();
     }
 
     template <typename T>
-    typename HashSet<T>::Iterator HashSet<T>::end() noexcept
+    typename HashSet<T>::Iterator HashSet<T>::end()
     {
         return static_cast<const HashSet<T>&>(*this).end();
     }
 
     template <typename T>
-    typename HashSet<T>::Iterator HashSet<T>::begin() const noexcept
+    typename HashSet<T>::Iterator HashSet<T>::begin() const
     {
         return Iterator(this, _firstNonEmptyBucketIndex, _table[_firstNonEmptyBucketIndex].begin());
     }
 
     template <typename T>
-    typename HashSet<T>::Iterator HashSet<T>::end() const noexcept
+    typename HashSet<T>::Iterator HashSet<T>::end() const
     {
         return Iterator(this, _lastNonEmptyBucketIndex, _table[_lastNonEmptyBucketIndex].end());
     }
 
     template <typename T>
-    void HashSet<T>::clear() noexcept
+    void HashSet<T>::clear()
     {
         _size = 0;
         _table.clear();
@@ -299,7 +338,7 @@ namespace CZ
     }
 
     template <typename T>
-    void HashSet<T>::_update_bucket_index_range() noexcept
+    void HashSet<T>::_update_bucket_index_range()
     {
         Rank tableSize = table_size();
         for (Rank i = 0; i < tableSize; ++i)
@@ -321,7 +360,7 @@ namespace CZ
     }
 
     template <typename T>
-    typename HashSet<T>::Rank HashSet<T>::_get_suitable_table_size(Rank lowerLimit) const noexcept
+    typename HashSet<T>::Rank HashSet<T>::_get_suitable_table_size(Rank lowerLimit) const
     {
         Rank res = 2;
         for (; res < lowerLimit; res *= 2);

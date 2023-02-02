@@ -20,7 +20,7 @@ namespace CZ
     inline bool RedBlackTree<T>::is_red(RedBlackTreeNode<T> *v) const { return v ? v->_red : false; }
 
     template <typename T>
-    inline typename RedBlackTree<T>::Rank
+    inline typename RedBlackTreeNode<T>::Rank
     RedBlackTree<T>::get_black_height(RedBlackTreeNode<T> *v) const
     {
         return v ? v->_blackHeight : 0;
@@ -32,12 +32,12 @@ namespace CZ
         if (v == nullptr)
         {
             // 空结点当然不需要高度更新
-            return false;
+            return true;
         }
         return (get_black_height(dynamic_cast<RedBlackTreeNode<T>*>(v->left_child())) == get_black_height(dynamic_cast<RedBlackTreeNode<T>*>(v->right_child())))
             && (v->_blackHeight ==
                     (is_red(v) ? get_black_height(dynamic_cast<RedBlackTreeNode<T>*>(v->left_child()))
-                        : get_black_height(dynamic_cast<RedBlackTreeNode<T>*>(v->right_child())) + 1
+                        : (get_black_height(dynamic_cast<RedBlackTreeNode<T>*>(v->left_child())) + 1)
                     )
             );
     }

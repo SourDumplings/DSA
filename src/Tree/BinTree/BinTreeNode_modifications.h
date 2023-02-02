@@ -61,7 +61,7 @@ namespace CZ
     }
 
     template <typename T>
-    TreeNode<T> *BinTreeNode<T>::insert_child(TreeNode<T> *pNode) noexcept
+    TreeNode<T> *BinTreeNode<T>::insert_child(TreeNode<T> *pNode)
     {
         if (left_child() == nullptr)
         {

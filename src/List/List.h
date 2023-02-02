@@ -61,9 +61,9 @@ namespace CZ
 
         // 顺序查找，找到第一个满足条件的，返回迭代器
         template <typename Pred>
-        Iterator search_if(const Pred &predicate) const noexcept;
+        Iterator search_if(const Pred &predicate) const;
 
-        Iterator search(const T &value) const noexcept;
+        Iterator search(const T &value) const;
 
         // 打印列表信息
         void print_info(const char *name = "") const;
@@ -84,7 +84,7 @@ namespace CZ
         Rank remove(const T &value); // 删除所有value值，返回被删除的结点数
 
         template <typename Pred>
-        Rank remove_if(const Pred &predicate) noexcept;
+        Rank remove_if(const Pred &predicate);
 
         void clear() override;
         virtual void merge(const List<T> &l);

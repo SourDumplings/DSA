@@ -83,7 +83,7 @@ namespace CZ
     }
 
     template <typename T>
-    BinTree<T> &BinTree<T>::operator=(const BinTree<T> &t) noexcept
+    BinTree<T> &BinTree<T>::operator=(const BinTree<T> &t)
     {
         if (&t != this)
         {
@@ -94,7 +94,7 @@ namespace CZ
     }
 
     template <typename T>
-    BinTree<T> &BinTree<T>::operator=(BinTree<T> &&t) noexcept
+    BinTree<T> &BinTree<T>::operator=(BinTree<T> &&t)
     {
         if (&t != this)
         {

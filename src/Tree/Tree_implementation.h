@@ -217,7 +217,7 @@ namespace CZ
     }
 
     template <typename T>
-    Tree<T> &Tree<T>::operator=(const Tree<T> &t) noexcept
+    Tree<T> &Tree<T>::operator=(const Tree<T> &t)
     {
         if (&t != this)
         {
@@ -228,7 +228,7 @@ namespace CZ
     }
 
     template <typename T>
-    Tree<T> &Tree<T>::operator=(Tree<T> &&t) noexcept
+    Tree<T> &Tree<T>::operator=(Tree<T> &&t)
     {
         if (&t != this)
         {

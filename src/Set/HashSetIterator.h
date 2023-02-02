@@ -139,19 +139,19 @@ namespace CZ
             return _listIterator;
         }
 
-        const char *c_str() const noexcept override
+        const char *c_str() const override
         {
             std::ostringstream oss;
             oss << this->get_entity_name() << "(" << *_listIterator << ")";
             return this->get_c_str_from_stream(oss);
         }
 
-        HashRank hash() const noexcept override
+        HashRank hash() const override
         {
             return (Hash<const HashSet<T> *>()(_pHashSet) + Hash<T>()(*_listIterator)) % CZ_MAX_HASH_VALUE;
         }
 
-        const char *get_entity_name() const noexcept override
+        const char *get_entity_name() const override
         {
             return "HashSetIterator";
         }

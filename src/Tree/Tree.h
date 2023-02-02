@@ -41,8 +41,8 @@ namespace CZ
         Tree(Tree<T> &&t);
         virtual ~Tree();
 
-        Tree<T> &operator=(const Tree<T> &t) noexcept;
-        Tree<T> &operator=(Tree<T> &&t) noexcept;
+        Tree<T> &operator=(const Tree<T> &t);
+        Tree<T> &operator=(Tree<T> &&t);
 
         Rank size() const override;
         TreeNode<T> *root() const;

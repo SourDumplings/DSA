@@ -65,6 +65,18 @@ namespace CZ
     }
 
     template <typename T>
+    typename TreeSet<T>::Iterator TreeSet<T>::search(const T &data) const
+    {
+        RedBlackTreeNode<T> *pRBTreeNode = dynamic_cast<RedBlackTreeNode<T> *>(_T.search_data(data));
+        if (pRBTreeNode == nullptr)
+        {
+            return end();
+        }
+        
+        return Iterator(pRBTreeNode, false, &_T);
+    }
+
+    template <typename T>
     inline bool TreeSet<T>::insert(const T &value)
     {
         return _T.insert_data(value);

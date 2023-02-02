@@ -9,11 +9,11 @@
 
 ## TODO
 1. 将类型别名首字母改为大写
-已完成
+已实现
 2. 去掉非 const 的 size() 方法
-已完成
+已实现
 3. 实现 Deque
-已完成
+已实现
 4. 实现空间复杂度为O(1)的归并排序，参考：https://leetcode-cn.com/problems/sort-list/solution/pai-xu-lian-biao-by-leetcode-solution/
 只有链表可以，一般的不行
 5. 实现树状数组（区间）
@@ -24,23 +24,23 @@
 已实现
 9. 实现前缀树 Trie
 10. 将非类模板的头文件和源文件分离并编译成库
-已完成
+已实现
 11. List 的归并排序，参考：https://leetcode-cn.com/problems/sort-list/solution/pai-xu-lian-biao-by-leetcode-solution/
-已完成
+已实现
 12. 实现 TreeMap
-已完成
+已实现
 13. 修正 Set 的接口，使其规范化
-已完成
+已实现
 14. 实现容器的 << 操作符，调用 c_str() 方法实现，从而实现容器嵌套，因为 print_info 方法的要求
 由于 23，无需进行
 15. 实现 BST 机器子类对于重复元素与否区别对待
-已完成
+已实现
 16. 修改 Set 对于重复元素的判断，在红黑树初始化时就指定不可重复
-已完成
+已实现
 17. 修正自定义迭代器的 -> 操作符
-已完成
+已实现
 18. 实现 HashSet、FlatHashSet，及对应的 Map 继承自 Set
-实现中
+已实现
 19. 为异常情况 assert，使用自己定义的 assert，并重构树操作接口，更好实现 OOP
 已实现
 20. "许多容器定义了print_info方法，故元素必须支持 << 运算符" 这条规则太僵硬，换一种方式解决这个问题，例如定义一个通用函数，来改造 print_info 的实现，使其不依赖于 << 的定义
@@ -52,11 +52,12 @@
 23. 添加基础基类 AbstractBaseEntity, AbstractBaseContainer, AbstractIterableContainer，AbstractSeqIterableContainer 并将容器类模板继承自其
 已实现
 24. 对内存分配失败等情况抛异常，直接 assert
-待 19 实现
+已拒绝
 25. 画出 UML 图等文档放在 doc 下
 26. 使用可变模板参数机制实现 Tuple
 已拒绝
-27. 给析构函数加 noexcept 关键字告诉编译器其不会抛出异常，别的不抛异常的函数做同样的处理
+27. 给析构函数加 关键字告诉编译器其不会抛出异常，别的不抛异常的函数做同样的处理
+已拒绝，并去掉乱加的
 28. 引入 Asan 进行编译
 已实现
 29. 将 nonexcept 参数都去掉，换成 ASSERT

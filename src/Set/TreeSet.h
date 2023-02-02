@@ -24,7 +24,7 @@ namespace CZ
     template <typename T> TreeSet<T> operator-(const TreeSet<T> &lhs, const TreeSet<T> &rhs);
 
     template <typename T>
-    class TreeSet : public AbstractSeqIterableContainer<T, TreeSetIterator<T>>
+    class TreeSet: public AbstractSeqIterableContainer<T, TreeSetIterator<T>>
     {
         friend TreeSet<T> operator+<T>(const TreeSet<T> &lhs, const TreeSet<T> &rhs);
         friend TreeSet<T> operator-<T>(const TreeSet<T> &lhs, const TreeSet<T> &rhs);
@@ -48,10 +48,10 @@ namespace CZ
         Iterator begin() const override;
         Iterator end() override;
         Iterator end() const override;
-        T& front();
-        const T& front() const;
-        T& back();
-        const T& back() const;
+        T &front();
+        const T &front() const;
+        T &back();
+        const T &back() const;
 
         // 插入，如果该值已经存在则插入失败，即什么都不做，返回 false
         bool insert(const T &value);
@@ -59,14 +59,18 @@ namespace CZ
         bool remove(const T &value);
         void clear() override;
 
-        TreeSet<T>& operator=(const TreeSet<T>& s);
-        TreeSet<T>& operator=(TreeSet<T>&& s);
+        TreeSet<T> &operator=(const TreeSet<T> &s);
+        TreeSet<T> &operator=(TreeSet<T> &&s);
 
         void print_info(const char *name = "") const;
 
         static TreeSet<T> intersection(const TreeSet<T> &s1, const TreeSet<T> &s2);
 
         const char *get_entity_name() const;
+
+    protected:
+        Iterator search(const T &data) const;
+
     private:
         RedBlackTree<T> _T;
 

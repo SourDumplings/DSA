@@ -108,19 +108,19 @@ namespace CZ
             return &((_pFlatHashSet->_table)[_bucketIndex]);
         }
 
-        const char *c_str() const noexcept override
+        const char *c_str() const override
         {
             std::ostringstream oss;
             oss << this->get_entity_name() << "(" << (_pFlatHashSet->_table)[_bucketIndex].key() << ")";
             return this->get_c_str_from_stream(oss);
         }
 
-        HashRank hash() const noexcept override
+        HashRank hash() const override
         {
             return (Hash<const FlatHashSet<T> *>()(_pFlatHashSet) + Hash<typename Vector<KVPair<T, bool>>::Rank>()(_bucketIndex)) % CZ_MAX_HASH_VALUE;
         }
 
-        const char *get_entity_name() const noexcept override
+        const char *get_entity_name() const override
         {
             return "FlatHashSetIterator";
         }

@@ -50,14 +50,37 @@ int main(int argc, char const *argv[])
         d.print_info((CZString("d after removing ") + to_string(removedKey)).c_str());
     }
 
-    HashMap<CZString, int> ds({KVPair<CZString, int>("CZ", 1), KVPair<CZString, int>("ZTT", 123), KVPair<CZString, int>("Hello", 0), KVPair<CZString, int>("WW", 123456)});
+    HashMap<CZString, int> ds({ KVPair<CZString, int>("CZ", 1), KVPair<CZString, int>("ZTT", 123), KVPair<CZString, int>("Hello", 0), KVPair<CZString, int>("WW", 123456) });
     ds.print_info("ds");
     ds.remove("CZW");
     ds.print_info("ds");
     ds["CZ"] = 888;
     ds.print_info("ds");
+    ds.at("CZ") = 999;
+    ds.print_info("ds");
     ds.remove("CZ");
     ds.print_info("ds");
+
+    // 测试复制和移动
+    HashMap<CZString, int> m3(ds);
+    m3.print_info("m3");
+    ds.print_info("ds");
+
+    HashMap<CZString, int> m4(std::move(ds));
+    ds.print_info("ds");
+    m4.print_info("m4");
+
+    HashMap<CZString, int> m5;
+    m5.print_info("m5");
+    m5 = m4;
+    m5.print_info("m5");
+    m4.print_info("m4");
+
+    HashMap<CZString, int> m6;
+    m6.print_info("m6");
+    m6 = std::move(m3);
+    m6.print_info("m6");
+    m3.print_info("m3");
     return 0;
 }
 

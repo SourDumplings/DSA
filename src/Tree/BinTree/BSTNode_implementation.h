@@ -29,7 +29,7 @@ namespace CZ
     inline const T& BSTNode<T>::data() const { return BinTreeNode<T>::data(); }
 
     template <typename T>
-    bool BSTNode<T>::insert_child_by_data(const T &data) noexcept
+    bool BSTNode<T>::insert_child_by_data(const T &data)
     { 
         BSTNode<T> *pNode = new BSTNode<T>(data);
         TreeNode<T> *pRes = insert_child(pNode);
@@ -42,7 +42,7 @@ namespace CZ
     }
 
     template <typename T>
-    TreeNode<T> *BSTNode<T>::insert_child(TreeNode<T> *pNode) noexcept
+    TreeNode<T> *BSTNode<T>::insert_child(TreeNode<T> *pNode)
     {
         if (pNode == nullptr)
         {
@@ -63,7 +63,7 @@ namespace CZ
     }
 
     template <typename T>
-    BSTNode<T>* BSTNode<T>::remove_child_by_data(const T &data) noexcept
+    BSTNode<T>* BSTNode<T>::remove_child_by_data(const T &data)
     {
         BSTNode<T> *ret = nullptr;
         if (this->left_child() && data == this->left_child()->data())

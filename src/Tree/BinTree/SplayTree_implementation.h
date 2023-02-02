@@ -36,7 +36,7 @@ namespace CZ
     SplayTree<T>::SplayTree(SplayTree<T> &&t) : BST<T>(std::move(t)) {}
 
     template <typename T>
-    SplayTreeNode<T> *SplayTree<T>::copy_from(TreeNode<T> *pRoot) noexcept
+    SplayTreeNode<T> *SplayTree<T>::copy_from(TreeNode<T> *pRoot)
     {
         if (pRoot == nullptr)
         {
@@ -72,7 +72,7 @@ namespace CZ
     }
 
     template <typename T>
-    SplayTreeNode<T> *SplayTree<T>::splay(SplayTreeNode<T> *v) noexcept
+    SplayTreeNode<T> *SplayTree<T>::splay(SplayTreeNode<T> *v)
     {
         if (v == nullptr)
         {
@@ -122,14 +122,14 @@ namespace CZ
     }
 
     template <typename T>
-    BSTNode<T> *SplayTree<T>::search_data(const T &data) const noexcept
+    BSTNode<T> *SplayTree<T>::search_data(const T &data) const
     {
         SplayTreeNode<T> *v = dynamic_cast<SplayTreeNode<T> *>(BST<T>::search_data(data));
         return const_cast<SplayTree<T> *>(this)->splay(v);
     }
 
     template <typename T>
-    BSTNode<T> *SplayTree<T>::insert(BSTNode<T> *node) noexcept
+    BSTNode<T> *SplayTree<T>::insert(BSTNode<T> *node)
     {
         SplayTreeNode<T> *ret = dynamic_cast<SplayTreeNode<T> *>(BST<T>::insert(node));
         if (ret == nullptr)
@@ -141,7 +141,7 @@ namespace CZ
     }
 
     template <typename T>
-    bool SplayTree<T>::insert_data(const T &data) noexcept
+    bool SplayTree<T>::insert_data(const T &data)
     {
         SplayTreeNode<T> *pNode = new SplayTreeNode<T>(data);
         if (this->insert(pNode) == nullptr && pNode)
@@ -154,7 +154,7 @@ namespace CZ
     }
 
     template <typename T>
-    BSTNode<T> *SplayTree<T>::remove(BSTNode<T> *pNode) noexcept
+    BSTNode<T> *SplayTree<T>::remove(BSTNode<T> *pNode)
     {
         if (pNode == nullptr)
         {
@@ -187,7 +187,7 @@ namespace CZ
     }
 
     template <typename T>
-    SplayTree<T> &SplayTree<T>::operator=(const SplayTree<T> &t) noexcept
+    SplayTree<T> &SplayTree<T>::operator=(const SplayTree<T> &t)
     {
         if (&t != this)
         {
@@ -199,7 +199,7 @@ namespace CZ
     }
 
     template <typename T>
-    SplayTree<T> &SplayTree<T>::operator=(SplayTree<T> &&t) noexcept
+    SplayTree<T> &SplayTree<T>::operator=(SplayTree<T> &&t)
     {
         if (&t != this)
         {

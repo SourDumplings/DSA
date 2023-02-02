@@ -123,7 +123,7 @@ namespace CZ
     }
 
     template <typename T>
-    TreeNode<T>* TreeNode<T>::insert_child(TreeNode<T> *pNode) noexcept
+    TreeNode<T>* TreeNode<T>::insert_child(TreeNode<T> *pNode)
     {
         _children.push_back(pNode);
         pNode->_father = this;

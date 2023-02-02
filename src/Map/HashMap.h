@@ -27,35 +27,31 @@ namespace CZ
         using Iterator = typename HashSet<KVPair<K, V>>::Iterator;
 
         // 构造函数，默认大小 32，使用取模作为哈希函数
-        HashMap(const std::initializer_list<KVPair<K, V>> &l) noexcept;
+        HashMap(const std::initializer_list<KVPair<K, V>> &l);
 
-        HashMap(const KVPair<K, V> *begin, const KVPair<K, V> *end) noexcept;
+        HashMap(const KVPair<K, V> *begin, const KVPair<K, V> *end);
 
         template <typename It>
-        HashMap(const It &begin, const It &end) noexcept;
+        HashMap(const It &begin, const It &end);
 
-        HashMap(const Rank tableSize_ = HashSet<KVPair<K, V>>::INITIAL_TABLE_SIZE) noexcept;
-
-        HashMap(const HashMap<K, V> &rHashmap) noexcept;
-
-        HashMap(HashMap<K, V> &&rHashmap) noexcept;
+        HashMap(const Rank tableSize_ = HashSet<KVPair<K, V>>::INITIAL_TABLE_SIZE);
 
         // 数据访问接口
-        bool contains(const K &key) const noexcept;
+        bool contains(const K &key) const;
 
         // 插入和删除
         // 成功删除了元素返回 true
-        bool remove(const K &key) noexcept;
+        bool remove(const K &key);
 
-        V& operator[](const K &key) noexcept;
+        V& operator[](const K &key);
 
         const V& at(const K &key) const;
         V& at(const K &key);
 
-        const char *get_entity_name() const noexcept override;
+        const char *get_entity_name() const override;
 
         // 列出所有存在的元素
-        void print_info(const char *name = "") const noexcept;
+        void print_info(const char *name = "") const;
     };
 } // CZ
 

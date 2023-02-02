@@ -57,7 +57,7 @@ namespace CZ
 
         TreeNode<T>* oldest_child() = delete;
 
-        TreeNode<T>* insert_child(TreeNode<T> *pNode) noexcept override;
+        TreeNode<T>* insert_child(TreeNode<T> *pNode) override;
 
         static bool equivalent(const BinTreeNode<T> &lhs, const BinTreeNode<T> &rhs);
 

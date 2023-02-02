@@ -31,7 +31,7 @@ namespace CZ
     }
 
     template <typename T>
-    RedBlackTreeNode<T> *RedBlackTree<T>::copy_from(TreeNode<T> *pRoot) noexcept
+    RedBlackTreeNode<T> *RedBlackTree<T>::copy_from(TreeNode<T> *pRoot)
     {
         if (pRoot == nullptr)
         {

@@ -50,15 +50,15 @@ namespace CZ
 
         virtual Rank height() const;
 
-        virtual TreeNode<T>* insert_child(TreeNode<T> *pNode) noexcept;
+        virtual TreeNode<T>* insert_child(TreeNode<T> *pNode);
 
         static bool equivalent(const TreeNode<T> &lhs, const TreeNode<T> &rhs);
 
         const char *c_str() const override;
         HashRank hash() const override;
 
-        TreeNode<T>& operator=(const TreeNode<T>& rhs) noexcept = delete;
-        TreeNode<T>& operator=(TreeNode<T>&& rhs) noexcept = delete;
+        TreeNode<T>& operator=(const TreeNode<T>& rhs) = delete;
+        TreeNode<T>& operator=(TreeNode<T>&& rhs) = delete;
 
         const char *get_entity_name() const override;
 

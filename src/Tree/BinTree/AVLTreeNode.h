@@ -46,7 +46,7 @@ namespace CZ
                            : dynamic_cast<AVLTreeNode<T> *>(this->left_child());
         }
 
-        bool insert_child_by_data(const T &data) noexcept override
+        bool insert_child_by_data(const T &data) override
         {
             AVLTreeNode<T> *pNode = new AVLTreeNode<T>(data);
             TreeNode<T> *pRes = this->insert_child(pNode);
@@ -65,7 +65,7 @@ namespace CZ
         }
 
         // 从本节点开始更新高度
-        void update_height() noexcept
+        void update_height()
         {
             _height = BSTNode<T>::height();
             this->update_height_here_above();
@@ -83,7 +83,7 @@ namespace CZ
         Rank _height; // 结点的高度，单个结点为 1
 
         // 向上更新结点高度
-        void update_height_here_above() noexcept
+        void update_height_here_above()
         {
             if (this->father() == nullptr)
             {

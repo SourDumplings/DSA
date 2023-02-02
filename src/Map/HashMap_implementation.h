@@ -20,68 +20,71 @@ HashMap 类模板的实现
 namespace CZ
 {
     template <typename K, typename V>
-    HashMap<K, V>::HashMap(const Rank tableSize_) noexcept: HashSet<KVPair<K, V>>(tableSize_)
+    HashMap<K, V>::HashMap(const Rank tableSize_): HashSet<KVPair<K, V>>(tableSize_)
     {
     }
 
     template <typename K, typename V>
-    HashMap<K, V>::HashMap(const std::initializer_list<KVPair<K, V>> &l) noexcept
+    HashMap<K, V>::HashMap(const std::initializer_list<KVPair<K, V>> &l)
         : HashSet<KVPair<K, V>>(l)
     {
     }
 
     template <typename K, typename V>
-    HashMap<K, V>::HashMap(const KVPair<K, V> *begin, const KVPair<K, V> *end) noexcept
+    HashMap<K, V>::HashMap(const KVPair<K, V> *begin, const KVPair<K, V> *end)
         : HashSet<KVPair<K, V>>(begin, end)
     {
     }
 
     template <typename K, typename V>
     template <typename It>
-    HashMap<K, V>::HashMap(const It &begin, const It &end) noexcept
+    HashMap<K, V>::HashMap(const It &begin, const It &end)
         : HashSet<KVPair<K, V>>(begin, end)
     {
     }
 
     template <typename K, typename V>
-    bool HashMap<K, V>::remove(const K &key) noexcept
+    bool HashMap<K, V>::remove(const K &key)
     {
         return HashSet<KVPair<K, V>>::remove(KVPair<K, V>(key, V()));
     }
 
     template <typename K, typename V>
-    bool HashMap<K, V>::contains(const K &key) const noexcept
+    bool HashMap<K, V>::contains(const K &key) const
     {
         return HashSet<KVPair<K, V>>::contains(KVPair<K, V>(key, V()));
     }
 
     template <typename K, typename V>
-    void HashMap<K, V>::print_info(const char *name) const noexcept
+    void HashMap<K, V>::print_info(const char *name) const
     {
         printf("for HashMap %s: \n", name);
         printf("size is %u, table size is %u\n", this->size(), this->table_size());
         printf("it contains:");
         Rank count = 0;
-        for (const KVPair<K, V> &p : *this)
+        if (0 < this->size())
         {
-            if (0 < count)
+            for (const KVPair<K, V> &p : *this)
             {
-                std::cout << ", ";
+                if (0 < count)
+                {
+                    std::cout << ", ";
+                }
+                std::cout << "[" << p.key() << "](" << p.value() << ")";
+                ++count;
             }
-            std::cout << "[" << p.key() << "](" << p.value() << ")";
-            ++count;
         }
-        printf("\n");
+        printf("\n\n");
     }
 
     template <typename K, typename V>
-    const char *HashMap<K, V>::get_entity_name() const noexcept
+    const char *HashMap<K, V>::get_entity_name() const
     {
         return "HashMap";
     }
 
     template <typename K, typename V>
-    V &HashMap<K, V>::operator[](const K &key) noexcept
+    V &HashMap<K, V>::operator[](const K &key)
     {
         KVPair<K, V> tempP(key, V());
         Iterator it = HashSet<KVPair<K, V>>::search(tempP);
@@ -90,7 +93,7 @@ namespace CZ
         {
             it = HashSet<KVPair<K, V>>::insert_return_it(tempP);
         }
-        return const_cast<V&>(((*(it.get())).data()).value());
+        return const_cast<V &>(((*(it.get())).data()).value());
     }
 
     template <typename K, typename V>
@@ -98,15 +101,17 @@ namespace CZ
     {
         if (contains(key))
         {
-            return operator[](key);
+            KVPair<K, V> tempP(key, V());
+            Iterator it = HashSet<KVPair<K, V>>::search(tempP);
+            return const_cast<V &>(((*(it.get())).data()).value());
         }
-        throw std::out_of_range(CZString("no this key in map") + key.c_str());
+        throw std::out_of_range((CZString("no this key in map") + CZString(key.c_str())).c_str());
     }
 
     template <typename K, typename V>
     inline V &HashMap<K, V>::at(const K &key)
     {
-        return const_cast<V&>(static_cast<const HashMap<K, V>&>(*this).at(key));
+        return const_cast<V &>(static_cast<const HashMap<K, V>&>(*this).at(key));
     }
 } // CZ
 

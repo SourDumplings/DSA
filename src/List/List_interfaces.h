@@ -124,7 +124,7 @@ namespace CZ
 
     template <typename T>
     template <typename Pred>
-    typename List<T>::Iterator List<T>::search_if(const Pred &predicate) const noexcept
+    typename List<T>::Iterator List<T>::search_if(const Pred &predicate) const
     {
         for (Iterator it = begin(); it != end(); ++it)
         {
@@ -137,7 +137,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline typename List<T>::Iterator List<T>::search(const T &value) const noexcept
+    inline typename List<T>::Iterator List<T>::search(const T &value) const
     {
         return search_if([&](const T &data) { return data == value; });
     }

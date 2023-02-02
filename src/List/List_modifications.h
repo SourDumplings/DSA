@@ -145,7 +145,7 @@ namespace CZ
 
     template <typename T>
     template <typename Pred>
-    typename List<T>::Rank List<T>::remove_if(const Pred &predicate) noexcept
+    typename List<T>::Rank List<T>::remove_if(const Pred &predicate)
     {
         Rank count = 0;
         for (auto it = begin(); it != end();)

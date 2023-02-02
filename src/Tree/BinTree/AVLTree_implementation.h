@@ -34,7 +34,7 @@ namespace CZ
     AVLTree<T>::AVLTree(AVLTree<T> &&t) : BST<T>(std::move(t)) {}
 
     template <typename T>
-    AVLTreeNode<T> *AVLTree<T>::copy_from(TreeNode<T> *pRoot) noexcept
+    AVLTreeNode<T> *AVLTree<T>::copy_from(TreeNode<T> *pRoot)
     {
         if (pRoot == nullptr)
         {
@@ -70,7 +70,7 @@ namespace CZ
     }
 
     template <typename T>
-    bool AVLTree<T>::insert_data(const T &data) noexcept
+    bool AVLTree<T>::insert_data(const T &data)
     {
         AVLTreeNode<T> *pNode = new AVLTreeNode<T>(data);
         if (this->insert(pNode) == nullptr && pNode)
@@ -83,7 +83,7 @@ namespace CZ
     }
 
     template <typename T>
-    BSTNode<T> *AVLTree<T>::insert(BSTNode<T> *pNode) noexcept
+    BSTNode<T> *AVLTree<T>::insert(BSTNode<T> *pNode)
     {
         if (!this->is_allow_repeat_key() && this->search_data(pNode->data()))
         {
@@ -114,7 +114,7 @@ namespace CZ
     }
 
     template <typename T>
-    TreeNode<T> *AVLTree<T>::secede(TreeNode<T> *pNode) noexcept
+    TreeNode<T> *AVLTree<T>::secede(TreeNode<T> *pNode)
     {
         if (pNode == nullptr)
         {
@@ -143,7 +143,7 @@ namespace CZ
     }
 
     template <typename T>
-    BSTNode<T> *AVLTree<T>::remove(BSTNode<T> *pNode) noexcept
+    BSTNode<T> *AVLTree<T>::remove(BSTNode<T> *pNode)
     {
         if (pNode == nullptr)
         {
@@ -184,7 +184,7 @@ namespace CZ
     }
 
     template <typename T>
-    BinTreeNode<T> *AVLTree<T>::rotate_at(BinTreeNode<T> *v) noexcept
+    BinTreeNode<T> *AVLTree<T>::rotate_at(BinTreeNode<T> *v)
     {
         AVLTreeNode<T> *ret = dynamic_cast<AVLTreeNode<T> *>(BinTree<T>::rotate_at(v));
         if (ret == nullptr)

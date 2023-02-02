@@ -18,7 +18,7 @@
 namespace CZ
 {
     template <typename C>
-    bool Dict_equal(const C &lhs, const C &rhs) noexcept
+    bool Dict_equal(const C &lhs, const C &rhs)
     {
         if (lhs.size() != rhs.size())
         {
@@ -36,13 +36,13 @@ namespace CZ
     }
 
     template <typename C>
-    inline bool Dict_unequal(const C &lhs, const C &rhs) noexcept
+    inline bool Dict_unequal(const C &lhs, const C &rhs)
     {
         return !(lhs == rhs);
     }
 
     template <typename C>
-    bool Dict_less(const C &lhs, const C &rhs) noexcept
+    bool Dict_less(const C &lhs, const C &rhs)
     {
         if (lhs.size() == 0)
         {
@@ -73,19 +73,19 @@ namespace CZ
     }
 
     template <typename C>
-    inline bool Dict_less_or_equal(const C &lhs, const C &rhs) noexcept
+    inline bool Dict_less_or_equal(const C &lhs, const C &rhs)
     {
         return lhs < rhs || lhs == rhs;
     }
 
     template <typename C>
-    inline bool Dict_greater(const C &lhs, const C &rhs) noexcept
+    inline bool Dict_greater(const C &lhs, const C &rhs)
     {
         return !(lhs <= rhs);
     }
 
     template <typename C>
-    inline bool Dict_greater_or_equal(const C &lhs, const C &rhs) noexcept
+    inline bool Dict_greater_or_equal(const C &lhs, const C &rhs)
     {
         return lhs > rhs || lhs == rhs;
     }

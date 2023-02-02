@@ -26,7 +26,7 @@ namespace CZ
 
 #define MAX_ERROR_MSG_LEN 100
 
-void Assert(bool assertion, const char *fileName, int lineNo, const char *failMsgFmt, ...) noexcept;
+void Assert(bool assertion, const char *fileName, int lineNo, const char *failMsgFmt, ...);
 }
 
 #endif

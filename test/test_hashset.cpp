@@ -51,5 +51,26 @@ int main(int argc, char const *argv[])
     }
     s2.print_info("s2");
 
+    // 测试复制和移动
+    HashSet<int> s3(s2);
+    s3.print_info("s3");
+    s2.print_info("s2");
+
+    HashSet<int> s4(std::move(s2));
+    s2.print_info("s2");
+    s4.print_info("s4");
+
+    HashSet<int> s5;
+    s5.print_info("s5");
+    s5 = s4;
+    s5.print_info("s5");
+    s4.print_info("s4");
+
+    HashSet<int> s6;
+    s6.print_info("s6");
+    s6 = std::move(s3);
+    s6.print_info("s6");
+    s3.print_info("s3");
+
     return 0;
 }

@@ -35,12 +35,12 @@ namespace CZ
 
         // 二叉搜索树结点对于插入和删除孩子结点的操作
         // 只能插入和删除这个结点的某个孩子
-        TreeNode<T> *insert_child(TreeNode<T> *pNode) noexcept override;
-        virtual bool insert_child_by_data(const T &data) noexcept;
+        TreeNode<T> *insert_child(TreeNode<T> *pNode) override;
+        virtual bool insert_child_by_data(const T &data);
 
         // 注意被删除后的孩子结点的生命周期将不再受父亲管理
         BSTNode *remove_child(BSTNode *pNode);
-        BSTNode *remove_child_by_data(const T &data) noexcept;
+        BSTNode *remove_child_by_data(const T &data);
 
         const char *get_entity_name() const override;
     };

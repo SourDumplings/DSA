@@ -27,7 +27,7 @@ namespace CZ
      T0 T1                 T1 T2                T1 T2                     T2 T3
          情况1              情况2                 情况3                  情况4 */
     template <typename T>
-    BinTreeNode<T> *BinTree<T>::rotate_at(BinTreeNode<T> *v) noexcept
+    BinTreeNode<T> *BinTree<T>::rotate_at(BinTreeNode<T> *v)
     {
         if (v == nullptr)
         {
@@ -36,11 +36,11 @@ namespace CZ
 
         BinTreeNode<T> *ret = nullptr;
         ASSERT_DEBUG(this->has_this_node(v), "this node is not in this BinTree");
-        BinTreeNode<T> *f = static_cast<BinTreeNode<T> *>(v->father());
+        BinTreeNode<T> *f = dynamic_cast<BinTreeNode<T> *>(v->father());
         ASSERT_DEBUG(f, "this node doesn't have father");
-        BinTreeNode<T> *g = static_cast<BinTreeNode<T> *>(f->father());
+        BinTreeNode<T> *g = dynamic_cast<BinTreeNode<T> *>(f->father());
         ASSERT_DEBUG(g, "this node doesn't have grandfather");
-        BinTreeNode<T> *z = static_cast<BinTreeNode<T> *>(g->father()); // 记录曾祖父结点
+        BinTreeNode<T> *z = dynamic_cast<BinTreeNode<T> *>(g->father()); // 记录曾祖父结点
 
         if (f == g->left_child())
         {
@@ -100,7 +100,7 @@ namespace CZ
     */
     template <typename T>
     BinTreeNode<T> *BinTree<T>::connect34(BinTreeNode<T> *a, BinTreeNode<T> *b, BinTreeNode<T> *c,
-                                          BinTreeNode<T> *T0, BinTreeNode<T> *T1, BinTreeNode<T> *T2, BinTreeNode<T> *T3) noexcept
+                                          BinTreeNode<T> *T0, BinTreeNode<T> *T1, BinTreeNode<T> *T2, BinTreeNode<T> *T3)
     {
         ASSERT_DEBUG(a && b && c, "a or b or c cannot be nullptr");
 

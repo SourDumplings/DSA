@@ -30,7 +30,7 @@ namespace CZ
             return "SplayTreeNode";
         }
 
-        bool insert_child_by_data(const T &data) noexcept override
+        bool insert_child_by_data(const T &data) override
         {
             SplayTreeNode<T> *pNode = new SplayTreeNode<T>(data);
             TreeNode<T> *pRes = this->insert_child(pNode);

@@ -21,7 +21,7 @@ FlatHashSet 类模板的实现
 namespace CZ
 {
     template <typename T>
-    FlatHashSet<T>::FlatHashSet(const Rank tableSize_, const FlatHashSetAccessories::ProbingMethod probingMethod_) noexcept
+    FlatHashSet<T>::FlatHashSet(const Rank tableSize_, const FlatHashSetAccessories::ProbingMethod probingMethod_)
         : _size(0), _firstNonEmptyBucketIndex(0), _lastNonEmptyBucketIndex(0), _probingMethod(probingMethod_)
     {
         _table.resize(tableSize_);
@@ -32,14 +32,14 @@ namespace CZ
     }
 
     template <typename T>
-    FlatHashSet<T>::FlatHashSet(const std::initializer_list<T> &l, const FlatHashSetAccessories::ProbingMethod probingMethod_) noexcept
+    FlatHashSet<T>::FlatHashSet(const std::initializer_list<T> &l, const FlatHashSetAccessories::ProbingMethod probingMethod_)
         : _size(0), _firstNonEmptyBucketIndex(0), _lastNonEmptyBucketIndex(0), _probingMethod(probingMethod_)
     {
         _construct_from(l.begin(), l.end());
     }
 
     template <typename T>
-    FlatHashSet<T>::FlatHashSet(const T *begin, const T *end, const FlatHashSetAccessories::ProbingMethod probingMethod_) noexcept
+    FlatHashSet<T>::FlatHashSet(const T *begin, const T *end, const FlatHashSetAccessories::ProbingMethod probingMethod_)
         : _size(0), _firstNonEmptyBucketIndex(0), _lastNonEmptyBucketIndex(0), _probingMethod(probingMethod_)
     {
         _construct_from(begin, end);
@@ -47,7 +47,7 @@ namespace CZ
 
     template <typename T>
     template <typename It>
-    FlatHashSet<T>::FlatHashSet(const It &begin, const It &end, const FlatHashSetAccessories::ProbingMethod probingMethod_) noexcept
+    FlatHashSet<T>::FlatHashSet(const It &begin, const It &end, const FlatHashSetAccessories::ProbingMethod probingMethod_)
         : _size(0), _firstNonEmptyBucketIndex(0), _lastNonEmptyBucketIndex(0), _probingMethod(probingMethod_)
     {
         _construct_from(begin, end);
@@ -71,20 +71,61 @@ namespace CZ
     }
 
     template <typename T>
-    inline typename FlatHashSet<T>::Rank FlatHashSet<T>::size() const noexcept
+    FlatHashSet<T>::FlatHashSet(FlatHashSet<T> &&rFlatHashSet)
+    {
+        _table = std::move(rFlatHashSet._table);
+        _size = rFlatHashSet._size;
+        _firstNonEmptyBucketIndex = rFlatHashSet._firstNonEmptyBucketIndex;
+        _lastNonEmptyBucketIndex = rFlatHashSet._lastNonEmptyBucketIndex;
+        _probingMethod = rFlatHashSet._probingMethod;
+        rFlatHashSet._size = rFlatHashSet._firstNonEmptyBucketIndex = rFlatHashSet._lastNonEmptyBucketIndex = 0;
+    }
+
+    template <typename T>
+    FlatHashSet<T> &FlatHashSet<T>::operator=(const FlatHashSet<T> &s)
+    {
+        if (&s != this)
+        {
+            _table = s._table;
+            _firstNonEmptyBucketIndex = s._firstNonEmptyBucketIndex;
+            _lastNonEmptyBucketIndex = s._lastNonEmptyBucketIndex;
+            _size = s._size;
+            _probingMethod = s._probingMethod;
+        }
+        return *this;
+    }
+
+    template <typename T>
+    FlatHashSet<T> &FlatHashSet<T>::operator=(FlatHashSet<T> &&s)
+    {
+        if (&s != this)
+        {
+            _table = std::move(s._table);
+            _firstNonEmptyBucketIndex = s._firstNonEmptyBucketIndex;
+            _lastNonEmptyBucketIndex = s._lastNonEmptyBucketIndex;
+            _size = s._size;
+            _probingMethod = s._probingMethod;
+            s._size = 0;
+            s._firstNonEmptyBucketIndex = s._lastNonEmptyBucketIndex = 0;
+        }
+        return *this;
+    }
+
+    template <typename T>
+    inline typename FlatHashSet<T>::Rank FlatHashSet<T>::size() const
     {
         return _size;
     }
 
     template <typename T>
-    inline typename FlatHashSet<T>::Rank FlatHashSet<T>::table_size() const noexcept
+    inline typename FlatHashSet<T>::Rank FlatHashSet<T>::table_size() const
     {
         return _table.size();
     }
 
     template <typename T>
     typename FlatHashSet<T>::Rank
-        FlatHashSet<T>::_linear_probing(const typename FlatHashSet<T>::Rank h) const noexcept
+        FlatHashSet<T>::_linear_probing(const typename FlatHashSet<T>::Rank h) const
     {
         typename FlatHashSet<T>::Rank ret = table_size();
         for (typename FlatHashSet<T>::Rank i = h, count = 0; count != table_size();
@@ -101,7 +142,7 @@ namespace CZ
 
     template <typename T>
     typename FlatHashSet<T>::Rank
-        FlatHashSet<T>::_square_probing(const typename FlatHashSet<T>::Rank h) const noexcept
+        FlatHashSet<T>::_square_probing(const typename FlatHashSet<T>::Rank h) const
     {
         typename FlatHashSet<T>::Rank ret = table_size();
         for (typename FlatHashSet<T>::Rank i = h, count = 0; count != table_size(); ++count)
@@ -119,7 +160,7 @@ namespace CZ
     template <typename T>
     typename FlatHashSet<T>::Rank
         FlatHashSet<T>::_linear_search(const typename FlatHashSet<T>::Rank h,
-            const T &v) const noexcept
+            const T &v) const
     {
         typename FlatHashSet<T>::Rank ret = table_size();
         for (typename FlatHashSet<T>::Rank i = h, count = 0; count != table_size(); ++count)
@@ -141,7 +182,7 @@ namespace CZ
     template <typename T>
     typename FlatHashSet<T>::Rank
         FlatHashSet<T>::_square_search(const typename FlatHashSet<T>::Rank h,
-            const T &v) const noexcept
+            const T &v) const
     {
         typename FlatHashSet<T>::Rank ret = table_size();
         for (typename FlatHashSet<T>::Rank i = h, count = 0; count != table_size(); ++count)
@@ -161,7 +202,7 @@ namespace CZ
     }
 
     template <typename T>
-    typename FlatHashSet<T>::Rank FlatHashSet<T>::_search(const T &data) const noexcept
+    typename FlatHashSet<T>::Rank FlatHashSet<T>::_search(const T &data) const
     {
         HashRank h = Hash<T>()(data);
         Rank index = static_cast<Rank>(h % table_size());
@@ -175,7 +216,7 @@ namespace CZ
     }
 
     template <typename T>
-    bool FlatHashSet<T>::insert(const T &data) noexcept
+    bool FlatHashSet<T>::insert(const T &data)
     {
         if (contains(data))
         {
@@ -206,7 +247,7 @@ namespace CZ
     }
 
     template <typename T>
-    typename FlatHashSet<T>::Rank FlatHashSet<T>::_do_insert(const T &data) noexcept
+    typename FlatHashSet<T>::Rank FlatHashSet<T>::_do_insert(const T &data)
     {
         HashRank h = Hash<T>()(data);
         Rank index = static_cast<Rank>(h % table_size());
@@ -225,7 +266,7 @@ namespace CZ
     }
 
     template <typename T>
-    bool FlatHashSet<T>::remove(const T &data) noexcept
+    bool FlatHashSet<T>::remove(const T &data)
     {
         typename List<T>::Rank pos = _search(data);
         if (pos == table_size())
@@ -242,25 +283,25 @@ namespace CZ
     }
 
     template <typename T>
-    inline bool FlatHashSet<T>::contains(const T &data) const noexcept
+    inline bool FlatHashSet<T>::contains(const T &data) const
     {
         return _search(data) < table_size();
     }
 
     template <typename T>
-    bool FlatHashSet<T>::_need_expand() const noexcept
+    bool FlatHashSet<T>::_need_expand() const
     {
         return table_size() < _size * 2;
     }
 
     template <typename T>
-    bool FlatHashSet<T>::_need_shrink() const noexcept
+    bool FlatHashSet<T>::_need_shrink() const
     {
         return _size * 2 < table_size();
     }
 
     template <typename T>
-    void FlatHashSet<T>::_expand() noexcept
+    void FlatHashSet<T>::_expand()
     {
         Rank oldTableSize = table_size();
         _table.resize(oldTableSize * 2);
@@ -272,7 +313,7 @@ namespace CZ
     }
 
     template <typename T>
-    void FlatHashSet<T>::_shrink() noexcept
+    void FlatHashSet<T>::_shrink()
     {
         _compress_forward();
         Rank oldTableSize = table_size();
@@ -281,7 +322,7 @@ namespace CZ
     }
 
     template <typename T>
-    void FlatHashSet<T>::_compress_forward() noexcept
+    void FlatHashSet<T>::_compress_forward()
     {
         for (typename Vector<KVPair<T, bool>>::Rank i = 0; i < table_size(); ++i)
         {
@@ -297,7 +338,7 @@ namespace CZ
     }
 
     template <typename T>
-    void FlatHashSet<T>::_rehash() noexcept
+    void FlatHashSet<T>::_rehash()
     {
         Rank tableSize = table_size();
         Vector<T> needRehashDataVec;
@@ -335,7 +376,7 @@ namespace CZ
     }
 
     template <typename T>
-    void FlatHashSet<T>::print_info(const char *name) const noexcept
+    void FlatHashSet<T>::print_info(const char *name) const
     {
         printf("for FlatHashSet %s: \n", name);
         printf("size is %u, table size is %u\n", _size, table_size());
@@ -358,37 +399,37 @@ namespace CZ
     }
 
     template <typename T>
-    const char *FlatHashSet<T>::get_entity_name() const noexcept
+    const char *FlatHashSet<T>::get_entity_name() const
     {
         return "FlatHashSet";
     }
 
     template <typename T>
-    typename FlatHashSet<T>::Iterator FlatHashSet<T>::begin() noexcept
+    typename FlatHashSet<T>::Iterator FlatHashSet<T>::begin()
     {
         return static_cast<const FlatHashSet<T>&>(*this).begin();
     }
 
     template <typename T>
-    typename FlatHashSet<T>::Iterator FlatHashSet<T>::end() noexcept
+    typename FlatHashSet<T>::Iterator FlatHashSet<T>::end()
     {
         return static_cast<const FlatHashSet<T>&>(*this).end();
     }
 
     template <typename T>
-    typename FlatHashSet<T>::Iterator FlatHashSet<T>::begin() const noexcept
+    typename FlatHashSet<T>::Iterator FlatHashSet<T>::begin() const
     {
         return Iterator(this, _firstNonEmptyBucketIndex);
     }
 
     template <typename T>
-    typename FlatHashSet<T>::Iterator FlatHashSet<T>::end() const noexcept
+    typename FlatHashSet<T>::Iterator FlatHashSet<T>::end() const
     {
         return Iterator(this, _lastNonEmptyBucketIndex);
     }
 
     template <typename T>
-    void FlatHashSet<T>::clear() noexcept
+    void FlatHashSet<T>::clear()
     {
         _size = 0;
         _table.clear();
@@ -402,7 +443,7 @@ namespace CZ
     }
 
     template <typename T>
-    typename FlatHashSet<T>::Rank FlatHashSet<T>::_get_suitable_table_size(Rank lowerLimit) const noexcept
+    typename FlatHashSet<T>::Rank FlatHashSet<T>::_get_suitable_table_size(Rank lowerLimit) const
     {
         Rank res = 2;
         for (; res < lowerLimit; res *= 2);

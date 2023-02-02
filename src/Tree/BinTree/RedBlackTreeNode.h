@@ -27,10 +27,10 @@ namespace CZ
     public:
         using Rank = typename BSTNode<T>::Rank;
 
-        // 构造函数，默认构造的结点为红结点，黑高度为1
+        // 构造函数，默认构造的结点为红结点，黑高度为 0
         RedBlackTreeNode(const T &data = T(), RedBlackTreeNode *father_ = nullptr) : BSTNode<T>(data, father_), _red(true), _blackHeight(0) {}
 
-        bool insert_child_by_data(const T &data) noexcept override
+        bool insert_child_by_data(const T &data) override
         {
             RedBlackTreeNode<T> *pNode = new RedBlackTreeNode<T>(data);
             TreeNode<T> *pRes = this->insert_child(pNode);
