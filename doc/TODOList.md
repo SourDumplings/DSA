@@ -56,15 +56,19 @@
 25. 画出 UML 图等文档放在 doc 下
 26. 使用可变模板参数机制实现 Tuple
 已拒绝
-27. 给析构函数加 关键字告诉编译器其不会抛出异常，别的不抛异常的函数做同样的处理
-已拒绝，并去掉乱加的
+27. 给析构函数加 noexcept 关键字告诉编译器其不会抛出异常，别的不抛异常的函数做同样的处理
+已拒绝，并去掉乱加的 noexcept
 28. 引入 Asan 进行编译
 已实现
 29. 将 nonexcept 参数都去掉，换成 ASSERT
-待 19 实现
+已实现
 30. （高优）调试 BinTree 遍历算法中先中序 NONRECURSION_TRAVERSAL4 再后序 NONRECURSION_TRAVERSAL1 的死循环情况，见 test_bintree.cpp
 待 19 实现
 31. 优化 AVLTreeNode 的 height() 方法，记录在结点上
 已实现
 32. 实现 win 版本的控制脚本
 33. 修正容器迭代器区间构造函数，参照 HashSet
+34. 优化哈希函数，采用异或和移位方式
+已实现
+35. 实现集合算法，交并等
+36. 排序算法前面增加 is_sorted 验证，可以提高效率

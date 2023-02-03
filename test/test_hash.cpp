@@ -8,6 +8,9 @@
 
 #include "Algorithms/Hash.h"
 #include <cstdio>
+#include "Vector/Vector.h"
+#include "List/List.h"
+#include "Set/HashSet.h"
 
 using namespace CZ;
 using namespace std;
@@ -26,6 +29,16 @@ int main(int argc, char const *argv[])
         , Hash<double>()(d1), Hash<double>()(d2), Hash<double>()(d3));
     char c1 = 'a', c2 = 'j';
     printf("Hash<char>()(c1) = %lu, Hash<char>()(c2) = %lu\n", Hash<char>()(c1), Hash<char>()(c2));
+
+    Vector<int> v1({ 5, 3, 10, 2, 4, 6, 2, 3, 7 }), v2({ 5, 3, 10, 3, 4, 6, 7 });
+    cout << v1.hash() << endl;
+    cout << v2.hash() << endl;
+    List<int> l1({ 5, 3, 10, 2, 4, 6, 2, 3, 7 }), l2({ 5, 3, 10, 3, 4, 6, 7 });
+    cout << l1.hash() << endl;
+    cout << l2.hash() << endl;
+    HashSet<int> s1({ 5, 3, 10, 2, 4, 6, 2, 3, 7 }), s2({ 5, 3, 10, 3, 4, 6, 7 });
+    cout << s1.hash() << endl;
+    cout << s2.hash() << endl;
     return 0;
 }
 

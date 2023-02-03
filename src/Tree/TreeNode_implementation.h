@@ -203,7 +203,7 @@ namespace CZ
     {
         // 树结点的哈希是综合了该结点的数据、孩子多少、结点高度和所有子结点的哈希值
         // 即树结点的哈希值由结点的数据和结构两方面决定
-        HashRank res = Hash<CZString>()(c_str() + _children.size());
+        HashRank res = Hash<CZString>()(get_entity_name()) + _children.size();
         for (TreeNode<T> * const &pc : _children)
         {
             if (pc)

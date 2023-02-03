@@ -58,12 +58,12 @@ namespace CZ
         const char *containerName = this->get_entity_name();
         for (const char *p = containerName; p && *p != '\0'; ++p)
         {
-            hashValue = (hashValue + Hash<char>()(*p)) % CZ_MAX_HASH_VALUE;
+            hashValue = hashValue ^ Hash<char>()(*p);
         }
         It e = end();
         for (It it = begin(); it != e; ++it)
         {
-            hashValue = (hashValue + Hash<T>()(*it)) % CZ_MAX_HASH_VALUE;
+            hashValue = hashValue ^ Hash<T>()(*it);
         }
         return hashValue;
     }

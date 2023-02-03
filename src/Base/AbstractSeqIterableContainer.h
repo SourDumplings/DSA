@@ -24,16 +24,15 @@ namespace CZ
         HashRank hash() const override
         {
             HashRank hashValue = 0;
-            Rank i = 1;
             const char *containerName = this->get_entity_name();
             for (const char *p = containerName; p && *p != '\0'; ++p)
             {
-                hashValue = (hashValue + Hash<char>()(*p)) % CZ_MAX_HASH_VALUE;
+                hashValue = ((hashValue ^ Hash<char>()(*p)) << 8) | ((hashValue >> 56) & 0xF);
             }
+
             for (It it = this->begin(); it != this->end(); ++it)
             {
-                hashValue = (hashValue + Hash<T>()(*it) * i) % CZ_MAX_HASH_VALUE;
-                ++i;
+                hashValue = ((hashValue ^ Hash<T>()(*it)) << 8) | ((hashValue >> 56) & 0xF);
             }
             return hashValue;
         }

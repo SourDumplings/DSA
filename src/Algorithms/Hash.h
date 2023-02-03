@@ -31,6 +31,104 @@ namespace CZ
 
     // 针对一些特定类型的哈希算法
     template <>
+    class Hash<const bool>
+    {
+    public:
+        HashRank operator()(const bool &value) const;
+    };
+
+    template <>
+    class Hash<const nullptr_t>
+    {
+    public:
+        HashRank operator()(const nullptr_t &value) const;
+    };
+
+    template <>
+    class Hash<const char>
+    {
+    public:
+        HashRank operator()(const char &value) const;
+    };
+
+    template <>
+    class Hash<const int8_t>
+    {
+    public:
+        HashRank operator()(const int8_t &value) const;
+    };
+
+    template <>
+    class Hash<const uint8_t>
+    {
+    public:
+        HashRank operator()(const uint8_t &value) const;
+    };
+
+    template <>
+    class Hash<const int16_t>
+    {
+    public:
+        HashRank operator()(const int16_t &value) const;
+    };
+
+    template <>
+    class Hash<const uint16_t>
+    {
+    public:
+        HashRank operator()(const uint16_t &value) const;
+    };
+
+    template <>
+    class Hash<const int32_t>
+    {
+    public:
+        HashRank operator()(const int32_t &value) const;
+    };
+
+    template <>
+    class Hash<const uint32_t>
+    {
+    public:
+        HashRank operator()(const uint32_t &value) const;
+    };
+
+    template <>
+    class Hash<const int64_t>
+    {
+    public:
+        HashRank operator()(const int64_t &value) const;
+    };
+
+    template <>
+    class Hash<const uint64_t>
+    {
+    public:
+        HashRank operator()(const uint64_t &value) const;
+    };
+
+    template <>
+    class Hash<const float>
+    {
+    public:
+        HashRank operator()(const float &value) const;
+    };
+
+    template <>
+    class Hash<const double>
+    {
+    public:
+        HashRank operator()(const double &value) const;
+    };
+
+    template <>
+    class Hash<const std::string>
+    {
+    public:
+        HashRank operator()(const std::string &value) const;
+    };
+
+    template <>
     class Hash<bool>
     {
     public:
