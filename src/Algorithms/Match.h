@@ -33,7 +33,7 @@ namespace CZ
     namespace MatchAccessories
     {
         template <typename It>
-        MatchRank doMatch(const It &TBegin, const It &TEnd, const It &PBegin, const It &PEnd,
+        MatchRank do_match(const It &TBegin, const It &TEnd, const It &PBegin, const It &PEnd,
                           const MatchMethod &method = KMP, const int32_t &version = 0)
         {
             ASSERT_DEBUG(TBegin < TEnd && PBegin < PEnd, "invalid iterator range");
@@ -61,7 +61,7 @@ namespace CZ
                                                  const It &PEnd, random_iterator_tag, const MatchMethod &method = KMP,
                                                  const int32_t &version = 0)
         {
-            return doMatch(TBegin, TEnd, PBegin, PEnd, method, version);
+            return do_match(TBegin, TEnd, PBegin, PEnd, method, version);
         }
 
         template <typename It>
@@ -69,7 +69,7 @@ namespace CZ
                                                  const It &PEnd, seq_iterator_tag, const MatchMethod &method = KMP,
                                                  const int32_t &version = 0)
         {
-            ASSERT_DEBUG(false, "iterator is seq_iterator, should be random_iterator");
+            ASSERT_RELEASE(false, "iterator is seq_iterator, should be random_iterator");
             return 0;
         }
 
@@ -78,7 +78,7 @@ namespace CZ
                                                  const It &PEnd, bi_iterator_tag, const MatchMethod &method = KMP,
                                                  const int32_t &version = 0)
         {
-            ASSERT_DEBUG(false, "iterator is bi_iterator, should be random_iterator");
+            ASSERT_RELEASE(false, "iterator is bi_iterator, should be random_iterator");
             return 0;
         }
     }

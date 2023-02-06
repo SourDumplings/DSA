@@ -32,7 +32,7 @@ namespace CZ
     namespace BinTreeReconstructAccessories
     {
         template <typename It>
-        auto doReconstruct_from_pre_in_traversal(It preB,
+        auto do_reconstruct_from_pre_in_traversal(It preB,
                                                  It preE, It inB, It inE)
             -> BinTreeNode<typename std::remove_reference<decltype(*inB)>::type> *
         {
@@ -57,19 +57,19 @@ namespace CZ
                     break;
                 }
             }
-            node *lc = doReconstruct_from_pre_in_traversal(preB + 1,
+            node *lc = do_reconstruct_from_pre_in_traversal(preB + 1,
                                                            preB + (leftInEnd - inB) + 1, inB, leftInEnd);
             root->insert_as_left_child(lc);
 
             node *rc =
-                doReconstruct_from_pre_in_traversal(preB + (leftInEnd - inB) + 1, preE,
+                do_reconstruct_from_pre_in_traversal(preB + (leftInEnd - inB) + 1, preE,
                                                     leftInEnd + 1, inE);
             root->insert_as_right_child(rc);
             return root;
         }
 
         template <typename It>
-        auto doReconstruct_from_post_in_traversal(It postB,
+        auto do_reconstruct_from_post_in_traversal(It postB,
                                                   It postE, It inB, It inE)
             -> BinTreeNode<typename std::remove_reference<decltype(*inB)>::type> *
         {
@@ -94,34 +94,34 @@ namespace CZ
                     break;
                 }
             }
-            node *lc = doReconstruct_from_post_in_traversal(postB,
+            node *lc = do_reconstruct_from_post_in_traversal(postB,
                                                             postB + (leftInEnd - inB), inB, leftInEnd);
             root->insert_as_left_child(lc);
 
-            node *rc = doReconstruct_from_post_in_traversal(postB + (leftInEnd - inB),
+            node *rc = do_reconstruct_from_post_in_traversal(postB + (leftInEnd - inB),
                                                             postE - 1, leftInEnd + 1, inE);
             root->insert_as_right_child(rc);
             return root;
         }
 
         template <typename It>
-        inline auto doReconstruct_from_in_pre_traversal(It inB,
+        inline auto do_reconstruct_from_in_pre_traversal(It inB,
                                                         It inE, It preB, It preE)
             -> BinTreeNode<typename std::remove_reference<decltype(*inB)>::type> *
         {
-            return doReconstruct_from_pre_in_traversal(preB, preE, inB, inE);
+            return do_reconstruct_from_pre_in_traversal(preB, preE, inB, inE);
         }
 
         template <typename It>
-        inline auto doReconstruct_from_in_post_traversal(It inB,
+        inline auto do_reconstruct_from_in_post_traversal(It inB,
                                                          It inE, It postB, It postE)
             -> BinTreeNode<typename std::remove_reference<decltype(*inB)>::type> *
         {
-            return doReconstruct_from_post_in_traversal(postB, postE, inB, inE);
+            return do_reconstruct_from_post_in_traversal(postB, postE, inB, inE);
         }
 
         template <typename T, typename It>
-        BinTreeNode<T> *test_Iterator_for_reconstruct(It begin1, It end1,
+        BinTreeNode<T> *test_iterator_for_reconstruct(It begin1, It end1,
                                                    It begin2, It end2,
                                                    random_iterator_tag, const ConstructBinTreeFrom &seqV)
         {
@@ -131,22 +131,22 @@ namespace CZ
             {
             case PRE_IN:
             {
-                return BinTreeReconstructAccessories::doReconstruct_from_pre_in_traversal(begin1,
+                return BinTreeReconstructAccessories::do_reconstruct_from_pre_in_traversal(begin1,
                                                                                           end1, begin2, end2);
             }
             case POST_IN:
             {
-                return BinTreeReconstructAccessories::doReconstruct_from_post_in_traversal(begin1,
+                return BinTreeReconstructAccessories::do_reconstruct_from_post_in_traversal(begin1,
                                                                                            end1, begin2, end2);
             }
             case IN_PRE:
             {
-                return BinTreeReconstructAccessories::doReconstruct_from_in_pre_traversal(begin1,
+                return BinTreeReconstructAccessories::do_reconstruct_from_in_pre_traversal(begin1,
                                                                                           end1, begin2, end2);
             }
             case IN_POST:
             {
-                return BinTreeReconstructAccessories::doReconstruct_from_in_post_traversal(begin1,
+                return BinTreeReconstructAccessories::do_reconstruct_from_in_post_traversal(begin1,
                                                                                            end1, begin2, end2);
             }
             }
@@ -154,20 +154,20 @@ namespace CZ
         }
 
         template <typename T, typename It>
-        BinTreeNode<T> *test_Iterator_for_reconstruct(It begin1, It end1,
+        BinTreeNode<T> *test_iterator_for_reconstruct(It begin1, It end1,
                                                    It begin2, It end2,
                                                    seq_iterator_tag, const ConstructBinTreeFrom &seqV)
         {
-            ASSERT_DEBUG(false, "Error: Iterator is seq_Iterator, should be random_Iterator");
+            ASSERT_RELEASE(false, "Error: Iterator is seq_Iterator, should be random_Iterator");
             return nullptr;
         }
 
         template <typename T, typename It>
-        BinTreeNode<T> *test_Iterator_for_reconstruct(It begin1, It end1,
+        BinTreeNode<T> *test_iterator_for_reconstruct(It begin1, It end1,
                                                    It begin2, It end2,
                                                    bi_iterator_tag, const ConstructBinTreeFrom &seqV)
         {
-            ASSERT_DEBUG(false, "Error: Iterator is bi_Iterator, should be random_Iterator");
+            ASSERT_RELEASE(false, "Error: Iterator is bi_Iterator, should be random_Iterator");
             return nullptr;
         }
     }
@@ -177,7 +177,7 @@ namespace CZ
     BinTree<T> BinTree<T>::reconstruct_from_pre_in_traversal(It preB, It preE,
                                                              It inB, It inE)
     {
-        BinTree<T> t(BinTreeReconstructAccessories::test_Iterator_for_reconstruct<T, It>(preB, preE, inB, inE,
+        BinTree<T> t(BinTreeReconstructAccessories::test_iterator_for_reconstruct<T, It>(preB, preE, inB, inE,
                                                                                   typename Iterator_traits<It>::iterator_category(), PRE_IN));
         t._size = inE - inB;
         return t;
@@ -188,7 +188,7 @@ namespace CZ
     BinTree<T> BinTree<T>::reconstruct_from_post_in_traversal(It postB, It postE,
                                                               It inB, It inE)
     {
-        BinTree<T> t(BinTreeReconstructAccessories::test_Iterator_for_reconstruct<T, It>(postB, postE, inB, inE,
+        BinTree<T> t(BinTreeReconstructAccessories::test_iterator_for_reconstruct<T, It>(postB, postE, inB, inE,
                                                                                   typename Iterator_traits<It>::iterator_category(), POST_IN));
         t._size = inE - inB;
         return t;
@@ -199,7 +199,7 @@ namespace CZ
     BinTree<T> BinTree<T>::reconstruct_from_in_pre_traversal(It inB, It inE,
                                                              It preB, It preE)
     {
-        BinTree<T> t(BinTreeReconstructAccessories::test_Iterator_for_reconstruct<T, It>(inB, inE, preB, preE,
+        BinTree<T> t(BinTreeReconstructAccessories::test_iterator_for_reconstruct<T, It>(inB, inE, preB, preE,
                                                                                   typename Iterator_traits<It>::iterator_category(), IN_PRE));
         t._size = inE - inB;
         return t;
@@ -210,7 +210,7 @@ namespace CZ
     BinTree<T> BinTree<T>::reconstruct_from_in_post_traversal(It inB, It inE,
                                                               It postB, It postE)
     {
-        BinTree<T> t(BinTreeReconstructAccessories::test_Iterator_for_reconstruct<T, It>(inB, inE, postB, postE,
+        BinTree<T> t(BinTreeReconstructAccessories::test_iterator_for_reconstruct<T, It>(inB, inE, postB, postE,
                                                                                   typename Iterator_traits<It>::iterator_category(), IN_POST));
         t._size = inE - inB;
         return t;

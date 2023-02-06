@@ -22,7 +22,7 @@ namespace CZ
     namespace ReverseAccessories
     {
         template <typename It>
-        void do_Reverse(It begin, It end)
+        void do_reverse(It begin, It end)
         {
             long long n = end - begin;
             ASSERT_DEBUG(0 <= n, "Error from Reverse: invalid iterator range");
@@ -36,21 +36,21 @@ namespace CZ
         template <typename It>
         void test_iterator_for_reverse(const It &begin, const It &end, random_iterator_tag)
         {
-            do_Reverse(begin, end);
+            do_reverse(begin, end);
             return;
         }
 
         template <typename It>
         void test_iterator_for_reverse(const It &begin, const It &end, seq_iterator_tag)
         {
-            ASSERT_DEBUG(false, "iterator is seq_iterator, should be random_iterator");
+            ASSERT_RELEASE(false, "iterator is seq_iterator, should be random_iterator");
             return;
         }
 
         template <typename It>
         void test_iterator_for_reverse(const It &begin, const It &end, bi_iterator_tag)
         {
-            ASSERT_DEBUG(false, "iterator is bi_iterator, should be random_iterator");
+            ASSERT_RELEASE(false, "iterator is bi_iterator, should be random_iterator");
             return;
         }
 

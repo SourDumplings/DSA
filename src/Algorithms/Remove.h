@@ -23,7 +23,7 @@ namespace CZ
     namespace RemoveAccessories
     {
         template <typename It, typename F>
-        It doRemove(const It begin, const It end, const F &is_remove)
+        It do_remove(const It begin, const It end, const F &is_remove)
         {
             using Rank = uint32_t;
             It it = begin;
@@ -43,14 +43,14 @@ namespace CZ
         It test_iterator_for_remove(const It &begin, const It &end,
                                     random_iterator_tag, const F &is_remove)
         {
-            return doRemove(begin, end, is_remove);
+            return do_remove(begin, end, is_remove);
         }
 
         template <typename It, typename F>
         It test_iterator_for_remove(const It &begin, const It &end,
                                     seq_iterator_tag, const F &is_remove)
         {
-            ASSERT_DEBUG(false, "iterator is seq_iterator, should be random_iterator");
+            ASSERT_RELEASE(false, "iterator is seq_iterator, should be random_iterator");
             return nullptr;
         }
 
@@ -58,7 +58,7 @@ namespace CZ
         It test_iterator_for_remove(const It &begin, const It &end,
                                     bi_iterator_tag, const F &is_remove)
         {
-            ASSERT_DEBUG(false, "iterator is bi_iterator, should be random_iterator");
+            ASSERT_RELEASE(false, "iterator is bi_iterator, should be random_iterator");
             return nullptr;
         }
     }

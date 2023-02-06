@@ -120,49 +120,6 @@ int main(int argc, char const *argv[])
     //
     //
 
-    // 测试排序算法
-    // Vector<int> v1{1, 8, 5, 4, 3, 0};
-    // Vector<string> vs1{"jsds", "ass", "abab", "aaaa", "ab", "bsds", "ghsl"}, vs2(vs1);
-    // v1.print_info("v1");
-    // Sort(v1.begin(), v1.end(), MERGE_SORT);
-    // Sort(v1.begin(), v1.end());
-    // Sort(v1.begin(), v1.end(), QUICK_SORT, 1);
-    // Sort(v1.begin(), v1.end(), HEAP_SORT);
-    // Sort(v1.begin(), v1.end(), SELECT_SORT);
-    // Sort(v1.begin(), v1.end(), INSERTION_SORT);
-    // Sort(v1.begin(), v1.end(), SHELL_SORT);
-    // Sort(v1.begin(), v1.end(), SHELL_SORT, 1);
-    // Sort(v1.begin(), v1.end(), SHELL_SORT, 2);
-    // Sort(v1.begin(), v1.end(), SHELL_SORT, 3);
-    // v1.print_info("v1");
-    // vs1.print_info("vs1");
-    // Sort(vs1.begin(), vs1.end(), QUICK_SORT);
-    // Sort(vs1.begin(), vs1.end(), QUICK_SORT, 1);
-    // Sort(vs1.begin(), vs1.end(), HEAP_SORT, 0);
-    // Stable_sort(vs1.begin(), vs1.end(), BUBBLE_SORT, 1);
-    // Stable_sort(vs1.begin(), vs1.end(), SELECT_SORT, 1);
-    // Stable_sort(vs1.begin(), vs1.end(), MERGE_SORT);
-    // Stable_sort(vs1.begin(), vs1.end(), INSERTION_SORT);
-    // Sort(vs1.begin(), vs1.end(), SHELL_SORT);
-    // vs1.print_info("vs1");
-    // Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-    // { return s1.length() < s2.length(); }, SELECT_SORT, 0);
-    // Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-    // { return s1.length() < s2.length(); }, INSERTION_SORT, 0);
-    // Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-    //     { return s1.length() < s2.length(); }, MERGE_SORT, 0);
-    // Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-    // { return s1.length() < s2.length(); }, BUBBLE_SORT, 0);
-    // Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-    // { return s1.length() < s2.length(); });
-    // Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-    // { return s1.length() < s2.length(); }, QUICK_SORT, 1);
-    // Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-    //     { return s1.length() < s2.length(); }, HEAP_SORT);
-    // Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-    // { return s1.length() < s2.length(); }, SHELL_SORT, 2);
-    // vs2.print_info("vs2");
-    //
     // 测试最大公约数算法
     // int a = 156, b = 81, c = 54;
     // printf("gcd of %d and %d is %lld\n", a, b, Gcd(a, b));

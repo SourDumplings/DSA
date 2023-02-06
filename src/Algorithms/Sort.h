@@ -26,20 +26,20 @@
 
 namespace CZ
 {
-    // 对于不稳定排序
-    enum UnStableSortMethod
-    {
-        SELECT_SORT = 0,
-        QUICK_SORT = 1,
-        HEAP_SORT = 2,
-        SHELL_SORT = 3
-    };
-
     namespace SortAccessories
     {
-        // 对于指定使用稳定排序方法
+        // 对于不稳定排序
+        enum UnStableSortMethod
+        {
+            SELECT_SORT = 3,
+            QUICK_SORT = 4,
+            HEAP_SORT = 5,
+            SHELL_SORT = 6
+        };
+
+            // 对于指定使用稳定排序方法
         template <typename It, typename Cmp>
-        void doSort(It begin, It end, const Cmp &cmp, const UnStableSortMethod &method = QUICK_SORT,
+        void do_sort(It begin, It end, const Cmp &cmp, const UnStableSortMethod &method = QUICK_SORT,
                     const uint32_t version = 0)
         {
             Rank_sort N = end - begin;
@@ -73,7 +73,7 @@ namespace CZ
                                     random_iterator_tag,
                                     const Cmp &cmp, const UnStableSortMethod &method = QUICK_SORT, const uint32_t version = 0)
         {
-            doSort(begin, end, cmp, method, version);
+            do_sort(begin, end, cmp, method, version);
 
         }
 
@@ -82,7 +82,7 @@ namespace CZ
                                     seq_iterator_tag,
                                     const Cmp &cmp, const UnStableSortMethod &method = QUICK_SORT, const uint32_t version = 0)
         {
-            ASSERT_DEBUG(false, "iterator is seq_iterator, should be random_iterator");
+            ASSERT_RELEASE(false, "iterator is seq_iterator, should be random_iterator");
         }
 
         template <typename It, typename Cmp>
@@ -90,12 +90,12 @@ namespace CZ
                                     bi_iterator_tag,
                                     const Cmp &cmp, const UnStableSortMethod &method = QUICK_SORT, const uint32_t version = 0)
         {
-            ASSERT_DEBUG(false, "iterator is bi_iterator, should be random_iterator");
+            ASSERT_RELEASE(false, "iterator is bi_iterator, should be random_iterator");
         }
     }
 
     template <typename It, typename Cmp>
-    inline void Sort(It begin, It end, const Cmp &cmp, const UnStableSortMethod &method = QUICK_SORT,
+    inline void Sort(It begin, It end, const Cmp &cmp, const SortAccessories::UnStableSortMethod &method = SortAccessories::QUICK_SORT,
                      const uint32_t version = 0)
     {
         SortAccessories::test_iterator_for_sort(begin, end,
@@ -104,7 +104,7 @@ namespace CZ
     }
 
     template <typename It>
-    inline void Sort(It begin, It end, const UnStableSortMethod &method = QUICK_SORT,
+    inline void Sort(It begin, It end, const SortAccessories::UnStableSortMethod &method = SortAccessories::QUICK_SORT,
               const uint32_t version = 0)
     {
         Sort(begin, end, std::less<decltype(*begin)>(), method, version);
@@ -112,7 +112,7 @@ namespace CZ
 
     // 稳定排序情况：默认比较函数
     template <typename It>
-    inline void Sort(It begin, It end, const StableSortMethod &method,
+    inline void Sort(It begin, It end, const SortAccessories::StableSortMethod &method,
               const uint32_t version = 0)
     {
         Stable_sort(begin, end, std::less<decltype(*begin)>(), method, version);
@@ -120,20 +120,20 @@ namespace CZ
 
     // 稳定排序情况：指定比较函数
     template <typename It, typename Cmp>
-    inline void Sort(It begin, It end, const Cmp &cmp, const StableSortMethod &method,
+    inline void Sort(It begin, It end, const Cmp &cmp, const SortAccessories::StableSortMethod &method,
               const uint32_t version = 0)
     {
         Stable_sort(begin, end, cmp, method, version);
     }
 
     template <typename It>
-    inline bool isSorted(It begin, It end)
+    inline bool Is_sorted(It begin, It end)
     {
-        return isSorted(begin, end, std::less<decltype(*begin)>());
+        return Is_sorted(begin, end, std::less<decltype(*begin)>());
     }
 
     template <typename It, typename Cmp>
-    bool isSorted(It begin, It end, const Cmp &cmp)
+    bool Is_sorted(It begin, It end, const Cmp &cmp)
     {
         for (It it = begin; it != end; ++it)
         {

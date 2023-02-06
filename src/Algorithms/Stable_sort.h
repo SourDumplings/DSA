@@ -23,19 +23,19 @@
 
 namespace CZ
 {
-    enum StableSortMethod
-    {
-        BUBBLE_SORT = 0,
-        INSERTION_SORT = 1,
-        MERGE_SORT = 2
-    };
-
     using Rank_sort = int64_t;
 
     namespace SortAccessories
     {
+        enum StableSortMethod
+        {
+            BUBBLE_SORT = 0,
+            INSERTION_SORT = 1,
+            MERGE_SORT = 2
+        };
+
         template <typename It, typename Cmp>
-        void doStable_sort(It begin, It end, const Cmp &cmp,
+        void do_stable_sort(It begin, It end, const Cmp &cmp,
                            const StableSortMethod &method = MERGE_SORT, const uint32_t version = 0)
         {
             Rank_sort N = end - begin;
@@ -65,7 +65,7 @@ namespace CZ
                                            random_iterator_tag,
                                            const Cmp &cmp, const StableSortMethod &method = MERGE_SORT, const uint32_t version = 0)
         {
-            doStable_sort(begin, end, cmp, method, version);
+            do_stable_sort(begin, end, cmp, method, version);
         }
 
         template <typename It, typename Cmp>
@@ -73,7 +73,7 @@ namespace CZ
                                            seq_iterator_tag,
                                            const Cmp &cmp, const StableSortMethod &method = MERGE_SORT, const uint32_t version = 0)
         {
-            ASSERT_DEBUG(false, "iterator is seq_iterator, should be random_iterator");
+            ASSERT_RELEASE(false, "iterator is seq_iterator, should be random_iterator");
         }
 
         template <typename It, typename Cmp>
@@ -81,13 +81,13 @@ namespace CZ
                                            bi_iterator_tag,
                                            const Cmp &cmp, const StableSortMethod &method = MERGE_SORT, const uint32_t version = 0)
         {
-            ASSERT_DEBUG(false, "iterator is bi_iterator, should be random_iterator");
+            ASSERT_RELEASE(false, "iterator is bi_iterator, should be random_iterator");
         }
     }
 
     template <typename It, typename Cmp>
     inline void Stable_sort(It begin, It end, const Cmp &cmp,
-                            const StableSortMethod &method = MERGE_SORT, const uint32_t version = 0)
+                            const SortAccessories::StableSortMethod &method = SortAccessories::MERGE_SORT, const uint32_t version = 0)
     {
         SortAccessories::test_iterator_for_stable_sort(begin, end,
                                                        typename Iterator_traits<It>::iterator_category(),
@@ -96,7 +96,7 @@ namespace CZ
 
     template <typename It>
     inline void Stable_sort(It begin, It end,
-                     const StableSortMethod &method = MERGE_SORT, const uint32_t version = 0)
+                     const SortAccessories::StableSortMethod &method = SortAccessories::MERGE_SORT, const uint32_t version = 0)
     {
         Stable_sort(begin, end, std::less<decltype(*begin)>(), method, version);
     }

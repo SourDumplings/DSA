@@ -101,6 +101,11 @@ namespace CZ::SortAccessories
             return;
         }
 
+        if (Is_sorted(begin, begin + e - b, cmp))
+        {
+            return;
+        }
+
         Rank_quick_sort mi = partition_1(begin, b, e, cmp); // 构造轴点并将元素划分
         quick_sort_1(begin, b, mi, cmp);
         quick_sort_1(begin, mi + 1, e, cmp);
@@ -113,6 +118,11 @@ namespace CZ::SortAccessories
         if (e - b < 2)
         {
             // 单元素区间自然有序
+            return;
+        }
+
+        if (Is_sorted(begin, begin + e - b, cmp))
+        {
             return;
         }
 
