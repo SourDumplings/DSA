@@ -125,31 +125,6 @@ namespace CZ
     {
         Stable_sort(begin, end, cmp, method, version);
     }
-
-    template <typename It>
-    inline bool Is_sorted(It begin, It end)
-    {
-        return Is_sorted(begin, end, std::less<decltype(*begin)>());
-    }
-
-    template <typename It, typename Cmp>
-    bool Is_sorted(It begin, It end, const Cmp &cmp)
-    {
-        for (It it = begin; it != end; ++it)
-        {
-            It temp = it;
-            ++temp;
-            if (temp == end)
-            {
-                break;
-            }
-            if (cmp(*temp, *it))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
 } // CZ
 
 #endif // SORT_H

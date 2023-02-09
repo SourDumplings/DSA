@@ -27,28 +27,24 @@ namespace CZ
             last->_prev->_next = last;
             last->_next->_prev = last;
         }
-        return;
     }
 
     template <typename T>
     List<T>::List(const T *begin, const T *end)
     {
         init_from(begin, end);
-        return;
     }
 
     template <typename T>
     List<T>::List(Iterator begin, Iterator end)
     {
         init_from(begin, end);
-        return;
     }
 
     template <typename T>
     List<T>::List(const std::initializer_list<T> &L)
     {
         init_from(L.begin(), L.end());
-        return;
     }
 } // CZ
 

@@ -20,7 +20,6 @@ namespace CZ
         T temp(a);
         a = b;
         b = temp;
-        return;
     }
 
     template <>

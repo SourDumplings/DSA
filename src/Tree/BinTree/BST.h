@@ -82,8 +82,8 @@ namespace CZ
         // 不得再使用 BinTree<T> 的插入
         using BinTree<T>::insert;
 
-        BSTNode<T> *do_recursion_search(const BSTNode<T> *pNowCheck, const T &data) const;
-        void do_recursion_insert(BSTNode<T> *pFather, BSTNode<T> *pNode);
+        BSTNode<T> *_do_recursion_search(BSTNode<T> *pNowCheck, const T &data) const;
+        void _do_recursion_insert(BSTNode<T> *pFather, BSTNode<T> *pNode);
 
         BSTNode<T> *copy_from(TreeNode<T> *pRoot);
     };

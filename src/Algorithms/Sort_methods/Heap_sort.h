@@ -29,7 +29,6 @@ namespace CZ::SortAccessories
             *(begin + (N - i - 1)) = H.top();
             H.pop(cmp);
         }
-        return;
     }
 
 } // CZ::SortAccessories

@@ -12,6 +12,7 @@
 #ifndef QUICK_SORT_H
 #define QUICK_SORT_H
 
+#include "../Is_sorted.h"
 #include "../Swap.h"
 
 namespace CZ::SortAccessories
@@ -68,7 +69,8 @@ namespace CZ::SortAccessories
                 else
                 {
                     // 直到遇到不大于轴点元素者，置于左子列并左子列右扩展
-                    *(begin + b++) = *(begin + (e - 1));
+                    *(begin + b) = *(begin + (e - 1));
+                    ++b;
                     break;
                 }
             }
@@ -82,7 +84,8 @@ namespace CZ::SortAccessories
                 else
                 {
                     // 直到遇到不小于轴点元素者，置于右子列并右子列左扩展
-                    *(begin + (e-- - 1)) = *(begin + b);
+                    *(begin + (e - 1)) = *(begin + b);
+                    --e;
                     break;
                 }
             }
@@ -109,7 +112,6 @@ namespace CZ::SortAccessories
         Rank_quick_sort mi = partition_1(begin, b, e, cmp); // 构造轴点并将元素划分
         quick_sort_1(begin, b, mi, cmp);
         quick_sort_1(begin, mi + 1, e, cmp);
-        return;
     }
 
     template <typename It, typename Cmp>
@@ -129,7 +131,6 @@ namespace CZ::SortAccessories
         Rank_quick_sort mi = partition_2(begin, b, e, cmp); // 构造轴点并将元素划分
         quick_sort_2(begin, b, mi, cmp);
         quick_sort_2(begin, mi + 1, e, cmp);
-        return;
     }
 
     template <typename It, typename Cmp>
@@ -137,7 +138,7 @@ namespace CZ::SortAccessories
     {
         // 两个版本区别在于对于重复元素的态度不同，
         // 想像极端情况，若是全是重复，则第一个版本就遇到了最坏情况，变成线性递归
-        // 而第二个版本中重复元素会在partition的过程中交替地从右（左）侧移到左（右）侧，从而始终被均衡切分
+        // 而第二个版本中重复元素会在 partition 的过程中交替地从右（左）侧移到左（右）侧，从而始终被均衡切分
         switch (version)
         {
         // 版本1，勤于拓展，懒于交换
@@ -149,7 +150,6 @@ namespace CZ::SortAccessories
             quick_sort_2(begin, 0, N, cmp);
             break;
         }
-        return;
     }
 } // CZ::SortAccessories
 
