@@ -30,7 +30,6 @@ namespace CZ
         {
             insert(*it);
         }
-        return;
     }
 
     template <typename T>
@@ -174,7 +173,6 @@ namespace CZ
         }
 
         printf("\n\n");
-        return;
     }
 
     template <typename T>

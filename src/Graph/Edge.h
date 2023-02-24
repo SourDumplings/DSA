@@ -42,12 +42,10 @@ namespace CZ
         void set_valid()
         {
             _valid = true;
-            return;
         }
         void set_invalid()
         {
             _valid = false;
-            return;
         }
         bool valid() const { return _valid; }
 

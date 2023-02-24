@@ -81,7 +81,6 @@ namespace CZ
                 }
             }
         }
-        return;
     }
 
     template <typename ED, typename VD>
@@ -122,7 +121,6 @@ namespace CZ
                 }
             }
         }
-        return;
     }
 
     template <typename ED, typename VD>
@@ -152,7 +150,6 @@ namespace CZ
         {
             _Dijkstra_nonheap(dist, path, visited, maxDist);
         }
-        return;
     }
 
     template <typename ED, typename VD>
@@ -224,7 +221,6 @@ namespace CZ
                     pathA[i][j] = _Nv;
             }
         }
-        return;
     }
 
     template <typename ED, typename VD>
@@ -249,7 +245,6 @@ namespace CZ
                 }
             }
         }
-        return;
     }
 } // CZ
 

@@ -40,13 +40,13 @@ namespace CZ
         class DoNothingE
         {
         public:
-            void operator()(const ED &) const { return; }
+            void operator()(const ED &) const { }
         };
 
         class DoNothingV
         {
         public:
-            void operator()(const VD &) const { return; }
+            void operator()(const VD &) const { }
         };
 
     public:

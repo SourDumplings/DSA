@@ -54,7 +54,6 @@ namespace CZ
         {
             insert(*it, cmp);
         }
-        return;
     }
 
     template <typename T, typename Cmp>
@@ -143,7 +142,6 @@ namespace CZ
 
         BinTreeNode<KVPair<T, Rank>> *r = _do_merge(lr, rr, cmp);
         _T = BinTree<KVPair<T, Rank>>(r);
-        return;
     }
 
     template <typename T, typename Cmp>
@@ -152,7 +150,6 @@ namespace CZ
         BinTreeNode<KVPair<T, Rank>> *node = new BinTreeNode<KVPair<T, Rank>>(KVPair<T, Rank>(value, 1));
         BinTreeNode<KVPair<T, Rank>> *r = _do_merge(_T.root(), node, cmp);
         _T = BinTree<KVPair<T, Rank>>(r);
-        return;
     }
 
     template <typename T, typename Cmp>
@@ -160,7 +157,6 @@ namespace CZ
     {
         printf("for LeftHeap %s, it contains a BinTree\n", name);
         _T.print_info("_T");
-        return;
     }
 
     template <typename T, typename Cmp>

@@ -39,14 +39,12 @@ namespace CZ
     {
         _m = new char[_charNum = (n_ + 7) >> 3];
         memset(_m, 0, _charNum);
-        return;
     }
 
     // 构造函数
     Bitmap::Bitmap(Bitmap::Rank n_)
     {
         init(n_);
-        return;
     }
 
     Bitmap::Bitmap(const char *file, Bitmap::Rank n_)
@@ -62,7 +60,6 @@ namespace CZ
     Bitmap::~Bitmap()
     {
         delete[] _m;
-        return;
     }
 
     // 扩容函数
@@ -157,7 +154,6 @@ namespace CZ
         // {
         //     std::cout << "_m[" << i << "] = " << std::bitset<8>(_m[i]) << std::endl;
         // }
-        return;
     }
 
     const char *Bitmap::c_str() const

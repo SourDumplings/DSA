@@ -21,14 +21,12 @@ namespace CZ
     {
         clear();
         delete _head;
-        return;
     }
 
     template <typename T>
     List<T>::~List()
     {
         free();
-        return;
     }
 } // CZ
 

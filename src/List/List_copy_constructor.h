@@ -20,7 +20,6 @@ namespace CZ
     List<T>::List(const List<T> &l)
     {
         init_from(l.begin(), l.end());
-        return;
     }
 } // CZ
 

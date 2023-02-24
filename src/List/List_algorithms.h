@@ -21,7 +21,6 @@ namespace CZ
     inline void List<T>::merge(const List<T> &l)
     {
         insert(end(), l.begin(), l.end());
-        return;
     }
 
     template <typename T>
@@ -37,14 +36,12 @@ namespace CZ
 
         _size += l._size;
         l._size = 0;
-        return;
     }
 
     template <typename T>
     inline void List<T>::swap(Iterator pos1, Iterator pos2)
     {
         Swap(*pos1, *pos2);
-        return;
     }
 
     template <typename T>
@@ -257,7 +254,6 @@ namespace CZ
                 }
             }
         }
-        return;
     }
 
     template <typename T>
@@ -281,7 +277,6 @@ namespace CZ
             }
             _head->_prev = first;
         }
-        return;
     }
 
     template <typename T>

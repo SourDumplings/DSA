@@ -21,7 +21,6 @@ namespace CZ
     {
         l.init();
         l._size = 0;
-        return;
     }
 } // CZ
 

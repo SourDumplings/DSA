@@ -16,21 +16,36 @@ using namespace CZ;
 
 int main(int argc, char const *argv[])
 {
+    // 测试构造函数和赋值
     CZString s("hello");
+    
+    CZString s1, s2;
+    s1 = s;
+    cout << "s: " << s << endl;
+    cout << "s1: " << s1 << endl;
+    s2 = std::move(s1);
+    cout << "s1: " << s1 << endl;
+    cout << "s2: " << s2 << endl;
 
-    const char *sContent = s;
-    printf("sContent = %s\n", sContent);
-    Vector<int> vi({ 1, 2, 3, 5 });
-    vi.print_info(CZString("vi"));
+    CZString s3(s), s4(std::move(s2));
+    cout << "s: " << s << endl;
+    cout << "s2: " << s2 << endl;
+    cout << "s3: " << s3 << endl;
+    cout << "s4: " << s4 << endl;
 
-    s.print_info("s");
-    std::cout << "s: " << s << std::endl;
-    std::cout << "s.c_str(): " << s.c_str() << std::endl;
+    // const char *sContent = s;
+    // printf("sContent = %s\n", sContent);
+    // Vector<int> vi({ 1, 2, 3, 5 });
+    // vi.print_info(CZString("vi"));
 
-    const CZString *ps = &s;
-    ps->print_info("*ps");
-    std::cout << "*ps: " << *ps << std::endl;
-    std::cout << "ps->c_str(): " << ps->c_str() << std::endl;
+    // s.print_info("s");
+    // std::cout << "s: " << s << std::endl;
+    // std::cout << "s.c_str(): " << s.c_str() << std::endl;
+
+    // const CZString *ps = &s;
+    // ps->print_info("*ps");
+    // std::cout << "*ps: " << *ps << std::endl;
+    // std::cout << "ps->c_str(): " << ps->c_str() << std::endl;
 
     // printf("s.substr(1) = %s\n", s.substr(1).c_str());
     // printf("s.substr(1, 2) = %s\n", s.substr(1, 2).c_str());

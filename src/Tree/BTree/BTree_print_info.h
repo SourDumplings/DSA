@@ -54,7 +54,6 @@ namespace CZ
             putchar(' ');
         }
         printf("\n\n");
-        return;
     }
 } // CZ
 

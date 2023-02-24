@@ -28,7 +28,11 @@ namespace CZ
     {
     }
 
-    CZString::CZString(const CZString &CZstring) : Vector<char>(CZstring)
+    CZString::CZString(const CZString &s) : Vector<char>(s)
+    {
+    }
+
+    CZString::CZString(CZString &&s) : Vector<char>(std::forward<Vector<char>>(s))
     {
     }
 
@@ -40,7 +44,6 @@ namespace CZ
             putchar(*it);
         }
         printf("\nlength = %u\n\n", length());
-        return;
     }
 
     CZString::Rank CZString::length() const { return size(); }
@@ -113,13 +116,13 @@ namespace CZ
 
     CZString &CZString::operator=(const CZString &s)
     {
-        Vector<char>::operator=(static_cast<Vector<char>>(s));
+        Vector<char>::operator=(s);
         return *this;
     }
 
     CZString &CZString::operator=(CZString &&s)
     {
-        Vector<char>::operator=(static_cast<Vector<char>>(s));
+        Vector<char>::operator=(std::forward<CZString>(s));
         return *this;
     }
 

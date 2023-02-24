@@ -100,7 +100,6 @@ namespace CZ
         {
             delete _wPtr;
         }
-        return;
     }
 
     template <typename T>

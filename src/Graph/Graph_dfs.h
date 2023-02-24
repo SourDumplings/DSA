@@ -30,7 +30,6 @@ namespace CZ
             i = false;
         }
         _do_dfs(s, results, visited, processE, processV);
-        return;
     }
 
     template <typename ED, typename VD>
@@ -46,7 +45,6 @@ namespace CZ
             i = false;
         }
         _do_dfs(s, results, visited, processE, processV);
-        return;
     }
 
     template <typename ED, typename VD>
@@ -85,7 +83,6 @@ namespace CZ
                 }
             }
         }
-        return;
     }
 
     template <typename ED, typename VD>
@@ -124,7 +121,6 @@ namespace CZ
                 }
             }
         }
-        return;
     }
 
 

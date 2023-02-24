@@ -148,7 +148,6 @@ namespace CZ
     {
         ASSERT_DEBUG(pFather, "father is nullptr, cannot be a father");
         ASSERT_DEBUG(pNode, "node is nullptr, cannot be a child");
-        ASSERT_DEBUG(pNode->father() == nullptr, "this node has already had a father");
 
         if (_pRoot)
         {
@@ -171,23 +170,20 @@ namespace CZ
             return nullptr;
         }
 
+        if (pNode == _pRoot)
+        {
+            _pRoot = nullptr;
+            return pNode;
+        }
+
         ASSERT_DEBUG(pNode->get_root() == _pRoot, "this node is not in this tree");
-        ASSERT_DEBUG(pNode != _pRoot, "cannot secede root");
 
         TreeNode<T> *f = pNode->father();
         typename List<TreeNode<T> *>::Iterator nodePos;
 
-        for (typename List<TreeNode<T> *>::Iterator it = f->children().begin(); it != f->children().end(); ++it)
-        {
-            if (*it == pNode)
-            {
-                nodePos = it;
-                break;
-            }
-        }
-
         // 删掉目标结点
-        f->children().erase(nodePos);
+        typename List<TreeNode<T> *>::Rank removedChildrenNum = f->children().remove(pNode);
+        ASSERT_RELEASE(removedChildrenNum == 1, "error remove child node");
         typename TreeNode<T>::Rank sizeLess = pNode->get_size();
         _size -= sizeLess;
 
@@ -206,14 +202,12 @@ namespace CZ
         }
         else
             _size = 0;
-        return;
     }
 
     template <typename T>
     void Tree<T>::OutPut::operator()(const T &data) const
     {
         std::cout << data << " ";
-        return;
     }
 
     template <typename T>

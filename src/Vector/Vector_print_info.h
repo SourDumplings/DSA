@@ -35,7 +35,6 @@ namespace CZ
             std::cout << _elem[i];
         }
         printf("\n\n");
-        return;
     }
 }
 

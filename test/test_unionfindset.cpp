@@ -57,7 +57,7 @@ int main(int argc, char const *argv[])
            UnionFindSet<string>::are_family(pc1, pc3) ? "true" : "false");
 
     // 测试插入删除
-    printf("\n\ntesting modifications\n");
+    printf("\n\n------------- testing modifications -----------------\n\n");
 
     us3.merge(std::move(us4));
     us3.print_info("us3");

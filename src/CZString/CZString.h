@@ -35,7 +35,8 @@ namespace CZ
         CZString(const std::string &str_);
         ~CZString() override;
 
-        CZString(const CZString &CZstring);
+        CZString(const CZString &s);
+        CZString(CZString &&s);
 
         void print_info(const char *name = "") const override;
 

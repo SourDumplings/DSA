@@ -22,7 +22,6 @@ namespace CZ
         _head = new ListNode<T>();
         _head->_next = _head;
         _head->_prev = _head;
-        return;
     }
 } // CZ
 

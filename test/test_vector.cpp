@@ -10,13 +10,97 @@
  */
 
 #include <iostream>
+#include <cstdlib>
+#include <sys/time.h>
 #include <string>
 #include <utility>
-
+#include <vector>
 #include "Vector/Vector.h"
 
-using CZ::Vector;
-using std::string;
+using namespace CZ;
+using namespace std;
+
+void test_vector_perf(Vector<int> &v1, vector<int> &v2, int a[], int size)
+{
+    struct timeval tv;
+    __suseconds_t start, stop;
+
+    // 测试 push_back
+    gettimeofday(&tv, NULL);
+    start = tv.tv_sec * 1000000 + tv.tv_usec;
+    for (int i = 0; i < size; i++)
+    {
+        v1.push_back(a[i]);
+    }
+    gettimeofday(&tv, NULL);
+    stop = tv.tv_sec * 1000000 + tv.tv_usec;
+    cout << "Vector push_back cost: " << stop - start << " micro seconds" << endl;
+
+    gettimeofday(&tv, NULL);
+    start = tv.tv_sec * 1000000 + tv.tv_usec;
+    for (int i = 0; i < size; i++)
+    {
+        v2.push_back(a[i]);
+    }
+    gettimeofday(&tv, NULL);
+    stop = tv.tv_sec * 1000000 + tv.tv_usec;
+    cout << "vector push_back cost: " << stop - start << " micro seconds" << endl;
+
+    // 测试 pop_back
+    gettimeofday(&tv, NULL);
+    start = tv.tv_sec * 1000000 + tv.tv_usec;
+    for (int i = 0; i < size; i++)
+    {
+        v1.pop_back();
+    }
+    gettimeofday(&tv, NULL);
+    stop = tv.tv_sec * 1000000 + tv.tv_usec;
+    cout << "Vector pop_back cost: " << stop - start << " micro seconds" << endl;
+
+    gettimeofday(&tv, NULL);
+    start = tv.tv_sec * 1000000 + tv.tv_usec;
+    for (int i = 0; i < size; i++)
+    {
+        v2.pop_back();
+    }
+    gettimeofday(&tv, NULL);
+    stop = tv.tv_sec * 1000000 + tv.tv_usec;
+    cout << "vector pop_back cost: " << stop - start << " micro seconds" << endl;
+
+    // 测试 erase
+    int erasePos[size];
+    for (int i = 0; i < size; ++i)
+    {
+        erasePos[i] = rand() % size;
+    }
+
+    gettimeofday(&tv, NULL);
+    start = tv.tv_sec * 1000000 + tv.tv_usec;
+    for (int i = 0; i < size; i++)
+    {
+        if (static_cast<uint32_t>(erasePos[i]) < v1.size())
+        {
+            v1.erase(v1.begin() + erasePos[i]);
+        }
+    }
+    gettimeofday(&tv, NULL);
+    stop = tv.tv_sec * 1000000 + tv.tv_usec;
+    cout << "Vector erase cost: " << stop - start << " micro seconds" << endl;
+
+    gettimeofday(&tv, NULL);
+    start = tv.tv_sec * 1000000 + tv.tv_usec;
+    for (int i = 0; i < size; i++)
+    {
+        if (static_cast<uint32_t>(erasePos[i]) < v2.size())
+        {
+            v2.erase(v2.begin() + erasePos[i]);
+        }
+    }
+    gettimeofday(&tv, NULL);
+    stop = tv.tv_sec * 1000000 + tv.tv_usec;
+    cout << "vector erase cost: " << stop - start << " micro seconds" << endl;
+
+}
 
 int main(int argc, char const *argv[])
 {
@@ -42,7 +126,7 @@ int main(int argc, char const *argv[])
     // std::cout << "v6.c_str(): " << v6.c_str() << std::endl;
     // std::cout << "v6: " << v6 << std::endl;
 
-    Vector<string> vs1(20), vs2(3, "abc"), vs3({"123", "abx", "sada1"});
+    // Vector<string> vs1(20), vs2(3, "abc"), vs3({"123", "abx", "sada1"});
 
     // v1.print_info("v1");
     // v2.print_info("v2");
@@ -50,17 +134,17 @@ int main(int argc, char const *argv[])
     // v4.print_info("v4");
     // v5.print_info("v5");
     // v6.print_info("v6");
-    vs1.print_info("vs1");
-    std::cout << "vs1: " << vs1 << std::endl;
-    std::cout << "vs1.hash(): " << vs1.hash() << std::endl;
+    // vs1.print_info("vs1");
+    // std::cout << "vs1: " << vs1 << std::endl;
+    // std::cout << "vs1.hash(): " << vs1.hash() << std::endl;
 
-    vs2.print_info("vs2");
-    std::cout << "vs2: " << vs2 << std::endl;
-    std::cout << "vs2.hash(): " << vs2.hash() << std::endl;
+    // vs2.print_info("vs2");
+    // std::cout << "vs2: " << vs2 << std::endl;
+    // std::cout << "vs2.hash(): " << vs2.hash() << std::endl;
 
-    vs3.print_info("vs3");
-    std::cout << "vs3: " << vs3 << std::endl;
-    std::cout << "vs3.hash(): " << vs3.hash() << std::endl;
+    // vs3.print_info("vs3");
+    // std::cout << "vs3: " << vs3 << std::endl;
+    // std::cout << "vs3.hash(): " << vs3.hash() << std::endl;
 
     // Vector<int> v7(std::move(v6));
     // Vector<string> vs4(std::move(vs3));
@@ -209,5 +293,23 @@ int main(int argc, char const *argv[])
     // vs2.print_info("vs2");
     // vs2.assign(vs2.begin(), vs2.end() - 2);
     // vs2.print_info("vs2");
+
+    // 性能测试
+    const int test = 10;
+    const int size = 1000000;
+    srand(0);
+    for (int i = 0; i < test; i++)
+    {
+        int a[size];
+        for (int j = 0; j < size; j++)
+        {
+            a[j] = rand() % size;
+        }
+        Vector<int> v1;
+        vector<int> v2;
+        printf("\n\nTest %d....\n", i);
+        test_vector_perf(v1, v2, a, size);
+    }
+
     return 0;
 }

@@ -63,7 +63,6 @@ namespace CZ
                 _ptr = nullptr;
                 //            printf("memory has been freed\n");
             }
-            return;
         }
 
         const T *get() const

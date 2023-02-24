@@ -79,7 +79,6 @@ namespace CZ
             }
         }
         putchar('\n');
-        return;
     }
 } // CZ
 

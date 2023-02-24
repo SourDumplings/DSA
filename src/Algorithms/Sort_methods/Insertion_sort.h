@@ -34,7 +34,6 @@ namespace CZ::SortAccessories
             }
             *(begin + (j + steps)) = temp;
         }
-        return;
     }
 } // CZ::SortAccessories
 

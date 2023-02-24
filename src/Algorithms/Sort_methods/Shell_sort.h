@@ -34,7 +34,6 @@ namespace CZ::SortAccessories
             }
             deltaSeq.push_back(delta);
         }
-        return;
     }
 
     void produce_Pratt_seq(Rank_shell_sort N)
@@ -56,7 +55,6 @@ namespace CZ::SortAccessories
                 break;
             }
         }
-        return;
     }
 
     void produce_Papernov_Stasevic_seq(Rank_shell_sort N)
@@ -71,7 +69,6 @@ namespace CZ::SortAccessories
             }
             deltaSeq.push_back(delta);
         }
-        return;
     }
 
     void produce_Shell_seq(Rank_shell_sort N)
@@ -86,7 +83,6 @@ namespace CZ::SortAccessories
             }
             deltaSeq.push_back(delta);
         }
-        return;
     }
 
     template <typename It, typename Cmp>
@@ -116,7 +112,6 @@ namespace CZ::SortAccessories
                 Insertion_sort(begin + j, N - j, deltaSeq[i], cmp, 0);
             }
         }
-        return;
     }
 } // CZ::SortAccessories
 

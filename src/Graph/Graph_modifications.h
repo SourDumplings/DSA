@@ -54,7 +54,6 @@ namespace CZ
                 _dataE[i] = pVi;
             }
         }
-        return;
     }
 
     template <typename ED, typename VD>
@@ -89,10 +88,10 @@ namespace CZ
         {
             // 注意对于邻接矩阵法，两结点之间的边最多只能有一条
             KVPair<bool, ED> &eP = (*(static_cast<Vector<KVPair<bool, ED>>*>(_dataE[s])))[d];
-            eP.value() = eData;
+            eP.set_value(eData);
             if (!eP.key())
             {
-                eP.key() = true;
+                eP.set_key(true);
                 ++_inDegree[d];
                 ++_outDegree[s];
             }
@@ -138,7 +137,7 @@ namespace CZ
             KVPair<bool, ED> &eP = (*(static_cast<Vector<KVPair<bool, ED>>*>(_dataE[s])))[d];
             if (eP.key())
             {
-                eP.key() = false;
+                eP.set_key(false);
                 success = true;
             }
         }

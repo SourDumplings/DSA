@@ -94,7 +94,6 @@ namespace CZ
             std::cout << " " << operator[](i);
         }
         printf("\n\n");
-        return;
     }
 
     template <typename T>

@@ -64,7 +64,6 @@ namespace CZ::SortAccessories
                 break;
             }
         }
-        return;
     }
 
 } // CZ::SortAccessories

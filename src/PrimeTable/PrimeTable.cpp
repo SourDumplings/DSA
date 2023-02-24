@@ -28,7 +28,6 @@ namespace CZ
         _upperLimit = upperLimit_;
         _size = 0;
         _build_table();
-        return;
     }
     // 返回第n个素数
     PrimeTable::Rank PrimeTable::get_prime(PrimeTable::Rank n) const
@@ -71,7 +70,6 @@ namespace CZ
             }
         }
         printf("\n\n");
-        return;
     }
 
     void PrimeTable::_build_table()
@@ -113,7 +111,6 @@ namespace CZ
             }
         }
 
-        return;
     }
 
     const char *PrimeTable::c_str() const

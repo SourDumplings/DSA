@@ -77,10 +77,17 @@ namespace CZ
         {
             return _key;
         }
+
+        void set_key(const K &k_)
+        {
+            _key = k_;
+        }
+
         const V &value() const
         {
             return _value;
         }
+
         void set_value(const V &value_)
         {
             _value = value_;

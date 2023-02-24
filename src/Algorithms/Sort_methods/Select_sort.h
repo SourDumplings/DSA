@@ -55,14 +55,12 @@ namespace CZ::SortAccessories
                 break;
             }
         }
-        return;
     }
 
     template <typename It>
     void Select_sort(It begin, Rank_select_sort N, const uint32_t version = 0)
     {
         Select_sort(begin, N, std::less<decltype(*begin)>(), version);
-        return;
     }
 } // CZ::SortAccessories
 

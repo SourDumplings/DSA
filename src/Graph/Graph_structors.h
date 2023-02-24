@@ -19,8 +19,13 @@ namespace CZ
 {
     template <typename ED, typename VD>
     Graph<ED, VD>::Graph(bool directed_, const GraphType &graphType_, Rank Nv_, bool vHasData_):
-        _graphType(graphType_), _directed(directed_), _vHasData(vHasData_), _Nv(Nv_),
-        _dataE(Nv_), _inDegree(Nv_), _outDegree(Nv_)
+        _graphType(graphType_)
+        , _directed(directed_)
+        , _vHasData(vHasData_)
+        , _Nv(Nv_)
+        , _dataE(Nv_)
+        , _inDegree(Nv_)
+        , _outDegree(Nv_)
     {
         if (_Nv == 0)
         {
@@ -43,9 +48,9 @@ namespace CZ
             for (Rank i = 0; i != _Nv; ++i)
             {
                 Vector<KVPair<bool, ED>> *pVi = new Vector<KVPair<bool, ED>>(_Nv);
-                for (auto &p : *pVi)
+                for (KVPair<bool, ED> &p : *pVi)
                 {
-                    p.key() = false;
+                    p.set_key(false);
                 }
                 _dataE[i] = pVi;
             }
@@ -69,7 +74,7 @@ namespace CZ
             for (Rank i = 0; i != _Nv; ++i)
             {
                 _dataE[i] = new Vector<Edge<ED>>
-                (*static_cast<Vector<Edge<ED>>*>(g._dataE[i]));
+                    (*static_cast<Vector<Edge<ED>>*>(g._dataE[i]));
             }
         }
         else
@@ -77,16 +82,21 @@ namespace CZ
             for (Rank i = 0; i != _Nv; ++i)
             {
                 _dataE[i] = new Vector<KVPair<bool, ED>>
-                (*static_cast<Vector<KVPair<bool, ED>>*>(g._dataE[i]));
+                    (*static_cast<Vector<KVPair<bool, ED>>*>(g._dataE[i]));
             }
         }
     }
 
     template <typename ED, typename VD>
-    Graph<ED, VD>::Graph(Graph &&g): _graphType(g._graphType), _directed(g._directed),
-        _vHasData(g._vHasData), _Nv(g._Nv), _dataV(std::move(g._dataV)),
-        _dataE(std::move(g._dataE)), _inDegree(std::move(g._inDegree)),
-        _outDegree(std::move(g._outDegree))
+    Graph<ED, VD>::Graph(Graph &&g):
+        _graphType(g._graphType)
+        , _directed(g._directed)
+        , _vHasData(g._vHasData)
+        , _Nv(g._Nv)
+        , _dataV(std::move(g._dataV))
+        , _dataE(std::move(g._dataE))
+        , _inDegree(std::move(g._inDegree))
+        , _outDegree(std::move(g._outDegree))
     {
         g._Nv = 0;
     }
@@ -98,14 +108,14 @@ namespace CZ
         {
             for (Rank i = 0; i != _Nv; ++i)
             {
-                delete static_cast<Vector<Edge<ED>>*>(_dataE[i]);
+                delete static_cast<Vector<Edge<ED>> *>(_dataE[i]);
             }
         }
         else
         {
             for (Rank i = 0; i != _Nv; ++i)
             {
-                delete static_cast<Vector<KVPair<bool, ED>>*>(_dataE[i]);
+                delete static_cast<Vector<KVPair<bool, ED>> *>(_dataE[i]);
             }
         }
     }

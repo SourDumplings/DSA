@@ -80,7 +80,6 @@ namespace CZ
     void Expression::print_info(const char *name) const
     {
         printf("expression %s is: %s\n\n", name, _exp + 1);
-        return;
     }
 
     bool Expression::is_one_element_operator(const char op) const

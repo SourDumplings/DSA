@@ -68,7 +68,6 @@ namespace CZ
         BinTree<T>::in_order_traversal(dynamic_cast<SplayTreeNode<T> *>(this->root()), typename Tree<T>::OutPut(),
                                        NONRECURSION_TRAVERSAL2);
         printf("\n\n");
-        return;
     }
 
     template <typename T>

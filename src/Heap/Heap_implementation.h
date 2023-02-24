@@ -33,7 +33,6 @@ namespace CZ
             _data.push_back(*it);
         }
         _build_heap(cmp);
-        return;
     }
 
     template <typename T, typename Cmp>
@@ -59,7 +58,6 @@ namespace CZ
             }
             
         }
-        return;
     }
 
     template <typename T, typename Cmp>
@@ -88,7 +86,6 @@ namespace CZ
             }
         }
         _data[f] = x;
-        return;
     }
 
     template <typename T, typename Cmp>
@@ -97,7 +94,6 @@ namespace CZ
         // 插入元素，将元素插入到末尾再上滤
         _data.push_back(value);
         _perc_up(_data.size() - 1, cmp);
-        return;
     }
 
     template <typename T, typename Cmp>
@@ -109,7 +105,6 @@ namespace CZ
             _data[i] = _data[(i - 1) / 2];
         }
         _data[i] = x;
-        return;
     }
 
     template <typename T, typename Cmp>
@@ -125,7 +120,6 @@ namespace CZ
             _perc_down(0, cmp);
         }
 
-        return;
     }
 
     template <typename T, typename Cmp>
@@ -145,7 +139,6 @@ namespace CZ
             std::cout << " " << i;
         }
         printf("\n\n");
-        return;
     }
 
     template <typename T, typename Cmp>

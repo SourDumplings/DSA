@@ -64,7 +64,6 @@ namespace CZ
         else
             printf("It is empty.");
         printf("\n\n");
-        return;
     }
 
     template <typename T>
@@ -109,16 +108,14 @@ namespace CZ
         }
         else
         {
-            for (auto &c : u._family.root()->children())
+            for (TreeNode<T> *pC : u._family.root()->children())
             {
-                c->father() = nullptr;
-                _family.insert(root(), c);
+                _family.insert(root(), pC);
             }
             _family.insert(root(), u._family.root());
-            u._family.root() = nullptr;
+            u._family.secede(u._family.root());
             u._family.clear();
         }
-        return;
     }
 
     template <typename T>

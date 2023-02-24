@@ -58,7 +58,6 @@ namespace CZ
                 std::cout << " " << item;
             }
             printf("\nit has %u children\n\n", _children.size());
-            return;
         }
 
         Rank depth() const;

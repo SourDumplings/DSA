@@ -24,7 +24,6 @@ namespace CZ
     {
         _size = 0;
         shrink();
-        return;
     }
 
     template <typename T>
@@ -34,7 +33,6 @@ namespace CZ
         ++_size;
         expand();
         _elem[_size-1] = x;
-        return;
     }
 
     template <typename T>
@@ -44,7 +42,6 @@ namespace CZ
         ++_size;
         expand();
         _elem[_size-1] = std::move(x);
-        return;
     }
 
     template <typename T>
@@ -162,7 +159,6 @@ namespace CZ
             _size = n;
             expand();
         }
-        return;
     }
 
     template <typename T>
@@ -176,7 +172,6 @@ namespace CZ
             _elem[i] = *(begin + i);
         }
         shrink();
-        return;
     }
 
     template <typename T>
@@ -194,7 +189,6 @@ namespace CZ
         }
         _size -= k;
         shrink();
-        return;
     }
 
     template <typename T>

@@ -286,7 +286,6 @@ namespace CZ
             free_node(c);
         }
         delete target;
-        return;
     }
 } // CZ
 

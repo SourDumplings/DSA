@@ -26,7 +26,6 @@ namespace CZ
         {
             _elem[_size++] = *it;
         }
-        return;
     }
 }
 

@@ -33,7 +33,6 @@ namespace CZ
             {
                 pre_order_traversal_recursion(root->right_child(), visit);
             }
-            return;
         }
 
         template <typename T, typename F>
@@ -55,7 +54,6 @@ namespace CZ
                     S.push(f->left_child());
                 }
             }
-            return;
         }
 
         // 二叉树的先序遍历可以看做是从根结点一路向左访问
@@ -84,7 +82,6 @@ namespace CZ
                 node = S.top();
                 S.pop();
             }
-            return;
         }
 
         // Morris 遍历法，
@@ -128,7 +125,6 @@ namespace CZ
                     node = node->right_child();
                 }
             }
-            return;
         }
 
         template <typename T, typename F>
@@ -143,7 +139,6 @@ namespace CZ
             {
                 in_order_traversal_recursion(root->right_child(), visit);
             }
-            return;
         }
 
         // 二叉树的中序遍历可以看做是从根结点一路向左入栈
@@ -170,7 +165,6 @@ namespace CZ
                 // 转向右子树
                 root = leftMost->right_child();
             }
-            return;
         }
 
         // 实际上为NONRECURSION_TRAVERSAL1的等价版本
@@ -197,7 +191,6 @@ namespace CZ
                     break;
                 }
             }
-            return;
         }
 
         // 不需要借助堆栈，（额外）空间复杂度由O(logn)降为O(1)
@@ -235,7 +228,6 @@ namespace CZ
                     }
                 }
             }
-            return;
         }
 
         // Morris 遍历法
@@ -280,7 +272,6 @@ namespace CZ
                     node = node->right_child();
                 }
             }
-            return;
         }
 
         template <typename T, typename F>
@@ -295,7 +286,6 @@ namespace CZ
                 post_order_traversal_recursion(root->right_child(), visit);
             }
             visit(root->data());
-            return;
         }
 
         // 后序遍历的访问顺序为先是左侧最高可见叶结点（LHVFL）
@@ -342,7 +332,6 @@ namespace CZ
                 ASSERT_DEBUG(s.find(root->data()) == s.end(), "wrong");
                 s.insert(root->data());
             }
-            return;
         }
 
         // 这种做法来自于王道，不需要借助父亲指针
@@ -381,7 +370,6 @@ namespace CZ
                     }
                 }
             }
-            return;
         }
 
         // 这种做法是相当于模拟了递归，类似于 pre_order_traversal_nonrecursion1
@@ -419,7 +407,6 @@ namespace CZ
                 }
             }
 
-            return;
         }
 
         // Morris 遍历法
@@ -495,7 +482,6 @@ namespace CZ
                 }
             }
             Morris::visit_node_after_reverse(root, visit);
-            return;
         }
     } // BinTreeTraversalAccessories
 
@@ -619,7 +605,6 @@ namespace CZ
             break;
         }
         }
-        return;
     }
 } // CZ
 

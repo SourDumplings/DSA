@@ -37,7 +37,6 @@ namespace CZ
             in_order_traversal(dynamic_cast<BinTreeNode<T>*>(this->root()), typename Tree<T>::OutPut(), RECURSION_TRAVERSAL);
             printf("\n\n");
         }
-        return;
     }
 } // CZ
 

@@ -32,7 +32,6 @@ namespace CZ
         }
         _size = 0;
         _head->_next = _head->_prev = _head;
-        return;
     }
 
     template <typename T>
@@ -105,42 +104,36 @@ namespace CZ
     inline void List<T>::push_back(const T &data)
     {
         insert(end(), data);
-        return;
     }
 
     template <typename T>
     inline void List<T>::push_back(T &&data)
     {
         insert(end(), std::move(data));
-        return;
     }
 
     template <typename T>
     inline void List<T>::push_front(const T &data)
     {
         insert(_head->_next, data);
-        return;
     }
 
     template <typename T>
     inline void List<T>::push_front(T &&data)
     {
         insert(_head->_next, std::move(data));
-        return;
     }
 
     template <typename T>
     inline void List<T>::pop_front()
     {
         erase(_head->_next);
-        return;
     }
 
     template <typename T>
     inline void List<T>::pop_back()
     {
         erase(_head->_prev);
-        return;
     }
 
     template <typename T>

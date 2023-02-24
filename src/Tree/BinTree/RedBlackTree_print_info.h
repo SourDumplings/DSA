@@ -27,14 +27,12 @@ namespace CZ
         printf("\nits in_order_traversal is: \n");
         _in_order_traversal(dynamic_cast<RedBlackTreeNode<T> *>(this->root()), RedBlackTree<T>::OutPut());
         printf("\n\n");
-        return;
     }
 
     template <typename T>
     void RedBlackTree<T>::OutPut::operator()(const T &data, bool red, typename RedBlackTreeNode<T>::Rank blackHeight) const
     {
         std::cout << data << "(" << (red ? 'r' : 'b') << ", " << blackHeight << ") ";
-        return;
     }
 
     template <typename T>
@@ -46,7 +44,6 @@ namespace CZ
             _pre_order_traversal(dynamic_cast<RedBlackTreeNode<T>*>(v->left_child()), process);
             _pre_order_traversal(dynamic_cast<RedBlackTreeNode<T>*>(v->right_child()), process);
         }
-        return;
     }
 
     template <typename T>
@@ -58,7 +55,6 @@ namespace CZ
             process(v->data(), v->_red, v->_blackHeight);
             _in_order_traversal(dynamic_cast<RedBlackTreeNode<T>*>(v->right_child()), process);
         }
-        return;
     }
 } // CZ
 

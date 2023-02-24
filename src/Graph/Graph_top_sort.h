@@ -64,7 +64,6 @@ namespace CZ
         }
 
         ASSERT_DEBUG(results.size() == _Nv, "Error from Graph top_sort: this Graph may have circuits");
-        return;
     }
 } // CZ
 

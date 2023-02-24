@@ -62,7 +62,6 @@ namespace CZ::SortAccessories
                     break;
                 }
             }
-            return;
         }
     }
 
@@ -80,7 +79,6 @@ namespace CZ::SortAccessories
         Merge_sort(begin + mi, N - mi, cmp, version);
         // 合并
         MergeSort::merge(begin, mi, N, cmp);
-        return;
     }
 } // CZ::SortAccessories
 

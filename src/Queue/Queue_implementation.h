@@ -72,7 +72,6 @@ namespace CZ
             std::cout << x << " ";
         }
         printf("\n\n");
-        return;
     }
 
     template <typename T, typename C>

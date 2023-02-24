@@ -67,7 +67,6 @@ namespace CZ
                 }
             }
         }
-        return;
     }
 
     template <typename ED, typename VD>
@@ -120,7 +119,6 @@ namespace CZ
                 }
             }
         }
-        return;
     }
 } // CZ
 

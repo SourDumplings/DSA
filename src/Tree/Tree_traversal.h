@@ -30,7 +30,6 @@ void Tree<T>::pre_order_traversal(TreeNode<T> *root, const F &visit)
             pre_order_traversal(c);
         }
     }
-    return;
 }
 
 template <typename T>
@@ -45,7 +44,6 @@ void Tree<T>::post_order_traversal(TreeNode<T> *root, const F &visit)
         }
         visit(root->data());
     }
-    return;
 }
 
 template <typename T>
@@ -67,7 +65,6 @@ void Tree<T>::level_order_traversal(TreeNode<T> *root, const F &visit)
             }
         }
     }
-    return;
 }
 } // namespace CZ
 

@@ -30,28 +30,24 @@ namespace CZ
             {
                 Swap(*(begin + i), *(begin + n - i - 1));
             }
-            return;
         }
 
         template <typename It>
         void test_iterator_for_reverse(const It &begin, const It &end, random_iterator_tag)
         {
             do_reverse(begin, end);
-            return;
         }
 
         template <typename It>
         void test_iterator_for_reverse(const It &begin, const It &end, seq_iterator_tag)
         {
             ASSERT_RELEASE(false, "iterator is seq_iterator, should be random_iterator");
-            return;
         }
 
         template <typename It>
         void test_iterator_for_reverse(const It &begin, const It &end, bi_iterator_tag)
         {
             ASSERT_RELEASE(false, "iterator is bi_iterator, should be random_iterator");
-            return;
         }
 
     } // ReverseAccessories
