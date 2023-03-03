@@ -5,12 +5,6 @@
  * @Email: changzheng300@foxmail.com
  * @Description:
  */
-/*
- @Date    : 2018-08-06 22:52:59
- @Author  : 酸饺子 (changzheng300@foxmail.com)
- @Link    : https://github.com/SourDumplings
- @Version : $Id$
-*/
 
 /*
 素数表类
@@ -25,7 +19,7 @@
 
 namespace CZ
 {
-    class PrimeTable : public AbstractBaseContainer<uint32_t>
+    class PrimeTable: public AbstractBaseContainer<uint32_t>
     {
     public:
         using Rank = typename AbstractBaseContainer<uint32_t>::Rank;
@@ -61,6 +55,8 @@ namespace CZ
         // 利用埃氏筛法构建素数表
         void _build_table();
     };
+
+    extern PrimeTable g_primeTable;
 } // namespace CZ
 
 #endif // PRIME_TABLE_H

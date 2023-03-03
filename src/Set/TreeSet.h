@@ -68,6 +68,9 @@ namespace CZ
 
         const char *get_entity_name() const;
 
+        static TreeSet<T> merge(const TreeSet<T> &s1, const TreeSet<T> &s2);
+        static TreeSet<T> intersect(const TreeSet<T> &s1, const TreeSet<T> &s2);
+
     protected:
         Iterator search(const T &data) const;
 

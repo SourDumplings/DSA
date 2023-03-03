@@ -96,5 +96,11 @@ int main(int argc, char const *argv[])
     s7 = std::move(s6);
     s7.print_info("s7");
     s6.print_info("s6");
+
+    // 测试集合算法
+    TreeSet<int> s8({1, 5, 3, 9, 10});
+    (s7 + s8).print_info("s7 + s8");
+    (s7 - s8).print_info("s7 - s8");
+    (TreeSet<int>::intersect(s7, s8)).print_info("s7 inter s8");
     return 0;
 }

@@ -20,7 +20,9 @@
 namespace CZ
 {
     template <typename T>
-    TreeSet<T>::TreeSet() : _T(nullptr, false) {}
+    TreeSet<T>::TreeSet(): _T(nullptr, false)
+    {
+    }
 
     template <typename T>
     template <typename It>
@@ -34,22 +36,37 @@ namespace CZ
 
     template <typename T>
     template <typename It>
-    TreeSet<T>::TreeSet(const It &begin, const It &end) : TreeSet() { _construct_from(begin, end); }
+    TreeSet<T>::TreeSet(const It &begin, const It &end): TreeSet()
+    {
+        _construct_from(begin, end);
+    }
 
     template <typename T>
-    TreeSet<T>::TreeSet(const T *begin, const T *end) : TreeSet() { _construct_from(begin, end); }
+    TreeSet<T>::TreeSet(const T *begin, const T *end): TreeSet()
+    {
+        _construct_from(begin, end);
+    }
 
     template <typename T>
-    TreeSet<T>::TreeSet(const std::initializer_list<T> &l) : TreeSet(l.begin(), l.end()) {}
+    TreeSet<T>::TreeSet(const std::initializer_list<T> &l): TreeSet(l.begin(), l.end())
+    {    
+}
 
     template <typename T>
-    TreeSet<T>::TreeSet(const TreeSet<T> &s) : _T(s._T) {}
+    TreeSet<T>::TreeSet(const TreeSet<T> &s) : _T(s._T)
+    {
+    }
 
     template <typename T>
-    TreeSet<T>::TreeSet(TreeSet<T> &&s) : _T(std::move(s._T)) {}
+    TreeSet<T>::TreeSet(TreeSet<T> &&s) : _T(std::move(s._T))
+    {
+    }
 
     template <typename T>
-    inline typename TreeSet<T>::Rank TreeSet<T>::size() const { return _T.size(); }
+    inline typename TreeSet<T>::Rank TreeSet<T>::size() const
+    {
+        return _T.size();
+    }
 
     template <typename T>
     const char *TreeSet<T>::get_entity_name() const
@@ -71,7 +88,7 @@ namespace CZ
         {
             return end();
         }
-        
+
         return Iterator(pRBTreeNode, false, &_T);
     }
 
@@ -88,7 +105,10 @@ namespace CZ
     }
 
     template <typename T>
-    inline void TreeSet<T>::clear() { _T.clear(); }
+    inline void TreeSet<T>::clear()
+    {
+        _T.clear();
+    }
 
     template <typename T>
     typename TreeSet<T>::Iterator TreeSet<T>::begin() const
@@ -207,6 +227,31 @@ namespace CZ
             _T = std::move(s._T);
         }
         return *this;
+    }
+
+    template <typename T>
+    TreeSet<T> TreeSet<T>::merge(const TreeSet<T> &s1, const TreeSet<T> &s2)
+    {
+        TreeSet<T> res(s1);
+        for (const T &elem : s2)
+        {
+            res.insert(elem);
+        }
+        return res;
+    }
+
+    template <typename T>
+    TreeSet<T> TreeSet<T>::intersect(const TreeSet<T> &s1, const TreeSet<T> &s2)
+    {
+        TreeSet<T> res;
+        for (const T &elem : s1)
+        {
+            if (s2.contains(elem))
+            {
+                res.insert(elem);
+            }
+        }
+        return res;
     }
 } // CZ
 

@@ -33,7 +33,7 @@ namespace CZ
         using RankPlus = typename Vector<List<T>>::RankPlus;
         using Iterator = HashSetIterator<T>;
 
-        static const Rank INITIAL_TABLE_SIZE = 32; 
+        static const Rank INITIAL_TABLE_SIZE = 32;
 
         // 构造函数，默认大小 32，使用取模作为哈希函数
         HashSet(const std::initializer_list<T> &l);
@@ -75,6 +75,9 @@ namespace CZ
         // 列出所有存在的元素
         void print_info(const char *name = "") const;
 
+        static HashSet<T> merge(const HashSet<T> &s1, const HashSet<T> &s2);
+        static HashSet<T> intersect(const HashSet<T> &s1, const HashSet<T> &s2);
+
     protected:
         Iterator search(const T &data) const;
 
@@ -101,6 +104,12 @@ namespace CZ
 
         Rank _get_suitable_table_size(Rank lowerLimit) const;
     };
+
+    template <typename T>
+    HashSet<T> operator+(const HashSet<T> &lhs, const HashSet<T> &rhs);
+
+    template <typename T>
+    HashSet<T> operator-(const HashSet<T> &lhs, const HashSet<T> &rhs);
 } // CZ
 
 #include "HashSet_implementation.h"

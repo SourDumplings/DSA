@@ -17,15 +17,16 @@ FlatHashSet 类模板的实现
 #include "../Algorithms/Search.h"
 #include <cctype>
 #include <iostream>
+#include "../PrimeTable/PrimeTable.h"
 
 namespace CZ
 {
     template <typename T>
-    FlatHashSet<T>::FlatHashSet(const Rank tableSize_, const FlatHashSetAccessories::ProbingMethod probingMethod_)
+    FlatHashSet<T>::FlatHashSet(const FlatHashSetAccessories::ProbingMethod probingMethod_)
         : _size(0), _firstNonEmptyBucketIndex(0), _lastNonEmptyBucketIndex(0), _probingMethod(probingMethod_)
     {
-        _table.resize(tableSize_);
-        for (Rank i = 0; i < tableSize_; ++i)
+        _table.resize(INITIAL_TABLE_SIZE);
+        for (Rank i = 0; i < table_size(); ++i)
         {
             _table[i].set_value(false);
         }
@@ -62,7 +63,11 @@ namespace CZ
         {
             ++elemNum;
         }
-        _table.resize(_get_suitable_table_size(elemNum));
+        _table.resize(INITIAL_TABLE_SIZE);
+        for (Rank i = 0; i < table_size(); ++i)
+        {
+            _table[i].set_value(false);
+        }
 
         for (It it = begin; it != end; ++it)
         {
@@ -145,9 +150,18 @@ namespace CZ
         FlatHashSet<T>::_square_probing(const typename FlatHashSet<T>::Rank h) const
     {
         typename FlatHashSet<T>::Rank ret = table_size();
-        for (typename FlatHashSet<T>::Rank i = h, count = 0; count != table_size(); ++count)
+        for (typename FlatHashSet<T>::Rank i = h, count = 0, n = 0; count < table_size(); ++n)
         {
-            i = (i + count * count) % table_size();
+            if (n % 2 == 0)
+            {
+                i = (i + count * count) % table_size();
+            }
+            else
+            {
+                i = (i - count * count) % table_size();
+                ++count;
+            }
+
             if (!_table[i].value())
             {
                 ret = i;
@@ -185,9 +199,18 @@ namespace CZ
             const T &v) const
     {
         typename FlatHashSet<T>::Rank ret = table_size();
-        for (typename FlatHashSet<T>::Rank i = h, count = 0; count != table_size(); ++count)
+        for (typename FlatHashSet<T>::Rank i = h, count = 0, n = 0; count < table_size(); ++n)
         {
-            i = (i + count * count) % table_size();
+            if (n % 2 == 0)
+            {
+                i = (i + count * count) % table_size();
+            }
+            else
+            {
+                i = (i - count * count) % table_size();
+                ++count;
+            }
+
             if (!_table[i].value())
             {
                 break;
@@ -258,7 +281,7 @@ namespace CZ
         case FlatHashSetAccessories::SQUARE_PROBING: pos = _square_probing(index); break;
         }
 
-        ASSERT_DEBUG(pos < table_size(), "FlatHashSet is full");
+        ASSERT_DEBUG(pos < table_size(), "No space for FlatHashSet inserting!");
 
         _table[pos] = KVPair<T, bool>(data, true);
         ++_size;
@@ -291,21 +314,40 @@ namespace CZ
     template <typename T>
     bool FlatHashSet<T>::_need_expand() const
     {
-        return table_size() < _size * 2;
+        return table_size() < _size * 4;
     }
 
     template <typename T>
     bool FlatHashSet<T>::_need_shrink() const
     {
-        return _size * 2 < table_size();
+        return INITIAL_TABLE_SIZE < table_size() && _size * 4 < table_size();
     }
 
     template <typename T>
     void FlatHashSet<T>::_expand()
     {
         Rank oldTableSize = table_size();
-        _table.resize(oldTableSize * 2);
-        for (typename Vector<KVPair<T, bool>>::Rank i = oldTableSize; i < table_size(); ++i)
+        uint32_t k = oldTableSize / 4;
+        Rank newTableSize = oldTableSize;
+
+        // 找下一个可以表示为 4k + 3，k ∈ N+ 的素数
+        while (true)
+        {
+            ++k;
+            while (g_primeTable.upper_limit() < 4 * k + 3)
+            {
+                g_primeTable.rebuild(g_primeTable.upper_limit() * 2);
+            }
+
+            if (g_primeTable.is_prime(4 * k + 3))
+            {
+                newTableSize = 4 * k + 3;
+                break;
+            }
+        }
+
+        _table.resize(newTableSize);
+        for (typename Vector<KVPair<T, bool>>::Rank i = oldTableSize; i < newTableSize; ++i)
         {
             _table[i].set_value(false);
         }
@@ -317,7 +359,12 @@ namespace CZ
     {
         _compress_forward();
         Rank oldTableSize = table_size();
-        _table.resize(oldTableSize / 2);
+        uint32_t k = 0;
+
+        // 找上一个可以表示为 4k + 3，k ∈ N+ 的素数
+        for (k = oldTableSize / 4 - 1; !g_primeTable.is_prime(4 * k + 3); --k);
+        Rank newTableSize = 4 * k + 3;
+        _table.resize(newTableSize);
         _rehash();
     }
 
@@ -443,10 +490,47 @@ namespace CZ
     }
 
     template <typename T>
-    typename FlatHashSet<T>::Rank FlatHashSet<T>::_get_suitable_table_size(Rank lowerLimit) const
+    FlatHashSet<T> FlatHashSet<T>::merge(const FlatHashSet<T> &s1, const FlatHashSet<T> &s2)
     {
-        Rank res = 2;
-        for (; res < lowerLimit; res *= 2);
+        FlatHashSet<T> res(s1);
+        for (const T &elem : s2)
+        {
+            res.insert(elem);
+        }
+        return res;
+    }
+
+    template <typename T>
+    FlatHashSet<T> FlatHashSet<T>::intersect(const FlatHashSet<T> &s1, const FlatHashSet<T> &s2)
+    {
+        FlatHashSet<T> res;
+        for (const T &elem : s1)
+        {
+            if (s2.contains(elem))
+            {
+                res.insert(elem);
+            }
+        }
+        return res;
+    }
+
+    template <typename T>
+    FlatHashSet<T> operator+(const FlatHashSet<T> &lhs, const FlatHashSet<T> &rhs)
+    {
+        return FlatHashSet<T>::merge(lhs, rhs);
+    }
+
+    template <typename T>
+    FlatHashSet<T> operator-(const FlatHashSet<T> &lhs, const FlatHashSet<T> &rhs)
+    {
+        FlatHashSet<T> res(lhs);
+        for (const T &elem : rhs)
+        {
+            if (res.contains(elem))
+            {
+                res.remove(elem);
+            }
+        }
         return res;
     }
 } // CZ

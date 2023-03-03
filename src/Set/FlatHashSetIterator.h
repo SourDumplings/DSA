@@ -54,7 +54,7 @@ namespace CZ
         {
             ASSERT_RELEASE(*this != _pFlatHashSet->end(), "Error from FlatHashSetIterator::operator++: cannot move forward from table end iterator.");
 
-            for (typename FlatHashSet<T>::Rank i = _bucketIndex; i <= _pFlatHashSet->_lastNonEmptyBucketIndex; ++i)
+            for (typename FlatHashSet<T>::Rank i = _bucketIndex + 1; i <= _pFlatHashSet->_lastNonEmptyBucketIndex; ++i)
             {
                 if ((_pFlatHashSet->_table)[i].value())
                 {
@@ -78,7 +78,7 @@ namespace CZ
         {
             ASSERT_RELEASE(*this != _pFlatHashSet->begin(), "Error from FlatHashSetIterator::operator++: cannot move backward from table begin iterator.");
 
-            for (typename FlatHashSet<T>::Rank i = _bucketIndex; _pFlatHashSet->_firstNonEmptyBucketIndex <= i; --i)
+            for (typename FlatHashSet<T>::Rank i = _bucketIndex - 1; _pFlatHashSet->_firstNonEmptyBucketIndex <= i; --i)
             {
                 if ((_pFlatHashSet->_table)[i].value())
                 {

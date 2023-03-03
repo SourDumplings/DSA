@@ -72,5 +72,11 @@ int main(int argc, char const *argv[])
     s6.print_info("s6");
     s3.print_info("s3");
 
+    // 测试集合算法
+    HashSet<int> s7({1, 8, 9, 10, 2});
+    (s6 + s7).print_info("s6 + s7");
+    (s6 - s7).print_info("s6 - s7");
+    HashSet<int>::intersect(s6, s7).print_info("s6 inter s7");
+
     return 0;
 }

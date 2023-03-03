@@ -366,6 +366,51 @@ namespace CZ
         for (; res < lowerLimit; res *= 2);
         return res;
     }
+
+    template <typename T>
+    HashSet<T> HashSet<T>::merge(const HashSet<T> &s1, const HashSet<T> &s2)
+    {
+        HashSet<T> res(s1);
+        for (const T &elem : s2)
+        {
+            res.insert(elem);
+        }
+        return res;
+    }
+
+    template <typename T>
+    HashSet<T> HashSet<T>::intersect(const HashSet<T> &s1, const HashSet<T> &s2)
+    {
+        HashSet<T> res;
+        for (const T &elem : s1)
+        {
+            if (s2.contains(elem))
+            {
+                res.insert(elem);
+            }
+        }
+        return res;
+    }
+
+    template <typename T>
+    HashSet<T> operator+(const HashSet<T> &lhs, const HashSet<T> &rhs)
+    {
+        return HashSet<T>::merge(lhs, rhs);
+    }
+
+    template <typename T>
+    HashSet<T> operator-(const HashSet<T> &lhs, const HashSet<T> &rhs)
+    {
+        HashSet<T> res(lhs);
+        for (const T &elem : rhs)
+        {
+            if (res.contains(elem))
+            {
+                res.remove(elem);
+            }
+        }
+        return res;
+    }
 } // CZ
 
 #endif // HASH_SET_IMPLEMENTATION_H

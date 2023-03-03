@@ -22,8 +22,8 @@ using namespace CZ;
 
 int main(int argc, char const *argv[])
 {
-    // FlatHashSet<int> d(10);
-    FlatHashSet<int> d(10, FlatHashSetAccessories::SQUARE_PROBING);
+    // FlatHashSet<int> d;
+    FlatHashSet<int> d(FlatHashSetAccessories::SQUARE_PROBING);
     d.print_info("d");
 
     // 测试插入操作
@@ -70,6 +70,39 @@ int main(int argc, char const *argv[])
     s6 = std::move(s3);
     s6.print_info("s6");
     s3.print_info("s3");
+
+    // 测试集合算法
+    FlatHashSet<int> s7({ 1, 2 ,33, 9, 10, 100, 88 });
+    (s6 + s7).print_info("s6 + s7");
+    (s6 - s7).print_info("s6 - s7");
+    FlatHashSet<int>::intersect(s6, s7).print_info("s6 inter s7");
+
+    // 大数据测试
+    /* size_t testNo = 10;
+    size_t elemNum = 10000;
+    FlatHashSet<int> s8(FlatHashSetAccessories::LINEAR_PROBING), s9(FlatHashSetAccessories::SQUARE_PROBING);
+    for (size_t i = 0; i < testNo; i++)
+    {
+        printf("Test %lu...\n", i);
+        printf("test insert...\n");
+        for (size_t j = 0; j < elemNum; j++)
+        {
+            int num = rand() % elemNum;
+            s8.insert(num);
+            s9.insert(num);
+        }
+        printf("test remove...\n");
+        for (size_t j = 0; j < elemNum; j++)
+        {
+            int num = rand() % elemNum;
+            s8.remove(num);
+            s9.remove(num);
+        }
+        s8.clear();
+        s9.clear();
+        printf("\n");
+    } */
+
     return 0;
 }
 

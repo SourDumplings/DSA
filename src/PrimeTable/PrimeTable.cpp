@@ -19,6 +19,8 @@ namespace CZ
     PrimeTable::PrimeTable(PrimeTable::Rank upperLimit_) : _upperLimit(upperLimit_),
                                                            _size(0) { _build_table(); }
 
+    PrimeTable g_primeTable(1000); // 全局放一个 1000 大小的素数表
+
     // 素数表中素数的个数
     PrimeTable::Rank PrimeTable::size() const { return _size; }
     // 素数表的上界

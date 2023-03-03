@@ -42,9 +42,12 @@ namespace CZ
         using RankPlus = typename Vector<KVPair<T, bool>>::RankPlus;
         using Iterator = FlatHashSetIterator<T>;
 
-        static const Rank INITIAL_TABLE_SIZE = 32;
+        /* 
+            当散列表大小为 4k + 3，k ∈ N+，形式的素数时，平方探测法一定能够探测出所有的空位
+         */
+        static const Rank INITIAL_TABLE_SIZE = 23;
 
-        // 构造函数，默认大小 32，使用取模作为哈希函数
+        // 构造函数，默认大小 23，使用取模作为哈希函数
         FlatHashSet(const std::initializer_list<T> &l, const FlatHashSetAccessories::ProbingMethod probingMethod_ = FlatHashSetAccessories::LINEAR_PROBING);
 
         FlatHashSet(const T *begin, const T *end, const FlatHashSetAccessories::ProbingMethod probingMethod_ = FlatHashSetAccessories::LINEAR_PROBING);
@@ -52,7 +55,7 @@ namespace CZ
         template <typename It>
         FlatHashSet(const It &begin, const It &end, const FlatHashSetAccessories::ProbingMethod probingMethod_ = FlatHashSetAccessories::LINEAR_PROBING);
 
-        FlatHashSet(const Rank tableSize_ = INITIAL_TABLE_SIZE, const FlatHashSetAccessories::ProbingMethod probingMethod_ = FlatHashSetAccessories::LINEAR_PROBING);
+        FlatHashSet(const FlatHashSetAccessories::ProbingMethod probingMethod_ = FlatHashSetAccessories::LINEAR_PROBING);
 
         FlatHashSet(const FlatHashSet<T> &rFlatHashSet) = default;
 
@@ -84,6 +87,9 @@ namespace CZ
         // 列出所有存在的元素
         void print_info(const char *name = "") const;
 
+        static FlatHashSet<T> merge(const FlatHashSet<T> &s1, const FlatHashSet<T> &s2);
+        static FlatHashSet<T> intersect(const FlatHashSet<T> &s1, const FlatHashSet<T> &s2);
+
     private:
         Vector<KVPair<T, bool>> _table; // 哈希表，存储 KVPair，键是数据，值代表其存在与否
         Rank _size;
@@ -112,11 +118,16 @@ namespace CZ
         template <typename It>
         void _construct_from(const It &begin, const It &end);
 
-        Rank _get_suitable_table_size(Rank lowerLimit) const;
-        
         // 将元素前压到前面去
         void _compress_forward();
+
     };
+
+    template <typename T>
+    FlatHashSet<T> operator+(const FlatHashSet<T> &lhs, const FlatHashSet<T> &rhs);
+
+    template <typename T>
+    FlatHashSet<T> operator-(const FlatHashSet<T> &lhs, const FlatHashSet<T> &rhs);
 } // CZ
 
 #include "FlatHashSet_implementation.h"

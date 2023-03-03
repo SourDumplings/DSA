@@ -19,12 +19,7 @@ namespace CZ
     template <typename T>
     TreeSet<T> operator+(const TreeSet<T> &lhs, const TreeSet<T> &rhs)
     {
-        TreeSet<T> sumTreeSet(lhs);
-        for (typename TreeSet<T>::Iterator it = rhs.begin(); it != rhs.end(); ++it)
-        {
-            sumTreeSet.insert(*it);
-        }
-        return sumTreeSet;
+        return TreeSet<T>::merge(lhs, rhs);
     }
 
     template <typename T>
