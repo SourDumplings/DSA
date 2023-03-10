@@ -78,8 +78,8 @@ int main(int argc, char const *argv[])
     FlatHashSet<int>::intersect(s6, s7).print_info("s6 inter s7");
 
     // 大数据测试
-    /* size_t testNo = 10;
-    size_t elemNum = 10000;
+    size_t testNo = 10;
+    size_t elemNum = 1000;
     FlatHashSet<int> s8(FlatHashSetAccessories::LINEAR_PROBING), s9(FlatHashSetAccessories::SQUARE_PROBING);
     for (size_t i = 0; i < testNo; i++)
     {
@@ -91,6 +91,8 @@ int main(int argc, char const *argv[])
             s8.insert(num);
             s9.insert(num);
         }
+        cout << "s8.size() = " << s8.size() << endl;
+        cout << "s9.size() = " << s9.size() << endl;
         printf("test remove...\n");
         for (size_t j = 0; j < elemNum; j++)
         {
@@ -101,7 +103,7 @@ int main(int argc, char const *argv[])
         s8.clear();
         s9.clear();
         printf("\n");
-    } */
+    }
 
     return 0;
 }

@@ -14,18 +14,18 @@ using namespace CZ;
 int main(int argc, char const *argv[])
 {
 
-    Deque<int> dq1(20, 5);
+    Deque<int> dq1(20);
     Deque<int> dq2;
     Deque<int> dq3(dq1.begin(), dq1.end());
     Deque<int> dq4(dq1.begin(), dq1.begin() + 7);
     Deque<int> dq41(dq1.begin(), dq1.begin() + 10);
-    int a[] = {1, 3, 5, 7, 9, 11, 13, 15};
+    int a[] = { 1, 3, 5, 7, 9, 11, 13, 15 };
     Deque<int> dq5(a, a + 5);
-    Deque<int> dq6({2, 4, 6, 8, 10});
-    Deque<int> dq61({2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28}, 3);
+    Deque<int> dq6({ 2, 4, 6, 8, 10 });
+    Deque<int> dq61({ 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28 });
     Deque<int> dq7(dq6);
     Deque<int> dq8(dq61.end() - 3, dq61.end());
-    Deque<int> dq81(dq61.begin(), dq61.end() - 8, 4);
+    Deque<int> dq81(dq61.begin(), dq61.end() - 8);
 
     std::cout << "dq6: " << dq6 << std::endl;
     std::cout << "dq6.hash(): " << dq6.hash() << std::endl;
@@ -134,6 +134,12 @@ int main(int argc, char const *argv[])
     //     dq2.print_info("dq2");
     // }
 
+    // push_pop 交错测试
+    // dq2.push_front(1);
+    // dq2.pop_front();
+    // dq2.push_front(2);
+    // dq2.print_info("dq2");
+
     // 测试 erase
     // dq61.print_info("dq61");
     // dq61.erase(dq61.end() - 1);
@@ -225,5 +231,22 @@ int main(int argc, char const *argv[])
     dq2.remove(11);
     dq2.print_info("dq2");
 
+    // 大数据测试
+/*     Deque<int> dq9;
+    uint32_t size = 1000;
+    srand(1678349090);
+    for (uint32_t j = 0; j < size; j++)
+    {
+        int value = rand() % size;
+        dq9.push_back(value);
+    }
+    for (uint32_t j = 0; j < size; j++)
+    {
+        uint32_t idx = rand() % dq9.size();
+        dq9.print_info("dq9");
+        std::cout << "erase at pos " << idx << std::endl;
+
+        dq9.erase(dq9.begin() + idx);
+    } */
     return 0;
 }

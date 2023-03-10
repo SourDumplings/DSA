@@ -133,9 +133,18 @@ namespace CZ
         FlatHashSet<T>::_linear_probing(const typename FlatHashSet<T>::Rank h) const
     {
         typename FlatHashSet<T>::Rank ret = table_size();
-        for (typename FlatHashSet<T>::Rank i = h, count = 0; count != table_size();
-            ++count, i = (i + 1) % table_size())
+        for (typename FlatHashSet<T>::Rank i = h, count = 0, n = 0; n < table_size(); ++n)
         {
+            if (n % 2 == 0)
+            {
+                i = (i + count) % table_size();
+            }
+            else
+            {
+                i = (i - count) % table_size();
+                ++count;
+            }
+
             if (!_table[i].value())
             {
                 ret = i;
@@ -150,7 +159,7 @@ namespace CZ
         FlatHashSet<T>::_square_probing(const typename FlatHashSet<T>::Rank h) const
     {
         typename FlatHashSet<T>::Rank ret = table_size();
-        for (typename FlatHashSet<T>::Rank i = h, count = 0, n = 0; count < table_size(); ++n)
+        for (typename FlatHashSet<T>::Rank i = h, count = 0, n = 0; n < table_size(); ++n)
         {
             if (n % 2 == 0)
             {
@@ -177,9 +186,18 @@ namespace CZ
             const T &v) const
     {
         typename FlatHashSet<T>::Rank ret = table_size();
-        for (typename FlatHashSet<T>::Rank i = h, count = 0; count != table_size(); ++count)
+        for (typename FlatHashSet<T>::Rank i = h, count = 0, n = 0; n < table_size(); ++n)
         {
-            i = (i + count * count) % table_size();
+            if (n % 2 == 0)
+            {
+                i = (i + count) % table_size();
+            }
+            else
+            {
+                i = (i - count) % table_size();
+                ++count;
+            }
+
             if (!_table[i].value())
             {
                 break;
@@ -199,7 +217,7 @@ namespace CZ
             const T &v) const
     {
         typename FlatHashSet<T>::Rank ret = table_size();
-        for (typename FlatHashSet<T>::Rank i = h, count = 0, n = 0; count < table_size(); ++n)
+        for (typename FlatHashSet<T>::Rank i = h, count = 0, n = 0; n < table_size(); ++n)
         {
             if (n % 2 == 0)
             {
@@ -334,14 +352,17 @@ namespace CZ
         while (true)
         {
             ++k;
-            while (g_primeTable.upper_limit() < 4 * k + 3)
+            newTableSize = 4 * k + 3;
+            while (g_primeTable.upper_limit() < newTableSize)
             {
                 g_primeTable.rebuild(g_primeTable.upper_limit() * 2);
             }
 
-            if (g_primeTable.is_prime(4 * k + 3))
+
+            if (g_primeTable.is_prime(newTableSize)
+                && oldTableSize < newTableSize * 2
+            )
             {
-                newTableSize = 4 * k + 3;
                 break;
             }
         }

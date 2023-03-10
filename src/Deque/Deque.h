@@ -31,14 +31,20 @@ namespace CZ
         using Iterator = DequeIterator<T>;
         using Node = T *;
 
+        static constexpr Rank DEFAULT_BUFFER_SIZE = 10;
+
         // 构造函数
         // 构造函数 1：容量为 c，规模为 s，所有元素初始为 v，缓冲区大小为 bufferSize_
-        Deque(Rank s = 0, T v = T(), Rank bufferSize_ = 10);
+        Deque(Rank s = 0);
+
         // 构造函数 2：迭代器区间的构造
-        Deque(const Iterator &begin, const Iterator &end, Rank bufferSize_ = 10);
-        Deque(const T *begin, const T *end, Rank bufferSize_ = 10);
+        template <typename It>
+        Deque(const It &begin, const It &end, Rank bufferSize_ = DEFAULT_BUFFER_SIZE);
+
+        Deque(const T *begin, const T *end, Rank bufferSize_ = DEFAULT_BUFFER_SIZE);
+
         // 构造函数 3：初始化列表构造
-        Deque(const std::initializer_list<T> &initL, Rank bufferSize_ = 10);
+        Deque(const std::initializer_list<T> &initL, Rank bufferSize_ = DEFAULT_BUFFER_SIZE);
 
         // 复制构造函数
         Deque(const Deque<T> &dq);
@@ -91,21 +97,21 @@ namespace CZ
     private:
         static const Rank MIN_BUFFER_SIZE = 5;
 
-        Rank _bufferSize;
+        const Rank _bufferSize;
         Rank _mapSize;
         Node *_bufferMap; // 缓冲区 map，默认左右都要有一个空隙
         Rank _size;       // 元素个数
-        Iterator _start;  // 首元素迭代器，其中 cur 指向首元素
-        Iterator _finish; // 尾元素迭代器，其中 cur 指向尾元素的后一个元素
+        Iterator _begin;  // 首元素迭代器，其中 cur 指向首元素
+        Iterator _end; // 尾元素迭代器，其中 cur 指向尾元素的后一个元素
 
         template <typename It>
-        void init_from(const It &begin, const It &end, Rank bufferSize_ = 10);
+        void init_from(const It &begin, const It &end);
 
         void free();
 
-        void expand();            // 双向伸展，2 倍扩容
-        bool need_shrink() const; // 判断是否需要缩容，如果有元素的 buffer 数小于总 buffer 数（bufferMap 的大小）的一半就返回 true
-        void shrink();            // 双向收缩，2 倍缩容，会判断是否需要缩容
+        void _expand();            // 双向伸展，2 倍扩容
+        bool _need_shrink() const; // 判断是否需要缩容，如果有元素的 buffer 数小于总 buffer 数（bufferMap 的大小）的一半就返回 true
+        void _shrink();            // 双向收缩，2 倍缩容，会判断是否需要缩容
 
         // 将 startIt 之后的所有元素向后移动 n 位（包括 startIt 所指向的元素），必要时扩容，返回由于后移形成的第一个空位的迭代器
         Iterator move_backward(Iterator startIt, Rank n);

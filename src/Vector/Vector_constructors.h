@@ -17,17 +17,24 @@ Vector的构造函数
 namespace CZ
 {
     template <typename T>
-    Vector<T>::Vector(Vector<T>::Rank s, T v)
+    Vector<T>::Vector(Vector<T>::Rank s)
     {
         _elem = new T[_capacity = s * 2];
         for (_size = 0; _size != s; ++_size)
         {
-            _elem[_size] = v;
+            _elem[_size] = T();
         }
     }
 
     template <typename T>
-    Vector<T>::Vector(const Iterator &begin, const Iterator &end)
+    template <typename It>
+    Vector<T>::Vector(const It &begin, const It &end)
+    {
+        init_from(begin, end);
+    }
+
+    template <typename T>
+    Vector<T>::Vector(const T *begin, const T *end)
     {
         init_from(begin, end);
     }

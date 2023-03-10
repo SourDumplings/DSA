@@ -17,13 +17,13 @@ List类模板的构造函数
 namespace CZ
 {
     template <typename T>
-    List<T>::List(Rank n, T data): _size(n)
+    List<T>::List(Rank n): _size(n)
     {
         init();
         ListNode<T> *last = _head;
         for (uint32_t i = 0; i != n; ++i)
         {
-            last = last->insert_as_next(data);
+            last = last->insert_as_next(T());
             last->_prev->_next = last;
             last->_next->_prev = last;
         }
@@ -36,7 +36,8 @@ namespace CZ
     }
 
     template <typename T>
-    List<T>::List(Iterator begin, Iterator end)
+    template <typename It>
+    List<T>::List(const It &begin, const It &end)
     {
         init_from(begin, end);
     }

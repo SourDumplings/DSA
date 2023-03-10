@@ -32,9 +32,13 @@ namespace CZ
         using Iterator = ListIterator<T>;
 
 		// 构造函数
-        List(Rank n = 0, T data = T());
+        List(Rank n = 0);
+
         List(const T *begin, const T *end);
-        List(Iterator begin, Iterator end);
+
+        template <typename It>
+        List(const It &begin, const It &end);
+
         List(const std::initializer_list<T> &L);
 
         // 复制构造函数
@@ -120,8 +124,9 @@ namespace CZ
     protected:
         void free();
         void init();
-        void init_from(const T *begin, const T *end);
-        void init_from(Iterator begin, Iterator end);
+
+        template <typename It>
+        void init_from(const It &begin, const It &end);
 
         // 归并排序
         template <typename Cmp>

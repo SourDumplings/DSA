@@ -30,10 +30,15 @@ namespace CZ
         using RankPlus = typename AbstractSeqIterableContainer<T, RandomIterator<T>>::RankPlus;
 
         // 构造函数
-        // 构造函数 1：容量为 c = 2 * s，规模为 s，所有元素初始为 v
-        Vector(Rank s = 0, T v = T());
+        // 构造函数 1：容量为 c = 2 * s，规模为 s，所有元素初始为默认值
+        Vector(Rank s = 0);
+
         // 构造函数 2：迭代器区间构造
-        Vector(const Iterator &begin, const Iterator &end);
+        Vector(const T *begin, const T *end);
+
+        template <typename It>
+        Vector(const It &begin, const It &end);
+
         // 构造函数 3：不定参数个数的构造函数
         Vector(const std::initializer_list<T> &initL);
 
@@ -91,7 +96,8 @@ namespace CZ
 
     protected:
         //迭代器区间的复制
-        void init_from(const Iterator &begin, const Iterator &end);
+        template <typename It>
+        void init_from(const It &begin, const It &end);
 
         // 析构辅助方法
         void free();

@@ -24,7 +24,7 @@ int main(int argc, char const *argv[])
 {
     // 测试构造函数
     int a[]{1, 3, 6, 7, 8, 10, 100};
-    List<int> l1, l2(5), l3(6, 3), l4(a, a + 5);
+    List<int> l1, l2(5), l3(6), l4(a, a + 5);
     List<int> l5(l4.begin(), l4.end());
 
     l1.print_info("l1");

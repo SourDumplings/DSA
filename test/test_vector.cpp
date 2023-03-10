@@ -20,111 +20,29 @@
 using namespace CZ;
 using namespace std;
 
-void test_vector_perf(Vector<int> &v1, vector<int> &v2, int a[], int size)
-{
-    struct timeval tv;
-    __suseconds_t start, stop;
-
-    // 测试 push_back
-    gettimeofday(&tv, NULL);
-    start = tv.tv_sec * 1000000 + tv.tv_usec;
-    for (int i = 0; i < size; i++)
-    {
-        v1.push_back(a[i]);
-    }
-    gettimeofday(&tv, NULL);
-    stop = tv.tv_sec * 1000000 + tv.tv_usec;
-    cout << "Vector push_back cost: " << stop - start << " micro seconds" << endl;
-
-    gettimeofday(&tv, NULL);
-    start = tv.tv_sec * 1000000 + tv.tv_usec;
-    for (int i = 0; i < size; i++)
-    {
-        v2.push_back(a[i]);
-    }
-    gettimeofday(&tv, NULL);
-    stop = tv.tv_sec * 1000000 + tv.tv_usec;
-    cout << "vector push_back cost: " << stop - start << " micro seconds" << endl;
-
-    // 测试 pop_back
-    gettimeofday(&tv, NULL);
-    start = tv.tv_sec * 1000000 + tv.tv_usec;
-    for (int i = 0; i < size; i++)
-    {
-        v1.pop_back();
-    }
-    gettimeofday(&tv, NULL);
-    stop = tv.tv_sec * 1000000 + tv.tv_usec;
-    cout << "Vector pop_back cost: " << stop - start << " micro seconds" << endl;
-
-    gettimeofday(&tv, NULL);
-    start = tv.tv_sec * 1000000 + tv.tv_usec;
-    for (int i = 0; i < size; i++)
-    {
-        v2.pop_back();
-    }
-    gettimeofday(&tv, NULL);
-    stop = tv.tv_sec * 1000000 + tv.tv_usec;
-    cout << "vector pop_back cost: " << stop - start << " micro seconds" << endl;
-
-    // 测试 erase
-    int erasePos[size];
-    for (int i = 0; i < size; ++i)
-    {
-        erasePos[i] = rand() % size;
-    }
-
-    gettimeofday(&tv, NULL);
-    start = tv.tv_sec * 1000000 + tv.tv_usec;
-    for (int i = 0; i < size; i++)
-    {
-        if (static_cast<uint32_t>(erasePos[i]) < v1.size())
-        {
-            v1.erase(v1.begin() + erasePos[i]);
-        }
-    }
-    gettimeofday(&tv, NULL);
-    stop = tv.tv_sec * 1000000 + tv.tv_usec;
-    cout << "Vector erase cost: " << stop - start << " micro seconds" << endl;
-
-    gettimeofday(&tv, NULL);
-    start = tv.tv_sec * 1000000 + tv.tv_usec;
-    for (int i = 0; i < size; i++)
-    {
-        if (static_cast<uint32_t>(erasePos[i]) < v2.size())
-        {
-            v2.erase(v2.begin() + erasePos[i]);
-        }
-    }
-    gettimeofday(&tv, NULL);
-    stop = tv.tv_sec * 1000000 + tv.tv_usec;
-    cout << "vector erase cost: " << stop - start << " micro seconds" << endl;
-
-}
-
 int main(int argc, char const *argv[])
 {
     // // 测试构造函数和数据访问接口
-    // int a[10] = {1, 2, 4, 5};
-    // Vector<int> v1;
-    // Vector<int> v2(10);
-    // Vector<int> v3(5, 1);
-    // Vector<int> v4(v3);
-    // Vector<int> v5(a, a+3);
-    // Vector<int> v6({1, 4, 7, 8, 3, 2, 8});
+    int a[10] = { 1, 2, 4, 5 };
+    Vector<int> v1;
+    Vector<int> v2(10);
+    Vector<int> v3(5);
+    Vector<int> v4(v3);
+    Vector<int> v5(a, a + 3);
+    Vector<int> v6({ 1, 4, 7, 8, 3, 2, 8 });
 
-    // printf("v6.at(1) = %d\n", v6.at(1));
-    // printf("v6.at(4) = %d\n", v6.at(4));
-    // printf("v6.at(-1) = %d\n", v6.at(-1));
-    // printf("v6.at(-3) = %d\n", v6.at(-3));
-    // printf("v3.at(1) = %d\n", v3.at(1));
+    printf("v6.at(1) = %d\n", v6.at(1));
+    printf("v6.at(4) = %d\n", v6.at(4));
+    printf("v6.at(-1) = %d\n", v6.at(-1));
+    printf("v6.at(-3) = %d\n", v6.at(-3));
+    printf("v3.at(1) = %d\n", v3.at(1));
 
     // 测试 c_str 和 hash
-    // printf("v6.c_str() = %s, v6.hash() = %lu\n", v6.c_str(), v6.hash());
-    // std::cout << "v2: " << v2 << std::endl;
-    // std::cout << "v5: " << v5 << std::endl;
-    // std::cout << "v6.c_str(): " << v6.c_str() << std::endl;
-    // std::cout << "v6: " << v6 << std::endl;
+    printf("v6.c_str() = %s, v6.hash() = %lu\n", v6.c_str(), v6.hash());
+    std::cout << "v2: " << v2 << std::endl;
+    std::cout << "v5: " << v5 << std::endl;
+    std::cout << "v6.c_str(): " << v6.c_str() << std::endl;
+    std::cout << "v6: " << v6 << std::endl;
 
     // Vector<string> vs1(20), vs2(3, "abc"), vs3({"123", "abx", "sada1"});
 
@@ -293,23 +211,5 @@ int main(int argc, char const *argv[])
     // vs2.print_info("vs2");
     // vs2.assign(vs2.begin(), vs2.end() - 2);
     // vs2.print_info("vs2");
-
-    // 性能测试
-    const int test = 10;
-    const int size = 1000000;
-    srand(0);
-    for (int i = 0; i < test; i++)
-    {
-        int a[size];
-        for (int j = 0; j < size; j++)
-        {
-            a[j] = rand() % size;
-        }
-        Vector<int> v1;
-        vector<int> v2;
-        printf("\n\nTest %d....\n", i);
-        test_vector_perf(v1, v2, a, size);
-    }
-
     return 0;
 }

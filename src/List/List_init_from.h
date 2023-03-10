@@ -17,28 +17,15 @@
 namespace CZ
 {
     template <typename T>
-    void List<T>::init_from(const T *begin, const T *end)
+    template <typename It>
+    void List<T>::init_from(const It &begin, const It &end)
     {
         init();
         ListNode<T> *last = _head;
-        for (T *it = const_cast<T*>(begin); it != end; ++it)
+        It it = begin;
+        while (it != end)
         {
-            last = last->insert_as_next(*it);
-            last->_prev->_next = last;
-            last->_next->_prev = last;
-            ++_size;
-        }
-        return;
-    }
-
-    template <typename T>
-    void List<T>::init_from(Iterator begin, Iterator end)
-    {
-        init();
-        ListNode<T> *last = _head;
-        while (begin != end)
-        {
-            last = last->insert_as_next(*begin++);
+            last = last->insert_as_next(*it++);
             last->_prev->_next = last;
             last->_next->_prev = last;
             ++_size;

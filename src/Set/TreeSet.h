@@ -35,9 +35,12 @@ namespace CZ
 
         TreeSet();
         TreeSet(const std::initializer_list<T> &l);
+        
         TreeSet(const T *begin, const T *end);
+
         template <typename It>
         TreeSet(const It &begin, const It &end);
+
         TreeSet(const TreeSet<T> &s);
         TreeSet(TreeSet<T> &&s);
 
