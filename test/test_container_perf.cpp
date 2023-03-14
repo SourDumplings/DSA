@@ -89,10 +89,10 @@ int main(int argc, char const *argv[])
         cst10.test_push_back_and_erase_at_random_pos(randSeed, cSize);
         cst11.test_push_back_and_erase_at_random_pos(randSeed, cSize);
 
-        // cst8.test_push_pop_back_front_randomly(randSeed, cSize);
-        // cst9.test_push_pop_back_front_randomly(randSeed, cSize);
-        // cst10.test_push_pop_back_front_randomly(randSeed, cSize);
-        // cst11.test_push_pop_back_front_randomly(randSeed, cSize);
+        cst8.test_push_pop_back_front_randomly(randSeed, cSize);
+        cst9.test_push_pop_back_front_randomly(randSeed, cSize);
+        cst10.test_push_pop_back_front_randomly(randSeed, cSize);
+        cst11.test_push_pop_back_front_randomly(randSeed, cSize);
     }
 
 

@@ -31,7 +31,7 @@ namespace CZ
         using Iterator = DequeIterator<T>;
         using Node = T *;
 
-        static constexpr Rank DEFAULT_BUFFER_SIZE = 10;
+        static constexpr Rank DEFAULT_BUFFER_SIZE = 1000;
 
         // 构造函数
         // 构造函数 1：容量为 c，规模为 s，所有元素初始为 v，缓冲区大小为 bufferSize_
@@ -48,6 +48,8 @@ namespace CZ
 
         // 复制构造函数
         Deque(const Deque<T> &dq);
+
+        Deque(Deque<T> &&dq);
 
         // 析构函数
         virtual ~Deque();
@@ -105,20 +107,25 @@ namespace CZ
         Iterator _end; // 尾元素迭代器，其中 cur 指向尾元素的后一个元素
 
         template <typename It>
-        void init_from(const It &begin, const It &end);
+        void _init_from(const It &begin, const It &end);
 
-        void free();
+        void _free();
 
         void _expand();            // 双向伸展，2 倍扩容
         bool _need_shrink() const; // 判断是否需要缩容，如果有元素的 buffer 数小于总 buffer 数（bufferMap 的大小）的一半就返回 true
         void _shrink();            // 双向收缩，2 倍缩容，会判断是否需要缩容
 
         // 将 startIt 之后的所有元素向后移动 n 位（包括 startIt 所指向的元素），必要时扩容，返回由于后移形成的第一个空位的迭代器
-        Iterator move_backward(Iterator startIt, Rank n);
+        Iterator _move_backward(Iterator startIt, Rank n);
+
         // 将 startIt 之后的所有元素向前移动 n 位（包括 startIt 所指向的元素），必要时缩容，返回被迁移的第一个元素的迭代器
-        // 注意前移不会扩容，即前移不会超过第一个元素的位置
+        // 注意前移不会扩容，并且前移不会超过第一个元素的位置
         // 前移元素会覆盖之前的元素
-        Iterator move_forward(Iterator startIt, Rank n);
+        Iterator _move_forward(Iterator startIt, Rank n);
+
+        // 将由 srcPos 起始的 n 个元素移动到 destPos
+        // 不改变容器结构即特征变量
+        void _do_move_elements(Rank srcPos, Rank destPos, Rank n);
     };
 }
 

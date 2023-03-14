@@ -23,26 +23,26 @@ using namespace std;
 int main(int argc, char const *argv[])
 {
     // // 测试构造函数和数据访问接口
-    int a[10] = { 1, 2, 4, 5 };
-    Vector<int> v1;
-    Vector<int> v2(10);
-    Vector<int> v3(5);
-    Vector<int> v4(v3);
-    Vector<int> v5(a, a + 3);
-    Vector<int> v6({ 1, 4, 7, 8, 3, 2, 8 });
+    // int a[10] = { 1, 2, 4, 5 };
+    // Vector<int> v1;
+    // Vector<int> v2(10);
+    // Vector<int> v3(5);
+    // Vector<int> v4(v3);
+    // Vector<int> v5(a, a + 3);
+    // Vector<int> v6({ 1, 4, 7, 8, 3, 2, 8 });
 
-    printf("v6.at(1) = %d\n", v6.at(1));
-    printf("v6.at(4) = %d\n", v6.at(4));
-    printf("v6.at(-1) = %d\n", v6.at(-1));
-    printf("v6.at(-3) = %d\n", v6.at(-3));
-    printf("v3.at(1) = %d\n", v3.at(1));
+    // printf("v6.at(1) = %d\n", v6.at(1));
+    // printf("v6.at(4) = %d\n", v6.at(4));
+    // printf("v6.at(-1) = %d\n", v6.at(-1));
+    // printf("v6.at(-3) = %d\n", v6.at(-3));
+    // printf("v3.at(1) = %d\n", v3.at(1));
 
     // 测试 c_str 和 hash
-    printf("v6.c_str() = %s, v6.hash() = %lu\n", v6.c_str(), v6.hash());
-    std::cout << "v2: " << v2 << std::endl;
-    std::cout << "v5: " << v5 << std::endl;
-    std::cout << "v6.c_str(): " << v6.c_str() << std::endl;
-    std::cout << "v6: " << v6 << std::endl;
+    // printf("v6.c_str() = %s, v6.hash() = %lu\n", v6.c_str(), v6.hash());
+    // std::cout << "v2: " << v2 << std::endl;
+    // std::cout << "v5: " << v5 << std::endl;
+    // std::cout << "v6.c_str(): " << v6.c_str() << std::endl;
+    // std::cout << "v6: " << v6 << std::endl;
 
     // Vector<string> vs1(20), vs2(3, "abc"), vs3({"123", "abx", "sada1"});
 
@@ -124,92 +124,89 @@ int main(int argc, char const *argv[])
     // putchar('\n');
 
     // 测试赋值操作符和索引操作符
-    // Vector<int> v1({1, 2, 3}), v2({2, 3, 5}), v3({6, 7});
-    // Vector<string> vs1({"abc", "ac"}), vs2({"cde", "fg"});
+    Vector<int> v1({1, 2, 3}), v2({2, 3, 5}), v3({6, 7});
+    Vector<string> vs6({"abc", "ac"}), vs7({"cde", "fg"});
 
-    // v1.print_info("v1");
-    // v1 = v2;
-    // v1.print_info("v1");
-    // v2.print_info("v2");
-    // v1 = v1;
-    // v1.print_info("v1");
-    // v3.print_info("v3");
-    // v1 = std::move(v3);
-    // v1.print_info("v1");
-    // v3.print_info("v3");
-    // v1 = std::move(v1);
-    // v1.print_info("v1");
-    // vs1.print_info("vs1");
-    // vs2.print_info("vs2");
-    // vs1 = std::move(vs2);
-    // vs1.print_info("vs1");
-    // vs2.print_info("vs2");
-    // vs1 = std::move(vs1);
-    // vs1.print_info("vs1");
+    v1.print_info("v1");
+    v1 = v2;
+    v1.print_info("v1");
+    v2.print_info("v2");
+    v1 = v1;
+    v1.print_info("v1");
+    v3.print_info("v3");
+    v1 = std::move(v3);
+    v1.print_info("v1");
+    v3.print_info("v3");
+    v1 = std::move(v1);
+    v1.print_info("v1");
+    vs6.print_info("vs6");
+    vs7.print_info("vs7");
+    vs6 = std::move(vs7);
+    vs6.print_info("vs6");
+    vs7.print_info("vs7");
+    vs6 = std::move(vs6);
+    vs6.print_info("vs6");
 
-    // putchar('\n');
-    // printf("v1[0] = %d, v1[1] = %d\n", v1[0], v1[1]);
-    // printf("vs1[0] = %s, vs1[1] = %s\n", vs1[0].c_str(), vs1[1].c_str());
-    // // printf("v2[3] = %d\n", v2[3]);
+    putchar('\n');
+    printf("v1[0] = %d, v1[1] = %d\n", v1[0], v1[1]);
+    printf("vs6[0] = %s, vs6[1] = %s\n", vs6[0].c_str(), vs6[1].c_str());
+    // printf("v2[3] = %d\n", v2[3]);
 
     // 测试动态操作
-    // Vector<char> vc1({'a', 'b', 'c'});
-    // Vector<string> vs1({"abc", "hello"}), vs2({"world", "add"});
-    // Vector<int> v1({1, 2, 3});
+    Vector<char> vc1({ 'a', 'b', 'c' });
+    Vector<string> vs8({ "abc", "hello" }), vs9({ "world", "add" });
 
-    // vc1.print_info("vc1");
-    // vc1.push_back('d');
-    // vc1.print_info("vc1");
+    vc1.print_info("vc1");
+    vc1.push_back('d');
+    vc1.print_info("vc1");
 
-    // v1.print_info("v1");
-    // for (int32_t i = 0; i < 10; ++i)
-    // {
-    //     v1.push_back(i + 4);
-    // }
-    // v1.print_info("v1");
-    // for (int32_t i = 0; i < 11; ++i)
-    // {
-    //     v1.pop_back();
-    // }
-    // v1.print_info("v1");
+    v1.print_info("v1");
+    for (int32_t i = 0; i < 10; ++i)
+    {
+        v1.push_back(i + 4);
+    }
+    v1.print_info("v1");
+    for (int32_t i = 0; i < 11; ++i)
+    {
+        v1.pop_back();
+    }
+    v1.print_info("v1");
 
-    // v1.insert(v1.begin(), 0);
-    // v1.print_info("v1");
-    // v1.insert(v1.insert(v1.begin() + 1, 100), 200);
-    // v1.print_info("v1");
+    v1.insert(v1.begin(), 0);
+    v1.print_info("v1");
+    v1.insert(v1.insert(v1.begin() + 1, 100), 200);
+    v1.print_info("v1");
 
-    // vc1.clear();
-    // vc1.print_info("vc1");
+    vc1.clear();
+    vc1.print_info("vc1");
 
-    // vs1.print_info("vs1");
-    // vs1.insert(vs1.end(), vs2.begin(), vs2.end());
-    // vs1.print_info("vs1");
-    // vs1.erase(vs1.begin() + 1);
-    // vs1.print_info("vs1");
-    // vs1.push_back("cz");
-    // vs1.push_back("ztt");
-    // vs1.print_info("vs1");
-    // vs1.erase(vs1.begin()+1, vs1.end()-1);
-    // vs1.print_info("vs1");
-    // // vs1.erase(vs2.begin());
-    // // vs1.print_info("vs1");
-    // // vs1.erase(vs2.begin(), vs2.end());
-    // // vs1.print_info("vs1");
+    vs8.print_info("vs8");
+    vs8.insert(vs8.end(), vs9.begin(), vs9.end());
+    vs8.print_info("vs8");
+    vs8.erase(vs8.begin() + 1);
+    vs8.print_info("vs8");
+    vs8.push_back("cz");
+    vs8.push_back("ztt");
+    vs8.print_info("vs8");
+    vs8.erase(vs8.begin() + 1, vs8.end() - 1);
+    vs8.print_info("vs8");
+    
+    // 无效迭代器测试
+    // vs8.erase(vs9.begin());
+    // vs8.print_info("vs8");
+    // vs8.erase(vs9.begin(), vs9.end());
+    // vs8.print_info("vs8");
 
-    // // 测试按值删除和assign
-    // Vector<string> vs1({"jd", "adsads", "jd", "jd", "dasda", "jd", "ee"}), vs2(vs1);
-    // vs1.print_info("vs1");
-    // vs1.remove("jd");
-    // vs1.print_info("vs1");
-    // vs1.remove("ddd");
-    // // vs1.remove("adsads");
-    // // vs1.remove("ee");
-    // vs1.print_info("vs1");
+    // // 测试按值删除
+    Vector<string> vs10({"jd", "adsads", "jd", "jd", "dasda", "jd", "ee"});
+    Vector<string> vs11(vs10);
+    vs10.print_info("vs10");
+    vs10.remove("jd");
+    vs10.print_info("vs10");
+    vs10.remove("ddd");
+    vs10.remove("adsads");
+    vs10.remove("ee");
+    vs10.print_info("vs10");
 
-    // vs2.print_info("vs2");
-    // vs2.assign(vs1.begin(), vs1.end());
-    // vs2.print_info("vs2");
-    // vs2.assign(vs2.begin(), vs2.end() - 2);
-    // vs2.print_info("vs2");
     return 0;
 }

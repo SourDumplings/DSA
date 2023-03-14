@@ -19,13 +19,17 @@ namespace CZ
     // 迭代器区间的复制
     template <typename T>
     template <typename It>
-    void Vector<T>::init_from(const It &begin, const It &end)
+    void Vector<T>::_init_from(const It &begin, const It &end)
     {
-        _elem = new T[_capacity = 2 * (end - begin)];
-        _size = 0;
-        for (It it = begin; it != end; ++it)
+        clear();
+        _size = end - begin;
+        _capacity = 2 * _size;
+        _elem = reinterpret_cast<T *>(malloc(_capacity * sizeof(T)));
+
+        Rank i = 0;
+        for (It it = begin; it != end; ++it, ++i)
         {
-            _elem[_size++] = *it;
+            new(_elem + i) T(*it);
         }
     }
 }

@@ -45,7 +45,7 @@ namespace CZ
     DequeIterator<T> operator+(const DequeIteratorRank n, const DequeIterator<T> &rhs);
 
     template <typename T>
-    class DequeIterator : public AbstractBaseEntity
+    class DequeIterator: public AbstractBaseEntity
     {
         friend class Deque<T>;
 
@@ -61,7 +61,13 @@ namespace CZ
         typedef random_iterator_tag iterator_category;
 
         // 构造函数
-        DequeIterator() : _cur(nullptr), _first(nullptr), _last(nullptr), _pNode(nullptr) {}
+        DequeIterator(T *cur_ = nullptr, T *first_ = nullptr, T *last_ = nullptr, typename Deque<T>::Node *pNode_ = nullptr)
+            : _cur(cur_)
+            , _first(first_)
+            , _last(last_)
+            , _pNode(pNode_)
+        {
+        }
 
         // 操作符
         T &operator*()
@@ -148,7 +154,7 @@ namespace CZ
 
         HashRank hash() const override
         {
-            return (Hash<CZString>()(get_entity_name()) + Hash<T*>()(_cur)) % CZ_MAX_HASH_VALUE;
+            return (Hash<CZString>()(get_entity_name()) + Hash<T *>()(_cur)) % CZ_MAX_HASH_VALUE;
         }
 
         const char *get_entity_name() const override
@@ -162,7 +168,7 @@ namespace CZ
         T *_last;                        // 当前元素所在的缓冲区中最后一个位置
         typename Deque<T>::Node *_pNode; // 指向缓冲区 map 中的 node 的指针
 
-        void init(T *cur_, T *first_, T *last_, typename Deque<T>::Node *pNode_)
+        void reset(T *cur_, T *first_, T *last_, typename Deque<T>::Node *pNode_)
         {
             _cur = cur_;
             _first = first_;
@@ -196,7 +202,7 @@ namespace CZ
         DequeIterator<T> res;
         if (lhs._first <= lhs._cur - n)
         {
-            res.init(lhs._cur - n, lhs._first, lhs._last, lhs._pNode);
+            res.reset(lhs._cur - n, lhs._first, lhs._last, lhs._pNode);
         }
         else
         {
@@ -205,7 +211,7 @@ namespace CZ
             typename Deque<T>::Rank bufferNumDelta = (n - resInBuffer) % bufferSize == 0 ? (n - resInBuffer) / bufferSize : (n - resInBuffer) / bufferSize + 1;
             typename Deque<T>::Node *newPNode = lhs._pNode - bufferNumDelta;
             typename Deque<T>::Rank posInBuffer = (n - resInBuffer) % bufferSize == 0 ? 0 : bufferSize - (n - resInBuffer) % bufferSize;
-            res.init(*newPNode + posInBuffer, *newPNode, *newPNode + bufferSize - 1, newPNode);
+            res.reset(*newPNode + posInBuffer, *newPNode, *newPNode + bufferSize - 1, newPNode);
         }
         return res;
     }
@@ -240,7 +246,7 @@ namespace CZ
         DequeIterator<T> res;
         if (lhs._cur + n <= lhs._last)
         {
-            res.init(lhs._cur + n, lhs._first, lhs._last, lhs._pNode);
+            res.reset(lhs._cur + n, lhs._first, lhs._last, lhs._pNode);
         }
         else
         {
@@ -249,7 +255,7 @@ namespace CZ
             typename Deque<T>::Rank bufferNumDelta = (n - resInBuffer) % bufferSize == 0 ? (n - resInBuffer) / bufferSize : (n - resInBuffer) / bufferSize + 1;
             typename Deque<T>::Node *newPNode = lhs._pNode + bufferNumDelta;
             typename Deque<T>::Rank posInBuffer = (n - resInBuffer) % bufferSize == 0 ? bufferSize - 1 : (n - resInBuffer) % bufferSize - 1;
-            res.init(*newPNode + posInBuffer, *newPNode, *newPNode + bufferSize - 1, newPNode);
+            res.reset(*newPNode + posInBuffer, *newPNode, *newPNode + bufferSize - 1, newPNode);
         }
 
         return res;

@@ -79,10 +79,7 @@ namespace CZ
         clear();
         _table.resize(_upperLimit + 1);
 
-        if (_upperLimit < 2)
-        {
-            return;
-        }
+        ASSERT_RELEASE(2 <= _upperLimit, "Wrong upperLimit %u", _upperLimit);
 
         _table[0] = _table[1] = false;
         for (PrimeTable::Rank i = 2; i <= _upperLimit; ++i)

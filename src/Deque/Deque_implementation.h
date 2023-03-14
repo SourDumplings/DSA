@@ -29,12 +29,12 @@ namespace CZ
 
         for (Rank i = 0; i < _mapSize; i++)
         {
-            _bufferMap[i] = new T[_bufferSize];
+            _bufferMap[i] = reinterpret_cast<T *>(malloc(_bufferSize * sizeof(T)));
         }
 
         if (s == 0)
         {
-            _begin.init(_bufferMap[0], _bufferMap[0], _bufferMap[0] + _bufferSize - 1, _bufferMap);
+            _begin.reset(_bufferMap[0], _bufferMap[0], _bufferMap[0] + _bufferSize - 1, _bufferMap);
             _end = _begin;
             return;
         }
@@ -47,12 +47,11 @@ namespace CZ
                 if (i == 1)
                 {
                     // 第一个缓冲区
-                    _begin.init(buffer, buffer, buffer + _bufferSize - 1, &buffer);
+                    _begin.reset(buffer, buffer, buffer + _bufferSize - 1, &buffer);
                 }
 
                 for (Rank j = 0; j < _bufferSize && count < s; ++j)
                 {
-                    buffer[j] = T();
                     ++count;
 
                     if (count == s)
@@ -60,12 +59,12 @@ namespace CZ
                         // 已经存完最后一个元素
                         if (j < _bufferSize - 1)
                         {
-                            _end.init(buffer + j + 1, buffer, buffer + _bufferSize - 1, &buffer);
+                            _end.reset(buffer + j + 1, buffer, buffer + _bufferSize - 1, &buffer);
                         }
                         else
                         {
                             Node &nextBuffer = _bufferMap[i + 1];
-                            _end.init(nextBuffer, nextBuffer, nextBuffer + _bufferSize - 1, &nextBuffer);
+                            _end.reset(nextBuffer, nextBuffer, nextBuffer + _bufferSize - 1, &nextBuffer);
                         }
                     }
                 }
@@ -81,36 +80,64 @@ namespace CZ
     template <typename It>
     Deque<T>::Deque(const It &begin, const It &end, Rank bufferSize_)
         : _bufferSize(bufferSize_)
+        , _mapSize(0)
+        , _bufferMap(nullptr)
+        , _size(0)
     {
-        init_from(begin, end);
+        _init_from(begin, end);
     }
 
     template <typename T>
     Deque<T>::Deque(const T *begin, const T *end, Rank bufferSize_)
         : _bufferSize(bufferSize_)
+        , _mapSize(0)
+        , _bufferMap(nullptr)
+        , _size(0)
     {
-        init_from(begin, end);
+        _init_from(begin, end);
     }
 
     template <typename T>
     Deque<T>::Deque(const std::initializer_list<T> &initL, Rank bufferSize_)
         : _bufferSize(bufferSize_)
+        , _mapSize(0)
+        , _bufferMap(nullptr)
+        , _size(0)
     {
-        init_from(initL.begin(), initL.end());
+        _init_from(initL.begin(), initL.end());
     }
 
     template <typename T>
     Deque<T>::Deque(const Deque<T> &dq)
         : _bufferSize(dq._bufferSize)
+        , _mapSize(0)
+        , _bufferMap(nullptr)
+        , _size(0)
     {
-        init_from(dq.begin(), dq.end());
+        _init_from(dq.begin(), dq.end());
+    }
+
+    template <typename T>
+    Deque<T>::Deque(Deque<T> &&dq)
+        : _bufferSize(dq._bufferSize)
+        , _mapSize(dq._mapSize)
+        , _bufferMap(dq._bufferMap)
+        , _size(dq._size)
+        , _begin(dq._begin)
+        , _end(dq._end)
+    {
+        dq._mapSize = 0;
+        dq._bufferMap = nullptr;
+        dq._size = 0;
+        dq._begin.reset(nullptr, nullptr, nullptr, nullptr);
+        dq._end = dq._begin;
     }
 
     // 析构函数
     template <typename T>
     Deque<T>::~Deque()
     {
-        free();
+        _free();
     }
 
     template <typename T>
@@ -187,23 +214,24 @@ namespace CZ
 
     template <typename T>
     template <typename It>
-    void Deque<T>::init_from(const It &begin, const It &end)
+    void Deque<T>::_init_from(const It &begin, const It &end)
     {
         ASSERT_RELEASE(MIN_BUFFER_SIZE <= _bufferSize, "Too small buffer size!");
         ASSERT_DEBUG(begin <= end, "Error from Deque init_from: invalid iterator range for end < begin.");
 
+        _free();
         _size = end - begin;
         _mapSize = _size % _bufferSize == 0 ? _size / _bufferSize + 2 : _size / _bufferSize + 3; // 左右各多一个 node
         _bufferMap = new Node[_mapSize];
 
         for (Rank i = 0; i < _mapSize; i++)
         {
-            _bufferMap[i] = new T[_bufferSize];
+            _bufferMap[i] = reinterpret_cast<T *>(malloc(_bufferSize * sizeof(T)));
         }
 
         if (_size == 0)
         {
-            _begin.init(_bufferMap[0], _bufferMap[0], _bufferMap[0] + _bufferSize - 1, _bufferMap);
+            _begin.reset(_bufferMap[0], _bufferMap[0], _bufferMap[0] + _bufferSize - 1, _bufferMap);
             _end = _begin;
             return;
         }
@@ -217,24 +245,23 @@ namespace CZ
                 if (i == 1)
                 {
                     // 第一个缓冲区
-                    _begin.init(buffer, buffer, buffer + _bufferSize - 1, &buffer);
+                    _begin.reset(buffer, buffer, buffer + _bufferSize - 1, &buffer);
                 }
 
                 for (Rank j = 0; j < _bufferSize && it != end; ++j)
                 {
-                    buffer[j] = *(it++);
-
+                    new(buffer + j) T(*it++);
                     if (it == end)
                     {
                         // 已经存完最后一个元素
                         if (j < _bufferSize - 1)
                         {
-                            _end.init(buffer + j + 1, buffer, buffer + _bufferSize - 1, &buffer);
+                            _end.reset(buffer + j + 1, buffer, buffer + _bufferSize - 1, &buffer);
                         }
                         else
                         {
                             Node &nextBuffer = _bufferMap[i + 1];
-                            _end.init(nextBuffer, nextBuffer, nextBuffer + _bufferSize - 1, &nextBuffer);
+                            _end.reset(nextBuffer, nextBuffer, nextBuffer + _bufferSize - 1, &nextBuffer);
                         }
                     }
                 }
@@ -244,13 +271,15 @@ namespace CZ
                 }
             }
         }
+
+        ASSERT_DEBUG(it == end, "Elems are not fully reseted at init_from.");
     }
 
     template <typename T>
     void Deque<T>::push_back(const T &x)
     {
         ++_size;
-        *(_end._cur) = x;
+        new(_end._cur) T(x);
 
         if (_end._cur < _end._last)
         {
@@ -265,7 +294,7 @@ namespace CZ
                 // 无空 buffer，需要扩容
                 _expand();
             }
-            _end.init(*(_end._pNode + 1), *(_end._pNode + 1), *(_end._pNode + 1) + _bufferSize - 1, _end._pNode + 1);
+            _end.reset(*(_end._pNode + 1), *(_end._pNode + 1), *(_end._pNode + 1) + _bufferSize - 1, _end._pNode + 1);
         }
     }
 
@@ -273,7 +302,7 @@ namespace CZ
     void Deque<T>::push_back(T &&x)
     {
         ++_size;
-        *(_end._cur) = std::move(x);
+        new(_end._cur) T(std::move(x));
 
         if (_end._cur < _end._last)
         {
@@ -288,7 +317,7 @@ namespace CZ
                 // 无空 buffer，需要扩容
                 _expand();
             }
-            _end.init(*(_end._pNode + 1), *(_end._pNode + 1), *(_end._pNode + 1) + _bufferSize - 1, _end._pNode + 1);
+            _end.reset(*(_end._pNode + 1), *(_end._pNode + 1), *(_end._pNode + 1) + _bufferSize - 1, _end._pNode + 1);
         }
     }
 
@@ -308,10 +337,10 @@ namespace CZ
                 // 无空 buffer，需要扩容
                 _expand();
             }
-            _begin.init(*(_begin._pNode - 1) + _bufferSize - 1, *(_begin._pNode - 1), *(_begin._pNode - 1) + _bufferSize - 1, _begin._pNode - 1);
+            _begin.reset(*(_begin._pNode - 1) + _bufferSize - 1, *(_begin._pNode - 1), *(_begin._pNode - 1) + _bufferSize - 1, _begin._pNode - 1);
         }
         ++_size;
-        *(_begin._cur) = x;
+        new(_begin._cur) T(x);
     }
 
     template <typename T>
@@ -330,10 +359,10 @@ namespace CZ
                 // 无空 buffer，需要扩容
                 _expand();
             }
-            _begin.init(*(_begin._pNode - 1) + _bufferSize - 1, *(_begin._pNode - 1), *(_begin._pNode - 1) + _bufferSize - 1, _begin._pNode - 1);
+            _begin.reset(*(_begin._pNode - 1) + _bufferSize - 1, *(_begin._pNode - 1), *(_begin._pNode - 1) + _bufferSize - 1, _begin._pNode - 1);
         }
         ++_size;
-        *(_begin._cur) = std::move(x);
+        new(_begin._cur) T(std::move(x));
     }
 
     template <typename T>
@@ -352,7 +381,7 @@ namespace CZ
             if (i < _mapSize / 2 || _mapSize / 2 + _mapSize <= i)
             {
                 // 新的 buffer
-                newBufferMap[i] = new T[_bufferSize];
+                newBufferMap[i] = reinterpret_cast<T *>(malloc(_bufferSize * sizeof(T)));
             }
             else
             {
@@ -379,18 +408,18 @@ namespace CZ
     template <typename T>
     typename Deque<T>::Iterator Deque<T>::insert(Iterator itPos, const T &x)
     {
-        Iterator it = move_backward(itPos, 1);
+        Iterator it = _move_backward(itPos, 1);
         ++_size;
-        *it = x;
+        new(it._cur) T(x);
         return it;
     }
 
     template <typename T>
     typename Deque<T>::Iterator Deque<T>::insert(Iterator itPos, T &&x)
     {
-        Iterator it = move_backward(itPos, 1);
+        Iterator it = _move_backward(itPos, 1);
         ++_size;
-        *it = std::move(x);
+        new(it._cur) T(std::move(x));
         return it;
     }
 
@@ -403,12 +432,14 @@ namespace CZ
             return itPos;
         }
 
-        Iterator it0 = move_backward(itPos, n);
+        Vector<T> tempV(b, e);
+        Iterator it0 = _move_backward(itPos, n);
         Iterator it = it0;
         _size += n;
-        for (T *p = b; p < e; ++p)
+        for (const T &t : tempV)
         {
-            *(it++) = *p;
+            new(it._cur) T(t);
+            ++it;
         }
         return it0;
     }
@@ -422,28 +453,30 @@ namespace CZ
             return itPos;
         }
 
-        Iterator it0 = move_backward(itPos, n);
+        Vector<T> tempV(b, e);
+        Iterator it0 = _move_backward(itPos, n);
         Iterator it = it0;
         _size += n;
-        for (Iterator itTemp = b; itTemp < e; ++itTemp)
+        for (const T &t : tempV)
         {
-            *(it++) = *itTemp;
+            new(it._cur) T(t);
+            ++it;
         }
         return it0;
     }
 
     template <typename T>
-    typename Deque<T>::Iterator Deque<T>::move_backward(Iterator startIt, typename Deque<T>::Rank n)
+    typename Deque<T>::Iterator Deque<T>::_move_backward(Iterator startIt, typename Deque<T>::Rank n)
     {
         Rank resInLastBuffer = _end._last - _end._cur; // 最后一个 buffer 还可以往后移动几个
         Rank bufferNumDelta = 0;                             // 最后一个元素会跨越几次 buffer
-        if (n > resInLastBuffer)
+        if (resInLastBuffer < n)
         {
             bufferNumDelta = (n - resInLastBuffer) % _bufferSize == 0 ? (n - resInLastBuffer) / _bufferSize : (n - resInLastBuffer) / _bufferSize + 1;
         }
 
-        Iterator newFinish = _end; // 新的 finish 迭代器
-        if (bufferNumDelta > 0)
+        Iterator newEnd = _end; // 新的 finish 迭代器
+        if (0 < bufferNumDelta)
         {
             // 会跨 buffer
             Rank resBufferNum = _mapSize - (_end._pNode - _bufferMap) - 1; // 剩下的 buffer 数
@@ -472,7 +505,7 @@ namespace CZ
                     }
                     else
                     {
-                        newBufferMap[i] = new T[_bufferSize];
+                        newBufferMap[i] = reinterpret_cast<T *>(malloc(_bufferSize * sizeof(T)));
                     }
                 }
 
@@ -484,26 +517,54 @@ namespace CZ
             }
 
             Node *newPNode = _end._pNode + bufferNumDelta;
-            newFinish.init(*newPNode + (n - resInLastBuffer - 1) % _bufferSize, *newPNode, *newPNode + _bufferSize - 1, newPNode);
+            newEnd.reset(*newPNode + (n - resInLastBuffer - 1) % _bufferSize, *newPNode, *newPNode + _bufferSize - 1, newPNode);
         }
         else
         {
-            newFinish.init(_end._cur + n, _end._first, _end._last, _end._pNode);
+            newEnd.reset(_end._cur + n, _end._first, _end._last, _end._pNode);
         }
 
         // 移动元素
-        Iterator res = newFinish;
-        for (Iterator it1 = _end, it2 = newFinish;; --it1, --it2)
+/*         for (Iterator it1 = _end, it2 = newEnd;; --it1, --it2)
         {
             *it2 = *it1;
             if (it1 == startIt)
             {
-                res = it2;
                 break;
             }
+        } */
+        // 双指针分别指向新旧起始位置
+        // 从后往前移动，避免缓冲区冲突
+        Rank elemNumShouldMove = newEnd - startIt - n;
+        Iterator p = startIt + elemNumShouldMove - 1;
+        Iterator q = p + n;
+        while (0 < elemNumShouldMove)
+        {
+            Rank moveNum = 0;
+            if (q._last - q._cur < p._last - p._cur)
+            {
+                // q 在 buffer 中相对于 p 更靠后
+                moveNum = p._cur - p._first + 1;
+            }
+            else
+            {
+                // q 在 buffer 中相对于 p 更靠前
+                moveNum = q._cur - q._first + 1;
+            }
+
+            memmove(q._cur - moveNum + 1, p._cur - moveNum + 1, moveNum * sizeof(T));
+            if (elemNumShouldMove < moveNum)
+            {
+                break;
+            }
+            
+            p -= moveNum;
+            q -= moveNum;
+            elemNumShouldMove -= moveNum;
         }
-        _end = newFinish;
-        return res - n;
+
+        _end = newEnd;
+        return startIt;
     }
 
     template <typename T>
@@ -512,6 +573,7 @@ namespace CZ
         ASSERT_DEBUG(!this->empty(), "Error from Deque::pop_back: empty deque");
 
         --_size;
+        (_end._cur - 1)->~T();
         if (_end._cur != _end._first)
         {
             --_end._cur;
@@ -520,7 +582,7 @@ namespace CZ
         {
             // 需要转移到前一个 buffer
             Node *newPNode = _end._pNode - 1;
-            _end.init(*newPNode + _bufferSize - 1, *newPNode, *newPNode + _bufferSize - 1, newPNode);
+            _end.reset(*newPNode + _bufferSize - 1, *newPNode, *newPNode + _bufferSize - 1, newPNode);
             if (_need_shrink())
             {
                 _shrink();
@@ -534,6 +596,7 @@ namespace CZ
         ASSERT_DEBUG(!this->empty(), "Error from Deque::pop_front: empty deque");
 
         --_size;
+        _begin._cur->~T();
         if (_begin._cur != _begin._last)
         {
             ++_begin._cur;
@@ -542,7 +605,7 @@ namespace CZ
         {
             // 需要转移到后一个 buffer
             Node *newPNode = _begin._pNode + 1;
-            _begin.init(*newPNode, *newPNode, *newPNode + _bufferSize - 1, newPNode);
+            _begin.reset(*newPNode, *newPNode, *newPNode + _bufferSize - 1, newPNode);
             if (_need_shrink())
             {
                 _shrink();
@@ -573,7 +636,7 @@ namespace CZ
 
         for (Rank i = 0; i < newIndex; i++)
         {
-            newBufferMap[i] = new T[_bufferSize];
+            newBufferMap[i] = reinterpret_cast<T *>(malloc(_bufferSize * sizeof(T)));
         }
 
         for (Rank i = 0; i < _mapSize; i++)
@@ -581,7 +644,7 @@ namespace CZ
             if (i < beginIndex || endIndex <= i)
             {
                 // 释放旧 buffer
-                delete[] _bufferMap[i];
+                free(_bufferMap[i]);
             }
             else
             {
@@ -605,7 +668,7 @@ namespace CZ
 
         for (Rank i = newIndex; i < newMapSize; i++)
         {
-            newBufferMap[i] = new T[_bufferSize];
+            newBufferMap[i] = reinterpret_cast<T *>(malloc(_bufferSize * sizeof(T)));
         }
 
         _bufferMap = newBufferMap;
@@ -617,8 +680,7 @@ namespace CZ
     {
         ASSERT_DEBUG(_begin <= itPos && itPos < _end, "Error from Deque::erase: invalid iterator");
         ASSERT_DEBUG(!this->empty(), "Error from Deque::erase: empty deque");
-        --_size;
-        return move_forward(itPos + 1, 1);
+        return _move_forward(itPos + 1, 1);
     }
 
     template <typename T>
@@ -629,22 +691,59 @@ namespace CZ
         Rank n = e - b;
         ASSERT_DEBUG(n <= _size, "Error from Deque::erase: insufficient size");
 
-        _size -= n;
-        return move_forward(e, n);
+        return _move_forward(e, n);
     }
 
     template <typename T>
-    typename Deque<T>::Iterator Deque<T>::move_forward(Iterator startIt, Rank n)
+    typename Deque<T>::Iterator Deque<T>::_move_forward(Iterator startIt, Rank n)
     {
-        ASSERT_DEBUG(0 <= n && _begin <= startIt - n && startIt <= _end, "Error from Deque::move_forward: invalid parameter");
+        ASSERT_DEBUG(0 <= n && _begin <= startIt - n && startIt <= _end, "Error from Deque::_move_forward: invalid parameter");
+
+        Iterator newEnd = _end - n;
 
         // 移动元素
-        for (Iterator it = startIt; it != _end; ++it)
+/*         for (Iterator it = startIt; it != _end; ++it)
         {
             *(it - n) = *it;
+        } */
+        // 1. 析构被覆盖的 n 个元素
+        for (Iterator it = startIt - n; it != startIt; ++it)
+        {
+            (it._cur)->~T();
         }
-        Rank temp = _end - startIt;
+        // 2. 移动元素
+        // 双指针分别指向新旧起始位置
+        Iterator p = startIt;
+        Iterator q = startIt - n;
+        Rank elemNumShouldMove = _end - startIt + 1;
+        while (0 < elemNumShouldMove)
+        {
+            Rank moveNum = 0;
+            if (q._last - q._cur <= p._last - p._cur)
+            {
+                // q 在 buffer 中相对于 p 更靠后
+                moveNum = q._last - q._cur + 1;
+            }
+            else
+            {
+                // q 在 buffer 中相对于 p 更靠前
+                moveNum = p._last - p._cur + 1;
+            }
+            memmove(q._cur, p._cur, moveNum * sizeof(T));
+
+            if (elemNumShouldMove < moveNum)
+            {
+                break;
+            }
+
+            p += moveNum;
+            q += moveNum;
+            elemNumShouldMove -= moveNum;
+        }
+
         _end -= n;
+        _size -= n;
+        Rank temp = _end - (startIt - n);
         if (_need_shrink())
         {
             _shrink();
@@ -683,7 +782,7 @@ namespace CZ
     {
         if (index < 0)
         {
-            ASSERT_DEBUG(-_size <= index, "invalid index");
+            ASSERT_DEBUG(-static_cast<RankPlus>(_size) <= index, "invalid index");
             return *((_end - (-index))._cur);
         }
         else
@@ -717,8 +816,7 @@ namespace CZ
     {
         if (&dq != this)
         {
-            free();
-            init_from(dq.begin(), dq.end(), dq._bufferSize);
+            _init_from(dq.begin(), dq.end());
         }
         return *this;
     }
@@ -728,30 +826,44 @@ namespace CZ
     {
         if (&dq != this)
         {
-            free();
+            _free();
             _bufferMap = dq._bufferMap;
             _size = dq._size;
-            _bufferSize = dq._bufferSize;
             _mapSize = dq._mapSize;
             _begin = dq._begin;
             _end = dq._end;
             dq._bufferMap = nullptr;
             dq._size = 0;
-            dq._mapSize = dq._bufferSize = 0;
-            dq._begin.init(nullptr, nullptr, nullptr, nullptr);
+            dq._mapSize = 0;
+            dq._begin.reset(nullptr, nullptr, nullptr, nullptr);
             dq._end = _begin;
         }
         return *this;
     }
 
     template <typename T>
-    void Deque<T>::free()
+    void Deque<T>::_free()
     {
+        if (_bufferMap == nullptr)
+        {
+            return;
+        }
+
+        ASSERT_DEBUG(0 < _mapSize, "Error map size %u", _mapSize);
+
+        for (Iterator it = _begin; it != _end; ++it)
+        {
+            it->~T();
+        }
+
         for (Rank i = 0; i < _mapSize; ++i)
         {
-            delete[] _bufferMap[i];
+            free(_bufferMap[i]);
+            _bufferMap[i] = nullptr;
         }
+
         delete[] _bufferMap;
+        _bufferMap = nullptr;
     }
 
     template <typename T>
@@ -761,13 +873,16 @@ namespace CZ
         {
             return;
         }
+        _free();
 
-        Node *newBufferMap = new Node[2];
-        newBufferMap[0] = new T[_bufferSize];
-        newBufferMap[1] = new T[_bufferSize];
-        _begin.init(newBufferMap[0], newBufferMap[0], newBufferMap[0] + _bufferSize - 1, newBufferMap);
+        _mapSize = 2;
+        Node *newBufferMap = new Node[_mapSize];
+        for (Rank i = 0; i != _mapSize; ++i)
+        {
+            newBufferMap[i] = reinterpret_cast<T *>(malloc(_bufferSize * sizeof(T)));
+        }
+        _begin.reset(newBufferMap[0], newBufferMap[0], newBufferMap[0] + _bufferSize - 1, newBufferMap);
         _end = _begin;
-        free();
         _bufferMap = newBufferMap;
         _size = 0;
     }
@@ -788,8 +903,15 @@ namespace CZ
                 ++removedNum;
             }
         }
+
+        Iterator newEnd = _end - removedNum;
+        for (Iterator it = newEnd; it != _end; ++it)
+        {
+            it._cur->~T();
+        }
+
         _size -= removedNum;
-        _end -= removedNum;
+        _end = newEnd;
         if (_need_shrink())
         {
             _shrink();

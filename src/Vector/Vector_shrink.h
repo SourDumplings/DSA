@@ -18,25 +18,35 @@ Vector类模板的缩容操作
 namespace CZ
 {
     template <typename T>
-    bool Vector<T>::shrink()
+    bool Vector<T>::_shrink()
     {
         // 以12.5%为界
-        if ((_size << 3) < _capacity)
+        if (_need_shrink())
         {
             T *oldElem = _elem;
-            while ((_size << 3) < _capacity)
+            while (_need_shrink())
             {
                 _capacity >>= 1;
             }
-            _elem = new T[_capacity];
+
+/*             _elem = new T[_capacity];
             for (uint32_t i = 0; i < _size; ++i)
             {
                 _elem[i] = oldElem[i];
             }
-            delete [] oldElem;
+            delete [] oldElem; */
+            _elem = reinterpret_cast<T *>(malloc(_capacity * sizeof(T)));
+            memcpy(reinterpret_cast<void *>(_elem), reinterpret_cast<void *>(oldElem), _capacity * sizeof(T));
+            free(oldElem);
             return true;
         }
         return false;
+    }
+
+    template <typename T>
+    inline bool Vector<T>::_need_shrink() const
+    {
+        return (_size << 3) < _capacity;
     }
 }
 

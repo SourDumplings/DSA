@@ -17,13 +17,13 @@ Vector类模板的扩容操作
 namespace CZ
 {
     template <typename T>
-    bool Vector<T>::expand()
+    bool Vector<T>::_expand()
     {
-        if (_size >= _capacity)
+        if (_need_expand())
         {
             T *oldElem = _elem;
-            Rank tempC = _capacity;
-            while (_size >= _capacity)
+            Rank oldCapacity = _capacity;
+            while (_need_expand())
             {
                 if (_capacity)
                 {
@@ -33,16 +33,25 @@ namespace CZ
                     _capacity = 1;
             }
 
-            _elem = new T[_capacity];
+/*             _elem = new T[_capacity];
             for (Rank i = 0; i != tempC; ++i)
             {
                 _elem[i] = oldElem[i];
             }
-            delete [] oldElem;
+            delete [] oldElem; */
+            _elem = reinterpret_cast<T *>(malloc(_capacity * sizeof(T)));
+            memcpy(reinterpret_cast<void*>(_elem), reinterpret_cast<void*>(oldElem), oldCapacity * sizeof(T));
+            free(oldElem);
             return true;
         }
         else
             return false;
+    }
+
+    template <typename T>
+    inline bool Vector<T>::_need_expand() const
+    {
+        return _capacity <= _size;
     }
 } // CZ
 

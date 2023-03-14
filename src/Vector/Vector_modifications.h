@@ -20,37 +20,42 @@ Vector类模板的动态操作方法
 namespace CZ
 {
     template <typename T>
-    inline void Vector<T>::clear()
-    {
-        _size = 0;
-        shrink();
-    }
-
-    template <typename T>
-    inline void Vector<T>::push_back(const T &x)
+    void Vector<T>::push_back(const T &x)
     {
         // 如有必要则扩容
         ++_size;
-        expand();
-        _elem[_size-1] = x;
+        if (_need_expand())
+        {
+            _expand();
+        }
+        // _elem[_size - 1] = x;
+        new(_elem + _size - 1) T(x);
     }
 
     template <typename T>
-    inline void Vector<T>::push_back(T &&x)
+    void Vector<T>::push_back(T &&x)
     {
         // 如有必要则扩容
         ++_size;
-        expand();
-        _elem[_size-1] = std::move(x);
+        if (_need_expand())
+        {
+            _expand();
+        }
+        // _elem[_size - 1] = std::move(x);
+        new(_elem + _size - 1) T(std::move(x));
     }
 
     template <typename T>
     void Vector<T>::pop_back()
     {
         ASSERT_DEBUG(_size != 0, "no elements");
+        (_elem + _size - 1)->~T();
         --_size;
         // 如有必要则缩容
-        shrink();
+        if (_need_shrink())
+        {
+            _shrink();
+        }
     }
 
     // 插入一个元素到指定位置之前，返回指向插入的元素的迭代器
@@ -59,13 +64,20 @@ namespace CZ
     {
         typename Vector<T>::Rank r = itPos - begin();
         ASSERT_DEBUG(itPos <= end() && itPos >= begin(), "Invalid pos Iterator");
+        Rank oldSize = _size;
         ++_size;
-        expand();
-        for (uint32_t i = _size - 1; i != r; --i)
+        if (_need_expand())
         {
-            _elem[i] = _elem[i-1];
+            _expand();
         }
-        _elem[r] = x;
+
+/*         for (uint32_t i = _size - 1; i != r; --i)
+        {
+            _elem[i] = _elem[i - 1];
+        }
+        _elem[r] = x; */
+        memmove(reinterpret_cast<void *>(_elem + r + 1), reinterpret_cast<void *>(_elem + r), (oldSize - r) * sizeof(T));
+        new(_elem + r) T(x);
         return begin() + r;
     }
 
@@ -74,13 +86,20 @@ namespace CZ
     {
         typename Vector<T>::Rank r = itPos - begin();
         ASSERT_DEBUG(itPos <= end() && itPos >= begin(), "Invalid pos Iterator");
+        Rank oldSize = _size;
         ++_size;
-        expand();
-        for (uint32_t i = _size - 1; i != r; --i)
+        if (_need_expand())
         {
-            _elem[i] = _elem[i-1];
+            _expand();
         }
-        _elem[r] = std::move(x);
+
+/*         for (uint32_t i = _size - 1; i != r; --i)
+        {
+            _elem[i] = _elem[i - 1];
+        }
+        _elem[r] = std::move(x); */
+        memmove(reinterpret_cast<void *>(_elem + r + 1), reinterpret_cast<void *>(_elem + r), (oldSize - r) * sizeof(T));
+        new(_elem + r) T(std::move(x));
         return begin() + r;
     }
 
@@ -93,16 +112,25 @@ namespace CZ
         ASSERT_DEBUG(itPos <= end() && itPos >= begin(), "Invalid pos Iterator");
         ASSERT_DEBUG(b <= e, "Invalid Iterator range");
         typename Vector<T>::Rank n = e - b;
+        Rank oldSize = _size;
         _size += n;
-        expand();
-        for (uint32_t i = _size - 1; n < i && i != r - 1; --i)
+        if (_need_expand())
         {
-            _elem[i] = _elem[i-n];
+            _expand();
         }
-        typename Vector<T>::Rank rTemp = r;
+
+/*         typename Vector<T>::Rank rTemp = r;
         for (const T *it = b; it != e; ++it)
         {
             _elem[rTemp++] = *it;
+        } */
+        Vector<T> elems(b, e); // 将元素备份出来
+        memmove(reinterpret_cast<void *>(_elem + r + n), reinterpret_cast<void *>(_elem + r), (oldSize - r) * sizeof(T));
+        typename Vector<T>::Rank rTemp = r;
+        for (const T &t : elems)
+        {
+            new(_elem + rTemp) T(std::move(t));
+            ++rTemp;
         }
         return begin() + r;
     }
@@ -110,7 +138,9 @@ namespace CZ
     template <typename T>
     inline typename Vector<T>::Iterator Vector<T>::insert(typename Vector<T>::Iterator itPos,
         const typename Vector<T>::Iterator &b, const typename Vector<T>::Iterator &e)
-    { return insert(itPos, b.get(), e.get()); }
+    {
+        return insert(itPos, b.get(), e.get());
+    }
 
     // 删除单元素，返回删除的元素之后的元素的迭代器
     template <typename T>
@@ -118,12 +148,19 @@ namespace CZ
     {
         typename Vector<T>::Rank r = itPos - begin();
         ASSERT_DEBUG(itPos < end() && itPos >= begin(), "Invalid pos Iterator");
-        for (uint32_t i = r; i != _size - 1; ++i)
+
+/*         for (Rank i = r; i != _size - 1; ++i)
         {
-            _elem[i] = _elem[i+1];
-        }
+            _elem[i] = std::move(_elem[i + 1]);
+        } */
+        (_elem + r)->~T();
+        memmove(reinterpret_cast<void *>(_elem + r), reinterpret_cast<void *>(_elem + r + 1), (_size - r - 1) * sizeof(T));
+
         --_size;
-        shrink();
+        if (_need_shrink())
+        {
+            _shrink();
+        }
         return begin() + r;
     }
 
@@ -133,45 +170,60 @@ namespace CZ
         typename Vector<T>::Iterator itEnd)
     {
         typename Vector<T>::Rank rB = itBegin - begin(), rE = itEnd - begin();
-        ASSERT_DEBUG(((itBegin >= begin() && itBegin <= end()) &&
-            (itEnd > begin() && itEnd <= end()) &&
-            itBegin <= itEnd), "Invalid Iterator range");
+        ASSERT_DEBUG(((itBegin >= begin() && itBegin <= end())
+            && (itEnd > begin() && itEnd <= end())
+            && itBegin <= itEnd)
+            , "Invalid Iterator range"
+        );
         typename Vector<T>::Rank n = itEnd - itBegin;
-        for (uint32_t i = rB; i != rE; ++i)
+
+/*         for (Rank i = rB; i != rE; ++i)
         {
-            _elem[i] = _elem[i+n];
+            _elem[i] = std::move(_elem[i + n]);
+        } */
+        for (Rank i = rB; i != rE; ++i)
+        {
+            (_elem + i)->~T();
         }
+        memmove(reinterpret_cast<void *>(_elem + rB), reinterpret_cast<void *>(_elem + rE), n * sizeof(T));
+
         _size -= n;
-        shrink();
+        if (_need_shrink())
+        {
+            _shrink();
+        }
         return begin() + rB;
     }
 
     template <typename T>
     void Vector<T>::resize(typename Vector<T>::Rank n)
     {
-        if (n < _size)
+        Rank oldSize = _size;
+        _size = n;
+        if (n < oldSize)
         {
-            _size = n;
-            shrink();
-        }
-        else if (n > _size)
-        {
-            _size = n;
-            expand();
-        }
-    }
+            for (Rank i = oldSize; _size <= i; --i)
+            {
+                (_elem + i)->~T();
+            }
 
-    template <typename T>
-    void Vector<T>::assign(const typename Vector<T>::Iterator &begin,
-        const typename Vector<T>::Iterator &end)
-    {
-        _size = end - begin;
-        expand();
-        for (Rank i= 0; i != _size; ++i)
-        {
-            _elem[i] = *(begin + i);
+            if (_need_shrink())
+            {
+                _shrink();
+            }
         }
-        shrink();
+        else if (n > oldSize)
+        {
+            if (_need_expand())
+            {
+                _expand();
+            }
+
+            for (Rank i = oldSize; i < _size; ++i)
+            {
+                new(_elem + i) T();
+            }
+        }
     }
 
     template <typename T>
@@ -187,8 +239,18 @@ namespace CZ
             else
                 ++k;
         }
+
+        Rank oldSize = _size;
         _size -= k;
-        shrink();
+        for (Rank i = _size; i != oldSize; ++i)
+        {
+            (_elem + i)->~T();
+        }
+
+        if (_need_shrink())
+        {
+            _shrink();
+        }
     }
 
     template <typename T>

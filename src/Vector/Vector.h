@@ -69,7 +69,7 @@ namespace CZ
         T& at(RankPlus index);
 
         // 动态操作
-        virtual void clear();
+        void clear() override;
         void push_back(const T &x);
         void push_back(T &&x);
         void pop_back();
@@ -80,8 +80,7 @@ namespace CZ
         Iterator erase(Iterator itPos);
         Iterator erase(Iterator itBegin, Iterator itEnd);
         void resize(Rank n);
-        // 区间赋值
-        void assign(const Iterator &begin, const Iterator &end);
+        
         // 删除所有值为value的元素
         void remove(const T &value);
         void reverse();
@@ -97,23 +96,24 @@ namespace CZ
     protected:
         //迭代器区间的复制
         template <typename It>
-        void init_from(const It &begin, const It &end);
-
-        // 析构辅助方法
-        void free();
+        void _init_from(const It &begin, const It &end);
 
         // 搬到大房子中，即扩容操作
         // 扩容后原来的元素都会保序复制到容器的前端，结果上看是往后拓展了空间
-        bool expand();
+        bool _expand();
+
+        bool _need_expand() const;
         
         // 装填因子过小时缩容
         // 缩容后原来的元素都会保序尽可能复制到容器的前端，结果上看是从尾部截断了一段
-        bool shrink();
+        bool _shrink();
+
+        bool _need_shrink() const;
 
     private:
         Rank _size; // 规模
         Rank _capacity; // 容量
-        T *_elem; // 数据区
+        T *_elem; // 数据区，[0, _size) 元素经过了构造，[_size, _capacity) 元素未经过构造
     };
 }
 

@@ -18,32 +18,44 @@ namespace CZ
 {
     template <typename T>
     Vector<T>::Vector(Vector<T>::Rank s)
+        : _size(s)
+        , _capacity(s * 2)
+        , _elem(nullptr)
     {
-        _elem = new T[_capacity = s * 2];
-        for (_size = 0; _size != s; ++_size)
+        _elem = reinterpret_cast<T *>(malloc(_capacity * sizeof(T)));
+        for (Rank i = 0; i != s; ++i)
         {
-            _elem[_size] = T();
+            new(_elem + i) T();
         }
     }
 
     template <typename T>
     template <typename It>
     Vector<T>::Vector(const It &begin, const It &end)
+        : _size(0)
+        , _capacity(0)
+        , _elem(nullptr)
     {
-        init_from(begin, end);
+        _init_from(begin, end);
     }
 
     template <typename T>
     Vector<T>::Vector(const T *begin, const T *end)
+        : _size(0)
+        , _capacity(0)
+        , _elem(nullptr)
     {
-        init_from(begin, end);
+        _init_from(begin, end);
     }
 
     template <typename T>
     Vector<T>::Vector(const std::initializer_list<T> &initL)
+        : _size(0)
+        , _capacity(0)
+        , _elem(nullptr)
     {
         // printf("initL construct\n");
-        init_from(initL.begin(), initL.end());
+        _init_from(initL.begin(), initL.end());
     }
 }
 

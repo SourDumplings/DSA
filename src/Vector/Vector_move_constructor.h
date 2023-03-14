@@ -18,10 +18,10 @@ namespace CZ
 {
     template <typename T>
     Vector<T>::Vector(Vector<T> &&V)
+        : _size(V._size)
+        , _capacity(V._capacity)
+        , _elem(V._elem)
     {
-        _elem = V._elem;
-        _size = V._size;
-        _capacity = V._capacity;
         V._elem = nullptr;
         V._size = 0;
         V._capacity = 0;

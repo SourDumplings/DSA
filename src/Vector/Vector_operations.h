@@ -37,9 +37,7 @@ namespace CZ
     {
         if (this != &V)
         {
-            T *temp = _elem;
-            init_from(V.begin(), V.end());
-            delete[] temp;
+            _init_from(V.begin(), V.end());
         }
         return *this;
     }
@@ -49,7 +47,7 @@ namespace CZ
     {
         if (this != &V)
         {
-            free();
+            clear();
             _elem = V.begin().get();
             _size = V.size();
             _capacity = V.capacity();
