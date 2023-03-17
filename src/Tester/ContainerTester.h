@@ -17,15 +17,17 @@ namespace CZ
     class ContainerTester
     {
     public:
-        uint32_t test_insert_random(int randSeed = 0, uint32_t size = 10000) const;
+        uint32_t test_insert_random(const char *containerName, int randSeed = 0, uint32_t size = 10000) const;
 
-        void test_insert_random_then_remove(int randSeed = 0, uint32_t size = 10000) const;
+        void test_insert_random_then_remove(const char *containerName, int randSeed = 0, uint32_t size = 10000) const;
 
-        void test_insert_random_then_erase(int randSeed = 0, uint32_t size = 10000) const;
+        void test_insert_random_then_erase(const char *containerName, int randSeed = 0, uint32_t size = 10000) const;
 
-        void test_push_back_and_erase_at_random_pos(int randSeed = 0, uint32_t size = 10000) const;
+        void test_push_back_and_erase_at_random_pos(const char *containerName, int randSeed = 0, uint32_t size = 10000) const;
 
-        void test_push_pop_back_front_randomly(int randSeed = 0, uint32_t size = 10000) const;
+        void test_push_pop_back_front_randomly(const char *containerName, int randSeed = 0, uint32_t size = 10000) const;
+
+        void test_at_random_pos(const char *containerName, int randSeed = 0, uint32_t size = 10000) const;
     };
 }
 

@@ -31,7 +31,8 @@ namespace CZ
         using Iterator = DequeIterator<T>;
         using Node = T *;
 
-        static constexpr Rank DEFAULT_BUFFER_SIZE = 1024;
+        // buffer 缓冲区大小，越大则越快，但内存消耗增加，需要 tradeoff
+        static constexpr Rank DEFAULT_BUFFER_SIZE = 512;
 
         // 构造函数
         // 构造函数 1：容量为 c，规模为 s，所有元素初始为 v，缓冲区大小为 bufferSize_

@@ -202,7 +202,7 @@ namespace CZ
         _size = n;
         if (n < oldSize)
         {
-            for (Rank i = oldSize; _size <= i; --i)
+            for (Rank i = oldSize - 1; _size <= i; --i)
             {
                 (_elem + i)->~T();
             }

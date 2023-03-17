@@ -79,7 +79,7 @@ namespace CZ
         Iterator it = begin();
         if (index >= 0)
         {
-            ASSERT_DEBUG(_size < static_cast<Rank>(index), "Error from List at: index is too large");
+            ASSERT_RELEASE(static_cast<Rank>(index) < _size, "Error from List at: index is too large");
             for (RankPlus i = 0; i < index; ++i)
             {
                 ++it;
@@ -87,7 +87,7 @@ namespace CZ
         }
         else
         {
-            ASSERT_DEBUG(_size <= static_cast<Rank>(-index), "Error from List at: the negative index is too small");
+            ASSERT_RELEASE(static_cast<Rank>(-index) <= _size, "Error from List at: the negative index is too small");
 
             // 方法一：直接法，仅适用于双链表
             for (int i = 0; i < -index + 1; ++i)
