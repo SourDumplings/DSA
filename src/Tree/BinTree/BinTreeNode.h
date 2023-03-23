@@ -30,38 +30,45 @@ namespace CZ
 
         BinTreeNode(const T &data = T(), BinTreeNode<T> *lChild_ = nullptr,
             BinTreeNode<T> *rChild_ = nullptr, BinTreeNode<T> *father_ = nullptr);
+        ~BinTreeNode() override;
 
-        BinTreeNode<T>* left_child() const;
-        BinTreeNode<T>* right_child() const;
-        BinTreeNode<T>* brother() const;
-        BinTreeNode<T>* uncle() const;
+        BinTreeNode<T> *left_child() const;
+        BinTreeNode<T> *right_child() const;
+        BinTreeNode<T> *brother() const;
+        BinTreeNode<T> *uncle() const;
 
         // 中序遍历下的直接前驱和后继
-        BinTreeNode<T>* prev() const;
-        BinTreeNode<T>* next() const;
+        BinTreeNode<T> *prev() const;
+        BinTreeNode<T> *next() const;
 
         void insert_as_left_child(BinTreeNode<T> *newChild);
         void insert_as_right_child(BinTreeNode<T> *newChild);
 
         // 删除孩子，孩子结点脱离父结点生命周期的管理，返回被删除的孩子结点的指针
-        BinTreeNode<T>* remove_left_child();
-        BinTreeNode<T>* remove_right_child();
+        BinTreeNode<T> *remove_left_child();
+        BinTreeNode<T> *remove_right_child();
 
         // 强制替换左右孩子，注意其会使得原先的左右孩子生命周期脱离二叉树结点的管理
         // 返回原先的孩子的结点指针
-        BinTreeNode<T>* set_left_child(BinTreeNode<T> *pNode);
-        BinTreeNode<T>* set_right_child(BinTreeNode<T> *pNode);
+        BinTreeNode<T> *set_left_child(BinTreeNode<T> *pNode);
+        BinTreeNode<T> *set_right_child(BinTreeNode<T> *pNode);
 
-        BinTreeNode<T>* zig(); // 顺时针旋转, 返回旋转后的原来位置的结点指针
-        BinTreeNode<T>* zag(); // 逆时针旋转, 返回旋转后的原来位置的结点指针
+        BinTreeNode<T> *zig(); // 顺时针旋转, 返回旋转后的原来位置的结点指针
+        BinTreeNode<T> *zag(); // 逆时针旋转, 返回旋转后的原来位置的结点指针
 
-        TreeNode<T>* oldest_child() = delete;
+        TreeNode<T> *oldest_child() = delete;
+        const List<TreeNode<T> *> &children() const = delete;
+        List<TreeNode<T> *> &children() = delete;
 
-        TreeNode<T>* insert_child(TreeNode<T> *pNode) override;
+        TreeNode<T> *insert_child(TreeNode<T> *pNode) override;
 
         static bool equivalent(const BinTreeNode<T> &lhs, const BinTreeNode<T> &rhs);
 
         const char *get_entity_name() const override;
+
+    private:
+        BinTreeNode<T> *_pLeftChild;
+        BinTreeNode<T> *_pRightChild;
     };
 } // CZ
 

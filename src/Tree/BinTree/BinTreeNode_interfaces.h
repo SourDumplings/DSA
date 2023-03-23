@@ -19,15 +19,17 @@ namespace CZ
     template <typename T>
     BinTreeNode<T> *BinTreeNode<T>::left_child() const
     {
-        ASSERT_DEBUG(this->children().size() == 2, "wrong children num %u for bintree", this->children());
-        return dynamic_cast<BinTreeNode<T> *>(this->children().front());
+/*         ASSERT_DEBUG(this->children().size() == 2, "wrong children num %u for bintree", this->children());
+        return dynamic_cast<BinTreeNode<T> *>(this->children().front()); */
+        return _pLeftChild;
     }
 
     template <typename T>
     BinTreeNode<T> *BinTreeNode<T>::right_child() const
     {
-        ASSERT_DEBUG(this->children().size() == 2, "wrong children num %u for bintree", this->children());
-        return dynamic_cast<BinTreeNode<T> *>(this->children().back());
+/*         ASSERT_DEBUG(this->children().size() == 2, "wrong children num %u for bintree", this->children());
+        return dynamic_cast<BinTreeNode<T> *>(this->children().back()); */
+        return _pRightChild;
     }
 
     template <typename T>

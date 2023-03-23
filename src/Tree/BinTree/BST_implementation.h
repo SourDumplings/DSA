@@ -75,22 +75,23 @@ namespace CZ
     }
 
     template <typename T>
-    BSTNode<T> *BST<T>::_do_recursion_search(BSTNode<T> *pNowCheck, const T &data) const
+    BSTNode<T> *BST<T>::_do_recursion_search(BinTreeNode<T> *pNowCheck, const T &data) const
     {
         BSTNode<T> *ret = nullptr;
         if (pNowCheck)
         {
             if (data < pNowCheck->data())
             {
-                ret = _do_recursion_search(dynamic_cast<BSTNode<T> *>(pNowCheck->left_child()), data);
+                ret = _do_recursion_search(pNowCheck->left_child(), data);
             }
             else if (pNowCheck->data() < data)
             {
-                ret = _do_recursion_search(dynamic_cast<BSTNode<T> *>(pNowCheck->right_child()), data);
+                ret = _do_recursion_search(pNowCheck->right_child(), data);
             }
             else
             {
-                ret = pNowCheck;
+                ret = dynamic_cast<BSTNode<T>*>(pNowCheck);
+                ASSERT_DEBUG(ret, "pNowCheck is not BST Node!");
             }
         }
         return ret;
@@ -99,42 +100,51 @@ namespace CZ
     template <typename T>
     inline BSTNode<T> *BST<T>::search_data(const T &data) const
     {
-        return _do_recursion_search(dynamic_cast<BSTNode<T> *>(this->root()), data);
+        return _do_recursion_search(dynamic_cast<BinTreeNode<T> *>(this->root()), data);
     }
 
     template <typename T>
-    void BST<T>::_do_recursion_insert(BSTNode<T> *pFather, BSTNode<T> *pNode)
+    BinTreeNode<T> *BST<T>::_do_recursion_insert(BinTreeNode<T> *pFather, BinTreeNode<T> *pNode)
     {
         ASSERT_DEBUG(pFather, "pFather is nullptr");
         // if (father == nullptr)
         // {
         //     Tree<T>::_size = node->get_size();
         //     father = node;
-        // }
+        // }        
+        BinTreeNode<T> *ret = nullptr;
+        if (!_isAllowRepeatKey && pFather->data() == pNode->data())
+        {
+            return ret;
+        }
+
         if (pFather->data() < pNode->data())
         {
             if (pFather->right_child())
             {
-                _do_recursion_insert(dynamic_cast<BSTNode<T> *>(pFather->right_child()), pNode);
+                ret = _do_recursion_insert(pFather->right_child(), pNode);
             }
             else
             {
-                pFather->insert_child(pNode);
+                pFather->insert_as_right_child(pNode);
                 this->_size += pNode->get_size();
+                ret = pNode;
             }
         }
         else
         {
             if (pFather->left_child())
             {
-                _do_recursion_insert(dynamic_cast<BSTNode<T> *>(pFather->left_child()), pNode);
+                ret = _do_recursion_insert(pFather->left_child(), pNode);
             }
             else
             {
-                pFather->insert_child(pNode);
+                pFather->insert_as_left_child(pNode);
                 this->_size += pNode->get_size();
+                ret = pNode;
             }
         }
+        return ret;
     }
 
     template <typename T>
@@ -158,21 +168,18 @@ namespace CZ
             return nullptr;
         }
 
-        if (!_isAllowRepeatKey && search_data(pNode->data()))
-        {
-            return nullptr;
-        }
-
+        BSTNode<T> *ret = nullptr;
         if (this->root() == nullptr)
         {
             BinTree<T>::insert(nullptr, pNode);
+            ret = pNode;
         }
         else
         {
-            _do_recursion_insert(dynamic_cast<BSTNode<T> *>(this->root()), pNode);
+            ret = dynamic_cast<BSTNode<T>*>(_do_recursion_insert(dynamic_cast<BinTreeNode<T> *>(this->root()), pNode));
         }
 
-        return pNode;
+        return ret;
     }
 
     template <typename T>

@@ -19,7 +19,7 @@ namespace CZ
 {
     template <typename T>
     BinTreeNode<T>::BinTreeNode(const T &data, BinTreeNode<T> *lChild_, BinTreeNode<T> *rChild_,
-        BinTreeNode<T> *father_): TreeNode<T>(data)
+        BinTreeNode<T> *father_): TreeNode<T>(data), _pLeftChild(lChild_), _pRightChild(rChild_)
     {
         if (father_)
         {
@@ -34,8 +34,21 @@ namespace CZ
             }
         }
 
-        TreeNode<T>::children().push_back(lChild_);
-        TreeNode<T>::children().push_back(rChild_);
+/*         TreeNode<T>::children().push_back(lChild_);
+        TreeNode<T>::children().push_back(rChild_); */
+    }
+
+    template <typename T>
+    BinTreeNode<T>::~BinTreeNode()
+    {
+        if (_pLeftChild)
+        {
+            delete _pLeftChild;
+        }
+        if (_pRightChild)
+        {
+            delete _pRightChild;
+        }
     }
 } // CZ
 

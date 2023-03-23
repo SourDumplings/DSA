@@ -22,7 +22,8 @@ namespace CZ
     BinTreeNode<T> *BinTreeNode<T>::set_left_child(BinTreeNode<T> *pNode)
     {
         BinTreeNode<T> *pOldChild = left_child();
-        this->children().front() = pNode;
+        // this->children().front() = pNode;
+        _pLeftChild = pNode;
         if (pNode)
         {
             ASSERT_DEBUG(pNode != right_child(), "this node is right child");
@@ -35,7 +36,8 @@ namespace CZ
     BinTreeNode<T> *BinTreeNode<T>::set_right_child(BinTreeNode<T> *pNode)
     {
         BinTreeNode<T> *pOldChild = right_child();
-        this->children().back() = pNode;
+        // this->children().back() = pNode;
+        _pRightChild = pNode;
         if (pNode)
         {
             ASSERT_DEBUG(pNode != left_child(), "this node is left child");
@@ -83,9 +85,12 @@ namespace CZ
         {
             return nullptr;
         }
-        BinTreeNode<T> *pChild = dynamic_cast<BinTreeNode<T> *>(this->children().front());
+/*         BinTreeNode<T> *pChild = dynamic_cast<BinTreeNode<T> *>(this->children().front());
         pChild->set_father(nullptr);
-        this->children().front() = nullptr;
+        this->children().front() = nullptr; */
+        _pLeftChild->set_father(nullptr);
+        BinTreeNode<T> *pChild = left_child();
+        _pLeftChild = nullptr;
         return pChild;
     }
 
@@ -96,9 +101,12 @@ namespace CZ
         {
             return nullptr;
         }
-        BinTreeNode<T> *pChild = dynamic_cast<BinTreeNode<T> *>(this->children().back());
+/*         BinTreeNode<T> *pChild = dynamic_cast<BinTreeNode<T> *>(this->children().back());
         pChild->set_father(nullptr);
-        this->children().back() = nullptr;
+        this->children().back() = nullptr; */
+        _pRightChild->set_father(nullptr);
+        BinTreeNode<T> *pChild = right_child();
+        _pRightChild = nullptr;
         return pChild;
     }
 } // CZ
