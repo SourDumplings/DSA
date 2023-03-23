@@ -106,7 +106,6 @@ namespace CZ
 
         Rank _search(const T &data) const;
 
-        // 哈希表的扩容和缩容，扩缩容倍率都是 2 倍，每次扩缩容完了都需要 rehash
         bool _need_expand() const;
         bool _need_shrink() const;
         void _expand();

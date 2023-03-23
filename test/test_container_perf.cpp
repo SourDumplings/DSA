@@ -48,25 +48,25 @@ int main(int argc, char const *argv[])
     ContainerTester<int, StdSet> cst4;
     ContainerTester<int, StdUSet> cst5;
 
-    const uint32_t cSize = 1000000U;
+    const uint32_t cSize = 1000U;
     const uint32_t testNo = 10;
     for (uint32_t i = 0; i < testNo; i++)
     {
         int randSeed = time(nullptr);
         printf("Testing %u...\n", i);
 
-        // uint32_t s1 = cst1.test_insert_random("CZ::FlatHashSet", randSeed, cSize);
-        // uint32_t s2 = cst2.test_insert_random("CZ::HashSet", randSeed, cSize);
-        // ASSERT_DEBUG(s1 == s2, "Wrong size!");
+        uint32_t s1 = cst1.test_insert_random("CZ::FlatHashSet", randSeed, cSize); // 很慢
+        uint32_t s2 = cst2.test_insert_random("CZ::HashSet", randSeed, cSize);
+        ASSERT_DEBUG(s1 == s2, "Wrong size!");
         cst3.test_insert_random("CZ::TreeSet", randSeed, cSize);
         cst4.test_insert_random("std::set", randSeed, cSize);
-        // cst5.test_insert_random("std::unordered_set", randSeed, cSize);
+        cst5.test_insert_random("std::unordered_set", randSeed, cSize);
 
-        // cst1.test_insert_random_then_remove("CZ::FlatHashSet", randSeed, cSize);
-        // cst2.test_insert_random_then_remove("CZ::HashSet", randSeed, cSize);
+        cst1.test_insert_random_then_remove("CZ::FlatHashSet", randSeed, cSize); // 很慢
+        cst2.test_insert_random_then_remove("CZ::HashSet", randSeed, cSize);
         cst3.test_insert_random_then_remove("CZ::TreeSet", randSeed, cSize);
         cst4.test_insert_random_then_erase("std::set", randSeed, cSize);
-        // cst5.test_insert_random_then_erase("std::unordered_set", randSeed, cSize);
+        cst5.test_insert_random_then_erase("std::unordered_set", randSeed, cSize);
     }
 
     // 测试顺序容器
