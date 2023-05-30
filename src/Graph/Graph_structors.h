@@ -50,7 +50,7 @@ namespace CZ
                 Vector<KVPair<bool, ED>> *pVi = new Vector<KVPair<bool, ED>>(_Nv);
                 for (KVPair<bool, ED> &p : *pVi)
                 {
-                    p.set_key(false);
+                    p.key() = false;
                 }
                 _dataE[i] = pVi;
             }

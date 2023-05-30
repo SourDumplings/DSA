@@ -59,20 +59,29 @@ namespace CZ
         }
 
         ASSERT_DEBUG(pNode->get_root() == this->root(), "this node is not in this tree");
-        ASSERT_DEBUG(pNode != this->root(), "cannot secede root");
 
         BinTreeNode<T> *pBinTreeNode = dynamic_cast<BinTreeNode<T> *>(pNode);
         ASSERT_RELEASE(pBinTreeNode, "wrong node pointer");
 
         BinTreeNode<T> *f = dynamic_cast<BinTreeNode<T> *>(pBinTreeNode->father());
-        if (f->left_child() == pBinTreeNode)
+        if (f)
         {
-            f->set_left_child(nullptr);
+            if (f->left_child() == pBinTreeNode)
+            {
+                f->set_left_child(nullptr);
+            }
+            else if (f->right_child() == pBinTreeNode)
+            {
+                f->set_right_child(nullptr);
+            }
         }
-        else if (f->right_child() == pBinTreeNode)
+        else
         {
-            f->set_right_child(nullptr);
+            // 说明是摘除 root 结点
+            ASSERT_DEBUG(pNode == Tree<T>::_pRoot, "wrong node pointer");
+            Tree<T>::_pRoot = nullptr;
         }
+
         typename TreeNode<T>::Rank sizeLess = pBinTreeNode->get_size();
         this->_size -= sizeLess;
 

@@ -39,8 +39,8 @@ namespace CZ
         if (TreeNode<T>::father())
         {
             ret = (this == dynamic_cast<BinTreeNode<T> *>(this->father())->left_child())
-                      ? dynamic_cast<BinTreeNode<T> *>(this->father())->right_child()
-                      : dynamic_cast<BinTreeNode<T> *>(this->father())->left_child();
+                ? dynamic_cast<BinTreeNode<T> *>(this->father())->right_child()
+                : dynamic_cast<BinTreeNode<T> *>(this->father())->left_child();
         }
         return ret;
     }
@@ -128,6 +128,22 @@ namespace CZ
     inline bool equivalent(const BinTreeNode<T> &lhs, const BinTreeNode<T> &rhs)
     {
         return TreeNode<T>::equivalent(lhs, rhs);
+    }
+
+    template <typename T>
+    typename BinTreeNode<T>::Rank BinTreeNode<T>::height() const
+    {
+        Rank lH = left_child() ? left_child()->height() : 0;
+        Rank rH = right_child() ? right_child()->height() : 0;
+        return Max(lH, rH) + 1;
+    }
+
+    template <typename T>
+    typename BinTreeNode<T>::Rank BinTreeNode<T>::get_size() const
+    {
+        Rank lSize = left_child() ? left_child()->get_size() : 0;
+        Rank rSize = right_child() ? right_child()->get_size() : 0;
+        return lSize + rSize + 1;
     }
 
     template <typename T>

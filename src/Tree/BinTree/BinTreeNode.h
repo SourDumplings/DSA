@@ -41,6 +41,8 @@ namespace CZ
         BinTreeNode<T> *prev() const;
         BinTreeNode<T> *next() const;
 
+        Rank get_size() const override;
+
         void insert_as_left_child(BinTreeNode<T> *newChild);
         void insert_as_right_child(BinTreeNode<T> *newChild);
 
@@ -53,6 +55,9 @@ namespace CZ
         BinTreeNode<T> *set_left_child(BinTreeNode<T> *pNode);
         BinTreeNode<T> *set_right_child(BinTreeNode<T> *pNode);
 
+        // 将左右孩子交换
+        void exchange_children();
+
         BinTreeNode<T> *zig(); // 顺时针旋转, 返回旋转后的原来位置的结点指针
         BinTreeNode<T> *zag(); // 逆时针旋转, 返回旋转后的原来位置的结点指针
 
@@ -61,6 +66,8 @@ namespace CZ
         List<TreeNode<T> *> &children() = delete;
 
         TreeNode<T> *insert_child(TreeNode<T> *pNode) override;
+
+        Rank height() const override;
 
         static bool equivalent(const BinTreeNode<T> &lhs, const BinTreeNode<T> &rhs);
 

@@ -43,6 +43,9 @@ namespace CZ
         BSTNode *remove_child_by_data(const T &data);
 
         const char *get_entity_name() const override;
+
+        // 不得再使用 exchange_children 方法
+        void exchange_children() = delete;
     };
 } // CZ
 

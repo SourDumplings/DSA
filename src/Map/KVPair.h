@@ -78,20 +78,14 @@ namespace CZ
             return _key;
         }
 
-        void set_key(const K &k_)
-        {
-            _key = k_;
-        }
+        K &key() { return _key; }
 
         const V &value() const
         {
             return _value;
         }
 
-        void set_value(const V &value_)
-        {
-            _value = value_;
-        }
+        V &value() { return _value; }
 
         // 赋值操作符函数
         template <typename KD, typename VD>

@@ -19,7 +19,7 @@ namespace CZ
     template <typename T, typename F>
     SegmentTree<T, F>::SegmentTree(const CZ::Vector<T> data,
                                    const F &f)
-        : _f(f), _n(data.size())
+        : _n(data.size()), _f(f)
     {
         _tree_data = Vector<T>(2 * _n);
         for (typename Vector<T>::Rank i = _n, j = 0; i < 2 * _n; ++i, ++j)

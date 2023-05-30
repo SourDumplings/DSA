@@ -28,7 +28,7 @@ namespace CZ
         _table.resize(INITIAL_TABLE_SIZE);
         for (Rank i = 0; i < table_size(); ++i)
         {
-            _table[i].set_value(false);
+            _table[i].value() = false;
         }
     }
 
@@ -66,7 +66,7 @@ namespace CZ
         _table.resize(INITIAL_TABLE_SIZE);
         for (Rank i = 0; i < table_size(); ++i)
         {
-            _table[i].set_value(false);
+            _table[i].value() = false;
         }
 
         for (It it = begin; it != end; ++it)
@@ -314,7 +314,7 @@ namespace CZ
         {
             return false;
         }
-        _table[pos].set_value(false);
+        _table[pos].value() = false;
         --_size;
         if (_need_shrink())
         {
@@ -370,7 +370,7 @@ namespace CZ
         _table.resize(newTableSize);
         for (typename Vector<KVPair<T, bool>>::Rank i = oldTableSize; i < newTableSize; ++i)
         {
-            _table[i].set_value(false);
+            _table[i].value() = false;
         }
         _rehash();
     }
@@ -401,7 +401,7 @@ namespace CZ
                 break;
             }
             _table[i] = std::move(_table[j]);
-            _table[j].set_value(false);
+            _table[j].value() = false;
         }
     }
 
@@ -415,7 +415,7 @@ namespace CZ
             if (_table[i].value())
             {
                 needRehashDataVec.push_back(_table[i].key());
-                _table[i].set_value(false);
+                _table[i].value() = false;
             }
         }
         _size = 0;
@@ -504,7 +504,7 @@ namespace CZ
         _table.resize(INITIAL_TABLE_SIZE);
         for (Rank i = 0; i < INITIAL_TABLE_SIZE; ++i)
         {
-            _table[i].set_value(false);
+            _table[i].value() = false;
         }
         _firstNonEmptyBucketIndex = 0;
         _lastNonEmptyBucketIndex = 0;

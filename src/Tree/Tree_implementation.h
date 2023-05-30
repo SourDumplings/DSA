@@ -173,6 +173,7 @@ namespace CZ
         if (pNode == _pRoot)
         {
             _pRoot = nullptr;
+            _size = 0;
             return pNode;
         }
 
@@ -182,8 +183,18 @@ namespace CZ
         typename List<TreeNode<T> *>::Iterator nodePos;
 
         // 删掉目标结点
-        typename List<TreeNode<T> *>::Rank removedChildrenNum = f->children().remove(pNode);
-        ASSERT_RELEASE(removedChildrenNum == 1, "error remove child node");
+        if (f)
+        {
+            typename List<TreeNode<T> *>::Rank removedChildrenNum = f->children().remove(pNode);
+            ASSERT_RELEASE(removedChildrenNum == 1, "error remove child node");
+        }
+        else
+        {
+            // 说明是摘除 root 结点
+            ASSERT_DEBUG(pNode == _pRoot, "wrong node pointer");
+            _pRoot = nullptr;
+        }
+
         typename TreeNode<T>::Rank sizeLess = pNode->get_size();
         _size -= sizeLess;
 

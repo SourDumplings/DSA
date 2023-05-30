@@ -90,7 +90,7 @@ namespace CZ
         Rank _size;
 
     private:
-        TreeNode<T> *copy_from(TreeNode<T> *pRoot);
+        virtual TreeNode<T> *copy_from(TreeNode<T> *pRoot);
     };
 } // CZ
 

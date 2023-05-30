@@ -93,7 +93,7 @@ namespace CZ
                                           BinTreeNode<T> *T0, BinTreeNode<T> *T1, BinTreeNode<T> *T2, BinTreeNode<T> *T3);
 
     private:
-        BinTreeNode<T> *copy_from(TreeNode<T> *pRoot);
+        BinTreeNode<T> *copy_from(TreeNode<T> *pRoot) override;
     };
 } // CZ
 

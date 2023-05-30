@@ -15,6 +15,7 @@
 #include "BinTreeNode.h"
 
 #include "../../Algorithms/Max.h"
+#include "../../Algorithms/Swap.h"
 
 namespace CZ
 {
@@ -108,6 +109,12 @@ namespace CZ
         BinTreeNode<T> *pChild = right_child();
         _pRightChild = nullptr;
         return pChild;
+    }
+
+    template <typename T>
+    void BinTreeNode<T>::exchange_children()
+    {
+        Swap(_pLeftChild, _pRightChild);
     }
 } // CZ
 

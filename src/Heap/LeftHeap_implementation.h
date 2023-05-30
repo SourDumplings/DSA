@@ -88,11 +88,10 @@ namespace CZ
             return merge(lHeap2, lHeap1, cmp);
         }
 
-        BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *r = lHeap2._T.root();
-        lHeap2._T.root() = nullptr;
-        lHeap2._T.update_size();
+        BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *r = dynamic_cast<BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *>(lHeap2._T.root());
+        lHeap2._T.secede(lHeap2._T.root());
 
-        _do_merge(lHeap1._T.root(), r, cmp);
+        _do_merge(dynamic_cast<BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *>(lHeap1._T.root()), r, cmp);
         lHeap1._T.update_size();
         return lHeap1;
     }
@@ -116,12 +115,12 @@ namespace CZ
         a->remove_right_child();
         a->insert_as_right_child(_do_merge(rc, b, cmp));
 
-        if (!a->left_child() ||
-            (a->right_child() &&
-             (a->left_child()->data().value() < a->right_child()->data().value())))
+        if (!a->left_child()
+            || (a->right_child() && a->left_child()->data().value() < a->right_child()->data().value())
+        )
         {
             // 保证右子堆的npl不大
-            Swap(a->left_child(), a->right_child());
+            a->exchange_children();
         }
         // 更新a的npl
         a->data().value() = a->right_child() ? a->right_child()->data().value() + 1 : 1;
@@ -133,23 +132,22 @@ namespace CZ
     {
         ASSERT_DEBUG(!this->empty(), "Error from LeftHeap pop: empty LeftHeap cannot pop");
 
-        BinTreeNode<KVPair<T, Rank>> *lr = _T.root()->left_child(), *rr = _T.root()->right_child();
-        if (lr)
-            lr->father() = nullptr;
-        if (rr)
-            rr->father() = nullptr;
+        BinTreeNode<KVPair<T, Rank>> *lr = dynamic_cast<BinTreeNode<KVPair<T, Rank>>*>(_T.root())->remove_left_child();
+        BinTreeNode<KVPair<T, Rank>> *rr = dynamic_cast<BinTreeNode<KVPair<T, Rank>>*>(_T.root())->remove_right_child();
         delete _T.root();
 
         BinTreeNode<KVPair<T, Rank>> *r = _do_merge(lr, rr, cmp);
         _T = BinTree<KVPair<T, Rank>>(r);
+        _T.update_size();
     }
 
     template <typename T, typename Cmp>
     void LeftHeap<T, Cmp>::insert(const T &value, const Cmp &cmp)
     {
         BinTreeNode<KVPair<T, Rank>> *node = new BinTreeNode<KVPair<T, Rank>>(KVPair<T, Rank>(value, 1));
-        BinTreeNode<KVPair<T, Rank>> *r = _do_merge(_T.root(), node, cmp);
+        BinTreeNode<KVPair<T, Rank>> *r = _do_merge(dynamic_cast<BinTreeNode<KVPair<T, Rank>>*>(_T.root()), node, cmp);
         _T = BinTree<KVPair<T, Rank>>(r);
+        _T.update_size();
     }
 
     template <typename T, typename Cmp>

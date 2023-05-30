@@ -88,10 +88,10 @@ namespace CZ
         {
             // 注意对于邻接矩阵法，两结点之间的边最多只能有一条
             KVPair<bool, ED> &eP = (*(static_cast<Vector<KVPair<bool, ED>>*>(_dataE[s])))[d];
-            eP.set_value(eData);
+            eP.value() = eData;
             if (!eP.key())
             {
-                eP.set_key(true);
+                eP.key() = true;
                 ++_inDegree[d];
                 ++_outDegree[s];
             }
@@ -137,7 +137,7 @@ namespace CZ
             KVPair<bool, ED> &eP = (*(static_cast<Vector<KVPair<bool, ED>>*>(_dataE[s])))[d];
             if (eP.key())
             {
-                eP.set_key(false);
+                eP.key() = false;
                 success = true;
             }
         }

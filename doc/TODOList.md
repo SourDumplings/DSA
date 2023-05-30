@@ -80,3 +80,4 @@
 38. Cmake 集成 GPERFTOOLS 进行内存分析
 39. 根据测试与分析结果，优化容器性能
 已实现
+40. 为 move cconstructor 和 move = 增加 nonexcept 声明，否则一些标准库函数如 vector 无法使用它

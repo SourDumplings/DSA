@@ -5,13 +5,6 @@
  * @Email: changzheng300@foxmail.com
  * @Description: 
  */
-/**  
-
-    * @projectName DSA
-    * @author SourDumplings
-    * @version 1.0.0
-    * @date 2021/3/4 10:31
-*/
 
 #include "Map/KVPair.h"
 #include "CZString/CZString.h"

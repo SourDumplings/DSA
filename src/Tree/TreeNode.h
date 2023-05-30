@@ -34,7 +34,7 @@ namespace CZ
         TreeNode<T> *father() const;
         TreeNode<T> *get_root() const;
         // 返回以这个结点为根结点的家族共有多少成员，没有孩子则返回1
-        Rank get_size() const;
+        virtual Rank get_size() const;
 
         TreeNode<T> *oldest_child() const;
 
@@ -62,7 +62,6 @@ namespace CZ
 
         const char *get_entity_name() const override;
 
-    protected:
         // 设置新的父结点，返回原父结点指针
         TreeNode<T> *set_father(TreeNode<T> *pNode);
 
