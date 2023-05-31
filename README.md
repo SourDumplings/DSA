@@ -9,7 +9,7 @@
 # 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：9.0.0，与 CMakeLists.txt 同步
+版本号：9.0.1，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -116,3 +116,11 @@
 7. 《Database System Concepts》6th-Abraham Silberschatz, Henry F. Korth, S. Sudarshan
 8. 《STL 源码剖析》-侯捷
 
+# TODO
+- 实现树状数组（区间）
+- 实现 KD 树
+- 实现前缀树（Tire 树）
+- 调试 BinTree 遍历算法中先中序 NONRECURSION_TRAVERSAL4 再后序 NONRECURSION_TRAVERSAL1 的死循环情况，见 test_bintree.cpp
+- 实现 win 版本的控制脚本
+- Cmake 集成 GPERFTOOLS 进行内存分析
+- 为 move cconstructor 和 move = 增加 nonexcept 声明，否则一些标准库函数如 vector 无法使用它
