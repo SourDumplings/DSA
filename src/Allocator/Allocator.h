@@ -15,7 +15,10 @@ namespace CZ
     class Allocator
     {
     public:
+        // 传入参数为 sizeof(obj)，即 obj 的大小，单位为 Byte
         void *allocate(size_t);
+
+        // 传入第二个参数为 sizeof(obj)，即 obj 的大小，单位为 Byte
         void deallocate(void *, size_t);
 
     private:
