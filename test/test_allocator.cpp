@@ -14,57 +14,47 @@
 using namespace CZ;
 using namespace std;
 
+#define DECLARE_POOL_ALLOC() \
+public:\
+    static void *operator new(size_t size) { return myAlloc.allocate(size); } \
+    static void operator delete(void *pDead, size_t size) { return myAlloc.deallocate(pDead, size); } \
+protected:\
+    static Allocator myAlloc;
+
+#define IMPLEMENT_POOL_ALLOC(className) \
+Allocator className::myAlloc;
+
 class Foo
 {
+    DECLARE_POOL_ALLOC();
 public:
     long L;
     string str;
-    static Allocator myAlloc;
 
     Foo(long l) : L(l)
     {
     }
-
-    static void *operator new(size_t size)
-    {
-        return myAlloc.allocate(size);
-    }
-
-    static void operator delete(void *pDead, size_t size)
-    {
-        return myAlloc.deallocate(pDead, size);
-    }
 };
 
-Allocator Foo::myAlloc;
+IMPLEMENT_POOL_ALLOC(Foo)
 
 class Goo
 {
+    DECLARE_POOL_ALLOC();
 public:
     complex<double> c;
     string str;
-    static Allocator myAlloc;
 
     Goo(const complex<double> &x) : c(x)
     {
     }
-    
-    static void *operator new(size_t size)
-    {
-        return myAlloc.allocate(size);
-    }
-
-    static void operator delete(void *pDead, size_t size)
-    {
-        return myAlloc.deallocate(pDead, size);
-    }
 };
 
-Allocator Goo::myAlloc;
+IMPLEMENT_POOL_ALLOC(Goo)
 
 int main(int argc, char const *argv[])
 {
-    /* 
+    /*
         测试结果：
         1. 使用 Allocator:
         sizeof(Foo) = 16
