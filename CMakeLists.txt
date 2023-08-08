@@ -29,9 +29,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin/)
 
 # 版本号管理，如果项目版本号为 a.b.c，则 version = a.b.c，api_version = a.b
 # 动态库版本
-set(version 9.1.3)
+set(version 9.2.0)
 # API 版本
-set(api_version 9.1)
+set(api_version 9.2)
 
 # PROJECT_SOURCE_DIR 即项目根目录，即脚本中的 project_base_dir
 message(STATUS "build_type: " ${BUILD_TYPE})

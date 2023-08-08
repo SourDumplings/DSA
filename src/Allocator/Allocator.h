@@ -32,4 +32,14 @@ namespace CZ
     };
 }
 
+#define DECLARE_POOL_ALLOC() \
+public:\
+    static void *operator new(size_t size) { return myAlloc.allocate(size); } \
+    static void operator delete(void *pDead, size_t size) { return myAlloc.deallocate(pDead, size); } \
+protected:\
+    static Allocator myAlloc;
+
+#define IMPLEMENT_POOL_ALLOC(className) \
+Allocator className::myAlloc
+
 #endif

@@ -14,16 +14,6 @@
 using namespace CZ;
 using namespace std;
 
-#define DECLARE_POOL_ALLOC() \
-public:\
-    static void *operator new(size_t size) { return myAlloc.allocate(size); } \
-    static void operator delete(void *pDead, size_t size) { return myAlloc.deallocate(pDead, size); } \
-protected:\
-    static Allocator myAlloc;
-
-#define IMPLEMENT_POOL_ALLOC(className) \
-Allocator className::myAlloc;
-
 class Foo
 {
     DECLARE_POOL_ALLOC();
@@ -36,7 +26,7 @@ public:
     }
 };
 
-IMPLEMENT_POOL_ALLOC(Foo)
+IMPLEMENT_POOL_ALLOC(Foo);
 
 class Goo
 {
@@ -50,7 +40,7 @@ public:
     }
 };
 
-IMPLEMENT_POOL_ALLOC(Goo)
+IMPLEMENT_POOL_ALLOC(Goo);
 
 int main(int argc, char const *argv[])
 {
