@@ -3,7 +3,11 @@
  * @Date: 2023-08-06 18:04:06
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com
- * @Description: 内存分配器，使用链表内存池，减少多次调用 malloc 的内存 cookie 成本
+ * @Description: 内存分配器
+ * 基本原理是预先申请一大块内存，将其分作大小固定的小块，使用链表串起来作为内存池，
+ * 减少多次调用 malloc 的内存 cookie 成本
+ * 
+ * TODO Problem：为什么 Allocator 只有 malloc 但是没有 free，Asan 却检测不出内存泄漏？
  */
 #ifndef ALLOCATOR_H
 #define ALLOCATOR_H
@@ -25,10 +29,15 @@ namespace CZ
         static constexpr size_t CHUNK_SIZE = 8;
         struct obj
         {
-            obj *pNext = nullptr; // embedded pointer
+            /* 
+                embedded pointer 内嵌指针
+                将未分配的小块的前 sizeof(obj*) 个字节用作链表结点的 next 指针，不浪费内存
+                在小块内存分配出去后 pFreeStore 指针记录了下一个可分配的小块地址
+             */
+            obj *pNext = nullptr;
         };
 
-        obj *pFreeStore = nullptr;
+        obj *pFreeStore = nullptr; // 记录了下一个可分配的小块地址，即内存池链表的头结点指针
     };
 }
 
