@@ -7,7 +7,8 @@
  * 基本原理是预先申请一大块内存，将其分作大小固定的小块，使用链表串起来作为内存池，
  * 减少多次调用 malloc 的内存 cookie 成本
  * 
- * TODO Problem：为什么 Allocator 只有 malloc 但是没有 free，Asan 却检测不出内存泄漏？
+ * 问题：这个 Allocator 通过 malloc 向 OS 要的内存是不会还回去的，即不会调用 free 去还，很霸道
+ * 但是为何 Asan 却检测不出内存泄漏？
  */
 #ifndef ALLOCATOR_H
 #define ALLOCATOR_H
