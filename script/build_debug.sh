@@ -14,6 +14,7 @@ echo "project_base_dir: $project_base_dir"
 cd $project_base_dir
 mkdir build
 cd build
-cmake .. -DBUILD_TYPE=Debug
+cmake .. -DBUILD_TYPE=Debug --graphviz=dsa.dot
+dot -Tpng dsa.dot.dsa-test > dsa-test_dependencies.png
 make
 make install

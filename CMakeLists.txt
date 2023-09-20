@@ -29,7 +29,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin/)
 
 # 版本号管理，如果项目版本号为 a.b.c，则 version = a.b.c，api_version = a.b
 # 动态库版本
-set(version 9.2.3)
+set(version 9.2.4)
 # API 版本
 set(api_version 9.2)
 
@@ -50,3 +50,6 @@ set(dist_dir ${PROJECT_SOURCE_DIR}/dist)
 
 # 安装当前工程中doc/目录下的所有内容到doc目录下
 INSTALL(DIRECTORY doc/  DESTINATION   ${dist_dir}/doc)
+
+# 安装 graphviz 输出的依赖关系图
+INSTALL(FILES ${PROJECT_BINARY_DIR}/dsa-test_dependencies.png DESTINATION ${dist_dir}/doc)
