@@ -18,9 +18,9 @@ namespace CZ
 {
     template <typename T>
     Vector<T>::Vector(const Vector<T> &V)
-        : _size(0)
+        : _elem(nullptr)
+        , _size(0)
         , _capacity(0)
-        , _elem(nullptr)
     {
         _init_from(V._elem, V._elem + V._size);
     }

@@ -6,6 +6,7 @@ ADD_DEFINITIONS(-std=c++11)
 # 添加库源文件
 SET(lib_source  Algorithms/Swap.cpp
                 Algorithms/Hash.cpp
+                Algorithms/Is_prime.cpp
                 Allocator/Allocator.cpp
                 Base/Assert.cpp
                 Base/AbstractBaseEntity.cpp

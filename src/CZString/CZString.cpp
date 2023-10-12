@@ -36,6 +36,11 @@ namespace CZ
     {
     }
 
+    CZString::CZString(Rank n, char c): Vector<char>(n)
+    {
+        memset(_elem, c, size());
+    }
+
     void CZString::print_info(const char *name) const
     {
         printf("CZString %s is ", name);

@@ -79,6 +79,13 @@ namespace CZ
         Iterator insert(Iterator itPos, const Iterator &b, const Iterator &e);
         Iterator erase(Iterator itPos);
         Iterator erase(Iterator itBegin, Iterator itEnd);
+
+        /**
+         * @brief 重新调整容器大小，如果是扩容，则扩容后原来的元素都会保序复制到容器的前端，结果上看是往后拓展了空间
+         * 如果是缩容，则缩容后原来的元素都会保序尽可能复制到容器的前端，结果上看是从尾部截断了一段
+         * 
+         * @param [in] n 目标容器大小
+         */
         void resize(Rank n);
         
         // 删除所有值为value的元素
@@ -94,6 +101,8 @@ namespace CZ
         const char *get_entity_name() const override;
 
     protected:
+        T *_elem; // 数据区，[0, _size) 元素经过了构造，[_size, _capacity) 元素未经过构造
+
         //迭代器区间的复制
         template <typename It>
         void _init_from(const It &begin, const It &end);
@@ -113,7 +122,6 @@ namespace CZ
     private:
         Rank _size; // 规模
         Rank _capacity; // 容量
-        T *_elem; // 数据区，[0, _size) 元素经过了构造，[_size, _capacity) 元素未经过构造
     };
 }
 

@@ -353,13 +353,8 @@ namespace CZ
         {
             ++k;
             newTableSize = 4 * k + 3;
-            while (g_primeTable.upper_limit() < newTableSize)
-            {
-                g_primeTable.rebuild(g_primeTable.upper_limit() * 2);
-            }
 
-
-            if (g_primeTable.is_prime(newTableSize)
+            if (PrimeTable::get_instance().is_prime(newTableSize)
                 && oldTableSize < newTableSize * 2
             )
             {
@@ -383,7 +378,7 @@ namespace CZ
         uint32_t k = 0;
 
         // 找上一个可以表示为 4k + 3，k ∈ N+ 的素数
-        for (k = oldTableSize / 4 - 1; !g_primeTable.is_prime(4 * k + 3); --k);
+        for (k = oldTableSize / 4 - 1; !PrimeTable::get_instance().is_prime(4 * k + 3); --k);
         Rank newTableSize = 4 * k + 3;
         _table.resize(newTableSize);
         _rehash();

@@ -8,35 +8,44 @@
 
 #include "PrimeTable.h"
 
-
 #include <cstdio>
 #include <iostream>
 #include "../CZString/CZString.h"
 
 namespace CZ
 {
-    // 构造存放最大素数不超过upperLimit_的素数表
-    PrimeTable::PrimeTable(PrimeTable::Rank upperLimit_) : _upperLimit(upperLimit_),
-                                                           _size(0) { _build_table(); }
-
-    PrimeTable g_primeTable(1000); // 全局放一个 1000 大小的素数表
-
-    // 素数表中素数的个数
-    PrimeTable::Rank PrimeTable::size() const { return _size; }
-    // 素数表的上界
-    PrimeTable::Rank PrimeTable::upper_limit() const { return _upperLimit; }
-    void PrimeTable::rebuild(PrimeTable::Rank upperLimit_)
+    PrimeTable::PrimeTable(PrimeTable::Rank upperLimit_)
+        : AbstractBaseContainer<uint32_t>() 
+        , _size(0)
     {
-        _upperLimit = upperLimit_;
-        _size = 0;
+        ASSERT_RELEASE(MIN_UPPER_LIMIT <= upperLimit_, "Too small upper limit %u, at least %u"
+            , upperLimit_
+            , MIN_UPPER_LIMIT
+        );
+        _table.resize(upperLimit_);
         _build_table();
     }
-    // 返回第n个素数
+
+    void PrimeTable::_expand(PrimeTable::Rank upperLimit_)
+    {
+        if (upperLimit_ <= upper_limit())
+        {
+            return;
+        }
+
+        _table.resize(upperLimit_);
+        _build_table();
+    }
+
     PrimeTable::Rank PrimeTable::get_prime(PrimeTable::Rank n) const
     {
-        ASSERT_DEBUG(n <= _size, "Error from PrimeTable get_prime: this table doesn't have so many primes");
+        ASSERT_RELEASE(n <= _size, "Too large n = %u requested, this table only contains %u primes."
+            , n
+            , _size
+        );
+
         PrimeTable::Rank ret = 0;
-        for (PrimeTable::Rank i = 2, count = 0; i <= _upperLimit; ++i)
+        for (PrimeTable::Rank i = 2, count = 0; i < upper_limit(); ++i)
         {
             if (_table[i])
             {
@@ -50,21 +59,45 @@ namespace CZ
         }
         return ret;
     }
-    // 判断素数
+
+    PrimeTable::Rank PrimeTable::get_prime(PrimeTable::Rank n)
+    {
+        while (_size < n)
+        {
+            _expand(upper_limit() * 2);
+        }
+
+        return static_cast<const PrimeTable&>(*this).get_prime(n);
+    }
+
+    bool PrimeTable::is_prime(PrimeTable::Rank num) const
+    {
+        ASSERT_RELEASE(num < upper_limit(), "Too large num = %u requested, upper limit is %u."
+            , num
+            , upper_limit()
+        );
+
+        return _table[num];
+    }
+
     bool PrimeTable::is_prime(PrimeTable::Rank num)
     {
-        ASSERT_DEBUG(num <= _upperLimit, "Error from PrimeTable get_prime: this number is too large");
-        return _table[num];
+        while (upper_limit() <= num)
+        {
+            _expand(num * 2);
+        }
+        
+        return static_cast<const PrimeTable&>(*this).is_prime(num);
     }
 
     // 输出信息
     void PrimeTable::print_info(const char *name) const
     {
         printf("for PrimeTable %s:\n", name);
-        std::cout << "it contains " << _size << " prime numbers, no greater than " << _upperLimit
-                  << std::endl;
+        std::cout << "it contains " << _size << " prime numbers, no greater than " << upper_limit()
+            << std::endl;
         printf("including:");
-        for (Rank i = 2; i <= _upperLimit; ++i)
+        for (Rank i = 2; i < upper_limit(); ++i)
         {
             if (_table[i])
             {
@@ -76,33 +109,30 @@ namespace CZ
 
     void PrimeTable::_build_table()
     {
-        clear();
-        _table.resize(_upperLimit + 1);
-
-        ASSERT_RELEASE(2 <= _upperLimit, "Wrong upperLimit %u", _upperLimit);
-
         _table[0] = _table[1] = false;
-        for (PrimeTable::Rank i = 2; i <= _upperLimit; ++i)
+        for (PrimeTable::Rank i = 2; i < upper_limit(); ++i)
         {
             _table[i] = true;
         }
-        for (PrimeTable::Rank i = 4; i <= _upperLimit; i += 2)
+        
+        for (PrimeTable::Rank i = 4; i < upper_limit(); i += 2)
         {
             _table[i] = false;
         }
 
-        for (PrimeTable::Rank i = 3; i * i <= _upperLimit; i += 2)
+        for (PrimeTable::Rank i = 3; i * i < upper_limit(); i += 2)
         {
             if (_table[i])
             {
-                for (PrimeTable::Rank j = i * 2; j <= _upperLimit; j += i)
+                for (PrimeTable::Rank j = i * 2; j < upper_limit(); j += i)
                 {
                     _table[j] = false;
                 }
             }
         }
 
-        for (PrimeTable::Rank i = 2; i < _upperLimit; i++)
+        _size = 0;
+        for (PrimeTable::Rank i = 2; i < upper_limit(); i++)
         {
             if (_table[i])
             {
@@ -116,7 +146,7 @@ namespace CZ
     {
         std::ostringstream oss;
         oss << this->get_entity_name() << "[";
-        for (Rank i = 2; i <= _upperLimit; ++i)
+        for (Rank i = 2; i < upper_limit(); ++i)
         {
             if (_table[i])
             {
@@ -145,6 +175,12 @@ namespace CZ
     {
         _size = 0;
         _table.clear();
+    }
+
+    PrimeTable &PrimeTable::get_instance(Rank upperLimit_)
+    {
+        static PrimeTable instance(upperLimit_);
+        return instance;
     }
 
 }

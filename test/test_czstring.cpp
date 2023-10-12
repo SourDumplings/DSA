@@ -33,6 +33,10 @@ int main(int argc, char const *argv[])
     cout << "s3: " << s3 << endl;
     cout << "s4: " << s4 << endl;
 
+    CZString s5(10, 'a'), s6(101, '+');
+    cout << "s5: " << s5 << endl;
+    cout << "s6: " << s6 << endl;
+
     // const char *sContent = s;
     // printf("sContent = %s\n", sContent);
     // Vector<int> vi({ 1, 2, 3, 5 });

@@ -33,6 +33,7 @@ namespace CZ
 
         CZString(const char *str_ = "");
         CZString(const std::string &str_);
+        explicit CZString(Rank n, char c); // 初始化一个字符 c 重复 n 次的字符串
         ~CZString() override;
 
         CZString(const CZString &s);
