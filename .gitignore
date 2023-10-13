@@ -1,6 +1,5 @@
 ﻿/.idea/
 /cmake-build-debug/
 /dist/
-/.vscode/
 *.exe
 /build/
