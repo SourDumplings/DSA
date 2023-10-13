@@ -55,7 +55,7 @@ namespace CZ
         Graph(bool directed_ = true, const GraphType &graphType_ = ADJACENCY_LIST,
               Rank Nv_ = 0, bool vHasData_ = false);
         Graph(const Graph &g);
-        Graph(Graph &&g);
+        Graph(Graph &&g) noexcept;
         ~Graph();
 
         // 设置图的规模，若是在构造时没有指定的话必须要先调用该方法，否则不能调用该方法

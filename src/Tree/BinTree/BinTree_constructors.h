@@ -33,7 +33,7 @@ namespace CZ
     }
 
     template <typename T>
-    BinTree<T>::BinTree(BinTree<T> &&t): Tree<T>(std::move(t)) {}
+    BinTree<T>::BinTree(BinTree<T> &&t) noexcept: Tree<T>(std::move(t)) {}
 
     template <typename T>
     BinTreeNode<T> *BinTree<T>::copy_from(TreeNode<T> *pRoot)

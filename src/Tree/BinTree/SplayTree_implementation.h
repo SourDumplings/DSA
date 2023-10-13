@@ -33,7 +33,7 @@ namespace CZ
     }
 
     template <typename T>
-    SplayTree<T>::SplayTree(SplayTree<T> &&t) : BST<T>(std::move(t)) {}
+    SplayTree<T>::SplayTree(SplayTree<T> &&t) noexcept : BST<T>(std::move(t)) {}
 
     template <typename T>
     SplayTreeNode<T> *SplayTree<T>::copy_from(TreeNode<T> *pRoot)
@@ -198,7 +198,7 @@ namespace CZ
     }
 
     template <typename T>
-    SplayTree<T> &SplayTree<T>::operator=(SplayTree<T> &&t)
+    SplayTree<T> &SplayTree<T>::operator=(SplayTree<T> &&t) noexcept
     {
         if (&t != this)
         {

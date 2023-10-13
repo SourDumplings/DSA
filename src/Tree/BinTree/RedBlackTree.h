@@ -37,7 +37,7 @@ namespace CZ
         RedBlackTree(std::nullptr_t);
         RedBlackTree(RedBlackTreeNode<T> *root = nullptr, bool isAllowRepeatKey_ = true);
         RedBlackTree(const RedBlackTree<T> &t);
-        RedBlackTree(RedBlackTree<T> &&t);
+        RedBlackTree(RedBlackTree<T> &&t) noexcept;
 
         // 颜色，默认空结点为黑色
         bool is_red(RedBlackTreeNode<T> *) const;
@@ -51,7 +51,7 @@ namespace CZ
         bool insert_data(const T &data) override;
 
         RedBlackTree<T> &operator=(const RedBlackTree<T> &t);
-        RedBlackTree<T> &operator=(RedBlackTree<T> &&t);
+        RedBlackTree<T> &operator=(RedBlackTree<T> &&t) noexcept;
 
         const char *get_entity_name() const override;
 

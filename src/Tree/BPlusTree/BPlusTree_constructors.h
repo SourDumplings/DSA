@@ -51,7 +51,7 @@ BPlusTree<K, V>::BPlusTree(const BPlusTree<K, V> &bt)
 {}
 
 template<typename K, typename V>
-BPlusTree<K, V>::BPlusTree(BPlusTree<K, V> &&bt)
+BPlusTree<K, V>::BPlusTree(BPlusTree<K, V> &&bt) noexcept
     : _size(bt._size), _order(bt._order), _root(bt._root)
 {
     bt._root = nullptr;

@@ -55,7 +55,7 @@ namespace CZ
     }
 
     template <typename T>
-    BST<T>::BST(BST<T> &&t): BinTree<T>(std::move(t)), _isAllowRepeatKey(t._isAllowRepeatKey)
+    BST<T>::BST(BST<T> &&t) noexcept: BinTree<T>(std::move(t)), _isAllowRepeatKey(t._isAllowRepeatKey)
     {
     }
 
@@ -315,7 +315,7 @@ namespace CZ
     }
 
     template <typename T>
-    BST<T> &BST<T>::operator=(BST<T> &&t)
+    BST<T> &BST<T>::operator=(BST<T> &&t) noexcept
     {
         if (&t != this)
         {

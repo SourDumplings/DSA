@@ -17,7 +17,7 @@ Vector的移动构造函数
 namespace CZ
 {
     template <typename T>
-    Vector<T>::Vector(Vector<T> &&V)
+    Vector<T>::Vector(Vector<T> &&V) noexcept
         : _elem(V._elem)
         , _size(V._size)
         , _capacity(V._capacity)

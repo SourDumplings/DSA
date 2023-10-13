@@ -30,7 +30,7 @@ namespace CZ
 
         BPlusTree(Rank order_ = 3);
         BPlusTree(const BPlusTree &bt);
-        BPlusTree(BPlusTree &&bt);
+        BPlusTree(BPlusTree &&bt) noexcept;
         // bottom-up 地批量建立 B+ 树索引，注意输入的 indexDataV 必须是按照索引排好序的
         BPlusTree(const Vector<KVPair<K, V *>> &indexDataV, Rank order_ = 3);
         ~BPlusTree();

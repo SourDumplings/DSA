@@ -58,7 +58,7 @@ namespace CZ
     }
 
     template <typename T>
-    TreeSet<T>::TreeSet(TreeSet<T> &&s) : _T(std::move(s._T))
+    TreeSet<T>::TreeSet(TreeSet<T> &&s) noexcept : _T(std::move(s._T))
     {
     }
 
@@ -220,7 +220,7 @@ namespace CZ
     }
 
     template <typename T>
-    TreeSet<T> &TreeSet<T>::operator=(TreeSet<T> &&s)
+    TreeSet<T> &TreeSet<T>::operator=(TreeSet<T> &&s) noexcept
     {
         if (&s != this)
         {

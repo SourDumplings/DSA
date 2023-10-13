@@ -14,11 +14,60 @@ FlatHashSet 类模板的测试
 #include <utility>
 #include <cctype>
 #include <ctime>
-
 #include "Set/FlatHashSet.h"
+#include <unordered_set>
 
 using namespace std;
 using namespace CZ;
+
+void test_correctiness()
+{
+    // 通过随机增删元素来验证容器逻辑的正确性
+    for (size_t i = 0; i < 100; i++)
+    {
+        printf("Correctiness check round %lu...\n", i + 1);
+        srand(time(0));
+        std::unordered_set<int> stdS;
+        FlatHashSet<int> flatS;
+        constexpr int opTimes = 200;
+        int rSeq1[opTimes];
+        int rSeq2[opTimes];
+        
+        for (size_t j = 0; j < opTimes; j++)
+        {
+            rSeq1[j] = -1;
+            rSeq2[j] = -1;
+        }
+
+        for (size_t j = 0; j < opTimes; j++)
+        {
+            rSeq1[j] = rand() % opTimes;
+            stdS.insert(rSeq1[j]);
+            flatS.insert(rSeq1[j]);
+
+            ASSERT_RELEASE(stdS.size() == flatS.size()
+                , "Correctiness check failed! stdS.size(): %lu, flatS.size(): %u"
+                , stdS.size()
+                , flatS.size()
+            );
+        }
+
+        for (size_t j = 0; j < opTimes; j++)
+        {
+            rSeq2[j] = rand() % opTimes;
+            stdS.erase(rSeq2[j]);
+            flatS.remove(rSeq2[j]);
+
+            ASSERT_RELEASE(stdS.size() == flatS.size()
+                , "Correctiness check failed! stdS.size(): %lu, flatS.size(): %u"
+                , stdS.size()
+                , flatS.size()
+            );
+        }
+    }
+
+    printf("Correctiness check succ!\n");
+}
 
 int main(int argc, char const *argv[])
 {
@@ -78,7 +127,7 @@ int main(int argc, char const *argv[])
     FlatHashSet<int>::intersect(s6, s7).print_info("s6 inter s7");
 
     // 大数据测试
-    size_t testNo = 10;
+    /* size_t testNo = 10;
     size_t elemNum = 1000;
     FlatHashSet<int> s8(FlatHashSetAccessories::LINEAR_PROBING), s9(FlatHashSetAccessories::SQUARE_PROBING);
     for (size_t i = 0; i < testNo; i++)
@@ -103,7 +152,9 @@ int main(int argc, char const *argv[])
         s8.clear();
         s9.clear();
         printf("\n");
-    }
+    } */
+
+    test_correctiness();
 
     return 0;
 }

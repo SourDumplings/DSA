@@ -58,7 +58,7 @@ namespace CZ
 
         PrimeTable() = delete;
         PrimeTable(const PrimeTable&) = delete;
-        PrimeTable(PrimeTable&&) = delete;
+        PrimeTable(PrimeTable&&) noexcept = delete;
 
         // 构造存放最大素数不超过upperLimit_的素数表
         PrimeTable(Rank upperLimit_);

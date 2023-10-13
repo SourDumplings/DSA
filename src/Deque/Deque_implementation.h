@@ -118,7 +118,7 @@ namespace CZ
     }
 
     template <typename T>
-    Deque<T>::Deque(Deque<T> &&dq)
+    Deque<T>::Deque(Deque<T> &&dq) noexcept
         : _bufferSize(dq._bufferSize)
         , _mapSize(dq._mapSize)
         , _bufferMap(dq._bufferMap)
@@ -822,7 +822,7 @@ namespace CZ
     }
 
     template <typename T>
-    Deque<T> &Deque<T>::operator=(Deque<T> &&dq)
+    Deque<T> &Deque<T>::operator=(Deque<T> &&dq) noexcept
     {
         if (&dq != this)
         {

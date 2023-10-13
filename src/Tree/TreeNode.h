@@ -58,7 +58,7 @@ namespace CZ
         HashRank hash() const override;
 
         TreeNode<T> &operator=(const TreeNode<T> &rhs) = delete;
-        TreeNode<T> &operator=(TreeNode<T> &&rhs) = delete;
+        TreeNode<T> &operator=(TreeNode<T> &&rhs) noexcept = delete;
 
         const char *get_entity_name() const override;
 

@@ -31,7 +31,7 @@ namespace CZ
     }
 
     template <typename T>
-    AVLTree<T>::AVLTree(AVLTree<T> &&t) : BST<T>(std::move(t)) {}
+    AVLTree<T>::AVLTree(AVLTree<T> &&t) noexcept : BST<T>(std::move(t)) {}
 
     template <typename T>
     AVLTreeNode<T> *AVLTree<T>::copy_from(TreeNode<T> *pRoot)

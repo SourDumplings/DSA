@@ -45,7 +45,7 @@ namespace CZ
         List(const List &l);
 
         // 移动构造函数
-        List(List &&l);
+        List(List &&l) noexcept;
 
 		// 析构函数
         virtual ~List();
@@ -117,7 +117,7 @@ namespace CZ
 
         // 操作符函数
         virtual List& operator=(const List &l);
-        virtual List& operator=(List &&l);
+        virtual List& operator=(List &&l) noexcept;
 
         const char *get_entity_name() const override;
 

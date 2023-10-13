@@ -76,7 +76,7 @@ namespace CZ
     }
 
     template <typename T>
-    FlatHashSet<T>::FlatHashSet(FlatHashSet<T> &&rFlatHashSet)
+    FlatHashSet<T>::FlatHashSet(FlatHashSet<T> &&rFlatHashSet) noexcept
     {
         _table = std::move(rFlatHashSet._table);
         _size = rFlatHashSet._size;
@@ -101,7 +101,7 @@ namespace CZ
     }
 
     template <typename T>
-    FlatHashSet<T> &FlatHashSet<T>::operator=(FlatHashSet<T> &&s)
+    FlatHashSet<T> &FlatHashSet<T>::operator=(FlatHashSet<T> &&s) noexcept
     {
         if (&s != this)
         {
@@ -387,16 +387,18 @@ namespace CZ
     template <typename T>
     void FlatHashSet<T>::_compress_forward()
     {
-        for (typename Vector<KVPair<T, bool>>::Rank i = 0; i < table_size(); ++i)
+        typename Vector<KVPair<T, bool>>::Rank firstEmptyPos = 0;
+        for (; _table[firstEmptyPos].value(); ++firstEmptyPos);
+        typename Vector<KVPair<T, bool>>::Rank r = firstEmptyPos;
+        for (typename Vector<KVPair<T, bool>>::Rank l = firstEmptyPos; l < table_size(); ++l)
         {
-            typename Vector<KVPair<T, bool>>::Rank j = i + 1;
-            for (; j < table_size() && !_table[j].value(); ++j);
-            if (j == table_size())
+            for (; r < table_size() && !_table[r].value(); ++r);
+            if (r == table_size())
             {
                 break;
             }
-            _table[i] = std::move(_table[j]);
-            _table[j].value() = false;
+            _table[l] = std::move(_table[r]);
+            _table[r].value() = false;
         }
     }
 

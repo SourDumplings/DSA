@@ -21,7 +21,7 @@ namespace CZ
     public:
         AbstractBaseEntity();
         AbstractBaseEntity(const AbstractBaseEntity &entity);
-        AbstractBaseEntity(AbstractBaseEntity &&entity);
+        AbstractBaseEntity(AbstractBaseEntity &&entity) noexcept;
         virtual ~AbstractBaseEntity();
 
         virtual const char *c_str() const = 0;
@@ -29,7 +29,7 @@ namespace CZ
         virtual const char *get_entity_name() const = 0;
 
         AbstractBaseEntity &operator=(const AbstractBaseEntity &rhs);
-        AbstractBaseEntity &operator=(AbstractBaseEntity &&rhs);
+        AbstractBaseEntity &operator=(AbstractBaseEntity &&rhs) noexcept;
 
     protected:
         const char *get_c_str_from_stream(const std::ostringstream &oss) const;

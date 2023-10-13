@@ -24,7 +24,7 @@ namespace CZ
         SplayTree(std::nullptr_t);
         SplayTree(SplayTreeNode<T> *root = nullptr, bool isAllowRepeatKey_ = true);
         SplayTree(const SplayTree<T> &t);
-        SplayTree(SplayTree<T> &&t);
+        SplayTree(SplayTree<T> &&t) noexcept;
 
         void print_info(const char *name = "") const override;
 
@@ -34,7 +34,7 @@ namespace CZ
         bool insert_data(const T &data) override;
 
         SplayTree<T> &operator=(const SplayTree<T> &t);
-        SplayTree<T> &operator=(SplayTree<T> &&t);
+        SplayTree<T> &operator=(SplayTree<T> &&t) noexcept;
 
         const char *get_entity_name() const override;
 

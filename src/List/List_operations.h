@@ -29,7 +29,7 @@ namespace CZ
     }
 
     template <typename T>
-    List<T> &List<T>::operator=(List &&l)
+    List<T> &List<T>::operator=(List &&l) noexcept
     {
         if (l != *this)
         {

@@ -117,7 +117,7 @@ namespace CZ
     }
 
     template <typename T>
-    RedBlackTree<T> &RedBlackTree<T>::operator=(RedBlackTree<T> &&t)
+    RedBlackTree<T> &RedBlackTree<T>::operator=(RedBlackTree<T> &&t) noexcept
     {
         if (&t != this)
         {

@@ -45,7 +45,7 @@ namespace CZ
         // 复制构造函数
         Vector(const Vector<T> &V);
         // 移动构造函数
-        Vector(Vector<T> &&V);
+        Vector(Vector<T> &&V) noexcept;
 
         // 析构函数
         ~Vector() override;
@@ -96,7 +96,7 @@ namespace CZ
         T& operator[](Rank i);
         const T& operator[](Rank i) const;
         Vector<T>& operator=(const Vector<T> &V);
-        Vector<T>& operator=(Vector<T> &&V);
+        Vector<T>& operator=(Vector<T> &&V) noexcept;
 
         const char *get_entity_name() const override;
 

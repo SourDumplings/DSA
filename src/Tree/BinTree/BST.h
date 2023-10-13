@@ -29,7 +29,7 @@ namespace CZ
         BST(std::nullptr_t);
         BST(BSTNode<T> *root = nullptr, bool isAllowRepeatKey_ = true);
         BST(const BST<T> &t);
-        BST(BST<T> &&t);
+        BST(BST<T> &&t) noexcept;
 
         void print_info(const char *name = "") const override;
 
@@ -54,7 +54,7 @@ namespace CZ
         Rank remove_all(const T &data);
 
         BST<T> &operator=(const BST<T> &t);
-        BST<T> &operator=(BST<T> &&t);
+        BST<T> &operator=(BST<T> &&t) noexcept;
 
         const char *get_entity_name() const override;
 

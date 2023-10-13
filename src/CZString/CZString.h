@@ -37,7 +37,7 @@ namespace CZ
         ~CZString() override;
 
         CZString(const CZString &s);
-        CZString(CZString &&s);
+        CZString(CZString &&s) noexcept;
 
         void print_info(const char *name = "") const override;
 
@@ -57,7 +57,7 @@ namespace CZ
         operator const std::string() const;
 
         CZString &operator=(const CZString &s);
-        CZString &operator=(CZString &&s);
+        CZString &operator=(CZString &&s) noexcept;
         CZString &operator+=(const char rhs);
         CZString &operator+=(const CZString &rhs);
 

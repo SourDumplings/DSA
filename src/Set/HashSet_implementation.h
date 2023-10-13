@@ -68,7 +68,7 @@ namespace CZ
     }
 
     template <typename T>
-    HashSet<T>::HashSet(HashSet<T> &&rHashSet)
+    HashSet<T>::HashSet(HashSet<T> &&rHashSet) noexcept
     {
         _table = std::move(rHashSet._table);
         _firstNonEmptyBucketIndex = rHashSet._firstNonEmptyBucketIndex;
@@ -92,7 +92,7 @@ namespace CZ
     }
 
     template <typename T>
-    HashSet<T> &HashSet<T>::operator=(HashSet<T> &&s)
+    HashSet<T> &HashSet<T>::operator=(HashSet<T> &&s) noexcept
     {
         if (&s != this)
         {

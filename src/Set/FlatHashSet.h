@@ -59,7 +59,7 @@ namespace CZ
 
         FlatHashSet(const FlatHashSet<T> &rFlatHashSet) = default;
 
-        FlatHashSet(FlatHashSet<T> &&rFlatHashSet);
+        FlatHashSet(FlatHashSet<T> &&rFlatHashSet) noexcept;
 
         // 数据访问接口
         Rank size() const override;
@@ -75,7 +75,7 @@ namespace CZ
         void clear() override;
 
         FlatHashSet<T> &operator=(const FlatHashSet<T> &s);
-        FlatHashSet<T> &operator=(FlatHashSet<T> &&s);
+        FlatHashSet<T> &operator=(FlatHashSet<T> &&s) noexcept;
 
         Iterator begin() override;
         Iterator end() override;

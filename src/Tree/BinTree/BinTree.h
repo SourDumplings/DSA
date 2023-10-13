@@ -38,7 +38,7 @@ namespace CZ
         BinTree(std::nullptr_t);
         BinTree(BinTreeNode<T> *root = nullptr);
         BinTree(const BinTree<T> &t);
-        BinTree(BinTree<T> &&t);
+        BinTree(BinTree<T> &&t) noexcept;
 
         virtual void print_info(const char *name = "") const;
 
@@ -75,7 +75,7 @@ namespace CZ
                                                              It postB, It postE);
 
         BinTree<T> &operator=(const BinTree<T> &t);
-        BinTree<T> &operator=(BinTree<T> &&t);
+        BinTree<T> &operator=(BinTree<T> &&t) noexcept;
 
         // 旋转与3+4重构
         // 旋转，返回旋转后局部子树树根的位置，借助3+4重构算法实现

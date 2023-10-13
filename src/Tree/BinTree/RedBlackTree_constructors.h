@@ -53,7 +53,7 @@ namespace CZ
     }
 
     template <typename T>
-    RedBlackTree<T>::RedBlackTree(RedBlackTree<T> &&t) : BST<T>(std::move(t)) {}
+    RedBlackTree<T>::RedBlackTree(RedBlackTree<T> &&t) noexcept : BST<T>(std::move(t)) {}
 } // CZ
 
 #endif // RED_BLACK_TREE_CONSTRUCTORS_H

@@ -42,7 +42,7 @@ namespace CZ
         TreeSet(const It &begin, const It &end);
 
         TreeSet(const TreeSet<T> &s);
-        TreeSet(TreeSet<T> &&s);
+        TreeSet(TreeSet<T> &&s) noexcept;
 
         // 数据访问接口
         Rank size() const override;
@@ -63,7 +63,7 @@ namespace CZ
         void clear() override;
 
         TreeSet<T> &operator=(const TreeSet<T> &s);
-        TreeSet<T> &operator=(TreeSet<T> &&s);
+        TreeSet<T> &operator=(TreeSet<T> &&s) noexcept;
 
         void print_info(const char *name = "") const;
 

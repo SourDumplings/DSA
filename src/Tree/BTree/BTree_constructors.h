@@ -45,7 +45,7 @@ namespace CZ
         _root(construct_node_from(bt._root)) {}
 
     template <typename T>
-    BTree<T>::BTree(BTree<T> &&bt):
+    BTree<T>::BTree(BTree<T> &&bt) noexcept:
         _size(bt._size), _order(bt._order), _root(bt._root)
     {
         bt._root = nullptr;

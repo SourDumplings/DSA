@@ -103,7 +103,7 @@ namespace CZ
     }
 
     template <typename T>
-    BinTree<T> &BinTree<T>::operator=(BinTree<T> &&t)
+    BinTree<T> &BinTree<T>::operator=(BinTree<T> &&t) noexcept
     {
         if (&t != this)
         {

@@ -43,7 +43,7 @@ namespace CZ
     }
 
     template <typename T>
-    Vector<T> &Vector<T>::operator=(Vector<T> &&V)
+    Vector<T> &Vector<T>::operator=(Vector<T> &&V) noexcept
     {
         if (this != &V)
         {

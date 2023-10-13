@@ -26,7 +26,7 @@ namespace CZ
         AVLTree(std::nullptr_t);
         AVLTree(AVLTreeNode<T> *root = nullptr, bool isAllowRepeatKey_ = true);
         AVLTree(const AVLTree<T> &t);
-        AVLTree(AVLTree<T> &&t);
+        AVLTree(AVLTree<T> &&t) noexcept;
 
         void print_info(const char *name = "") const override;
 
@@ -35,7 +35,7 @@ namespace CZ
         TreeNode<T> *secede(TreeNode<T> *pNode) override;
 
         AVLTree<T> &operator=(const AVLTree<T> &t);
-        AVLTree<T> &operator=(AVLTree<T> &&t);
+        AVLTree<T> &operator=(AVLTree<T> &&t) noexcept;
 
         const char *get_entity_name() const override;
 

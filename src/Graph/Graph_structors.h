@@ -88,7 +88,7 @@ namespace CZ
     }
 
     template <typename ED, typename VD>
-    Graph<ED, VD>::Graph(Graph &&g):
+    Graph<ED, VD>::Graph(Graph &&g) noexcept:
         _graphType(g._graphType)
         , _directed(g._directed)
         , _vHasData(g._vHasData)

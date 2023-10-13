@@ -32,7 +32,7 @@ namespace CZ
     {
     }
 
-    CZString::CZString(CZString &&s) : Vector<char>(std::forward<Vector<char>>(s))
+    CZString::CZString(CZString &&s) noexcept : Vector<char>(std::forward<Vector<char>>(s))
     {
     }
 
@@ -125,7 +125,7 @@ namespace CZ
         return *this;
     }
 
-    CZString &CZString::operator=(CZString &&s)
+    CZString &CZString::operator=(CZString &&s) noexcept
     {
         Vector<char>::operator=(std::forward<CZString>(s));
         return *this;

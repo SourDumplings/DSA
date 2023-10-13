@@ -38,11 +38,11 @@ namespace CZ
         Tree(std::nullptr_t);
         Tree(TreeNode<T> *pRoot = nullptr);
         Tree(const Tree<T> &t);
-        Tree(Tree<T> &&t);
+        Tree(Tree<T> &&t) noexcept;
         virtual ~Tree();
 
         Tree<T> &operator=(const Tree<T> &t);
-        Tree<T> &operator=(Tree<T> &&t);
+        Tree<T> &operator=(Tree<T> &&t) noexcept;
 
         Rank size() const override;
         TreeNode<T> *root() const;

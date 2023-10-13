@@ -50,7 +50,7 @@ namespace CZ
         // 复制构造函数
         Deque(const Deque<T> &dq);
 
-        Deque(Deque<T> &&dq);
+        Deque(Deque<T> &&dq) noexcept;
 
         // 析构函数
         virtual ~Deque();
@@ -73,7 +73,7 @@ namespace CZ
 
         // 操作符
         Deque<T> &operator=(const Deque<T> &dq);
-        Deque<T> &operator=(Deque<T> &&dq);
+        Deque<T> &operator=(Deque<T> &&dq) noexcept;
         const T &operator[](Rank index) const;
         T &operator[](Rank index);
 

@@ -47,7 +47,7 @@ namespace CZ
 
         HashSet(const HashSet<T> &rHashSet) = default;
 
-        HashSet(HashSet<T> &&rHashSet);
+        HashSet(HashSet<T> &&rHashSet) noexcept;
 
         // 数据访问接口
         Rank size() const override;
@@ -63,7 +63,7 @@ namespace CZ
         void clear() override;
 
         HashSet<T> &operator=(const HashSet<T> &s);
-        HashSet<T> &operator=(HashSet<T> &&s);
+        HashSet<T> &operator=(HashSet<T> &&s) noexcept;
 
         Iterator begin() override;
         Iterator end() override;

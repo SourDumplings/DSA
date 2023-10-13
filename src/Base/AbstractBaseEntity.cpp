@@ -25,7 +25,7 @@ namespace CZ
         }
     }
 
-    AbstractBaseEntity::AbstractBaseEntity(AbstractBaseEntity &&entity)
+    AbstractBaseEntity::AbstractBaseEntity(AbstractBaseEntity &&entity) noexcept
         : _pStr(entity._pStr)
     {
         entity._pStr = nullptr;
@@ -65,7 +65,7 @@ namespace CZ
         return *this;
     }
 
-    AbstractBaseEntity &AbstractBaseEntity::operator=(AbstractBaseEntity &&rhs)
+    AbstractBaseEntity &AbstractBaseEntity::operator=(AbstractBaseEntity &&rhs) noexcept
     {
         if (&(rhs) != this)
         {

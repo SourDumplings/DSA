@@ -25,7 +25,7 @@ namespace CZ
 
         BTree(Rank order_ = 3);
         BTree(const BTree &bt);
-        BTree(BTree &&bt);
+        BTree(BTree &&bt) noexcept;
         ~BTree();
 
         Rank order() const;
