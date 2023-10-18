@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build debug",
+            "label": "Build debug on Linux",
             "type": "shell",
             "command": "${workspaceFolder}/script/build_debug.sh",
             "problemMatcher": [],
@@ -12,7 +12,17 @@
             }
         },
         {
-            "label": "Build release",
+            "label": "Build debug on Windows",
+            "type": "shell",
+            "command": "${workspaceFolder}/script/build_debug.bat",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Build release on Linux",
             "type": "shell",
             "command": "${workspaceFolder}/script/build_release.sh",
             "problemMatcher": [],
@@ -22,7 +32,17 @@
             }
         },
         {
-            "label": "Clean",
+            "label": "Build release on Windows",
+            "type": "shell",
+            "command": "${workspaceFolder}/script/build_release.bat",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Clean on Linux",
             "type": "shell",
             "command": "${workspaceFolder}/script/clean.sh",
             "problemMatcher": [],
@@ -32,9 +52,29 @@
             }
         },
         {
-            "label": "Run test",
+            "label": "Clean on Windows",
+            "type": "shell",
+            "command": "${workspaceFolder}/script/clean.bat",
+            "problemMatcher": [],
+            "group": {
+                "kind": "none",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Run test on Linux",
             "type": "shell",
             "command": "${workspaceFolder}/script/run_test.sh",
+            "problemMatcher": [],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Run test on Windows",
+            "type": "shell",
+            "command": "${workspaceFolder}/script/run_test.bat",
             "problemMatcher": [],
             "group": {
                 "kind": "test",

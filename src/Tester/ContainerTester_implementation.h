@@ -24,7 +24,7 @@ namespace CZ
         srand(randSeed);
         struct timeval tv;
         gettimeofday(&tv, NULL);
-        __suseconds_t start = tv.tv_sec * 1000000 + tv.tv_usec;
+        long start = tv.tv_sec * 1000000 + tv.tv_usec;
 
         for (uint32_t j = 0; j < size; j++)
         {
@@ -33,7 +33,7 @@ namespace CZ
         }
 
         gettimeofday(&tv, NULL);
-        __suseconds_t stop = tv.tv_sec * 1000000 + tv.tv_usec;
+        long stop = tv.tv_sec * 1000000 + tv.tv_usec;
         std::cout << "For container " << containerName << " inserting random value costs: " << stop - start
             << " micro seconds, c.size() = " << c.size() << std::endl;
         return c.size();
@@ -46,7 +46,7 @@ namespace CZ
         srand(randSeed);
         struct timeval tv;
         gettimeofday(&tv, NULL);
-        __suseconds_t start = tv.tv_sec * 1000000 + tv.tv_usec;
+        long start = tv.tv_sec * 1000000 + tv.tv_usec;
 
         for (uint32_t j = 0; j < size; j++)
         {
@@ -61,7 +61,7 @@ namespace CZ
         }
 
         gettimeofday(&tv, NULL);
-        __suseconds_t stop = tv.tv_sec * 1000000 + tv.tv_usec;
+        long stop = tv.tv_sec * 1000000 + tv.tv_usec;
         std::cout << "For container " << containerName << " inserting and remove random value costs: " << stop - start
             << " micro seconds, c.size() = " << c.size() << std::endl;
     }
@@ -73,7 +73,7 @@ namespace CZ
         srand(randSeed);
         struct timeval tv;
         gettimeofday(&tv, NULL);
-        __suseconds_t start = tv.tv_sec * 1000000 + tv.tv_usec;
+        long start = tv.tv_sec * 1000000 + tv.tv_usec;
 
         for (uint32_t j = 0; j < size; j++)
         {
@@ -88,7 +88,7 @@ namespace CZ
         }
 
         gettimeofday(&tv, NULL);
-        __suseconds_t stop = tv.tv_sec * 1000000 + tv.tv_usec;
+        long stop = tv.tv_sec * 1000000 + tv.tv_usec;
         std::cout << "For container " << containerName << " inserting and erase random value costs: " << stop - start
             << " micro seconds, c.size() = " << c.size() << std::endl;
     }
@@ -100,7 +100,7 @@ namespace CZ
         srand(randSeed);
         struct timeval tv;
         gettimeofday(&tv, NULL);
-        __suseconds_t start = tv.tv_sec * 1000000 + tv.tv_usec;
+        long start = tv.tv_sec * 1000000 + tv.tv_usec;
 
         for (uint32_t j = 0; j < size; j++)
         {
@@ -108,7 +108,7 @@ namespace CZ
             c.push_back(value);
         }
 
-        __suseconds_t additionalTime = 0;
+        long additionalTime = 0;
         for (uint32_t j = 0; j < size; j++)
         {
             uint32_t idx = rand() % c.size();
@@ -116,20 +116,20 @@ namespace CZ
 
             struct timeval tvTemp;
             gettimeofday(&tvTemp, NULL);
-            __suseconds_t tempStart = tvTemp.tv_sec * 1000000 + tvTemp.tv_usec;
+            long tempStart = tvTemp.tv_sec * 1000000 + tvTemp.tv_usec;
             for (uint32_t i = 0; i < idx; ++i)
             {
                 ++it;
             }
             gettimeofday(&tvTemp, NULL);
-            __suseconds_t tempStop = tvTemp.tv_sec * 1000000 + tvTemp.tv_usec;
+            long tempStop = tvTemp.tv_sec * 1000000 + tvTemp.tv_usec;
             additionalTime += tempStop - tempStart;
 
             c.erase(it);
         }
 
         gettimeofday(&tv, NULL);
-        __suseconds_t stop = tv.tv_sec * 1000000 + tv.tv_usec;
+        long stop = tv.tv_sec * 1000000 + tv.tv_usec;
         // std::cout << "For container " << containerName << " moving iterator costs: " << additionalTime << " micro seconds." << std::endl;
         std::cout << "For container " << containerName << " pushing back and erase at random pos costs: " << stop - start - additionalTime
             << " micro seconds, c.size() = " << c.size() << std::endl;
@@ -142,7 +142,7 @@ namespace CZ
         srand(randSeed);
         struct timeval tv;
         gettimeofday(&tv, NULL);
-        __suseconds_t start = tv.tv_sec * 1000000 + tv.tv_usec;
+        long start = tv.tv_sec * 1000000 + tv.tv_usec;
 
         for (uint32_t i = 0; i < size; i++)
         {
@@ -180,7 +180,7 @@ namespace CZ
         }
 
         gettimeofday(&tv, NULL);
-        __suseconds_t stop = tv.tv_sec * 1000000 + tv.tv_usec;
+        long stop = tv.tv_sec * 1000000 + tv.tv_usec;
         std::cout << "For container " << containerName << " pushing and poping back and front randomly costs: " << stop - start
             << " micro seconds, c.size() = " << c.size() << std::endl;
     }
@@ -192,7 +192,7 @@ namespace CZ
         srand(randSeed);
         struct timeval tv;
         gettimeofday(&tv, NULL);
-        __suseconds_t start = tv.tv_sec * 1000000 + tv.tv_usec;
+        long start = tv.tv_sec * 1000000 + tv.tv_usec;
 
         for (uint32_t j = 0; j < size; j++)
         {
@@ -202,7 +202,7 @@ namespace CZ
         }
 
         gettimeofday(&tv, NULL);
-        __suseconds_t stop = tv.tv_sec * 1000000 + tv.tv_usec;
+        long stop = tv.tv_sec * 1000000 + tv.tv_usec;
         std::cout << "For container " << containerName << " at random pos costs: " << stop - start
             << " micro seconds, c.size() = " << c.size() << std::endl;
     }

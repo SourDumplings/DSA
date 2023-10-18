@@ -19,15 +19,17 @@ SET(lib_source  Algorithms/Swap.cpp
 # 添加静态库，关键词为 static
 ADD_LIBRARY(dsa STATIC ${lib_source})
 
-# 添加动态库，关键词为 shared
-ADD_LIBRARY(dsa_shared SHARED ${lib_source})
+if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    # 添加动态库，关键词为 shared
+    ADD_LIBRARY(dsa_shared SHARED ${lib_source})
 
-# 指定动态库的输出名称
-SET_TARGET_PROPERTIES(dsa_shared PROPERTIES OUTPUT_NAME "dsa")
+    # 指定动态库的输出名称
+    SET_TARGET_PROPERTIES(dsa_shared PROPERTIES OUTPUT_NAME "dsa")
 
-# 指定动态库版本, 视需求而定，可不加
-# VERSION：动态库版本，SOVERSION：API 版本
-SET_TARGET_PROPERTIES(dsa_shared PROPERTIES VERSION ${version} SOVERSION ${api_version})
+    # 指定动态库版本, 视需求而定，可不加
+    # VERSION：动态库版本，SOVERSION：API 版本
+    SET_TARGET_PROPERTIES(dsa_shared PROPERTIES VERSION ${version} SOVERSION ${api_version})
+endif()
 
 # 指定库编译输出目录
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
@@ -41,11 +43,20 @@ INSTALL(DIRECTORY ${PROJECT_SOURCE_DIR}/src
 )
 
 # 安装库文件
-INSTALL(
-        # 安装静态库和动态库
-        TARGETS dsa dsa_shared
-        # 动态库安装位置
-        LIBRARY DESTINATION ${dist_dir}/lib/shared
-        # 静态库安装位置
-        ARCHIVE DESTINATION ${dist_dir}/lib/static
-    )
+if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+    INSTALL(
+            # 安装静态库
+            TARGETS dsa
+            # 静态库安装位置
+            ARCHIVE DESTINATION ${dist_dir}/lib/static
+        )
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    INSTALL(
+            # 安装静态库和动态库
+            TARGETS dsa dsa_shared
+            # 动态库安装位置
+            LIBRARY DESTINATION ${dist_dir}/lib/shared
+            # 静态库安装位置
+            ARCHIVE DESTINATION ${dist_dir}/lib/static
+        )
+endif()

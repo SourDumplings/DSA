@@ -12,6 +12,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <string>
+#include <cstddef>
 
 namespace CZ
 {
@@ -35,13 +36,6 @@ namespace CZ
     {
     public:
         HashRank operator()(const bool &value) const;
-    };
-
-    template <>
-    class Hash<const nullptr_t>
-    {
-    public:
-        HashRank operator()(const nullptr_t &value) const;
     };
 
     template <>
@@ -136,10 +130,10 @@ namespace CZ
     };
 
     template <>
-    class Hash<nullptr_t>
+    class Hash<std::nullptr_t>
     {
     public:
-        HashRank operator()(const nullptr_t &value) const;
+        HashRank operator()(const std::nullptr_t &value) const;
     };
 
     template <>

@@ -15,11 +15,6 @@ namespace CZ
         return value ? 1 : 0;
     }
 
-    HashRank Hash<const nullptr_t>::operator()(const nullptr_t &value) const
-    {
-        return 0;
-    }
-
     HashRank Hash<const char>::operator()(const char &value) const
     {
         return Hash<int32_t>()(value - '\0');
@@ -96,7 +91,7 @@ namespace CZ
         return value ? 1 : 0;
     }
 
-    HashRank Hash<nullptr_t>::operator()(const nullptr_t &value) const
+    HashRank Hash<std::nullptr_t>::operator()(const std::nullptr_t &value) const
     {
         return 0;
     }

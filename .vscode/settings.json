@@ -3,6 +3,8 @@
         "*.tcc": "cpp",
         "optional": "cpp",
         "system_error": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "cstddef": "cpp",
+        "iostream": "cpp"
     }
 }

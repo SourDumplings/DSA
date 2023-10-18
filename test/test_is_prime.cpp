@@ -17,6 +17,7 @@ using namespace CZ;
 
 void test_is_prime()
 {
+    printf("Correctiness check test!\n");
     for (uint32_t i = 0; i < 10000; i++)
     {
         bool res1 = Is_prime(i, PrimeAccessories::VIOLENCE);
@@ -37,10 +38,10 @@ void test_is_prime()
             return;
         }
 
-/*         if (res1)
+        if (res1)
         {
             printf("Check prime num %u succ!\n", i);
-        } */
+        }
     }
     printf("Correctiness check succ!\n");
 }
