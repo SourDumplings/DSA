@@ -9,7 +9,7 @@
 # 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：9.4.5，与 CMakeLists.txt 同步
+版本号：9.4.6，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -36,7 +36,7 @@
 ## 单元测试
 - 在`test`目录下编写单元测试代码，命名规范为：`test_xxx.cpp`
 - 写好单元测试源文件后，如果要进行测试可以在`test/CMakeLists.txt`文件中的“添加源文件”中添加测试入口源文件
-- 在项目构建好后，执行`script/run_test.sh`脚本即可运行单元测试（VSCode task: Run test）
+- 在项目构建好后，执行`script/run_test.sh`脚本（Windows 下为`script/run_test.bat`）即可运行单元测试（VSCode task: Run test）
 
 # 内容
 ## 通用算法（模板）
