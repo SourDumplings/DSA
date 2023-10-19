@@ -9,7 +9,7 @@
 # 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：9.4.7，与 CMakeLists.txt 同步
+版本号：9.4.8，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -17,7 +17,7 @@
 我自己实现的各种数据结构和算法的模板，采用 C++（C++11）语言实现，统一在 CZ 命名空间中
 
 # 环境要求
-在编译器 gcc version 8.3.1 20190311 (Red Hat 8.3.1-3) (GCC) 下测试通过
+项目在编译器`gcc version 8.3.1 20190311 (Red Hat 8.3.1-3) (GCC) `及`gcc version 8.5.0 (x86_64-posix-seh-rev0, Built by MinGW-W64 project)`下测试通过。
 
 调试推荐：GNU gdb (GDB) 10.2
 
