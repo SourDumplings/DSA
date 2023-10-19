@@ -100,7 +100,7 @@ int main(int argc, char const *argv[])
     for (int i = 0; i < 5; i++)
     {
         auto it = dq2.end();
-        printf("Inserting %d at %ld....\n", i, it - dq2.begin());
+        printf("Inserting %d at %" PRId64 "....\n", i, it - dq2.begin());
         dq2.insert(it, i);
         // dq2.print_info("dq2");
     }
@@ -108,7 +108,7 @@ int main(int argc, char const *argv[])
     auto it = dq2.end();
     for (int i = 0; i < 16; i++)
     {
-        printf("Inserting %d at %ld....\n", i + 100, it - dq2.begin());
+        printf("Inserting %d at %" PRId64 "....\n", i + 100, it - dq2.begin());
         it = dq2.insert(it, i + 100);
         // dq2.print_info("dq2");
     }
@@ -163,7 +163,7 @@ int main(int argc, char const *argv[])
     it = dq2.begin();
     for (size_t i = 0; i < 50; i++)
     {
-        printf("Erasing pos %ld....\n", it - dq2.begin());
+        printf("Erasing pos %" PRId64 "....\n", it - dq2.begin());
         it = dq2.erase(it);
         dq2.print_info("dq2");
     }

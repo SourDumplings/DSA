@@ -175,7 +175,7 @@ namespace CZ
     {
         printf("Deque %s:\n", name);
         printf("size = %u, bufferSize = %u, _mapSize = %u\n", _size, _bufferSize, _mapSize);
-        printf("_begin[curIdx = %ld, nodeIdx = %ld], _end[curIdx = %ld, nodeIdx = %ld]\n"
+        printf("_begin[curIdx = %" PRId64 ", nodeIdx = %" PRId64 "], _end[curIdx = %" PRId64 ", nodeIdx = %" PRId64 "]\n"
             , _begin._cur - _begin._first
             , _begin._pNode - _bufferMap
             , _end._cur - _end._first

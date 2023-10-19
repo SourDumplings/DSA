@@ -15,7 +15,7 @@
 using namespace CZ;
 using namespace std;
 
-__suseconds_t test_sort_prof(const Vector<int> &v, typename SortAccessories::UnStableSortMethod sortMethod, int version)
+long test_sort_prof(const Vector<int> &v, typename SortAccessories::UnStableSortMethod sortMethod, int version)
 {
     typename Vector<int>::Rank n = v.size();
     int tempV[n];
@@ -27,16 +27,16 @@ __suseconds_t test_sort_prof(const Vector<int> &v, typename SortAccessories::UnS
     struct timeval tv;
     gettimeofday(&tv, NULL);
 
-    __suseconds_t start = tv.tv_sec * 1000000 + tv.tv_usec;
+    long start = tv.tv_sec * 1000000 + tv.tv_usec;
 
     Sort(tempV, tempV + n, sortMethod, version);
 
     gettimeofday(&tv, NULL);
-    __suseconds_t stop = tv.tv_sec * 1000000 + tv.tv_usec;
+    long stop = tv.tv_sec * 1000000 + tv.tv_usec;
     return stop - start;
 }
 
-__suseconds_t test_sort_prof(const Vector<int> &v, typename SortAccessories::StableSortMethod sortMethod, int version)
+long test_sort_prof(const Vector<int> &v, typename SortAccessories::StableSortMethod sortMethod, int version)
 {
     typename Vector<int>::Rank n = v.size();
     int tempV[n];
@@ -48,16 +48,16 @@ __suseconds_t test_sort_prof(const Vector<int> &v, typename SortAccessories::Sta
     struct timeval tv;
     gettimeofday(&tv, NULL);
 
-    __suseconds_t start = tv.tv_sec * 1000000 + tv.tv_usec;
+    long start = tv.tv_sec * 1000000 + tv.tv_usec;
 
     Sort(tempV, tempV + n, sortMethod, version);
 
     gettimeofday(&tv, NULL);
-    __suseconds_t stop = tv.tv_sec * 1000000 + tv.tv_usec;
+    long stop = tv.tv_sec * 1000000 + tv.tv_usec;
     return stop - start;
 }
 
-__suseconds_t test_sort_prof(const Vector<int> &v)
+long test_sort_prof(const Vector<int> &v)
 {
     typename Vector<int>::Rank n = v.size();
     int tempV[n];
@@ -69,12 +69,12 @@ __suseconds_t test_sort_prof(const Vector<int> &v)
     struct timeval tv;
     gettimeofday(&tv, NULL);
 
-    __suseconds_t start = tv.tv_sec * 1000000 + tv.tv_usec;
+    long start = tv.tv_sec * 1000000 + tv.tv_usec;
 
     sort(tempV, tempV + n);
 
     gettimeofday(&tv, NULL);
-    __suseconds_t stop = tv.tv_sec * 1000000 + tv.tv_usec;
+    long stop = tv.tv_sec * 1000000 + tv.tv_usec;
     return stop - start;
 }
 
@@ -138,7 +138,7 @@ int main(int argc, char const *argv[])
             v.push_back(rand());
         }
 
-        __suseconds_t costTimeInMicroS = 0;
+        long costTimeInMicroS = 0;
 
         costTimeInMicroS = test_sort_prof(v, SortAccessories::SELECT_SORT, 0);
         cout << "SELECT_SORT version 0 cost: " << costTimeInMicroS << " micro seconds this round." << endl;

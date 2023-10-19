@@ -19,8 +19,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     message(STATUS "CMake on Windows")
     # Windows specific code
-    set(CMAKE_CXX_FLAGS_RELEASE -O0 -g -Wall -Werror -fno-common -Wno-unused-variable)
-    set(CMAKE_CXX_FLAGS_DEBUG -O0 -g -Wall -Werror -fno-common -Wno-unused-variable)
+    set(CMAKE_CXX_FLAGS_RELEASE -O0 -g -Wall -Werror -fno-common -Wno-unused-variable -Wno-unused-but-set-variable)
+    set(CMAKE_CXX_FLAGS_DEBUG -O0 -g -Wall -Werror -fno-common -Wno-unused-variable -Wno-unused-but-set-variable)
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     message(STATUS "CMake on Linux")
     # Linux specific code
@@ -41,7 +41,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin/)
 
 # 版本号管理，如果项目版本号为 a.b.c，则 version = a.b.c，api_version = a.b
 # 动态库版本
-set(version 9.4.6)
+set(version 9.4.7)
 # API 版本
 set(api_version 9.4)
 

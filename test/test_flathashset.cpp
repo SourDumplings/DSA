@@ -16,6 +16,7 @@ FlatHashSet 类模板的测试
 #include <ctime>
 #include "Set/FlatHashSet.h"
 #include <unordered_set>
+#include <cinttypes>
 
 using namespace std;
 using namespace CZ;
@@ -25,7 +26,7 @@ void test_correctiness()
     // 通过随机增删元素来验证容器逻辑的正确性
     for (size_t i = 0; i < 100; i++)
     {
-        printf("Correctiness check round %lu...\n", i + 1);
+        printf("Correctiness check round %" PRId64 "...\n", i + 1);
         srand(time(0));
         std::unordered_set<int> stdS;
         FlatHashSet<int> flatS;
@@ -46,7 +47,7 @@ void test_correctiness()
             flatS.insert(rSeq1[j]);
 
             ASSERT_RELEASE(stdS.size() == flatS.size()
-                , "Correctiness check failed! stdS.size(): %lu, flatS.size(): %u"
+                , "Correctiness check failed! stdS.size(): %" PRId64 ", flatS.size(): %u"
                 , stdS.size()
                 , flatS.size()
             );
@@ -59,7 +60,7 @@ void test_correctiness()
             flatS.remove(rSeq2[j]);
 
             ASSERT_RELEASE(stdS.size() == flatS.size()
-                , "Correctiness check failed! stdS.size(): %lu, flatS.size(): %u"
+                , "Correctiness check failed! stdS.size(): %" PRId64 ", flatS.size(): %u"
                 , stdS.size()
                 , flatS.size()
             );
@@ -132,7 +133,7 @@ int main(int argc, char const *argv[])
     FlatHashSet<int> s8(FlatHashSetAccessories::LINEAR_PROBING), s9(FlatHashSetAccessories::SQUARE_PROBING);
     for (size_t i = 0; i < testNo; i++)
     {
-        printf("Test %lu...\n", i);
+        printf("Test %" PRId64 "...\n", i);
         printf("test insert...\n");
         for (size_t j = 0; j < elemNum; j++)
         {
