@@ -24,8 +24,8 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     message(STATUS "CMake on Linux")
     # Linux specific code
-    set(CMAKE_CXX_FLAGS_RELEASE -gz=zlib -O0 -g -Wall -Werror -fno-common)
-    set(CMAKE_CXX_FLAGS_DEBUG -gz=zlib -O0 -g -Wall -fsanitize=address -fno-omit-frame-pointer -fno-optimize-sibling-calls -Werror -fno-common)
+    set(CMAKE_CXX_FLAGS_RELEASE -gz=zlib -O0 -g -Wall -Werror -fno-common -Wno-unused-variable -Wno-unused-but-set-variable)
+    set(CMAKE_CXX_FLAGS_DEBUG -gz=zlib -O0 -g -Wall -fsanitize=address -fno-omit-frame-pointer -fno-optimize-sibling-calls -Werror -fno-common -Wno-unused-variable -Wno-unused-but-set-variable)
 endif()
 
 if(${BUILD_TYPE} STREQUAL Release)
@@ -41,7 +41,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin/)
 
 # 版本号管理，如果项目版本号为 a.b.c，则 version = a.b.c，api_version = a.b
 # 动态库版本
-set(version 9.4.8)
+set(version 9.4.9)
 # API 版本
 set(api_version 9.4)
 

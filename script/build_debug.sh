@@ -12,7 +12,17 @@ project_base_dir=$(cd $(dirname $0)/..;pwd)
 echo "project_base_dir: $project_base_dir" 
 
 cd $project_base_dir
-mkdir build
+
+if [ ! -d "doc" ]; then  
+    mkdir -p "doc"
+    echo "Directory created: doc"
+fi
+
+if [ ! -d "build" ]; then  
+    mkdir -p "build"
+    echo "Directory created: build"
+fi
+
 cd build
 cmake .. -DBUILD_TYPE=Debug --graphviz=dsa.dot
 dot -Tpng dsa.dot.dsa-test > dsa-test_dependencies.png
