@@ -141,11 +141,11 @@ namespace CZ::SortAccessories
         // 而第二个版本中重复元素会在 partition 的过程中交替地从右（左）侧移到左（右）侧，从而始终被均衡切分
         switch (version)
         {
-        // 版本1，勤于拓展，懒于交换
+        // 版本 1，勤于拓展，懒于交换
         case 0:
             quick_sort_1(begin, 0, N, cmp);
             break;
-        // 版本2，懒于拓展，勤于交换
+        // 版本 2，懒于拓展，勤于交换
         case 1:
             quick_sort_2(begin, 0, N, cmp);
             break;

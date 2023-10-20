@@ -65,7 +65,7 @@ long test_sort_prof(const Vector<int> &v)
     {
         tempV[i] = v[i];
     }
-    
+
     struct timeval tv;
     gettimeofday(&tv, NULL);
 
@@ -78,53 +78,8 @@ long test_sort_prof(const Vector<int> &v)
     return stop - start;
 }
 
-int main(int argc, char const *argv[])
+void test_perf()
 {
-    // 测试排序算法
-    // 基本逻辑测试
-    /* Vector<int> v1{1, 8, 5, 4, 3, 0};
-    Vector<string> vs1{"jsds", "ass", "abab", "aaaa", "ab", "bsds", "ghsl"}, vs2(vs1);
-    v1.print_info("v1");
-    Sort(v1.begin(), v1.end(), SortAccessories::MERGE_SORT);
-    Sort(v1.begin(), v1.end());
-    Sort(v1.begin(), v1.end(), SortAccessories::QUICK_SORT, 1);
-    Sort(v1.begin(), v1.end(), SortAccessories::HEAP_SORT);
-    Sort(v1.begin(), v1.end(), SortAccessories::SELECT_SORT);
-    Sort(v1.begin(), v1.end(), SortAccessories::INSERTION_SORT);
-    Sort(v1.begin(), v1.end(), SortAccessories::SHELL_SORT);
-    Sort(v1.begin(), v1.end(), SortAccessories::SHELL_SORT, 1);
-    Sort(v1.begin(), v1.end(), SortAccessories::SHELL_SORT, 2);
-    Sort(v1.begin(), v1.end(), SortAccessories::SHELL_SORT, 3);
-    v1.print_info("v1");
-    vs1.print_info("vs1");
-    Sort(vs1.begin(), vs1.end(), SortAccessories::QUICK_SORT);
-    Sort(vs1.begin(), vs1.end(), SortAccessories::QUICK_SORT, 1);
-    Sort(vs1.begin(), vs1.end(), SortAccessories::HEAP_SORT, 0);
-    Stable_sort(vs1.begin(), vs1.end(), SortAccessories::BUBBLE_SORT, 1);
-    // Stable_sort(vs1.begin(), vs1.end(), SortAccessories::SELECT_SORT, 1);
-    Stable_sort(vs1.begin(), vs1.end(), SortAccessories::MERGE_SORT);
-    Stable_sort(vs1.begin(), vs1.end(), SortAccessories::INSERTION_SORT);
-    Sort(vs1.begin(), vs1.end(), SortAccessories::SHELL_SORT);
-    vs1.print_info("vs1");
-    Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-    { return s1.length() < s2.length(); }, SortAccessories::SELECT_SORT, 0);
-    Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-    { return s1.length() < s2.length(); }, SortAccessories::INSERTION_SORT, 0);
-    Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-        { return s1.length() < s2.length(); }, SortAccessories::MERGE_SORT, 0);
-    Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-    { return s1.length() < s2.length(); }, SortAccessories::BUBBLE_SORT, 0);
-    Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-    { return s1.length() < s2.length(); });
-    Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-    { return s1.length() < s2.length(); }, SortAccessories::QUICK_SORT, 1);
-    Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-        { return s1.length() < s2.length(); }, SortAccessories::HEAP_SORT);
-    Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
-    { return s1.length() < s2.length(); }, SortAccessories::SHELL_SORT, 2);
-    vs2.print_info("vs2");
- */
-    // 性能测试
     srand(time(NULL));
     constexpr int size = 50000;
     constexpr int test = 10;
@@ -181,7 +136,7 @@ int main(int argc, char const *argv[])
 
         putchar('\n');
     }
-    
+
 /* 性能测试结果：size = 50000
 Test round 0....
 SELECT_SORT version 0 cost: 5155541 micro seconds this round.
@@ -333,6 +288,60 @@ INSERTION_SORT version 0 cost: 4225016 micro seconds this round.
 MERGE_SORT version 0 cost: 84094 micro seconds this round.
 STL sort cost: 9685 micro seconds this round.
  */
+}
 
+int main(int argc, char const *argv[])
+{
+    // 测试排序算法
+    // 基本逻辑测试
+/*     Vector<int> v1{1, 8, 5, 4, 3, 0};
+    Vector<string> vs1{"jsds", "ass", "abab", "aaaa", "ab", "bsds", "ghsl"}, vs2(vs1);
+    v1.print_info("v1");
+    Sort(v1.begin(), v1.end(), SortAccessories::MERGE_SORT);
+    Sort(v1.begin(), v1.end());
+    Sort(v1.begin(), v1.end(), SortAccessories::QUICK_SORT, 1);
+    Sort(v1.begin(), v1.end(), SortAccessories::HEAP_SORT);
+    Sort(v1.begin(), v1.end(), SortAccessories::SELECT_SORT);
+    Sort(v1.begin(), v1.end(), SortAccessories::INSERTION_SORT);
+    Sort(v1.begin(), v1.end(), SortAccessories::SHELL_SORT);
+    Sort(v1.begin(), v1.end(), SortAccessories::SHELL_SORT, 1);
+    Sort(v1.begin(), v1.end(), SortAccessories::SHELL_SORT, 2);
+    Sort(v1.begin(), v1.end(), SortAccessories::SHELL_SORT, 3);
+    v1.print_info("v1");
+    vs1.print_info("vs1");
+    Sort(vs1.begin(), vs1.end(), SortAccessories::QUICK_SORT);
+    Sort(vs1.begin(), vs1.end(), SortAccessories::QUICK_SORT, 1);
+    Sort(vs1.begin(), vs1.end(), SortAccessories::HEAP_SORT, 0);
+    Stable_sort(vs1.begin(), vs1.end(), SortAccessories::BUBBLE_SORT, 1);
+    // Stable_sort(vs1.begin(), vs1.end(), SortAccessories::SELECT_SORT, 1);
+    Stable_sort(vs1.begin(), vs1.end(), SortAccessories::MERGE_SORT);
+    Stable_sort(vs1.begin(), vs1.end(), SortAccessories::INSERTION_SORT);
+    Sort(vs1.begin(), vs1.end(), SortAccessories::SHELL_SORT);
+    vs1.print_info("vs1");
+    Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
+    { return s1.length() < s2.length(); }, SortAccessories::SELECT_SORT, 0);
+    Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
+    { return s1.length() < s2.length(); }, SortAccessories::INSERTION_SORT, 0);
+    Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
+        { return s1.length() < s2.length(); }, SortAccessories::MERGE_SORT, 0);
+    Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
+    { return s1.length() < s2.length(); }, SortAccessories::BUBBLE_SORT, 0);
+    Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
+    { return s1.length() < s2.length(); });
+    Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
+    { return s1.length() < s2.length(); }, SortAccessories::QUICK_SORT, 1);
+    Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
+        { return s1.length() < s2.length(); }, SortAccessories::HEAP_SORT);
+    Sort(vs2.begin(), vs2.end(), [] (const string &s1, const string &s2)
+    { return s1.length() < s2.length(); }, SortAccessories::SHELL_SORT, 2);
+    vs2.print_info("vs2");
+
+    Vector<int> vDup(100);
+    vDup.print_info("vDup");
+    Sort(vDup.begin(), vDup.end()); */
+
+
+    // 性能测试
+    test_perf();
     return 0;
 }
