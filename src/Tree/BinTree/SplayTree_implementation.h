@@ -20,9 +20,13 @@
 namespace CZ
 {
     template <typename T>
-    SplayTree<T>::SplayTree(std::nullptr_t) : BST<T>(nullptr) {}
+    SplayTree<T>::SplayTree(std::nullptr_t) : BST<T>(nullptr)
+    {
+    }
     template <typename T>
-    SplayTree<T>::SplayTree(SplayTreeNode<T> *root, bool isAllowRepeatKey_) : BST<T>(root, isAllowRepeatKey_) {}
+    SplayTree<T>::SplayTree(SplayTreeNode<T> *root, bool isAllowRepeatKey_) : BST<T>(root, isAllowRepeatKey_)
+    {
+    }
 
     template <typename T>
     SplayTree<T>::SplayTree(const SplayTree<T> &t)
@@ -33,7 +37,9 @@ namespace CZ
     }
 
     template <typename T>
-    SplayTree<T>::SplayTree(SplayTree<T> &&t) noexcept : BST<T>(std::move(t)) {}
+    SplayTree<T>::SplayTree(SplayTree<T> &&t) noexcept : BST<T>(std::move(t))
+    {
+    }
 
     template <typename T>
     SplayTreeNode<T> *SplayTree<T>::copy_from(TreeNode<T> *pRoot)
@@ -61,12 +67,16 @@ namespace CZ
         printf("for splaytree %s, is_allow_repeat_key() = %d\n", name, BST<T>::is_allow_repeat_key());
         printf("it contains %u nodes(including root) and height is %u\n",
                this->size(), this->height());
+
+#ifdef DEBUG
         printf("its pre_order_traversal is: \n");
         BinTree<T>::pre_order_traversal(dynamic_cast<SplayTreeNode<T> *>(this->root()), typename Tree<T>::OutPut(),
                                         NONRECURSION_TRAVERSAL2);
         printf("\nits in_order_traversal is: \n");
         BinTree<T>::in_order_traversal(dynamic_cast<SplayTreeNode<T> *>(this->root()), typename Tree<T>::OutPut(),
                                        NONRECURSION_TRAVERSAL2);
+#endif
+
         printf("\n\n");
     }
 

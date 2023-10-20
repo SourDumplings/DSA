@@ -30,6 +30,8 @@ namespace CZ
         }
 
         printf("it contains %u vertices", _Nv);
+
+#ifdef DEBUG
         if (_vHasData)
         {
             printf(" with data\n");
@@ -48,7 +50,7 @@ namespace CZ
         {
             for (auto &pEV : _dataE)
             {
-                const Vector<KVPair<bool, ED>> &EV_use = *static_cast<Vector<KVPair<bool, ED>>*>(pEV);
+                const Vector<KVPair<bool, ED>> &EV_use = *static_cast<Vector<KVPair<bool, ED>> *>(pEV);
                 for (auto &eP : EV_use)
                 {
                     if (eP.key())
@@ -78,6 +80,8 @@ namespace CZ
                 putchar('\n');
             }
         }
+#endif
+
         putchar('\n');
     }
 } // CZ

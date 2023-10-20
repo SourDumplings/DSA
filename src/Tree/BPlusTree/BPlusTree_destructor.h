@@ -27,7 +27,6 @@ void BPlusTree<K, V>::free_node(BPlusTreeNode <K, V> *target)
             free_node(static_cast<BPlusTreeNode<K, V> *>(c));
         }
     }
-//    target->print_info("going to free");
     delete target;
 }
 

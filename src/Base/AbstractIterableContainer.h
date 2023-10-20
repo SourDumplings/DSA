@@ -36,6 +36,7 @@ namespace CZ
     template <typename T, typename It>
     const char *AbstractIterableContainer<T, It>::c_str() const
     {
+#ifdef DEBUG
         std::ostringstream oss;
         oss << this->get_entity_name() << "[";
         It b = begin(), e = end();
@@ -49,6 +50,10 @@ namespace CZ
         }
         oss << "]";
         return this->get_c_str_from_stream(oss);
+#else
+        return nullptr;
+#endif
+
     }
 
     template <typename T, typename It>

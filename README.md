@@ -9,7 +9,7 @@
 # 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：9.4.9，与 CMakeLists.txt 同步
+版本号：10.0.0，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -32,6 +32,7 @@
 - 执行`script/build_release.sh`进行构建发布版（VSCode task: Build release）
 - 构建好的头文件、库文件和文档都在目标目录`dist`目录下
 - 执行`script/clean.sh`可以对项目进行 clean（VSCode task: Clean）
+- DEBUG 模式构建的话，容器元素必须支持`operator<<`
 
 ## 单元测试
 - 在`test`目录下编写单元测试代码，命名规范为：`test_xxx.cpp`
@@ -69,7 +70,7 @@
 12. ### Shuffle 算法
 13. ### 素数判断算法
 
-## 容器（模板）类（许多容器定义了 print_info 方法，故元素必须支持 << 运算符）
+## 容器（模板）类
 1. ### 向量
 2. ### 位域
 3. ### 链表
@@ -146,5 +147,4 @@
 - 实现 KD 树
 - 调试 BinTree 遍历算法中先中序 NONRECURSION_TRAVERSAL4 再后序 NONRECURSION_TRAVERSAL1 的死循环情况，见 test_bintree.cpp
 - Cmake 集成 GPERFTOOLS 进行内存分析
-- 将`print_info`方法纳入 DEBUG 编译，解放容器对`<<`操作符定义的限制
 - 实现前缀树 Trie 类模板

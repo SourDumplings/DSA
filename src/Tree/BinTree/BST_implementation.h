@@ -20,7 +20,7 @@
 namespace CZ
 {
     template <typename T>
-    BST<T>::BST(std::nullptr_t): BinTree<T>(nullptr), _isAllowRepeatKey(true)
+    BST<T>::BST(std::nullptr_t) : BinTree<T>(nullptr), _isAllowRepeatKey(true)
     {
     }
     template <typename T>
@@ -55,7 +55,7 @@ namespace CZ
     }
 
     template <typename T>
-    BST<T>::BST(BST<T> &&t) noexcept: BinTree<T>(std::move(t)), _isAllowRepeatKey(t._isAllowRepeatKey)
+    BST<T>::BST(BST<T> &&t) noexcept : BinTree<T>(std::move(t)), _isAllowRepeatKey(t._isAllowRepeatKey)
     {
     }
 
@@ -65,12 +65,14 @@ namespace CZ
         printf("for bst %s, is_allow_repeat_key() = %d\n", name, _isAllowRepeatKey);
         printf("it contains %u nodes(including root) and height is %u\n",
                this->size(), this->height());
+#ifdef DEBUG
         printf("its pre_order_traversal is: \n");
         BinTree<T>::pre_order_traversal(dynamic_cast<BinTreeNode<T> *>(this->root()), typename Tree<T>::OutPut(),
                                         NONRECURSION_TRAVERSAL2);
         printf("\nits in_order_traversal is: \n");
         BinTree<T>::in_order_traversal(dynamic_cast<BinTreeNode<T> *>(this->root()), typename Tree<T>::OutPut(),
                                        NONRECURSION_TRAVERSAL2);
+#endif
         printf("\n\n");
     }
 
@@ -333,6 +335,6 @@ namespace CZ
     {
         return "BST";
     }
-} // CZ
+    } // CZ
 
 #endif // BST_IMPLEMENTATION_H

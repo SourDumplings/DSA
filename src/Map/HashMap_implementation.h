@@ -20,7 +20,7 @@ HashMap 类模板的实现
 namespace CZ
 {
     template <typename K, typename V>
-    HashMap<K, V>::HashMap(const Rank tableSize_): HashSet<KVPair<K, V>>(tableSize_)
+    HashMap<K, V>::HashMap(const Rank tableSize_) : HashSet<KVPair<K, V>>(tableSize_)
     {
     }
 
@@ -60,6 +60,8 @@ namespace CZ
     {
         printf("for HashMap %s: \n", name);
         printf("size is %u, table size is %u\n", this->size(), this->table_size());
+
+#ifdef DEBUG
         printf("it contains:");
         Rank count = 0;
         if (0 < this->size())
@@ -74,6 +76,8 @@ namespace CZ
                 ++count;
             }
         }
+#endif
+
         printf("\n\n");
     }
 

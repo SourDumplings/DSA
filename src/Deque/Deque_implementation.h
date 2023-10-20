@@ -181,6 +181,8 @@ namespace CZ
             , _end._cur - _end._first
             , _end._pNode - _bufferMap
         );
+
+#ifdef DEBUG
         printf("including: ");
 
         Iterator it = _begin;
@@ -209,6 +211,7 @@ namespace CZ
             pNode = _bufferMap + nodeIdx;
             p = *pNode;
         }
+#endif
         putchar('\n');
     }
 
@@ -557,7 +560,7 @@ namespace CZ
             {
                 break;
             }
-            
+
             p -= moveNum;
             q -= moveNum;
             elemNumShouldMove -= moveNum;
@@ -923,6 +926,6 @@ namespace CZ
     {
         return "Deque";
     }
-}
+    }
 
 #endif

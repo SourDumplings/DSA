@@ -24,6 +24,8 @@ namespace CZ
     {
         printf("Vector %s:\n", name);
         printf("capacity = %u, size = %u\n", _capacity, _size);
+
+#ifdef DEBUG
         printf("including: ");
         int output = 0;
         for (Vector<T>::Rank i = 0; i < _size; ++i)
@@ -34,6 +36,8 @@ namespace CZ
             }
             std::cout << _elem[i];
         }
+#endif
+
         printf("\n\n");
     }
 }

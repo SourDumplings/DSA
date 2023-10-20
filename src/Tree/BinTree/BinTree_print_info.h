@@ -29,12 +29,15 @@ namespace CZ
         }
         else
         {
+#ifdef DEBUG
             printf("its pre_order_traversal is: \n");
             // pre_order_traversal(dynamic_cast<BinTreeNode<T>*>(this->root()), typename Tree<T>::OutPut(), NONRECURSION_TRAVERSAL2);
             pre_order_traversal(dynamic_cast<BinTreeNode<T>*>(this->root()), typename Tree<T>::OutPut(), RECURSION_TRAVERSAL);
             printf("\nits in_order_traversal is: \n");
             // in_order_traversal(dynamic_cast<BinTreeNode<T>*>(this->root()), typename Tree<T>::OutPut(), NONRECURSION_TRAVERSAL2);
             in_order_traversal(dynamic_cast<BinTreeNode<T>*>(this->root()), typename Tree<T>::OutPut(), RECURSION_TRAVERSAL);
+#endif
+
             printf("\n\n");
         }
     }

@@ -23,6 +23,8 @@ namespace CZ
     {
         printf("List %s:\n", name);
         printf("size = %u\n", _size);
+
+#ifdef DEBUG
         printf("including: ");
         int output = 0;
         for (Iterator it = begin(); it != end(); ++it)
@@ -33,6 +35,8 @@ namespace CZ
             }
             std::cout << *it;
         }
+#endif
+
         printf("\n\n");
         return;
     }

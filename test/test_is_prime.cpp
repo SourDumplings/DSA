@@ -37,11 +37,12 @@ void test_is_prime()
             );
             return;
         }
-
+#ifdef DEBUG
         if (res1)
         {
             printf("Check prime num %u succ!\n", i);
         }
+#endif
     }
     printf("Correctiness check succ!\n");
 }

@@ -24,7 +24,10 @@
 namespace CZ
 {
     template <typename T, typename C>
-    inline typename Queue<T, C>::Rank Queue<T, C>::size() const { return _data.size(); }
+    inline typename Queue<T, C>::Rank Queue<T, C>::size() const
+    {
+        return _data.size();
+    }
 
     template <typename T, typename C>
     const T &Queue<T, C>::front() const
@@ -59,18 +62,25 @@ namespace CZ
     }
 
     template <typename T, typename C>
-    inline void Queue<T, C>::clear() { return _data.clear(); }
+    inline void Queue<T, C>::clear()
+    {
+        return _data.clear();
+    }
 
     template <typename T, typename C>
     void Queue<T, C>::print_info(const char *name) const
     {
         printf("for queue %s:\n", name);
         printf("size = %u\n", size());
+
+#ifdef DEBUG
         printf("elements(from front to back): ");
         for (auto &x : _data)
         {
             std::cout << x << " ";
         }
+#endif
+
         printf("\n\n");
     }
 

@@ -445,6 +445,8 @@ namespace CZ
     {
         printf("for FlatHashSet %s: \n", name);
         printf("size is %u, table size is %u\n", _size, table_size());
+
+#ifdef DEBUG
         printf("it contains:");
         Rank count = 0;
         for (Rank i = 0; i != table_size(); ++i)
@@ -460,6 +462,8 @@ namespace CZ
             }
 
         }
+#endif
+
         printf("\n\n");
     }
 

@@ -36,10 +36,16 @@ namespace CZ
     }
 
     template <typename T, typename Cmp>
-    Heap<T, Cmp>::Heap(T *begin, T *end, const Cmp &cmp) : _data(begin, end) { _build_heap(cmp); }
+    Heap<T, Cmp>::Heap(T *begin, T *end, const Cmp &cmp) : _data(begin, end)
+    {
+        _build_heap(cmp);
+    }
 
     template <typename T, typename Cmp>
-    Heap<T, Cmp>::Heap(const std::initializer_list<T> &l, const Cmp &cmp) : _data(l.begin(), l.end()) { _build_heap(cmp); }
+    Heap<T, Cmp>::Heap(const std::initializer_list<T> &l, const Cmp &cmp) : _data(l.begin(), l.end())
+    {
+        _build_heap(cmp);
+    }
 
     template <typename T, typename Cmp>
     void Heap<T, Cmp>::_build_heap(const Cmp &cmp)
@@ -56,7 +62,7 @@ namespace CZ
             {
                 break;
             }
-            
+
         }
     }
 
@@ -123,21 +129,31 @@ namespace CZ
     }
 
     template <typename T, typename Cmp>
-    inline typename Heap<T, Cmp>::Rank Heap<T, Cmp>::size() const { return _data.size(); }
+    inline typename Heap<T, Cmp>::Rank Heap<T, Cmp>::size() const
+    {
+        return _data.size();
+    }
 
     template <typename T, typename Cmp>
-    inline const T &Heap<T, Cmp>::top() const { return _data.front(); }
+    inline const T &Heap<T, Cmp>::top() const
+    {
+        return _data.front();
+    }
 
     template <typename T, typename Cmp>
     void Heap<T, Cmp>::print_info(const char *name) const
     {
         printf("for Heap %s:\n", name);
         printf("its size is %u\n", size());
+
+#ifdef DEBUG
         printf("it contains:");
         for (auto &i : _data)
         {
             std::cout << " " << i;
         }
+#endif
+
         printf("\n\n");
     }
 
@@ -176,6 +192,6 @@ namespace CZ
         _data.clear();
     }
 
-} // CZ
+    } // CZ
 
 #endif // HEAP_IMPLEMENTATION_H

@@ -15,68 +15,71 @@
 
 namespace CZ
 {
-template<typename K, typename V>
-void BPlusTree<K, V>::print_info(const char *name) const
-{
-    printf("for bPlustree %s: \n", name);
-    if (empty())
+    template<typename K, typename V>
+    void BPlusTree<K, V>::print_info(const char *name) const
     {
-        printf("It's empty.\n\n");
-        return;
-    }
-
-    printf("contains %d nodes, %d keys, with height %d\n",
-           _nodeNum,
-           _size,
-           height());
-    BPlusTreeNode<K, V> *p = nullptr;
-
-    printf("all keys in level-order-traversal inner nodes are: \n");
-    Queue<BPlusTreeNode<K, V> *> Q;
-    Q.push(_root);
-    while (!Q.empty())
-    {
-        p = Q.front();
-        Q.pop();
-        if (p->_isLeaf)
+        printf("for bPlustree %s: \n", name);
+        if (empty())
         {
-            break;
+            printf("It's empty.\n\n");
+            return;
         }
-        print_keys_in_node(p);
-        putchar(' ');
-        for (void *c : p->_children)
+
+        printf("contains %d nodes, %d keys, with height %d\n",
+               _nodeNum,
+               _size,
+               height());
+        BPlusTreeNode<K, V> *p = nullptr;
+
+#ifdef DEBUG
+        printf("all keys in level-order-traversal inner nodes are: \n");
+        Queue<BPlusTreeNode<K, V> *> Q;
+        Q.push(_root);
+        while (!Q.empty())
         {
-            Q.push(static_cast<BPlusTreeNode<K, V> *>(c));
+            p = Q.front();
+            Q.pop();
+            if (p->_isLeaf)
+            {
+                break;
+            }
+            print_keys_in_node(p);
+            putchar(' ');
+            for (void *c : p->_children)
+            {
+                Q.push(static_cast<BPlusTreeNode<K, V> *>(c));
+            }
         }
-    }
 
 
-    printf("\nall keys in leaves are: \n");
-    while (p != nullptr)
-    {
-        print_keys_in_node(p);
-        putchar(' ');
-        p = static_cast<BPlusTreeNode<K, V> *>(p->_children.back());
-    }
-    printf("\n\n");
-}
-
-template<typename K, typename V>
-void BPlusTree<K, V>::print_keys_in_node(BPlusTreeNode<K, V> *node) const
-{
-    putchar('(');
-    Vector<K> &keys = node->_keys;
-    typename Vector<K>::Rank s = keys.size();
-    for (typename Vector<K>::Rank i = 0; i < s; i++)
-    {
-        if (i != 0)
+        printf("\nall keys in leaves are: \n");
+        while (p != nullptr)
         {
-            printf(", ");
+            print_keys_in_node(p);
+            putchar(' ');
+            p = static_cast<BPlusTreeNode<K, V> *>(p->_children.back());
         }
-        std::cout << keys[i];
+#endif
+
+        printf("\n\n");
     }
-    putchar(')');
-}
+
+    template<typename K, typename V>
+    void BPlusTree<K, V>::print_keys_in_node(BPlusTreeNode<K, V> *node) const
+    {
+        putchar('(');
+        Vector<K> &keys = node->_keys;
+        typename Vector<K>::Rank s = keys.size();
+        for (typename Vector<K>::Rank i = 0; i < s; i++)
+        {
+            if (i != 0)
+            {
+                printf(", ");
+            }
+            std::cout << keys[i];
+        }
+        putchar(')');
+    }
 } // namespace CZ
 
 #endif // B_PLUS_TREE_PRINT_INFO_H

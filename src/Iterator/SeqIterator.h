@@ -36,7 +36,9 @@ namespace CZ
         typedef seq_iterator_tag iterator_category;
 
         // 构造函数
-        SeqIterator(const T *p_ = nullptr) : _p(const_cast<T *>(p_)) {}
+        SeqIterator(const T *p_ = nullptr) : _p(const_cast<T *>(p_))
+        {
+        }
 
         virtual ~SeqIterator() = default;
 
@@ -70,15 +72,24 @@ namespace CZ
             return temp;
         }
 
-        T *get() { return _p; }
-        T *get() const { return _p; }
+        T *get()
+        {
+            return _p;
+        }
+        T *get() const
+        {
+            return _p;
+        }
 
         const char *c_str() const override
         {
+#ifdef DEBUG
             std::ostringstream oss;
             oss << this->get_entity_name() << "(" << *_p << ")";
-            
+
             return this->get_c_str_from_stream(oss);
+#endif
+            return nullptr;
         }
 
         HashRank hash() const override

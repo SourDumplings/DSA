@@ -7,7 +7,7 @@
 
 /*
 稳定排序函数模板接口，传入的迭代器必须是随机访问迭代器
-传入的比较函数 Cmp 必须是二元函数，返回 bool，当第一个参数比第二个参数小时返回 true
+传入的比较函数 Cmp 必须是二元函数，返回 bool，当第一个参数比第二个参数小时返回 true，如果两个元素是同一个时必须返回 false
  */
 
 #ifndef STABLE_SORT_H
@@ -89,6 +89,8 @@ namespace CZ
     inline void Stable_sort(It begin, It end, const Cmp &cmp,
                             const SortAccessories::StableSortMethod &method = SortAccessories::MERGE_SORT, const uint32_t version = 0)
     {
+        ASSERT_RELEASE(!cmp(*begin, *begin), "Cmp function must return false when comparing one elem to itself!");
+
         SortAccessories::test_iterator_for_stable_sort(begin, end,
                                                        typename Iterator_traits<It>::iterator_category(),
                                                        cmp, method, version);

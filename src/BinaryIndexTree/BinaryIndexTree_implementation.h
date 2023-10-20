@@ -21,7 +21,9 @@
 namespace CZ
 {
     template <typename T>
-    BinaryIndexTree<T>::BinaryIndexTree(const typename BinaryIndexTree<T>::Rank size) : _data(size + 1) {}
+    BinaryIndexTree<T>::BinaryIndexTree(const typename BinaryIndexTree<T>::Rank size) : _data(size + 1)
+    {
+    }
 
     template <typename T>
     inline typename BinaryIndexTree<T>::Rank BinaryIndexTree<T>::_low_bit(
@@ -88,11 +90,15 @@ namespace CZ
     {
         printf("for BinaryIndexTree %s:\n", name);
         Rank s = size();
+#ifdef DEBUG
         printf("it manages %u elements, which are:", s);
         for (Rank i = 0; i != s; ++i)
         {
             std::cout << " " << operator[](i);
         }
+#else
+        printf("it manages %u elements", s);
+#endif
         printf("\n\n");
     }
 

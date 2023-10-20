@@ -23,9 +23,11 @@ namespace CZ
     {
         printf("for btree %s: \n", name);
         printf("contains %d nodes, with height %d\n", keys_num(), height());
+
+#ifdef DEBUG
         printf("level order traversal for keys are: \n");
 
-        Queue<BTreeNode<T>*> Q;
+        Queue<BTreeNode<T> *> Q;
         if (_root)
             Q.push(_root);
         while (!Q.empty())
@@ -53,6 +55,8 @@ namespace CZ
             putchar(')');
             putchar(' ');
         }
+#endif
+
         printf("\n\n");
     }
 } // CZ

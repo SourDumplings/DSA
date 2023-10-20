@@ -73,11 +73,15 @@ namespace CZ
     {
         printf("for stack %s:\n", name);
         printf("size = %u\n", size());
+
+#ifdef DEBUG
         printf("elements(from bottom to top): ");
         for (auto &x : _data)
         {
             std::cout << x << " ";
         }
+#endif
+
         printf("\n\n");
     }
 

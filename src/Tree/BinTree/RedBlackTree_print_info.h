@@ -22,10 +22,14 @@ namespace CZ
         printf("for RedBlackTree %s, is_allow_repeat_key() = %d\n", name, BST<T>::is_allow_repeat_key());
         printf("it contains %u nodes(including root) and height is %u\n",
                this->size(), this->height());
+               
+#ifdef DEBUG
         printf("its pre_order_traversal is: \n");
         _pre_order_traversal(dynamic_cast<RedBlackTreeNode<T> *>(this->root()), RedBlackTree<T>::OutPut());
         printf("\nits in_order_traversal is: \n");
         _in_order_traversal(dynamic_cast<RedBlackTreeNode<T> *>(this->root()), RedBlackTree<T>::OutPut());
+#endif
+
         printf("\n\n");
     }
 

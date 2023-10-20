@@ -19,9 +19,13 @@ AVL树模板的实现
 namespace CZ
 {
     template <typename T>
-    AVLTree<T>::AVLTree(std::nullptr_t) : BST<T>(nullptr) {}
+    AVLTree<T>::AVLTree(std::nullptr_t) : BST<T>(nullptr)
+    {
+    }
     template <typename T>
-    AVLTree<T>::AVLTree(AVLTreeNode<T> *root, bool isAllowRepeatKey_) : BST<T>(root, isAllowRepeatKey_) {}
+    AVLTree<T>::AVLTree(AVLTreeNode<T> *root, bool isAllowRepeatKey_) : BST<T>(root, isAllowRepeatKey_)
+    {
+    }
     template <typename T>
     AVLTree<T>::AVLTree(const AVLTree<T> &t)
     {
@@ -31,7 +35,9 @@ namespace CZ
     }
 
     template <typename T>
-    AVLTree<T>::AVLTree(AVLTree<T> &&t) noexcept : BST<T>(std::move(t)) {}
+    AVLTree<T>::AVLTree(AVLTree<T> &&t) noexcept : BST<T>(std::move(t))
+    {
+    }
 
     template <typename T>
     AVLTreeNode<T> *AVLTree<T>::copy_from(TreeNode<T> *pRoot)
@@ -60,12 +66,15 @@ namespace CZ
         printf("for AVLTree %s, is_allow_repeat_key() = %d\n", name, BST<T>::is_allow_repeat_key());
         printf("it contains %u nodes(including root) and height is %u\n",
                this->size(), this->height());
+
+#ifdef DEBUG
         printf("its pre_order_traversal is: \n");
         BinTree<T>::pre_order_traversal(dynamic_cast<BinTreeNode<T> *>(this->root()), typename AVLTree<T>::OutPut(),
                                         NONRECURSION_TRAVERSAL2);
         printf("\nits in_order_traversal is: \n");
         BinTree<T>::in_order_traversal(dynamic_cast<BinTreeNode<T> *>(this->root()), typename AVLTree<T>::OutPut(),
                                        NONRECURSION_TRAVERSAL2);
+#endif
         printf("\n\n");
     }
 
@@ -180,7 +189,7 @@ namespace CZ
     void AVLTree<T>::OutPut::operator()(const T &data) const
     {
         std::cout << data << "(" << &data << ")"
-                  << " ";
+            << " ";
     }
 
     template <typename T>
@@ -202,6 +211,6 @@ namespace CZ
         }
         return ret;
     }
-} // CZ
+    } // CZ
 
 #endif // AVL_TREE_IMPLEMENTATION_H

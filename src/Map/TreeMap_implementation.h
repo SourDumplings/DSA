@@ -14,7 +14,7 @@
 namespace CZ
 {
     template <typename K, typename V>
-    TreeMap<K, V>::TreeMap(): TreeSet<KVPair<K, V>>()
+    TreeMap<K, V>::TreeMap() : TreeSet<KVPair<K, V>>()
     {
     }
 
@@ -54,6 +54,8 @@ namespace CZ
     {
         printf("for TreeMap %s: \n", name);
         printf("size is %u\n", this->size());
+
+#ifdef DEBUG
         printf("it contains:");
         Rank count = 0;
         if (0 < this->size())
@@ -68,6 +70,8 @@ namespace CZ
                 ++count;
             }
         }
+#endif
+
         printf("\n\n");
     }
 

@@ -21,7 +21,7 @@ HashSet 类模板的实现
 namespace CZ
 {
     template <typename T>
-    HashSet<T>::HashSet(const Rank tableSize_): _size(0)
+    HashSet<T>::HashSet(const Rank tableSize_) : _size(0)
     {
         _table.resize(tableSize_);
         _firstNonEmptyBucketIndex = 0;
@@ -272,6 +272,8 @@ namespace CZ
     {
         printf("for HashSet %s: \n", name);
         printf("size is %u, table size is %u\n", _size, table_size());
+
+#ifdef DEBUG
         printf("it contains:");
         for (Rank i = 0; i != table_size(); ++i)
         {
@@ -294,6 +296,8 @@ namespace CZ
             }
             std::cout << ")" << std::endl;
         }
+#endif
+
         printf("\n");
     }
 

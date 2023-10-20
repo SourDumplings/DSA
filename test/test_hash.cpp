@@ -16,6 +16,18 @@
 using namespace CZ;
 using namespace std;
 
+class CWithNoHash
+{
+
+};
+
+
+class CWithHash
+{
+public:
+    HashRank hash() const { return 0; }
+};
+
 int main(int argc, char const *argv[])
 {
     bool b1 = true, b2 = false;
@@ -31,9 +43,14 @@ int main(int argc, char const *argv[])
     char c1 = 'a', c2 = 'j';
     printf("Hash<char>()(c1) = %" PRId64 ", Hash<char>()(c2) = %" PRId64 "\n", Hash<char>()(c1), Hash<char>()(c2));
 
+    cout << "Testing Vector hash start" << endl;
     Vector<int> v1({ 5, 3, 10, 2, 4, 6, 2, 3, 7 }), v2({ 5, 3, 10, 3, 4, 6, 7 });
     cout << v1.hash() << endl;
     cout << v2.hash() << endl;
+    cout << Hash<Vector<int>>()(v1) << endl;
+    cout << Hash<Vector<int>>()(v2) << endl;
+    cout << "Testing Vector hash finish" << endl;
+
     List<int> l1({ 5, 3, 10, 2, 4, 6, 2, 3, 7 }), l2({ 5, 3, 10, 3, 4, 6, 7 });
     cout << l1.hash() << endl;
     cout << l2.hash() << endl;
@@ -43,6 +60,11 @@ int main(int argc, char const *argv[])
 
     int *p = nullptr;
     printf("Hash(p) = %" PRId64 "\n", Hash<int*>()(p));
+
+    CWithNoHash cNo;
+    CWithHash cH;
+    cout << Hash<CWithNoHash>()(cNo) << endl;
+    cout << Hash<CWithHash>()(cH) << endl;
 
     return 0;
 }

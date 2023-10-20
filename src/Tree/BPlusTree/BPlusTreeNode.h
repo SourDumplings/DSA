@@ -62,10 +62,14 @@ namespace CZ
             printf("it contains %d keys, %d children\n:",
                    _keys.size(),
                    _children.size());
+
+#ifdef DEBUG
             for (const K &k : _keys)
             {
                 std::cout << " " << k;
             }
+#endif
+
             printf("\n\n");
         }
 

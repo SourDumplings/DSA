@@ -131,7 +131,7 @@ namespace CZ
             return this->get_c_str_from_stream(oss);
         }
 
-        virtual HashRank hash() const
+        HashRank hash() const override
         {
             return (Hash<RedBlackTreeNode<T>>()(*_it) + Hash<bool>()(_isEnd) + Hash<const RedBlackTree<T> *>()(_pRBT)) % CZ_MAX_HASH_VALUE;
         }

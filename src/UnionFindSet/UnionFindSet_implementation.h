@@ -21,7 +21,9 @@
 namespace CZ
 {
     template <typename T>
-    UnionFindSet<T>::UnionFindSet(UnionFindSetNode *root) : _family(root) {}
+    UnionFindSet<T>::UnionFindSet(UnionFindSetNode *root) : _family(root)
+    {
+    }
 
     template <typename T>
     UnionFindSet<T>::UnionFindSet(const std::initializer_list<T> &l) : _family(new UnionFindSetNode(*l.begin()))
@@ -33,7 +35,10 @@ namespace CZ
     }
 
     template <typename T>
-    inline typename UnionFindSet<T>::Rank UnionFindSet<T>::size() const { return _family.size(); }
+    inline typename UnionFindSet<T>::Rank UnionFindSet<T>::size() const
+    {
+        return _family.size();
+    }
 
     template <typename T>
     inline typename UnionFindSet<T>::UnionFindSetNode *UnionFindSet<T>::root() const
@@ -53,6 +58,7 @@ namespace CZ
         printf("for UnionFindSet %s:\n", name);
         if (root())
         {
+#ifdef DEBUG
             std::cout << "root is " << root()->data() << ", size is " << size() << std::endl;
             printf("contains: ");
             std::cout << root()->data();
@@ -60,6 +66,9 @@ namespace CZ
             {
                 std::cout << " " << c->data();
             }
+#else
+            std::cout << "size is " << size() << std::endl;
+#endif
         }
         else
             printf("It is empty.");
@@ -97,7 +106,10 @@ namespace CZ
     }
 
     template <typename T>
-    inline void UnionFindSet<T>::clear() { return _family.clear(); }
+    inline void UnionFindSet<T>::clear()
+    {
+        return _family.clear();
+    }
 
     template <typename T>
     void UnionFindSet<T>::merge(UnionFindSet<T> &&u)
@@ -163,7 +175,7 @@ namespace CZ
                 {
                     continue;
                 }
-                
+
                 if (0 < count)
                 {
                     oss << ", ";

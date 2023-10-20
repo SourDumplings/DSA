@@ -20,6 +20,27 @@
 using namespace CZ;
 using namespace std;
 
+class C
+{
+public:
+    C(int i) : a(i)
+    {
+    }
+
+    int a = 1;
+};
+
+// ostream &operator<<(ostream &os, const C &c)
+// {
+//     return os << c;
+// }
+
+/* void test_normal_class_elem()
+{
+    Vector<C> v{ 1, 2, 3, 4, 6 };
+    v.print_info("v");
+} */
+
 int main(int argc, char const *argv[])
 {
     // // 测试构造函数和数据访问接口
@@ -124,8 +145,8 @@ int main(int argc, char const *argv[])
     // putchar('\n');
 
     // 测试赋值操作符和索引操作符
-    Vector<int> v1({1, 2, 3}), v2({2, 3, 5}), v3({6, 7});
-    Vector<string> vs6({"abc", "ac"}), vs7({"cde", "fg"});
+    Vector<int> v1({ 1, 2, 3 }), v2({ 2, 3, 5 }), v3({ 6, 7 });
+    Vector<string> vs6({ "abc", "ac" }), vs7({ "cde", "fg" });
 
     v1.print_info("v1");
     v1 = v2;
@@ -190,7 +211,7 @@ int main(int argc, char const *argv[])
     vs8.print_info("vs8");
     vs8.erase(vs8.begin() + 1, vs8.end() - 1);
     vs8.print_info("vs8");
-    
+
     // 无效迭代器测试
     // vs8.erase(vs9.begin());
     // vs8.print_info("vs8");
@@ -198,7 +219,7 @@ int main(int argc, char const *argv[])
     // vs8.print_info("vs8");
 
     // // 测试按值删除
-    Vector<string> vs10({"jd", "adsads", "jd", "jd", "dasda", "jd", "ee"});
+    Vector<string> vs10({ "jd", "adsads", "jd", "jd", "dasda", "jd", "ee" });
     Vector<string> vs11(vs10);
     vs10.print_info("vs10");
     vs10.remove("jd");
@@ -207,6 +228,8 @@ int main(int argc, char const *argv[])
     vs10.remove("adsads");
     vs10.remove("ee");
     vs10.print_info("vs10");
+
+    // test_normal_class_elem();
 
     return 0;
 }

@@ -52,12 +52,16 @@ namespace CZ
         void print_info(const char *name = "") const
         {
             printf("for btreenode %s: \n", name);
+
+#ifdef DBEUG
             printf("it contains keys:");
             for (auto &item : _keys)
             {
                 std::cout << " " << item;
             }
             printf("\nit has %u children\n\n", _children.size());
+#endif
+
         }
 
         Rank depth() const;

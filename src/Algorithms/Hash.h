@@ -13,24 +13,56 @@
 #include <cstdint>
 #include <string>
 #include <cstddef>
+#include <type_traits>
 
 namespace CZ
 {
     using HashRank = uint64_t;
     constexpr HashRank CZ_MAX_HASH_VALUE = UINT64_MAX;
 
+    /**
+     * @brief 判断是否定义了自己的哈希函数，即 hash，可见性必须是 public 才行
+     *
+     * @tparam T
+     */
+    class HasDefineOwnHashMethod
+    {
+    public:
+        template <typename C> static std::true_type test(decltype(&C::hash))
+        {
+            return std::true_type();
+        }
+        template <typename C> static std::false_type test(...)
+        {
+            return std::false_type();
+        }
+
+    private:
+        HasDefineOwnHashMethod();
+    };
+
     // 默认哈希算法
     template <typename T>
     class Hash
     {
     public:
-        HashRank operator()(const T &value) const
+        HashRank operator()(const T &target) const
         {
-            return value.hash();
+            return invoke_hash(target, HasDefineOwnHashMethod::test<T>(nullptr));
+        }
+
+    private:
+        HashRank invoke_hash(const T &target, const std::true_type &) const
+        {
+            return target.hash();
+        }
+
+        HashRank invoke_hash(const T &target, const std::false_type &) const
+        {
+            return reinterpret_cast<HashRank>(&target);
         }
     };
 
-    // 针对一些特定类型的哈希算法
     template <>
     class Hash<const bool>
     {

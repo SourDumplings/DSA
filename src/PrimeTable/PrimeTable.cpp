@@ -15,7 +15,7 @@
 namespace CZ
 {
     PrimeTable::PrimeTable(PrimeTable::Rank upperLimit_)
-        : AbstractBaseContainer<uint32_t>() 
+        : AbstractBaseContainer<uint32_t>()
         , _size(0)
     {
         ASSERT_RELEASE(MIN_UPPER_LIMIT <= upperLimit_, "Too small upper limit %u, at least %u"
@@ -67,7 +67,7 @@ namespace CZ
             _expand(upper_limit() * 2);
         }
 
-        return static_cast<const PrimeTable&>(*this).get_prime(n);
+        return static_cast<const PrimeTable &>(*this).get_prime(n);
     }
 
     bool PrimeTable::is_prime(PrimeTable::Rank num) const
@@ -86,8 +86,8 @@ namespace CZ
         {
             _expand(num * 2);
         }
-        
-        return static_cast<const PrimeTable&>(*this).is_prime(num);
+
+        return static_cast<const PrimeTable &>(*this).is_prime(num);
     }
 
     // 输出信息
@@ -114,7 +114,7 @@ namespace CZ
         {
             _table[i] = true;
         }
-        
+
         for (PrimeTable::Rank i = 4; i < upper_limit(); i += 2)
         {
             _table[i] = false;

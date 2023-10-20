@@ -20,7 +20,7 @@
 namespace CZ
 {
     template <typename T>
-    TreeSet<T>::TreeSet(): _T(nullptr, false)
+    TreeSet<T>::TreeSet() : _T(nullptr, false)
     {
     }
 
@@ -36,21 +36,21 @@ namespace CZ
 
     template <typename T>
     template <typename It>
-    TreeSet<T>::TreeSet(const It &begin, const It &end): TreeSet()
+    TreeSet<T>::TreeSet(const It &begin, const It &end) : TreeSet()
     {
         _construct_from(begin, end);
     }
 
     template <typename T>
-    TreeSet<T>::TreeSet(const T *begin, const T *end): TreeSet()
+    TreeSet<T>::TreeSet(const T *begin, const T *end) : TreeSet()
     {
         _construct_from(begin, end);
     }
 
     template <typename T>
-    TreeSet<T>::TreeSet(const std::initializer_list<T> &l): TreeSet(l.begin(), l.end())
-    {    
-}
+    TreeSet<T>::TreeSet(const std::initializer_list<T> &l) : TreeSet(l.begin(), l.end())
+    {
+    }
 
     template <typename T>
     TreeSet<T>::TreeSet(const TreeSet<T> &s) : _T(s._T)
@@ -186,11 +186,14 @@ namespace CZ
     void TreeSet<T>::print_info(const char *name) const
     {
         printf("for TreeSet %s, it has %u elements\n", name, size());
+
+#ifdef DEBUG
         printf("it contains:");
         for (Iterator it = begin(); it != end(); ++it)
         {
             std::cout << " " << *it;
         }
+#endif
 
         printf("\n\n");
     }
@@ -253,6 +256,6 @@ namespace CZ
         }
         return res;
     }
-} // CZ
+    } // CZ
 
 #endif // TreeSET_IMPLEMENTATION_H
