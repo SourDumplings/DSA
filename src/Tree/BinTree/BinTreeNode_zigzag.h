@@ -44,8 +44,14 @@ namespace CZ
         if (f)
         {
             (this == f->left_child()) ? f->set_left_child(lChild) : f->set_right_child(lChild);
+            lChild->set_father(f);
         }
         set_left_child(lChild->right_child());
+        if (lChild->right_child())
+        {
+            lChild->right_child()->set_father(this);
+        }
+        
         if (left_child())
         {
             left_child()->set_father(this);
@@ -69,6 +75,11 @@ namespace CZ
             (this == f->right_child()) ? f->set_right_child(rChild) : f->set_left_child(rChild);
         }
         set_right_child(rChild->left_child());
+        if (rChild->left_child())
+        {
+            rChild->left_child()->set_father(this);
+        }
+        
         if (right_child())
         {
             right_child()->set_father(this);

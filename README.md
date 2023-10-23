@@ -9,7 +9,7 @@
 # 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：10.0.1，与 CMakeLists.txt 同步
+版本号：10.1.0，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -145,6 +145,5 @@
 # TODO
 - 实现树状数组（区间）
 - 实现 KD 树
-- 调试 BinTree 遍历算法中先中序 NONRECURSION_TRAVERSAL4 再后序 NONRECURSION_TRAVERSAL1 的死循环情况，见 test_bintree.cpp
 - Cmake 集成 GPERFTOOLS 进行内存分析
 - 实现前缀树 Trie 类模板

@@ -60,6 +60,10 @@ namespace CZ
         static void post_order_traversal(BinTreeNode<T> *root, const F &visit = F(),
                                          const BinTreeTraversalVersion &version = RECURSION_TRAVERSAL);
 
+        // 二叉树的层序遍历
+        template <typename F = typename Tree<T>::OutPut>
+        static void level_order_traversal(BinTreeNode<T> *pRoot, const F &visit = F());
+
         // 根据遍历序列返回构造二叉树的算法
         template <typename It>
         static BinTree<T> reconstruct_from_pre_in_traversal(It preB, It preE,

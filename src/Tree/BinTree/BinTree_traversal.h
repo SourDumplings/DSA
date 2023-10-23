@@ -15,7 +15,6 @@
 #include "BinTree.h"
 
 #include "../../Stack/Stack.h"
-#include <set>
 
 namespace CZ
 {
@@ -88,6 +87,7 @@ namespace CZ
         // 使用空余孩子指针记录相对根节点，不需要栈
         // 空间复杂度 O(1)，时间 O(n)
         // 参考：https://blog.csdn.net/danmo_wuhen/article/details/104339630
+        // 由于 Morris 遍历过程中会改变树的结构，但不涉及父结点指针，故无需更新父结点指针
         template <typename T, typename F>
         void pre_order_traversal_nonrecursion3(BinTreeNode<T> *root, const F &visit)
         {
@@ -232,9 +232,9 @@ namespace CZ
 
         // Morris 遍历法
         // 参考：https://blog.csdn.net/danmo_wuhen/article/details/104339630
-        // Morris中序遍历和前序遍历相差不大，只是在访问位置上出现了变化
+        // Morris 中序遍历和前序遍历相差不大，只是在访问位置上出现了变化
         // 空间复杂度 O(1)，时间 O(n)
-        // TODO: 改方法待调试
+        // 由于 Morris 遍历过程中会改变树的结构，但不涉及父结点指针，故无需更新父结点指针
         template <typename T, typename F>
         void in_order_traversal_nonrecursion4(BinTreeNode<T> *root, const F &visit)
         {
@@ -291,14 +291,11 @@ namespace CZ
         // 后序遍历的访问顺序为先是左侧最高可见叶结点（LHVFL）
         // 再深入其右兄弟（可能不存在）后序遍历
         // 最后是其父亲结点，于是一路尽量向左地向下走，一路将父结点和右兄弟压栈，直到走到叶结点
-        // TODO: 改方法待调试
         template <typename T, typename F>
         void post_order_traversal_nonrecursion1(BinTreeNode<T> *root, const F &visit)
         {
             Stack<BinTreeNode<T> *> S;
             S.push(root);
-
-            std::set<T> s;
 
             while (!S.empty())
             {
@@ -328,9 +325,6 @@ namespace CZ
                 root = S.top();
                 S.pop();
                 visit(root->data());
-
-                ASSERT_DEBUG(s.find(root->data()) == s.end(), "wrong");
-                s.insert(root->data());
             }
         }
 
@@ -414,6 +408,7 @@ namespace CZ
         // 空间复杂度 O(1)，时间复杂度 O(n)
         // Morris 后序遍历较为复杂，因为右孩子需要在根节点之前输出
         // 需要逆转左子树右边界结点的父子关系，再恢复
+        // 由于 Morris 遍历过程中会改变树的结构，但不涉及父结点指针，故无需更新父结点指针
         namespace Morris
         {
             template <typename T>
@@ -604,6 +599,25 @@ namespace CZ
                                                                  visit);
             break;
         }
+        }
+    }
+
+    template <typename T>
+    template <typename F>
+    void BinTree<T>::level_order_traversal(BinTreeNode<T> *pRoot, const F &visit)
+    {
+        Queue<BinTreeNode<T> *> q;
+        q.push(pRoot);
+        while (!q.empty())
+        {
+            BinTreeNode<T> *pNode = q.front();
+            q.pop();
+            if (pNode)
+            {
+                visit(pNode->data());
+                q.push(pNode->left_child());
+                q.push(pNode->right_child());
+            }
         }
     }
 } // CZ

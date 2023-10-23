@@ -81,6 +81,11 @@ namespace CZ
         if (z)
         {
             (z->left_child() == g ? z->set_left_child(ret) : z->set_right_child(ret));
+            if (ret)
+            {
+                ret->set_father(z);
+            }
+            
         }
         else
         {
@@ -112,6 +117,26 @@ namespace CZ
 
         b->set_left_child(a);
         b->set_right_child(c);
+
+        // 更新父结点指针
+        if (T0)
+        {
+            T0->set_father(a);
+        }
+        if (T1)
+        {
+            T1->set_father(a);
+        }
+        if (T2)
+        {
+            T2->set_father(c);
+        }
+        if (T3)
+        {
+            T3->set_father(c);
+        }
+        a->set_father(b);
+        c->set_father(b);
         return b;
     }
 } // CZ

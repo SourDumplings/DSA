@@ -25,11 +25,7 @@ namespace CZ
         BinTreeNode<T> *pOldChild = left_child();
         // this->children().front() = pNode;
         _pLeftChild = pNode;
-        if (pNode)
-        {
-            ASSERT_DEBUG(pNode != right_child(), "this node is right child");
-            pNode->set_father(this);
-        }
+        ASSERT_DEBUG(!(pNode && pNode == right_child()), "this node is right child");
         return pOldChild;
     }
 
@@ -39,11 +35,7 @@ namespace CZ
         BinTreeNode<T> *pOldChild = right_child();
         // this->children().back() = pNode;
         _pRightChild = pNode;
-        if (pNode)
-        {
-            ASSERT_DEBUG(pNode != left_child(), "this node is left child");
-            pNode->set_father(this);
-        }
+        ASSERT_DEBUG(!(pNode && pNode == left_child()), "this node is left child");
         return pOldChild;
     }
 
@@ -53,6 +45,11 @@ namespace CZ
         ASSERT_DEBUG(left_child() == nullptr, "left child position is occupied");
 
         set_left_child(newChild);
+        if (newChild)
+        {
+            newChild->set_father(this);
+        }
+
     }
 
     template <typename T>
@@ -61,6 +58,10 @@ namespace CZ
         ASSERT_DEBUG(right_child() == nullptr, "right child position is occupied");
 
         set_right_child(newChild);
+        if (newChild)
+        {
+            newChild->set_father(this);
+        }
     }
 
     template <typename T>

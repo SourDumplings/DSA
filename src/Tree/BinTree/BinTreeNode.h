@@ -52,6 +52,7 @@ namespace CZ
 
         // 强制替换左右孩子，注意其会使得原先的左右孩子生命周期脱离二叉树结点的管理
         // 返回原先的孩子的结点指针
+        // 新旧孩子的父结点指针未做处理
         BinTreeNode<T> *set_left_child(BinTreeNode<T> *pNode);
         BinTreeNode<T> *set_right_child(BinTreeNode<T> *pNode);
 
