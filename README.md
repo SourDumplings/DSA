@@ -9,21 +9,19 @@
 # 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：10.1.0，与 CMakeLists.txt 同步
+版本号：10.1.1，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
 
 我自己实现的各种数据结构和算法的模板，采用 C++（C++11）语言实现，统一在 CZ 命名空间中
 
-# 环境要求
+# 使用说明
+## 环境要求
 项目在编译器`gcc version 8.3.1 20190311 (Red Hat 8.3.1-3) (GCC) `及`gcc version 8.5.0 (x86_64-posix-seh-rev0, Built by MinGW-W64 project)`下测试通过。
 
 调试推荐：GNU gdb (GDB) 10.2
 
-内存分析工具 asan 下载链接：http://mirror.centos.org/centos/7/sclo/x86_64/rh/Packages/d/devtoolset-8-libasan-devel-8.3.1-3.el7.x86_64.rpm
-
-# 使用说明
 ## 开发和构建（以 Linux 平台为例，Windows 类似）
 - 按照 C++ 开发的一般规范，声明以及模板卸载头文件即 .h 文件中，实现代码写在 .cpp 源文件中
 - 增加源文件需要在`src/CMakeLists.txt`文件中的“添加库源文件”中添加
@@ -32,12 +30,21 @@
 - 执行`script/build_release.sh`进行构建发布版（VSCode task: Build release）
 - 构建好的头文件、库文件和文档都在目标目录`dist`目录下
 - 执行`script/clean.sh`可以对项目进行 clean（VSCode task: Clean）
-- DEBUG 模式构建的话，容器元素必须支持`operator<<`
+
+## DEBUG 模式构建环境需求
+DEBUG 模式用于调试。DEBUG 模式构建的话，容器元素必须支持`operator<<`。
+### Linux
+1. Asan：下载链接：http://mirror.centos.org/centos/7/sclo/x86_64/rh/Packages/d/devtoolset-8-libasan-devel-8.3.1-3.el7.x86_64.rpm
+2. Graphviz
 
 ## 单元测试
 - 在`test`目录下编写单元测试代码，命名规范为：`test_xxx.cpp`
 - 写好单元测试源文件后，如果要进行测试可以在`test/CMakeLists.txt`文件中的“添加源文件”中添加测试入口源文件
 - 在项目构建好后，执行`script/run_test.sh`脚本（Windows 下为`script/run_test.bat`）即可运行单元测试（VSCode task: Run test）
+
+## 性能分析
+- Vtune：使用 Vtune 工具进行性能分析（推荐）
+- gperftools：（与 Asan 不太兼容，故只支持 RELEASE 模式构建的）对于 Linux 环境下，安装 gperftools，运行`script/run_test_with_gperftools.sh`会生成性能分析报告`dsa-test.prof`及`dsa-test.pdf`（VSCode task：Run test on Linux with gperftools）
 
 # 内容
 ## 通用算法（模板）
@@ -145,5 +152,6 @@
 # TODO
 - 实现树状数组（区间）
 - 实现 KD 树
-- Cmake 集成 GPERFTOOLS 进行内存分析
 - 实现前缀树 Trie 类模板
+- 研究 Python 调用本库的方式
+- 研究 Lua 调用本库的方式

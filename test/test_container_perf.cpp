@@ -48,8 +48,8 @@ int main(int argc, char const *argv[])
     ContainerTester<int, StdSet> cst4;
     ContainerTester<int, StdUSet> cst5;
 
-    const uint32_t cSize = 1000U;
-    const uint32_t testNo = 10;
+    const uint32_t cSize = 10000U;
+    const uint32_t testNo = 5;
     for (uint32_t i = 0; i < testNo; i++)
     {
         int randSeed = time(nullptr);

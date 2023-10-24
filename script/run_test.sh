@@ -11,4 +11,6 @@ export ASAN_OPTIONS=abort_on_error=1:disable_coredump=0:unmap_shadow_on_exit=1
 ulimit -c unlimited
 
 project_base_dir=$(cd $(dirname $0)/..;pwd)
-$project_base_dir/build/test/bin/dsa-test
+cd $project_base_dir/build/test/bin
+
+./dsa-test
