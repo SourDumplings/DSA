@@ -91,5 +91,15 @@
                 "isDefault": true
             }
         },
+        {
+            "label": "Run python test on Linux",
+            "type": "shell",
+            "command": "${workspaceFolder}/script/run_python_test.sh",
+            "problemMatcher": [],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
     ]
 }

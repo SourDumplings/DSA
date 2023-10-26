@@ -16,7 +16,10 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     TARGET_LINK_LIBRARIES(dsa-test dsa)
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     # 依赖静态库
-    # TARGET_LINK_LIBRARIES(dsa-test dsa)
+    # TARGET_LINK_LIBRARIES(dsa-test dsa python3)
     # 依赖动态库
-    TARGET_LINK_LIBRARIES(dsa-test libdsa.so)
+    TARGET_LINK_LIBRARIES(dsa-test libdsa.so libpython3.so)
 endif()
+
+# 安装 graphviz 输出的依赖关系图
+INSTALL(FILES ${PROJECT_BINARY_DIR}/dsa-test_dependencies.png DESTINATION ${dist_dir}/doc)

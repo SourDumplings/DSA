@@ -14,6 +14,7 @@ SET(lib_source  Algorithms/Swap.cpp
                 CZString/CZString.cpp
                 Expression/Expression.cpp
                 PrimeTable/PrimeTable.cpp
+                Python/Python_interfaces.cpp
 )
 
 # 添加静态库，关键词为 static

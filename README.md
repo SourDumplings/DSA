@@ -9,7 +9,7 @@
 # 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：10.1.3，与 CMakeLists.txt 同步
+版本号：11.0.0，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -41,6 +41,7 @@ DEBUG 模式用于调试。DEBUG 模式构建的话，容器元素必须支持`o
 - 在`test`目录下编写单元测试代码，命名规范为：`test_xxx.cpp`
 - 写好单元测试源文件后，如果要进行测试可以在`test/CMakeLists.txt`文件中的“添加源文件”中添加测试入口源文件
 - 在项目构建好后，执行`script/run_test.sh`脚本（Windows 下为`script/run_test.bat`）即可运行单元测试（VSCode task: Run test）
+- Linux 下可以运行 Python3 脚本进行测试，执行`script/run_python_test.sh`脚本即可（与 Asan 不太兼容，故只支持 RELEASE 模式构建的）
 
 ## 性能分析
 - Vtune：使用 Vtune 工具进行性能分析（推荐）
@@ -137,6 +138,8 @@ DEBUG 模式用于调试。DEBUG 模式构建的话，容器元素必须支持`o
 	- #### 随机访问迭代器
 3. ### 单元测试模板
 4. ### 内存分配器
+5. ### Asset 宏
+6. ### Python3 调用接口
 
 # 参考资料
 1. 《数据结构》3rd-邓俊辉
@@ -153,5 +156,4 @@ DEBUG 模式用于调试。DEBUG 模式构建的话，容器元素必须支持`o
 - 实现树状数组（区间）
 - 实现 KD 树
 - 实现前缀树 Trie 类模板
-- 研究 Python 调用本库的方式
 - 研究 Lua 调用本库的方式

@@ -43,15 +43,18 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin/)
 
 # 版本号管理，如果项目版本号为 a.b.c，则 version = a.b.c，api_version = a.b
 # 动态库版本
-set(version 10.1.3)
+set(version 11.0.0)
 # API 版本
-set(api_version 10.1)
+set(api_version 11.0)
 
 # PROJECT_SOURCE_DIR 即项目根目录，即脚本中的 project_base_dir
 message(STATUS "build_type: " ${BUILD_TYPE})
 message(STATUS "source dir: " ${PROJECT_SOURCE_DIR})
 message(STATUS "binary dir: " ${PROJECT_BINARY_DIR})
 message(STATUS "output dir: " ${PROJECT_BINARY_DIR}/${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+
+# 添加头文件搜索目录
+INCLUDE_DIRECTORIES(/usr/include/python3.6m) # Python.h 所在目录
 
 # 添加子目录
 ADD_SUBDIRECTORY(src)
@@ -64,6 +67,3 @@ set(dist_dir ${PROJECT_SOURCE_DIR}/dist)
 
 # 安装当前工程中doc/目录下的所有内容到doc目录下
 INSTALL(DIRECTORY doc/  DESTINATION   ${dist_dir}/doc)
-
-# 安装 graphviz 输出的依赖关系图
-INSTALL(FILES ${PROJECT_BINARY_DIR}/dsa-test_dependencies.png DESTINATION ${dist_dir}/doc)
