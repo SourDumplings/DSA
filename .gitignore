@@ -3,3 +3,4 @@
 /dist/
 *.exe
 /build/
+/test/python/__pycache__

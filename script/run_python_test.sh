@@ -11,4 +11,4 @@ ulimit -c unlimited
 project_base_dir=$(cd $(dirname $0)/..;pwd)
 cd $project_base_dir/test/python
 
-python3 test_is_prime.py
+python3 main.py

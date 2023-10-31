@@ -5,7 +5,6 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.17)
 set(project_name DSA)
 project(${project_name})
 
-set(CMAKE_CXX_COMPILER "c++")
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
@@ -43,7 +42,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin/)
 
 # 版本号管理，如果项目版本号为 a.b.c，则 version = a.b.c，api_version = a.b
 # 动态库版本
-set(version 11.0.0)
+set(version 11.0.1)
 # API 版本
 set(api_version 11.0)
 
