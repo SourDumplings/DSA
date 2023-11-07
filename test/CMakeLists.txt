@@ -1,6 +1,11 @@
 # 声明编译要求cmake最低版本
 CMAKE_MINIMUM_REQUIRED(VERSION 3.17)
 
+if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+    message(FATAL_ERROR "This project doesn't support CMake build on Windows!")
+    # Windows specific code
+endif()
+
 # 添加源文件
 set(source test_hello_world.cpp)
 
@@ -11,15 +16,10 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src)
 # 添加一个可执行程序，名称和工程名称保持一致
 ADD_EXECUTABLE(dsa-test ${source})
 
-if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-    # 依赖静态库
-    TARGET_LINK_LIBRARIES(dsa-test dsa)
-elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    # 依赖静态库
-    # TARGET_LINK_LIBRARIES(dsa-test dsa python3)
-    # 依赖动态库
-    TARGET_LINK_LIBRARIES(dsa-test libdsa.so libpython3.so)
-endif()
+# 依赖静态库
+# TARGET_LINK_LIBRARIES(dsa-test dsa python3)
+# 依赖动态库
+TARGET_LINK_LIBRARIES(dsa-test libdsa.so libpython3.so)
 
 # 安装 graphviz 输出的依赖关系图
 INSTALL(FILES ${PROJECT_BINARY_DIR}/dsa-test_dependencies.png DESTINATION ${dist_dir}/doc)

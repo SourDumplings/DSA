@@ -12,29 +12,9 @@
             }
         },
         {
-            "label": "Build debug on Windows",
-            "type": "shell",
-            "command": "${workspaceFolder}/script/build_debug.bat",
-            "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
             "label": "Build release on Linux",
             "type": "shell",
             "command": "${workspaceFolder}/script/build_release.sh",
-            "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
-            "label": "Build release on Windows",
-            "type": "shell",
-            "command": "${workspaceFolder}/script/build_release.bat",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
