@@ -6,43 +6,13 @@
  * @Description:
  */
 
-#include "Allocator/Allocator.h"
-#include <complex>
-#include <iostream>
-#include <string>
-
-using namespace CZ;
-using namespace std;
-
-class Foo
-{
-    DECLARE_POOL_ALLOC();
-public:
-    long L;
-    string str;
-
-    Foo(long l) : L(l)
-    {
-    }
-};
+#include "test_allocator.h"
 
 IMPLEMENT_POOL_ALLOC(Foo);
-
-class Goo
-{
-    DECLARE_POOL_ALLOC();
-public:
-    complex<double> c;
-    string str;
-
-    Goo(const complex<double> &x) : c(x)
-    {
-    }
-};
-
 IMPLEMENT_POOL_ALLOC(Goo);
 
-int main(int argc, char const *argv[])
+
+bool test_allocator()
 {
     /*
         测试结果：
@@ -162,5 +132,5 @@ sizeof(Goo) = 24
     {
         delete pG[i];
     }
-    return 0;
+    return true;
 }

@@ -9,12 +9,14 @@
 测试字符串类模板
  */
 
+#include "test_czstring.h"
+
 #include "CZString/CZString.h"
 
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_czstring()
 {
     // 测试构造函数和赋值
     CZString s("hello");
@@ -98,5 +100,5 @@ int main(int argc, char const *argv[])
     // printf("s1 == abc123 ? %d\n", s1 == "abc123"); // s1 会转换为 const char *，故不相等
     // printf("s1 == abc123 ? %d\n", s1 == CZString("abc123"));
     // printf("s1 == abc123 ? %d\n", s1 == std::string("abc123")); // 编译不通过
-    return 0;
+    return true;
 }

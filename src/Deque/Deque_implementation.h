@@ -856,7 +856,11 @@ namespace CZ
 
         for (Iterator it = _begin; it != _end; ++it)
         {
-            it->~T();
+#ifdef _WIN32
+            (*it).~T();
+#elif __linux__
+            it->~T(); // windows 的 MSVC 下这个会 bug 导致无法通过编译
+#endif
         }
 
         for (Rank i = 0; i < _mapSize; ++i)

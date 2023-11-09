@@ -20,7 +20,7 @@ HashMap 类模板的测试
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_hashmap()
 {
     HashMap<int, int> d(10);
     d.print_info("d");
@@ -81,6 +81,6 @@ int main(int argc, char const *argv[])
     m6 = std::move(m3);
     m6.print_info("m6");
     m3.print_info("m3");
-    return 0;
+    return true;
 }
 

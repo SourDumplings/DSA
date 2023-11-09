@@ -9,6 +9,8 @@
 测试匹配算法
  */
 
+#include "test_match.h"
+
 #include <iostream>
 #include <cstdio>
 #include <cstring>
@@ -25,7 +27,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_match()
 {
     // // 测试括号匹配算法
     // const char en1[] = "dadad(d}a{da([d([ada])asda)dada)dadwda2121",
@@ -71,6 +73,6 @@ int main(int argc, char const *argv[])
     printf("pos2 is %u, res = %s\n", pos2, s.substr(pos2, p2.end() - p2.begin()).c_str());
     // printf("pos3 is %u, res = %s\n", pos3, CZString(cs).substr(pos3, 4).c_str());
     printf("pos3 is %u, res = %s\n", pos3, CZString(cs).substr(pos3, 6).c_str());
-    return 0;
+    return true;
 }
 

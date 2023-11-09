@@ -6,8 +6,10 @@
 */
 
 /*
-测试逆置算法
+测试乘方算法
  */
+
+#include "test_pow.h"
 
 #include <iostream>
 #include <cstdio>
@@ -16,7 +18,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_pow()
 {
     double A[] = {2, 2.5, 3, 1, 11, 10};
     long p[] = {1, -3, 5, 7, 10};
@@ -28,6 +30,6 @@ int main(int argc, char const *argv[])
             printf("Pow(%lf, %ld) = %lf\n", A[i], p[j], Pow(A[i], p[j]));
         }
     }
-    return 0;
+    return true;
 }
 

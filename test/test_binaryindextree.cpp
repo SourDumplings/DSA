@@ -9,6 +9,8 @@
 测试树状数组
  */
 
+#include "test_binaryindextree.h"
+
 #include <iostream>
 #include <cstdio>
 #include <string>
@@ -21,7 +23,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_binaryindextree()
 {
     BinaryIndexTree<int> bit(10);
     for (int32_t i = 0; i < 10; ++i)
@@ -40,6 +42,6 @@ int main(int argc, char const *argv[])
     printf("bit.sum(3, 6) = %d\n", bit.sum(3, 6));
     printf("bit.sum(7, 10) = %d\n", bit.sum(7, 10));
     printf("bit.sum(1, 9) = %d\n", bit.sum(1, 9));
-    return 0;
+    return true;
 }
 

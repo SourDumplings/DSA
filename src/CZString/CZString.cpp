@@ -24,6 +24,11 @@ namespace CZ
     CZString::CZString(const char *str_) : Vector<char>(const_cast<char*>(str_), const_cast<char*>(str_) + strlen(str_)) {}
     CZString::CZString(const std::string &str_) : CZString(str_.c_str()) {}
 
+    CZString::CZString(const char* begin, const char* end) : Vector<char>(begin, end) {}
+
+    template <typename It>
+    CZString::CZString(const It& begin, const It& end) : Vector<char>(begin, end) {}
+
     CZString::~CZString()
     {
     }
@@ -66,10 +71,7 @@ namespace CZ
     CZString CZString::substr(Rank pos, Rank l) const
     {
         ASSERT_DEBUG(pos + l <= length(), "wrong, the length of this string is %u", length());
-        char temp[l + 1];
-        strncpy(temp, &front() + pos, l);
-        temp[l] = '\0';
-        return CZString(temp);
+        return CZString(begin() + pos, begin() + pos + l + 1);
     }
 
     CZString CZString::substr(Rank pos) const

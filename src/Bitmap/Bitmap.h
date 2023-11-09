@@ -17,7 +17,7 @@
 
 namespace CZ
 {
-    class Bitmap : public AbstractBaseEntity
+    class DLL_EXPORT_IMPORT Bitmap : public AbstractBaseEntity
     {
     public:
         using Rank = uint32_t;

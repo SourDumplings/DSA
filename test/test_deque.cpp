@@ -6,13 +6,15 @@
  * @Description:
  */
 
+#include "test_deque.h"
+
 #include "Deque/Deque.h"
 #include "CZString/CZString.h"
 
 using namespace CZ;
 using namespace std;
 
-int main(int argc, char const *argv[])
+bool test_deque()
 {
     // 测试构造函数
     Deque<int> dq1(20);

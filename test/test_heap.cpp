@@ -8,6 +8,7 @@
 /*
 堆测试
  */
+#include "test_heap.h"
 
 #include <iostream>
 #include <cstdio>
@@ -18,7 +19,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_heap()
 {
     // 测试构造和建堆
     Vector<int> v({4, 2, 1, 5, 6, 6, 10});
@@ -59,5 +60,5 @@ int main(int argc, char const *argv[])
     std::cout << "h2: " << h2 << std::endl;
     h2.clear();
     std::cout << "h2: " << h2 << std::endl;
-    return 0;
+    return true;
 }

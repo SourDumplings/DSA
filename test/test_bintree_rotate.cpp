@@ -9,6 +9,8 @@
 测试二叉树的旋转和3+4重构
  */
 
+#include "test_bintree_rotate.h"
+
 #include <iostream>
 #include <cstdio>
 #include <string>
@@ -23,7 +25,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_bintree_rotate()
 {
     Vector<BinTreeNode<int>*> vn;
     vn.resize(12);
@@ -85,6 +87,6 @@ int main(int argc, char const *argv[])
     // b2.rotate_at(vn[2]);
     b2.rotate_at(vn[10]);
     b2.print_info("b2");
-    return 0;
+    return true;
 }
 

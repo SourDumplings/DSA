@@ -9,9 +9,11 @@
  *
  */
 
+#include "../Base/BaseDef.h"
+
 extern "C"
 {
-    bool Is_prime(int x, int method);
+    DLL_EXPORT_IMPORT bool Is_prime(int x, int method);
 
-    int Add(int x, int y);
+    DLL_EXPORT_IMPORT int Add(int x, int y);
 }

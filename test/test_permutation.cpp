@@ -13,11 +13,13 @@
  * 测试全排列算法
  * */
 
+#include "test_permutation.h"
+
 #include "Algorithms/Permutate.h"
 
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_permutation()
 {
     Vector<int> v({1, 2, 3, 4});
     Vector<Vector<int>> permutation = Permutate(v);
@@ -25,6 +27,6 @@ int main(int argc, char const *argv[])
     {
         list.print_info("list");
     }
-    return 0;
+    return true;
 }
 

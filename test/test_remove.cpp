@@ -9,6 +9,8 @@
 测试Remove算法
  */
 
+#include "test_remove.h"
+
 #include <iostream>
 #include <cstdio>
 #include <utility>
@@ -20,7 +22,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_remove()
 {
     Vector<CZString> vs({"adsasd", "abc", "ds","a", "aaa", "bb", "cc", "bab"});
     vs.print_info("vs");
@@ -39,6 +41,6 @@ int main(int argc, char const *argv[])
     v.print_info("v");
 
     printf("Test finish\n");
-    return 0;
+    return true;
 }
 

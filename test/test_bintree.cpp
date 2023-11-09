@@ -9,6 +9,8 @@
 二叉树的测试
  */
 
+#include "test_bintree.h"
+
 #include <iostream>
 #include <cstdio>
 #include <string>
@@ -25,7 +27,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_bintree()
 {
     // 二叉树的接口和动态操作
     BinTree<CZString> t1(nullptr), t2(new BinTreeNode<CZString>("hi"));
@@ -283,6 +285,6 @@ int main(int argc, char const *argv[])
     t1.print_info("t1"); */
 
 
-    return 0;
+    return true;
 }
 

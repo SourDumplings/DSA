@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="test_algorithms.cpp" />
+    <ClCompile Include="test_allocator.cpp" />
+    <ClCompile Include="test_asan.cpp" />
+    <ClCompile Include="test_assert.cpp" />
+    <ClCompile Include="test_avltree.cpp" />
+    <ClCompile Include="test_binaryindextree.cpp" />
+    <ClCompile Include="test_bintree.cpp" />
+    <ClCompile Include="test_bintree_rotate.cpp" />
+    <ClCompile Include="test_bitmap.cpp" />
+    <ClCompile Include="test_bplustree.cpp" />
+    <ClCompile Include="test_bst.cpp" />
+    <ClCompile Include="test_btree.cpp" />
+    <ClCompile Include="test_container_perf.cpp" />
+    <ClCompile Include="test_czstring.cpp" />
+    <ClCompile Include="test_deque.cpp" />
+    <ClCompile Include="test_expression.cpp" />
+    <ClCompile Include="test_flathashset.cpp" />
+    <ClCompile Include="test_graph.cpp" />
+    <ClCompile Include="test_hash.cpp" />
+    <ClCompile Include="test_hashmap.cpp" />
+    <ClCompile Include="test_hashset.cpp" />
+    <ClCompile Include="test_heap.cpp" />
+    <ClCompile Include="test_hello_world.cpp" />
+    <ClCompile Include="test_is_prime.cpp" />
+    <ClCompile Include="test_kvpair.cpp" />
+    <ClCompile Include="test_leftheap.cpp" />
+    <ClCompile Include="test_list.cpp" />
+    <ClCompile Include="test_match.cpp" />
+    <ClCompile Include="test_median.cpp" />
+    <ClCompile Include="test_permutation.cpp" />
+    <ClCompile Include="test_pow.cpp" />
+    <ClCompile Include="test_primetable.cpp" />
+    <ClCompile Include="test_queue.cpp" />
+    <ClCompile Include="test_redblacktree.cpp" />
+    <ClCompile Include="test_remove.cpp" />
+    <ClCompile Include="test_reverse.cpp" />
+    <ClCompile Include="test_segment_tree.cpp" />
+    <ClCompile Include="test_shuffle.cpp" />
+    <ClCompile Include="test_smart_pointer.cpp" />
+    <ClCompile Include="test_sort.cpp" />
+    <ClCompile Include="test_splaytree.cpp" />
+    <ClCompile Include="test_stack.cpp" />
+    <ClCompile Include="test_tree.cpp" />
+    <ClCompile Include="test_treemap.cpp" />
+    <ClCompile Include="test_treeset.cpp" />
+    <ClCompile Include="test_unionfindset.cpp" />
+    <ClCompile Include="test_vector.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="test_algorithms.h" />
+    <ClInclude Include="test_allocator.h" />
+    <ClInclude Include="test_asan.h" />
+    <ClInclude Include="test_assert.h" />
+    <ClInclude Include="test_avltree.h" />
+    <ClInclude Include="test_binaryindextree.h" />
+    <ClInclude Include="test_bintree.h" />
+    <ClInclude Include="test_bintree_rotate.h" />
+    <ClInclude Include="test_bitmap.h" />
+    <ClInclude Include="test_bplustree.h" />
+    <ClInclude Include="test_bst.h" />
+    <ClInclude Include="test_btree.h" />
+    <ClInclude Include="test_container_perf.h" />
+    <ClInclude Include="test_czstring.h" />
+    <ClInclude Include="test_deque.h" />
+    <ClInclude Include="test_expression.h" />
+    <ClInclude Include="test_flathashset.h" />
+    <ClInclude Include="test_graph.h" />
+    <ClInclude Include="test_hash.h" />
+    <ClInclude Include="test_hashmap.h" />
+    <ClInclude Include="test_hashset.h" />
+    <ClInclude Include="test_heap.h" />
+    <ClInclude Include="test_hello_world.h" />
+    <ClInclude Include="test_is_prime.h" />
+    <ClInclude Include="test_kvpair.h" />
+    <ClInclude Include="test_leftheap.h" />
+    <ClInclude Include="test_list.h" />
+    <ClInclude Include="test_match.h" />
+    <ClInclude Include="test_median.h" />
+    <ClInclude Include="test_permutation.h" />
+    <ClInclude Include="test_pow.h" />
+    <ClInclude Include="test_primetable.h" />
+    <ClInclude Include="test_queue.h" />
+    <ClInclude Include="test_redblacktree.h" />
+    <ClInclude Include="test_remove.h" />
+    <ClInclude Include="test_reverse.h" />
+    <ClInclude Include="test_segment_tree.h" />
+    <ClInclude Include="test_shuffle.h" />
+    <ClInclude Include="test_smart_pointer.h" />
+    <ClInclude Include="test_sort.h" />
+    <ClInclude Include="test_splaytree.h" />
+    <ClInclude Include="test_stack.h" />
+    <ClInclude Include="test_treemap.h" />
+    <ClInclude Include="test_treeset.h" />
+    <ClInclude Include="test_unionfindset.h" />
+    <ClInclude Include="test_vector.h" />
+    <ClInclude Include="test_tree.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{7aecbba1-f51e-43d1-b625-3424587e7ca4}</ProjectGuid>
+    <RootNamespace>test</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <EnableASAN>true</EnableASAN>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <EnableASAN>true</EnableASAN>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(SolutionDir)\src</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <OutDir>$(SolutionDir)\dist\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(SolutionDir)\src</IncludePath>
+    <OutDir>$(SolutionDir)\dist\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(SolutionDir)\src</IncludePath>
+    <OutDir>$(SolutionDir)\dist\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(SolutionDir)\src</IncludePath>
+    <OutDir>$(SolutionDir)\dist\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>DEBUG</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <DisableSpecificWarnings>4819</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)\dist\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>dsa.lib</AdditionalDependencies>
+      <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <DisableSpecificWarnings>4819</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)\dist\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>dsa.lib</AdditionalDependencies>
+      <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>DEBUG</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <DisableSpecificWarnings>4819</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)\dist\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>dsa.lib</AdditionalDependencies>
+      <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <DisableSpecificWarnings>4819</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)\dist\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>dsa.lib</AdditionalDependencies>
+      <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

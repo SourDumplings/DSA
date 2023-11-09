@@ -8,6 +8,7 @@
 /*
 测试堆栈类模板
  */
+#include "test_stack.h"
 
 #include <iostream>
 #include <cstdio>
@@ -19,7 +20,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_stack()
 {
     // Stack<string> Ss;
     // Ss.print_info("Ss");
@@ -52,6 +53,6 @@ int main(int argc, char const *argv[])
     std::cout << "Ss: " << Ss << std::endl;
     std::cout << "Ss.hash(): " << Ss.hash() << std::endl;
     std::cout << "Ss.c_str(): " << Ss.c_str() << std::endl;
-    return 0;
+    return true;
 }
 

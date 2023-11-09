@@ -13,6 +13,7 @@
 #define IS_PRIME_H
 
 #include <cstdint>
+#include "../Base/BaseDef.h"
 
 namespace CZ
 {
@@ -32,7 +33,7 @@ namespace CZ
         bool Is_prime_regex(uint32_t num);
     }
 
-    bool Is_prime(uint32_t num, PrimeAccessories::IsPrimeMethod method = PrimeAccessories::PRIME_TABLE);
+    DLL_EXPORT_IMPORT bool Is_prime(uint32_t num, PrimeAccessories::IsPrimeMethod method = PrimeAccessories::PRIME_TABLE);
 }
 
 #endif // IS_PRIME_H

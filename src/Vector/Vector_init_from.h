@@ -26,10 +26,9 @@ namespace CZ
         _capacity = 2 * _size;
         _elem = reinterpret_cast<T *>(malloc(_capacity * sizeof(T)));
 
-        Rank i = 0;
-        for (It it = begin; it != end; ++it, ++i)
+        for (Rank i = 0; i < _size; ++i)
         {
-            new(_elem + i) T(*it);
+            new(_elem + i) T(*(begin + i));
         }
     }
 }

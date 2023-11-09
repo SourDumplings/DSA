@@ -5,6 +5,7 @@
  * @Email: changzheng300@foxmail.com
  * @Description:
  */
+#include "test_container_perf.h"
 
 #include "Base/Assert.h"
 #include "Deque/Deque.h"
@@ -39,7 +40,7 @@ using StdList = std::list<T, std::allocator<T>>;
 template <typename T>
 using StdDeq = std::deque<T, std::allocator<T>>;
 
-int main(int argc, char const *argv[])
+bool test_container_perf()
 {
     // 测试 set
     ContainerTester<int, FlatHashSet> cst1;
@@ -104,5 +105,5 @@ int main(int argc, char const *argv[])
     } */
 
 
-    return 0;
+    return true;
 }

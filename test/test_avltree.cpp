@@ -9,6 +9,8 @@
 对于AVL树的测试
  */
 
+#include "test_avltree.h"
+
 #include <iostream>
 #include <cstdio>
 #include <string>
@@ -24,7 +26,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_avltree()
 {
     // 插入测试
 
@@ -137,5 +139,5 @@ int main(int argc, char const *argv[])
         1         9
      */
 
-    return 0;
+    return true;
 }

@@ -9,6 +9,8 @@
 测试位图
  */
 
+#include "test_bitmap.h"
+
 #include <iostream>
 #include <cstdio>
 
@@ -17,7 +19,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_bitmap()
 {
     // 在O(n)时间内剔除n个ASCII码字符集的重复字符
     const int ASCIINUM = 128; // ASCII码字符个数
@@ -46,6 +48,6 @@ int main(int argc, char const *argv[])
     cout << "b: " << b << endl;
     cout << "b.hash(): " << b.hash() << endl;
 
-    return 0;
+    return true;
 }
 

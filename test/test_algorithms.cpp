@@ -9,6 +9,8 @@
 用于测试
  */
 
+#include "test_algorithms.h"
+
 #include <iostream>
 #include <cstdio>
 #include <string>
@@ -28,7 +30,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_algorithms()
 {
     // 测试查找函数模板
     // Vector<int> v1({1, 5, 7, 88, -3});
@@ -168,5 +170,5 @@ int main(int argc, char const *argv[])
     cout << "top5: " << TopK<decltype(v.begin()), int, std::greater<int>>(v.begin(), v.end(), 5, std::greater<int>()) << endl;
     cout << "top3: " << TopK<decltype(v.begin()), int, std::greater<int>>(v.begin(), v.end(), 3, std::greater<int>(), HEAP_SORT_METHOD) << endl;
     cout << "top5: " << TopK<decltype(v.begin()), int, std::greater<int>>(v.begin(), v.end(), 5, std::greater<int>(), HEAP_SORT_METHOD) << endl;
-    return 0;
+    return true;
 }

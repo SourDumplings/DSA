@@ -6,6 +6,8 @@
  * @Description: 测试哈希算法
  */
 
+#include "test_hash.h"
+
 #include "Algorithms/Hash.h"
 #include <cstdio>
 #include "Vector/Vector.h"
@@ -28,7 +30,7 @@ public:
     HashRank hash() const { return 0; }
 };
 
-int main(int argc, char const *argv[])
+bool test_hash()
 {
     bool b1 = true, b2 = false;
     printf("Hash<bool>()(b1) = %" PRId64 ", Hash<bool>()(b2) = %" PRId64 "\n", Hash<bool>()(b1), Hash<bool>()(b2));
@@ -66,7 +68,7 @@ int main(int argc, char const *argv[])
     cout << Hash<CWithNoHash>()(cNo) << endl;
     cout << Hash<CWithHash>()(cH) << endl;
 
-    return 0;
+    return true;
 }
 
 

@@ -9,6 +9,8 @@
 测试算术表达式类
  */
 
+#include "test_expression.h"
+
 #include <iostream>
 #include <cstdio>
 #include "Expression/Expression.h"
@@ -16,7 +18,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_expression()
 {
     // 测试中缀表达式求值
     Expression e1("1+2*3"), e2("(3-5)*2"), e3("(4!)*(3^(1+2)) * 2.0 ^ 5");
@@ -50,5 +52,5 @@ int main(int argc, char const *argv[])
     // 测试波兰式转换
     printf("e3's PN: %s\n", e3.to_PN().c_str());
 
-    return 0;
+    return true;
 }

@@ -20,7 +20,7 @@
 using namespace std;
 using CZ::List;
 
-int main(int argc, char const *argv[])
+bool test_list()
 {
     // 测试构造函数
     int a[]{1, 3, 6, 7, 8, 10, 100};
@@ -239,5 +239,5 @@ int main(int argc, char const *argv[])
     // printf("time used for 1: %ld\n", end1 - begin1);
     // printf("time used for 2: %ld\n", end2 - begin2);
     // printf("time used for 3: %ld\n", end3 - begin3);
-    return 0;
+    return true;
 }

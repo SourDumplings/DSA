@@ -47,14 +47,17 @@ namespace CZ
         {
             return *_p;
         }
+
         virtual const T &operator*() const
         {
             return *_p;
         }
+
         virtual T *operator->()
         {
             return _p;
         }
+
         virtual const T *operator->() const
         {
             return _p;
@@ -65,6 +68,7 @@ namespace CZ
             ++_p;
             return *this;
         }
+
         virtual SeqIterator<T> operator++(int)
         {
             SeqIterator<T> temp = *this;

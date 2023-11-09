@@ -6,6 +6,8 @@
  * @Description:
  */
 
+#include "test_shuffle.h"
+
 #include "Algorithms/Shuffle.h"
 #include "CZString/CZString.h"
 #include "Vector/Vector.h"
@@ -13,7 +15,7 @@
 using namespace CZ;
 using namespace std;
 
-int main(int argc, char const *argv[])
+bool test_shuffle()
 {
     Vector<int> v;
     for (size_t i = 0; i < 100; i++)
@@ -29,5 +31,5 @@ int main(int argc, char const *argv[])
     Shuffle(vs.begin(), vs.end());
     vs.print_info("vs");
 
-    return 0;
+    return true;
 }

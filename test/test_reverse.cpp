@@ -8,6 +8,7 @@
 /*
 测试逆置算法
  */
+#include "test_reverse.h"
 
 #include <iostream>
 #include <cstdio>
@@ -24,7 +25,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_reverse()
 {
     Vector<CZString> vs1({"ashjdk", "dasd", "adad", "sadasd"}),
         vs2({"askdl", "dasdasda", "adsdasd", "SAsS", "asdasd", "qweqwe", "sidhui"});
@@ -54,6 +55,6 @@ int main(int argc, char const *argv[])
 
 
 
-    return 0;
+    return true;
 }
 

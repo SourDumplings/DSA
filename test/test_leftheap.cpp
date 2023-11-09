@@ -8,6 +8,7 @@
 /*
 左式堆的测试
  */
+#include "test_leftheap.h"
 
 #include <iostream>
 #include <cstdio>
@@ -17,7 +18,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_leftheap()
 {
     LeftHeap<int> lH1({6, 13, 12, 17, 11}), lH2({15, 10, 8});
     lH1.print_info("lH1");
@@ -36,5 +37,5 @@ int main(int argc, char const *argv[])
     printf("lHm.top() = %d\n", lHm.top());
     lHm.pop();
     lHm.print_info("lHm");
-    return 0;
+    return true;
 }

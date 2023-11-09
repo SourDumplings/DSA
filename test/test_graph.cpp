@@ -9,6 +9,8 @@
 测试图
  */
 
+#include "test_graph.h"
+
 #include <iostream>
 #include <cstdio>
 #include <string>
@@ -22,7 +24,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_graph()
 {
     // // 测试构造函数
     // Graph<int> g1, g2(false, ADJACENCY_MATRIX, 5);
@@ -257,6 +259,6 @@ int main(int argc, char const *argv[])
     // // G5.add_edge(7, 3);
     // // G5.top_sort(res);
     // res.print_info("res");
-    return 0;
+    return true;
 }
 

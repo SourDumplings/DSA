@@ -50,7 +50,7 @@ Vector<Vector<T>> Permutate(Vector<T> elems)
     Vector <Vector<T>> res;
     Vector <T> thisList;
     typename Vector<T>::Rank l = elems.size();
-    bool visited[l];
+    bool *visited = new bool[l];
     for (typename Vector<T>::Rank j = 0; j < l; ++j)
     {
         visited[j] = false;
@@ -60,6 +60,7 @@ Vector<Vector<T>> Permutate(Vector<T> elems)
     {
         PermutateMethod::backtrack(elems, i, visited, thisList, res);
     }
+    delete[] visited;
 
     return std::move(res);
 }

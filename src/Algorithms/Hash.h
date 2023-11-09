@@ -9,6 +9,7 @@
 #ifndef HASH_H
 #define HASH_H
 
+#include "../Base/BaseDef.h"
 #include <cstddef>
 #include <cstdint>
 #include <string>
@@ -64,189 +65,189 @@ namespace CZ
     };
 
     template <>
-    class Hash<const bool>
+    class DLL_EXPORT_IMPORT Hash<const bool>
     {
     public:
         HashRank operator()(const bool &value) const;
     };
 
     template <>
-    class Hash<const char>
+    class DLL_EXPORT_IMPORT Hash<const char>
     {
     public:
-        HashRank operator()(const char &value) const;
+        HashRank operator()(const char& value) const;
     };
 
     template <>
-    class Hash<const int8_t>
+    class DLL_EXPORT_IMPORT Hash<const int8_t>
     {
     public:
-        HashRank operator()(const int8_t &value) const;
+        HashRank operator()(const int8_t& value) const;
     };
 
     template <>
-    class Hash<const uint8_t>
+    class DLL_EXPORT_IMPORT Hash<const uint8_t>
     {
     public:
-        HashRank operator()(const uint8_t &value) const;
+        HashRank operator()(const uint8_t& value) const;
     };
 
     template <>
-    class Hash<const int16_t>
+    class DLL_EXPORT_IMPORT Hash<const int16_t>
     {
     public:
-        HashRank operator()(const int16_t &value) const;
+        HashRank operator()(const int16_t& value) const;
     };
 
     template <>
-    class Hash<const uint16_t>
+    class DLL_EXPORT_IMPORT Hash<const uint16_t>
     {
     public:
-        HashRank operator()(const uint16_t &value) const;
+        HashRank operator()(const uint16_t& value) const;
     };
 
     template <>
-    class Hash<const int32_t>
+    class DLL_EXPORT_IMPORT Hash<const int32_t>
     {
     public:
-        HashRank operator()(const int32_t &value) const;
+        HashRank operator()(const int32_t& value) const;
     };
 
     template <>
-    class Hash<const uint32_t>
+    class DLL_EXPORT_IMPORT Hash<const uint32_t>
     {
     public:
-        HashRank operator()(const uint32_t &value) const;
+        HashRank operator()(const uint32_t& value) const;
     };
 
     template <>
-    class Hash<const int64_t>
+    class DLL_EXPORT_IMPORT Hash<const int64_t>
     {
     public:
-        HashRank operator()(const int64_t &value) const;
+        HashRank operator()(const int64_t& value) const;
     };
 
     template <>
-    class Hash<const uint64_t>
+    class DLL_EXPORT_IMPORT Hash<const uint64_t>
     {
     public:
-        HashRank operator()(const uint64_t &value) const;
+        HashRank operator()(const uint64_t& value) const;
     };
 
     template <>
-    class Hash<const float>
+    class DLL_EXPORT_IMPORT Hash<const float>
     {
     public:
-        HashRank operator()(const float &value) const;
+        HashRank operator()(const float& value) const;
     };
 
     template <>
-    class Hash<const double>
+    class DLL_EXPORT_IMPORT Hash<const double>
     {
     public:
-        HashRank operator()(const double &value) const;
+        HashRank operator()(const double& value) const;
     };
 
     template <>
-    class Hash<const std::string>
+    class DLL_EXPORT_IMPORT Hash<const std::string>
     {
     public:
-        HashRank operator()(const std::string &value) const;
+        HashRank operator()(const std::string& value) const;
     };
 
     template <>
-    class Hash<bool>
+    class DLL_EXPORT_IMPORT Hash<bool>
     {
     public:
-        HashRank operator()(const bool &value) const;
+        HashRank operator()(const bool& value) const;
     };
 
     template <>
-    class Hash<std::nullptr_t>
+    class DLL_EXPORT_IMPORT Hash<std::nullptr_t>
     {
     public:
-        HashRank operator()(const std::nullptr_t &value) const;
+        HashRank operator()(const std::nullptr_t& value) const;
     };
 
     template <>
-    class Hash<char>
+    class DLL_EXPORT_IMPORT Hash<char>
     {
     public:
-        HashRank operator()(const char &value) const;
+        HashRank operator()(const char& value) const;
     };
 
     template <>
-    class Hash<int8_t>
+    class DLL_EXPORT_IMPORT Hash<int8_t>
     {
     public:
-        HashRank operator()(const int8_t &value) const;
+        HashRank operator()(const int8_t& value) const;
     };
 
     template <>
-    class Hash<uint8_t>
+    class DLL_EXPORT_IMPORT Hash<uint8_t>
     {
     public:
-        HashRank operator()(const uint8_t &value) const;
+        HashRank operator()(const uint8_t& value) const;
     };
 
     template <>
-    class Hash<int16_t>
+    class DLL_EXPORT_IMPORT Hash<int16_t>
     {
     public:
-        HashRank operator()(const int16_t &value) const;
+        HashRank operator()(const int16_t& value) const;
     };
 
     template <>
-    class Hash<uint16_t>
+    class DLL_EXPORT_IMPORT Hash<uint16_t>
     {
     public:
-        HashRank operator()(const uint16_t &value) const;
+        HashRank operator()(const uint16_t& value) const;
     };
 
     template <>
-    class Hash<int32_t>
+    class DLL_EXPORT_IMPORT Hash<int32_t>
     {
     public:
-        HashRank operator()(const int32_t &value) const;
+        HashRank operator()(const int32_t& value) const;
     };
 
     template <>
-    class Hash<uint32_t>
+    class DLL_EXPORT_IMPORT Hash<uint32_t>
     {
     public:
-        HashRank operator()(const uint32_t &value) const;
+        HashRank operator()(const uint32_t& value) const;
     };
 
     template <>
-    class Hash<int64_t>
+    class DLL_EXPORT_IMPORT Hash<int64_t>
     {
     public:
-        HashRank operator()(const int64_t &value) const;
+        HashRank operator()(const int64_t& value) const;
     };
 
     template <>
-    class Hash<uint64_t>
+    class DLL_EXPORT_IMPORT Hash<uint64_t>
     {
     public:
-        HashRank operator()(const uint64_t &value) const;
+        HashRank operator()(const uint64_t& value) const;
     };
 
     template <>
-    class Hash<float>
+    class DLL_EXPORT_IMPORT Hash<float>
     {
     public:
-        HashRank operator()(const float &value) const;
+        HashRank operator()(const float& value) const;
     };
 
     template <>
-    class Hash<double>
+    class DLL_EXPORT_IMPORT Hash<double>
     {
     public:
-        HashRank operator()(const double &value) const;
+        HashRank operator()(const double& value) const;
     };
 
     template <>
-    class Hash<std::string>
+    class DLL_EXPORT_IMPORT Hash<std::string>
     {
     public:
         HashRank operator()(const std::string &value) const;

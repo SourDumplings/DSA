@@ -9,6 +9,8 @@
 伸展树的测试
  */
 
+#include "test_splaytree.h"
+
 #include <iostream>
 #include <cstdio>
 #include <string>
@@ -23,7 +25,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_splaytree()
 {
     Vector<int> v({1, 2, 3, 4, 5, 6, 7});
     // 测试查找算法和伸展树的伸展
@@ -82,6 +84,6 @@ int main(int argc, char const *argv[])
     cout << "sT3: " << sT3 << endl;
     cout << "sT3.hash(): " << sT3.hash() << endl;
     sT3.print_info("sT3");
-    return 0;
+    return true;
 }
 

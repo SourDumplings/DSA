@@ -9,6 +9,8 @@
 测试智能指针
  */
 
+#include "test_smart_pointer.h"
+
 #include <cstdio>
 #include <string>
 #include "Smart_pointer/Shared_ptr.h"
@@ -16,7 +18,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_smart_pointer()
 {
     // Shared_ptr<string> ps1(new string("string1")), ps2(new string("string2"));
     // printf("ps1.use_count() = %u\n", ps1.use_count());
@@ -96,5 +98,5 @@ int main(int argc, char const *argv[])
     cout << "pBd2: " << pBd2 << endl;
     cout << "pBd2.hash(): " << pBd2.hash() << endl;
 
-    return 0;
+    return true;
 }

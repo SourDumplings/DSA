@@ -22,11 +22,11 @@ namespace CZ
     class CZString;
 
     // 操作符函数的声明
-    const CZString operator+(const CZString &lhs, const char rhs);
-    const CZString operator+(const CZString &lhs, const CZString &rhs);
-    std::istream &operator>>(std::istream &is, CZString &rhs);
+    DLL_EXPORT_IMPORT const CZString operator+(const CZString &lhs, const char rhs);
+    DLL_EXPORT_IMPORT const CZString operator+(const CZString &lhs, const CZString &rhs);
+    DLL_EXPORT_IMPORT std::istream &operator>>(std::istream &is, CZString &rhs);
 
-    class CZString : public Vector<char>
+    class DLL_EXPORT_IMPORT CZString : public Vector<char>
     {
     public:
         using Rank = typename Vector<char>::Rank;
@@ -35,6 +35,11 @@ namespace CZ
         CZString(const std::string &str_);
         explicit CZString(Rank n, char c); // 初始化一个字符 c 重复 n 次的字符串
         ~CZString() override;
+
+        CZString(const char* begin, const char* end);
+
+        template <typename It>
+        CZString(const It& begin, const It& end);
 
         CZString(const CZString &s);
         CZString(CZString &&s) noexcept;

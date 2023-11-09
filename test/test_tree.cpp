@@ -9,6 +9,8 @@
 树类模板的测试
  */
 
+#include "test_tree.h"
+
 #include <iostream>
 #include <cstdio>
 
@@ -17,7 +19,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_tree()
 {
     Tree<CZString> T(new TreeNode<CZString>("hello"));
     auto root = T.root();
@@ -244,5 +246,5 @@ int main(int argc, char const *argv[])
 
     // 测试树的相等与不等
 
-    return 0;
+    return true;
 }

@@ -54,7 +54,7 @@ void test_correctiness()
     cout << "Correctiness check succ!" << endl;
 }
 
-int main(int argc, char const *argv[])
+bool test_treeset()
 {
     TreeSet<int> s1({ 1, 1, 3, 4, 5, 2, 2 });
     s1.print_info("s1");
@@ -137,5 +137,5 @@ int main(int argc, char const *argv[])
 
     // 正确性测试
     test_correctiness();
-    return 0;
+    return true;
 }

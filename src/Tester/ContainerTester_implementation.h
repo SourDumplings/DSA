@@ -12,8 +12,13 @@
 #include "ContainerTester.h"
 
 #include <cstdlib>
-#include <sys/time.h>
 #include <iostream>
+
+#ifdef _WIN32
+#include "../Base/WinTime.h"
+#elif __linux__
+#include <sys/time.h>
+#endif
 
 namespace CZ
 {

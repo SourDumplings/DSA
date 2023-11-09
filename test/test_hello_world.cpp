@@ -9,12 +9,14 @@
  *
  */
 
+#include "test_hello_world.h"
+
 #include "CZString/CZString.h"
 #include <iostream>
 
-int main(int argc, char const *argv[])
+bool test_hello_world()
 {
     CZ::CZString hello("Hello World!");
     std::cout << "hello: " << hello << std::endl;
-    return 0;
+    return true;
 }

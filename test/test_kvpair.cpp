@@ -6,6 +6,8 @@
  * @Description: 
  */
 
+#include "test_kvpair.h"
+
 #include "Map/KVPair.h"
 #include "CZString/CZString.h"
 #include <cstdio>
@@ -56,7 +58,7 @@ class VD: public V
 
 };
 
-int main(int argc, char const *argv[])
+bool test_kvpair()
 {
     KVPair<KD, double> p1;
     p1.key().k = 1;
@@ -83,5 +85,5 @@ int main(int argc, char const *argv[])
     printf("p4.key().k = %d, p4.value().v = %s\n",
            p4.key().k,
            p4.value().v.c_str());
-    return 0;
+    return true;
 }

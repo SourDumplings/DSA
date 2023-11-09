@@ -9,6 +9,8 @@
 红黑树的测试
  */
 
+#include "test_redblacktree.h"
+
 #include <iostream>
 #include <cstdio>
 
@@ -17,7 +19,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_redblacktree()
 {
     RedBlackTree<int> rt1;
     // 测试插入操作
@@ -273,5 +275,5 @@ int main(int argc, char const *argv[])
         }
         // rt.print_info("rt");
     }
-    return 0;
+    return true;
 }

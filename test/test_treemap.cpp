@@ -5,6 +5,7 @@
  * @Email: changzheng300@foxmail.com
  * @Description: TreeMap 类模板的测试
  */
+#include "test_treemap.h"
 
 #include "Map/TreeMap.h"
 #include "CZString/CZString.h"
@@ -14,7 +15,7 @@
 using namespace CZ;
 using namespace std;
 
-int main(int argc, char const *argv[])
+bool test_treemap()
 {
     TreeMap<CZString, CZString> m1;
     m1.print_info("m1");
@@ -62,6 +63,6 @@ int main(int argc, char const *argv[])
     m7.print_info("m7");
     m4.print_info("m4");
     m6.print_info("m6");
-    return 0;
+    return true;
 }
 

@@ -5,7 +5,7 @@
  * @Email: changzheng300@foxmail.com
  * @Description:
  */
-
+#include "test_hashset.h"
 
 #include "Set/HashSet.h"
 #include <iostream>
@@ -17,7 +17,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_hashset()
 {
     HashSet<string> s0({ "Hello", "World", "World", "Hey", "CZ", "Fuc", "ZTT" });
     s0.print_info("s0");

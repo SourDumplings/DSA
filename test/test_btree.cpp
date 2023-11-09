@@ -9,6 +9,8 @@
 B树的测试
  */
 
+#include "test_btree.h"
+
 #include <iostream>
 #include <cstdio>
 #include <string>
@@ -22,7 +24,7 @@ B树的测试
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_btree()
 {
     // 测试插入操作
     // BTree<int> b;
@@ -56,5 +58,5 @@ int main(int argc, char const *argv[])
     b.clear();
     cout<< "b: " << b << endl;
     cout << "b.hash(): " << b.hash() << endl;
-    return 0;
+    return true;
 }

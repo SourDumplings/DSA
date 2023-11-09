@@ -5,6 +5,7 @@
  * @Email: changzheng300@foxmail.com
  * @Description: B+树的测试
  */
+#include "test_bplustree.h"
 
 #include <cstdio>
 #include <iostream>
@@ -17,7 +18,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_bplustree()
 {
     // 0.测试构造和打印信息
     const int l = 23;
@@ -123,5 +124,5 @@ int main(int argc, char const *argv[])
     cout << "bp1: " << bp1 << endl;
     cout << "bp1.hash(): " << bp1.hash() << endl;
     bp1.print_info("bp1");
-    return 0;
+    return true;
 }

@@ -9,6 +9,8 @@
 测试素数表
  */
 
+#include "test_primetable.h"
+
 #include <iostream>
 #include <cstdio>
 #include "PrimeTable/PrimeTable.h"
@@ -16,7 +18,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_primetatble()
 {
     PrimeTable &p = PrimeTable::get_instance();
     p.print_info("p");
@@ -55,5 +57,5 @@ int main(int argc, char const *argv[])
     cout << p.get_prime(7000) << endl;
 
     p.print_info("p");
-    return 0;
+    return true;
 }

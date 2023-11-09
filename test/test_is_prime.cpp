@@ -8,6 +8,7 @@
  * @copyright Copyright (c) 2023 SourDumplings
  *
  */
+#include "test_is_prime.h"
 
 #include "Algorithms/Is_prime.h"
 #include "Base/Assert.h"
@@ -15,7 +16,7 @@
 using namespace std;
 using namespace CZ;
 
-void test_is_prime()
+void do_test_is_prime()
 {
     printf("Correctiness check test!\n");
     for (uint32_t i = 0; i < 10000; i++)
@@ -47,8 +48,8 @@ void test_is_prime()
     printf("Correctiness check succ!\n");
 }
 
-int main(int argc, char const *argv[])
+bool test_is_prime()
 {
-    test_is_prime();
-    return 0;
+    do_test_is_prime();
+    return true;
 }

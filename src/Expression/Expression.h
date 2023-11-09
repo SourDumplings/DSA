@@ -23,7 +23,7 @@ namespace CZ
 {
     static const uint32_t OPERTAOR_NUM = 9;
 
-    class Expression : public AbstractBaseEntity
+    class DLL_EXPORT_IMPORT Expression : public AbstractBaseEntity
     {
     public:
         using ValueType = double;

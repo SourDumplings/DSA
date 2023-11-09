@@ -22,7 +22,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_bst()
 {
     // 插入测试
     BST<int> bst1;
@@ -76,5 +76,5 @@ int main(int argc, char const *argv[])
     cout << "bst1: " << bst1 << endl;
     cout << "bst1.hash(): " << bst1.hash() << endl;
 
-    return 0;
+    return true;
 }

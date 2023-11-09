@@ -19,7 +19,7 @@
 
 namespace CZ
 {
-    class PrimeTable: public AbstractBaseContainer<uint32_t>
+    class DLL_EXPORT_IMPORT PrimeTable: public AbstractBaseContainer<uint32_t>
     {
     public:
         using Rank = typename Vector<bool>::Rank;

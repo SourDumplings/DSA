@@ -10,7 +10,12 @@
 #include "Algorithms/Stable_sort.h"
 #include <algorithm>
 #include <cstdlib>
+
+#ifdef _WIN32
+#include "Base/WinTime.h"
+#elif __linux__
 #include <sys/time.h>
+#endif
 
 using namespace CZ;
 using namespace std;
@@ -18,7 +23,7 @@ using namespace std;
 long test_sort_prof(const Vector<int> &v, typename SortAccessories::UnStableSortMethod sortMethod, int version)
 {
     typename Vector<int>::Rank n = v.size();
-    int tempV[n];
+    int *tempV = new int[n];
     for (uint32_t i = 0; i < n; i++)
     {
         tempV[i] = v[i];
@@ -33,13 +38,14 @@ long test_sort_prof(const Vector<int> &v, typename SortAccessories::UnStableSort
 
     gettimeofday(&tv, NULL);
     long stop = tv.tv_sec * 1000000 + tv.tv_usec;
+    delete[] tempV;
     return stop - start;
 }
 
 long test_sort_prof(const Vector<int> &v, typename SortAccessories::StableSortMethod sortMethod, int version)
 {
     typename Vector<int>::Rank n = v.size();
-    int tempV[n];
+    int *tempV = new int[n];
     for (uint32_t i = 0; i < n; i++)
     {
         tempV[i] = v[i];
@@ -54,13 +60,14 @@ long test_sort_prof(const Vector<int> &v, typename SortAccessories::StableSortMe
 
     gettimeofday(&tv, NULL);
     long stop = tv.tv_sec * 1000000 + tv.tv_usec;
-    return stop - start;
+    
+return stop - start;
 }
 
 long test_sort_prof(const Vector<int> &v)
 {
     typename Vector<int>::Rank n = v.size();
-    int tempV[n];
+    int *tempV = new int[n];
     for (uint32_t i = 0; i < n; i++)
     {
         tempV[i] = v[i];
@@ -75,7 +82,8 @@ long test_sort_prof(const Vector<int> &v)
 
     gettimeofday(&tv, NULL);
     long stop = tv.tv_sec * 1000000 + tv.tv_usec;
-    return stop - start;
+    
+return stop - start;
 }
 
 void test_perf()
@@ -290,7 +298,7 @@ STL sort cost: 9685 micro seconds this round.
  */
 }
 
-int main(int argc, char const *argv[])
+bool test_sort()
 {
     // 测试排序算法
     // 基本逻辑测试
@@ -343,5 +351,5 @@ int main(int argc, char const *argv[])
 
     // 性能测试
     test_perf();
-    return 0;
+    return true;
 }

@@ -9,13 +9,20 @@
 测试向量类模板
  */
 
+#include "test_vector.h"
+
 #include <iostream>
 #include <cstdlib>
-#include <sys/time.h>
 #include <string>
 #include <utility>
 #include <vector>
 #include "Vector/Vector.h"
+
+#ifdef _WIN32
+#include "Base/WinTime.h"
+#elif __linux__
+#include <sys/time.h>
+#endif
 
 using namespace CZ;
 using namespace std;
@@ -41,7 +48,7 @@ public:
     v.print_info("v");
 } */
 
-int main(int argc, char const *argv[])
+bool test_vector()
 {
     // // 测试构造函数和数据访问接口
     // int a[10] = { 1, 2, 4, 5 };
@@ -231,5 +238,5 @@ int main(int argc, char const *argv[])
 
     // test_normal_class_elem();
 
-    return 0;
+    return true;
 }

@@ -8,6 +8,7 @@
 /*
 并查集类模板的测试
  */
+#include "test_unionfindset.h"
 
 #include <string>
 #include <iostream>
@@ -18,7 +19,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_unionfindset()
 {
     using Node = UnionFindSet<string>::UnionFindSetNode;
 
@@ -96,5 +97,5 @@ int main(int argc, char const *argv[])
     us1.clear();
     us1.print_info("us1");
 
-    return 0;
+    return true;
 }

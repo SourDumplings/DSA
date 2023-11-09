@@ -9,6 +9,8 @@
 测试中位数寻找算法
  */
 
+#include "test_median.h"
+
 #include <iostream>
 #include <cstdio>
 #include "Vector/Vector.h"
@@ -19,7 +21,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_median()
 {
     Vector<int> v1({1, 3, 5, 6, 7}), v2({3, 4, 5, 5, 8});
     // Vector<int> v1({1, 3, 6, 7}), v2({3, 4, 5, 8});
@@ -48,6 +50,6 @@ int main(int argc, char const *argv[])
     Sort(vsm.begin(), vsm.end(), [] (const CZString &s1, const CZString &s2)
             { return s1.length() < s2.length(); });
     vsm.print_info("vsm");
-    return 0;
+    return true;
 }
 

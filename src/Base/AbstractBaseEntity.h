@@ -9,6 +9,7 @@
 #ifndef ABSTRACT_BASE_ENTITY_H
 #define ABSTRACT_BASE_ENTITY_H
 
+#include "BaseDef.h"
 #include "../Algorithms/Hash.h"
 
 #include <iostream>
@@ -16,7 +17,7 @@
 
 namespace CZ
 {
-    class AbstractBaseEntity
+    class DLL_EXPORT_IMPORT AbstractBaseEntity
     {
     public:
         AbstractBaseEntity();
@@ -38,9 +39,9 @@ namespace CZ
         mutable char *_pStr; // 存储字符串信息的指针
     };
 
-    std::ostream &operator<<(std::ostream &os, const AbstractBaseEntity &rhs);
-    bool operator==(const AbstractBaseEntity &lhs, const AbstractBaseEntity &rhs);
-    bool operator!=(const AbstractBaseEntity &lhs, const AbstractBaseEntity &rhs);
+    DLL_EXPORT_IMPORT std::ostream &operator<<(std::ostream &os, const AbstractBaseEntity &rhs);
+    DLL_EXPORT_IMPORT bool operator==(const AbstractBaseEntity &lhs, const AbstractBaseEntity &rhs);
+    DLL_EXPORT_IMPORT bool operator!=(const AbstractBaseEntity &lhs, const AbstractBaseEntity &rhs);
 }
 
 #endif

@@ -9,20 +9,31 @@
 # 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：12.0.0，与 CMakeLists.txt 同步
+版本号：12.1.0，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
 
-我自己实现的各种数据结构和算法的模板，采用 C++（C++11）语言实现，统一在 CZ 命名空间中
+我自己实现的各种数据结构和算法的模板，采用 C++ 语言实现，统一在 CZ 命名空间中，支持跨平台
 
 # 使用说明
 ## 环境要求
-项目在编译器`gcc version 8.3.1 20190311 (Red Hat 8.3.1-3) (GCC) `及`gcc version 8.5.0 (x86_64-posix-seh-rev0, Built by MinGW-W64 project)`下测试通过。
+### 通用
+1. Asan（DEBUG 模式需要）
+2. 容器元素必须支持`operator<<`（DEBUG 模式需要）
 
-调试推荐：GNU gdb (GDB) 10.2
+### Linux
+1. C++ 语言标准：C++11
+2. 编译器：gcc version 8.3.1 20190311 (Red Hat 8.3.1-3) (GCC) 
+3. 调试器：推荐 GNU gdb (GDB) 10.2
+4. CMake：3.17.5
+5. Graphviz（DEBUG 模式需要）
 
-## 开发和构建（以 Linux 平台为例，Windows 类似）
+### Windows
+1. C++ 语言标准：C++17
+2. 编译器：Visual Studio 2022 (v143)
+
+## 构建步骤（以 Linux 平台为例，Windows 用 Visual Studio 2022 Build 即可）
 - 按照 C++ 开发的一般规范，声明以及模板卸载头文件即 .h 文件中，实现代码写在 .cpp 源文件中
 - 增加源文件需要在`src/CMakeLists.txt`文件中的“添加库源文件”中添加
 - 如果增加了头文件目录，需要在`src/CMakeLists.txt`文件中的“安装头文件”中添加
@@ -31,16 +42,9 @@
 - 构建好的头文件、库文件和文档都在目标目录`dist`目录下
 - 执行`script/clean.sh`可以对项目进行 clean（VSCode task: Clean）
 
-## DEBUG 模式构建环境需求
-DEBUG 模式用于调试。DEBUG 模式构建的话，容器元素必须支持`operator<<`。
-### Linux
-1. Asan：下载链接：http://mirror.centos.org/centos/7/sclo/x86_64/rh/Packages/d/devtoolset-8-libasan-devel-8.3.1-3.el7.x86_64.rpm
-2. Graphviz
-
 ## 单元测试
 - 在`test`目录下编写单元测试代码，命名规范为：`test_xxx.cpp`
-- 写好单元测试源文件后，如果要进行测试可以在`test/CMakeLists.txt`文件中的“添加源文件”中添加测试入口源文件
-- 在项目构建好后，执行`script/run_test.sh`脚本（Windows 下为`script/run_test.bat`）即可运行单元测试（VSCode task: Run test）
+- 在项目构建好后，执行`script/run_test.sh`脚本即可运行单元测试（VSCode task: Run test）
 - Linux 下可以运行 Python3 脚本进行测试，执行`script/run_python_test.sh`脚本即可（与 Asan 不太兼容，故只支持 RELEASE 模式构建的）
 
 ## 性能分析

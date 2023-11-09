@@ -9,6 +9,8 @@
 测试队列类模板
  */
 
+#include "test_queue.h"
+
 #include <iostream>
 #include <cstdio>
 #include <string>
@@ -18,7 +20,7 @@
 using namespace std;
 using namespace CZ;
 
-int main(int argc, char const *argv[])
+bool test_queue()
 {
     Queue<string> Qs;
     Qs.print_info("Qs");
@@ -39,6 +41,6 @@ int main(int argc, char const *argv[])
     std::cout << "Qs: " << Qs << std::endl;
     std::cout << "Qs.hash(): " << Qs.hash() << std::endl;
     std::cout << "Qs.c_str(): " << Qs.c_str() << std::endl;
-    return 0;
+    return true;
 }
 

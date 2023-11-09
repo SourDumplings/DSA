@@ -9,6 +9,8 @@
 FlatHashSet 类模板的测试
  */
 
+#include "test_flathashset.h"
+
 #include <iostream>
 #include <cstdio>
 #include <utility>
@@ -70,7 +72,7 @@ void test_correctiness()
     printf("Correctiness check succ!\n");
 }
 
-int main(int argc, char const *argv[])
+bool test_flathashset()
 {
     // FlatHashSet<int> d;
     FlatHashSet<int> d(FlatHashSetAccessories::SQUARE_PROBING);
@@ -157,6 +159,6 @@ int main(int argc, char const *argv[])
 
     test_correctiness();
 
-    return 0;
+    return true;
 }
 

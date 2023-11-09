@@ -13,11 +13,12 @@
 #ifndef ALLOCATOR_H
 #define ALLOCATOR_H
 
+#include "../Base/BaseDef.h"
 #include <cstddef>
 
 namespace CZ
 {
-    class Allocator
+    class DLL_EXPORT_IMPORT Allocator
     {
     public:
         // 传入参数为 sizeof(obj)，即 obj 的大小，单位为 Byte
@@ -47,7 +48,7 @@ public:\
     static void *operator new(size_t size) { return myAlloc.allocate(size); } \
     static void operator delete(void *pDead, size_t size) { return myAlloc.deallocate(pDead, size); } \
 protected:\
-    static Allocator myAlloc;
+    static Allocator myAlloc
 
 #define IMPLEMENT_POOL_ALLOC(className) \
 Allocator className::myAlloc

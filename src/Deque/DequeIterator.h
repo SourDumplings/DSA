@@ -74,14 +74,17 @@ namespace CZ
         {
             return *_cur;
         }
+
         const T &operator*() const
         {
             return *_cur;
         }
+
         T *operator->()
         {
             return _cur;
         }
+
         const T *operator->() const
         {
             return _cur;

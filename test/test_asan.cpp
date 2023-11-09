@@ -6,6 +6,8 @@
  * @Description: 
  */
 
+#include "test_asan.h"
+
 #include <cstdio>
 #include "Vector/Vector.h"
 
@@ -48,11 +50,13 @@ void test_stack_overflow()
 
 void test_memory_leak()
 {
+    // Windows 下 MSVC 的 Asan 探测不出来
     int *p = new int(5);
 }
 
-int main()
+bool test_asan()
 {
-    test_unknow_address();
-    return 0;
+    //test_memory_leak();
+    test_use_after_free_with_dsa();
+    return true;
 }
