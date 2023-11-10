@@ -13,6 +13,7 @@
 #define FACTORIAL_H
 
 #include "../Base/Assert.h"
+#include <cstdint>
 
 namespace CZ
 {
@@ -20,7 +21,7 @@ namespace CZ
 
     namespace FactorialAccessories
     {
-        using ValueType = int64_t;
+        using ValueType = uint64_t;
 
         ValueType recursion_fact(const ValueType x);
 

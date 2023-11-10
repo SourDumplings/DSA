@@ -106,6 +106,7 @@ namespace CZ
     template <typename K, typename V>
     const char *BPlusTreeNode<K, V>::c_str() const
     {
+#ifdef DEBUG
         std::ostringstream oss;
         oss << get_entity_name() << "[";
         for (Rank i = 0; i != _keys.size(); ++i)
@@ -118,6 +119,9 @@ namespace CZ
         }
         oss << "]";
         return this->get_c_str_from_stream(oss);
+#else
+        return this->get_entity_name();
+#endif
     }
 
     template <typename K, typename V>

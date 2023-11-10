@@ -27,9 +27,6 @@
     <ClCompile Include="test_asan.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test_vector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="test_czstring.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -157,6 +154,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="test_unionfindset.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_vector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

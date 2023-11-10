@@ -4,7 +4,7 @@ namespace CZ::SortAccessories
 {
     Vector<Rank_shell_sort> deltaSeq;
 
-    void produce_Sedgewick_seq(Rank_shell_sort N)
+    void produce_Sedgewick_seq(Rank_shell_sort N, Vector<Rank_shell_sort> &deltaSeq)
     {
         Rank_shell_sort delta = 1;
         for (Rank_shell_sort i = 0;; ++i)
@@ -18,7 +18,7 @@ namespace CZ::SortAccessories
         }
     }
 
-    void produce_Pratt_seq(Rank_shell_sort N)
+    void produce_Pratt_seq(Rank_shell_sort N, Vector<Rank_shell_sort> &deltaSeq)
     {
         Rank_shell_sort delta = 1;
         for (Rank_shell_sort i = 0;; ++i)
@@ -39,7 +39,7 @@ namespace CZ::SortAccessories
         }
     }
 
-    void produce_Papernov_Stasevic_seq(Rank_shell_sort N)
+    void produce_Papernov_Stasevic_seq(Rank_shell_sort N, Vector<Rank_shell_sort> &deltaSeq)
     {
         Rank_shell_sort delta = 1;
         for (Rank_shell_sort i = 1;; ++i)
@@ -53,7 +53,7 @@ namespace CZ::SortAccessories
         }
     }
 
-    void produce_Shell_seq(Rank_shell_sort N)
+    void produce_Shell_seq(Rank_shell_sort N, Vector<Rank_shell_sort> &deltaSeq)
     {
         Rank_shell_sort delta = 1;
         for (Rank_shell_sort i = 0;; ++i)

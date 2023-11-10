@@ -51,7 +51,7 @@ namespace CZ
         oss << "]";
         return this->get_c_str_from_stream(oss);
 #else
-        return nullptr;
+        return this->get_entity_name();
 #endif
 
     }

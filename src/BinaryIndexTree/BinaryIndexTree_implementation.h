@@ -105,6 +105,7 @@ namespace CZ
     template <typename T>
     const char *BinaryIndexTree<T>::c_str() const
     {
+#ifdef DEBUG
         std::ostringstream oss;
         oss << this->get_entity_name() << "[";
         Rank s = size();
@@ -118,6 +119,9 @@ namespace CZ
         }
         oss << "]";
         return this->get_c_str_from_stream(oss);
+#else
+        return this->get_entity_name();
+#endif
     }
 
     template <typename T>

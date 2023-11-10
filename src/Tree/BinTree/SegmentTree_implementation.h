@@ -98,6 +98,7 @@ namespace CZ
     template <typename T, typename F>
     const char *SegmentTree<T, F>::c_str() const
     {
+#ifdef DEBUG
         std::ostringstream oss;
         oss << get_entity_name() << "[";
         Rank count = 0;
@@ -112,6 +113,9 @@ namespace CZ
         }
         oss << "]";
         return this->get_c_str_from_stream(oss);
+#else
+        return this->get_entity_name();
+#endif
     }
 
     template <typename T, typename F>

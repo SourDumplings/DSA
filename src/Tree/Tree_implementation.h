@@ -292,19 +292,24 @@ namespace CZ
     template <typename T>
     const char *Tree<T>::c_str() const
     {
+#ifdef DEBUG
         std::ostringstream oss;
         oss << get_entity_name() << "[";
         Rank count = 0;
-        level_order_traversal(_pRoot, [&](const T &data)
-                              {
-                                if (0 < count)
-                                {
-                                    oss << ", ";
-                                }
-                                oss << data;
-                                ++count; });
+        level_order_traversal(_pRoot, [&](const T& data)
+            {
+                if (0 < count)
+                {
+                    oss << ", ";
+                }
+                oss << data;
+                ++count; });
         oss << "]";
         return this->get_c_str_from_stream(oss);
+#else
+        return this->get_entity_name();
+#endif // DEBUG
+
     }
 } // CZ
 

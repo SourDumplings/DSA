@@ -112,6 +112,7 @@ namespace CZ
     template <typename T>
     const char *BTreeNode<T>::c_str() const
     {
+#ifdef DEBUG
         std::ostringstream oss;
         oss << get_entity_name() << "[";
         for (typename Vector<T>::Rank i = 0; i != _keys.size(); ++i)
@@ -124,6 +125,9 @@ namespace CZ
         }
         oss << "]";
         return this->get_c_str_from_stream(oss);
+#else
+        return this->get_entity_name();
+#endif
     }
 
     template <typename T>

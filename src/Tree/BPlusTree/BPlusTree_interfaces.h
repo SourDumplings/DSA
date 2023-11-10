@@ -68,7 +68,7 @@ namespace CZ
 
     template <typename K, typename V>
     inline BPlusTreeNode<K, V> *
-    BPlusTree<K, V>::find_leaf(const K &key) const
+        BPlusTree<K, V>::find_leaf(const K &key) const
     {
         BPlusTreeNode<K, V> *p = _root;
         while (!p->_isLeaf)
@@ -139,7 +139,7 @@ namespace CZ
 
     template <typename K, typename V>
     Vector<const V *>
-    BPlusTree<K, V>::search(const K &minKey, const K &maxKey) const
+        BPlusTree<K, V>::search(const K &minKey, const K &maxKey) const
     {
         Vector<const V *> res;
         BPlusTreeNode<K, V> *leaf = find_leaf(minKey);
@@ -167,7 +167,7 @@ namespace CZ
 
     template <typename K, typename V>
     Vector<V *>
-    BPlusTree<K, V>::search(const K &minKey, const K &maxKey)
+        BPlusTree<K, V>::search(const K &minKey, const K &maxKey)
     {
         Vector<V *> res;
         BPlusTreeNode<K, V> *leaf = find_leaf(minKey);
@@ -219,7 +219,7 @@ namespace CZ
 
     template <typename K, typename V>
     inline bool
-    BPlusTree<K, V>::is_overflow(typename Vector<void *>::Rank pointerNum) const
+        BPlusTree<K, V>::is_overflow(typename Vector<void *>::Rank pointerNum) const
     {
         return _order < pointerNum;
     }
@@ -245,6 +245,7 @@ namespace CZ
     template <typename K, typename V>
     const char *BPlusTree<K, V>::c_str() const
     {
+#ifdef DEBUG
         std::ostringstream oss;
         oss << get_entity_name() << "[";
         Queue<void *> Q;
@@ -298,6 +299,9 @@ namespace CZ
         }
         oss << "]";
         return this->get_c_str_from_stream(oss);
+#else
+        return this->get_entity_name();
+#endif
     }
 } // namespace CZ
 

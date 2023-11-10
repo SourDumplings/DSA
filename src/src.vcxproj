@@ -346,8 +346,13 @@
     <ClInclude Include="Vector\Vector_shrink.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Algorithms\Factorial.cpp" />
+    <ClCompile Include="Algorithms\Fib.cpp" />
+    <ClCompile Include="Algorithms\Gcd.cpp" />
     <ClCompile Include="Algorithms\Hash.cpp" />
     <ClCompile Include="Algorithms\Is_prime.cpp" />
+    <ClCompile Include="Algorithms\Pow.cpp" />
+    <ClCompile Include="Algorithms\Sort_methods\Shell_sort.cpp" />
     <ClCompile Include="Algorithms\Swap.cpp" />
     <ClCompile Include="Allocator\Allocator.cpp" />
     <ClCompile Include="Base\AbstractBaseEntity.cpp" />

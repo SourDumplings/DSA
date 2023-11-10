@@ -57,10 +57,16 @@ namespace CZ
     }
 
     template <typename T, typename Cmp>
-    inline typename LeftHeap<T, Cmp>::Rank LeftHeap<T, Cmp>::size() const { return _T.size(); }
+    inline typename LeftHeap<T, Cmp>::Rank LeftHeap<T, Cmp>::size() const
+    {
+        return _T.size();
+    }
 
     template <typename T, typename Cmp>
-    inline const T &LeftHeap<T, Cmp>::top() const { return _T.root()->data().key(); }
+    inline const T &LeftHeap<T, Cmp>::top() const
+    {
+        return _T.root()->data().key();
+    }
 
     template <typename T, typename Cmp>
     typename LeftHeap<T, Cmp>::Rank LeftHeap<T, Cmp>::_get_npl(BinTreeNode<T> *node) const
@@ -98,8 +104,8 @@ namespace CZ
 
     template <typename T, typename Cmp>
     BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *
-    LeftHeap<T, Cmp>::_do_merge(BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *a,
-                                BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *b, const Cmp &cmp)
+        LeftHeap<T, Cmp>::_do_merge(BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *a,
+                                    BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *b, const Cmp &cmp)
     {
         if (!a)
             return b;
@@ -132,8 +138,8 @@ namespace CZ
     {
         ASSERT_DEBUG(!this->empty(), "Error from LeftHeap pop: empty LeftHeap cannot pop");
 
-        BinTreeNode<KVPair<T, Rank>> *lr = dynamic_cast<BinTreeNode<KVPair<T, Rank>>*>(_T.root())->remove_left_child();
-        BinTreeNode<KVPair<T, Rank>> *rr = dynamic_cast<BinTreeNode<KVPair<T, Rank>>*>(_T.root())->remove_right_child();
+        BinTreeNode<KVPair<T, Rank>> *lr = dynamic_cast<BinTreeNode<KVPair<T, Rank>> *>(_T.root())->remove_left_child();
+        BinTreeNode<KVPair<T, Rank>> *rr = dynamic_cast<BinTreeNode<KVPair<T, Rank>> *>(_T.root())->remove_right_child();
         delete _T.root();
 
         BinTreeNode<KVPair<T, Rank>> *r = _do_merge(lr, rr, cmp);
@@ -172,9 +178,13 @@ namespace CZ
     template <typename T, typename Cmp>
     const char *LeftHeap<T, Cmp>::c_str() const
     {
+#ifdef DEBUG
         std::ostringstream oss;
         oss << this->get_entity_name() << "[" << _T << "]";
         return this->get_c_str_from_stream(oss);
+#else
+        return this->get_entity_name();
+#endif
     }
 
     template <typename T, typename Cmp>

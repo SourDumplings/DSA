@@ -20,16 +20,28 @@ B树数据的访问接口
 namespace CZ
 {
     template <typename T>
-    inline typename BTree<T>::Rank BTree<T>::order() const { return _order; }
+    inline typename BTree<T>::Rank BTree<T>::order() const
+    {
+        return _order;
+    }
 
     template <typename T>
-    inline typename BTree<T>::Rank BTree<T>::size() const { return _size; }
+    inline typename BTree<T>::Rank BTree<T>::size() const
+    {
+        return _size;
+    }
 
     template <typename T>
-    inline BTreeNode<T> *BTree<T>::root() const { return _root; }
+    inline BTreeNode<T> *BTree<T>::root() const
+    {
+        return _root;
+    }
 
     template <typename T>
-    inline typename BTree<T>::Rank BTree<T>::height() const { return get_height(_root); }
+    inline typename BTree<T>::Rank BTree<T>::height() const
+    {
+        return get_height(_root);
+    }
 
     template <typename T>
     typename BTree<T>::Rank BTree<T>::get_height(BTreeNode<T> *root) const
@@ -54,7 +66,10 @@ namespace CZ
     }
 
     template <typename T>
-    inline typename BTree<T>::Rank BTree<T>::keys_num() const { return get_keys_num(_root); }
+    inline typename BTree<T>::Rank BTree<T>::keys_num() const
+    {
+        return get_keys_num(_root);
+    }
 
     template <typename T>
     typename BTree<T>::Rank BTree<T>::get_keys_num(BTreeNode<T> *v) const
@@ -102,6 +117,7 @@ namespace CZ
     template <typename T>
     const char *BTree<T>::c_str() const
     {
+#ifdef DEBUG
         std::ostringstream oss;
 
         oss << get_entity_name() << "[";
@@ -112,7 +128,7 @@ namespace CZ
         {
             BTreeNode<T> *v = Q.front();
             Q.pop();
-            
+
             oss << '(';
             bool first = true;
             for (typename Vector<T>::Rank i = 0; i < v->_keys.size(); ++i)
@@ -140,6 +156,9 @@ namespace CZ
         }
         oss << "]";
         return this->get_c_str_from_stream(oss);
+#else
+        return this->get_entity_name();
+#endif
     }
 
     template <typename T>
@@ -150,7 +169,7 @@ namespace CZ
         {
             res = (res + _root->hash()) % CZ_MAX_HASH_VALUE;
         }
-        
+
         return res;
     }
 

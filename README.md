@@ -9,7 +9,7 @@
 # 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：12.2.0，与 CMakeLists.txt 同步
+版本号：12.3.0，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -45,8 +45,8 @@
 
 ## 单元测试
 - 在`test`目录下编写单元测试代码，命名规范为：`test_xxx.cpp`
-- 在项目构建好后，执行`script/run_test.sh`脚本即可运行单元测试（VSCode task: Run test）
-- Linux 下可以运行 Python3 脚本进行测试，执行`script/run_python_test.sh`脚本即可（与 Asan 不太兼容，故只支持 RELEASE 模式构建的）
+- 在项目构建好后，执行`script/run_test.sh`脚本（Linux）即可运行单元测试（VSCode task: Run test）
+- 可以运行 Python3 脚本进行测试，执行`script/run_python_test.sh`脚本（Windows 下为`script/run_python_test.bat`）即可（VSCode task: Run python test，与 Asan 不太兼容，故只支持 RELEASE 模式构建的）
 
 ## 性能分析
 - Vtune：使用 Vtune 工具进行性能分析（推荐）

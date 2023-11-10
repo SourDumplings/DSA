@@ -72,10 +72,16 @@ namespace CZ
     }
 
     template <typename T>
-    inline const T &TreeNode<T>::data() const { return _data; }
+    inline const T &TreeNode<T>::data() const
+    {
+        return _data;
+    }
 
     template <typename T>
-    inline T &TreeNode<T>::data() { return _data; }
+    inline T &TreeNode<T>::data()
+    {
+        return _data;
+    }
 
     template <typename T>
     bool TreeNode<T>::is_leaf() const
@@ -123,7 +129,7 @@ namespace CZ
     }
 
     template <typename T>
-    TreeNode<T>* TreeNode<T>::insert_child(TreeNode<T> *pNode)
+    TreeNode<T> *TreeNode<T>::insert_child(TreeNode<T> *pNode)
     {
         _children.push_back(pNode);
         pNode->_father = this;
@@ -193,9 +199,13 @@ namespace CZ
     template <typename T>
     const char *TreeNode<T>::c_str() const
     {
+#ifdef DEBUG
         std::ostringstream oss;
         oss << get_entity_name() << "(" << _data << ")";
         return this->get_c_str_from_stream(oss);
+#else
+        return this->get_entity_name();
+#endif
     }
 
     template <typename T>
@@ -204,7 +214,7 @@ namespace CZ
         // 树结点的哈希是综合了该结点的数据、孩子多少、结点高度和所有子结点的哈希值
         // 即树结点的哈希值由结点的数据和结构两方面决定
         HashRank res = Hash<CZString>()(get_entity_name()) + _children.size();
-        for (TreeNode<T> * const &pc : _children)
+        for (TreeNode<T> *const &pc : _children)
         {
             if (pc)
             {

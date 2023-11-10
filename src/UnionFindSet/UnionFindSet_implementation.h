@@ -163,6 +163,7 @@ namespace CZ
     template <typename T>
     const char *UnionFindSet<T>::c_str() const
     {
+#ifdef DEBUG
         std::ostringstream oss;
         oss << this->get_entity_name() << "[";
         if (root())
@@ -186,6 +187,9 @@ namespace CZ
         }
         oss << "]";
         return this->get_c_str_from_stream(oss);
+#else
+        return this->get_entity_name();
+#endif
     }
 
     template <typename T>
@@ -194,6 +198,6 @@ namespace CZ
         return (Hash<CZString>()(get_entity_name()) + _family.hash()) % CZ_MAX_HASH_VALUE;
     }
 
-} // CZ
+    } // CZ
 
 #endif // UNION_FIND_SET_IMPLEMENTATION_H

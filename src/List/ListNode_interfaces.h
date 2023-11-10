@@ -20,15 +20,27 @@
 namespace CZ
 {
     template <typename T>
-    inline ListNode<T> *ListNode<T>::next() const { return _next; }
+    inline ListNode<T> *ListNode<T>::next() const
+    {
+        return _next;
+    }
 
     template <typename T>
-    inline ListNode<T> *ListNode<T>::prev() const { return _prev; }
+    inline ListNode<T> *ListNode<T>::prev() const
+    {
+        return _prev;
+    }
 
     template <typename T>
-    inline T &ListNode<T>::data() { return _data; }
+    inline T &ListNode<T>::data()
+    {
+        return _data;
+    }
     template <typename T>
-    inline const T &ListNode<T>::data() const { return _data; }
+    inline const T &ListNode<T>::data() const
+    {
+        return _data;
+    }
 
     template <typename T>
     const char *ListNode<T>::get_entity_name() const
@@ -39,9 +51,13 @@ namespace CZ
     template <typename T>
     const char *ListNode<T>::c_str() const
     {
+#ifdef DEBUG
         std::ostringstream oss;
         oss << this->get_entity_name() << "(" << data() << ")";
         return this->get_c_str_from_stream(oss);
+#else
+        return this->get_entity_name();
+#endif
     }
 
     template <typename T>

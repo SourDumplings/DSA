@@ -4,8 +4,6 @@ namespace CZ
 {
     namespace FactorialAccessories
     {
-        using ValueType = int64_t;
-
         ValueType recursion_fact(const ValueType x)
         {
             if (x <= 1)

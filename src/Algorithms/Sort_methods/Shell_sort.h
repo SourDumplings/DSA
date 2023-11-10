@@ -18,35 +18,35 @@
 
 namespace CZ::SortAccessories
 {
-    using Rank_shell_sort = int64_t;
+    using Rank_shell_sort = uint64_t;
 
-    extern Vector<Rank_shell_sort> deltaSeq;
+    DLL_EXPORT_IMPORT void produce_Sedgewick_seq(Rank_shell_sort N, Vector<Rank_shell_sort> &deltaSeq);
 
-    DLL_EXPORT_IMPORT void produce_Sedgewick_seq(Rank_shell_sort N);
+    DLL_EXPORT_IMPORT void produce_Pratt_seq(Rank_shell_sort N, Vector<Rank_shell_sort> &deltaSeq);
 
-    DLL_EXPORT_IMPORT void produce_Pratt_seq(Rank_shell_sort N);
+    DLL_EXPORT_IMPORT void produce_Papernov_Stasevic_seq(Rank_shell_sort N, Vector<Rank_shell_sort> &deltaSeq);
 
-    DLL_EXPORT_IMPORT void produce_Papernov_Stasevic_seq(Rank_shell_sort N);
-
-    DLL_EXPORT_IMPORT void produce_Shell_seq(Rank_shell_sort N);
+    DLL_EXPORT_IMPORT void produce_Shell_seq(Rank_shell_sort N, Vector<Rank_shell_sort> &deltaSeq);
 
     template <typename It, typename Cmp>
     void Shell_sort(It begin, Rank_shell_sort N, const Cmp &cmp, const uint32_t version = 0)
     {
+        Vector<Rank_shell_sort> deltaSeq;
+
         switch (version)
         {
         // 不同版本的增量序列
         case 0:
-            produce_Sedgewick_seq(N);
+            produce_Sedgewick_seq(N, deltaSeq);
             break;
         case 1:
-            produce_Pratt_seq(N);
+            produce_Pratt_seq(N, deltaSeq);
             break;
         case 2:
-            produce_Papernov_Stasevic_seq(N);
+            produce_Papernov_Stasevic_seq(N, deltaSeq);
             break;
         case 3:
-            produce_Shell_seq(N);
+            produce_Shell_seq(N, deltaSeq);
             break;
         }
 

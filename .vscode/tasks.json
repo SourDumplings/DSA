@@ -72,9 +72,19 @@
             }
         },
         {
-            "label": "Run python test on Linux",
+            "label": "Run Python test on Linux",
             "type": "shell",
             "command": "${workspaceFolder}/script/run_python_test.sh",
+            "problemMatcher": [],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Run Python test on Windows",
+            "type": "shell",
+            "command": "${workspaceFolder}/script/run_python_test.bat",
             "problemMatcher": [],
             "group": {
                 "kind": "test",

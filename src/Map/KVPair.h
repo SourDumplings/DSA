@@ -68,26 +68,36 @@ namespace CZ
 
     public:
         KVPair() = default;
-        KVPair(const K &key_, const V &value_) : _key(key_), _value(value_){};
-        // 成员模板复制构造函数，用于支持键值类为 K、V 子类的 KVPair
+        KVPair(const K &key_, const V &value_) : _key(key_), _value(value_)
+        {
+        };
+               // 成员模板复制构造函数，用于支持键值类为 K、V 子类的 KVPair
         template <typename KD, typename VD>
-        KVPair(const KVPair<KD, VD> &p) : _key(p.key()), _value(p.value()){};
+        KVPair(const KVPair<KD, VD> &p) : _key(p.key()), _value(p.value())
+        {
+        };
 
         const K &key() const
         {
             return _key;
         }
 
-        K &key() { return _key; }
+        K &key()
+        {
+            return _key;
+        }
 
         const V &value() const
         {
             return _value;
         }
 
-        V &value() { return _value; }
+        V &value()
+        {
+            return _value;
+        }
 
-        // 赋值操作符函数
+// 赋值操作符函数
         template <typename KD, typename VD>
         KVPair<K, V> &operator=(const KVPair<KD, VD> &p)
         {
@@ -123,9 +133,13 @@ namespace CZ
     template <typename K, typename V>
     const char *KVPair<K, V>::c_str() const
     {
+#ifdef DEBUG
         std::ostringstream oss;
         oss << get_entity_name() << "(" << _key << ", " << _value << ")";
         return this->get_c_str_from_stream(oss);
+#else
+        return this->get_entity_name();
+#endif
     }
 
     // 键值数对的大小比较即相等判断都是比较key

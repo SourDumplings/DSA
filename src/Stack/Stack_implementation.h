@@ -100,6 +100,7 @@ namespace CZ
     template <typename T, typename C>
     const char *Stack<T, C>::c_str() const
     {
+#ifdef DEBUG
         std::ostringstream oss;
         oss << get_entity_name() << "[";
         for (auto it = _data.begin(); it != _data.end(); ++it)
@@ -112,6 +113,9 @@ namespace CZ
         }
         oss << "]";
         return this->get_c_str_from_stream(oss);
+#else
+        return this->get_entity_name();
+#endif
     }
 } // CZ
 
