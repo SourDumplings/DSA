@@ -192,6 +192,6 @@ namespace CZ
         _data.clear();
     }
 
-    } // CZ
+} // CZ
 
 #endif // HEAP_IMPLEMENTATION_H

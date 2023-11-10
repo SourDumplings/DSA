@@ -23,7 +23,7 @@ FlatHashSet 类模板的测试
 using namespace std;
 using namespace CZ;
 
-void test_correctiness()
+static void test_correctiness()
 {
     // 通过随机增删元素来验证容器逻辑的正确性
     for (size_t i = 0; i < 100; i++)

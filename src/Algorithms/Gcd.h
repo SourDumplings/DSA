@@ -12,21 +12,14 @@
 #ifndef GCD_H
 #define GCD_H
 
+#include "../Base/BaseDef.h"
+#include <cstdint>
+
 namespace CZ
 {
-    using GcdValueType = int64_t;
+    using GcdValueType = uint64_t;
 
-    GcdValueType Gcd(GcdValueType a, GcdValueType b)
-    {
-        GcdValueType r;
-        do
-        {
-            r = a % b;
-            a = b;
-            b = r;
-        } while (b);
-        return a;
-    }
+    DLL_EXPORT_IMPORT GcdValueType Gcd(GcdValueType a, GcdValueType b);
 } // CZ
 
 #endif // GCD_H

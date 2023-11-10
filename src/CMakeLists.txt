@@ -8,25 +8,14 @@ endif()
 
 ADD_DEFINITIONS(-std=c++11)
 
-# 添加库源文件
-SET(lib_source  Algorithms/Swap.cpp
-                Algorithms/Hash.cpp
-                Algorithms/Is_prime.cpp
-                Allocator/Allocator.cpp
-                Base/Assert.cpp
-                Base/AbstractBaseEntity.cpp
-                Bitmap/Bitmap.cpp
-                CZString/CZString.cpp
-                Expression/Expression.cpp
-                PrimeTable/PrimeTable.cpp
-                Python/Python_interfaces.cpp
-)
+# 添加源文件
+FILE(GLOB lib_sources CONFIGURE_DEPENDS ${PROJECT_SOURCE_DIR}/src/**/*.cpp ${PROJECT_SOURCE_DIR}/src/**/**/*.cpp)
 
 # 添加静态库，关键词为 static
-ADD_LIBRARY(dsa STATIC ${lib_source})
+ADD_LIBRARY(dsa STATIC ${lib_sources})
 
 # 添加动态库，关键词为 shared
-ADD_LIBRARY(dsa_shared SHARED ${lib_source})
+ADD_LIBRARY(dsa_shared SHARED ${lib_sources})
 
 # 指定动态库的输出名称
 SET_TARGET_PROPERTIES(dsa_shared PROPERTIES OUTPUT_NAME "dsa")

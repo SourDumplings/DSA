@@ -21,7 +21,7 @@
 using namespace std;
 using namespace CZ;
 
-void test_correctiness()
+static void test_correctiness()
 {
     for (size_t i = 0; i < 10; i++)
     {

@@ -20,70 +20,15 @@ namespace CZ::SortAccessories
 {
     using Rank_shell_sort = int64_t;
 
-    Vector<Rank_shell_sort> deltaSeq;
+    extern Vector<Rank_shell_sort> deltaSeq;
 
-    void produce_Sedgewick_seq(Rank_shell_sort N)
-    {
-        Rank_shell_sort delta = 1;
-        for (Rank_shell_sort i = 0;; ++i)
-        {
-            delta = 9 * pow(4, i) - 9 * pow(2, i) + 1;
-            if (N <= delta)
-            {
-                break;
-            }
-            deltaSeq.push_back(delta);
-        }
-    }
+    DLL_EXPORT_IMPORT void produce_Sedgewick_seq(Rank_shell_sort N);
 
-    void produce_Pratt_seq(Rank_shell_sort N)
-    {
-        Rank_shell_sort delta = 1;
-        for (Rank_shell_sort i = 0;; ++i)
-        {
-            for (Rank_shell_sort j = 0; j <= i; ++j)
-            {
-                delta = pow(2, i) * pow(3, j);
-                if (N <= delta)
-                {
-                    break;
-                }
-                deltaSeq.push_back(delta);
-            }
-            if (N <= delta)
-            {
-                break;
-            }
-        }
-    }
+    DLL_EXPORT_IMPORT void produce_Pratt_seq(Rank_shell_sort N);
 
-    void produce_Papernov_Stasevic_seq(Rank_shell_sort N)
-    {
-        Rank_shell_sort delta = 1;
-        for (Rank_shell_sort i = 1;; ++i)
-        {
-            delta = pow(2, i) - 1;
-            if (N <= delta)
-            {
-                break;
-            }
-            deltaSeq.push_back(delta);
-        }
-    }
+    DLL_EXPORT_IMPORT void produce_Papernov_Stasevic_seq(Rank_shell_sort N);
 
-    void produce_Shell_seq(Rank_shell_sort N)
-    {
-        Rank_shell_sort delta = 1;
-        for (Rank_shell_sort i = 0;; ++i)
-        {
-            delta = pow(2, i);
-            if (N <= delta)
-            {
-                break;
-            }
-            deltaSeq.push_back(delta);
-        }
-    }
+    DLL_EXPORT_IMPORT void produce_Shell_seq(Rank_shell_sort N);
 
     template <typename It, typename Cmp>
     void Shell_sort(It begin, Rank_shell_sort N, const Cmp &cmp, const uint32_t version = 0)

@@ -46,8 +46,9 @@ void test_cpu_prof()
     
 }
 
-int main()
+bool test_gperf_tools()
 {
     test_cpu_prof();
     test_heap_mem();
+    return true;
 }

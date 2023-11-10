@@ -9,7 +9,7 @@
 # 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：12.1.0，与 CMakeLists.txt 同步
+版本号：12.2.0，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -24,7 +24,7 @@
 
 ### Linux
 1. C++ 语言标准：C++11
-2. 编译器：gcc version 8.3.1 20190311 (Red Hat 8.3.1-3) (GCC) 
+2. 编译器：gcc version 8.3.1 20190311 (Red Hat 8.3.1-3) (GCC)
 3. 调试器：推荐 GNU gdb (GDB) 10.2
 4. CMake：3.17.5
 5. Graphviz（DEBUG 模式需要）
@@ -33,7 +33,8 @@
 1. C++ 语言标准：C++17
 2. 编译器：Visual Studio 2022 (v143)
 
-## 构建步骤（以 Linux 平台为例，Windows 用 Visual Studio 2022 Build 即可）
+## 构建步骤
+以 Linux 平台为例，Windows 打开`DSA.sln`用 Visual Studio 2022 Build 即可：
 - 按照 C++ 开发的一般规范，声明以及模板卸载头文件即 .h 文件中，实现代码写在 .cpp 源文件中
 - 增加源文件需要在`src/CMakeLists.txt`文件中的“添加库源文件”中添加
 - 如果增加了头文件目录，需要在`src/CMakeLists.txt`文件中的“安装头文件”中添加

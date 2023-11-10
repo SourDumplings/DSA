@@ -4,9 +4,9 @@
  * @brief 测试程序入口
  * @version 1.0.0
  * @date 2023-11-08
- * 
+ *
  * @copyright Copyright (c) 2023 SourDumplings
- * 
+ *
  */
 
 #include "test_algorithms.h"
@@ -26,6 +26,7 @@
 #include "test_deque.h"
 #include "test_expression.h"
 #include "test_flathashset.h"
+#include "test_gperftools.h"
 #include "test_graph.h"
 #include "test_hash.h"
 #include "test_hashmap.h"
@@ -66,7 +67,11 @@ int main(int argc, char const *argv[])
     std::cout << "--------------------------------------------------------" << std::endl;
     std::cout << "--------------------------------------------------------" << std::endl;
 
-    test_asan();
+#ifdef DEBUG
+    std::cout << "------------------ Test on DEBUG mode ------------------" << std::endl;
+#endif
+
+    test_bplustree();
 
     std::cout << "--------------------------------------------------------" << std::endl;
     std::cout << "--------------------------------------------------------" << std::endl;
