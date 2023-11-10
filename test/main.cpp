@@ -71,7 +71,7 @@ int main(int argc, char const *argv[])
     std::cout << "------------------ Test on DEBUG mode ------------------" << std::endl;
 #endif
 
-    test_bplustree();
+    test_algorithms();
 
     std::cout << "--------------------------------------------------------" << std::endl;
     std::cout << "--------------------------------------------------------" << std::endl;

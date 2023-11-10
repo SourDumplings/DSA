@@ -93,7 +93,7 @@ namespace CZ
 
             return this->get_c_str_from_stream(oss);
 #endif
-            return nullptr;
+            return this->get_entity_name();
         }
 
         HashRank hash() const override

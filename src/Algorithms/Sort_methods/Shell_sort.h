@@ -50,7 +50,7 @@ namespace CZ::SortAccessories
             break;
         }
 
-        for (Rank_shell_sort i = deltaSeq.size() - 1; -1 < i; --i)
+        for (Rank_shell_sort i = deltaSeq.size() - 1; 0 <= i; --i)
         {
             for (Rank_shell_sort j = 0; j < deltaSeq[i]; ++j)
             {
