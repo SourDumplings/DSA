@@ -60,8 +60,8 @@ long test_sort_prof(const Vector<int> &v, typename SortAccessories::StableSortMe
 
     gettimeofday(&tv, NULL);
     long stop = tv.tv_sec * 1000000 + tv.tv_usec;
-    
-return stop - start;
+    delete [] tempV;
+    return stop - start;
 }
 
 long test_sort_prof(const Vector<int> &v)
@@ -82,8 +82,8 @@ long test_sort_prof(const Vector<int> &v)
 
     gettimeofday(&tv, NULL);
     long stop = tv.tv_sec * 1000000 + tv.tv_usec;
-    
-return stop - start;
+    delete [] tempV;
+    return stop - start;
 }
 
 void test_perf()

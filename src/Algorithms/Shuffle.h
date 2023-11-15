@@ -21,8 +21,8 @@ namespace CZ
         void do_shuffle(const It &begin, const It &end)
         {
             srand(time(nullptr));
-            uint64_t n = end - begin;
-            for (uint64_t i = 0; i < n; i++)
+            int64_t n = end - begin;
+            for (int64_t i = 0; i < n; i++)
             {
                 Swap(*(begin + i), *(begin + rand() % n));
             }
@@ -53,6 +53,8 @@ namespace CZ
     template <typename It>
     void Shuffle(It begin, It end)
     {
+        ASSERT_DEBUG(begin <= end, "wrong iterator range");
+
         ShuffleAccessories::test_iterator_for_shuffle(begin, end, typename Iterator_traits<It>::iterator_category());
     }
 }

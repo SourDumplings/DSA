@@ -18,7 +18,7 @@
 
 namespace CZ::SortAccessories
 {
-    using Rank_shell_sort = uint64_t;
+    using Rank_shell_sort = int64_t;
 
     DLL_EXPORT_IMPORT void produce_Sedgewick_seq(Rank_shell_sort N, Vector<Rank_shell_sort> &deltaSeq);
 

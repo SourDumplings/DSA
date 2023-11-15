@@ -21,7 +21,7 @@ namespace CZ
 
     namespace FactorialAccessories
     {
-        using ValueType = uint64_t;
+        using ValueType = int64_t;
 
         ValueType recursion_fact(const ValueType x);
 

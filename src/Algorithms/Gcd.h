@@ -17,7 +17,7 @@
 
 namespace CZ
 {
-    using GcdValueType = uint64_t;
+    using GcdValueType = int64_t;
 
     DLL_EXPORT_IMPORT GcdValueType Gcd(GcdValueType a, GcdValueType b);
 } // CZ
