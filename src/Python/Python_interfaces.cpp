@@ -11,11 +11,12 @@
 
 #include "Python_interfaces.h"
 #include "../Algorithms/Is_prime.h"
+#include "../Algorithms/Sort.h"
 
 
 extern "C"
 {
-    bool Is_prime(int x, int method)
+    bool Is_prime(uint32_t x, uint8_t method)
     {
         return CZ::Is_prime(x, static_cast<CZ::PrimeAccessories::IsPrimeMethod>(method));
     }
@@ -23,5 +24,10 @@ extern "C"
     int Add(int x, int y)
     {
         return x + y;
+    }
+
+    void Sort_int(int64_t *begin, uint32_t n)
+    {
+        CZ::Sort(begin, begin + n, CZ::SortAccessories::QUICK_SORT, 1);
     }
 }

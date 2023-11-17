@@ -104,7 +104,7 @@ namespace CZ::SortAccessories
             return;
         }
 
-        if (Is_sorted(begin, begin + e - b, cmp))
+        if (Is_sorted(begin + b, begin + e, cmp))
         {
             return;
         }
@@ -123,7 +123,7 @@ namespace CZ::SortAccessories
             return;
         }
 
-        if (Is_sorted(begin, begin + e - b, cmp))
+        if (Is_sorted(begin + b, begin + e, cmp))
         {
             return;
         }

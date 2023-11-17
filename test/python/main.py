@@ -4,6 +4,7 @@ import ctypes
 import platform
 
 import test_is_prime
+import test_sort
 
 
 def main():
@@ -14,9 +15,8 @@ def main():
     else:
         libdsa = ctypes.CDLL("../../dist/lib/shared/libdsa.so")
 
-    print("Start test is_prime...")
-    test_is_prime.test(libdsa)
-
+    # test_is_prime.test(libdsa)
+    test_sort.test(libdsa)
 
 if __name__ == "__main__":
     main()

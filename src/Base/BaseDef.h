@@ -12,6 +12,7 @@
 #if !defined(BASE_DEFINE_H)
 #define BASE_DEFINE_H
 
+// DLL_EXPORT_IMPORT 动态库如果要能够使用该方法需要使用这个宏
 #ifdef _WIN32
     #ifdef DLL_EXPORT
         #define DLL_EXPORT_IMPORT __declspec(dllexport)  
