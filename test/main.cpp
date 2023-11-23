@@ -37,6 +37,7 @@
 #include "test_kvpair.h"
 #include "test_leftheap.h"
 #include "test_list.h"
+#include "test_lua.h"
 #include "test_match.h"
 #include "test_median.h"
 #include "test_permutation.h"
@@ -71,7 +72,7 @@ int main(int argc, char const *argv[])
     std::cout << "------------------ Test on DEBUG mode ------------------" << std::endl;
 #endif
 
-    test_sort();
+    test_lua();
 
     std::cout << "--------------------------------------------------------" << std::endl;
     std::cout << "--------------------------------------------------------" << std::endl;

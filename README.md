@@ -9,7 +9,7 @@
 # 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：12.5.0，与 CMakeLists.txt 同步
+版本号：12.6.0，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -28,10 +28,12 @@
 3. 调试器：推荐 GNU gdb (GDB) 10.2
 4. CMake：3.17.5
 5. Graphviz（DEBUG 模式需要）
+6. Lua：Lua 5.4.4 开发环境
 
 ### Windows
 1. C++ 语言标准：C++17
 2. 编译器：Visual Studio 2022 (v143)
+3. Lua：Lua 5.4.4 开发环境
 
 ## 构建步骤
 以 Linux 平台为例，Windows 打开`DSA.sln`用 Visual Studio 2022 Build 即可：
@@ -146,6 +148,7 @@
 4. ### 内存分配器
 5. ### Asset 宏
 6. ### Python3 调用接口
+7. ### Lua 调用接口
 
 # 参考资料
 1. 《数据结构》3rd-邓俊辉
@@ -162,4 +165,3 @@
 - 实现树状数组（区间）
 - 实现 KD 树
 - 实现前缀树 Trie 类模板
-- 研究 Lua 调用本库的方式

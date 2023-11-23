@@ -16,17 +16,17 @@
 
 extern "C"
 {
-    bool Is_prime(uint32_t x, uint8_t method)
+    bool CZPyF_Is_prime(uint32_t x, uint8_t method)
     {
         return CZ::Is_prime(x, static_cast<CZ::PrimeAccessories::IsPrimeMethod>(method));
     }
 
-    int Add(int x, int y)
+    int CZPyF_Add(int x, int y)
     {
         return x + y;
     }
 
-    void Sort_int(int64_t *begin, uint32_t n)
+    void CZPyF_Sort_int(int64_t *begin, uint32_t n)
     {
         CZ::Sort(begin, begin + n, CZ::SortAccessories::QUICK_SORT, 1);
     }

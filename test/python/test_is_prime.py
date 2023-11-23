@@ -6,7 +6,7 @@ import time
 def test_correctiness(libdsa):
     for i in range(100):
         num = random.randint(0, 1000)
-        isPrime = bool(libdsa.Is_prime(num, 1))
+        isPrime = bool(libdsa.CZPyF_Is_prime(num, 1))
         if isPrime:
             print("%d is prime." % num)
         else:
@@ -45,13 +45,13 @@ def test_correctiness_and_prof(libdsa):
             res.append(isPrime)
         
         for i in range(len(nums)):
-            isPrime = bool(libdsa.Is_prime(nums[i], 0))
+            isPrime = bool(libdsa.CZPyF_Is_prime(nums[i], 0))
             if isPrime != res[i]:
                 print("Error for %d, python: %d, cpp: %d" % (nums[i], res[i], isPrime))
 
         start = time.time()
         for num in nums:
-            isPrime = bool(libdsa.Is_prime(num, 0))
+            isPrime = bool(libdsa.CZPyF_Is_prime(num, 0))
         finish = time.time()
         print("------ Cpp is prime violence costs: %.6f seconds" % (finish - start))
         print()

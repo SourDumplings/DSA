@@ -19,7 +19,7 @@ def test_sort_prof(libdsa):
 
         numsArray = (ctypes.c_int64 * len(nums))(*nums)
         start = time.time()
-        libdsa.Sort_int(numsArray, NUMS)
+        libdsa.CZPyF_Sort_int(numsArray, NUMS)
         finish = time.time()
         print("Cpp sort costs %.6f seconds" % (finish - start))
 

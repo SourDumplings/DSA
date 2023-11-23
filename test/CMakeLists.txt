@@ -20,7 +20,7 @@ TARGET_SOURCES(dsa-test PUBLIC ${sources})
 # 依赖静态库
 # TARGET_LINK_LIBRARIES(dsa-test dsa)
 # 依赖动态库
-TARGET_LINK_LIBRARIES(dsa-test libdsa.so)
+TARGET_LINK_LIBRARIES(dsa-test libdsa.so /usr/local/lib/liblua-5.4.4.so)
 
 # 安装 graphviz 输出的依赖关系图
 INSTALL(FILES ${PROJECT_BINARY_DIR}/dsa-test_dependencies.png DESTINATION ${dist_dir}/doc)
