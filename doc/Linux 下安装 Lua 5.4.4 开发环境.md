@@ -31,3 +31,7 @@ make install
 ```
 
 同样我们可以在源码根目录下执行`make uninstall`可以进行卸载。
+
+# 参考资料
+1. https://blog.spreendigital.de/2020/05/24/how-to-compile-lua-5-4-0-for-linux-as-a-shared-library/
+2. [centos下安装lua5.1.4](https://blog.csdn.net/weixin_34242658/article/details/92457503)

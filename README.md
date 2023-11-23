@@ -9,7 +9,7 @@
 # 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：12.6.0，与 CMakeLists.txt 同步
+版本号：12.6.1，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -160,6 +160,7 @@
 7. 《Database System Concepts》6th-Abraham Silberschatz, Henry F. Korth, S. Sudarshan
 8. 《STL 源码剖析》-侯捷
 9. 《C++ 内存管理》-侯捷
+10. https://github.com/SourDumplings/TestLua
 
 # TODO
 - 实现树状数组（区间）
