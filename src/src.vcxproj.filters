@@ -585,6 +585,9 @@
     <ClInclude Include="Base\BaseDef.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Lua\Lua_interfaces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Algorithms\Hash.cpp">
@@ -636,6 +639,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Algorithms\Pow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lua\Lua_interfaces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

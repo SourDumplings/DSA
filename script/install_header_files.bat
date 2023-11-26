@@ -15,8 +15,10 @@ set dest_dir=%2
 echo source_dir: %source_dir%
 echo dest_dir: %dest_dir%
 
-if not exist %dest_dir% (
-    mkdir %dest_dir%
+if exist %dest_dir% (
+    rmdir /s /q %dest_dir%
+    echo Old %dest_dir% has been removed.
 )
+mkdir %dest_dir%
 
 xcopy /s /e "%source_dir%\*.h" "%dest_dir%"
