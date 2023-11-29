@@ -219,6 +219,12 @@
       <AdditionalDependencies>dsa.lib;lua54.lib</AdditionalDependencies>
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
+    <PostBuildEvent>
+      <Command>$(SolutionDir)\script\install_external_dlls.bat $(OutDir) $(LuaLibPath)\lua54.dll</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>安装第三方 dll</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -241,6 +247,12 @@
       <AdditionalDependencies>dsa.lib;lua54.lib</AdditionalDependencies>
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
+    <PostBuildEvent>
+      <Command>$(SolutionDir)\script\install_external_dlls.bat $(OutDir) $(LuaLibPath)\lua54.dll</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>安装第三方 dll</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -259,6 +271,12 @@
       <AdditionalDependencies>dsa.lib;lua54.lib</AdditionalDependencies>
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
+    <PostBuildEvent>
+      <Command>$(SolutionDir)\script\install_external_dlls.bat $(OutDir) $(LuaLibPath)\lua54.dll</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>安装第三方 dll</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -281,6 +299,12 @@
       <AdditionalDependencies>dsa.lib;lua54.lib</AdditionalDependencies>
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
+    <PostBuildEvent>
+      <Command>$(SolutionDir)\script\install_external_dlls.bat $(OutDir) $(LuaLibPath)\lua54.dll</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>安装第三方 dll</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

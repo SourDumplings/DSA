@@ -9,7 +9,7 @@
 # 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：12.7.0，与 CMakeLists.txt 同步
+版本号：12.7.1，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -28,7 +28,7 @@
 3. 调试器：推荐 GNU gdb (GDB) 10.2
 4. CMake：3.17.5
 5. Graphviz（DEBUG 模式需要）
-6. Lua：Lua 5.4.4 开发环境
+6. Lua：Lua 5.4.4 开发环境，见文档`doc/Linux 下安装 Lua 5.4.4 开发环境.md`
 
 ### Windows
 1. C++ 语言标准：C++17
@@ -50,7 +50,6 @@
 - 在项目构建好后，执行`script/run_test.sh`脚本（Linux）即可运行单元测试（VSCode task: Run test）
 - 可以运行 Python3 脚本进行测试，执行`script/run_python_test.sh`脚本（Windows 下为`script/run_python_test.bat`）即可（VSCode task: Run python test，与 Asan 不太兼容，故只支持 RELEASE 模式构建的）
 - Windows 下用 VS 打开项目解决方案`DSA.sln`后将 test 项目设置为启动项目
-- Windows 下需要将`lua54.dll`放在`test.exe`文件同目录下才能运行
 
 ## 性能分析
 - Vtune：使用 Vtune 工具进行性能分析（推荐）
@@ -167,4 +166,3 @@
 - 实现树状数组（区间）
 - 实现 KD 树
 - 实现前缀树 Trie 类模板
-- 添加自动安装第三方`dll`文件的机制
