@@ -17,10 +17,10 @@ ADD_EXECUTABLE(dsa-test)
 AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/test sources)
 TARGET_SOURCES(dsa-test PUBLIC ${sources})
 
-# 依赖静态库 TODO 待测试
-# TARGET_LINK_LIBRARIES(dsa-test dsa lua)
+# 依赖静态库
+TARGET_LINK_LIBRARIES(dsa-test dsa lua dl)
 # 依赖动态库
-TARGET_LINK_LIBRARIES(dsa-test libdsa.so /usr/local/lib/liblua-5.4.4.so)
+# TARGET_LINK_LIBRARIES(dsa-test libdsa.so /usr/local/lib/liblua-5.4.4.so)
 
 # 安装 graphviz 输出的依赖关系图
 INSTALL(FILES ${PROJECT_BINARY_DIR}/dsa-test_dependencies.png DESTINATION ${dist_dir}/doc)

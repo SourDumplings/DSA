@@ -9,12 +9,12 @@
 # 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：13.0.1，与 CMakeLists.txt 同步
+版本号：13.1.0，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
 
-我自己实现的各种数据结构和算法的模板，采用 C++ 语言实现，统一在 CZ 命名空间中，支持跨平台
+我自己实现的各种数据结构和算法的模板，采用 C++17 语言实现，统一在 CZ 命名空间中，支持跨平台
 
 # 使用说明
 ## 环境要求
@@ -23,17 +23,15 @@
 2. 容器元素必须支持`operator<<`（DEBUG 模式需要）
 
 ### Linux
-1. C++ 语言标准：C++11
-2. 编译器：gcc version 8.3.1 20190311 (Red Hat 8.3.1-3) (GCC)
-3. 调试器：推荐 GNU gdb (GDB) 10.2
-4. CMake：3.17.5
-5. Graphviz（DEBUG 模式需要）
-6. Lua：Lua 5.4.4 开发环境，见文档`doc/Linux 下安装 Lua 5.4.4 开发环境.md`
+1. 编译器：gcc version 8.3.1 20190311 (Red Hat 8.3.1-3) (GCC)
+2. 调试器：推荐 GNU gdb (GDB) 10.2
+3. CMake：3.17.5
+4. Graphviz（DEBUG 模式需要）
+5. Lua：Lua 5.4.4 开发环境，见文档`doc/Linux 下安装 Lua 5.4.4 开发环境.md`
 
 ### Windows
-1. C++ 语言标准：C++17
-2. 编译器：Visual Studio 2022 (v143)
-3. Lua：Lua 5.4.2 开发环境：安装后需要改配置，见文档`doc/Windows 下安装 Lua 5.4.2 开发环境并配置.md`
+1. 编译器：Visual Studio 2022 (v143)
+2. Lua：Lua 5.4.2 开发环境：安装后需要改配置，见文档`doc/Windows 下安装 Lua 5.4.2 开发环境并配置.md`
 
 ## 构建步骤
 以 Linux 平台为例，Windows 打开`DSA.sln`用 Visual Studio 2022 Build 即可：
