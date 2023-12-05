@@ -492,6 +492,334 @@ STL sort cost: 3025 micro seconds this round.
 --------------------------------------------------------
 --------------------- Test finish ----------------------
 --------------------------------------------------------
+
+--------------------------------------------------------
+Operating System: Windows
+CPU Architecture: x86-64, 64-bit
+Compiler: MSVC, Version: 1936
+Cpp version: 199711
+------------------ Test on DEBUG mode ------------------
+--------------------- Test start -----------------------
+--------------------------------------------------------
+--------------------------------------------------------
+Test round 0....
+SELECT_SORT version 0 cost: 14694556 micro seconds this round.
+QUICK_SORT version 0 cost: 11273 micro seconds this round.
+QUICK_SORT version 1 cost: 9649 micro seconds this round.
+HEAP_SORT version 0 cost: 70793 micro seconds this round.
+SHELL_SORT version 0 cost: 22612 micro seconds this round.
+SHELL_SORT version 1 cost: 44724 micro seconds this round.
+SHELL_SORT version 2 cost: 23311 micro seconds this round.
+SHELL_SORT version 3 cost: 53662 micro seconds this round.
+BUBBLE_SORT version 0 cost: 38148482 micro seconds this round.
+BUBBLE_SORT version 1 cost: 38351208 micro seconds this round.
+INSERTION_SORT version 0 cost: 11572925 micro seconds this round.
+MERGE_SORT version 0 cost: 263904 micro seconds this round.
+STL sort cost: 19894 micro seconds this round.
+
+Test round 1....
+SELECT_SORT version 0 cost: 15799973 micro seconds this round.
+QUICK_SORT version 0 cost: 11665 micro seconds this round.
+QUICK_SORT version 1 cost: 10260 micro seconds this round.
+HEAP_SORT version 0 cost: 74444 micro seconds this round.
+SHELL_SORT version 0 cost: 22958 micro seconds this round.
+SHELL_SORT version 1 cost: 49546 micro seconds this round.
+SHELL_SORT version 2 cost: 24579 micro seconds this round.
+SHELL_SORT version 3 cost: 61829 micro seconds this round.
+BUBBLE_SORT version 0 cost: 39392208 micro seconds this round.
+BUBBLE_SORT version 1 cost: 38163535 micro seconds this round.
+INSERTION_SORT version 0 cost: 10144923 micro seconds this round.
+MERGE_SORT version 0 cost: 221311 micro seconds this round.
+STL sort cost: 19684 micro seconds this round.
+
+Test round 2....
+SELECT_SORT version 0 cost: 14277097 micro seconds this round.
+QUICK_SORT version 0 cost: 10912 micro seconds this round.
+QUICK_SORT version 1 cost: 11838 micro seconds this round.
+HEAP_SORT version 0 cost: 1078961 micro seconds this round.
+SHELL_SORT version 0 cost: 22567 micro seconds this round.
+SHELL_SORT version 1 cost: 52605 micro seconds this round.
+SHELL_SORT version 2 cost: 24535 micro seconds this round.
+SHELL_SORT version 3 cost: 64264 micro seconds this round.
+BUBBLE_SORT version 0 cost: 38117050 micro seconds this round.
+BUBBLE_SORT version 1 cost: 38158686 micro seconds this round.
+INSERTION_SORT version 0 cost: 10219586 micro seconds this round.
+MERGE_SORT version 0 cost: 222760 micro seconds this round.
+STL sort cost: 20704 micro seconds this round.
+
+Test round 3....
+SELECT_SORT version 0 cost: 15118344 micro seconds this round.
+QUICK_SORT version 0 cost: 11054 micro seconds this round.
+QUICK_SORT version 1 cost: 9512 micro seconds this round.
+HEAP_SORT version 0 cost: 70411 micro seconds this round.
+SHELL_SORT version 0 cost: 22166 micro seconds this round.
+SHELL_SORT version 1 cost: 68205 micro seconds this round.
+SHELL_SORT version 2 cost: 23398 micro seconds this round.
+SHELL_SORT version 3 cost: 80663 micro seconds this round.
+BUBBLE_SORT version 0 cost: 38002918 micro seconds this round.
+BUBBLE_SORT version 1 cost: 38079371 micro seconds this round.
+INSERTION_SORT version 0 cost: 10129101 micro seconds this round.
+MERGE_SORT version 0 cost: 228128 micro seconds this round.
+STL sort cost: 20035 micro seconds this round.
+
+Test round 4....
+SELECT_SORT version 0 cost: 15241161 micro seconds this round.
+QUICK_SORT version 0 cost: 11197 micro seconds this round.
+QUICK_SORT version 1 cost: 9283 micro seconds this round.
+HEAP_SORT version 0 cost: 76081 micro seconds this round.
+SHELL_SORT version 0 cost: 21820 micro seconds this round.
+SHELL_SORT version 1 cost: 57257 micro seconds this round.
+SHELL_SORT version 2 cost: 22994 micro seconds this round.
+SHELL_SORT version 3 cost: 67272 micro seconds this round.
+BUBBLE_SORT version 0 cost: 38212723 micro seconds this round.
+BUBBLE_SORT version 1 cost: 38305489 micro seconds this round.
+INSERTION_SORT version 0 cost: 11215662 micro seconds this round.
+MERGE_SORT version 0 cost: 223639 micro seconds this round.
+STL sort cost: 20550 micro seconds this round.
+
+Test round 5....
+SELECT_SORT version 0 cost: 14237218 micro seconds this round.
+QUICK_SORT version 0 cost: 11077 micro seconds this round.
+QUICK_SORT version 1 cost: 9796 micro seconds this round.
+HEAP_SORT version 0 cost: 70538 micro seconds this round.
+SHELL_SORT version 0 cost: 22262 micro seconds this round.
+SHELL_SORT version 1 cost: 51592 micro seconds this round.
+SHELL_SORT version 2 cost: 22820 micro seconds this round.
+SHELL_SORT version 3 cost: 67421 micro seconds this round.
+BUBBLE_SORT version 0 cost: 38155565 micro seconds this round.
+BUBBLE_SORT version 1 cost: 39236826 micro seconds this round.
+INSERTION_SORT version 0 cost: 10126963 micro seconds this round.
+MERGE_SORT version 0 cost: 223103 micro seconds this round.
+STL sort cost: 20694 micro seconds this round.
+
+Test round 6....
+SELECT_SORT version 0 cost: 14135142 micro seconds this round.
+QUICK_SORT version 0 cost: 11276 micro seconds this round.
+QUICK_SORT version 1 cost: 9591 micro seconds this round.
+HEAP_SORT version 0 cost: 70478 micro seconds this round.
+SHELL_SORT version 0 cost: 22787 micro seconds this round.
+SHELL_SORT version 1 cost: 51867 micro seconds this round.
+SHELL_SORT version 2 cost: 22910 micro seconds this round.
+SHELL_SORT version 3 cost: 61556 micro seconds this round.
+BUBBLE_SORT version 0 cost: 39227780 micro seconds this round.
+BUBBLE_SORT version 1 cost: 39785568 micro seconds this round.
+INSERTION_SORT version 0 cost: 10711527 micro seconds this round.
+MERGE_SORT version 0 cost: 224246 micro seconds this round.
+STL sort cost: 19727 micro seconds this round.
+
+Test round 7....
+SELECT_SORT version 0 cost: 15446675 micro seconds this round.
+QUICK_SORT version 0 cost: 11469 micro seconds this round.
+QUICK_SORT version 1 cost: 9483 micro seconds this round.
+HEAP_SORT version 0 cost: 70762 micro seconds this round.
+SHELL_SORT version 0 cost: 22040 micro seconds this round.
+SHELL_SORT version 1 cost: 65032 micro seconds this round.
+SHELL_SORT version 2 cost: 23578 micro seconds this round.
+SHELL_SORT version 3 cost: 78750 micro seconds this round.
+BUBBLE_SORT version 0 cost: 38115738 micro seconds this round.
+BUBBLE_SORT version 1 cost: 39230891 micro seconds this round.
+INSERTION_SORT version 0 cost: 10305431 micro seconds this round.
+MERGE_SORT version 0 cost: 222152 micro seconds this round.
+STL sort cost: 20128 micro seconds this round.
+
+Test round 8....
+SELECT_SORT version 0 cost: 14114463 micro seconds this round.
+QUICK_SORT version 0 cost: 11137 micro seconds this round.
+QUICK_SORT version 1 cost: 9758 micro seconds this round.
+HEAP_SORT version 0 cost: 70789 micro seconds this round.
+SHELL_SORT version 0 cost: 22273 micro seconds this round.
+SHELL_SORT version 1 cost: 52351 micro seconds this round.
+SHELL_SORT version 2 cost: 22004 micro seconds this round.
+SHELL_SORT version 3 cost: 59332 micro seconds this round.
+BUBBLE_SORT version 0 cost: 39027460 micro seconds this round.
+BUBBLE_SORT version 1 cost: 36881803 micro seconds this round.
+INSERTION_SORT version 0 cost: 10055113 micro seconds this round.
+MERGE_SORT version 0 cost: 1219009 micro seconds this round.
+STL sort cost: 19891 micro seconds this round.
+
+Test round 9....
+SELECT_SORT version 0 cost: 14068961 micro seconds this round.
+QUICK_SORT version 0 cost: 11030 micro seconds this round.
+QUICK_SORT version 1 cost: 9334 micro seconds this round.
+HEAP_SORT version 0 cost: 69361 micro seconds this round.
+SHELL_SORT version 0 cost: 22296 micro seconds this round.
+SHELL_SORT version 1 cost: 49805 micro seconds this round.
+SHELL_SORT version 2 cost: 23124 micro seconds this round.
+SHELL_SORT version 3 cost: 56836 micro seconds this round.
+BUBBLE_SORT version 0 cost: 37893125 micro seconds this round.
+BUBBLE_SORT version 1 cost: 38157281 micro seconds this round.
+INSERTION_SORT version 0 cost: 10305221 micro seconds this round.
+MERGE_SORT version 0 cost: 1222818 micro seconds this round.
+STL sort cost: 20080 micro seconds this round.
+
+--------------------------------------------------------
+--------------------------------------------------------
+--------------------- Test finish ----------------------
+--------------------------------------------------------
+
+--------------------------------------------------------
+Operating System: Windows
+CPU Architecture: x86-64, 64-bit
+Compiler: MSVC, Version: 1936
+Cpp version: 199711
+------------------ Test on RELEASE mode ------------------
+--------------------- Test start -----------------------
+--------------------------------------------------------
+--------------------------------------------------------
+Test round 0....
+SELECT_SORT version 0 cost: 4088008 micro seconds this round.
+QUICK_SORT version 0 cost: 2641 micro seconds this round.
+QUICK_SORT version 1 cost: 2824 micro seconds this round.
+HEAP_SORT version 0 cost: 3244 micro seconds this round.
+SHELL_SORT version 0 cost: 2679 micro seconds this round.
+SHELL_SORT version 1 cost: 5899 micro seconds this round.
+SHELL_SORT version 2 cost: 4962 micro seconds this round.
+SHELL_SORT version 3 cost: 6377 micro seconds this round.
+BUBBLE_SORT version 0 cost: 7892124 micro seconds this round.
+BUBBLE_SORT version 1 cost: 6887208 micro seconds this round.
+INSERTION_SORT version 0 cost: 1201489 micro seconds this round.
+MERGE_SORT version 0 cost: 5141 micro seconds this round.
+STL sort cost: 2307 micro seconds this round.
+
+Test round 1....
+SELECT_SORT version 0 cost: 3940551 micro seconds this round.
+QUICK_SORT version 0 cost: 2507 micro seconds this round.
+QUICK_SORT version 1 cost: 2377 micro seconds this round.
+HEAP_SORT version 0 cost: 3138 micro seconds this round.
+SHELL_SORT version 0 cost: 2638 micro seconds this round.
+SHELL_SORT version 1 cost: 5692 micro seconds this round.
+SHELL_SORT version 2 cost: 4410 micro seconds this round.
+SHELL_SORT version 3 cost: 5820 micro seconds this round.
+BUBBLE_SORT version 0 cost: 6841145 micro seconds this round.
+BUBBLE_SORT version 1 cost: 7933051 micro seconds this round.
+INSERTION_SORT version 0 cost: 1203324 micro seconds this round.
+MERGE_SORT version 0 cost: 5083 micro seconds this round.
+STL sort cost: 2312 micro seconds this round.
+
+Test round 2....
+SELECT_SORT version 0 cost: 3954727 micro seconds this round.
+QUICK_SORT version 0 cost: 2486 micro seconds this round.
+QUICK_SORT version 1 cost: 2359 micro seconds this round.
+HEAP_SORT version 0 cost: 3370 micro seconds this round.
+SHELL_SORT version 0 cost: 2725 micro seconds this round.
+SHELL_SORT version 1 cost: 5182 micro seconds this round.
+SHELL_SORT version 2 cost: 4548 micro seconds this round.
+SHELL_SORT version 3 cost: 5628 micro seconds this round.
+BUBBLE_SORT version 0 cost: 6808610 micro seconds this round.
+BUBBLE_SORT version 1 cost: 7871797 micro seconds this round.
+INSERTION_SORT version 0 cost: 208177 micro seconds this round.
+MERGE_SORT version 0 cost: 7018 micro seconds this round.
+STL sort cost: 2547 micro seconds this round.
+
+Test round 3....
+SELECT_SORT version 0 cost: 4046368 micro seconds this round.
+QUICK_SORT version 0 cost: 2570 micro seconds this round.
+QUICK_SORT version 1 cost: 2416 micro seconds this round.
+HEAP_SORT version 0 cost: 3084 micro seconds this round.
+SHELL_SORT version 0 cost: 2651 micro seconds this round.
+SHELL_SORT version 1 cost: 5009 micro seconds this round.
+SHELL_SORT version 2 cost: 4409 micro seconds this round.
+SHELL_SORT version 3 cost: 5242 micro seconds this round.
+BUBBLE_SORT version 0 cost: 6862810 micro seconds this round.
+BUBBLE_SORT version 1 cost: 7811539 micro seconds this round.
+INSERTION_SORT version 0 cost: 191776 micro seconds this round.
+MERGE_SORT version 0 cost: 4924 micro seconds this round.
+STL sort cost: 2302 micro seconds this round.
+
+Test round 4....
+SELECT_SORT version 0 cost: 3932448 micro seconds this round.
+QUICK_SORT version 0 cost: 2476 micro seconds this round.
+QUICK_SORT version 1 cost: 2503 micro seconds this round.
+HEAP_SORT version 0 cost: 3008 micro seconds this round.
+SHELL_SORT version 0 cost: 2713 micro seconds this round.
+SHELL_SORT version 1 cost: 5606 micro seconds this round.
+SHELL_SORT version 2 cost: 4223 micro seconds this round.
+SHELL_SORT version 3 cost: 5681 micro seconds this round.
+BUBBLE_SORT version 0 cost: 7762839 micro seconds this round.
+BUBBLE_SORT version 1 cost: 7808345 micro seconds this round.
+INSERTION_SORT version 0 cost: 188611 micro seconds this round.
+MERGE_SORT version 0 cost: 4792 micro seconds this round.
+STL sort cost: 2314 micro seconds this round.
+
+Test round 5....
+SELECT_SORT version 0 cost: 3932761 micro seconds this round.
+QUICK_SORT version 0 cost: 2533 micro seconds this round.
+QUICK_SORT version 1 cost: 2325 micro seconds this round.
+HEAP_SORT version 0 cost: 3206 micro seconds this round.
+SHELL_SORT version 0 cost: 2669 micro seconds this round.
+SHELL_SORT version 1 cost: 5060 micro seconds this round.
+SHELL_SORT version 2 cost: 4252 micro seconds this round.
+SHELL_SORT version 3 cost: 5521 micro seconds this round.
+BUBBLE_SORT version 0 cost: 7767366 micro seconds this round.
+BUBBLE_SORT version 1 cost: 7797240 micro seconds this round.
+INSERTION_SORT version 0 cost: 190461 micro seconds this round.
+MERGE_SORT version 0 cost: 4852 micro seconds this round.
+STL sort cost: 2278 micro seconds this round.
+
+Test round 6....
+SELECT_SORT version 0 cost: 3930827 micro seconds this round.
+QUICK_SORT version 0 cost: 2487 micro seconds this round.
+QUICK_SORT version 1 cost: 2511 micro seconds this round.
+HEAP_SORT version 0 cost: 3127 micro seconds this round.
+SHELL_SORT version 0 cost: 3110 micro seconds this round.
+SHELL_SORT version 1 cost: 5483 micro seconds this round.
+SHELL_SORT version 2 cost: 4456 micro seconds this round.
+SHELL_SORT version 3 cost: 5963 micro seconds this round.
+BUBBLE_SORT version 0 cost: 7765522 micro seconds this round.
+BUBBLE_SORT version 1 cost: 6777836 micro seconds this round.
+INSERTION_SORT version 0 cost: 1197792 micro seconds this round.
+MERGE_SORT version 0 cost: 4797 micro seconds this round.
+STL sort cost: 2271 micro seconds this round.
+
+Test round 7....
+SELECT_SORT version 0 cost: 3933800 micro seconds this round.
+QUICK_SORT version 0 cost: 2500 micro seconds this round.
+QUICK_SORT version 1 cost: 2325 micro seconds this round.
+HEAP_SORT version 0 cost: 3059 micro seconds this round.
+SHELL_SORT version 0 cost: 2703 micro seconds this round.
+SHELL_SORT version 1 cost: 5231 micro seconds this round.
+SHELL_SORT version 2 cost: 4422 micro seconds this round.
+SHELL_SORT version 3 cost: 5576 micro seconds this round.
+BUBBLE_SORT version 0 cost: 6766273 micro seconds this round.
+BUBBLE_SORT version 1 cost: 7788983 micro seconds this round.
+INSERTION_SORT version 0 cost: 188678 micro seconds this round.
+MERGE_SORT version 0 cost: 4946 micro seconds this round.
+STL sort cost: 2333 micro seconds this round.
+
+Test round 8....
+SELECT_SORT version 0 cost: 3938473 micro seconds this round.
+QUICK_SORT version 0 cost: 2650 micro seconds this round.
+QUICK_SORT version 1 cost: 2336 micro seconds this round.
+HEAP_SORT version 0 cost: 3200 micro seconds this round.
+SHELL_SORT version 0 cost: 3237 micro seconds this round.
+SHELL_SORT version 1 cost: 7011 micro seconds this round.
+SHELL_SORT version 2 cost: 4534 micro seconds this round.
+SHELL_SORT version 3 cost: 6163 micro seconds this round.
+BUBBLE_SORT version 0 cost: 7790368 micro seconds this round.
+BUBBLE_SORT version 1 cost: 7780954 micro seconds this round.
+INSERTION_SORT version 0 cost: 200520 micro seconds this round.
+MERGE_SORT version 0 cost: 4753 micro seconds this round.
+STL sort cost: 2492 micro seconds this round.
+
+Test round 9....
+SELECT_SORT version 0 cost: 3931846 micro seconds this round.
+QUICK_SORT version 0 cost: 2567 micro seconds this round.
+QUICK_SORT version 1 cost: 2322 micro seconds this round.
+HEAP_SORT version 0 cost: 3248 micro seconds this round.
+SHELL_SORT version 0 cost: 2640 micro seconds this round.
+SHELL_SORT version 1 cost: 5040 micro seconds this round.
+SHELL_SORT version 2 cost: 4317 micro seconds this round.
+SHELL_SORT version 3 cost: 5261 micro seconds this round.
+BUBBLE_SORT version 0 cost: 7769883 micro seconds this round.
+BUBBLE_SORT version 1 cost: 7787693 micro seconds this round.
+INSERTION_SORT version 0 cost: 190071 micro seconds this round.
+MERGE_SORT version 0 cost: 4776 micro seconds this round.
+STL sort cost: 2295 micro seconds this round.
+
+--------------------------------------------------------
+--------------------------------------------------------
+--------------------- Test finish ----------------------
+--------------------------------------------------------
  */
 
 bool test_sort()
