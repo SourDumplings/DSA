@@ -20,7 +20,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # -g 用于保存符号信息，用于 GDB 调试
 # -gz=zlib 用于压缩二进制文件大小，这个选项只压缩符号表，不影响性能。唯一的影响是 gdb 二进制文件启动时解压符号表会慢，只支持 Linux
 # -fsanitize=address 启动 asan 内存检测工具，Windows MinGW 不支持
-set(CMAKE_CXX_FLAGS_RELEASE -gz=zlib -O0 -g -Wall -Werror -fno-common -Wno-unused-variable -Wno-unused-but-set-variable)
+set(CMAKE_CXX_FLAGS_RELEASE -gz=zlib -O4 -Wall -Werror -fno-common
+    -Wno-unused-variable -Wno-unused-but-set-variable -Wno-maybe-uninitialized -Wno-strict-aliasing
+)
 set(CMAKE_CXX_FLAGS_DEBUG -gz=zlib -O0 -g -Wall -fsanitize=address -fno-omit-frame-pointer -fno-optimize-sibling-calls
     -Werror -fno-common -Wno-unused-variable -Wno-unused-but-set-variable
 )
@@ -38,9 +40,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin/)
 
 # 版本号管理，如果项目版本号为 a.b.c，则 version = a.b.c，api_version = a.b
 # 动态库版本
-set(version 12.8.1)
+set(version 13.0.0)
 # API 版本
-set(api_version 12.8)
+set(api_version 13.0)
 
 # PROJECT_SOURCE_DIR 即项目根目录，即脚本中的 project_base_dir
 message(STATUS "build_type: " ${BUILD_TYPE})

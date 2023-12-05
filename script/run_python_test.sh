@@ -11,4 +11,6 @@ ulimit -c unlimited
 project_base_dir=$(cd $(dirname $0)/..;pwd)
 cd $project_base_dir/test/python
 
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+
 python3 main.py

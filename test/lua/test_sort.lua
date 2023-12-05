@@ -63,107 +63,35 @@ end
     local MAX_NUM = 10000
 
 --------------------------------------------------------
-Operating System: Windows
-Processor Architecture: 64-bit
-Compiler: 199711
------------------- Test on RELEASE mode ------------------
---------------------- Test start -----------------------
---------------------------------------------------------
---------------------------------------------------------
-PROJECT_SOURCE_DIR = E:/github/DSA
---------- lua script called begin ---------
-Cpp sort costs 1 seconds
-Lua sort costs 4 seconds
-Cpp sort costs 2 seconds
-Lua sort costs 3 seconds
-Cpp sort costs 1 seconds
-Lua sort costs 3 seconds
-Cpp sort costs 1 seconds
-Lua sort costs 2 seconds
-Cpp sort costs 2 seconds
-Lua sort costs 3 seconds
-Cpp sort costs 2 seconds
-Lua sort costs 3 seconds
-Cpp sort costs 1 seconds
-Lua sort costs 3 seconds
-Cpp sort costs 1 seconds
-Lua sort costs 2 seconds
-Cpp sort costs 2 seconds
-Lua sort costs 3 seconds
-Cpp sort costs 2 seconds
-Lua sort costs 3 seconds
---------- lua script called end ---------
---------------------------------------------------------
---------------------------------------------------------
---------------------- Test finish ----------------------
---------------------------------------------------------
-
-
---------------------------------------------------------
-Operating System: Windows
-Processor Architecture: 64-bit
-Compiler: 199711
------------------- Test on DEBUG mode ------------------
---------------------- Test start -----------------------
---------------------------------------------------------
---------------------------------------------------------
-PROJECT_SOURCE_DIR = E:/github/DSA
---------- lua script called begin ---------
-Cpp sort costs 20 seconds
-Lua sort costs 3 seconds
-Cpp sort costs 19 seconds
-Lua sort costs 2 seconds
-Cpp sort costs 19 seconds
-Lua sort costs 3 seconds
-Cpp sort costs 19 seconds
-Lua sort costs 3 seconds
-Cpp sort costs 19 seconds
-Lua sort costs 3 seconds
-Cpp sort costs 22 seconds
-Lua sort costs 3 seconds
-Cpp sort costs 20 seconds
-Lua sort costs 2 seconds
-Cpp sort costs 20 seconds
-Lua sort costs 3 seconds
-Cpp sort costs 20 seconds
-Lua sort costs 3 seconds
-Cpp sort costs 20 seconds
-Lua sort costs 3 seconds
---------- lua script called end ---------
---------------------------------------------------------
---------------------------------------------------------
---------------------- Test finish ----------------------
---------------------------------------------------------
-
---------------------------------------------------------
 Operating System: Linux
-Processor Architecture: 64-bit
-Compiler: 201103
------------------- Test on DEBUG mode ------------------
+CPU Architecture: x86-64, 64-bit
+Compiler: GCC, Version: 8.3.1
+Cpp version: 201103
+------------------ Test on RELEASE mode ------------------
 --------------------- Test start -----------------------
 --------------------------------------------------------
 --------------------------------------------------------
 PROJECT_SOURCE_DIR = /root/DSA
 --------- lua script called begin ---------
-Cpp sort costs 14 seconds
+Cpp sort costs 3 seconds
 Lua sort costs 5 seconds
-Cpp sort costs 13 seconds
+Cpp sort costs 3 seconds
 Lua sort costs 5 seconds
-Cpp sort costs 14 seconds
+Cpp sort costs 2 seconds
 Lua sort costs 5 seconds
-Cpp sort costs 13 seconds
+Cpp sort costs 3 seconds
+Lua sort costs 5 seconds
+Cpp sort costs 3 seconds
+Lua sort costs 5 seconds
+Cpp sort costs 2 seconds
 Lua sort costs 6 seconds
-Cpp sort costs 13 seconds
+Cpp sort costs 3 seconds
 Lua sort costs 5 seconds
-Cpp sort costs 14 seconds
+Cpp sort costs 3 seconds
 Lua sort costs 5 seconds
-Cpp sort costs 14 seconds
-Lua sort costs 5 seconds
-Cpp sort costs 14 seconds
-Lua sort costs 5 seconds
-Cpp sort costs 13 seconds
-Lua sort costs 5 seconds
-Cpp sort costs 14 seconds
+Cpp sort costs 2 seconds
+Lua sort costs 6 seconds
+Cpp sort costs 2 seconds
 Lua sort costs 5 seconds
 --------- lua script called end ---------
 --------------------------------------------------------
@@ -174,33 +102,34 @@ Lua sort costs 5 seconds
 
 --------------------------------------------------------
 Operating System: Linux
-Processor Architecture: 64-bit
-Compiler: 201103
------------------- Test on RELEASE mode ------------------
+CPU Architecture: x86-64, 64-bit
+Compiler: GCC, Version: 8.3.1
+Cpp version: 201103
+------------------ Test on DEBUG mode ------------------
 --------------------- Test start -----------------------
 --------------------------------------------------------
 --------------------------------------------------------
 PROJECT_SOURCE_DIR = /root/DSA
 --------- lua script called begin ---------
-Cpp sort costs 11 seconds
+Cpp sort costs 13 seconds
+Lua sort costs 5 seconds
+Cpp sort costs 13 seconds
 Lua sort costs 6 seconds
-Cpp sort costs 12 seconds
+Cpp sort costs 13 seconds
 Lua sort costs 5 seconds
-Cpp sort costs 11 seconds
+Cpp sort costs 14 seconds
 Lua sort costs 5 seconds
-Cpp sort costs 11 seconds
+Cpp sort costs 14 seconds
+Lua sort costs 5 seconds
+Cpp sort costs 13 seconds
 Lua sort costs 6 seconds
-Cpp sort costs 12 seconds
+Cpp sort costs 13 seconds
 Lua sort costs 5 seconds
-Cpp sort costs 11 seconds
+Cpp sort costs 13 seconds
 Lua sort costs 5 seconds
-Cpp sort costs 11 seconds
+Cpp sort costs 13 seconds
 Lua sort costs 5 seconds
-Cpp sort costs 12 seconds
-Lua sort costs 5 seconds
-Cpp sort costs 11 seconds
-Lua sort costs 5 seconds
-Cpp sort costs 12 seconds
+Cpp sort costs 13 seconds
 Lua sort costs 5 seconds
 --------- lua script called end ---------
 --------------------------------------------------------

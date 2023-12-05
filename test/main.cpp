@@ -62,7 +62,7 @@
 #include <iostream>
 #include <cstdlib>
 
-void print_runtime_info()
+void print_runtime_environment_info()
 {
     // 打印操作系统类型
     #ifdef _WIN32
@@ -76,10 +76,50 @@ void print_runtime_info()
     #endif
 
     // 打印处理器架构
-    std::cout << "Processor Architecture: " << sizeof(void*) * 8 << "-bit" << std::endl;
+    std::cout << "CPU Architecture: ";
+    #if defined(__x86_64__) || defined(_M_X64)
+        std::cout << "x86-64";
+    #elif defined(__i386) || defined(_M_IX86)
+        std::cout << "x86";
+    #elif defined(__arm__) || defined(_M_ARM)
+        std::cout << "ARM";
+    #elif defined(__aarch64__) || defined(_M_ARM64)
+        std::cout << "ARM64";
+    #else
+        std::cout << "Unknown";
+    #endif
+    
+    std::cout << ", " << sizeof(void*) * 8 << "-bit" << std::endl;
 
     // 打印编译器信息
-    std::cout << "Compiler: " << __cplusplus << std::endl;
+    std::cout << "Compiler: ";
+    
+    #ifdef __clang__
+        std::cout << "Clang";
+    #elif defined(__GNUC__)
+        std::cout << "GCC";
+    #elif defined(_MSC_VER)
+        std::cout << "MSVC";
+    #else
+        std::cout << "Unknown";
+    #endif
+    
+    std::cout << ", Version: ";
+    
+    #if defined(__clang__)
+        std::cout << __clang_major__ << "." << __clang_minor__ << "." << __clang_patchlevel__;
+    #elif defined(__GNUC__)
+        std::cout << __GNUC__ << "." << __GNUC_MINOR__ << "." << __GNUC_PATCHLEVEL__;
+    #elif defined(_MSC_VER)
+        std::cout << _MSC_VER;
+    #else
+        std::cout << "Unknown";
+    #endif
+    
+    std::cout << std::endl;
+
+    // 打印语言标准
+    std::cout << "Cpp version: " << __cplusplus << std::endl;
 
     // 打印构建模式
     #ifdef DEBUG
@@ -92,7 +132,7 @@ void print_runtime_info()
 int main(int argc, char const *argv[])
 {
     std::cout << "--------------------------------------------------------" << std::endl;
-    print_runtime_info();
+    print_runtime_environment_info();
 
     std::cout << "--------------------- Test start -----------------------" << std::endl;
     std::cout << "--------------------------------------------------------" << std::endl;

@@ -17,8 +17,8 @@ ADD_EXECUTABLE(dsa-test)
 AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/test sources)
 TARGET_SOURCES(dsa-test PUBLIC ${sources})
 
-# 依赖静态库
-# TARGET_LINK_LIBRARIES(dsa-test dsa)
+# 依赖静态库 TODO 待测试
+# TARGET_LINK_LIBRARIES(dsa-test dsa lua)
 # 依赖动态库
 TARGET_LINK_LIBRARIES(dsa-test libdsa.so /usr/local/lib/liblua-5.4.4.so)
 

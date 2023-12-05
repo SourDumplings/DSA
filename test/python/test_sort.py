@@ -39,72 +39,39 @@ def test_sort_prof(libdsa):
 """ 测试结果：
     NUMS = 10000000
     MAX_NUM = 10000
+
 Running python test on Linux
 Start test sort...
 Test round 0...
-Cpp sort costs 1.487382 seconds
-Python sort costs 3.895837 seconds
+Cpp sort costs 0.593584 seconds
+Python sort costs 4.236202 seconds
 Test round 1...
-Cpp sort costs 1.458537 seconds
-Python sort costs 3.844982 seconds
+Cpp sort costs 0.604615 seconds
+Python sort costs 4.027337 seconds
 Test round 2...
-Cpp sort costs 1.470404 seconds
-Python sort costs 3.887146 seconds
+Cpp sort costs 0.600406 seconds
+Python sort costs 3.930394 seconds
 Test round 3...
-Cpp sort costs 1.462713 seconds
-Python sort costs 3.882015 seconds
+Cpp sort costs 0.599764 seconds
+Python sort costs 3.897122 seconds
 Test round 4...
-Cpp sort costs 1.475652 seconds
-Python sort costs 3.898359 seconds
+Cpp sort costs 0.599517 seconds
+Python sort costs 3.923864 seconds
 Test round 5...
-Cpp sort costs 1.445553 seconds
-Python sort costs 3.897262 seconds
+Cpp sort costs 0.602069 seconds
+Python sort costs 3.887575 seconds
 Test round 6...
-Cpp sort costs 1.434608 seconds
-Python sort costs 3.861650 seconds
+Cpp sort costs 0.598927 seconds
+Python sort costs 3.899475 seconds
 Test round 7...
-Cpp sort costs 1.442214 seconds
-Python sort costs 3.969240 seconds
+Cpp sort costs 0.600208 seconds
+Python sort costs 3.916687 seconds
 Test round 8...
-Cpp sort costs 1.461499 seconds
-Python sort costs 3.877917 seconds
+Cpp sort costs 0.596409 seconds
+Python sort costs 3.930904 seconds
 Test round 9...
-Cpp sort costs 1.460853 seconds
-Python sort costs 3.850148 seconds
-Finish test sort...
-
-Running python test on Windows
-Start test sort...
-Test round 0...   
-Cpp sort costs 0.422794 seconds
-Python sort costs 1.801475 seconds
-Test round 1...
-Cpp sort costs 0.404694 seconds
-Python sort costs 1.786247 seconds
-Test round 2...
-Cpp sort costs 0.413671 seconds
-Python sort costs 2.185446 seconds
-Test round 3...
-Cpp sort costs 0.413137 seconds
-Python sort costs 1.748599 seconds
-Test round 4...
-Cpp sort costs 0.439276 seconds
-Python sort costs 1.857947 seconds
-Test round 5...
-Cpp sort costs 0.405554 seconds
-Python sort costs 1.767668 seconds
-Test round 6...
-Cpp sort costs 0.416102 seconds
-Python sort costs 1.757587 seconds
-Test round 7...
-Cpp sort costs 0.443556 seconds
-Python sort costs 1.793826 seconds
-Test round 8...
-Cpp sort costs 0.413520 seconds
-Python sort costs 2.010154 seconds
-Test round 9...
-Cpp sort costs 0.421472 seconds
-Python sort costs 2.072021 seconds
+Cpp sort costs 0.616687 seconds
+Python sort costs 3.898012 seconds
 Finish test sort...
 
 可以看出 CPP 比 Python 排序上也是有性能优势的
