@@ -46,10 +46,21 @@ bool test_lua()
 #ifdef PROJECT_SOURCE_DIR
     printf("PROJECT_SOURCE_DIR = %s\n", PROJECT_SOURCE_DIR);
     char luaFilePath[100];
-    sprintf(luaFilePath, "%s/test/lua/test_sayhi.lua", PROJECT_SOURCE_DIR);
+    sprintf(luaFilePath, "%s/test/lua/main.lua", PROJECT_SOURCE_DIR);
 
-    /* 运行脚本 */
+    /* 运行脚本 Main 函数 */
     luaL_dofile(L, luaFilePath);
+    lua_getglobal(L, "Main");
+    lua_pushstring(L, PROJECT_SOURCE_DIR);
+    if (lua_pcall(L, 1, 0, 0) != LUA_OK)
+    {
+        const char* errorMessage = lua_tostring(L, -1);
+        // 处理错误
+        lua_pop(L, 1);  // 弹出错误消息
+        printf("Error: %s\n", errorMessage);
+        lua_close(L);
+        return false;
+    }
 #else
     printf("ERROR: No PROJECT_SOURCE_DIR defined!\n");
 #endif

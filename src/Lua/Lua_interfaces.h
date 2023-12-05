@@ -19,18 +19,17 @@
  * @brief 判断是否是素数
  *
  * @param [in] x 被判断目标，必须为非负整数
- * @param [in] method 判断方法：0 暴力方法；1 素数表法；2 正则表达式法
- * @return bool 判断结果
+ * @param [in] method 判断方法（可选）：0 暴力方法；1 素数表法（默认）；2 正则表达式法
+ * @return int 判断结果：0 代表非素数
  */
-bool CZLuaF_Is_prime(uint32_t x, uint8_t method);
+int CZLuaF_Is_prime(lua_State *L);
 
-// /**
-//  * @brief 排序整型数组
-//  * 
-//  * @param [in] begin 数组起始地址
-//  * @param [in] n 数组大小
-//  */
-// void CZLuaF_Sort_int(int64_t *begin, uint32_t n);
+/**
+ * @brief 排序整型数组
+ * 
+ * @param [in] A 待排序的整型数组 table
+ */
+int CZLuaF_Sort_int(lua_State *L);
 
 int CZLuaF_Add(lua_State *L);
 

@@ -21,3 +21,5 @@
 View -> Other Windows -> Property Manager 即可找到各项目 `Property Sheet`，修改用户自定义宏即可。
 
 也可以直接修改配置文件`PropertySheet.props`（推荐）中的`LuaLibPath`的值。
+
+如果使用 VSCode 的话，修改`.vscode/c_cpp_properties.json`中的`includePath`加上 Lua 开发包的安装路径下的`include`目录可以使 editor 识别头文件目录。

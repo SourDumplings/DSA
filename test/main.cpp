@@ -60,23 +60,49 @@
 #include "test_vector.h"
 
 #include <iostream>
+#include <cstdlib>
+
+void print_runtime_info()
+{
+    // 打印操作系统类型
+    #ifdef _WIN32
+        std::cout << "Operating System: Windows" << std::endl;
+    #elif __linux__
+        std::cout << "Operating System: Linux" << std::endl;
+    #elif __APPLE__
+        std::cout << "Operating System: macOS" << std::endl;
+    #else
+        std::cout << "Operating System: Unknown" << std::endl;
+    #endif
+
+    // 打印处理器架构
+    std::cout << "Processor Architecture: " << sizeof(void*) * 8 << "-bit" << std::endl;
+
+    // 打印编译器信息
+    std::cout << "Compiler: " << __cplusplus << std::endl;
+
+    // 打印构建模式
+    #ifdef DEBUG
+    std::cout << "------------------ Test on DEBUG mode ------------------" << std::endl;
+    #else
+    std::cout << "------------------ Test on RELEASE mode ------------------" << std::endl;
+    #endif
+}
 
 int main(int argc, char const *argv[])
 {
+    std::cout << "--------------------------------------------------------" << std::endl;
+    print_runtime_info();
+
     std::cout << "--------------------- Test start -----------------------" << std::endl;
     std::cout << "--------------------------------------------------------" << std::endl;
     std::cout << "--------------------------------------------------------" << std::endl;
-    std::cout << "--------------------------------------------------------" << std::endl;
-
-#ifdef DEBUG
-    std::cout << "------------------ Test on DEBUG mode ------------------" << std::endl;
-#endif
 
     test_lua();
 
     std::cout << "--------------------------------------------------------" << std::endl;
     std::cout << "--------------------------------------------------------" << std::endl;
-    std::cout << "--------------------------------------------------------" << std::endl;
     std::cout << "--------------------- Test finish ----------------------" << std::endl;
+    std::cout << "--------------------------------------------------------" << std::endl;
     return 0;
 }

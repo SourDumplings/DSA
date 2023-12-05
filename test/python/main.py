@@ -15,7 +15,7 @@ def main():
     else:
         libdsa = ctypes.CDLL("../../dist/lib/shared/libdsa.so")
 
-    # test_is_prime.test(libdsa)
+    # 运行 python 测试脚本
     test_sort.test(libdsa)
 
 if __name__ == "__main__":

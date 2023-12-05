@@ -105,7 +105,7 @@ namespace CZ
 
     template <typename It>
     inline void Sort(It begin, It end, const SortAccessories::UnStableSortMethod &method = SortAccessories::QUICK_SORT,
-              const uint32_t version = 0)
+              const uint32_t version = 1)
     {
         Sort(begin, end, std::less<decltype(*begin)>(), method, version);
     }
