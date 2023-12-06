@@ -210,7 +210,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <DisableSpecificWarnings>4819</DisableSpecificWarnings>
-      <AdditionalOptions>/D PROJECT_SOURCE_DIR=\"E:/github/DSA\" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/D PROJECT_SOURCE_DIR=\"E:/codes/DSA\" </AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -236,7 +236,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <DisableSpecificWarnings>4819</DisableSpecificWarnings>
-      <AdditionalOptions>/D PROJECT_SOURCE_DIR=\"E:/github/DSA\" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/D PROJECT_SOURCE_DIR=\"E:/codes/DSA\" </AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -262,7 +262,7 @@
       <ConformanceMode>true</ConformanceMode>
       <DisableSpecificWarnings>4819</DisableSpecificWarnings>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalOptions>/D PROJECT_SOURCE_DIR=\"E:/github/DSA\" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/D PROJECT_SOURCE_DIR=\"E:/codes/DSA\" </AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -288,7 +288,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <DisableSpecificWarnings>4819</DisableSpecificWarnings>
-      <AdditionalOptions>/D PROJECT_SOURCE_DIR=\"E:/github/DSA\" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/D PROJECT_SOURCE_DIR=\"E:/codes/DSA\" </AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
