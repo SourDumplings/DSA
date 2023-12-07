@@ -1,6 +1,6 @@
 function Main(projectSourceDir)
     package.path = package.path .. ";" .. projectSourceDir .. "/test/lua/?.lua"
-    local luaScriptName = "test_sort" -- 要执行的 lua 脚本
+    local luaScriptName = "test_sayhi_add" -- 要执行的 lua 脚本
 
     print("--------- lua script called begin ---------")
     -- print("projectSourceDir: ", projectSourceDir)

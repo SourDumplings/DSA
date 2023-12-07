@@ -157,6 +157,25 @@ namespace CZ
     {
         return "CZString";
     }
+
+    typename CZString::Rank CZString::replace_char(char oldChar, char newChar)
+    {
+        if (oldChar == newChar)
+        {
+            return 0;
+        }
+        
+        Rank replacedNum = 0;
+        for (Iterator it = begin(); it != end(); ++it)
+        {
+            if (*it == oldChar)
+            {
+                *it = newChar;
+                ++replacedNum;
+            }
+        }
+        return replacedNum;
+    }
 } // CZ
 
 #endif // CZ_STRING_IMPLEMENTATION_H

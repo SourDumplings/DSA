@@ -9,7 +9,7 @@
 # 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：13.1.2，与 CMakeLists.txt 同步
+版本号：13.2.0，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -30,11 +30,7 @@
 5. Lua：Lua 5.4.4 开发环境，见文档`doc/Linux 下安装 Lua 5.4.4 开发环境.md`
 
 ### Windows
-1. 编译器：Visual Studio 2022 (v143)，并修改配置：
-- test 项目右键 -> C/C++ -> CommandLine -> AdditionalOptions，其中的`E:/codes/DSA`需要修改替换为项目根目录（注意使用正斜杠`/`）：
-```
-/D PROJECT_SOURCE_DIR=\"E:/codes/DSA\" 
-```
+1. 编译器：Visual Studio 2022 (v143)
 2. Lua：Lua 5.4.2 开发环境：安装后需要改配置，见文档`doc/Windows 下安装 Lua 5.4.2 开发环境并配置.md`
 
 ## 构建步骤
@@ -169,3 +165,4 @@
 - 实现树状数组（区间）
 - 实现 KD 树
 - 实现前缀树 Trie 类模板
+- 增加 《CSAPP》 9.9.12 中的内存分配器 

@@ -67,6 +67,15 @@ namespace CZ
         CZString &operator+=(const CZString &rhs);
 
         const char *get_entity_name() const override;
+
+        /**
+         * @brief 替换字符串中单个字符
+         * 
+         * @param [in] oldChar 
+         * @param [in] newChar 
+         * @return Rank 被替换的字符个数
+         */
+        Rank replace_char(char oldChar, char newChar);
     };
 } // CZ
 
