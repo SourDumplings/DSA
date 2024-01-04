@@ -9,7 +9,7 @@
 # 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：13.2.0，与 CMakeLists.txt 同步
+版本号：13.3.0，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -160,9 +160,10 @@
 8. 《STL 源码剖析》-侯捷
 9. 《C++ 内存管理》-侯捷
 10. https://github.com/SourDumplings/TestLua
+11.《Computer Systems A Programmer's Perspective》3e-Randal E.Bryant, David R. O'Hallaron
 
 # TODO
 - 实现树状数组（区间）
 - 实现 KD 树
 - 实现前缀树 Trie 类模板
-- 增加 《CSAPP》 9.9.12 中的内存分配器 
+- 增加 《CSAPP》 10.4 中的 RIO 读写函数

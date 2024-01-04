@@ -11,6 +11,7 @@
 
 #include "test_algorithms.h"
 #include "test_allocator.h"
+#include "test_allocator2.h"
 #include "test_asan.h"
 #include "test_assert.h"
 #include "test_avltree.h"
@@ -138,7 +139,7 @@ int main(int argc, char const *argv[])
     std::cout << "--------------------------------------------------------" << std::endl;
     std::cout << "--------------------------------------------------------" << std::endl;
 
-    test_lua();
+    test_allocator2();
 
     std::cout << "--------------------------------------------------------" << std::endl;
     std::cout << "--------------------------------------------------------" << std::endl;
