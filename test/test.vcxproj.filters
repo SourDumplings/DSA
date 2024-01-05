@@ -162,6 +162,9 @@
     <ClCompile Include="test_lua.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test_allocator2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test_allocator.h">
@@ -306,6 +309,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="test_lua.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test_allocator2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

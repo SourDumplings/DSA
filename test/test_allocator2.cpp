@@ -11,19 +11,19 @@ static void test_alloc_and_free()
 {
     printf("Test alloc...\n");
     Allocator2 &alloc = Allocator2::get_instance();
-    size_t NUM = 500;
+    constexpr size_t NUM = 500;
     int64_t *A[NUM];
     for (size_t i = 0; i < NUM; i++)
     {
         A[i] = static_cast<int64_t*>(alloc.allocate(sizeof(int64_t)));
-        printf("A[%lu] = %p\n", i, A[i]);
+        std::cout << "A[" << i << "] = " << A[i] << std::endl;
     }
 
     printf("Then free...\n");
     for (size_t i = 0; i < NUM; i++)
     {
         alloc.deallocate(A[i], sizeof(int64_t));
-        printf("A[%lu] = %p freed!\n", i, A[i]);
+        std::cout << "A[" << i << "] = " << A[i] << " freed!" << std::endl;
     }
 }
 
@@ -31,7 +31,7 @@ static void test_alloc_and_free_randomly()
 {
     printf("Test alloc and free randomly...\n");
     Allocator2 &alloc = Allocator2::get_instance();
-    size_t NUM = 500;
+    constexpr size_t NUM = 500;
     Vector<KVPair<int64_t*, bool>> ptrs;
     for (size_t i = 0; i < NUM; i++)
     {
@@ -40,7 +40,7 @@ static void test_alloc_and_free_randomly()
         {
             // alloc
             int64_t *ptr = static_cast<int64_t*>(alloc.allocate(sizeof(int64_t)));
-            printf("%lu: alloc %p succ!\n", i, ptr);
+            std::cout << i << ": alloc " << ptr << " succ!" << std::endl;
             ptrs.push_back(KVPair<int64_t*, bool>(ptr, true));
         }
         else
@@ -52,7 +52,7 @@ static void test_alloc_and_free_randomly()
                 int64_t *ptr = ptrs[idx].key();
                 alloc.deallocate(ptr, sizeof(int64_t));
                 ptrs[idx].value() = false;
-                printf("%lu: %d: dealloc %p succ!\n", i, idx, ptr);
+                std::cout << i << ": " << idx << ": dealloc " << ptr << " succ!" << std::endl;
             }
         }
     }

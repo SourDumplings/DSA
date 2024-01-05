@@ -22,6 +22,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="test_algorithms.cpp" />
     <ClCompile Include="test_allocator.cpp" />
+    <ClCompile Include="test_allocator2.cpp" />
     <ClCompile Include="test_asan.cpp" />
     <ClCompile Include="test_assert.cpp" />
     <ClCompile Include="test_avltree.cpp" />
@@ -72,6 +73,7 @@
   <ItemGroup>
     <ClInclude Include="test_algorithms.h" />
     <ClInclude Include="test_allocator.h" />
+    <ClInclude Include="test_allocator2.h" />
     <ClInclude Include="test_asan.h" />
     <ClInclude Include="test_assert.h" />
     <ClInclude Include="test_avltree.h" />
