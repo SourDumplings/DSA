@@ -25,9 +25,9 @@ void Tree<T>::pre_order_traversal(TreeNode<T> *root, const F &visit)
     if (root)
     {
         visit(root->data());
-        for (auto &c : root->children())
+        for (TreeNode<T> *pChild: root->children())
         {
-            pre_order_traversal(c);
+            pre_order_traversal(pChild);
         }
     }
 }
@@ -38,9 +38,9 @@ void Tree<T>::post_order_traversal(TreeNode<T> *root, const F &visit)
 {
     if (root)
     {
-        for (auto &c : root->children())
+        for (TreeNode<T> *pChild: root->children())
         {
-            post_order_traversal(c);
+            post_order_traversal(pChild);
         }
         visit(root->data());
     }
@@ -59,9 +59,9 @@ void Tree<T>::level_order_traversal(TreeNode<T> *root, const F &visit)
         if (node)
         {
             visit(node->data());
-            for (auto &c : node->children())
+            for (TreeNode<T> *pChild: node->children())
             {
-                q.push(c);
+                q.push(pChild);
             }
         }
     }

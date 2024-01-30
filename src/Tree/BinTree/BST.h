@@ -37,7 +37,7 @@ namespace CZ
 
         // 在BST中查找值为data的结点，找不到返回nullptr
         // 对于有重复元素的树，返回的是最高的结点的指针
-        virtual BSTNode<T> *search_data(const T &data) const;
+        TreeNode<T> *search_data(const T &data) const override;
 
         // 插入 data，成功插入则返回 true
         virtual bool insert_data(const T &data);

@@ -75,7 +75,7 @@ namespace CZ::SearchAccessories
                     const E &temp = *(begin + mi);
                     cmp(value, temp) ? e = mi : b = mi + 1;
                 }
-                return begin + (--b);
+                return begin + b - 1;
             }
         }
         return end;

@@ -100,7 +100,7 @@ namespace CZ
     }
 
     template <typename T>
-    inline BSTNode<T> *BST<T>::search_data(const T &data) const
+    inline TreeNode<T> *BST<T>::search_data(const T &data) const
     {
         return _do_recursion_search(dynamic_cast<BinTreeNode<T> *>(this->root()), data);
     }
@@ -187,7 +187,7 @@ namespace CZ
     template <typename T>
     BSTNode<T> *BST<T>::secede_data(const T &data)
     {
-        BSTNode<T> *target = BST<T>::search_data(data);
+        BSTNode<T> *target = dynamic_cast<BSTNode<T>*>(this->search_data(data));
         ASSERT_DEBUG(target, "this value doesn't in this BST");
         return dynamic_cast<BSTNode<T> *>(this->secede(target));
     }
@@ -270,7 +270,7 @@ namespace CZ
     template <typename T>
     bool BST<T>::remove_data(const T &data)
     {
-        BSTNode<T> *pNode = this->search_data(data);
+        BSTNode<T> *pNode = dynamic_cast<BSTNode<T>*>(this->search_data(data));
         BSTNode<T> *pActualRemovedNode = this->remove(pNode);
         if (pActualRemovedNode)
         {

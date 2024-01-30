@@ -146,7 +146,7 @@ namespace CZ
     template <typename T>
     void Tree<T>::insert(TreeNode<T> *pFather, TreeNode<T> *pNode)
     {
-        ASSERT_DEBUG(pFather, "father is nullptr, cannot be a father");
+        ASSERT_DEBUG(this->empty() || pFather, "father is nullptr, cannot be a father in nonempty tree");
         ASSERT_DEBUG(pNode, "node is nullptr, cannot be a child");
 
         if (_pRoot)
@@ -309,7 +309,43 @@ namespace CZ
 #else
         return this->get_entity_name();
 #endif // DEBUG
+    }
 
+    template <typename T>
+    TreeNode<T>* Tree<T>::search_data(const T &data_) const
+    {
+        if (this->empty())
+        {
+            return nullptr;
+        }
+        if (root()->data() == data_)
+        {
+            return root();
+        }
+        return root()->search_data_in_children(data_);
+    }
+
+    template <typename T>
+    void Tree<T>::print_info(const char *name) const
+    {
+        printf("for tree %s\n", name);
+        printf("it contains %u nodes(including root) and height is %u\n",
+            this->size(), this->height());
+        if (this->root() == nullptr)
+        {
+            printf("%s is an empty bintree\n\n", name);
+        }
+        else
+        {
+#ifdef DEBUG
+            printf("its pre_order_traversal is: \n");
+            pre_order_traversal(this->root());
+            printf("\nits level_order_traversal is: \n");
+            level_order_traversal(this->root());
+#endif
+
+            printf("\n\n");
+        }
     }
 } // CZ
 

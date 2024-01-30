@@ -28,8 +28,15 @@ namespace CZ
     public:
         using Rank = typename List<T>::Rank;
 
+        /**
+         * @brief Construct a new Tree Node object
+         * 
+         * @param [in] data_ 
+         * @param [in] father_ 父结点指针，会对父结点执行 insert_child，默认为 nullptr
+         */
         TreeNode(const T &data_ = T(), TreeNode<T> *father_ = nullptr);
-        virtual ~TreeNode();
+        
+        ~TreeNode() override;
 
         TreeNode<T> *father() const;
         TreeNode<T> *get_root() const;
@@ -64,6 +71,10 @@ namespace CZ
 
         // 设置新的父结点，返回原父结点指针
         TreeNode<T> *set_father(TreeNode<T> *pNode);
+
+        TreeNode<T> *search_data_in_children(const T &data_) const;
+
+        bool has_brothers() const;
 
     private:
         List<TreeNode<T> *> _children;

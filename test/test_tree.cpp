@@ -166,6 +166,7 @@ bool test_tree()
     std::cout << "T2: " << T2 << std::endl;
     std::cout << "T3: " << T3 << std::endl;
 
+    // 测试树的相等与不等
     printf("T == T1: %d\n", T == T1);
     printf("T == T2: %d\n", T == T2);
     printf("T == T3: %d\n", T == T3);
@@ -244,7 +245,13 @@ bool test_tree()
     printf("LCA of 7 and 6 is %d\n", Tl.LCA(n7, n6)->data());
     printf("LCA of 7 and 2 is %d\n", Tl.LCA(n7, n2)->data());
 
-    // 测试树的相等与不等
+    // 测试查找数据
+    printf("Tl contains %d? %d\n", 7, Tl.search_data(7) != nullptr);
+    printf("Tl contains %d? %d\n", 4, Tl.search_data(4) != nullptr);
+    printf("Tl contains %d? %d\n", 45, Tl.search_data(45) != nullptr);
+
+    // 测试 print_info
+    Tl.print_info("Tl");
 
     return true;
 }

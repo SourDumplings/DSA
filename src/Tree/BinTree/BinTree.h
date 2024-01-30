@@ -40,7 +40,7 @@ namespace CZ
         BinTree(const BinTree<T> &t);
         BinTree(BinTree<T> &&t) noexcept;
 
-        virtual void print_info(const char *name = "") const;
+        void print_info(const char *name = "") const override;
 
         // 插入结点作为 father 的孩子，哪个位置空就插到哪，默认插到左孩子位置
         void insert(TreeNode<T> *pFather, TreeNode<T> *pNode) override;

@@ -85,6 +85,16 @@ namespace CZ
 
         const char *get_entity_name() const override;
 
+        /**
+         * @brief 查找数据
+         * 
+         * @param [in] data_ 
+         * @return TreeNode<T>* 数据树结点指针，没找到则返回 nullptr
+         */
+        virtual TreeNode<T>* search_data(const T &data_) const;
+
+        virtual void print_info(const char *name = "") const;
+
     protected:
         TreeNode<T> *_pRoot;
         Rank _size;

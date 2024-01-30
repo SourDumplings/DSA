@@ -54,6 +54,7 @@
 #include "test_sort.h"
 #include "test_splaytree.h"
 #include "test_stack.h"
+#include "test_trietree.h"
 #include "test_tree.h"
 #include "test_treemap.h"
 #include "test_treeset.h"
@@ -139,7 +140,7 @@ int main(int argc, char const *argv[])
     std::cout << "--------------------------------------------------------" << std::endl;
     std::cout << "--------------------------------------------------------" << std::endl;
 
-    test_allocator2();
+    test_trietree();
 
     std::cout << "--------------------------------------------------------" << std::endl;
     std::cout << "--------------------------------------------------------" << std::endl;

@@ -231,6 +231,40 @@ namespace CZ
         _father = pNode;
         return pOldFather;
     }
+
+    template <typename T>
+    TreeNode<T> *TreeNode<T>::search_data_in_children(const T &data_) const
+    {
+        for (TreeNode<T> *pChild : children())
+        {
+            if (pChild == nullptr)
+            {
+                continue;
+            }
+
+            if (pChild->data() == data_)
+            {
+                return pChild;
+            }
+            
+            TreeNode<T> *res = pChild->search_data_in_children(data_);
+            if (res)
+            {
+                return res;
+            }
+        }
+        return nullptr;
+    }
+
+    template <typename T>
+    bool TreeNode<T>::has_brothers() const
+    {
+        if (father() == nullptr)
+        {
+            return false;
+        }
+        return 1 < father()->children().size();
+    }
 } // CZ
 
 #endif // TREE_NODE_IMPLEMENTATION_H

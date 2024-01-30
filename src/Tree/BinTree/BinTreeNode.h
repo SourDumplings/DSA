@@ -74,6 +74,8 @@ namespace CZ
 
         const char *get_entity_name() const override;
 
+        TreeNode<T> *search_data_in_children(const T &data_) const = delete;
+
     private:
         BinTreeNode<T> *_pLeftChild;
         BinTreeNode<T> *_pRightChild;
