@@ -7,7 +7,6 @@
  *
  * @copyright Copyright (c) 2024 SourDumplings
  * 
- * TODO Linux 下用 GCC 编译 dynamic_cast from TreeNode 会失败，需要排查
  *
  */
 

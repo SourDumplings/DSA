@@ -6,9 +6,26 @@
 namespace CZ
 {
     template <typename T>
-    TrieTree<T>::TrieTree() : Tree<T>(nullptr)
+    TrieTree<T>::TrieTree(std::nullptr_t) : TrieTree<T>()
     {
     }
+	
+	template <typename T>
+	TrieTree<T>::TrieTree(TrieTreeNode<T>* pRoot) : Tree<T>(pRoot)
+	{
+	}
+
+	template <typename T>
+	TrieTree<T>::TrieTree(const TrieTree<T>& t)
+	{
+		this->_pRoot = copy_from(t.root());
+		this->_size = t.size();
+	}
+
+	template <typename T>
+	TrieTree<T>::TrieTree(TrieTree<T>&& t) noexcept : Tree<T>(t)
+	{
+	}
 
     template <typename T>
     TrieTree<T>::TrieTree(const Vector<T> &seq) : TrieTree<T>()
@@ -31,8 +48,7 @@ namespace CZ
         }
 
         Rank res = 0;
-        // TrieTreeNode<T> *pRoot = dynamic_cast<TrieTreeNode<T>*>(this->root());
-        TrieTreeNode<T> *pRoot = reinterpret_cast<TrieTreeNode<T>*>(this->root());
+        TrieTreeNode<T> *pRoot = dynamic_cast<TrieTreeNode<T>*>(this->root());
         res = pRoot->insert_child_by_seq(seq, 0);
         this->_size += res;
         return res;
@@ -47,8 +63,7 @@ namespace CZ
             return nullptr;
         }
 
-        // const TrieTreeNode<T> *pRoot = dynamic_cast<const TrieTreeNode<T>*>(this->root());
-        const TrieTreeNode<T> *pRoot = reinterpret_cast<const TrieTreeNode<T>*>(this->root());
+        const TrieTreeNode<T> *pRoot = dynamic_cast<const TrieTreeNode<T>*>(this->root());
         return pRoot->search_seq_in_children(seq);
     }
 
@@ -66,6 +81,26 @@ namespace CZ
         delete pNode;
         return res;
     }
+
+	template <typename T>
+	TrieTreeNode<T>* TrieTree<T>::copy_from(TreeNode<T>* pRoot)
+	{
+		if (pRoot == nullptr)
+		{
+			return nullptr;
+		}
+		TrieTreeNode<T>* copiedRoot = new TrieTreeNode<T>(pRoot->data(), nullptr);
+		for (auto& c : pRoot->children())
+		{
+			TrieTreeNode<T>* pChild = copy_from(c);
+			if (pChild)
+			{
+				pChild->set_father(copiedRoot);
+			}
+			copiedRoot->children().push_back(pChild);
+		}
+		return copiedRoot;
+	}
 }
 
 

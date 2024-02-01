@@ -26,7 +26,10 @@ namespace CZ
     public:
         using Rank = typename Tree<T>::Rank;
 
-        TrieTree();
+        TrieTree(std::nullptr_t);
+        TrieTree(TrieTreeNode<T>* pRoot = nullptr);
+        TrieTree(const TrieTree<T>& t);
+        TrieTree(TrieTree<T>&& t) noexcept;
 
         TrieTree(const Vector<T> &seq);
 
@@ -63,6 +66,8 @@ namespace CZ
 
     private:
         using Tree<T>::insert;
+
+        TrieTreeNode<T>* copy_from(TreeNode<T>* pRoot);
     };
 }
 

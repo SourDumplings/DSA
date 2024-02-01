@@ -30,8 +30,7 @@ namespace CZ
         }
 
         // 孩子中已有目标数据，不需要创建新的孩子结点
-        // return dynamic_cast<TrieTreeNode<T>*>(*it)->insert_child_by_seq(seq, idx + 1);
-        return reinterpret_cast<TrieTreeNode<T>*>(*it)->insert_child_by_seq(seq, idx + 1);
+        return dynamic_cast<TrieTreeNode<T>*>(*it)->insert_child_by_seq(seq, idx + 1);
     }
 
     template <typename T>
