@@ -40,7 +40,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin/)
 
 # 版本号管理，如果项目版本号为 a.b.c，则 version = a.b.c，api_version = a.b
 # 动态库版本
-set(version 13.4.1)
+set(version 13.4.2)
 # API 版本
 set(api_version 13.4)
 
@@ -60,4 +60,4 @@ ADD_SUBDIRECTORY(test)
 set(dist_dir ${PROJECT_SOURCE_DIR}/dist)
 
 # 安装当前工程中doc/目录下的所有内容到doc目录下
-INSTALL(DIRECTORY doc/  DESTINATION   ${dist_dir}/doc)
+INSTALL(DIRECTORY ${PROJECT_SOURCE_DIR}/doc/  DESTINATION   ${dist_dir}/doc)
