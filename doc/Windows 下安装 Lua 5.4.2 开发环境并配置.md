@@ -18,7 +18,7 @@
 修改项目宏定义`LuaLibPath`为 Lua 开发包的安装路径即可。
 
 可以在 VS 中修改每个项目的`PropertySheet`：
-View -> Other Windows -> Property Manager 即可找到各项目 `Property Sheet`，修改用户自定义宏即可。
+View -> Other Windows -> Property Manager（有时候是 View -> Property Manager）即可找到各项目 `Property Sheet`，修改用户自定义宏即可。
 
 也可以直接修改配置文件`PropertySheet.props`（推荐）中的`LuaLibPath`的值。
 
