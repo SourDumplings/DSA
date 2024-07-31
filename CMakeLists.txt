@@ -6,12 +6,15 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     # Windows specific code
 endif()
 
-# 声明一个cmake工程
-set(project_name DSA)
-project(${project_name})
+set(CMAKE_C_COMPILER "/usr/bin/gcc")
+set(CMAKE_CXX_COMPILER "/usr/bin/g++")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+# 声明一个cmake工程
+set(project_name DSA)
+project(${project_name})
 
 # GCC 编译过程对进行优化的程度可分为 5 个等级，分别为 O0~O4，O0 表示不优化（默认选项），从 O1 ~ O4 优化级别越来越高，O4 最高。
 # 所谓优化，例如省略掉代码中从未使用过的变量、直接将常量表达式用结果值代替等等，这些操作会缩减目标文件所包含的代码量，提高最终生成的可执行文件的运行效率。
