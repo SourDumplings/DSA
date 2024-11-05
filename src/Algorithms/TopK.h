@@ -2,7 +2,7 @@
  * @Author: SourDumplings
  * @Date: 2022-12-08 19:19:55
  * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
+ * @Email: sourdumplings@qq.com
  * @Description: TopK 算法，选出序列中第 K 大的元素，即从大到小排序下的第 K 个
  */
 

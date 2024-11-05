@@ -2,7 +2,7 @@
  * @Author: SourDumplings
  * @Date: 2023-01-11 19:04:06
  * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
+ * @Email: sourdumplings@qq.com
  * @Description:
  */
 #include "test_hashset.h"

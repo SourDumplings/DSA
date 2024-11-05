@@ -2,7 +2,7 @@
  * @Author: SourDumplings
  * @Date: 2022-08-19 20:32:06
  * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
+ * @Email: sourdumplings@qq.com
  * @Description: 测试哈希算法
  */
 

@@ -2,7 +2,7 @@
  # @Author: SourDumplings
  # @Date: 2021-11-01 17:00:49
  # @Link: https://github.com/SourDumplings/
- # @Email: changzheng300@foxmail.com
+ # @Email: sourdumplings@qq.com
  # @Description: 运行 Python3 测试脚本，必须要先构建（与 Asan 不兼容）
 ### 
 

@@ -2,7 +2,7 @@
  * @Author: SourDumplings
  * @Date: 2023-02-01 19:24:51
  * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
+ * @Email: sourdumplings@qq.com
  * @Description: 使用红黑树实现的 TreeMap 类模板，保持元素的有序性
 
  不允许重复 key，继承 TreeSet 实现

@@ -1,6 +1,6 @@
 /**
  * @file test.cpp
- * @author  SourDumplings (changzheng300@foxmail.com)
+ * @author  SourDumplings (sourdumplings@qq.com)
  * @brief 单元测试程序
  * @version 1.0.0
  * @date 2023-10-25

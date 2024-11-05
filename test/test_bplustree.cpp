@@ -2,7 +2,7 @@
  * @Author: SourDumplings
  * @Date: 2020-01-30 19:24:03
  * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
+ * @Email: sourdumplings@qq.com
  * @Description: B+树的测试
  */
 #include "test_bplustree.h"

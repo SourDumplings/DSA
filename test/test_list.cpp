@@ -1,6 +1,6 @@
 /*
  @Date    : 2018-05-17 19:28:44
- @Author  : 酸饺子 (changzheng300@foxmail.com)
+ @Author  : 酸饺子 (sourdumplings@qq.com)
  @Link    : https://github.com/SourDumplings
  @Version : $Id$
 */
@@ -148,7 +148,7 @@ bool test_list()
     // 列表排序算法性能比较测试
     /*
     size = 1000 时，输出结果为：
-        [root@VM-0-11-centos script]# sh run_test.sh
+        [root@VM-0-11-centos tool]# sh run_test.sh
         ----- Before sorting ------
         l9.size() = 1000, isSorted: 0
         l10.size() = 1000, isSorted: 0
@@ -165,7 +165,7 @@ bool test_list()
         time used for 3: 0
 
     size = 10000 时，输出结果为：
-        [root@VM-0-11-centos script]# sh run_test.sh
+        [root@VM-0-11-centos tool]# sh run_test.sh
         ----- Before sorting ------
         l9.size() = 10000, isSorted: 0
         l10.size() = 10000, isSorted: 0
@@ -182,7 +182,7 @@ bool test_list()
         time used for 3: 0
 
     size = 50000 时，输出结果为：
-        [root@VM-0-11-centos script]# sh run_test.sh
+        [root@VM-0-11-centos tool]# sh run_test.sh
         ----- Before sorting ------
         l9.size() = 50000, isSorted: 0
         l10.size() = 50000, isSorted: 0

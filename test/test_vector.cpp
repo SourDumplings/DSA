@@ -1,6 +1,6 @@
 /*
  @Date    : 2018-04-06 19:00:46
- @Author  : 酸饺子 (changzheng300@foxmail.com)
+ @Author  : 酸饺子 (sourdumplings@qq.com)
  @Link    : https://github.com/SourDumplings
  @Version : $Id$
 */
@@ -165,15 +165,11 @@ bool test_vector()
     v1 = std::move(v3);
     v1.print_info("v1");
     v3.print_info("v3");
-    v1 = std::move(v1);
-    v1.print_info("v1");
     vs6.print_info("vs6");
     vs7.print_info("vs7");
     vs6 = std::move(vs7);
     vs6.print_info("vs6");
     vs7.print_info("vs7");
-    vs6 = std::move(vs6);
-    vs6.print_info("vs6");
 
     putchar('\n');
     printf("v1[0] = %d, v1[1] = %d\n", v1[0], v1[1]);

@@ -1,6 +1,6 @@
 /**
  * @file Python_interfaces.cpp
- * @author  SourDumplings (changzheng300@foxmail.com)
+ * @author  SourDumplings (sourdumplings@qq.com)
  * @brief
  * @version 1.0.0
  * @date 2023-10-26

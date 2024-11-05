@@ -2,14 +2,14 @@
  * @Author: SourDumplings
  * @Date: 2019-09-21 22:54:58
  * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
+ * @Email: sourdumplings@qq.com
  * @Description: 我自己实现的各种数据结构和算法的模板，用以学习数据结构和算法及编程语言
  -->
 
 # 概述
 ----- 版权所有 酸饺子 -----
 
-版本号：13.4.4，与 CMakeLists.txt 同步
+版本号：13.5.0，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -38,21 +38,21 @@
 - 按照 C++ 开发的一般规范，声明以及模板卸载头文件即 .h 文件中，实现代码写在 .cpp 源文件中
 - 增加源文件需要在`src/CMakeLists.txt`文件中的“添加库源文件”中添加
 - 如果增加了头文件目录，需要在`src/CMakeLists.txt`文件中的“安装头文件”中添加
-- 执行`script/build_debug.sh`进行构建调试版（VSCode task: Build debug），会启用 AddressSanitizer(asan) 有助于内存分析
-- 执行`script/build_release.sh`进行构建发布版（VSCode task: Build release）
+- 执行`tool/build_debug.sh`进行构建调试版（VSCode task: Build debug），会启用 AddressSanitizer(asan) 有助于内存分析
+- 执行`tool/build_release.sh`进行构建发布版（VSCode task: Build release）
 - 构建好的头文件、库文件和文档都在目标目录`dist`目录下
-- 执行`script/clean.sh`可以对项目进行 clean（VSCode task: Clean）
+- 执行`tool/clean.sh`可以对项目进行 clean（VSCode task: Clean）
 
 ## 单元测试
 - 在`test`目录下编写单元测试代码，命名规范为：`test_xxx.cpp`
-- 在项目构建好后，执行`script/run_test.sh`脚本（Linux）即可运行单元测试（VSCode task: Run test）
-- 可以运行 Python3 脚本进行测试，执行`script/run_python_test.sh`脚本（Windows 下为`script/run_python_test.bat`）即可（VSCode task: Run python test，与 Asan 不太兼容，故只支持 RELEASE 模式构建的），Python 脚本的执行入口为`test/python/main.py`
+- 在项目构建好后，执行`tool/run_test.sh`脚本（Linux）即可运行单元测试（VSCode task: Run test）
+- 可以运行 Python3 脚本进行测试，执行`tool/run_python_test.sh`脚本（Windows 下为`tool/run_python_test.bat`）即可（VSCode task: Run python test，与 Asan 不太兼容，故只支持 RELEASE 模式构建的），Python 脚本的执行入口为`test/python/main.py`
 - 可以通过`test/test_lua.cpp`来执行 Lua 测试脚本，执行入口为`test/lua/main.lua`
 - Windows 下用 VS 打开项目解决方案`DSA.sln`后将 test 项目设置为启动项目
 
 ## 性能分析
 - Vtune：使用 Vtune 工具进行性能分析（推荐）
-- gperftools：（与 Asan 不太兼容，故只支持 RELEASE 模式构建的）对于 Linux 环境下，安装 gperftools，运行`script/run_test_with_gperftools.sh`会生成性能分析报告`dsa-test.prof`及`dsa-test.pdf`（VSCode task：Run test on Linux with gperftools）
+- gperftools：（与 Asan 不太兼容，故只支持 RELEASE 模式构建的）对于 Linux 环境下，安装 gperftools，运行`tool/run_test_with_gperftools.sh`会生成性能分析报告`dsa-test.prof`及`dsa-test.pdf`（VSCode task：Run test on Linux with gperftools）
 
 # 内容
 ## 通用算法（模板）

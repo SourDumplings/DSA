@@ -1,6 +1,6 @@
 /**
  * @file Allocator2.h
- * @author  SourDumplings (changzheng300@foxmail.com)
+ * @author  SourDumplings (sourdumplings@qq.com)
  * @brief
  * @version 1.0.0
  * @date 2023-12-08
@@ -42,10 +42,10 @@ namespace CZ
         void deallocate(void *, size_t);
 
     private:
-        static constexpr size_t HEAP_SIZE = 1 << 20; // Heap 的大小，即 Chunk 的最大大小，单位为 Byte
-        static constexpr size_t CHUNK_SIZE = 1 << 12; // Chunk 扩展的单位大小，单位为 Byte
-        static constexpr size_t WSIZE = 4; // 字大小，即 Rank 以及头尾 cookie 的大小，单位为 Byte
-        static constexpr size_t DSIZE = 8; // 双字大小，即 Block 地址对齐的单位，双 Rank 的大小，单位为 Byte
+        const size_t HEAP_SIZE = 1 << 20; // Heap 的大小，即 Chunk 的最大大小，单位为 Byte
+        const size_t CHUNK_SIZE = 1 << 12; // Chunk 扩展的单位大小，单位为 Byte
+        const size_t WSIZE = 4; // 字大小，即 Rank 以及头尾 cookie 的大小，单位为 Byte
+        const size_t DSIZE = 8; // 双字大小，即 Block 地址对齐的单位，双 Rank 的大小，单位为 Byte
 
         /* Chunk 和 Heap */
         char *_pBeginByteOfChunk;

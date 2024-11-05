@@ -2,7 +2,7 @@
  * @Author: SourDumplings
  * @Date: 2022-08-19 20:05:37
  * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
+ * @Email: sourdumplings@qq.com
  * @Description: 哈希算法，将一个对象哈希为一个整数
  */
 

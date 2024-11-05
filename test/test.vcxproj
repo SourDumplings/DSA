@@ -225,7 +225,7 @@
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)\script\install_external_dlls.bat $(OutDir) $(LuaLibPath)\lua54.dll</Command>
+      <Command>$(SolutionDir)\tool\install_external_dlls.bat $(OutDir) $(LuaLibPath)\lua54.dll</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>安装第三方 dll</Message>
@@ -260,7 +260,7 @@
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)\script\install_external_dlls.bat $(OutDir) $(LuaLibPath)\lua54.dll</Command>
+      <Command>$(SolutionDir)\tool\install_external_dlls.bat $(OutDir) $(LuaLibPath)\lua54.dll</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>安装第三方 dll</Message>
@@ -291,7 +291,7 @@
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)\script\install_external_dlls.bat $(OutDir) $(LuaLibPath)\lua54.dll</Command>
+      <Command>$(SolutionDir)\tool\install_external_dlls.bat $(OutDir) $(LuaLibPath)\lua54.dll</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>安装第三方 dll</Message>
@@ -326,7 +326,7 @@
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)\script\install_external_dlls.bat $(OutDir) $(LuaLibPath)\lua54.dll</Command>
+      <Command>$(SolutionDir)\tool\install_external_dlls.bat $(OutDir) $(LuaLibPath)\lua54.dll</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>安装第三方 dll</Message>

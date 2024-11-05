@@ -2,7 +2,7 @@
  * @Author: SourDumplings
  * @Date: 2023-08-06 18:08:18
  * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
+ * @Email: sourdumplings@qq.com
  * @Description:
  */
 #include "Allocator.h"

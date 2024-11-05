@@ -2,7 +2,7 @@
  * @Author: SourDumplings
  * @Date: 2022-10-24 18:41:58
  * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
+ * @Email: sourdumplings@qq.com
  * @Description: 基础容器类模板
  */
 

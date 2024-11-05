@@ -2,7 +2,7 @@
  * @Author: SourDumplings
  * @Date: 2021-11-01 16:09:58
  * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
+ * @Email: sourdumplings@qq.com
  * @Description: 素数表的实现
  */
 

@@ -2,7 +2,7 @@
  * @Author: SourDumplings
  * @Date: 2022-11-16 14:43:07
  * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
+ * @Email: sourdumplings@qq.com
  * @Description: 顺序的可迭代容器抽象类模板
  */
 

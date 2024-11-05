@@ -2,7 +2,7 @@
  * @Author: SourDumplings
  * @Date: 2021-10-31 14:03:24
  * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
+ * @Email: sourdumplings@qq.com
  * @Description: 双向队列类模板
  */
 

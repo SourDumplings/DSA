@@ -2,7 +2,7 @@
  * @Author: SourDumplings
  * @Date: 2022-12-01 11:21:06
  * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
+ * @Email: sourdumplings@qq.com
  * @Description: 
  */
 
@@ -50,7 +50,7 @@ void test_stack_overflow()
 
 void test_memory_leak()
 {
-    // Windows ÏÂ MSVC µÄ Asan Ì½²â²»³öÀ´
+    // Windows ï¿½ï¿½ MSVC ï¿½ï¿½ Asan Ì½ï¿½â²»ï¿½ï¿½ï¿½ï¿½
     int *p = new int(5);
 }
 

@@ -2,7 +2,7 @@
  * @Author: SourDumplings
  * @Date: 2023-08-06 18:04:06
  * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
+ * @Email: sourdumplings@qq.com
  * @Description: 内存分配器
  * 
  * 该分配器的基本原理是预先申请一大块内存，将其分作大小固定的小块，使用链表串起来作为内存池，

@@ -1,6 +1,6 @@
 /**
  * @file TrieTree.h
- * @author  SourDumplings(changzheng300@foxmail.com)
+ * @author  SourDumplings(sourdumplings@qq.com)
  * @brief 前缀树，适用于对序列的存储与查找
  * @version 1.0.0
  * @date 2024-01-09

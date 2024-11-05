@@ -1,6 +1,6 @@
 /**
  * @file test_is_prime.cpp
- * @author  SourDumplings (changzheng300@foxmail.com)
+ * @author  SourDumplings (sourdumplings@qq.com)
  * @brief 测试 Is_prime 算法
  * @version 1.0.0
  * @date 2023-10-12

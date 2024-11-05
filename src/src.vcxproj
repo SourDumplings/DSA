@@ -116,7 +116,7 @@
       <AdditionalDependencies>lua54.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)\script\install_header_files.bat $(SolutionDir)\src $(SolutionDir)\dist\include</Command>
+      <Command>$(SolutionDir)\tool\install_header_files.bat $(SolutionDir)\src $(SolutionDir)\dist\include</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>安装头文件</Message>
@@ -141,7 +141,7 @@
       <AdditionalDependencies>lua54.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)\script\install_header_files.bat $(SolutionDir)\src $(SolutionDir)\dist\include</Command>
+      <Command>$(SolutionDir)\tool\install_header_files.bat $(SolutionDir)\src $(SolutionDir)\dist\include</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>安装头文件</Message>
@@ -162,7 +162,7 @@
       <AdditionalDependencies>lua54.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)\script\install_header_files.bat $(SolutionDir)\src $(SolutionDir)\dist\include</Command>
+      <Command>$(SolutionDir)\tool\install_header_files.bat $(SolutionDir)\src $(SolutionDir)\dist\include</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>安装头文件</Message>
@@ -187,7 +187,7 @@
       <AdditionalDependencies>lua54.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)\script\install_header_files.bat $(SolutionDir)\src $(SolutionDir)\dist\include</Command>
+      <Command>$(SolutionDir)\tool\install_header_files.bat $(SolutionDir)\src $(SolutionDir)\dist\include</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>安装头文件</Message>

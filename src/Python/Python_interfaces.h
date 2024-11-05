@@ -1,6 +1,6 @@
 /**
  * @file Python_interface.h
- * @author  SourDumplings (changzheng300@foxmail.com)
+ * @author  SourDumplings (sourdumplings@qq.com)
  * @brief 可暴露给 Python3 调用的接口
  * @version 1.0.0
  * @date 2023-10-26

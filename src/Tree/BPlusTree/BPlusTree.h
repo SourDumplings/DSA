@@ -2,7 +2,7 @@
  * @Author: SourDumplings
  * @Date: 2020-01-30 17:40:59
  * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
+ * @Email: sourdumplings@qq.com
  * @Description: B+树模板，不支持关键码重复
  *
  * 模板参数：K关键码类型，V数据类型

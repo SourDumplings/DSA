@@ -1,6 +1,6 @@
 /**
  * @file TrieTreeNode.h
- * @author  SourDumplings(changzheng300@foxmail.com)
+ * @author  SourDumplings(sourdumplings@qq.com)
  * @brief 前缀树结点，内部对孩子存储是有序的
  * @version 1.0.0
  * @date 2024-01-19

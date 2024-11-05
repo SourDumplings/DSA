@@ -1,6 +1,6 @@
 /**
  * @file Is_prime.h
- * @author  SourDumplings (changzheng300@foxmail.com)
+ * @author  SourDumplings (sourdumplings@qq.com)
  * @brief 判断素数的算法
  * @version 1.0.0
  * @date 2023-10-11

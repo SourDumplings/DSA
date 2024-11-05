@@ -2,7 +2,7 @@
  * @Author: SourDumplings
  * @Date: 2020-01-30 18:35:27
  * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
+ * @Email: sourdumplings@qq.com
  * @Description: B+树的构造函数群
  */
 
@@ -56,7 +56,6 @@ BPlusTree<K, V>::BPlusTree(BPlusTree<K, V> &&bt) noexcept
 {
     bt._root = nullptr;
     bt._size = 0;
-    bt._order = 3;
 }
 
 template<typename K, typename V>

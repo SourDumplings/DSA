@@ -4,7 +4,7 @@
         {
             "label": "Build debug on Linux",
             "type": "shell",
-            "command": "${workspaceFolder}/script/build_debug.sh",
+            "command": "${workspaceFolder}/tool/build_debug.sh",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -14,7 +14,7 @@
         {
             "label": "Build release on Linux",
             "type": "shell",
-            "command": "${workspaceFolder}/script/build_release.sh",
+            "command": "${workspaceFolder}/tool/build_release.sh",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -24,7 +24,7 @@
         {
             "label": "Clean on Linux",
             "type": "shell",
-            "command": "${workspaceFolder}/script/clean.sh",
+            "command": "${workspaceFolder}/tool/clean.sh",
             "problemMatcher": [],
             "group": {
                 "kind": "none",
@@ -34,7 +34,7 @@
         {
             "label": "Clean on Windows",
             "type": "shell",
-            "command": "${workspaceFolder}/script/clean.bat",
+            "command": "${workspaceFolder}/tool/clean.bat",
             "problemMatcher": [],
             "group": {
                 "kind": "none",
@@ -44,7 +44,7 @@
         {
             "label": "Run test on Linux",
             "type": "shell",
-            "command": "${workspaceFolder}/script/run_test.sh",
+            "command": "${workspaceFolder}/tool/run_test.sh",
             "problemMatcher": [],
             "group": {
                 "kind": "test",
@@ -54,7 +54,7 @@
         {
             "label": "Run test on Windows",
             "type": "shell",
-            "command": "${workspaceFolder}/script/run_test.bat",
+            "command": "${workspaceFolder}/tool/run_test.bat",
             "problemMatcher": [],
             "group": {
                 "kind": "test",
@@ -64,7 +64,7 @@
         {
             "label": "Run test on Linux with gperftools",
             "type": "shell",
-            "command": "${workspaceFolder}/script/run_test_with_gperftools.sh",
+            "command": "${workspaceFolder}/tool/run_test_with_gperftools.sh",
             "problemMatcher": [],
             "group": {
                 "kind": "test",
@@ -74,7 +74,7 @@
         {
             "label": "Run Python test on Linux",
             "type": "shell",
-            "command": "${workspaceFolder}/script/run_python_test.sh",
+            "command": "${workspaceFolder}/tool/run_python_test.sh",
             "problemMatcher": [],
             "group": {
                 "kind": "test",
@@ -84,7 +84,7 @@
         {
             "label": "Run Python test on Windows",
             "type": "shell",
-            "command": "${workspaceFolder}/script/run_python_test.bat",
+            "command": "${workspaceFolder}/tool/run_python_test.bat",
             "problemMatcher": [],
             "group": {
                 "kind": "test",
