@@ -18,7 +18,7 @@ HashSet 类模板的实现
 #include <cctype>
 #include <iostream>
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     HashSet<T>::HashSet(const Rank tableSize_) : _size(0)
@@ -415,6 +415,6 @@ namespace CZ
         }
         return res;
     }
-} // CZ
+} // DSA
 
 #endif // HASH_SET_IMPLEMENTATION_H

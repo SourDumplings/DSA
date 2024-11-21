@@ -15,7 +15,7 @@ B树模板，不允许关键码重复
 #include "../../Base/AbstractBaseContainer.h"
 #include "BTreeNode.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class BTree : public AbstractBaseContainer<T>
@@ -61,7 +61,7 @@ namespace CZ
         void solve_overflow(BTreeNode<T> *);  // 分裂解决由于插入结点而可能导致的上溢
         void solve_underflow(BTreeNode<T> *); // 合并解决由于删除结点而可能导致的下溢
     };
-} // CZ
+} // DSA
 
 #include "BTree_implementation.h"
 

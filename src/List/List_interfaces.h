@@ -17,7 +17,7 @@ List类模板的访问接口函数
 #include "../Base/Assert.h"
 #include <iostream>
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     inline typename List<T>::Iterator List<T>::begin()
@@ -142,6 +142,6 @@ namespace CZ
         return search_if([&](const T &data) { return data == value; });
     }
 
-} // CZ
+} // DSA
 
 #endif // LIST_INTERFACES_H

@@ -14,7 +14,7 @@
 
 #include "BiIterator.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class RandomIterator;
@@ -153,6 +153,6 @@ namespace CZ
     {
         return RandomIterator<T>(rhs._p + n);
     }
-} // CZ
+} // DSA
 
 #endif // RANDOM_ITERATOR_H

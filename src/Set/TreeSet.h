@@ -16,7 +16,7 @@
 #include "../Tree/BinTree/RedBlackTree.h"
 #include "TreeSetIterator.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T> class TreeSet;
 
@@ -83,7 +83,7 @@ namespace CZ
         template <typename It>
         void _construct_from(const It &begin, const It &end);
     };
-} // CZ
+} // DSA
 
 #include "TreeSet_implementation.h"
 #include "TreeSet_operations.h"

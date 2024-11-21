@@ -15,7 +15,7 @@
 #include "../Base/AbstractBaseContainer.h"
 #include "../List/List.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T, typename C = List<T>>
     class Queue : public AbstractBaseContainer<T>
@@ -42,7 +42,7 @@ namespace CZ
     private:
         C _data;
     };
-} // CZ
+} // DSA
 
 #include "Queue_implementation.h"
 

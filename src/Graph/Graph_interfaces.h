@@ -14,10 +14,10 @@
 
 #include "Graph.h"
 
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 
 
-namespace CZ
+namespace DSA
 {
     template <typename ED, typename VD>
     inline typename Graph<ED, VD>::Rank Graph<ED, VD>::Nv() const { return _Nv; }
@@ -123,8 +123,8 @@ namespace CZ
     template <typename ED, typename VD>
     HashRank Graph<ED, VD>::hash() const
     {
-        HashRank res = (Hash<CZString>()(get_entity_name()) + Hash<bool>()(_directed) + _graphType)
-            % CZ_MAX_HASH_VALUE;
+        HashRank res = (Hash<DSAString>()(get_entity_name()) + Hash<bool>()(_directed) + _graphType)
+            % DSA_MAX_HASH_VALUE;
 
         if (_Nv == 0)
         {
@@ -133,7 +133,7 @@ namespace CZ
 
         if (_vHasData)
         {
-            res = (res + _dataV.hash()) % CZ_MAX_HASH_VALUE;
+            res = (res + _dataV.hash()) % DSA_MAX_HASH_VALUE;
         }
 
         if (_graphType == ADJACENCY_MATRIX)
@@ -141,7 +141,7 @@ namespace CZ
             for (auto &pEV : _dataE)
             {
                 Vector<KVPair<bool, ED>> *pEV_use = static_cast<Vector<KVPair<bool, ED>> *>(pEV);
-                res = (res + pEV_use->hash()) % CZ_MAX_HASH_VALUE;
+                res = (res + pEV_use->hash()) % DSA_MAX_HASH_VALUE;
             }
         }
         else
@@ -149,7 +149,7 @@ namespace CZ
             for (Rank s = 0; s != _Nv; ++s)
             {
                 Vector<Edge<ED>> &eV = *(static_cast<Vector<Edge<ED>> *>(_dataE[s]));
-                res = (res + eV.hash()) % CZ_MAX_HASH_VALUE;
+                res = (res + eV.hash()) % DSA_MAX_HASH_VALUE;
             }
         }
         return res;
@@ -163,6 +163,6 @@ namespace CZ
         return this->get_c_str_from_stream(oss);
     }
 
-} // CZ
+} // DSA
 
 #endif // GRAPH_INTERFACES_H

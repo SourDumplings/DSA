@@ -16,7 +16,7 @@
 #include <cstdint>
 #include <cstdio>
 
-namespace CZ::SortAccessories
+namespace DSA::SortAccessories
 {
     using Rank_insertion_sort = int64_t;
 
@@ -36,6 +36,6 @@ namespace CZ::SortAccessories
             *(begin + (j + steps)) = temp;
         }
     }
-} // CZ::SortAccessories
+} // DSA::SortAccessories
 
 #endif // INSERTION_SORT_H

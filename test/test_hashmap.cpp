@@ -18,7 +18,7 @@ HashMap 类模板的测试
 #include "Map/HashMap.h"
 
 using namespace std;
-using namespace CZ;
+using namespace DSA;
 
 bool test_hashmap()
 {
@@ -47,36 +47,36 @@ bool test_hashmap()
     {
         int removedKey = keys[rand() % 20];
         d.remove(removedKey);
-        d.print_info((CZString("d after removing ") + to_string(removedKey)).c_str());
+        d.print_info((DSAString("d after removing ") + to_string(removedKey)).c_str());
     }
 
-    HashMap<CZString, int> ds({ KVPair<CZString, int>("CZ", 1), KVPair<CZString, int>("ZTT", 123), KVPair<CZString, int>("Hello", 0), KVPair<CZString, int>("WW", 123456) });
+    HashMap<DSAString, int> ds({ KVPair<DSAString, int>("DSA", 1), KVPair<DSAString, int>("ZTT", 123), KVPair<DSAString, int>("Hello", 0), KVPair<DSAString, int>("WW", 123456) });
     ds.print_info("ds");
-    ds.remove("CZW");
+    ds.remove("DSAW");
     ds.print_info("ds");
-    ds["CZ"] = 888;
+    ds["DSA"] = 888;
     ds.print_info("ds");
-    ds.at("CZ") = 999;
+    ds.at("DSA") = 999;
     ds.print_info("ds");
-    ds.remove("CZ");
+    ds.remove("DSA");
     ds.print_info("ds");
 
     // 测试复制和移动
-    HashMap<CZString, int> m3(ds);
+    HashMap<DSAString, int> m3(ds);
     m3.print_info("m3");
     ds.print_info("ds");
 
-    HashMap<CZString, int> m4(std::move(ds));
+    HashMap<DSAString, int> m4(std::move(ds));
     ds.print_info("ds");
     m4.print_info("m4");
 
-    HashMap<CZString, int> m5;
+    HashMap<DSAString, int> m5;
     m5.print_info("m5");
     m5 = m4;
     m5.print_info("m5");
     m4.print_info("m4");
 
-    HashMap<CZString, int> m6;
+    HashMap<DSAString, int> m6;
     m6.print_info("m6");
     m6 = std::move(m3);
     m6.print_info("m6");

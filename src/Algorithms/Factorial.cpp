@@ -1,6 +1,6 @@
 #include "Factorial.h"
 
-namespace CZ
+namespace DSA
 {
     namespace FactorialAccessories
     {

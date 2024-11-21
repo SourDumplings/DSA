@@ -15,7 +15,7 @@
 #include "../../Heap/Heap.h"
 #include <type_traits>
 
-namespace CZ::SortAccessories
+namespace DSA::SortAccessories
 {
     using Rank_heap_sort = typename Heap<int>::Rank;
 
@@ -31,7 +31,7 @@ namespace CZ::SortAccessories
         }
     }
 
-} // CZ::SortAccessories
+} // DSA::SortAccessories
 
 #endif // HEAP_SORT_H
 

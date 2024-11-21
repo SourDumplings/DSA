@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-namespace CZ
+namespace DSA
 {
     // 初始化为不小于n的最小斐波那契项，默认为第0项，O(log_phi(n))时间
     Fib::Fib(int64_t n) : lastItem(1), thisItem(0)

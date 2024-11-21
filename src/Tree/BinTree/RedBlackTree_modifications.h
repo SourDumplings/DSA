@@ -15,7 +15,7 @@
 #include "RedBlackTree.h"
 #include "../../Algorithms/Max.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     void RedBlackTree<T>::update_black_height(RedBlackTreeNode<T> *v)
@@ -129,6 +129,6 @@ namespace CZ
         }
         return *this;
     }
-} // CZ
+} // DSA
 
 #endif // RED_BLACK_TREE_MODIFICATIONS_H

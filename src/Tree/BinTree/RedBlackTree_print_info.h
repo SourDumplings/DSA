@@ -14,7 +14,7 @@
 
 #include "RedBlackTree.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     void RedBlackTree<T>::print_info(const char *name) const
@@ -60,6 +60,6 @@ namespace CZ
             _in_order_traversal(dynamic_cast<RedBlackTreeNode<T>*>(v->right_child()), process);
         }
     }
-} // CZ
+} // DSA
 
 #endif // RED_BLACK_TREE_PRINT_INFO_H

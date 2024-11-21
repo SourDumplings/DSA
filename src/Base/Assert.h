@@ -14,7 +14,7 @@
 #include <cstdio>
 #include <cstdlib>
 
-namespace CZ
+namespace DSA
 {
 
 #ifdef DEBUG

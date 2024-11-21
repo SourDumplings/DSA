@@ -15,7 +15,7 @@
 #include "BinTreeNode.h"
 #include "../Tree.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class BinTreeNode;
@@ -99,7 +99,7 @@ namespace CZ
     private:
         BinTreeNode<T> *copy_from(TreeNode<T> *pRoot) override;
     };
-} // CZ
+} // DSA
 
 #include "BinTree_implementation.h"
 

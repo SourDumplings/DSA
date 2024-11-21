@@ -16,7 +16,7 @@
 #include <functional>
 #include <cstdio>
 
-namespace CZ::SearchAccessories
+namespace DSA::SearchAccessories
 {
     template <typename It, typename E, typename Cmp>
     It Binary_search(const It &begin, const It &end, const E &value,
@@ -80,7 +80,7 @@ namespace CZ::SearchAccessories
         }
         return end;
     }
-} // CZ
+} // DSA
 
 #endif // BINARY_SEARCH_H
 

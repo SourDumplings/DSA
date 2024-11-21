@@ -17,7 +17,7 @@
 #include <cstdio>
 #include <iostream>
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     TreeSet<T>::TreeSet() : _T(nullptr, false)
@@ -256,6 +256,6 @@ namespace CZ
         }
         return res;
     }
-    } // CZ
+    } // DSA
 
 #endif // TreeSET_IMPLEMENTATION_H

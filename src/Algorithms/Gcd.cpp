@@ -1,6 +1,6 @@
 #include "Gcd.h"
 
-namespace CZ
+namespace DSA
 {
     GcdValueType Gcd(GcdValueType a, GcdValueType b)
     {

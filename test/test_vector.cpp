@@ -24,7 +24,7 @@
 #include <sys/time.h>
 #endif
 
-using namespace CZ;
+using namespace DSA;
 using namespace std;
 
 class C

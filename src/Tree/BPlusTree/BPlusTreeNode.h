@@ -12,12 +12,12 @@
 #define B_PLUS_TREE_NODE_H
 
 #include "../../Base/AbstractBaseEntity.h"
-#include "../../CZString/CZString.h"
+#include "../../DSAString/DSAString.h"
 #include "../../Vector/Vector.h"
 #include <cstdio>
 #include <iostream>
 
-namespace CZ
+namespace DSA
 {
     template <typename K, typename V>
     class BPlusTree;
@@ -128,12 +128,12 @@ namespace CZ
     HashRank BPlusTreeNode<K, V>::hash() const
     {
         // 树结点的哈希值由其名字、数据列表的哈希值、深度以及子结点的哈希值共同决定
-        HashRank res = (Hash<CZString>()(get_entity_name()) + _keys.hash() + depth()) % CZ_MAX_HASH_VALUE;
+        HashRank res = (Hash<DSAString>()(get_entity_name()) + _keys.hash() + depth()) % DSA_MAX_HASH_VALUE;
         for (const void *pC : _children)
         {
             if (pC)
             {
-                res = (res + static_cast<const BPlusTreeNode<K, V>*>(pC)->hash()) % CZ_MAX_HASH_VALUE;
+                res = (res + static_cast<const BPlusTreeNode<K, V>*>(pC)->hash()) % DSA_MAX_HASH_VALUE;
             }
         }
         return res;
@@ -157,6 +157,6 @@ namespace CZ
         }
         return res;
     }
-} // namespace CZ
+} // namespace DSA
 
 #endif // B_PLUS_TREE_NODE_H

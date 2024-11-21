@@ -14,7 +14,7 @@
 
 #include "ListNode.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     ListNode<T>::ListNode() = default;
@@ -22,7 +22,7 @@ namespace CZ
     template <typename T>
     ListNode<T>::ListNode(const T &data_, ListNode<T> *prev_, ListNode<T> *next_):
         _data(data_), _prev(prev_), _next(next_) {}
-} // CZ
+} // DSA
 
 #endif // LIST_NODE_CONSTRUCTORS_H
 

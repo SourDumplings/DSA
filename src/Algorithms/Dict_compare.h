@@ -15,7 +15,7 @@
 #ifndef DICT_COMPARE_CPP
 #define DICT_COMPARE_CPP
 
-namespace CZ
+namespace DSA
 {
     template <typename C>
     bool Dict_equal(const C &lhs, const C &rhs)

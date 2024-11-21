@@ -14,13 +14,13 @@
 
 #include "Tree.h"
 
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 #include <sstream>
 
 #include <iostream>
 #include <utility>
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     Tree<T>::Tree(std::nullptr_t) : Tree<T>() {}
@@ -281,10 +281,10 @@ namespace CZ
     template <typename T>
     HashRank Tree<T>::hash() const
     {
-        HashRank res = Hash<CZString>()(get_entity_name());
+        HashRank res = Hash<DSAString>()(get_entity_name());
         if (_pRoot)
         {
-            res = (res + Hash<TreeNode<T>>()(*_pRoot)) % CZ_MAX_HASH_VALUE;
+            res = (res + Hash<TreeNode<T>>()(*_pRoot)) % DSA_MAX_HASH_VALUE;
         }
         return res;
     }
@@ -347,7 +347,7 @@ namespace CZ
             printf("\n\n");
         }
     }
-} // CZ
+} // DSA
 
 #include "Tree_traversal.h"
 

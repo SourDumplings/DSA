@@ -14,7 +14,7 @@ Vector类模板的数据访问接口方法
 
 #include "Vector.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     inline typename Vector<T>::Iterator Vector<T>::begin()

@@ -11,7 +11,7 @@
 
 #include <cstdint>
 
-namespace CZ
+namespace DSA
 {
     template<typename T, template <typename E> class Container >
     class ContainerTester

@@ -8,18 +8,18 @@
 
 #include "Tree/BinTree/SegmemtTree.h"
 #include "Vector/Vector.h"
-#include "CZString/CZString.h"
+#include "DSAString/DSAString.h"
 #include <functional>
 #include <cstdio>
 #include <iostream>
 
 using namespace std;
-using namespace CZ;
+using namespace DSA;
 
 bool test_segment_tree()
 {
     Vector<int> v({2, 4, 5, 7, 8, 9});
-    Vector<CZString> vs({"a", "b", "cd", "hello", "world"});
+    Vector<DSAString> vs({"a", "b", "cd", "hello", "world"});
 
     // 测试
     SegmentTree<int> T(v);
@@ -33,7 +33,7 @@ bool test_segment_tree()
     // 测试不同的运算
 //    SegmentTree<int, std::multiplies<int>> T1(v);
 //    printf("sumRange[0, 3] = %d\n", T1.range_res(0, 3, 1));
-//    SegmentTree<CZString> T2(vs);
+//    SegmentTree<DSAString> T2(vs);
 //    printf("sumRange[1, 3] = %s\n", T2.range_res(1, 3, "").c_str());
     return true;
 }

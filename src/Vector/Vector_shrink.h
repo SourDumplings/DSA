@@ -15,7 +15,7 @@ Vector类模板的缩容操作
 
 #include "Vector.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     bool Vector<T>::_shrink()

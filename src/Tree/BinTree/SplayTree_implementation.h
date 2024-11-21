@@ -17,7 +17,7 @@
 #include <cstdio>
 #include <iostream>
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     SplayTree<T>::SplayTree(std::nullptr_t) : BST<T>(nullptr)
@@ -226,6 +226,6 @@ namespace CZ
     {
         return "SplayTree";
     }
-} // CZ
+} // DSA
 
 #endif // SPLAY_TREE_IMPLEMENTATION_H

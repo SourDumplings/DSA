@@ -19,7 +19,7 @@
 #include <cstdio>
 #include <type_traits>
 
-namespace CZ
+namespace DSA
 {
     enum ConstructBinTreeFrom
     {
@@ -215,6 +215,6 @@ namespace CZ
         t._size = inE - inB;
         return t;
     }
-} // CZ
+} // DSA
 
 #endif // BIN_TREE_RECONSTRUCT_H

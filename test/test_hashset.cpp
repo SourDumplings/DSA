@@ -15,15 +15,15 @@
 #include <string>
 
 using namespace std;
-using namespace CZ;
+using namespace DSA;
 
 bool test_hashset()
 {
-    HashSet<string> s0({ "Hello", "World", "World", "Hey", "CZ", "Fuc", "ZTT" });
+    HashSet<string> s0({ "Hello", "World", "World", "Hey", "DSA", "Fuc", "ZTT" });
     s0.print_info("s0");
     cout << "s0: " << s0 << endl;
     cout << "s0.hash(): " << s0.hash() << endl;
-    HashSet<CZString> s1({ "Hello", "World", "World", "Hey", "CZ", "Fuc", "ZTT" });
+    HashSet<DSAString> s1({ "Hello", "World", "World", "Hey", "DSA", "Fuc", "ZTT" });
     s1.print_info("s1");
     cout << "s1: " << s1 << endl;
     cout << "s1.hash(): " << s1.hash() << endl;

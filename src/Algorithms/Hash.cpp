@@ -8,7 +8,7 @@
 
 #include "Hash.h"
 
-namespace CZ
+namespace DSA
 {
     HashRank Hash<const bool>::operator()(const bool &value) const
     {

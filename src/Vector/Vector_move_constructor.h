@@ -14,7 +14,7 @@ Vector的移动构造函数
 
 #include "Vector.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     Vector<T>::Vector(Vector<T> &&V) noexcept
@@ -26,7 +26,7 @@ namespace CZ
         V._size = 0;
         V._capacity = 0;
     }
-} // CZ
+} // DSA
 
 #endif // VECTOR_MOVE_CONSTRUCTOR_H
 

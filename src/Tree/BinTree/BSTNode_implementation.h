@@ -14,7 +14,7 @@
 
 #include "BSTNode.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     BSTNode<T>::BSTNode(const T &data, BSTNode<T> *father_): BinTreeNode<T>(data, nullptr, nullptr)
@@ -105,7 +105,7 @@ namespace CZ
     {
         return "BSTNode";
     }
-} // CZ
+} // DSA
 
 
 #endif // BST_NODE_IMPLEMENTATION_H

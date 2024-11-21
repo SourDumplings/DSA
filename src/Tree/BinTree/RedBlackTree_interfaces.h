@@ -14,7 +14,7 @@
 
 #include "RedBlackTree.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     inline bool RedBlackTree<T>::is_red(RedBlackTreeNode<T> *v) const { return v ? v->_red : false; }
@@ -48,6 +48,6 @@ namespace CZ
         return "RedBlackTree";
     }
 
-} // CZ
+} // DSA
 
 #endif // RED_BLACK_TREE_INTERFACES_H

@@ -14,18 +14,18 @@
 #include <iostream>
 #include <cstdio>
 #include "Vector/Vector.h"
-#include "CZString/CZString.h"
+#include "DSAString/DSAString.h"
 #include "Algorithms/Median.h"
 #include "Algorithms/Sort.h"
 
 using namespace std;
-using namespace CZ;
+using namespace DSA;
 
 bool test_median()
 {
     Vector<int> v1({1, 3, 5, 6, 7}), v2({3, 4, 5, 5, 8});
     // Vector<int> v1({1, 3, 6, 7}), v2({3, 4, 5, 8});
-    Vector<CZString> vs1({"b", "c", "d", "yz", "fdds"}),
+    Vector<DSAString> vs1({"b", "c", "d", "yz", "fdds"}),
         vs2({"aaa", "aaa", "aaaa", "aaaa", "aaaaaa"});
 
     printf("the median of v1 && v2 is %d\n", *Median_of_two_seq(v1.begin(), v1.end(), v2.begin(),
@@ -37,17 +37,17 @@ bool test_median()
 
     printf("the median of vs1 && vs2 is %s\n", Median_of_two_seq(vs1.begin(), vs1.end(), vs2.begin(),
         vs2.end())->c_str());
-    Vector<CZString> vsm(vs1.begin(), vs1.end());
+    Vector<DSAString> vsm(vs1.begin(), vs1.end());
     vsm.insert(vsm.end(), vs2.begin(), vs2.end());
     Sort(vsm.begin(), vsm.end());
     vsm.print_info("vsm");
 
     printf("the median about length of vs1 && vs2 is %s\n",
         Median_of_two_seq(vs1.begin(), vs1.end(), vs2.begin(), vs2.end(),
-        [] (const CZString &s1, const CZString &s2)
+        [] (const DSAString &s1, const DSAString &s2)
             { return s1.length() < s2.length(); })
         ->c_str());
-    Sort(vsm.begin(), vsm.end(), [] (const CZString &s1, const CZString &s2)
+    Sort(vsm.begin(), vsm.end(), [] (const DSAString &s1, const DSAString &s2)
             { return s1.length() < s2.length(); });
     vsm.print_info("vsm");
     return true;

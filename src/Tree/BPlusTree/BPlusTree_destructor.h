@@ -11,7 +11,7 @@
 
 #include "BPlusTree.h"
 
-namespace CZ
+namespace DSA
 {
 template<typename K, typename V>
 void BPlusTree<K, V>::free_node(BPlusTreeNode <K, V> *target)
@@ -35,6 +35,6 @@ BPlusTree<K, V>::~BPlusTree()
 {
     free_node(_root);
 }
-} // namespace CZ
+} // namespace DSA
 
 #endif // B_PLUS_TREE_DESTRUCTORS_H

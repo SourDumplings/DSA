@@ -14,7 +14,7 @@
 
 #include "../Base/BaseDef.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     void Swap(T &a, T &b)
@@ -26,7 +26,7 @@ namespace CZ
 
     template <>
     DLL_EXPORT_IMPORT void Swap<int>(int &a, int &b);
-} // CZ
+} // DSA
 
 #endif // SWAP_H
 

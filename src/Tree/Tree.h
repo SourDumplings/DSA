@@ -15,7 +15,7 @@
 #include "../Base/AbstractBaseContainer.h"
 #include "TreeNode.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class Tree;
@@ -102,7 +102,7 @@ namespace CZ
     private:
         virtual TreeNode<T> *copy_from(TreeNode<T> *pRoot);
     };
-} // CZ
+} // DSA
 
 #include "Tree_implementation.h"
 

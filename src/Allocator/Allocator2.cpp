@@ -5,7 +5,7 @@
 #include "../Algorithms/Max.h"
 
 
-namespace CZ
+namespace DSA
 {
     Allocator2::Allocator2()
         : _pHead(nullptr)

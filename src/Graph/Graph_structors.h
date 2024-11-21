@@ -15,7 +15,7 @@
 #include "Graph.h"
 #include <utility>
 
-namespace CZ
+namespace DSA
 {
     template <typename ED, typename VD>
     Graph<ED, VD>::Graph(bool directed_, const GraphType &graphType_, Rank Nv_, bool vHasData_):
@@ -120,6 +120,6 @@ namespace CZ
         }
     }
 
-} // CZ
+} // DSA
 
 #endif // GRAPH_STRUCTORS_H

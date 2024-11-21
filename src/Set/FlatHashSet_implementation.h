@@ -19,7 +19,7 @@ FlatHashSet 类模板的实现
 #include <iostream>
 #include "../PrimeTable/PrimeTable.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     FlatHashSet<T>::FlatHashSet(const FlatHashSetAccessories::ProbingMethod probingMethod_)
@@ -555,6 +555,6 @@ namespace CZ
         }
         return res;
     }
-} // CZ
+} // DSA
 
 #endif // FLAT_HASH_SET_IMPLEMENTATION_H

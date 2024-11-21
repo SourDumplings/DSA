@@ -16,7 +16,7 @@
 #include <cstdio>
 #include <iostream>
 
-namespace CZ
+namespace DSA
 {
     // 打印所有元素，空格隔开，末尾换行
     template <typename T>

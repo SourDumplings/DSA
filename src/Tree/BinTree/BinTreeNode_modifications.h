@@ -17,7 +17,7 @@
 #include "../../Algorithms/Max.h"
 #include "../../Algorithms/Swap.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     BinTreeNode<T> *BinTreeNode<T>::set_left_child(BinTreeNode<T> *pNode)
@@ -117,6 +117,6 @@ namespace CZ
     {
         Swap(_pLeftChild, _pRightChild);
     }
-} // CZ
+} // DSA
 
 #endif // BIN_TREE_NODE_MODIFICATIONS_H

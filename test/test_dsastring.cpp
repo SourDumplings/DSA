@@ -9,19 +9,19 @@
 测试字符串类模板
  */
 
-#include "test_czstring.h"
+#include "test_dsastring.h"
 
-#include "CZString/CZString.h"
+#include "DSAString/DSAString.h"
 
 using namespace std;
-using namespace CZ;
+using namespace DSA;
 
-bool test_czstring()
+bool test_dsastring()
 {
     // 测试构造函数和赋值
-    CZString s("hello");
+    DSAString s("hello");
     
-    CZString s1, s2;
+    DSAString s1, s2;
     s1 = s;
     cout << "s: " << s << endl;
     cout << "s1: " << s1 << endl;
@@ -29,26 +29,26 @@ bool test_czstring()
     cout << "s1: " << s1 << endl;
     cout << "s2: " << s2 << endl;
 
-    CZString s3(s), s4(std::move(s2));
+    DSAString s3(s), s4(std::move(s2));
     cout << "s: " << s << endl;
     cout << "s2: " << s2 << endl;
     cout << "s3: " << s3 << endl;
     cout << "s4: " << s4 << endl;
 
-    CZString s5(10, 'a'), s6(101, '+');
+    DSAString s5(10, 'a'), s6(101, '+');
     cout << "s5: " << s5 << endl;
     cout << "s6: " << s6 << endl;
 
     // const char *sContent = s;
     // printf("sContent = %s\n", sContent);
     // Vector<int> vi({ 1, 2, 3, 5 });
-    // vi.print_info(CZString("vi"));
+    // vi.print_info(DSAString("vi"));
 
     // s.print_info("s");
     // std::cout << "s: " << s << std::endl;
     // std::cout << "s.c_str(): " << s.c_str() << std::endl;
 
-    // const CZString *ps = &s;
+    // const DSAString *ps = &s;
     // ps->print_info("*ps");
     // std::cout << "*ps: " << *ps << std::endl;
     // std::cout << "ps->c_str(): " << ps->c_str() << std::endl;
@@ -66,7 +66,7 @@ bool test_czstring()
     // s += to_string(12.5);
     // s.print_info("s");
 
-    // CZString sc(s);
+    // DSAString sc(s);
     // sc.print_info("sc");
 
     // s = "abc" + s;
@@ -83,8 +83,8 @@ bool test_czstring()
     // printf("s.index_of(\"000\") = %u\n", s.index_of("000"));
 
 
-    // CZString和Vector
-    // Vector<CZString> vs({"adsasd", "abc", "ds","a", "aaa", "bb", "cc", "bab"});
+    // DSAString和Vector
+    // Vector<DSAString> vs({"adsasd", "abc", "ds","a", "aaa", "bb", "cc", "bab"});
     // vs.print_info("vs");
     // printf("vs.size() = %d\n", vs.size());
     // printf("vs[1].c_str() = %s\n", vs[1].c_str());
@@ -96,9 +96,9 @@ bool test_czstring()
     // vs.print_info("vs");
 
     // 测试比较与转换
-    // CZString s1("abc123");
+    // DSAString s1("abc123");
     // printf("s1 == abc123 ? %d\n", s1 == "abc123"); // s1 会转换为 const char *，故不相等
-    // printf("s1 == abc123 ? %d\n", s1 == CZString("abc123"));
+    // printf("s1 == abc123 ? %d\n", s1 == DSAString("abc123"));
     // printf("s1 == abc123 ? %d\n", s1 == std::string("abc123")); // 编译不通过
     return true;
 }

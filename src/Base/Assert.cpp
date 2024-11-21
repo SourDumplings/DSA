@@ -9,7 +9,7 @@
 
 #include "Assert.h"
 
-namespace CZ
+namespace DSA
 {
     void Assert(bool assertion, const char *fileName, int lineNo, const char *failMsgFmt, ...)
     {

@@ -16,7 +16,7 @@ HashMap 类模板，继承 HashSet 实现
 #include "KVPair.h"
 #include "../Set/HashSet.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename K, typename V>
     class HashMap: public HashSet<KVPair<K, V>>
@@ -53,7 +53,7 @@ namespace CZ
         // 列出所有存在的元素
         void print_info(const char *name = "") const;
     };
-} // CZ
+} // DSA
 
 #include "HashMap_implementation.h"
 

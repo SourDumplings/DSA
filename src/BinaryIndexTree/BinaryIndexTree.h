@@ -23,7 +23,7 @@
 #include "../Base/AbstractBaseContainer.h"
 #include "../Vector/Vector.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class BinaryIndexTree : public AbstractBaseContainer<T>
@@ -55,7 +55,7 @@ namespace CZ
         // 返回x的二进制形式中，从右起第一位的1保留，其余位全为0所对应的数
         Rank _low_bit(const Rank x) const;
     };
-} // CZ
+} // DSA
 
 #include "BinaryIndexTree_implementation.h"
 

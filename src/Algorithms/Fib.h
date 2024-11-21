@@ -17,7 +17,7 @@
 
 #include <cstdint>
 
-namespace CZ
+namespace DSA
 {
     class DLL_EXPORT_IMPORT Fib
     {
@@ -36,7 +36,7 @@ namespace CZ
 
     // 得到斐波那契数列的第n项，2个版本的方法
     DLL_EXPORT_IMPORT int64_t get_fib(int n, uint32_t version = 0);
-} // CZ
+} // DSA
 
 
 

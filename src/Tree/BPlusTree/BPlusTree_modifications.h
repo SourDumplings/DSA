@@ -14,7 +14,7 @@
 #include "../../Algorithms/Search.h"
 #include "../../Algorithms/Swap.h"
 
-namespace CZ
+namespace DSA
 {
 
     template <typename K, typename V>
@@ -43,7 +43,7 @@ namespace CZ
     }
 
     template <typename K, typename V>
-    void BPlusTree<K, V>::insert_in_node(CZ::BPlusTreeNode<K, V> *node,
+    void BPlusTree<K, V>::insert_in_node(DSA::BPlusTreeNode<K, V> *node,
                                          const K &key,
                                          void *p)
     {
@@ -308,6 +308,6 @@ namespace CZ
             }
         }
     }
-} // namespace CZ
+} // namespace DSA
 
 #endif // B_PLUS_TREE_MODIFICATIONS_H

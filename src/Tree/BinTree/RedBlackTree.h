@@ -26,7 +26,7 @@
 #include "BST.h"
 #include "RedBlackTreeNode.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class RedBlackTree : public BST<T>
@@ -88,7 +88,7 @@ namespace CZ
         void _pre_order_traversal(RedBlackTreeNode<T> *v, const OutPut &process) const;
         void _in_order_traversal(RedBlackTreeNode<T> *v, const OutPut &process) const;
     };
-} // CZ
+} // DSA
 
 #include "RedBlackTree_implementation.h"
 

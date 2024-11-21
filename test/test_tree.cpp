@@ -17,50 +17,50 @@
 #include "Tree/Tree.h"
 
 using namespace std;
-using namespace CZ;
+using namespace DSA;
 
 bool test_tree()
 {
-    Tree<CZString> T(new TreeNode<CZString>("hello"));
+    Tree<DSAString> T(new TreeNode<DSAString>("hello"));
     auto root = T.root();
 
-    TreeNode<CZString> *wN = new TreeNode<CZString>("world");
+    TreeNode<DSAString> *wN = new TreeNode<DSAString>("world");
     printf("wN->height() = %u\n", wN->height());
-    TreeNode<CZString> *yN(new TreeNode<CZString>("you", wN));
+    TreeNode<DSAString> *yN(new TreeNode<DSAString>("you", wN));
     printf("wN->height() = %u\n", wN->height());
 
     printf("yN->height() = %u\n", yN->height());
-    yN->insert_child(new TreeNode<CZString>("I"));
+    yN->insert_child(new TreeNode<DSAString>("I"));
     printf("yN->height() = %u\n", yN->height());
-    yN->insert_child(new TreeNode<CZString>("me"));
-    yN->insert_child(new TreeNode<CZString>("him"));
-    yN->insert_child(new TreeNode<CZString>("her"));
+    yN->insert_child(new TreeNode<DSAString>("me"));
+    yN->insert_child(new TreeNode<DSAString>("him"));
+    yN->insert_child(new TreeNode<DSAString>("her"));
     printf("wN->height() = %u\n", wN->height());
 
     T.insert(root, wN);
-    T.insert(root, new TreeNode<CZString>("hi"));
-    T.insert(root, new TreeNode<CZString>("fuck"));
+    T.insert(root, new TreeNode<DSAString>("hi"));
+    T.insert(root, new TreeNode<DSAString>("fuck"));
 
     printf("T.size() = %u\n", T.size());
     printf("T.height() = %u\n", T.height());
 
     printf("pre_order_traversal from root: \n");
-    Tree<CZString>::pre_order_traversal(root);
+    Tree<DSAString>::pre_order_traversal(root);
     putchar('\n');
     printf("post_order_traversal from root: \n");
-    Tree<CZString>::post_order_traversal(root);
+    Tree<DSAString>::post_order_traversal(root);
     putchar('\n');
     printf("level_order_traversal from root: \n");
-    Tree<CZString>::level_order_traversal(root);
+    Tree<DSAString>::level_order_traversal(root);
     putchar('\n');
     printf("pre_order_traversal from wN: \n");
-    Tree<CZString>::pre_order_traversal(wN);
+    Tree<DSAString>::pre_order_traversal(wN);
     putchar('\n');
     printf("post_order_traversal from wN: \n");
-    Tree<CZString>::post_order_traversal(wN);
+    Tree<DSAString>::post_order_traversal(wN);
     putchar('\n');
     printf("level_order_traversal from wN: \n");
-    Tree<CZString>::level_order_traversal(wN);
+    Tree<DSAString>::level_order_traversal(wN);
     putchar('\n');
 
     /*
@@ -82,17 +82,17 @@ bool test_tree()
          you
     I me him her
      */
-    TreeNode<CZString> *N10 = new TreeNode<CZString>("hello");
-    TreeNode<CZString> *N11 = new TreeNode<CZString>("world");
-    TreeNode<CZString> *N12 = new TreeNode<CZString>("hi");
-    TreeNode<CZString> *N13 = new TreeNode<CZString>("fuck");
-    TreeNode<CZString> *N14 = new TreeNode<CZString>("you");
-    TreeNode<CZString> *N15 = new TreeNode<CZString>("we");
-    TreeNode<CZString> *N16 = new TreeNode<CZString>("I");
-    TreeNode<CZString> *N17 = new TreeNode<CZString>("me");
-    TreeNode<CZString> *N18 = new TreeNode<CZString>("him");
-    TreeNode<CZString> *N19 = new TreeNode<CZString>("her");
-    Tree<CZString> T1(N10);
+    TreeNode<DSAString> *N10 = new TreeNode<DSAString>("hello");
+    TreeNode<DSAString> *N11 = new TreeNode<DSAString>("world");
+    TreeNode<DSAString> *N12 = new TreeNode<DSAString>("hi");
+    TreeNode<DSAString> *N13 = new TreeNode<DSAString>("fuck");
+    TreeNode<DSAString> *N14 = new TreeNode<DSAString>("you");
+    TreeNode<DSAString> *N15 = new TreeNode<DSAString>("we");
+    TreeNode<DSAString> *N16 = new TreeNode<DSAString>("I");
+    TreeNode<DSAString> *N17 = new TreeNode<DSAString>("me");
+    TreeNode<DSAString> *N18 = new TreeNode<DSAString>("him");
+    TreeNode<DSAString> *N19 = new TreeNode<DSAString>("her");
+    Tree<DSAString> T1(N10);
     N10->insert_child(N11);
     N10->insert_child(N12);
     N10->insert_child(N13);
@@ -110,17 +110,17 @@ bool test_tree()
         you                      we
     I me him her
      */
-    TreeNode<CZString> *N20 = new TreeNode<CZString>("hello");
-    TreeNode<CZString> *N21 = new TreeNode<CZString>("world");
-    TreeNode<CZString> *N22 = new TreeNode<CZString>("hi");
-    TreeNode<CZString> *N23 = new TreeNode<CZString>("fuck");
-    TreeNode<CZString> *N24 = new TreeNode<CZString>("you");
-    TreeNode<CZString> *N25 = new TreeNode<CZString>("we");
-    TreeNode<CZString> *N26 = new TreeNode<CZString>("I");
-    TreeNode<CZString> *N27 = new TreeNode<CZString>("me");
-    TreeNode<CZString> *N28 = new TreeNode<CZString>("him");
-    TreeNode<CZString> *N29 = new TreeNode<CZString>("her");
-    Tree<CZString> T2(N20);
+    TreeNode<DSAString> *N20 = new TreeNode<DSAString>("hello");
+    TreeNode<DSAString> *N21 = new TreeNode<DSAString>("world");
+    TreeNode<DSAString> *N22 = new TreeNode<DSAString>("hi");
+    TreeNode<DSAString> *N23 = new TreeNode<DSAString>("fuck");
+    TreeNode<DSAString> *N24 = new TreeNode<DSAString>("you");
+    TreeNode<DSAString> *N25 = new TreeNode<DSAString>("we");
+    TreeNode<DSAString> *N26 = new TreeNode<DSAString>("I");
+    TreeNode<DSAString> *N27 = new TreeNode<DSAString>("me");
+    TreeNode<DSAString> *N28 = new TreeNode<DSAString>("him");
+    TreeNode<DSAString> *N29 = new TreeNode<DSAString>("her");
+    Tree<DSAString> T2(N20);
     N20->insert_child(N21);
     N20->insert_child(N22);
     N20->insert_child(N23);
@@ -137,17 +137,17 @@ bool test_tree()
         world        hi       fuck     you
     I me him her
      */
-    TreeNode<CZString> *N30 = new TreeNode<CZString>("hello");
-    TreeNode<CZString> *N31 = new TreeNode<CZString>("world");
-    TreeNode<CZString> *N32 = new TreeNode<CZString>("hi");
-    TreeNode<CZString> *N33 = new TreeNode<CZString>("fuck");
-    TreeNode<CZString> *N34 = new TreeNode<CZString>("you");
-    TreeNode<CZString> *N35 = new TreeNode<CZString>("we");
-    TreeNode<CZString> *N36 = new TreeNode<CZString>("I");
-    TreeNode<CZString> *N37 = new TreeNode<CZString>("me");
-    TreeNode<CZString> *N38 = new TreeNode<CZString>("him");
-    TreeNode<CZString> *N39 = new TreeNode<CZString>("her");
-    Tree<CZString> T3(N30);
+    TreeNode<DSAString> *N30 = new TreeNode<DSAString>("hello");
+    TreeNode<DSAString> *N31 = new TreeNode<DSAString>("world");
+    TreeNode<DSAString> *N32 = new TreeNode<DSAString>("hi");
+    TreeNode<DSAString> *N33 = new TreeNode<DSAString>("fuck");
+    TreeNode<DSAString> *N34 = new TreeNode<DSAString>("you");
+    TreeNode<DSAString> *N35 = new TreeNode<DSAString>("we");
+    TreeNode<DSAString> *N36 = new TreeNode<DSAString>("I");
+    TreeNode<DSAString> *N37 = new TreeNode<DSAString>("me");
+    TreeNode<DSAString> *N38 = new TreeNode<DSAString>("him");
+    TreeNode<DSAString> *N39 = new TreeNode<DSAString>("her");
+    Tree<DSAString> T3(N30);
     N30->insert_child(N31);
     N30->insert_child(N32);
     N30->insert_child(N33);
@@ -172,29 +172,29 @@ bool test_tree()
     printf("T == T3: %d\n", T == T3);
     printf("T != T3: %d\n", T != T3);
 
-    auto tW = Tree<CZString>(T.secede(wN));
+    auto tW = Tree<DSAString>(T.secede(wN));
     printf("T.size() = %u\n", T.size());
     printf("T.height() = %u\n", T.height());
     printf("tW.size() = %u\n", tW.size());
     printf("tW.height() = %u\n", tW.height());
 
     printf("pre_order_traversal from root: \n");
-    Tree<CZString>::pre_order_traversal(root);
+    Tree<DSAString>::pre_order_traversal(root);
     putchar('\n');
     printf("post_order_traversal from root: \n");
-    Tree<CZString>::post_order_traversal(T.root());
+    Tree<DSAString>::post_order_traversal(T.root());
     putchar('\n');
     printf("level_order_traversal from root: \n");
-    Tree<CZString>::level_order_traversal(root);
+    Tree<DSAString>::level_order_traversal(root);
     putchar('\n');
     printf("pre_order_traversal from tW.root(): \n");
-    Tree<CZString>::pre_order_traversal(tW.root());
+    Tree<DSAString>::pre_order_traversal(tW.root());
     putchar('\n');
     printf("post_order_traversal from tW.root(): \n");
-    Tree<CZString>::post_order_traversal(tW.root());
+    Tree<DSAString>::post_order_traversal(tW.root());
     putchar('\n');
     printf("level_order_traversal from tW.root(): \n");
-    Tree<CZString>::level_order_traversal(tW.root());
+    Tree<DSAString>::level_order_traversal(tW.root());
     putchar('\n');
 
     printf("wN in T? %d\n", T.has_this_node(wN));

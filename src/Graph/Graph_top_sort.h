@@ -16,7 +16,7 @@
 #include "../Queue/Queue.h"
 #include "../Algorithms/Sort.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename ED, typename VD>
     void Graph<ED, VD>::top_sort(Vector<Rank> &results) const
@@ -65,6 +65,6 @@ namespace CZ
 
         ASSERT_DEBUG(results.size() == _Nv, "Error from Graph top_sort: this Graph may have circuits");
     }
-} // CZ
+} // DSA
 
 #endif // GRAPH_TOP_SORT_H

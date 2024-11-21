@@ -3,7 +3,7 @@
 
 #include "TrieTreeNode.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     typename TrieTreeNode<T>::Rank TrieTreeNode<T>::insert_child_by_seq(const Vector<T> &seq, typename Vector<T>::Rank idx)

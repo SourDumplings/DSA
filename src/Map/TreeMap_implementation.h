@@ -11,7 +11,7 @@
 
 #include "TreeMap.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename K, typename V>
     TreeMap<K, V>::TreeMap() : TreeSet<KVPair<K, V>>()
@@ -104,7 +104,7 @@ namespace CZ
             Iterator it = TreeSet<KVPair<K, V>>::search(tempP);
             return ((*(it.get())).data()).value();
         }
-        throw std::out_of_range((CZString("no this key in map") + CZString(key.c_str())).c_str());
+        throw std::out_of_range((DSAString("no this key in map") + DSAString(key.c_str())).c_str());
     }
 
     template <typename K, typename V>

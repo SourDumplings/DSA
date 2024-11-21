@@ -14,9 +14,9 @@
 
 #include <iostream>
 #include "../Base/AbstractBaseEntity.h"
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class Edge;
@@ -53,7 +53,7 @@ namespace CZ
 
         HashRank hash() const override
         {
-            return (Hash<CZString>()(get_entity_name()) + Hash<T>()(_data) + Hash<Rank>()(_s) + Hash<Rank>()(_d) + Hash<bool>()(_valid)) % CZ_MAX_HASH_VALUE;
+            return (Hash<DSAString>()(get_entity_name()) + Hash<T>()(_data) + Hash<Rank>()(_s) + Hash<Rank>()(_d) + Hash<bool>()(_valid)) % DSA_MAX_HASH_VALUE;
         }
 
         const char *get_entity_name() const override
@@ -74,6 +74,6 @@ namespace CZ
         oss << this->get_entity_name() << "(" << source() << ", " << destination() << ")";
         return this->get_c_str_from_stream(oss);
     }
-} // CZ
+} // DSA
 
 #endif // EDGE_H

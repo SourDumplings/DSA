@@ -16,7 +16,7 @@
 #include "Algorithms/Pow.h"
 
 using namespace std;
-using namespace CZ;
+using namespace DSA;
 
 bool test_pow()
 {

@@ -18,7 +18,7 @@ Remove算法，类似于STL中的remove，将待删除的元素移到后面，�
 #include "../Iterator/Iterator_traits.h"
 #include <utility>
 
-namespace CZ
+namespace DSA
 {
     namespace RemoveAccessories
     {

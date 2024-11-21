@@ -24,7 +24,7 @@
 
 #include <typeinfo>
 
-namespace CZ
+namespace DSA
 {
     namespace SortAccessories
     {
@@ -125,6 +125,6 @@ namespace CZ
     {
         Stable_sort(begin, end, cmp, method, version);
     }
-} // CZ
+} // DSA
 
 #endif // SORT_H

@@ -18,7 +18,7 @@
 
 #include <utility>
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class BST : public BinTree<T>
@@ -88,7 +88,7 @@ namespace CZ
         BSTNode<T> *copy_from(TreeNode<T> *pRoot);
     };
 
-} // CZ
+} // DSA
 
 #include "BST_implementation.h"
 

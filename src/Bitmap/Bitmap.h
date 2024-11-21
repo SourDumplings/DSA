@@ -13,9 +13,9 @@
 #define BITMAP_H
 
 #include "../Base/AbstractBaseEntity.h"
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 
-namespace CZ
+namespace DSA
 {
     class DLL_EXPORT_IMPORT Bitmap : public AbstractBaseEntity
     {
@@ -30,7 +30,7 @@ namespace CZ
 
         // 访问接口函数
         void dump(const char *file) const;   // 将位图导出☞指定的文件，以便于以后对位图的批量初始化
-        CZString bits2czstring(Rank n_) const; // 将前 n_ 位转为二进制数字符串
+        DSAString bits2dsastring(Rank n_) const; // 将前 n_ 位转为二进制数字符串
         bool test(Rank k) const;             // 测试第k位是否为true（是否包含整数k），O(1)
 
         // 动态接口
@@ -54,6 +54,6 @@ namespace CZ
         char *_m;
         Rank _charNum;
     };
-} // CZ
+} // DSA
 
 #endif // BITMAP_H

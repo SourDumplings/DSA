@@ -17,7 +17,7 @@
 #include <sys/time.h>
 #endif
 
-using namespace CZ;
+using namespace DSA;
 using namespace std;
 
 bool test_sort_correctiness(int *tempV, uint32_t n)

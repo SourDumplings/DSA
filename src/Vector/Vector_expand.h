@@ -14,7 +14,7 @@ Vector类模板的扩容操作
 
 #include "Vector.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     bool Vector<T>::_expand()
@@ -53,6 +53,6 @@ namespace CZ
     {
         return _capacity <= _size;
     }
-} // CZ
+} // DSA
 
 #endif // VECTOR_EXPAND_H

@@ -17,7 +17,7 @@ Vector类模板的动态操作方法
 #include "../Algorithms/Swap.h"
 #include <utility>
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     void Vector<T>::push_back(const T &x)

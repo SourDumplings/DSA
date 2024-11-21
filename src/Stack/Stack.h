@@ -15,7 +15,7 @@
 #include "../Base/AbstractBaseContainer.h"
 #include "../Vector/Vector.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T, typename C = Vector<T>>
     class Stack : public AbstractBaseContainer<T>
@@ -42,7 +42,7 @@ namespace CZ
     private:
         C _data;
     };
-} // CZ
+} // DSA
 
 #include "Stack_implementation.h"
 

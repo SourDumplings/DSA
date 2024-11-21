@@ -11,7 +11,7 @@
 
 #include "AbstractBaseEntity.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class AbstractBaseContainer : public AbstractBaseEntity

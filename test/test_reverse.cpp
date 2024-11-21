@@ -20,14 +20,14 @@
 
 #include "Algorithms/Reverse.h"
 #include "Vector/Vector.h"
-#include "CZString/CZString.h"
+#include "DSAString/DSAString.h"
 
 using namespace std;
-using namespace CZ;
+using namespace DSA;
 
 bool test_reverse()
 {
-    Vector<CZString> vs1({"ashjdk", "dasd", "adad", "sadasd"}),
+    Vector<DSAString> vs1({"ashjdk", "dasd", "adad", "sadasd"}),
         vs2({"askdl", "dasdasda", "adsdasd", "SAsS", "asdasd", "qweqwe", "sidhui"});
     int a[] = {1, 2, 4, 5, 6, 8};
 

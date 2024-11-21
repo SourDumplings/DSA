@@ -14,7 +14,7 @@
 #include <cstring>
 #include <sstream>
 
-namespace CZ
+namespace DSA
 {
     template <typename T, typename It>
     class AbstractIterableContainer : public AbstractBaseContainer<T>

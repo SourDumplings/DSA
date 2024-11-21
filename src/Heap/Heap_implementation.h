@@ -17,9 +17,9 @@
 #include <iostream>
 #include <cstdio>
 #include "../Algorithms/Swap.h"
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T, typename Cmp>
     Heap<T, Cmp>::Heap() = default;
@@ -166,7 +166,7 @@ namespace CZ
     template <typename T, typename Cmp>
     HashRank Heap<T, Cmp>::hash() const
     {
-        return (CZString(get_entity_name()).hash() + _data.hash()) % CZ_MAX_HASH_VALUE;
+        return (DSAString(get_entity_name()).hash() + _data.hash()) % DSA_MAX_HASH_VALUE;
     }
 
     template <typename T, typename Cmp>
@@ -196,6 +196,6 @@ namespace CZ
         _data.clear();
     }
 
-} // CZ
+} // DSA
 
 #endif // HEAP_IMPLEMENTATION_H

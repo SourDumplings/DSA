@@ -20,9 +20,9 @@
 
 #include "Stack.h"
 
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T, typename C>
     const T &Stack<T, C>::top() const
@@ -94,7 +94,7 @@ namespace CZ
     template <typename T, typename C>
     HashRank Stack<T, C>::hash() const
     {
-        return (CZString(get_entity_name()).hash() + _data.hash()) % CZ_MAX_HASH_VALUE;
+        return (DSAString(get_entity_name()).hash() + _data.hash()) % DSA_MAX_HASH_VALUE;
     }
 
     template <typename T, typename C>
@@ -117,6 +117,6 @@ namespace CZ
         return this->get_entity_name();
 #endif
     }
-} // CZ
+} // DSA
 
 #endif // STACK_IMPLEMENTATION_H

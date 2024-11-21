@@ -1,6 +1,6 @@
 #include "Pow.h"
 
-namespace CZ
+namespace DSA
 {
     double Pow(double x, long long n)
     {
@@ -15,4 +15,4 @@ namespace CZ
         }
         return n < 0 ? 1 / res : res;
     }
-} // CZ
+} // DSA

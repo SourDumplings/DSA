@@ -16,7 +16,7 @@ B树打印信息的方法
 #include "../../Queue/Queue.h"
 #include <iostream>
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     void BTree<T>::print_info(const char *name) const
@@ -59,7 +59,7 @@ namespace CZ
 
         printf("\n\n");
     }
-} // CZ
+} // DSA
 
 #endif // B_TREE_PRINT_INFO_H
 

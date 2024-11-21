@@ -21,7 +21,7 @@
 
 #include "../Iterator/Iterator_traits.h"
 
-namespace CZ
+namespace DSA
 {
     using Rank_sort = int64_t;
 
@@ -100,6 +100,6 @@ namespace CZ
     {
         Stable_sort(begin, end, std::less<decltype(*begin)>(), method, version);
     }
-} // CZ
+} // DSA
 
 #endif // STABLE_SORT_H

@@ -31,7 +31,7 @@ zag:
 
 #include "BinTreeNode.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     BinTreeNode<T>* BinTreeNode<T>::zig()
@@ -89,7 +89,7 @@ namespace CZ
 
         return rChild;
     }
-} // CZ
+} // DSA
 
 #endif // BIN_TREE_NODE_ZIGZAG_H
 

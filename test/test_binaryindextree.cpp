@@ -21,7 +21,7 @@
 #include "BinaryIndexTree/BinaryIndexTree.h"
 
 using namespace std;
-using namespace CZ;
+using namespace DSA;
 
 bool test_binaryindextree()
 {

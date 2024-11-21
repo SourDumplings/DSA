@@ -12,7 +12,7 @@
 #ifndef BRUTE_FORCE_MATCH_H
 #define BRUTE_FORCE_MATCH_H
 
-namespace CZ
+namespace DSA
 {
     using MatchRank = uint32_t;
 
@@ -88,7 +88,7 @@ namespace CZ
         }
         return ret;
     }
-} // CZ
+} // DSA
 
 #endif // BRUTE_FORCE_MATCH_H
 

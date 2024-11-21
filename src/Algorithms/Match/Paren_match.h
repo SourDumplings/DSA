@@ -16,7 +16,7 @@
 #include "../../Stack/Stack.h"
 #include <cstring>
 
-namespace CZ
+namespace DSA
 {
     enum ParenMatchVersion { RECURSION_PAREN_MATCH, NONRECURSION_PAREN_MATCH };
 
@@ -165,7 +165,7 @@ namespace CZ
         }
     }
 
-} // CZ
+} // DSA
 
 #endif // PAREN_MATCH_H
 

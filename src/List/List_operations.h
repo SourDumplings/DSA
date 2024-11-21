@@ -14,7 +14,7 @@ List类模板的操作符函数模板
 
 #include "List.h"
 
-namespace CZ
+namespace DSA
 {
     // 赋值操作符
     template <typename T>
@@ -39,6 +39,6 @@ namespace CZ
         return *this;
     }
 
-} // CZ
+} // DSA
 
 #endif // LIST_OPERATIONS_H

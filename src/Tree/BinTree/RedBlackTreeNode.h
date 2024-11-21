@@ -14,7 +14,7 @@
 
 #include "BSTNode.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class RedBlackTree;
@@ -51,6 +51,6 @@ namespace CZ
         bool _red;         // 颜色
         Rank _blackHeight; // 黑高度
     };
-} // CZ
+} // DSA
 
 #endif // RED_BLACK_TREE_NODE_H

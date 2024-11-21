@@ -20,7 +20,7 @@
 #include <sys/time.h>
 #endif
 
-namespace CZ
+namespace DSA
 {
     template<typename T, template <typename E> class Container >
     uint32_t ContainerTester<T, Container>::test_insert_random(const char *containerName, int randSeed, uint32_t size) const

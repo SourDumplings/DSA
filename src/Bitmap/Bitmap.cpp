@@ -32,7 +32,7 @@ Bitmap类的实现
 #include <string>
 #include <iostream>
 
-namespace CZ
+namespace DSA
 {
     // 初始化函数
     void Bitmap::init(Bitmap::Rank n_)
@@ -87,9 +87,9 @@ namespace CZ
         fclose(fp);
     }
 
-    CZString Bitmap::bits2czstring(typename Bitmap::Rank n_) const
+    DSAString Bitmap::bits2dsastring(typename Bitmap::Rank n_) const
     {
-        CZString res;
+        DSAString res;
         Rank maxNum = n_;
         if (sizeof(char) * _charNum * 8 < n_)
         {
@@ -159,18 +159,18 @@ namespace CZ
     const char *Bitmap::c_str() const
     {
         std::ostringstream oss;
-        oss << this->get_entity_name() << "(" << bits2czstring(_charNum * sizeof(char) * 8) << ")";
+        oss << this->get_entity_name() << "(" << bits2dsastring(_charNum * sizeof(char) * 8) << ")";
         return this->get_c_str_from_stream(oss);
     }
 
     HashRank Bitmap::hash() const
     {
-        HashRank res = Hash<CZString>()(get_entity_name());
+        HashRank res = Hash<DSAString>()(get_entity_name());
         for (Bitmap::Rank i = 0; i < _charNum * 8 * sizeof(char); ++i)
         {
             if (test(i))
             {
-                res = (res + Hash<Rank>()(i)) % CZ_MAX_HASH_VALUE;
+                res = (res + Hash<Rank>()(i)) % DSA_MAX_HASH_VALUE;
             }
         }
         return res;
@@ -181,4 +181,4 @@ namespace CZ
         return "Bitmap";
     }
 
-} // CZ
+} // DSA

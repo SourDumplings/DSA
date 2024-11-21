@@ -15,7 +15,7 @@ KMP算法，通过构建next表，“充分利用成功匹配的成功经验”�
 
 #include "../../Vector/Vector.h"
 
-namespace CZ
+namespace DSA
 {
     using MatchRank = uint32_t;
 
@@ -141,7 +141,7 @@ namespace CZ
         }
         return j == pL ? i - j : tL;
     }
-} // CZ
+} // DSA
 
 #endif // KMP_MATCH_H
 

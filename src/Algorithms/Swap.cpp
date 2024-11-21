@@ -8,7 +8,7 @@
 
 #include "Swap.h"
 
-namespace CZ
+namespace DSA
 {
     template <>
     void Swap<int>(int &a, int &b)

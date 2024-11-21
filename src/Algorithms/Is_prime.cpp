@@ -11,11 +11,11 @@
 
 #include "Is_prime.h"
 
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 #include "../PrimeTable/PrimeTable.h"
 #include <regex>
 
-namespace CZ
+namespace DSA
 {
     namespace PrimeAccessories
     {
@@ -39,7 +39,7 @@ namespace CZ
         // 使用正则表达式来判断素数
         bool Is_prime_regex(uint32_t num)
         {
-            CZString s(num, '1');
+            DSAString s(num, '1');
             std::cmatch m;
             std::regex pattern("^.?$|^(..+?)\\1+$");
             /* 正则表达式 "^.?$|^(..+?)\1+$" 详解：By Monica

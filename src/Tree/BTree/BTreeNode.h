@@ -13,13 +13,13 @@ B树结点类模板
 #define B_TREE_NODE_H
 
 #include "../../Base/AbstractBaseEntity.h"
-#include "../../CZString/CZString.h"
+#include "../../DSAString/DSAString.h"
 #include "../../Vector/Vector.h"
 #include <cstdio>
 #include <iostream>
 #include <sstream>
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class BTree;
@@ -98,12 +98,12 @@ namespace CZ
     HashRank BTreeNode<T>::hash() const
     {
         // 树结点的哈希值由其名字、数据列表的哈希值、深度以及子结点的哈希值共同决定
-        HashRank res = (Hash<CZString>()(get_entity_name()) + _keys.hash() + depth()) % CZ_MAX_HASH_VALUE;
+        HashRank res = (Hash<DSAString>()(get_entity_name()) + _keys.hash() + depth()) % DSA_MAX_HASH_VALUE;
         for (const BTreeNode<T> *pC : _children)
         {
             if (pC)
             {
-                res = (res + pC->hash()) % CZ_MAX_HASH_VALUE;
+                res = (res + pC->hash()) % DSA_MAX_HASH_VALUE;
             }
         }
         return res;
@@ -142,6 +142,6 @@ namespace CZ
         }
         return res;
     }
-} // CZ
+} // DSA
 
 #endif // B_TREE_NODE_H

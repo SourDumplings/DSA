@@ -8,21 +8,21 @@
 #include "test_treemap.h"
 
 #include "Map/TreeMap.h"
-#include "CZString/CZString.h"
+#include "DSAString/DSAString.h"
 #include <cstdio>
 #include <iostream>
 
-using namespace CZ;
+using namespace DSA;
 using namespace std;
 
 bool test_treemap()
 {
-    TreeMap<CZString, CZString> m1;
+    TreeMap<DSAString, DSAString> m1;
     m1.print_info("m1");
-    m1.insert(KVPair<CZString, CZString>("hello", "world"));
-    m1.insert(KVPair<CZString, CZString>("world", "hello"));
-    m1.insert(KVPair<CZString, CZString>("cz", "ztt"));
-    m1.insert(KVPair<CZString, CZString>("cz", "cz"));
+    m1.insert(KVPair<DSAString, DSAString>("hello", "world"));
+    m1.insert(KVPair<DSAString, DSAString>("world", "hello"));
+    m1.insert(KVPair<DSAString, DSAString>("cz", "ztt"));
+    m1.insert(KVPair<DSAString, DSAString>("cz", "cz"));
     m1.print_info("m1");
     m1.at("cz") = "123";
     m1.print_info("m1");
@@ -40,18 +40,18 @@ bool test_treemap()
     m1.remove("hello");
     m1.print_info("m1");
 
-    KVPair<int, CZString> p1(1, "cz"), p2(3, "ztt"), p3(4, "dd"), p4(10, "hello"), p5(123, "world");
-    KVPair<int, CZString> pa[]{p1, p2, p3, p4, p5};
-    TreeMap<int, CZString> m2(pa + 1, pa + 4), m3(m2.begin(), m2.end());
+    KVPair<int, DSAString> p1(1, "cz"), p2(3, "ztt"), p3(4, "dd"), p4(10, "hello"), p5(123, "world");
+    KVPair<int, DSAString> pa[]{p1, p2, p3, p4, p5};
+    TreeMap<int, DSAString> m2(pa + 1, pa + 4), m3(m2.begin(), m2.end());
     m2.print_info("m2");
     m3.print_info("m3");
-    TreeMap<int, CZString> m4(m2), m5(std::move(m3));
+    TreeMap<int, DSAString> m4(m2), m5(std::move(m3));
     m4.print_info("m4");
     m5.print_info("m5");
     m3.print_info("m3");
     m5.clear();
     m5.print_info("m5");
-    TreeMap<int, CZString> m6, m7;
+    TreeMap<int, DSAString> m6, m7;
     m6.print_info("m6");
     m6 = m4;
     m6.print_info("m6");

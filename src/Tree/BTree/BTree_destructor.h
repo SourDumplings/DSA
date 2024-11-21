@@ -14,10 +14,10 @@ B树的析构函数
 
 #include "BTree.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     BTree<T>::~BTree() { clear(); }
-} // CZ
+} // DSA
 
 #endif // B_TREE_DESTRUCTORS_H

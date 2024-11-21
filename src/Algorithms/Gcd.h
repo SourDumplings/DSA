@@ -15,12 +15,12 @@
 #include "../Base/BaseDef.h"
 #include <cstdint>
 
-namespace CZ
+namespace DSA
 {
     using GcdValueType = int64_t;
 
     DLL_EXPORT_IMPORT GcdValueType Gcd(GcdValueType a, GcdValueType b);
-} // CZ
+} // DSA
 
 #endif // GCD_H
 

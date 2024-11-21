@@ -21,11 +21,11 @@
 #include "Algorithms/Match/Paren_match.h"
 #include "Algorithms/Match.h"
 #include "Vector/Vector.h"
-#include "CZString/CZString.h"
+#include "DSAString/DSAString.h"
 #include <cstring>
 
 using namespace std;
-using namespace CZ;
+using namespace DSA;
 
 bool test_match()
 {
@@ -49,7 +49,7 @@ bool test_match()
     //     Paren_match(en4, strlen(en4), RECURSION_PAREN_MATCH) ? "true" : "false");
 
     // 测试串匹配算法
-    CZString s("In the pAst 30 years the Past Chinese past search for a past past spouse has"),
+    DSAString s("In the pAst 30 years the Past Chinese past search for a past past spouse has"),
         p1("past"), p2("Chinese");
     MatchRank pos1, pos2, pos3;
     // pos1 = Match(s.begin(), s.end(), p1.begin(), p1.end(), BRUTE_FORCE, 0);
@@ -71,8 +71,8 @@ bool test_match()
     printf("cs.length() = %u\n", (int32_t)strlen(cs));
     printf("pos1 is %u, res = %s\n", pos1, s.substr(pos1, p1.end() - p1.begin()).c_str());
     printf("pos2 is %u, res = %s\n", pos2, s.substr(pos2, p2.end() - p2.begin()).c_str());
-    // printf("pos3 is %u, res = %s\n", pos3, CZString(cs).substr(pos3, 4).c_str());
-    printf("pos3 is %u, res = %s\n", pos3, CZString(cs).substr(pos3, 6).c_str());
+    // printf("pos3 is %u, res = %s\n", pos3, DSAString(cs).substr(pos3, 4).c_str());
+    printf("pos3 is %u, res = %s\n", pos3, DSAString(cs).substr(pos3, 6).c_str());
     return true;
 }
 

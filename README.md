@@ -7,14 +7,14 @@
  -->
 
 # 概述
------ 版权所有 酸饺子 -----
+Data Structs and Algorithms(DSA)
 
-版本号：13.5.1，与 CMakeLists.txt 同步
+版本号：14.0.0，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
 
-我自己实现的各种数据结构和算法的模板，采用 C++17 语言实现，统一在 CZ 命名空间中，支持跨平台
+我自己实现的各种数据结构和算法的模板，采用 C++17 语言标准，统一在 DSA 命名空间中，支持跨平台
 
 # 使用说明
 ## 环境要求
@@ -164,6 +164,10 @@
 11.《Computer Systems A Programmer's Perspective》3e-Randal E.Bryant, David R. O'Hallaron
 
 # TODO
+- 删掉所有的 dynamic_cast 为 reinterpret_cast 来实现最佳性能
+- 实现稀疏集
+- 整理一下编译规则，在 Windows 下也使用 CMake，参考 SCGF 项目
+- 将其用在 SCGF 项目中
 - 实现树状数组（区间）
 - 实现 KD 树
 - 优化树的打印方法

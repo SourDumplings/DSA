@@ -9,11 +9,11 @@
 #ifndef DEQUEITERATOR_H
 #define DEQUEITERATOR_H
 
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 #include "../Iterator/RandomIterator.h"
 #include "Deque.h"
 
-namespace CZ
+namespace DSA
 {
     using DequeIteratorRank = int64_t;
 
@@ -157,7 +157,7 @@ namespace CZ
 
         HashRank hash() const override
         {
-            return (Hash<CZString>()(get_entity_name()) + Hash<T *>()(_cur)) % CZ_MAX_HASH_VALUE;
+            return (Hash<DSAString>()(get_entity_name()) + Hash<T *>()(_cur)) % DSA_MAX_HASH_VALUE;
         }
 
         const char *get_entity_name() const override

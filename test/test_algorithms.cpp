@@ -17,7 +17,7 @@
 
 #include <functional>
 
-#include "CZString/CZString.h"
+#include "DSAString/DSAString.h"
 #include "Vector/Vector.h"
 #include "List/List.h"
 #include "Algorithms/Search.h"
@@ -28,7 +28,7 @@
 #include "Algorithms/TopK.h"
 
 using namespace std;
-using namespace CZ;
+using namespace DSA;
 
 bool test_algorithms()
 {
@@ -141,7 +141,7 @@ bool test_algorithms()
     // l.print_info("l");
 
     // 测试交换算法
-    // CZString s1 = "hello", s2 = "world";
+    // DSAString s1 = "hello", s2 = "world";
     // int i1 = 1, i2 = 99;
     // printf("s1 = %s, s2 = %s\n", s1.c_str(), s2.c_str());
     // Swap(s1, s2);

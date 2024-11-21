@@ -17,7 +17,7 @@
 #include <functional>
 #include "../Base/Assert.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename It, typename Cmp>
     It Min_element(const It &begin, const It &end, const Cmp &cmp)
@@ -39,6 +39,6 @@ namespace CZ
     {
         return Min_element(begin, end, std::less<decltype(*begin)>());
     }
-} // CZ
+} // DSA
 
 #endif // MIN_ELEMENT_H

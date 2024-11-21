@@ -15,7 +15,7 @@
 #include "../Base/Assert.h"
 #include <cstdint>
 
-namespace CZ
+namespace DSA
 {
     enum FactorialVersion { RECURSION_FACT, NONRECURSION_FACT };
 
@@ -31,7 +31,7 @@ namespace CZ
     FactorialAccessories::ValueType DLL_EXPORT_IMPORT Factorial(const FactorialAccessories::ValueType x,
         const FactorialVersion &version = NONRECURSION_FACT);
 
-} // CZ
+} // DSA
 
 #endif // FACTORIAL_H
 

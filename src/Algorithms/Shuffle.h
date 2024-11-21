@@ -13,7 +13,7 @@
 #include "../Iterator/Iterator_traits.h"
 #include "Swap.h"
 
-namespace CZ
+namespace DSA
 {
     namespace ShuffleAccessories
     {

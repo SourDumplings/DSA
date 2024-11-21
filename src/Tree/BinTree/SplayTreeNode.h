@@ -14,7 +14,7 @@
 
 #include "BSTNode.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class SplayTreeNode : public BSTNode<T>
@@ -42,6 +42,6 @@ namespace CZ
             return true;
         }
     };
-} // CZ
+} // DSA
 
 #endif // SPLAY_TREE_NODE_H

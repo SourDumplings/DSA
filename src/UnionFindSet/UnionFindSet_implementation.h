@@ -18,7 +18,7 @@
 #include <iostream>
 #include <cstdio>
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     UnionFindSet<T>::UnionFindSet(UnionFindSetNode *root) : _family(root)
@@ -195,9 +195,9 @@ namespace CZ
     template <typename T>
     HashRank UnionFindSet<T>::hash() const
     {
-        return (Hash<CZString>()(get_entity_name()) + _family.hash()) % CZ_MAX_HASH_VALUE;
+        return (Hash<DSAString>()(get_entity_name()) + _family.hash()) % DSA_MAX_HASH_VALUE;
     }
 
-    } // CZ
+    } // DSA
 
 #endif // UNION_FIND_SET_IMPLEMENTATION_H

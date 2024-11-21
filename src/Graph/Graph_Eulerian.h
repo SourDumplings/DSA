@@ -14,7 +14,7 @@
 
 #include "Graph.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename ED, typename VD>
     bool Graph<ED, VD>::is_Eulerian() const
@@ -58,7 +58,7 @@ namespace CZ
         }
         return ret;
     }
-} // CZ
+} // DSA
 
 #endif // GRAPH_EULERIAN_H
 

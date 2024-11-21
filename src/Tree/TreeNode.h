@@ -17,7 +17,7 @@
 #include "../Base/AbstractBaseEntity.h"
 #include "../List/List.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T> class Tree;
 
@@ -83,7 +83,7 @@ namespace CZ
         TreeNode<T> *_father;
     };
 
-} // CZ
+} // DSA
 
 #include "TreeNode_implementation.h"
 

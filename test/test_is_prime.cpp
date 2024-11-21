@@ -14,7 +14,7 @@
 #include "Base/Assert.h"
 
 using namespace std;
-using namespace CZ;
+using namespace DSA;
 
 void do_test_is_prime()
 {

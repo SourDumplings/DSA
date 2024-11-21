@@ -16,11 +16,11 @@
 #include <cstring>
 #include <iostream>
 #include "../Base/Assert.h"
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 #include "../Stack/Stack.h"
 #include "../Algorithms/Factorial.h"
 
-namespace CZ
+namespace DSA
 {
     // 初始化算数符号优先级顺序表
     // '<'代表栈顶元素的优先级高，'>'代表当前元素优先级高
@@ -69,7 +69,7 @@ namespace CZ
 
     Expression::Expression(const std::string &exp_, const char delimiter_) : Expression(exp_.c_str(), delimiter_) {}
 
-    Expression::Expression(const CZString &exp_, const char delimiter_) : Expression(exp_.c_str(), delimiter_) {}
+    Expression::Expression(const DSAString &exp_, const char delimiter_) : Expression(exp_.c_str(), delimiter_) {}
 
     Expression::~Expression()
     {
@@ -273,12 +273,12 @@ namespace CZ
         return operandS.top(); // 返回最终的运算结果
     }
 
-    CZString Expression::to_RPN() const
+    DSAString Expression::to_RPN() const
     {
         Stack<char> operatorS; // 运算符栈
         operatorS.push('\0');  // 哨兵运算符入栈
 
-        CZString RPN;
+        DSAString RPN;
 
         const char *p = _exp + 1;
         while (!operatorS.empty())
@@ -335,14 +335,14 @@ namespace CZ
         return RPN;
     }
 
-    CZString Expression::to_PN() const
+    DSAString Expression::to_PN() const
     {
         Stack<char> operatorS; // 运算符栈
         operatorS.push('\0');  // 哨兵运算符入栈
 
-        CZString PN;
+        DSAString PN;
 
-        CZString::Rank l = strlen(_exp + 1);
+        DSAString::Rank l = strlen(_exp + 1);
         const char *p = _exp + l;
         while (!operatorS.empty())
         {
@@ -408,11 +408,11 @@ namespace CZ
 
     HashRank Expression::hash() const
     {
-        return (Hash<CZString>()(get_entity_name()) + Hash<CZString>()(_exp + 1)) % CZ_MAX_HASH_VALUE;
+        return (Hash<DSAString>()(get_entity_name()) + Hash<DSAString>()(_exp + 1)) % DSA_MAX_HASH_VALUE;
     }
 
     const char *Expression::get_entity_name() const
     {
         return "Expression";
     }
-} // CZ
+} // DSA

@@ -17,7 +17,7 @@
 #include "UnionFindSet/UnionFindSet.h"
 
 using namespace std;
-using namespace CZ;
+using namespace DSA;
 
 bool test_unionfindset()
 {

@@ -8,9 +8,9 @@
 
 #include "../Base/BaseDef.h"
 
-namespace CZ
+namespace DSA
 {
     DLL_EXPORT_IMPORT double Pow(double x, long long n);
-} // CZ
+} // DSA
 
 #endif //DSA_POW_H

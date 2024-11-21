@@ -16,7 +16,7 @@
 #include "../TreeNode.h"
 #include "BinTree.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T> class BinTree;
 
@@ -80,7 +80,7 @@ namespace CZ
         BinTreeNode<T> *_pLeftChild;
         BinTreeNode<T> *_pRightChild;
     };
-} // CZ
+} // DSA
 
 #include "BinTreeNode_implementation.h"
 

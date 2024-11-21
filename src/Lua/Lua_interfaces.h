@@ -22,18 +22,18 @@
  * @param [in] method 判断方法（可选）：0 暴力方法；1 素数表法（默认）；2 正则表达式法
  * @return int 判断结果：0 代表非素数
  */
-int CZLuaF_Is_prime(lua_State *L);
+int DSALuaF_Is_prime(lua_State *L);
 
 /**
  * @brief 排序整型数组
  * 
  * @param [in] A 待排序的整型数组 table
  */
-int CZLuaF_Sort_int(lua_State *L);
+int DSALuaF_Sort_int(lua_State *L);
 
-int CZLuaF_Add(lua_State *L);
+int DSALuaF_Add(lua_State *L);
 
-int CZLuaF_SayHi(lua_State *L);
+int DSALuaF_SayHi(lua_State *L);
 
 extern "C" DLL_EXPORT_IMPORT int luaopen_DSALuaDLL(lua_State * L);
 

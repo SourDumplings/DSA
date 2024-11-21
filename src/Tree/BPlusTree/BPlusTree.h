@@ -20,7 +20,7 @@
 #include "BPlusTreeNode.h"
 #include "../../Map/KVPair.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename K, typename V>
     class BPlusTree : public AbstractBaseEntity
@@ -88,7 +88,7 @@ namespace CZ
 
         void print_keys_in_node(BPlusTreeNode<K, V> *node) const;
     };
-} // namespace CZ
+} // namespace DSA
 
 #include "BPlusTree_implementation.h"
 

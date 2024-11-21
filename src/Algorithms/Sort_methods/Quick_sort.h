@@ -15,7 +15,7 @@
 #include "../Is_sorted.h"
 #include "../Swap.h"
 
-namespace CZ::SortAccessories
+namespace DSA::SortAccessories
 {
     using Rank_quick_sort = int64_t;
 
@@ -151,6 +151,6 @@ namespace CZ::SortAccessories
             break;
         }
     }
-} // CZ::SortAccessories
+} // DSA::SortAccessories
 
 #endif // QUICK_SORT_H

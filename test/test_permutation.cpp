@@ -17,7 +17,7 @@
 
 #include "Algorithms/Permutate.h"
 
-using namespace CZ;
+using namespace DSA;
 
 bool test_permutation()
 {

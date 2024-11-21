@@ -11,7 +11,7 @@
 
 #include "AbstractIterableContainer.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T, typename It>
     class AbstractSeqIterableContainer : public AbstractIterableContainer<T, It>

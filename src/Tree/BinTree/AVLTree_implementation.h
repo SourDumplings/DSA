@@ -16,7 +16,7 @@ AVL树模板的实现
 #include <utility>
 #include <iostream>
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     AVLTree<T>::AVLTree(std::nullptr_t) : BST<T>(nullptr)
@@ -211,6 +211,6 @@ namespace CZ
         }
         return ret;
     }
-    } // CZ
+    } // DSA
 
 #endif // AVL_TREE_IMPLEMENTATION_H

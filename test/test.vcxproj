@@ -34,7 +34,7 @@
     <ClCompile Include="test_bst.cpp" />
     <ClCompile Include="test_btree.cpp" />
     <ClCompile Include="test_container_perf.cpp" />
-    <ClCompile Include="test_czstring.cpp" />
+    <ClCompile Include="test_dsastring.cpp" />
     <ClCompile Include="test_deque.cpp" />
     <ClCompile Include="test_expression.cpp" />
     <ClCompile Include="test_flathashset.cpp" />
@@ -86,7 +86,7 @@
     <ClInclude Include="test_bst.h" />
     <ClInclude Include="test_btree.h" />
     <ClInclude Include="test_container_perf.h" />
-    <ClInclude Include="test_czstring.h" />
+    <ClInclude Include="test_dsastring.h" />
     <ClInclude Include="test_deque.h" />
     <ClInclude Include="test_expression.h" />
     <ClInclude Include="test_flathashset.h" />

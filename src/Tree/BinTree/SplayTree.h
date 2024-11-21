@@ -15,7 +15,7 @@
 #include "SplayTreeNode.h"
 #include "BST.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class SplayTree : public BST<T>
@@ -53,7 +53,7 @@ namespace CZ
     private:
         SplayTreeNode<T> *copy_from(TreeNode<T> *pRoot);
     };
-} // CZ
+} // DSA
 
 #include "SplayTree_implementation.h"
 

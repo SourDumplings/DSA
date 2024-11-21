@@ -14,7 +14,7 @@ List类模板的析构函数
 
 #include "List.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     void List<T>::free()
@@ -28,7 +28,7 @@ namespace CZ
     {
         free();
     }
-} // CZ
+} // DSA
 
 #endif // LIST_DESTRUCTOR_H
 

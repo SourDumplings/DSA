@@ -14,7 +14,7 @@
 #include "KVPair.h"
 #include "../Set/TreeSet.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename K, typename V>
     class TreeMap: public TreeSet<KVPair<K, V>>

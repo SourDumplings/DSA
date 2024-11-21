@@ -14,14 +14,14 @@
 
 #include "Queue.h"
 
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 
 #include <cstdio>
 #include <utility>
 #include <iostream>
 #include <sstream>
 
-namespace CZ
+namespace DSA
 {
     template <typename T, typename C>
     inline typename Queue<T, C>::Rank Queue<T, C>::size() const
@@ -93,7 +93,7 @@ namespace CZ
     template <typename T, typename C>
     HashRank Queue<T, C>::hash() const
     {
-        return (CZString(get_entity_name()).hash() + _data.hash()) % CZ_MAX_HASH_VALUE;
+        return (DSAString(get_entity_name()).hash() + _data.hash()) % DSA_MAX_HASH_VALUE;
     }
 
     template <typename T, typename C>
@@ -117,6 +117,6 @@ namespace CZ
 #endif
     }
 
-} // CZ
+} // DSA
 
 #endif // QUEUE_IMPLEMENTATION_H

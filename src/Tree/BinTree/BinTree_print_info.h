@@ -15,7 +15,7 @@
 
 #include "BinTree.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     void BinTree<T>::print_info(const char *name) const
@@ -41,7 +41,7 @@ namespace CZ
             printf("\n\n");
         }
     }
-} // CZ
+} // DSA
 
 #endif // BIN_TREE_PRINT_INFO_H
 

@@ -17,7 +17,7 @@
 #include "Tree/BinTree/RedBlackTree.h"
 
 using namespace std;
-using namespace CZ;
+using namespace DSA;
 
 bool test_redblacktree()
 {

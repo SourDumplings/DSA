@@ -16,7 +16,7 @@
 #include <cstdio>
 #include "../Fib.h"
 
-namespace CZ::SearchAccessories
+namespace DSA::SearchAccessories
 {
     // 一共有两个版本的斐波那契查找
 
@@ -81,6 +81,6 @@ namespace CZ::SearchAccessories
         }
         return end;
     }
-} // CZ
+} // DSA
 
 #endif // FIB_SEARCH_H

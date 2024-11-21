@@ -12,12 +12,12 @@
 #ifndef ABS_H
 #define ABS_H
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     inline T Abs(const T num)
     { return num < 0 ? -num : num; }
-} // CZ
+} // DSA
 
 #endif // ABS_H
 

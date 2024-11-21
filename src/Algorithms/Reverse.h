@@ -16,7 +16,7 @@
 #include "../Iterator/Iterator_traits.h"
 #include "Swap.h"
 
-namespace CZ
+namespace DSA
 {
 
     namespace ReverseAccessories
@@ -59,6 +59,6 @@ namespace CZ
                                                              typename Iterator_traits<It>::iterator_category());
     }
 
-} // CZ
+} // DSA
 
 #endif // REVERSE_H

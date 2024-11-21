@@ -3,7 +3,7 @@
 
 #include "TrieTree.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     TrieTree<T>::TrieTree(std::nullptr_t) : TrieTree<T>()

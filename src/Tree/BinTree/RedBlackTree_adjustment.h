@@ -14,7 +14,7 @@
 
 #include "RedBlackTree.h"
 
-namespace CZ
+namespace DSA
 {
 
     /* 双红修正，解决父子结点皆红的情况
@@ -163,6 +163,6 @@ namespace CZ
             }
         }
     }
-} // CZ
+} // DSA
 
 #endif // RED_BLACK_TREE_ADJUSTMENT_H

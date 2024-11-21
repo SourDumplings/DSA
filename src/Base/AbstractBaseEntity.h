@@ -15,7 +15,7 @@
 #include <iostream>
 #include <sstream>
 
-namespace CZ
+namespace DSA
 {
     class DLL_EXPORT_IMPORT AbstractBaseEntity
     {

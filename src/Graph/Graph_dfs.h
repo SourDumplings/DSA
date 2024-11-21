@@ -15,7 +15,7 @@
 #include "Graph.h"
 
 
-namespace CZ
+namespace DSA
 {
     template <typename ED, typename VD>
     template <typename EF, typename VF>
@@ -124,6 +124,6 @@ namespace CZ
     }
 
 
-} // CZ
+} // DSA
 
 #endif // GRAPH_DFS_H

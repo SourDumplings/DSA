@@ -9,9 +9,9 @@
 #include "test_deque.h"
 
 #include "Deque/Deque.h"
-#include "CZString/CZString.h"
+#include "DSAString/DSAString.h"
 
-using namespace CZ;
+using namespace DSA;
 using namespace std;
 
 bool test_deque()
@@ -65,8 +65,8 @@ bool test_deque()
         dq2.push_back(i);
     }
     dq2.print_info("dq2");
-    Deque<CZString> dqs1;
-    CZString s = "hello";
+    Deque<DSAString> dqs1;
+    DSAString s = "hello";
     for (int i = 0; i < 20; ++i)
     {
         dqs1.push_back(s + (i + '0'));
@@ -191,10 +191,10 @@ bool test_deque()
     // 测试 back、front
     printf("dq1.front() = %d\n", dq1.front());
     printf("dq1.back() = %d\n", dq1.back());
-    dqs1 = Deque<CZString>({"abc", "def", "hello", "world"});
+    dqs1 = Deque<DSAString>({"abc", "def", "hello", "world"});
     printf("dqs1.front().c_str() = %s\n", dqs1.front().c_str());
     printf("dqs1.back().c_str() = %s\n", dqs1.back().c_str());
-    Deque<CZString> dqs2(dqs1);
+    Deque<DSAString> dqs2(dqs1);
     printf("dqs2.front().c_str() = %s\n", dqs2.front().c_str());
     printf("dqs2.back().c_str() = %s\n", dqs2.back().c_str());
 

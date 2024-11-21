@@ -17,7 +17,7 @@ B树数据的访问接口
 #include "../../Algorithms/Search.h"
 #include "../../Queue/Queue.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     inline typename BTree<T>::Rank BTree<T>::order() const
@@ -164,10 +164,10 @@ namespace CZ
     template <typename T>
     HashRank BTree<T>::hash() const
     {
-        HashRank res = Hash<CZString>()(get_entity_name()) + _order;
+        HashRank res = Hash<DSAString>()(get_entity_name()) + _order;
         if (_root)
         {
-            res = (res + _root->hash()) % CZ_MAX_HASH_VALUE;
+            res = (res + _root->hash()) % DSA_MAX_HASH_VALUE;
         }
 
         return res;
@@ -178,6 +178,6 @@ namespace CZ
     {
         return "BTree";
     }
-} // CZ
+} // DSA
 
 #endif // B_TREE_INTERFACES_H

@@ -17,7 +17,7 @@
 #include "../Base/AbstractBaseContainer.h"
 #include "../Vector/Vector.h"
 
-namespace CZ
+namespace DSA
 {
     class DLL_EXPORT_IMPORT PrimeTable: public AbstractBaseContainer<uint32_t>
     {
@@ -69,6 +69,6 @@ namespace CZ
         // 扩展素数表
         void _expand(Rank upperLimit_);
     };
-} // namespace CZ
+} // namespace DSA
 
 #endif // PRIME_TABLE_H

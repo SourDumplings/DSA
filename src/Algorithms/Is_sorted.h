@@ -9,7 +9,7 @@
 #ifndef IS_SORTED_H
 #define IS_SORTED_H
 
-namespace CZ
+namespace DSA
 {
     template <typename It>
     inline bool Is_sorted(It begin, It end)

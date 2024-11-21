@@ -15,7 +15,7 @@ AVL树类模板
 #include "AVLTreeNode.h"
 #include "BST.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class AVLTree : public BST<T>
@@ -61,7 +61,7 @@ namespace CZ
     private:
         AVLTreeNode<T> *copy_from(TreeNode<T> *pNode);
     };
-} // CZ
+} // DSA
 
 #include "AVLTree_implementation.h"
 

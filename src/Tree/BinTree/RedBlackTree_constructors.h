@@ -14,7 +14,7 @@
 
 #include "RedBlackTree.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     RedBlackTree<T>::RedBlackTree(std::nullptr_t) : BST<T>(nullptr) {}
@@ -54,6 +54,6 @@ namespace CZ
 
     template <typename T>
     RedBlackTree<T>::RedBlackTree(RedBlackTree<T> &&t) noexcept : BST<T>(std::move(t)) {}
-} // CZ
+} // DSA
 
 #endif // RED_BLACK_TREE_CONSTRUCTORS_H

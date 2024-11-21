@@ -14,7 +14,7 @@ List类模板的构造函数
 
 #include "List.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     List<T>::List(Rank n): _size(n)
@@ -47,7 +47,7 @@ namespace CZ
     {
         init_from(L.begin(), L.end());
     }
-} // CZ
+} // DSA
 
 #endif // LIST_CONSTRUCTORS_H
 

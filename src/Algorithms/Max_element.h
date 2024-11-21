@@ -18,7 +18,7 @@
 #include "../Base/Assert.h"
 
 
-namespace CZ
+namespace DSA
 {
     template <typename It, typename Cmp>
     It Max_element(const It &begin, const It &end, const Cmp &cmp)
@@ -40,6 +40,6 @@ namespace CZ
     {
         return Max_element(begin, end, std::less<decltype(*begin)>());
     }
-} // CZ
+} // DSA
 
 #endif // MAX_ELEMENT_H

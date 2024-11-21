@@ -10,14 +10,14 @@
 
 #include "SegmemtTree.h"
 
-#include "../../CZString/CZString.h"
+#include "../../DSAString/DSAString.h"
 #include "../../Queue/Queue.h"
 #include <cstdio>
 
-namespace CZ
+namespace DSA
 {
     template <typename T, typename F>
-    SegmentTree<T, F>::SegmentTree(const CZ::Vector<T> data,
+    SegmentTree<T, F>::SegmentTree(const DSA::Vector<T> data,
                                    const F &f)
         : _n(data.size()), _f(f)
     {
@@ -121,7 +121,7 @@ namespace CZ
     template <typename T, typename F>
     HashRank SegmentTree<T, F>::hash() const
     {
-        return (Hash<CZString>()(get_entity_name()) + _tree_data.hash() + Hash<const F *const>()(&_f)) % CZ_MAX_HASH_VALUE;
+        return (Hash<DSAString>()(get_entity_name()) + _tree_data.hash() + Hash<const F *const>()(&_f)) % DSA_MAX_HASH_VALUE;
     }
 
     template <typename T, typename F>

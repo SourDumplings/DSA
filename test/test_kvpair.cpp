@@ -9,10 +9,10 @@
 #include "test_kvpair.h"
 
 #include "Map/KVPair.h"
-#include "CZString/CZString.h"
+#include "DSAString/DSAString.h"
 #include <cstdio>
 
-using namespace CZ;
+using namespace DSA;
 using namespace std;
 
 class K
@@ -34,7 +34,7 @@ ostream& operator<<(ostream &os, const K &k)
 class V
 {
 public:
-    CZString v;
+    DSAString v;
 
     HashRank hash() const
     {

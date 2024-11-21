@@ -15,7 +15,7 @@
 #include "BinTree.h"
 #include "../../Algorithms/Max.h"
 
-namespace CZ
+namespace DSA
 {
     /* 旋转算法，传入孙辈结点，共有四种情况
            g                 g                    g                     g
@@ -139,6 +139,6 @@ namespace CZ
         c->set_father(b);
         return b;
     }
-} // CZ
+} // DSA
 
 #endif // BIN_TREE_ROTATION_H

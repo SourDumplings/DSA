@@ -14,14 +14,14 @@
 
 #include "BinTree.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     const char *BinTree<T>::get_entity_name() const
     {
         return "BinTree";
     }
-} // CZ
+} // DSA
 
 #endif // BIN_TREE_INTERFACES_H
 

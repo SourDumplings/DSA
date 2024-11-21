@@ -16,7 +16,7 @@
 #include "../Iterator/BiIterator.h"
 #include "../Tree/BinTree/RedBlackTreeNode.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class TreeSetIterator;
@@ -133,7 +133,7 @@ namespace CZ
 
         HashRank hash() const override
         {
-            return (Hash<RedBlackTreeNode<T>>()(*_it) + Hash<bool>()(_isEnd) + Hash<const RedBlackTree<T> *>()(_pRBT)) % CZ_MAX_HASH_VALUE;
+            return (Hash<RedBlackTreeNode<T>>()(*_it) + Hash<bool>()(_isEnd) + Hash<const RedBlackTree<T> *>()(_pRBT)) % DSA_MAX_HASH_VALUE;
         }
 
         const char *get_entity_name() const override
@@ -167,6 +167,6 @@ namespace CZ
     {
         return !(lhs == rhs);
     }
-} // CZ
+} // DSA
 
 #endif // TREE_TreeSET_ITERATOR_H

@@ -15,9 +15,9 @@
 #include <cstdio>
 #include <iostream>
 #include "../Base/AbstractBaseEntity.h"
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class Shared_ptr;
@@ -123,8 +123,8 @@ namespace CZ
     template <typename T>
     HashRank Weak_ptr<T>::hash() const
     {
-        return (Hash<CZString>()(get_entity_name()) + Hash<T *>()(_ptr) * Hash<Rank>()(_count)) % CZ_MAX_HASH_VALUE;
+        return (Hash<DSAString>()(get_entity_name()) + Hash<T *>()(_ptr) * Hash<Rank>()(_count)) % DSA_MAX_HASH_VALUE;
     }
-} // CZ
+} // DSA
 
 #endif // WEAK_PTR_H

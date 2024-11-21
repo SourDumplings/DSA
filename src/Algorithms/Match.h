@@ -20,7 +20,7 @@
 #include "Match/Brute_force_match.h"
 #include "Match/KMP_match.h"
 
-namespace CZ
+namespace DSA
 {
     using MatchRank = uint32_t;
 
@@ -90,6 +90,6 @@ namespace CZ
         return MatchAccessories::test_iterator_for_match(TBegin, TEnd, PBegin, PEnd,
                                                      typename Iterator_traits<It>::iterator_category(), method, version);
     }
-} // CZ
+} // DSA
 
 #endif // MATCH_H

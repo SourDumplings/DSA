@@ -16,10 +16,10 @@
 #define EXPRESSION_H
 
 #include "../Base/AbstractBaseEntity.h"
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 #include <string>
 
-namespace CZ
+namespace DSA
 {
     static const uint32_t OPERTAOR_NUM = 9;
 
@@ -30,15 +30,15 @@ namespace CZ
 
         Expression(const char *exp_ = "", const char delimiter_ = ' ');
         Expression(const std::string &exp_, const char delimiter_ = ' ');
-        Expression(const CZString &exp_, const char delimiter_ = ' ');
+        Expression(const DSAString &exp_, const char delimiter_ = ' ');
         ~Expression();
 
         void print_info(const char *name = "") const;
 
         ValueType calc_value() const;
 
-        CZString to_PN() const;
-        CZString to_RPN() const;
+        DSAString to_PN() const;
+        DSAString to_RPN() const;
 
         const char *c_str() const override;
         HashRank hash() const override;
@@ -58,6 +58,6 @@ namespace CZ
         static const char priTable[OPERTAOR_NUM][OPERTAOR_NUM];        // 运算符优先级表
         static const char priTableReverse[OPERTAOR_NUM][OPERTAOR_NUM]; // 运算符优先级逆表
     };
-} // CZ
+} // DSA
 
 #endif // EXPRESSION_H

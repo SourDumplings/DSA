@@ -15,7 +15,7 @@
 #include "Graph.h"
 #include <iostream>
 
-namespace CZ
+namespace DSA
 {
     template <typename ED, typename VD>
     void Graph<ED, VD>::print_info(const char *name) const
@@ -84,6 +84,6 @@ namespace CZ
 
         putchar('\n');
     }
-} // CZ
+} // DSA
 
 #endif // GRAPH_PRINT_INFO_H

@@ -16,7 +16,7 @@ AVL树结点类模板
 #include "BSTNode.h"
 #include "../../Algorithms/Abs.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class AVLTree;
@@ -101,6 +101,6 @@ namespace CZ
             }
         }
     };
-} // CZ
+} // DSA
 
 #endif // AVL_TREE_NODE_H

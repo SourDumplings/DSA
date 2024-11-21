@@ -18,9 +18,9 @@
 #include <initializer_list>
 #include "DequeIterator.h"
 #include "../Base/AbstractSeqIterableContainer.h"
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class Deque : public AbstractSeqIterableContainer<T, DequeIterator<T>>

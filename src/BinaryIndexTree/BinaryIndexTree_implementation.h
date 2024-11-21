@@ -14,11 +14,11 @@
 
 #include "BinaryIndexTree.h"
 
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 
 #include <iostream>
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     BinaryIndexTree<T>::BinaryIndexTree(const typename BinaryIndexTree<T>::Rank size) : _data(size + 1)
@@ -127,7 +127,7 @@ namespace CZ
     template <typename T>
     HashRank BinaryIndexTree<T>::hash() const
     {
-        return (Hash<CZString>()(get_entity_name()) + _data.hash()) % CZ_MAX_HASH_VALUE;
+        return (Hash<DSAString>()(get_entity_name()) + _data.hash()) % DSA_MAX_HASH_VALUE;
     }
 
     template <typename T>
@@ -141,6 +141,6 @@ namespace CZ
     {
         resize(0);
     }
-} // CZ
+} // DSA
 
 #endif // BINARY_INDEX_TREE_IMPLEMENTATION_H

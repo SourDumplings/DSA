@@ -1,6 +1,6 @@
 #include "Shell_sort.h"
 
-namespace CZ::SortAccessories
+namespace DSA::SortAccessories
 {
     Vector<Rank_shell_sort> deltaSeq;
 
@@ -66,4 +66,4 @@ namespace CZ::SortAccessories
             deltaSeq.push_back(delta);
         }
     }
-} // CZ::SortAccessories
+} // DSA::SortAccessories

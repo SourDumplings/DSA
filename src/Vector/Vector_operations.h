@@ -17,7 +17,7 @@ Vector本身所支持的操作
 #include "../Base/Assert.h"
 #include <iostream>
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     const T &Vector<T>::operator[](const Vector<T>::Rank i) const

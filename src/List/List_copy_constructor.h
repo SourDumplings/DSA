@@ -14,13 +14,13 @@ List类模板的复制构造函数
 
 #include "List.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     List<T>::List(const List<T> &l)
     {
         init_from(l.begin(), l.end());
     }
-} // CZ
+} // DSA
 
 #endif // LIST_COPY_CONSTRUCTOR_H

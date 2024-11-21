@@ -11,12 +11,12 @@
 
 #include "test_hello_world.h"
 
-#include "CZString/CZString.h"
+#include "DSAString/DSAString.h"
 #include <iostream>
 
 bool test_hello_world()
 {
-    CZ::CZString hello("Hello World!");
+    DSA::DSAString hello("Hello World!");
     std::cout << "hello: " << hello << std::endl;
     return true;
 }

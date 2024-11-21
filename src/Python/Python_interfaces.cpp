@@ -16,18 +16,18 @@
 
 extern "C"
 {
-    bool CZPyF_Is_prime(uint32_t x, uint8_t method)
+    bool DSAPyF_Is_prime(uint32_t x, uint8_t method)
     {
-        return CZ::Is_prime(x, static_cast<CZ::PrimeAccessories::IsPrimeMethod>(method));
+        return DSA::Is_prime(x, static_cast<DSA::PrimeAccessories::IsPrimeMethod>(method));
     }
 
-    int CZPyF_Add(int x, int y)
+    int DSAPyF_Add(int x, int y)
     {
         return x + y;
     }
 
-    void CZPyF_Sort_int(int64_t *begin, uint32_t n)
+    void DSAPyF_Sort_int(int64_t *begin, uint32_t n)
     {
-        CZ::Sort(begin, begin + n, CZ::SortAccessories::QUICK_SORT, 1);
+        DSA::Sort(begin, begin + n, DSA::SortAccessories::QUICK_SORT, 1);
     }
 }

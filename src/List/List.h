@@ -21,7 +21,7 @@
 #include "ListNode.h"
 #include "ListIterator.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class List : public AbstractSeqIterableContainer<T, ListIterator<T>>
@@ -140,7 +140,7 @@ namespace CZ
         Rank _size = 0;
         ListNode<T> *_head = nullptr; // 头哨兵结点
     };
-} // CZ
+} // DSA
 
 #include "List_implementation.h"
 #include "List_operations.h"

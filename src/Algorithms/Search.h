@@ -18,7 +18,7 @@
 #include "./Search_methods/Binary_search.h"
 #include "./Search_methods/Fib_search.h"
 
-namespace CZ
+namespace DSA
 {
     enum SearchMethod
     {
@@ -58,6 +58,6 @@ namespace CZ
         }
         return end;
     }
-} // CZ
+} // DSA
 
 #endif // SEARCH_H

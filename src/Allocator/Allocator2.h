@@ -24,7 +24,7 @@
 #include <cstddef>
 #include <cstdint>
 
-namespace CZ
+namespace DSA
 {
     class DLL_EXPORT_IMPORT Allocator2
     {

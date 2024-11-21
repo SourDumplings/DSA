@@ -14,7 +14,7 @@
 
 #include "SeqIterator.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class BiIterator;
@@ -65,6 +65,6 @@ namespace CZ
     {
         return !(lhs == rhs);
     }
-} // CZ
+} // DSA
 
 #endif // BI_ITERATOR_H

@@ -14,7 +14,7 @@
 
 #include "BinTreeNode.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class BST;
@@ -47,7 +47,7 @@ namespace CZ
         // 不得再使用 exchange_children 方法
         void exchange_children() = delete;
     };
-} // CZ
+} // DSA
 
 #include "BSTNode_implementation.h"
 

@@ -17,7 +17,7 @@ a不比b小，b不比a小即认为a和b相等
 #include <functional>
 #include "../Base/Assert.h"
 
-namespace CZ
+namespace DSA
 {
     namespace MedianAlgorithms
     {
@@ -87,7 +87,7 @@ namespace CZ
     {
         return Median_of_two_seq(begin1, end1, begin2, end2, std::less<decltype(*begin1)>());
     }
-} // CZ
+} // DSA
 
 #endif // MEDIAN_H
 

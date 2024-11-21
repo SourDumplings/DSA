@@ -16,7 +16,7 @@
 #include "../Base/AbstractBaseEntity.h"
 #include "../Iterator/BiIterator.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class ListIterator;
@@ -98,7 +98,7 @@ namespace CZ
 
         HashRank hash() const override
         {
-            return (Hash<ListNode<T>>()(*_it) + Hash<CZString>()(get_entity_name())) % CZ_MAX_HASH_VALUE;
+            return (Hash<ListNode<T>>()(*_it) + Hash<DSAString>()(get_entity_name())) % DSA_MAX_HASH_VALUE;
         }
 
         const char *get_entity_name() const override
@@ -121,6 +121,6 @@ namespace CZ
         return !(lhs == rhs);
     }
 
-} // CZ
+} // DSA
 
 #endif // LISTITERATOR_H

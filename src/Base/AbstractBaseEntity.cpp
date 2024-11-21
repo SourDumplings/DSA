@@ -11,7 +11,7 @@
 #include <cstdlib>
 #include <cstring>
 
-namespace CZ
+namespace DSA
 {
     AbstractBaseEntity::AbstractBaseEntity() : _pStr(nullptr) {}
 

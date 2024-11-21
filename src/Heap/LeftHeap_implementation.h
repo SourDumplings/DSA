@@ -19,9 +19,9 @@
 
 #include "../Algorithms/Min.h"
 #include "../Algorithms/Swap.h"
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T, typename Cmp>
     LeftHeap<T, Cmp>::LeftHeap() = default;
@@ -172,7 +172,7 @@ namespace CZ
     template <typename T, typename Cmp>
     HashRank LeftHeap<T, Cmp>::hash() const
     {
-        return (Hash<CZString>()(get_entity_name()) + _T.hash()) % CZ_MAX_HASH_VALUE;
+        return (Hash<DSAString>()(get_entity_name()) + _T.hash()) % DSA_MAX_HASH_VALUE;
     }
 
     template <typename T, typename Cmp>
@@ -192,6 +192,6 @@ namespace CZ
     {
         return "LeftHeap";
     }
-} // CZ
+} // DSA
 
 #endif // LEFT_HEAP_IMPLEMENTATION_H

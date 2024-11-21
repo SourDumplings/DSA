@@ -16,7 +16,7 @@
 #include "Iterator_traits.h"
 #include <iostream>
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class SeqIterator;
@@ -98,7 +98,7 @@ namespace CZ
 
         HashRank hash() const override
         {
-            return (Hash<const char *>()(get_entity_name()) + Hash<T *>()(_p)) % CZ_MAX_HASH_VALUE;
+            return (Hash<const char *>()(get_entity_name()) + Hash<T *>()(_p)) % DSA_MAX_HASH_VALUE;
         }
 
         const char *get_entity_name() const override
@@ -121,6 +121,6 @@ namespace CZ
         return !(lhs == rhs);
     }
 
-} // CZ
+} // DSA
 
 #endif // SEQ_ITERATOR_H

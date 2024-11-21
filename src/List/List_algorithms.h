@@ -15,7 +15,7 @@ List的一些特有算法
 #include "List.h"
 
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     inline void List<T>::merge(const List<T> &l)
@@ -297,6 +297,6 @@ namespace CZ
         pos.get()->_prev = last;
         return ListIterator<T>(first);
     }
-} // CZ
+} // DSA
 
 #endif // LIST_ALGORITHMS_H

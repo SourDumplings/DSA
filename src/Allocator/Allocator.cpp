@@ -11,7 +11,7 @@
 #include <cstdlib>
 #include <cstdio>
 
-namespace CZ
+namespace DSA
 {
     void *Allocator::allocate(size_t size)
     {

@@ -16,7 +16,7 @@
 #include "Tree.h"
 #include "../Queue/Queue.h"
 
-namespace CZ
+namespace DSA
 {
 template <typename T>
 template <typename F>
@@ -66,6 +66,6 @@ void Tree<T>::level_order_traversal(TreeNode<T> *root, const F &visit)
         }
     }
 }
-} // namespace CZ
+} // namespace DSA
 
 #endif // TREE_TRAVERSAL_H

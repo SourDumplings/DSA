@@ -36,10 +36,10 @@ int main()
 #define PAIR_H
 
 #include "../Base/AbstractBaseEntity.h"
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 #include <iostream>
 
-namespace CZ
+namespace DSA
 {
     template <typename K, typename V>
     class KVPair;
@@ -127,7 +127,7 @@ namespace CZ
     template <typename K, typename V>
     HashRank KVPair<K, V>::hash() const
     {
-        return (Hash<CZString>()(get_entity_name()) + Hash<K>()(_key)) % CZ_MAX_HASH_VALUE;
+        return (Hash<DSAString>()(get_entity_name()) + Hash<K>()(_key)) % DSA_MAX_HASH_VALUE;
     }
 
     template <typename K, typename V>
@@ -178,6 +178,6 @@ namespace CZ
     {
         return lhs._key > rhs._key || lhs._key == rhs._key;
     }
-} // CZ
+} // DSA
 
 #endif // PAIR_H

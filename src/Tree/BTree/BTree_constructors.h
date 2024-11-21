@@ -14,7 +14,7 @@ B树的构造函数群
 
 #include "BTree.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     BTree<T>::BTree(typename BTree<T>::Rank order_):
@@ -52,7 +52,7 @@ namespace CZ
         bt._size = 0;
         bt._order = 3;
     }
-} // CZ
+} // DSA
 
 #endif // B_TREE_CONSTRUCTORS_H
 

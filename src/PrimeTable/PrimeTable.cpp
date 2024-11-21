@@ -10,9 +10,9 @@
 
 #include <cstdio>
 #include <iostream>
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 
-namespace CZ
+namespace DSA
 {
     PrimeTable::PrimeTable(PrimeTable::Rank upperLimit_)
         : AbstractBaseContainer<uint32_t>()
@@ -163,7 +163,7 @@ namespace CZ
 
     HashRank PrimeTable::hash() const
     {
-        return (Hash<CZString>()(get_entity_name()) + _table.hash()) % CZ_MAX_HASH_VALUE;
+        return (Hash<DSAString>()(get_entity_name()) + _table.hash()) % DSA_MAX_HASH_VALUE;
     }
 
     const char *PrimeTable::get_entity_name() const

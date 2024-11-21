@@ -15,12 +15,12 @@
 #include "TreeNode.h"
 
 #include "../Algorithms/Max.h"
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 #include <cstdio>
 #include <iostream>
 #include <sstream>
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     TreeNode<T>::TreeNode(const T &data_, TreeNode<T> *father_) : _data(data_), _father(father_)
@@ -213,12 +213,12 @@ namespace CZ
     {
         // 树结点的哈希是综合了该结点的数据、孩子多少、结点高度和所有子结点的哈希值
         // 即树结点的哈希值由结点的数据和结构两方面决定
-        HashRank res = Hash<CZString>()(get_entity_name()) + _children.size();
+        HashRank res = Hash<DSAString>()(get_entity_name()) + _children.size();
         for (TreeNode<T> *const &pc : _children)
         {
             if (pc)
             {
-                res = (res + Hash<TreeNode<T>>()(*pc)) % CZ_MAX_HASH_VALUE;
+                res = (res + Hash<TreeNode<T>>()(*pc)) % DSA_MAX_HASH_VALUE;
             }
         }
         return res;
@@ -265,6 +265,6 @@ namespace CZ
         }
         return 1 < father()->children().size();
     }
-} // CZ
+} // DSA
 
 #endif // TREE_NODE_IMPLEMENTATION_H

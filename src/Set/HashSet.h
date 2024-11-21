@@ -21,7 +21,7 @@ HashSet 类模板
 #include "HashSetIterator.h"
 #include <initializer_list>
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class HashSet: public AbstractIterableContainer<T, HashSetIterator<T>>
@@ -110,7 +110,7 @@ namespace CZ
 
     template <typename T>
     HashSet<T> operator-(const HashSet<T> &lhs, const HashSet<T> &rhs);
-} // CZ
+} // DSA
 
 #include "HashSet_implementation.h"
 

@@ -27,7 +27,7 @@
     <ClCompile Include="test_asan.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test_czstring.cpp">
+    <ClCompile Include="test_dsastring.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="test_hello_world.cpp">
@@ -182,7 +182,7 @@
     <ClInclude Include="test_vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="test_czstring.h">
+    <ClInclude Include="test_dsastring.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="test_hello_world.h">

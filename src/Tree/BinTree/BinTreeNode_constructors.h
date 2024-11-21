@@ -15,7 +15,7 @@
 #include "BinTreeNode.h"
 #include "../../Algorithms/Max.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     BinTreeNode<T>::BinTreeNode(const T &data, BinTreeNode<T> *lChild_, BinTreeNode<T> *rChild_,
@@ -50,7 +50,7 @@ namespace CZ
             delete _pRightChild;
         }
     }
-} // CZ
+} // DSA
 
 #endif // BIN_TREE_NODE_CONSTRUCTORS_H
 

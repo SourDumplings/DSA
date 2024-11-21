@@ -22,7 +22,7 @@ B树的测试
 #include "Tree/BTree/BTree.h"
 
 using namespace std;
-using namespace CZ;
+using namespace DSA;
 
 bool test_btree()
 {

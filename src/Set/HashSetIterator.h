@@ -13,7 +13,7 @@
 #include "../List/List.h"
 #include "../Vector/Vector.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class HashSet;
@@ -148,7 +148,7 @@ namespace CZ
 
         HashRank hash() const override
         {
-            return (Hash<const HashSet<T> *>()(_pHashSet) + Hash<T>()(*_listIterator)) % CZ_MAX_HASH_VALUE;
+            return (Hash<const HashSet<T> *>()(_pHashSet) + Hash<T>()(*_listIterator)) % DSA_MAX_HASH_VALUE;
         }
 
         const char *get_entity_name() const override
@@ -173,6 +173,6 @@ namespace CZ
     {
         return !(lhs == rhs);
     }
-} // namespace CZ
+} // namespace DSA
 
 #endif

@@ -14,7 +14,7 @@
 
 #include "Graph.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename ED, typename VD>
     void Graph<ED, VD>::set_Nv(Rank Nv_)
@@ -157,7 +157,7 @@ namespace CZ
         }
         return success;
     }
-} // CZ
+} // DSA
 
 #endif // GRAPH_MODIFICATIONS_H
 

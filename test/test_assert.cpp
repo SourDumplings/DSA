@@ -10,7 +10,7 @@
 
 #include "Base/Assert.h"
 
-using namespace CZ;
+using namespace DSA;
 
 bool test_assert()
 {

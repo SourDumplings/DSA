@@ -16,7 +16,7 @@
 
 #include "../../Stack/Stack.h"
 
-namespace CZ
+namespace DSA
 {
     namespace BinTreeTraversalAccessories
     {
@@ -620,6 +620,6 @@ namespace CZ
             }
         }
     }
-} // CZ
+} // DSA
 
 #endif // BIN_TREE_TRAVERSAL_H

@@ -15,7 +15,7 @@
 #include <iostream>
 #include "List.h"
 
-namespace CZ
+namespace DSA
 {
     // 打印所有元素，空格隔开，末尾换行
     template <typename T>
@@ -40,7 +40,7 @@ namespace CZ
         printf("\n\n");
         return;
     }
-} // CZ
+} // DSA
 
 #endif // LIST_PRINT_INFO_H
 

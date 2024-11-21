@@ -15,7 +15,7 @@
 #include <cstdint>
 #include "../Base/BaseDef.h"
 
-namespace CZ
+namespace DSA
 {
     namespace PrimeAccessories
     {

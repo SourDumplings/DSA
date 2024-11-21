@@ -14,7 +14,7 @@ Vector的构造函数
 
 #include "Vector.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     Vector<T>::Vector(Vector<T>::Rank s)

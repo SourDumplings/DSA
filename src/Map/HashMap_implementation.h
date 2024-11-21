@@ -14,10 +14,10 @@ HashMap 类模板的实现
 
 #include "HashMap.h"
 
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 #include <iostream>
 
-namespace CZ
+namespace DSA
 {
     template <typename K, typename V>
     HashMap<K, V>::HashMap(const Rank tableSize_) : HashSet<KVPair<K, V>>(tableSize_)
@@ -109,7 +109,7 @@ namespace CZ
             Iterator it = HashSet<KVPair<K, V>>::search(tempP);
             return const_cast<V &>(((*(it.get())).data()).value());
         }
-        throw std::out_of_range((CZString("no this key in map") + CZString(key.c_str())).c_str());
+        throw std::out_of_range((DSAString("no this key in map") + DSAString(key.c_str())).c_str());
     }
 
     template <typename K, typename V>
@@ -117,7 +117,7 @@ namespace CZ
     {
         return const_cast<V &>(static_cast<const HashMap<K, V>&>(*this).at(key));
     }
-} // CZ
+} // DSA
 
 #endif // HASH_MAP_IMPLEMENTATION_H
 

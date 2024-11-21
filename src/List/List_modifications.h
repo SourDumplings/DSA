@@ -18,7 +18,7 @@ List类模板的动态操作
 #include "../Algorithms/Swap.h"
 #include "../Base/Assert.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     void List<T>::clear()
@@ -159,7 +159,7 @@ namespace CZ
     {
         return remove_if([&](const T &data) { return data == value; });
     }
-} // CZ
+} // DSA
 
 #endif // LIST_MODIFICATIONS_H
 

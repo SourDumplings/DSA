@@ -15,7 +15,7 @@ B树的动态操作，插入和删除只能针对值
 #include "BTree.h"
 #include "../../Algorithms/Search.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     void BTree<T>::solve_overflow(BTreeNode<T> *target)
@@ -287,6 +287,6 @@ namespace CZ
         }
         delete target;
     }
-} // CZ
+} // DSA
 
 #endif // B_TREE_MODIFICATIONS_H

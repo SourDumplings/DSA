@@ -20,7 +20,7 @@
 #include <limits.h>
 #include <cstdio>
 
-namespace CZ
+namespace DSA
 {
     enum GraphType
     {
@@ -154,7 +154,7 @@ namespace CZ
         ED _Prim(Vector<Rank> &MST, const ED &maxDist = UINT_MAX, const ED &minDist = 0) const;
         ED _Kruskal(Vector<Rank> &MST, const ED &maxDist = UINT_MAX, const ED &minDist = 0) const;
     };
-} // CZ
+} // DSA
 
 #include "Graph_implementation.h"
 

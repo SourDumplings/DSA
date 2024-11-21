@@ -14,7 +14,7 @@ TreeSet所相关的一些运算符函数模板
 
 #include "TreeSet.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     TreeSet<T> operator+(const TreeSet<T> &lhs, const TreeSet<T> &rhs)
@@ -35,7 +35,7 @@ namespace CZ
         }
         return retTreeSet;
     }
-} // CZ
+} // DSA
 
 #endif // TreeSET_OPERATIONS_H
 

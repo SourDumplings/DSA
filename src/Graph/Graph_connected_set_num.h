@@ -15,7 +15,7 @@
 
 #include "Graph.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename ED, typename VD>
     typename Graph<ED, VD>::Rank Graph<ED, VD>::connected_set_num() const
@@ -42,7 +42,7 @@ namespace CZ
         }
         return ret;
     }
-} // CZ
+} // DSA
 
 #endif // GRAPH_CONNECTED_SET_NUM_H
 

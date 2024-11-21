@@ -13,7 +13,7 @@
 #include "../Heap/Heap.h"
 #include "../Vector/Vector.h"
 
-namespace CZ
+namespace DSA
 {
     enum TopKMethod
     {

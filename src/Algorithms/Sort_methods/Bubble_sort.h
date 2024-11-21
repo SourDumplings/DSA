@@ -16,7 +16,7 @@
 #include <cstdio>
 #include <cstdint>
 
-namespace CZ::SortAccessories
+namespace DSA::SortAccessories
 {
     using Rank_bubble_sort = int64_t;
 
@@ -67,7 +67,7 @@ namespace CZ::SortAccessories
         }
     }
 
-} // CZ::SortAccessories
+} // DSA::SortAccessories
 
 #endif // BUBBLE_SORT_H
 

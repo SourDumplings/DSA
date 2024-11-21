@@ -11,7 +11,7 @@
 #include <cstdio>
 #include "Vector/Vector.h"
 
-using namespace CZ;
+using namespace DSA;
 using namespace std;
 
 void test_heap_overflow()

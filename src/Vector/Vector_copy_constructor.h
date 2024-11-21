@@ -14,7 +14,7 @@
 
 #include "Vector.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     Vector<T>::Vector(const Vector<T> &V)

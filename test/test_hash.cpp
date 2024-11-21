@@ -15,7 +15,7 @@
 #include "Set/HashSet.h"
 #include <cinttypes>
 
-using namespace CZ;
+using namespace DSA;
 using namespace std;
 
 class CWithNoHash

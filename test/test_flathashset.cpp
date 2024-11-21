@@ -21,7 +21,7 @@ FlatHashSet 类模板的测试
 #include <cinttypes>
 
 using namespace std;
-using namespace CZ;
+using namespace DSA;
 
 static void test_correctiness()
 {

@@ -14,7 +14,7 @@ List类模板的移动构造函数
 
 #include "List.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     List<T>::List(List<T> &&l) noexcept: _size(l._size), _head(l._head)
@@ -22,7 +22,7 @@ namespace CZ
         l.init();
         l._size = 0;
     }
-} // CZ
+} // DSA
 
 #endif // LIST_MOVE_CONSTRUCTOR_H
 

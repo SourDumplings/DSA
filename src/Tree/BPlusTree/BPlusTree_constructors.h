@@ -12,7 +12,7 @@
 #include "BPlusTree.h"
 #include "../../Queue/Queue.h"
 
-namespace CZ
+namespace DSA
 {
 template<typename K, typename V>
 BPlusTree<K, V>::BPlusTree(typename BPlusTree<K, V>::Rank order_)
@@ -153,6 +153,6 @@ BPlusTree<K, V>::BPlusTree(const Vector<KVPair<K, V *>> &indexDataV, Rank order_
         _root->_father = nullptr;
     }
 }
-} // namespace CZ
+} // namespace DSA
 
 #endif // B_PLUS_TREE_CONSTRUCTORS_H

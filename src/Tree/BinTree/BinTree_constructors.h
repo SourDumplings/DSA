@@ -17,7 +17,7 @@
 #include "../../Algorithms/Max.h"
 #include <utility>
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     BinTree<T>::BinTree(std::nullptr_t): BinTree<T>() {}
@@ -54,7 +54,7 @@ namespace CZ
         pCopiedRoot->insert_as_right_child(pRCopied);
         return pCopiedRoot;
     }
-} // CZ
+} // DSA
 
 #endif // BIN_TREE_CONSTRUCTORS_H
 

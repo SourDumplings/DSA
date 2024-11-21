@@ -19,7 +19,7 @@
 #include "Set/TreeSet.h"
 
 using namespace std;
-using namespace CZ;
+using namespace DSA;
 
 static void test_correctiness()
 {
@@ -136,15 +136,15 @@ bool test_treeset()
     // (TreeSet<int>::intersect(s7, s8)).print_info("s7 inter s8");
 
     // 测试复杂元素类型
-    TreeSet<CZString> ss({"Hello", "World", "Wor", "ZTT", "Hey", "I"});
-    Vector<CZString> vs({"123", "Hey", "Why", "Me"});
-    for (const CZString &s : vs)
+    TreeSet<DSAString> ss({"Hello", "World", "Wor", "ZTT", "Hey", "I"});
+    Vector<DSAString> vs({"123", "Hey", "Why", "Me"});
+    for (const DSAString &s : vs)
     {
         ss.insert(s);
     }
     ss.print_info("ss");
-    Vector<CZString> vs2({"Hello", "World", "Do"});
-    for (const CZString &s : vs2)
+    Vector<DSAString> vs2({"Hello", "World", "Do"});
+    for (const DSAString &s : vs2)
     {
         ss.remove(s);
     }

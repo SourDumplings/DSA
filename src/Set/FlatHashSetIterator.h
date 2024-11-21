@@ -13,7 +13,7 @@
 #include "../List/List.h"
 #include "../Vector/Vector.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class FlatHashSet;
@@ -117,7 +117,7 @@ namespace CZ
 
         HashRank hash() const override
         {
-            return (Hash<const FlatHashSet<T> *>()(_pFlatHashSet) + Hash<typename Vector<KVPair<T, bool>>::Rank>()(_bucketIndex)) % CZ_MAX_HASH_VALUE;
+            return (Hash<const FlatHashSet<T> *>()(_pFlatHashSet) + Hash<typename Vector<KVPair<T, bool>>::Rank>()(_bucketIndex)) % DSA_MAX_HASH_VALUE;
         }
 
         const char *get_entity_name() const override
@@ -141,6 +141,6 @@ namespace CZ
     {
         return !(lhs == rhs);
     }
-} // namespace CZ
+} // namespace DSA
 
 #endif

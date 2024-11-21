@@ -16,7 +16,7 @@
 #include <cmath>
 #include "../../Vector/Vector.h"
 
-namespace CZ::SortAccessories
+namespace DSA::SortAccessories
 {
     using Rank_shell_sort = int64_t;
 
@@ -58,6 +58,6 @@ namespace CZ::SortAccessories
             }
         }
     }
-} // CZ::SortAccessories
+} // DSA::SortAccessories
 
 #endif // SHELL_SORT_H

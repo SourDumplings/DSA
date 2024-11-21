@@ -17,7 +17,7 @@
 #include <iostream>
 #include "../../Algorithms/Swap.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     BST<T>::BST(std::nullptr_t) : BinTree<T>(nullptr), _isAllowRepeatKey(true)
@@ -335,6 +335,6 @@ namespace CZ
     {
         return "BST";
     }
-    } // CZ
+    } // DSA
 
 #endif // BST_IMPLEMENTATION_H

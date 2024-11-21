@@ -5,7 +5,7 @@
 #include "Vector/Vector.h"
 #include "Map/KVPair.h"
 
-using namespace CZ;
+using namespace DSA;
 
 static void test_alloc_and_free()
 {

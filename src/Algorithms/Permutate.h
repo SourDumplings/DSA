@@ -10,7 +10,7 @@
 #include "../Vector/Vector.h"
 #include "../Bitmap/Bitmap.h"
 
-namespace CZ
+namespace DSA
 {
 namespace PermutateMethod
 {
@@ -64,6 +64,6 @@ Vector<Vector<T>> Permutate(Vector<T> elems)
 
     return std::move(res);
 }
-} // CZ
+} // DSA
 
 #endif //DSA_PERMUTATE_H

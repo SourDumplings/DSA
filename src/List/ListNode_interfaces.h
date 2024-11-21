@@ -14,10 +14,10 @@
 
 #include "ListNode.h"
 
-#include "../CZString/CZString.h"
+#include "../DSAString/DSAString.h"
 #include <iostream>
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     inline ListNode<T> *ListNode<T>::next() const
@@ -63,9 +63,9 @@ namespace CZ
     template <typename T>
     HashRank ListNode<T>::hash() const
     {
-        return (Hash<CZString>()(get_entity_name()) + Hash<T>()(data()) + Hash<ListNode<T> *>()(_prev)
-            + Hash<ListNode<T> *>()(_next)) % CZ_MAX_HASH_VALUE;
+        return (Hash<DSAString>()(get_entity_name()) + Hash<T>()(data()) + Hash<ListNode<T> *>()(_prev)
+            + Hash<ListNode<T> *>()(_next)) % DSA_MAX_HASH_VALUE;
     }
-} // CZ
+} // DSA
 
 #endif // LIST_NODE_INTERFACES_H

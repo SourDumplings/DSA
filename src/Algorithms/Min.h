@@ -14,7 +14,7 @@
 
 #include <functional>
 
-namespace CZ
+namespace DSA
 {
     template <typename T, typename Cmp>
     const T& Min(const T &a, const T &b, const Cmp &cmp)
@@ -39,7 +39,7 @@ namespace CZ
     {
         return Min(a, b, std::less<const T&>());
     }
-} // CZ
+} // DSA
 
 #endif // MIN_H
 

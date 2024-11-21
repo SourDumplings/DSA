@@ -17,7 +17,7 @@
 #include "../../Vector/Vector.h"
 #include "../../Algorithms/Search.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class TrieTreeNode : public TreeNode<T>

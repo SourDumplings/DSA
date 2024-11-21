@@ -16,10 +16,10 @@
 #include <cstddef>
 #include <type_traits>
 
-namespace CZ
+namespace DSA
 {
     using HashRank = uint64_t;
-    constexpr HashRank CZ_MAX_HASH_VALUE = UINT64_MAX;
+    constexpr HashRank DSA_MAX_HASH_VALUE = UINT64_MAX;
 
     /**
      * @brief 判断是否定义了自己的哈希函数，即 hash，可见性必须是 public 才行

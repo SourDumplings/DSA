@@ -14,7 +14,7 @@
 
 #include "List.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     void List<T>::init()
@@ -23,7 +23,7 @@ namespace CZ
         _head->_next = _head;
         _head->_prev = _head;
     }
-} // CZ
+} // DSA
 
 #endif // LIST_INIT_H
 

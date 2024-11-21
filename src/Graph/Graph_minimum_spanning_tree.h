@@ -18,7 +18,7 @@
 #include "../Heap/Heap.h"
 #include <functional>
 
-namespace CZ
+namespace DSA
 {
     template <typename ED, typename VD>
     ED Graph<ED, VD>::_Prim(Vector<Rank> &MST, const ED &maxDist, const ED &minDist) const
@@ -193,7 +193,7 @@ namespace CZ
         }
         return ret;
     }
-} // CZ
+} // DSA
 
 #endif // GRAPH_MINIMUM_SPANNING_TREE_H
 

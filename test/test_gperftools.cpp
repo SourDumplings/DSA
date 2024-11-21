@@ -41,7 +41,7 @@ void test_cpu_prof()
         {
             A[j] = rand(); 
         }
-        CZ::Sort(A, A + NUM, CZ::SortAccessories::HEAP_SORT);
+        DSA::Sort(A, A + NUM, DSA::SortAccessories::HEAP_SORT);
     }
     
 }

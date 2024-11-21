@@ -21,7 +21,7 @@ FlatHashSet 类模板
 #include "FlatHashSetIterator.h"
 #include <initializer_list>
 
-namespace CZ
+namespace DSA
 {
     namespace FlatHashSetAccessories
     {
@@ -127,7 +127,7 @@ namespace CZ
 
     template <typename T>
     FlatHashSet<T> operator-(const FlatHashSet<T> &lhs, const FlatHashSet<T> &rhs);
-} // CZ
+} // DSA
 
 #include "FlatHashSet_implementation.h"
 

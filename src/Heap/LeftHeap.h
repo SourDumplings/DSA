@@ -20,7 +20,7 @@
 #include <initializer_list>
 #include "../Map/KVPair.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T, typename Cmp = std::less<const T &>>
     class LeftHeap : public AbstractBaseContainer<T>
@@ -66,7 +66,7 @@ namespace CZ
         template <typename It>
         void _build_heap(const It &begin, const It &end, const Cmp &cmp = Cmp()); // floyd算法建堆还不会，用逐个插入法建堆
     };
-} // CZ
+} // DSA
 
 #include "LeftHeap_implementation.h"
 

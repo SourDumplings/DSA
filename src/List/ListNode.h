@@ -15,7 +15,7 @@
 
 #include "../Base/AbstractBaseEntity.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class List;
@@ -56,7 +56,7 @@ namespace CZ
         T _data;
         ListNode<T> *_prev = nullptr, *_next = nullptr;
     };
-} // CZ
+} // DSA
 
 #include "ListNode_implementation.h"
 

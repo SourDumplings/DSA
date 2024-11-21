@@ -16,7 +16,7 @@
 #include "Smart_pointer/Shared_ptr.h"
 
 using namespace std;
-using namespace CZ;
+using namespace DSA;
 
 bool test_smart_pointer()
 {

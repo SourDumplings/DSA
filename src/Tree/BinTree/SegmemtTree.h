@@ -31,7 +31,7 @@
 
 #include <functional>
 
-namespace CZ
+namespace DSA
 {
     enum SegmentTreeImplementation
     {

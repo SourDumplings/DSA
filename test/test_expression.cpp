@@ -16,7 +16,7 @@
 #include "Expression/Expression.h"
 
 using namespace std;
-using namespace CZ;
+using namespace DSA;
 
 bool test_expression()
 {
@@ -43,7 +43,7 @@ bool test_expression()
     printf("e3 = %f\n", e3.calc_value());
 
     // printf("input an expression: \n");
-    // CZString s;
+    // DSAString s;
     // cin >> s;
     // Expression e4(s);
     // e4.print_info("e4");

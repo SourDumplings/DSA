@@ -19,7 +19,7 @@
 #include "../Vector/Vector.h"
 #include <initializer_list>
 
-namespace CZ
+namespace DSA
 {
     template <typename T, typename Cmp = std::less<const T &>>
     class Heap : public AbstractBaseContainer<T>
@@ -56,7 +56,7 @@ namespace CZ
         void _perc_down(Rank i, const Cmp &cmp = Cmp()); // 下滤，即将_data[i]为根的子堆调整为最大堆
         void _perc_up(Rank i, const Cmp &cmp = Cmp());   // 将_data[i]元素进行上滤
     };
-} // CZ
+} // DSA
 
 #include "Heap_implementation.h"
 

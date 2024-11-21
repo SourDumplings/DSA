@@ -12,7 +12,7 @@
 #ifndef ITERATOR_TRAITS_H
 #define ITERATOR_TRAITS_H
 
-namespace CZ
+namespace DSA
 {
     struct seq_iterator_tag { static const char * what() { return "seq_Iterator"; }};
     struct bi_iterator_tag: public seq_iterator_tag
@@ -32,7 +32,7 @@ namespace CZ
         typedef random_iterator_tag iterator_category;
     };
 
-} // CZ
+} // DSA
 
 #endif // ITERATOR_TRAITS_H
 

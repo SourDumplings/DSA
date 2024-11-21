@@ -14,7 +14,7 @@
 
 #include "BinTreeNode.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     BinTreeNode<T> *BinTreeNode<T>::left_child() const
@@ -151,6 +151,6 @@ namespace CZ
     {
         return "BinTreeNode";
     }
-} // CZ
+} // DSA
 
 #endif // BIN_TREE_NODE_INTERFACES_H

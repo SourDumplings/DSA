@@ -15,7 +15,7 @@
 #include "ListNode.h"
 #include <utility>
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     inline ListNode<T>* ListNode<T>::insert_as_prev(const T &newData)
@@ -61,7 +61,7 @@ namespace CZ
         return newNode;
     }
 
-} // CZ
+} // DSA
 
 #endif // LIST_NODE_MODIFICATIONS_H
 

@@ -22,7 +22,7 @@
 #include "../Base/BaseDef.h"
 #include <cstddef>
 
-namespace CZ
+namespace DSA
 {
     class DLL_EXPORT_IMPORT Allocator
     {

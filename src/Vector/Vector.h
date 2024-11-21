@@ -19,7 +19,7 @@
 #include "../Iterator/RandomIterator.h"
 #include "../Algorithms/Dict_compare.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class Vector : public AbstractSeqIterableContainer<T, RandomIterator<T>>

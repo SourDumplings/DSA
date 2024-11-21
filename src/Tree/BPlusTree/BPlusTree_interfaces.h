@@ -14,7 +14,7 @@
 #include "../../Algorithms/Search.h"
 #include <iostream>
 
-namespace CZ
+namespace DSA
 {
     template <typename K, typename V>
     inline typename BPlusTree<K, V>::Rank BPlusTree<K, V>::order() const
@@ -233,10 +233,10 @@ namespace CZ
     template <typename K, typename V>
     HashRank BPlusTree<K, V>::hash() const
     {
-        HashRank res = Hash<CZString>()(get_entity_name()) + _order;
+        HashRank res = Hash<DSAString>()(get_entity_name()) + _order;
         if (_root)
         {
-            res = (res + _root->hash()) % CZ_MAX_HASH_VALUE;
+            res = (res + _root->hash()) % DSA_MAX_HASH_VALUE;
         }
 
         return res;
@@ -303,6 +303,6 @@ namespace CZ
         return this->get_entity_name();
 #endif
     }
-} // namespace CZ
+} // namespace DSA
 
 #endif // B_PLUS_TREE_INTERFACES_H

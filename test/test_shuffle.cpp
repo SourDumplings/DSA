@@ -9,10 +9,10 @@
 #include "test_shuffle.h"
 
 #include "Algorithms/Shuffle.h"
-#include "CZString/CZString.h"
+#include "DSAString/DSAString.h"
 #include "Vector/Vector.h"
 
-using namespace CZ;
+using namespace DSA;
 using namespace std;
 
 bool test_shuffle()
@@ -26,7 +26,7 @@ bool test_shuffle()
     Shuffle(v.begin(), v.end());
     v.print_info("v");
 
-    Vector<CZString> vs({ "CZ", "Hello", "ZTT", "Oh", "YJY", "Y" });
+    Vector<DSAString> vs({ "DSA", "Hello", "ZTT", "Oh", "YJY", "Y" });
     vs.print_info("vs");
     Shuffle(vs.begin(), vs.end());
     vs.print_info("vs");

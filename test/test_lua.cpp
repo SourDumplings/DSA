@@ -13,7 +13,7 @@
 #include <iostream>
 
 // 注册的模块
-static const luaL_Reg CZLuaRegLibs[] = {
+static const luaL_Reg DSALuaRegLibs[] = {
     {"base", luaopen_base},
     {"DSALuaDLL", luaopen_DSALuaDLL},
     {NULL, NULL}
@@ -28,7 +28,7 @@ bool test_lua()
     luaL_openlibs(L);
 
     // 注册 Lua 模块
-    const luaL_Reg *lua_reg = CZLuaRegLibs;
+    const luaL_Reg *lua_reg = DSALuaRegLibs;
     for (; lua_reg->func; ++lua_reg)
     {
         // 加载模块

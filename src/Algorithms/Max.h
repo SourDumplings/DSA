@@ -14,7 +14,7 @@
 
 #include <functional>
 
-namespace CZ
+namespace DSA
 {
     template <typename T, typename Cmp>
     T& Max(T &a, T &b, const Cmp &cmp)
@@ -39,7 +39,7 @@ namespace CZ
     {
         return Max(a, b, std::less<const T&>());
     }
-} // CZ
+} // DSA
 
 #endif // MAX_H
 

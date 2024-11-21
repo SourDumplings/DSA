@@ -18,7 +18,7 @@
 #include "Algorithms/Sort.h"
 
 using namespace std;
-using CZ::List;
+using DSA::List;
 
 bool test_list()
 {

@@ -13,7 +13,7 @@
 #include "../../Queue/Queue.h"
 #include <iostream>
 
-namespace CZ
+namespace DSA
 {
     template<typename K, typename V>
     void BPlusTree<K, V>::print_info(const char *name) const
@@ -80,6 +80,6 @@ namespace CZ
         }
         putchar(')');
     }
-} // namespace CZ
+} // namespace DSA
 
 #endif // B_PLUS_TREE_PRINT_INFO_H

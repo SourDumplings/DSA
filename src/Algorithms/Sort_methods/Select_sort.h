@@ -17,7 +17,7 @@
 #include "../Min_element.h"
 #include "../Swap.h"
 
-namespace CZ::SortAccessories
+namespace DSA::SortAccessories
 {
     using Rank_select_sort = int64_t;
 
@@ -62,7 +62,7 @@ namespace CZ::SortAccessories
     {
         Select_sort(begin, N, std::less<decltype(*begin)>(), version);
     }
-} // CZ::SortAccessories
+} // DSA::SortAccessories
 
 #endif // SELECT_SORT_H
 

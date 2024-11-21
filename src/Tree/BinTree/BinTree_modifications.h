@@ -14,7 +14,7 @@
 
 #include "BinTree.h"
 
-namespace CZ
+namespace DSA
 {
 
     template <typename T>
@@ -114,6 +114,6 @@ namespace CZ
         }
         return *this;
     }
-} // CZ
+} // DSA
 
 #endif // BIN_TREE_MODIFICATIONS_H

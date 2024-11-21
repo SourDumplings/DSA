@@ -16,7 +16,7 @@
 #include "../Heap/Heap.h"
 #include <functional>
 
-namespace CZ
+namespace DSA
 {
     namespace MinDist
     {
@@ -246,7 +246,7 @@ namespace CZ
             }
         }
     }
-} // CZ
+} // DSA
 
 #endif // GRAPH_MIN_DIST_H
 

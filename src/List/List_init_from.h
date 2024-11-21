@@ -14,7 +14,7 @@
 
 #include "List.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     template <typename It>
@@ -32,7 +32,7 @@ namespace CZ
         }
         return;
     }
-} // CZ
+} // DSA
 
 #endif // LIST_INIT_FROM_H
 

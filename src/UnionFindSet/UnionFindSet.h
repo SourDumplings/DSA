@@ -16,7 +16,7 @@
 #include "../Base/AbstractBaseContainer.h"
 #include "../Tree/Tree.h"
 
-namespace CZ
+namespace DSA
 {
     template <typename T>
     class UnionFindSet : public AbstractBaseContainer<T>
@@ -50,7 +50,7 @@ namespace CZ
     private:
         Tree<T> _family;
     };
-} // CZ
+} // DSA
 
 #include "UnionFindSet_implementation.h"
 
