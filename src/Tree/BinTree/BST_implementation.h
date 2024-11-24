@@ -41,13 +41,13 @@ namespace DSA
         {
             return nullptr;
         }
-        BSTNode<T> *pBSTNode = dynamic_cast<BSTNode<T> *>(pRoot);
+        BSTNode<T> *pBSTNode = reinterpret_cast<BSTNode<T> *>(pRoot);
         ASSERT_DEBUG(pBSTNode, "error pRoot");
         BSTNode<T> *pCopiedRoot = new BSTNode<T>(pBSTNode->data());
         ASSERT_RELEASE(pCopiedRoot, "copy root error");
-        BSTNode<T> *pLC = dynamic_cast<BSTNode<T> *>(pBSTNode->left_child());
+        BSTNode<T> *pLC = reinterpret_cast<BSTNode<T> *>(pBSTNode->left_child());
         BSTNode<T> *pLCopied = this->copy_from(pLC);
-        BSTNode<T> *pRC = dynamic_cast<BSTNode<T> *>(pBSTNode->right_child());
+        BSTNode<T> *pRC = reinterpret_cast<BSTNode<T> *>(pBSTNode->right_child());
         BSTNode<T> *pRCopied = this->copy_from(pRC);
         pCopiedRoot->insert_as_left_child(pLCopied);
         pCopiedRoot->insert_as_right_child(pRCopied);
@@ -67,10 +67,10 @@ namespace DSA
                this->size(), this->height());
 #ifdef DEBUG
         printf("its pre_order_traversal is: \n");
-        BinTree<T>::pre_order_traversal(dynamic_cast<BinTreeNode<T> *>(this->root()), typename Tree<T>::OutPut(),
+        BinTree<T>::pre_order_traversal(reinterpret_cast<BinTreeNode<T> *>(this->root()), typename Tree<T>::OutPut(),
                                         NONRECURSION_TRAVERSAL2);
         printf("\nits in_order_traversal is: \n");
-        BinTree<T>::in_order_traversal(dynamic_cast<BinTreeNode<T> *>(this->root()), typename Tree<T>::OutPut(),
+        BinTree<T>::in_order_traversal(reinterpret_cast<BinTreeNode<T> *>(this->root()), typename Tree<T>::OutPut(),
                                        NONRECURSION_TRAVERSAL2);
 #endif
         printf("\n\n");
@@ -92,7 +92,7 @@ namespace DSA
             }
             else
             {
-                ret = dynamic_cast<BSTNode<T>*>(pNowCheck);
+                ret = reinterpret_cast<BSTNode<T>*>(pNowCheck);
                 ASSERT_DEBUG(ret, "pNowCheck is not BST Node!");
             }
         }
@@ -102,7 +102,7 @@ namespace DSA
     template <typename T>
     inline TreeNode<T> *BST<T>::search_data(const T &data) const
     {
-        return _do_recursion_search(dynamic_cast<BinTreeNode<T> *>(this->root()), data);
+        return _do_recursion_search(reinterpret_cast<BinTreeNode<T> *>(this->root()), data);
     }
 
     template <typename T>
@@ -178,7 +178,7 @@ namespace DSA
         }
         else
         {
-            ret = dynamic_cast<BSTNode<T>*>(_do_recursion_insert(dynamic_cast<BinTreeNode<T> *>(this->root()), pNode));
+            ret = reinterpret_cast<BSTNode<T>*>(_do_recursion_insert(reinterpret_cast<BinTreeNode<T> *>(this->root()), pNode));
         }
 
         return ret;
@@ -187,9 +187,9 @@ namespace DSA
     template <typename T>
     BSTNode<T> *BST<T>::secede_data(const T &data)
     {
-        BSTNode<T> *target = dynamic_cast<BSTNode<T>*>(this->search_data(data));
+        BSTNode<T> *target = reinterpret_cast<BSTNode<T>*>(this->search_data(data));
         ASSERT_DEBUG(target, "this value doesn't in this BST");
-        return dynamic_cast<BSTNode<T> *>(this->secede(target));
+        return reinterpret_cast<BSTNode<T> *>(this->secede(target));
     }
 
     template <typename T>
@@ -211,32 +211,32 @@ namespace DSA
         if (target->left_child() == nullptr)
         {
             // 如果左子树为空，那么直接让右子树接替即可
-            succ = dynamic_cast<BSTNode<T> *>(target->right_child());
+            succ = reinterpret_cast<BSTNode<T> *>(target->right_child());
         }
         else if (target->right_child() == nullptr)
         {
             // 如果右子树为空，则对称处理
             // 注意此时左子树一定不空
-            succ = dynamic_cast<BSTNode<T> *>(target->left_child());
+            succ = reinterpret_cast<BSTNode<T> *>(target->left_child());
         }
         else
         {
             // 左右子树均不空
-            actualRemoved = dynamic_cast<BSTNode<T> *>(actualRemoved->next()); // 实际摘除结点为传入的目标的直接后继
+            actualRemoved = reinterpret_cast<BSTNode<T> *>(actualRemoved->next()); // 实际摘除结点为传入的目标的直接后继
             // 交换数据，让被摘除结点的直接后继代替被摘除结点
             Swap(const_cast<T &>(actualRemoved->data()), const_cast<T &>(target->data()));
-            succ = dynamic_cast<BSTNode<T> *>(actualRemoved->right_child());
+            succ = reinterpret_cast<BSTNode<T> *>(actualRemoved->right_child());
         }
 
         // 把接替者摘出来
         if (succ)
         {
-            BSTNode<T> *f = dynamic_cast<BSTNode<T> *>(succ->father());
+            BSTNode<T> *f = reinterpret_cast<BSTNode<T> *>(succ->father());
             f->remove_child(succ);
         }
 
         // 执行删除并且接替者接任
-        hot = dynamic_cast<BSTNode<T> *>(actualRemoved->father());
+        hot = reinterpret_cast<BSTNode<T> *>(actualRemoved->father());
         if (hot)
         {
             hot->remove_child(actualRemoved);
@@ -262,7 +262,7 @@ namespace DSA
         ASSERT_DEBUG(this->has_this_node(node), "this node isn't in this tree");
 
         BSTNode<T> *actualRemoved = node;
-        BSTNode<T> *hot = dynamic_cast<BSTNode<T> *>(node->father());
+        BSTNode<T> *hot = reinterpret_cast<BSTNode<T> *>(node->father());
         this->remove_at(actualRemoved, hot);
         return actualRemoved;
     }
@@ -270,7 +270,7 @@ namespace DSA
     template <typename T>
     bool BST<T>::remove_data(const T &data)
     {
-        BSTNode<T> *pNode = dynamic_cast<BSTNode<T>*>(this->search_data(data));
+        BSTNode<T> *pNode = reinterpret_cast<BSTNode<T>*>(this->search_data(data));
         BSTNode<T> *pActualRemovedNode = this->remove(pNode);
         if (pActualRemovedNode)
         {

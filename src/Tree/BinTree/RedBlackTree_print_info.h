@@ -25,9 +25,9 @@ namespace DSA
                
 #ifdef DEBUG
         printf("its pre_order_traversal is: \n");
-        _pre_order_traversal(dynamic_cast<RedBlackTreeNode<T> *>(this->root()), RedBlackTree<T>::OutPut());
+        _pre_order_traversal(reinterpret_cast<RedBlackTreeNode<T> *>(this->root()), RedBlackTree<T>::OutPut());
         printf("\nits in_order_traversal is: \n");
-        _in_order_traversal(dynamic_cast<RedBlackTreeNode<T> *>(this->root()), RedBlackTree<T>::OutPut());
+        _in_order_traversal(reinterpret_cast<RedBlackTreeNode<T> *>(this->root()), RedBlackTree<T>::OutPut());
 #endif
 
         printf("\n\n");
@@ -45,8 +45,8 @@ namespace DSA
         if (v)
         {
             process(v->data(), v->_red, v->_blackHeight);
-            _pre_order_traversal(dynamic_cast<RedBlackTreeNode<T>*>(v->left_child()), process);
-            _pre_order_traversal(dynamic_cast<RedBlackTreeNode<T>*>(v->right_child()), process);
+            _pre_order_traversal(reinterpret_cast<RedBlackTreeNode<T>*>(v->left_child()), process);
+            _pre_order_traversal(reinterpret_cast<RedBlackTreeNode<T>*>(v->right_child()), process);
         }
     }
 
@@ -55,9 +55,9 @@ namespace DSA
     {
         if (v)
         {
-            _in_order_traversal(dynamic_cast<RedBlackTreeNode<T>*>(v->left_child()), process);
+            _in_order_traversal(reinterpret_cast<RedBlackTreeNode<T>*>(v->left_child()), process);
             process(v->data(), v->_red, v->_blackHeight);
-            _in_order_traversal(dynamic_cast<RedBlackTreeNode<T>*>(v->right_child()), process);
+            _in_order_traversal(reinterpret_cast<RedBlackTreeNode<T>*>(v->right_child()), process);
         }
     }
 } // DSA

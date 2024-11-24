@@ -18,7 +18,7 @@
 using namespace std;
 using namespace DSA;
 
-bool test_primetatble()
+bool test_primetable()
 {
     PrimeTable &p = PrimeTable::get_instance();
     p.print_info("p");

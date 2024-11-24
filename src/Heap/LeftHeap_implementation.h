@@ -94,10 +94,10 @@ namespace DSA
             return merge(lHeap2, lHeap1, cmp);
         }
 
-        BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *r = dynamic_cast<BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *>(lHeap2._T.root());
+        BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *r = reinterpret_cast<BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *>(lHeap2._T.root());
         lHeap2._T.secede(lHeap2._T.root());
 
-        _do_merge(dynamic_cast<BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *>(lHeap1._T.root()), r, cmp);
+        _do_merge(reinterpret_cast<BinTreeNode<KVPair<T, typename LeftHeap<T, Cmp>::Rank>> *>(lHeap1._T.root()), r, cmp);
         lHeap1._T.update_size();
         return lHeap1;
     }
@@ -138,8 +138,8 @@ namespace DSA
     {
         ASSERT_DEBUG(!this->empty(), "Error from LeftHeap pop: empty LeftHeap cannot pop");
 
-        BinTreeNode<KVPair<T, Rank>> *lr = dynamic_cast<BinTreeNode<KVPair<T, Rank>> *>(_T.root())->remove_left_child();
-        BinTreeNode<KVPair<T, Rank>> *rr = dynamic_cast<BinTreeNode<KVPair<T, Rank>> *>(_T.root())->remove_right_child();
+        BinTreeNode<KVPair<T, Rank>> *lr = reinterpret_cast<BinTreeNode<KVPair<T, Rank>> *>(_T.root())->remove_left_child();
+        BinTreeNode<KVPair<T, Rank>> *rr = reinterpret_cast<BinTreeNode<KVPair<T, Rank>> *>(_T.root())->remove_right_child();
         delete _T.root();
 
         BinTreeNode<KVPair<T, Rank>> *r = _do_merge(lr, rr, cmp);
@@ -151,7 +151,7 @@ namespace DSA
     void LeftHeap<T, Cmp>::insert(const T &value, const Cmp &cmp)
     {
         BinTreeNode<KVPair<T, Rank>> *node = new BinTreeNode<KVPair<T, Rank>>(KVPair<T, Rank>(value, 1));
-        BinTreeNode<KVPair<T, Rank>> *r = _do_merge(dynamic_cast<BinTreeNode<KVPair<T, Rank>>*>(_T.root()), node, cmp);
+        BinTreeNode<KVPair<T, Rank>> *r = _do_merge(reinterpret_cast<BinTreeNode<KVPair<T, Rank>>*>(_T.root()), node, cmp);
         _T = BinTree<KVPair<T, Rank>>(r);
         _T.update_size();
     }

@@ -71,7 +71,7 @@ namespace DSA
     DSAString DSAString::substr(Rank pos, Rank l) const
     {
         ASSERT_DEBUG(pos + l <= length(), "wrong, the length of this string is %u", length());
-        return DSAString(begin() + pos, begin() + pos + l + 1);
+        return DSAString(begin() + pos, begin() + pos + l);
     }
 
     DSAString DSAString::substr(Rank pos) const

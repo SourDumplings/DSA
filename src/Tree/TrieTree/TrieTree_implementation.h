@@ -48,7 +48,7 @@ namespace DSA
         }
 
         Rank res = 0;
-        TrieTreeNode<T> *pRoot = dynamic_cast<TrieTreeNode<T>*>(this->root());
+        TrieTreeNode<T> *pRoot = reinterpret_cast<TrieTreeNode<T>*>(this->root());
         res = pRoot->insert_child_by_seq(seq, 0);
         this->_size += res;
         return res;
@@ -63,7 +63,7 @@ namespace DSA
             return nullptr;
         }
 
-        const TrieTreeNode<T> *pRoot = dynamic_cast<const TrieTreeNode<T>*>(this->root());
+        const TrieTreeNode<T> *pRoot = reinterpret_cast<const TrieTreeNode<T>*>(this->root());
         return pRoot->search_seq_in_children(seq);
     }
 
@@ -76,7 +76,7 @@ namespace DSA
             return 0;
         }
 
-        pNode = dynamic_cast<TrieTreeNode<T>*>(this->secede(pNode));
+        pNode = reinterpret_cast<TrieTreeNode<T>*>(this->secede(pNode));
         Rank res = pNode->get_size();
         delete pNode;
         return res;

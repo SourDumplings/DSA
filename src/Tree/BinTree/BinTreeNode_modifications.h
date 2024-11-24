@@ -69,12 +69,12 @@ namespace DSA
     {
         if (left_child() == nullptr)
         {
-            insert_as_left_child(dynamic_cast<BinTreeNode<T> *>(pNode));
+            insert_as_left_child(reinterpret_cast<BinTreeNode<T> *>(pNode));
             return pNode;
         }
         else if (right_child() == nullptr)
         {
-            insert_as_right_child(dynamic_cast<BinTreeNode<T> *>(pNode));
+            insert_as_right_child(reinterpret_cast<BinTreeNode<T> *>(pNode));
             return pNode;
         }
         return nullptr;
@@ -87,7 +87,7 @@ namespace DSA
         {
             return nullptr;
         }
-/*         BinTreeNode<T> *pChild = dynamic_cast<BinTreeNode<T> *>(this->children().front());
+/*         BinTreeNode<T> *pChild = reinterpret_cast<BinTreeNode<T> *>(this->children().front());
         pChild->set_father(nullptr);
         this->children().front() = nullptr; */
         _pLeftChild->set_father(nullptr);
@@ -103,7 +103,7 @@ namespace DSA
         {
             return nullptr;
         }
-/*         BinTreeNode<T> *pChild = dynamic_cast<BinTreeNode<T> *>(this->children().back());
+/*         BinTreeNode<T> *pChild = reinterpret_cast<BinTreeNode<T> *>(this->children().back());
         pChild->set_father(nullptr);
         this->children().back() = nullptr; */
         _pRightChild->set_father(nullptr);

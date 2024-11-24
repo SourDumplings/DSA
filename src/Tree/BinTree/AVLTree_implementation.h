@@ -46,14 +46,14 @@ namespace DSA
         {
             return nullptr;
         }
-        AVLTreeNode<T> *pAVLNode = dynamic_cast<AVLTreeNode<T> *>(pRoot);
+        AVLTreeNode<T> *pAVLNode = reinterpret_cast<AVLTreeNode<T> *>(pRoot);
         ASSERT_DEBUG(pAVLNode, "error pRoot");
         AVLTreeNode<T> *pCopiedRoot = new AVLTreeNode<T>(pAVLNode->data());
         pCopiedRoot->set_height(pAVLNode->height());
         ASSERT_RELEASE(pCopiedRoot, "copy root error");
-        AVLTreeNode<T> *pLC = dynamic_cast<AVLTreeNode<T> *>(pAVLNode->left_child());
+        AVLTreeNode<T> *pLC = reinterpret_cast<AVLTreeNode<T> *>(pAVLNode->left_child());
         AVLTreeNode<T> *pLCopied = this->copy_from(pLC);
-        AVLTreeNode<T> *pRC = dynamic_cast<AVLTreeNode<T> *>(pAVLNode->right_child());
+        AVLTreeNode<T> *pRC = reinterpret_cast<AVLTreeNode<T> *>(pAVLNode->right_child());
         AVLTreeNode<T> *pRCopied = this->copy_from(pRC);
         pCopiedRoot->insert_as_left_child(pLCopied);
         pCopiedRoot->insert_as_right_child(pRCopied);
@@ -69,10 +69,10 @@ namespace DSA
 
 #ifdef DEBUG
         printf("its pre_order_traversal is: \n");
-        BinTree<T>::pre_order_traversal(dynamic_cast<BinTreeNode<T> *>(this->root()), typename AVLTree<T>::OutPut(),
+        BinTree<T>::pre_order_traversal(reinterpret_cast<BinTreeNode<T> *>(this->root()), typename AVLTree<T>::OutPut(),
                                         NONRECURSION_TRAVERSAL2);
         printf("\nits in_order_traversal is: \n");
-        BinTree<T>::in_order_traversal(dynamic_cast<BinTreeNode<T> *>(this->root()), typename AVLTree<T>::OutPut(),
+        BinTree<T>::in_order_traversal(reinterpret_cast<BinTreeNode<T> *>(this->root()), typename AVLTree<T>::OutPut(),
                                        NONRECURSION_TRAVERSAL2);
 #endif
         printf("\n\n");
@@ -99,8 +99,8 @@ namespace DSA
             return nullptr;
         }
 
-        AVLTreeNode<T> *ret = dynamic_cast<AVLTreeNode<T> *>(BST<T>::insert(pNode));
-        AVLTreeNode<T> *f = dynamic_cast<AVLTreeNode<T> *>(pNode->father());
+        AVLTreeNode<T> *ret = reinterpret_cast<AVLTreeNode<T> *>(BST<T>::insert(pNode));
+        AVLTreeNode<T> *f = reinterpret_cast<AVLTreeNode<T> *>(pNode->father());
         if (f == nullptr)
         {
             // 从空树插入一个结点为根结点的情况无需调整
@@ -110,7 +110,7 @@ namespace DSA
         ret->update_height();
         // 如果其父亲结点的高度升高则其祖父结点就有可能失衡
         // 只需要做对多1次调整即可
-        for (AVLTreeNode<T> *g = dynamic_cast<AVLTreeNode<T> *>(f->father()); g; g = dynamic_cast<AVLTreeNode<T> *>(g->father()))
+        for (AVLTreeNode<T> *g = reinterpret_cast<AVLTreeNode<T> *>(f->father()); g; g = reinterpret_cast<AVLTreeNode<T> *>(g->father()))
         {
             if (!g->is_balance())
             {
@@ -129,7 +129,7 @@ namespace DSA
         {
             return nullptr;
         }
-        AVLTreeNode<T> *f = dynamic_cast<AVLTreeNode<T> *>(pNode->father());
+        AVLTreeNode<T> *f = reinterpret_cast<AVLTreeNode<T> *>(pNode->father());
         BinTree<T>::secede(pNode);
         if (f == nullptr)
         {
@@ -140,7 +140,7 @@ namespace DSA
 
         // 原结点的父亲结点和祖先结点都有可能失衡
         // 需要做Ω(logn)次调整
-        for (AVLTreeNode<T> *hot = f; hot; hot = dynamic_cast<AVLTreeNode<T> *>(hot->father()))
+        for (AVLTreeNode<T> *hot = f; hot; hot = reinterpret_cast<AVLTreeNode<T> *>(hot->father()))
         {
             if (!hot->is_balance())
             {
@@ -161,14 +161,14 @@ namespace DSA
 
         ASSERT_DEBUG(this->has_this_node(pNode), "this node is not in this AVLTree");
 
-        AVLTreeNode<T> *hot = dynamic_cast<AVLTreeNode<T> *>(pNode->father());
-        AVLTreeNode<T> *succ = dynamic_cast<AVLTreeNode<T> *>(this->remove_at((BSTNode<T> *&)(pNode), (BSTNode<T> *&)(hot)));
+        AVLTreeNode<T> *hot = reinterpret_cast<AVLTreeNode<T> *>(pNode->father());
+        AVLTreeNode<T> *succ = reinterpret_cast<AVLTreeNode<T> *>(this->remove_at((BSTNode<T> *&)(pNode), (BSTNode<T> *&)(hot)));
         if (succ)
         {
             succ->update_height();
         }
 
-        for (AVLTreeNode<T> *f = dynamic_cast<AVLTreeNode<T> *>(hot); f; f = dynamic_cast<AVLTreeNode<T> *>(f->father()))
+        for (AVLTreeNode<T> *f = reinterpret_cast<AVLTreeNode<T> *>(hot); f; f = reinterpret_cast<AVLTreeNode<T> *>(f->father()))
         {
             if (!f->is_balance())
             {
@@ -195,7 +195,7 @@ namespace DSA
     template <typename T>
     BinTreeNode<T> *AVLTree<T>::rotate_at(BinTreeNode<T> *v)
     {
-        AVLTreeNode<T> *ret = dynamic_cast<AVLTreeNode<T> *>(BinTree<T>::rotate_at(v));
+        AVLTreeNode<T> *ret = reinterpret_cast<AVLTreeNode<T> *>(BinTree<T>::rotate_at(v));
         if (ret == nullptr)
         {
             return nullptr;
@@ -203,11 +203,11 @@ namespace DSA
 
         if (ret->left_child())
         {
-            dynamic_cast<AVLTreeNode<T> *>(ret->left_child())->update_height();
+            reinterpret_cast<AVLTreeNode<T> *>(ret->left_child())->update_height();
         }
         if (ret->right_child())
         {
-            dynamic_cast<AVLTreeNode<T> *>(ret->right_child())->update_height();
+            reinterpret_cast<AVLTreeNode<T> *>(ret->right_child())->update_height();
         }
         return ret;
     }

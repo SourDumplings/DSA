@@ -1,3 +1,3 @@
 #pragma once
 
-bool test_primetatble();
+bool test_primetable();

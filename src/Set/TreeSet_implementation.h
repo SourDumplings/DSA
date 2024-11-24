@@ -83,7 +83,7 @@ namespace DSA
     template <typename T>
     typename TreeSet<T>::Iterator TreeSet<T>::search(const T &data) const
     {
-        RedBlackTreeNode<T> *pRBTreeNode = dynamic_cast<RedBlackTreeNode<T> *>(_T.search_data(data));
+        RedBlackTreeNode<T> *pRBTreeNode = reinterpret_cast<RedBlackTreeNode<T> *>(_T.search_data(data));
         if (pRBTreeNode == nullptr)
         {
             return end();
@@ -115,13 +115,13 @@ namespace DSA
     {
         if (this->empty())
         {
-            return Iterator(dynamic_cast<RedBlackTreeNode<T> *>(_T.root()), true, &_T);
+            return Iterator(reinterpret_cast<RedBlackTreeNode<T> *>(_T.root()), true, &_T);
         }
 
-        RedBlackTreeNode<T> *pNode = dynamic_cast<RedBlackTreeNode<T> *>(_T.root());
+        RedBlackTreeNode<T> *pNode = reinterpret_cast<RedBlackTreeNode<T> *>(_T.root());
         while (pNode->left_child())
         {
-            pNode = dynamic_cast<RedBlackTreeNode<T> *>(pNode->left_child());
+            pNode = reinterpret_cast<RedBlackTreeNode<T> *>(pNode->left_child());
         }
         return Iterator(pNode, false, &_T);
     }
@@ -135,7 +135,7 @@ namespace DSA
     template <typename T>
     inline typename TreeSet<T>::Iterator TreeSet<T>::end() const
     {
-        return Iterator(dynamic_cast<RedBlackTreeNode<T> *>(_T.root()), true, &_T);
+        return Iterator(reinterpret_cast<RedBlackTreeNode<T> *>(_T.root()), true, &_T);
     }
 
     template <typename T>
@@ -149,10 +149,10 @@ namespace DSA
     {
         ASSERT_DEBUG(!this->empty(), "Error from TreeSet::front(): empty Treeset.");
 
-        RedBlackTreeNode<T> *pNode = dynamic_cast<RedBlackTreeNode<T> *>(_T.root());
+        RedBlackTreeNode<T> *pNode = reinterpret_cast<RedBlackTreeNode<T> *>(_T.root());
         while (pNode->right_child())
         {
-            pNode = dynamic_cast<RedBlackTreeNode<T> *>(pNode->right_child());
+            pNode = reinterpret_cast<RedBlackTreeNode<T> *>(pNode->right_child());
         }
         return pNode->data();
     }
@@ -168,10 +168,10 @@ namespace DSA
     {
         ASSERT_DEBUG(!this->empty(), "Error from TreeSet::front(): empty Treeset.");
 
-        RedBlackTreeNode<T> *pNode = dynamic_cast<RedBlackTreeNode<T> *>(_T.root());
+        RedBlackTreeNode<T> *pNode = reinterpret_cast<RedBlackTreeNode<T> *>(_T.root());
         while (pNode->left_child())
         {
-            pNode = dynamic_cast<RedBlackTreeNode<T> *>(pNode->left_child());
+            pNode = reinterpret_cast<RedBlackTreeNode<T> *>(pNode->left_child());
         }
         return pNode->data();
     }

@@ -34,10 +34,10 @@ namespace DSA
             // 空结点当然不需要高度更新
             return true;
         }
-        return (get_black_height(dynamic_cast<RedBlackTreeNode<T>*>(v->left_child())) == get_black_height(dynamic_cast<RedBlackTreeNode<T>*>(v->right_child())))
+        return (get_black_height(reinterpret_cast<RedBlackTreeNode<T>*>(v->left_child())) == get_black_height(reinterpret_cast<RedBlackTreeNode<T>*>(v->right_child())))
             && (v->_blackHeight ==
-                    (is_red(v) ? get_black_height(dynamic_cast<RedBlackTreeNode<T>*>(v->left_child()))
-                        : (get_black_height(dynamic_cast<RedBlackTreeNode<T>*>(v->left_child())) + 1)
+                    (is_red(v) ? get_black_height(reinterpret_cast<RedBlackTreeNode<T>*>(v->left_child()))
+                        : (get_black_height(reinterpret_cast<RedBlackTreeNode<T>*>(v->left_child())) + 1)
                     )
             );
     }

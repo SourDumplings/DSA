@@ -20,7 +20,7 @@ namespace DSA
     BinTreeNode<T> *BinTreeNode<T>::left_child() const
     {
 /*         ASSERT_DEBUG(this->children().size() == 2, "wrong children num %u for bintree", this->children());
-        return dynamic_cast<BinTreeNode<T> *>(this->children().front()); */
+        return reinterpret_cast<BinTreeNode<T> *>(this->children().front()); */
         return _pLeftChild;
     }
 
@@ -28,7 +28,7 @@ namespace DSA
     BinTreeNode<T> *BinTreeNode<T>::right_child() const
     {
 /*         ASSERT_DEBUG(this->children().size() == 2, "wrong children num %u for bintree", this->children());
-        return dynamic_cast<BinTreeNode<T> *>(this->children().back()); */
+        return reinterpret_cast<BinTreeNode<T> *>(this->children().back()); */
         return _pRightChild;
     }
 
@@ -38,9 +38,9 @@ namespace DSA
         BinTreeNode<T> *ret = nullptr;
         if (TreeNode<T>::father())
         {
-            ret = (this == dynamic_cast<BinTreeNode<T> *>(this->father())->left_child())
-                ? dynamic_cast<BinTreeNode<T> *>(this->father())->right_child()
-                : dynamic_cast<BinTreeNode<T> *>(this->father())->left_child();
+            ret = (this == reinterpret_cast<BinTreeNode<T> *>(this->father())->left_child())
+                ? reinterpret_cast<BinTreeNode<T> *>(this->father())->right_child()
+                : reinterpret_cast<BinTreeNode<T> *>(this->father())->left_child();
         }
         return ret;
     }
@@ -48,7 +48,7 @@ namespace DSA
     template <typename T>
     inline BinTreeNode<T> *BinTreeNode<T>::uncle() const
     {
-        return dynamic_cast<BinTreeNode<T> *>(this->father())->brother();
+        return reinterpret_cast<BinTreeNode<T> *>(this->father())->brother();
     }
 
     template <typename T>
@@ -104,11 +104,11 @@ namespace DSA
         {
             // 没有右孩子的话就是该结点的把该结点包含在左子树的最低的祖先
             ret = const_cast<BinTreeNode<T> *>(this);
-            BinTreeNode<T> *f = dynamic_cast<BinTreeNode<T> *>(ret->father());
+            BinTreeNode<T> *f = reinterpret_cast<BinTreeNode<T> *>(ret->father());
             while (f && ret == f->right_child())
             {
                 ret = f;
-                f = dynamic_cast<BinTreeNode<T> *>(f->father());
+                f = reinterpret_cast<BinTreeNode<T> *>(f->father());
             }
             if (f)
             {

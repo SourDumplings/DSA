@@ -51,12 +51,12 @@ namespace DSA
         if (pNode->data() <= data() && this->left_child() == nullptr)
         {
             // 相等的数据结点优先作为左孩子
-            this->insert_as_left_child(dynamic_cast<BSTNode<T>*>(pNode));
+            this->insert_as_left_child(reinterpret_cast<BSTNode<T>*>(pNode));
             return pNode;
         }
         else if (data() <= pNode->data() && this->right_child() == nullptr)
         {
-            this->insert_as_right_child(dynamic_cast<BSTNode<T>*>(pNode));
+            this->insert_as_right_child(reinterpret_cast<BSTNode<T>*>(pNode));
             return pNode;
         }
         return nullptr;
@@ -68,11 +68,11 @@ namespace DSA
         BSTNode<T> *ret = nullptr;
         if (this->left_child() && data == this->left_child()->data())
         {
-            ret = dynamic_cast<BSTNode<T>*>(this->remove_left_child());
+            ret = reinterpret_cast<BSTNode<T>*>(this->remove_left_child());
         }
         else if (this->right_child() && data == this->right_child()->data())
         {
-            ret = dynamic_cast<BSTNode<T>*>(this->remove_right_child());
+            ret = reinterpret_cast<BSTNode<T>*>(this->remove_right_child());
         }
         else
             ASSERT_DEBUG(false, "this node doesn't have child with this data");
@@ -89,11 +89,11 @@ namespace DSA
         BSTNode<T> *ret = nullptr;
         if (this->left_child() && pNode == this->left_child())
         {
-            ret = dynamic_cast<BSTNode<T>*>(this->remove_left_child());
+            ret = reinterpret_cast<BSTNode<T>*>(this->remove_left_child());
         }
         else if (this->right_child() && pNode == this->right_child())
         {
-            ret = dynamic_cast<BSTNode<T>*>(this->remove_right_child());
+            ret = reinterpret_cast<BSTNode<T>*>(this->remove_right_child());
         }
         else
             ASSERT_DEBUG(false, "this node doesn't have that child");

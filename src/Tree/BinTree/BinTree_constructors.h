@@ -28,7 +28,7 @@ namespace DSA
     template <typename T>
     BinTree<T>::BinTree(const BinTree<T> &t)
     {
-        this->_pRoot = dynamic_cast<BinTreeNode<T>*>(copy_from(t._pRoot));
+        this->_pRoot = reinterpret_cast<BinTreeNode<T>*>(copy_from(t._pRoot));
         this->_size = t._size;
     }
 
@@ -42,7 +42,7 @@ namespace DSA
         {
             return nullptr;
         }
-        BinTreeNode<T> *pBinTreeRoot = dynamic_cast<BinTreeNode<T>*>(pRoot);
+        BinTreeNode<T> *pBinTreeRoot = reinterpret_cast<BinTreeNode<T>*>(pRoot);
         ASSERT_DEBUG(pBinTreeRoot, "error pRoot");
         BinTreeNode<T> *pCopiedRoot = new BinTreeNode<T>(pBinTreeRoot->data());
         ASSERT_RELEASE(pCopiedRoot, "copy root error");

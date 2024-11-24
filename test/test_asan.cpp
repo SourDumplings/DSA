@@ -50,13 +50,12 @@ void test_stack_overflow()
 
 void test_memory_leak()
 {
-    // Windows �� MSVC �� Asan ̽�ⲻ����
     int *p = new int(5);
 }
 
 bool test_asan()
 {
-    //test_memory_leak();
+    //test_memory_leak(); // 在 MSVC 下貌似检测不出来
     test_use_after_free_with_dsa();
     return true;
 }

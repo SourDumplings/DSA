@@ -66,85 +66,135 @@
 
 void print_runtime_environment_info()
 {
-    // 打印操作系统类型
-    #ifdef _WIN32
-        std::cout << "Operating System: Windows" << std::endl;
-    #elif __linux__
-        std::cout << "Operating System: Linux" << std::endl;
-    #elif __APPLE__
-        std::cout << "Operating System: macOS" << std::endl;
-    #else
-        std::cout << "Operating System: Unknown" << std::endl;
-    #endif
+// 打印操作系统类型
+#ifdef _WIN32
+	std::cout << "Operating System: Windows" << std::endl;
+#elif __linux__
+	std::cout << "Operating System: Linux" << std::endl;
+#elif __APPLE__
+	std::cout << "Operating System: macOS" << std::endl;
+#else
+	std::cout << "Operating System: Unknown" << std::endl;
+#endif
 
-    // 打印处理器架构
-    std::cout << "CPU Architecture: ";
-    #if defined(__x86_64__) || defined(_M_X64)
-        std::cout << "x86-64";
-    #elif defined(__i386) || defined(_M_IX86)
-        std::cout << "x86";
-    #elif defined(__arm__) || defined(_M_ARM)
-        std::cout << "ARM";
-    #elif defined(__aarch64__) || defined(_M_ARM64)
-        std::cout << "ARM64";
-    #else
-        std::cout << "Unknown";
-    #endif
-    
-    std::cout << ", " << sizeof(void*) * 8 << "-bit" << std::endl;
+	// 打印处理器架构
+	std::cout << "CPU Architecture: ";
+#if defined(__x86_64__) || defined(_M_X64)
+	std::cout << "x86-64";
+#elif defined(__i386) || defined(_M_IX86)
+	std::cout << "x86";
+#elif defined(__arm__) || defined(_M_ARM)
+	std::cout << "ARM";
+#elif defined(__aarch64__) || defined(_M_ARM64)
+	std::cout << "ARM64";
+#else
+	std::cout << "Unknown";
+#endif
 
-    // 打印编译器信息
-    std::cout << "Compiler: ";
-    
-    #ifdef __clang__
-        std::cout << "Clang";
-    #elif defined(__GNUC__)
-        std::cout << "GCC";
-    #elif defined(_MSC_VER)
-        std::cout << "MSVC";
-    #else
-        std::cout << "Unknown";
-    #endif
-    
-    std::cout << ", Version: ";
-    
-    #if defined(__clang__)
-        std::cout << __clang_major__ << "." << __clang_minor__ << "." << __clang_patchlevel__;
-    #elif defined(__GNUC__)
-        std::cout << __GNUC__ << "." << __GNUC_MINOR__ << "." << __GNUC_PATCHLEVEL__;
-    #elif defined(_MSC_VER)
-        std::cout << _MSC_VER;
-    #else
-        std::cout << "Unknown";
-    #endif
-    
-    std::cout << std::endl;
+	std::cout << ", " << sizeof(void *) * 8 << "-bit" << std::endl;
 
-    // 打印语言标准
-    std::cout << "Cpp version: " << __cplusplus << std::endl;
+	// 打印编译器信息
+	std::cout << "Compiler: ";
 
-    // 打印构建模式
-    #ifdef DEBUG
-    std::cout << "------------------ Test on DEBUG mode ------------------" << std::endl;
-    #else
-    std::cout << "------------------ Test on RELEASE mode ------------------" << std::endl;
-    #endif
+#ifdef __clang__
+	std::cout << "Clang";
+#elif defined(__GNUC__)
+	std::cout << "GCC";
+#elif defined(_MSC_VER)
+	std::cout << "MSVC";
+#else
+	std::cout << "Unknown";
+#endif
+
+	std::cout << ", Version: ";
+
+#if defined(__clang__)
+	std::cout << __clang_major__ << "." << __clang_minor__ << "." << __clang_patchlevel__;
+#elif defined(__GNUC__)
+	std::cout << __GNUC__ << "." << __GNUC_MINOR__ << "." << __GNUC_PATCHLEVEL__;
+#elif defined(_MSC_VER)
+	std::cout << _MSC_VER;
+#else
+	std::cout << "Unknown";
+#endif
+
+	std::cout << std::endl;
+
+	// 打印语言标准
+	std::cout << "Cpp version: " << __cplusplus << std::endl;
+
+// 打印构建模式
+#ifdef DEBUG
+	std::cout << "------------------ Test on DEBUG mode ------------------" << std::endl;
+#else
+	std::cout << "------------------ Test on RELEASE mode ------------------" << std::endl;
+#endif
 }
 
 int main(int argc, char const *argv[])
 {
-    std::cout << "--------------------------------------------------------" << std::endl;
-    print_runtime_environment_info();
+	std::cout << "--------------------------------------------------------" << std::endl;
+	print_runtime_environment_info();
 
-    std::cout << "--------------------- Test start -----------------------" << std::endl;
-    std::cout << "--------------------------------------------------------" << std::endl;
-    std::cout << "--------------------------------------------------------" << std::endl;
+	std::cout << "--------------------- Test start -----------------------" << std::endl;
+	std::cout << "--------------------------------------------------------" << std::endl;
+	std::cout << "--------------------------------------------------------" << std::endl;
 
-    test_trietree();
+	// test_algorithms();
+	// test_allocator();
+	// test_allocator2();
+	// test_asan();
+	// test_assert();
+	// test_avltree();
+	// test_binaryindextree();
+	// test_bintree();
+	// test_bintree_rotate();
+	// test_bitmap();
+	// test_bplustree();
+	// test_bst();
+	// test_btree();
+	// test_container_perf();
+	// test_dsastring();
+	// test_deque();
+	// test_expression();
+	// test_flathashset();
+	// test_gperftools();
+	// test_graph();
+	// test_hash();
+	// test_hashmap();
+	// test_hashset();
+	// test_heap();
+	// test_hello_world();
+	// test_is_prime();
+	// test_kvpair();
+	// test_leftheap();
+	// test_list();
+	// test_lua();
+	// test_match();
+	// test_median();
+	// test_permutation();
+	// test_pow();
+	// test_primetable();
+	// test_queue();
+	// test_redblacktree();
+	// test_remove();
+	// test_reverse();
+	// test_segment_tree();
+	// test_shuffle();
+	// test_smart_pointer();
+	// test_sort();
+	// test_splaytree();
+	// test_stack();
+	// test_trietree();
+	// test_tree();
+	// test_treemap();
+	// test_treeset();
+	// test_unionfindset();
+	test_vector();
 
-    std::cout << "--------------------------------------------------------" << std::endl;
-    std::cout << "--------------------------------------------------------" << std::endl;
-    std::cout << "--------------------- Test finish ----------------------" << std::endl;
-    std::cout << "--------------------------------------------------------" << std::endl;
-    return 0;
+	std::cout << "--------------------------------------------------------" << std::endl;
+	std::cout << "--------------------------------------------------------" << std::endl;
+	std::cout << "--------------------- Test finish ----------------------" << std::endl;
+	std::cout << "--------------------------------------------------------" << std::endl;
+	return 0;
 }

@@ -40,7 +40,7 @@ namespace DSA
         ASSERT_DEBUG(lChild, "this node doesn't have left child, cannot zig");
 
         lChild->set_father(this->father());
-        BinTreeNode<T> *f = dynamic_cast<BinTreeNode<T>*>(this->father());
+        BinTreeNode<T> *f = reinterpret_cast<BinTreeNode<T>*>(this->father());
         if (f)
         {
             (this == f->left_child()) ? f->set_left_child(lChild) : f->set_right_child(lChild);
@@ -69,7 +69,7 @@ namespace DSA
         ASSERT_DEBUG(rChild, "this node doesn't have right child, cannot zag");
 
         rChild->set_father(this->father());
-        BinTreeNode<T> *f = dynamic_cast<BinTreeNode<T>*>(this->father());
+        BinTreeNode<T> *f = reinterpret_cast<BinTreeNode<T>*>(this->father());
         if (f)
         {
             (this == f->right_child()) ? f->set_right_child(rChild) : f->set_left_child(rChild);

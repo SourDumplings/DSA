@@ -25,17 +25,17 @@ namespace DSA
 
         if (this->root())
         {
-            BinTreeNode<T> *pBinTreeNodeFather = dynamic_cast<BinTreeNode<T> *>(pFather);
+            BinTreeNode<T> *pBinTreeNodeFather = reinterpret_cast<BinTreeNode<T> *>(pFather);
             ASSERT_DEBUG(pBinTreeNodeFather, "father is nullptr, cannot be a father");
             ASSERT_DEBUG(pBinTreeNodeFather->get_root() == this->root(), "this father is not a node in this tree");
 
             if (pBinTreeNodeFather->left_child() == nullptr)
             {
-                pBinTreeNodeFather->insert_as_left_child(dynamic_cast<BinTreeNode<T> *>(pNode));
+                pBinTreeNodeFather->insert_as_left_child(reinterpret_cast<BinTreeNode<T> *>(pNode));
             }
             else if (pBinTreeNodeFather->right_child() == nullptr)
             {
-                pBinTreeNodeFather->insert_as_right_child(dynamic_cast<BinTreeNode<T> *>(pNode));
+                pBinTreeNodeFather->insert_as_right_child(reinterpret_cast<BinTreeNode<T> *>(pNode));
             }
             else
             {
@@ -60,10 +60,10 @@ namespace DSA
 
         ASSERT_DEBUG(pNode->get_root() == this->root(), "this node is not in this tree");
 
-        BinTreeNode<T> *pBinTreeNode = dynamic_cast<BinTreeNode<T> *>(pNode);
+        BinTreeNode<T> *pBinTreeNode = reinterpret_cast<BinTreeNode<T> *>(pNode);
         ASSERT_RELEASE(pBinTreeNode, "wrong node pointer");
 
-        BinTreeNode<T> *f = dynamic_cast<BinTreeNode<T> *>(pBinTreeNode->father());
+        BinTreeNode<T> *f = reinterpret_cast<BinTreeNode<T> *>(pBinTreeNode->father());
         if (f)
         {
             if (f->left_child() == pBinTreeNode)

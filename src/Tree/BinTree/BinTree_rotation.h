@@ -36,11 +36,11 @@ namespace DSA
 
         BinTreeNode<T> *ret = nullptr;
         ASSERT_DEBUG(this->has_this_node(v), "this node is not in this BinTree");
-        BinTreeNode<T> *f = dynamic_cast<BinTreeNode<T> *>(v->father());
+        BinTreeNode<T> *f = reinterpret_cast<BinTreeNode<T> *>(v->father());
         ASSERT_DEBUG(f, "this node doesn't have father");
-        BinTreeNode<T> *g = dynamic_cast<BinTreeNode<T> *>(f->father());
+        BinTreeNode<T> *g = reinterpret_cast<BinTreeNode<T> *>(f->father());
         ASSERT_DEBUG(g, "this node doesn't have grandfather");
-        BinTreeNode<T> *z = dynamic_cast<BinTreeNode<T> *>(g->father()); // 记录曾祖父结点
+        BinTreeNode<T> *z = reinterpret_cast<BinTreeNode<T> *>(g->father()); // 记录曾祖父结点
 
         if (f == g->left_child())
         {

@@ -22,7 +22,7 @@ namespace DSA
     {
         ASSERT_DEBUG(v, "empty node cannot update black height");
 
-        v->_blackHeight = Max(get_black_height(dynamic_cast<RedBlackTreeNode<T> *>(v->left_child())), get_black_height(dynamic_cast<RedBlackTreeNode<T> *>(v->right_child())));
+        v->_blackHeight = Max(get_black_height(reinterpret_cast<RedBlackTreeNode<T> *>(v->left_child())), get_black_height(reinterpret_cast<RedBlackTreeNode<T> *>(v->right_child())));
         if (!v->_red)
         {
             // 若当前结点为黑结点，则计入黑高度
@@ -33,7 +33,7 @@ namespace DSA
     template <typename T>
     BSTNode<T> *RedBlackTree<T>::insert(BSTNode<T> *pNode)
     {
-        RedBlackTreeNode<T> *ret = dynamic_cast<RedBlackTreeNode<T> *>(BST<T>::insert(pNode));
+        RedBlackTreeNode<T> *ret = reinterpret_cast<RedBlackTreeNode<T> *>(BST<T>::insert(pNode));
         if (ret == nullptr)
         {
             return nullptr;
@@ -66,8 +66,8 @@ namespace DSA
         ASSERT_DEBUG(this->has_this_node(pNode), "this node isn't in this tree");
 
         BSTNode<T> *actualRemoved = pNode;
-        BSTNode<T> *hot = dynamic_cast<BSTNode<T> *>(pNode->father());
-        RedBlackTreeNode<T> *succ = dynamic_cast<RedBlackTreeNode<T> *>(this->remove_at(actualRemoved, hot));
+        BSTNode<T> *hot = reinterpret_cast<BSTNode<T> *>(pNode->father());
+        RedBlackTreeNode<T> *succ = reinterpret_cast<RedBlackTreeNode<T> *>(this->remove_at(actualRemoved, hot));
         if (this->size() == 0)
         {
             return actualRemoved;
@@ -76,12 +76,12 @@ namespace DSA
         if (hot == nullptr)
         {
             // 如果刚刚被删除的是根结点，则需要将根结点染黑并更新黑高度
-            dynamic_cast<RedBlackTreeNode<T> *>(this->root())->_red = false;
-            update_black_height(dynamic_cast<RedBlackTreeNode<T> *>(this->root()));
+            reinterpret_cast<RedBlackTreeNode<T> *>(this->root())->_red = false;
+            update_black_height(reinterpret_cast<RedBlackTreeNode<T> *>(this->root()));
         }
         else
         {
-            if (is_black_balanced(dynamic_cast<RedBlackTreeNode<T> *>(hot)))
+            if (is_black_balanced(reinterpret_cast<RedBlackTreeNode<T> *>(hot)))
             {
                 // printf("hot is black balanced\n");
                 // 敏感结点黑高度无需更新，即平衡
@@ -98,7 +98,7 @@ namespace DSA
             else
             {
                 // 接任者为黑色，双黑调整
-                solve_double_black(succ, dynamic_cast<RedBlackTreeNode<T> *>(hot));
+                solve_double_black(succ, reinterpret_cast<RedBlackTreeNode<T> *>(hot));
             }
         }
         return actualRemoved;

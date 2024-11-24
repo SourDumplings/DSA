@@ -79,7 +79,7 @@ bool test_avltree()
     // 删除测试
     AVLTree<int> aT2(aT);
     aT2.print_info("aT2");
-    AVLTreeNode<int> *n8 = dynamic_cast<AVLTreeNode<int> *>(dynamic_cast<AVLTreeNode<int> *>(aT2.root())->right_child());
+    AVLTreeNode<int> *n8 = reinterpret_cast<AVLTreeNode<int> *>(reinterpret_cast<AVLTreeNode<int> *>(aT2.root())->right_child());
     printf("n8 = %d\n", n8->data());
     TreeNode<int> *pN8 = aT2.secede(n8);
     delete pN8;

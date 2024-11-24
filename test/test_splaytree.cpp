@@ -34,7 +34,7 @@ bool test_splaytree()
     for (int i = 5; i > -1; --i)
     {
         r->insert_child_by_data(v[i]);
-        r = dynamic_cast<SplayTreeNode<int>*>(r->left_child());
+        r = reinterpret_cast<SplayTreeNode<int>*>(r->left_child());
     }
     SplayTree<int> sT(nr);
     sT.print_info("sT");
@@ -79,7 +79,7 @@ bool test_splaytree()
               5   7
      */
 
-    SplayTreeNode<int> *pTempNode = dynamic_cast<SplayTreeNode<int>*>(sT3.secede_data(6));
+    SplayTreeNode<int> *pTempNode = reinterpret_cast<SplayTreeNode<int>*>(sT3.secede_data(6));
     delete pTempNode;
     cout << "sT3: " << sT3 << endl;
     cout << "sT3.hash(): " << sT3.hash() << endl;

@@ -25,27 +25,27 @@ namespace DSA
     template <typename T>
     void RedBlackTree<T>::solve_double_red(RedBlackTreeNode<T> *v)
     {
-        if (v == dynamic_cast<RedBlackTreeNode<T> *>(this->root()))
+        if (v == reinterpret_cast<RedBlackTreeNode<T> *>(this->root()))
         {
             // 如果已经（递归）到树根，则将其转黑，增加黑高度
             v->_red = false;
             ++v->_blackHeight;
             return;
         }
-        RedBlackTreeNode<T> *f = dynamic_cast<RedBlackTreeNode<T> *>(v->father());
-        if (!dynamic_cast<RedBlackTreeNode<T> *>(v->father())->_red)
+        RedBlackTreeNode<T> *f = reinterpret_cast<RedBlackTreeNode<T> *>(v->father());
+        if (!reinterpret_cast<RedBlackTreeNode<T> *>(v->father())->_red)
         {
             // v的父结点是黑结点，不用调整
             return;
         }
 
-        RedBlackTreeNode<T> *g = dynamic_cast<RedBlackTreeNode<T> *>(f->father()); // 既然父结点是红结点，则祖父结点一定存在
-        RedBlackTreeNode<T> *u = dynamic_cast<RedBlackTreeNode<T> *>(v->uncle());
+        RedBlackTreeNode<T> *g = reinterpret_cast<RedBlackTreeNode<T> *>(f->father()); // 既然父结点是红结点，则祖父结点一定存在
+        RedBlackTreeNode<T> *u = reinterpret_cast<RedBlackTreeNode<T> *>(v->uncle());
         if (!is_red(u))
         {
             // u为黑色，即RR-1情况
             bool isVFSameSide = (v == f->left_child()) == (f == g->left_child()); // v 和 f 是否属于同侧
-            RedBlackTreeNode<T> *newG = dynamic_cast<RedBlackTreeNode<T> *>(this->rotate_at(v)); // 3+4重构
+            RedBlackTreeNode<T> *newG = reinterpret_cast<RedBlackTreeNode<T> *>(this->rotate_at(v)); // 3+4重构
             newG->_red = false; // 新祖父染黑
             g->_red = true; // 原祖父染红
             if (isVFSameSide)
@@ -90,12 +90,12 @@ namespace DSA
     template <typename T>
     void RedBlackTree<T>::solve_double_black(RedBlackTreeNode<T> *v, RedBlackTreeNode<T> *hot)
     {
-        RedBlackTreeNode<T> *f = v ? dynamic_cast<RedBlackTreeNode<T> *>(v->father()) : hot;
+        RedBlackTreeNode<T> *f = v ? reinterpret_cast<RedBlackTreeNode<T> *>(v->father()) : hot;
         if (f == nullptr)
         {
             return;
         }
-        RedBlackTreeNode<T> *b = dynamic_cast<RedBlackTreeNode<T> *>((v == f->left_child()) ? f->right_child() : f->left_child());
+        RedBlackTreeNode<T> *b = reinterpret_cast<RedBlackTreeNode<T> *>((v == f->left_child()) ? f->right_child() : f->left_child());
 
         ASSERT_DEBUG(b, "error rb tree node");
 
@@ -105,7 +105,7 @@ namespace DSA
             b->_red = false;
             f->_red = true;
             // 取 c 与其父 b 同侧
-            RedBlackTreeNode<T> *c = dynamic_cast<RedBlackTreeNode<T> *>((b == f->left_child()) ? b->left_child() : b->right_child());
+            RedBlackTreeNode<T> *c = reinterpret_cast<RedBlackTreeNode<T> *>((b == f->left_child()) ? b->left_child() : b->right_child());
             hot = f;
             this->rotate_at(c);
             solve_double_black(v, hot); // 继续对v处进行双黑修正，但f已经转红，故只可能是BB-1或BB-2
@@ -114,13 +114,13 @@ namespace DSA
         else
         {
             RedBlackTreeNode<T> *c = nullptr; // b的红孩子
-            if (is_red(dynamic_cast<RedBlackTreeNode<T> *>(b->left_child())))
+            if (is_red(reinterpret_cast<RedBlackTreeNode<T> *>(b->left_child())))
             {
-                c = dynamic_cast<RedBlackTreeNode<T> *>(b->left_child());
+                c = reinterpret_cast<RedBlackTreeNode<T> *>(b->left_child());
             }
-            else if (is_red(dynamic_cast<RedBlackTreeNode<T> *>(b->right_child())))
+            else if (is_red(reinterpret_cast<RedBlackTreeNode<T> *>(b->right_child())))
             {
-                c = dynamic_cast<RedBlackTreeNode<T> *>(b->right_child());
+                c = reinterpret_cast<RedBlackTreeNode<T> *>(b->right_child());
             }
 
             if (c)
@@ -128,16 +128,16 @@ namespace DSA
                 // BB-1，黑b有红孩子
                 bool oldColor = f->_red; // 备份f的颜色
                 // 重构，并将新子树的左右孩子结点染黑
-                RedBlackTreeNode<T> *newG = dynamic_cast<RedBlackTreeNode<T> *>(this->rotate_at(c));
+                RedBlackTreeNode<T> *newG = reinterpret_cast<RedBlackTreeNode<T> *>(this->rotate_at(c));
                 if (newG->left_child())
                 {
-                    dynamic_cast<RedBlackTreeNode<T> *>(newG->left_child())->_red = false;
-                    update_black_height(dynamic_cast<RedBlackTreeNode<T> *>(newG->left_child()));
+                    reinterpret_cast<RedBlackTreeNode<T> *>(newG->left_child())->_red = false;
+                    update_black_height(reinterpret_cast<RedBlackTreeNode<T> *>(newG->left_child()));
                 }
                 if (newG->right_child())
                 {
-                    dynamic_cast<RedBlackTreeNode<T> *>(newG->right_child())->_red = false;
-                    update_black_height(dynamic_cast<RedBlackTreeNode<T> *>(newG->right_child()));
+                    reinterpret_cast<RedBlackTreeNode<T> *>(newG->right_child())->_red = false;
+                    update_black_height(reinterpret_cast<RedBlackTreeNode<T> *>(newG->right_child()));
                 }
                 // 新子树结点继承原根节点
                 newG->_red = oldColor;

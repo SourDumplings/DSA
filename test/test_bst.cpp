@@ -51,11 +51,11 @@ bool test_bst()
     printf("8 is in bst1? %d\n", static_cast<bool>(bst1.search_data(8)));
 
     // 测试secede
-    // // BST<int> bst2(dynamic_cast<BSTNode<int>*>(bst1.secede(bst1.search_data(6))));
+    // // BST<int> bst2(reinterpret_cast<BSTNode<int>*>(bst1.secede(bst1.search_data(6))));
     // BST<int> bst2(bst1.secede_data(7));
     // bst1.print_info("bst1");
     // bst2.print_info("bst2");
-    // BSTNode<int> *pC = dynamic_cast<BSTNode<int>*>(dynamic_cast<BSTNode<int>*>(bst2.root())->remove_left_child());
+    // BSTNode<int> *pC = reinterpret_cast<BSTNode<int>*>(reinterpret_cast<BSTNode<int>*>(bst2.root())->remove_left_child());
     // delete pC;
     // bst2.print_info("bst2");
     //

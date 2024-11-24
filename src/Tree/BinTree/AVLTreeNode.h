@@ -42,8 +42,8 @@ namespace DSA
         {
             Rank lH = this->left_child() ? this->left_child()->height() : 0,
                  rH = this->right_child() ? this->right_child()->height() : 0;
-            return lH < rH ? dynamic_cast<AVLTreeNode<T> *>(this->right_child())
-                           : dynamic_cast<AVLTreeNode<T> *>(this->left_child());
+            return lH < rH ? reinterpret_cast<AVLTreeNode<T> *>(this->right_child())
+                           : reinterpret_cast<AVLTreeNode<T> *>(this->left_child());
         }
 
         bool insert_child_by_data(const T &data) override
@@ -90,8 +90,8 @@ namespace DSA
                 return;
             }
 
-            AVLTreeNode<T> *f = dynamic_cast<AVLTreeNode<T> *>(this->father());
-            AVLTreeNode<T> *b = dynamic_cast<AVLTreeNode<T> *>(this->brother());
+            AVLTreeNode<T> *f = reinterpret_cast<AVLTreeNode<T> *>(this->father());
+            AVLTreeNode<T> *b = reinterpret_cast<AVLTreeNode<T> *>(this->brother());
             Rank thisH = this->height();
             Rank bH = b ? b->height() : 0;
             if (f && f->height() != Max(thisH, bH) + 1)

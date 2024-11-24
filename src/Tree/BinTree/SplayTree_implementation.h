@@ -48,13 +48,13 @@ namespace DSA
         {
             return nullptr;
         }
-        SplayTreeNode<T> *pSplayTreeNode = dynamic_cast<SplayTreeNode<T> *>(pRoot);
+        SplayTreeNode<T> *pSplayTreeNode = reinterpret_cast<SplayTreeNode<T> *>(pRoot);
         ASSERT_DEBUG(pSplayTreeNode, "error pRoot");
         SplayTreeNode<T> *pCopiedRoot = new SplayTreeNode<T>(pSplayTreeNode->data());
         ASSERT_RELEASE(pCopiedRoot, "copy root error");
-        SplayTreeNode<T> *pLC = dynamic_cast<SplayTreeNode<T> *>(pSplayTreeNode->left_child());
+        SplayTreeNode<T> *pLC = reinterpret_cast<SplayTreeNode<T> *>(pSplayTreeNode->left_child());
         SplayTreeNode<T> *pLCopied = this->copy_from(pLC);
-        SplayTreeNode<T> *pRC = dynamic_cast<SplayTreeNode<T> *>(pSplayTreeNode->right_child());
+        SplayTreeNode<T> *pRC = reinterpret_cast<SplayTreeNode<T> *>(pSplayTreeNode->right_child());
         SplayTreeNode<T> *pRCopied = this->copy_from(pRC);
         pCopiedRoot->insert_as_left_child(pLCopied);
         pCopiedRoot->insert_as_right_child(pRCopied);
@@ -70,10 +70,10 @@ namespace DSA
 
 #ifdef DEBUG
         printf("its pre_order_traversal is: \n");
-        BinTree<T>::pre_order_traversal(dynamic_cast<SplayTreeNode<T> *>(this->root()), typename Tree<T>::OutPut(),
+        BinTree<T>::pre_order_traversal(reinterpret_cast<SplayTreeNode<T> *>(this->root()), typename Tree<T>::OutPut(),
                                         NONRECURSION_TRAVERSAL2);
         printf("\nits in_order_traversal is: \n");
-        BinTree<T>::in_order_traversal(dynamic_cast<SplayTreeNode<T> *>(this->root()), typename Tree<T>::OutPut(),
+        BinTree<T>::in_order_traversal(reinterpret_cast<SplayTreeNode<T> *>(this->root()), typename Tree<T>::OutPut(),
                                        NONRECURSION_TRAVERSAL2);
 #endif
 
@@ -88,7 +88,7 @@ namespace DSA
             return nullptr;
         }
         SplayTreeNode<T> *f = nullptr, *g = nullptr;
-        while ((f = dynamic_cast<SplayTreeNode<T> *>(v->father())) && (g = dynamic_cast<SplayTreeNode<T> *>(f->father())))
+        while ((f = reinterpret_cast<SplayTreeNode<T> *>(v->father())) && (g = reinterpret_cast<SplayTreeNode<T> *>(f->father())))
         {
             if (v == f->left_child())
             {
@@ -133,19 +133,19 @@ namespace DSA
     template <typename T>
     BSTNode<T> *SplayTree<T>::search_data(const T &data) const
     {
-        SplayTreeNode<T> *v = dynamic_cast<SplayTreeNode<T> *>(BST<T>::search_data(data));
+        SplayTreeNode<T> *v = reinterpret_cast<SplayTreeNode<T> *>(BST<T>::search_data(data));
         return const_cast<SplayTree<T> *>(this)->splay(v);
     }
 
     template <typename T>
     BSTNode<T> *SplayTree<T>::insert(BSTNode<T> *node)
     {
-        SplayTreeNode<T> *ret = dynamic_cast<SplayTreeNode<T> *>(BST<T>::insert(node));
+        SplayTreeNode<T> *ret = reinterpret_cast<SplayTreeNode<T> *>(BST<T>::insert(node));
         if (ret == nullptr)
         {
             return nullptr;
         }
-        splay(dynamic_cast<SplayTreeNode<T> *>(node));
+        splay(reinterpret_cast<SplayTreeNode<T> *>(node));
         return ret;
     }
 
@@ -172,10 +172,10 @@ namespace DSA
 
         ASSERT_DEBUG(this->has_this_node(pNode), "this node is not in this SplayTree");
 
-        splay(dynamic_cast<SplayTreeNode<T> *>(pNode));
-        SplayTreeNode<T> *lC = dynamic_cast<SplayTreeNode<T> *>(pNode->left_child());
-        SplayTreeNode<T> *rC = dynamic_cast<SplayTreeNode<T> *>(pNode->right_child());
-        SplayTreeNode<T> *next = dynamic_cast<SplayTreeNode<T> *>(pNode->next());
+        splay(reinterpret_cast<SplayTreeNode<T> *>(pNode));
+        SplayTreeNode<T> *lC = reinterpret_cast<SplayTreeNode<T> *>(pNode->left_child());
+        SplayTreeNode<T> *rC = reinterpret_cast<SplayTreeNode<T> *>(pNode->right_child());
+        SplayTreeNode<T> *next = reinterpret_cast<SplayTreeNode<T> *>(pNode->next());
         pNode->remove_left_child();
         pNode->remove_right_child();
         --this->_size;

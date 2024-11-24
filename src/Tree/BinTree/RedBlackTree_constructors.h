@@ -37,15 +37,15 @@ namespace DSA
         {
             return nullptr;
         }
-        RedBlackTreeNode<T> *pRBTreeNode = dynamic_cast<RedBlackTreeNode<T> *>(pRoot);
+        RedBlackTreeNode<T> *pRBTreeNode = reinterpret_cast<RedBlackTreeNode<T> *>(pRoot);
         ASSERT_DEBUG(pRBTreeNode, "error pRoot");
         RedBlackTreeNode<T> *pCopiedRoot = new RedBlackTreeNode<T>(pRBTreeNode->data());
         pCopiedRoot->_red = pRBTreeNode->_red;
         pCopiedRoot->_blackHeight = pRBTreeNode->_blackHeight;
         ASSERT_RELEASE(pCopiedRoot, "copy root error");
-        RedBlackTreeNode<T> *pLC = dynamic_cast<RedBlackTreeNode<T> *>(pRBTreeNode->left_child());
+        RedBlackTreeNode<T> *pLC = reinterpret_cast<RedBlackTreeNode<T> *>(pRBTreeNode->left_child());
         RedBlackTreeNode<T> *pLCopied = this->copy_from(pLC);
-        RedBlackTreeNode<T> *pRC = dynamic_cast<RedBlackTreeNode<T> *>(pRBTreeNode->right_child());
+        RedBlackTreeNode<T> *pRC = reinterpret_cast<RedBlackTreeNode<T> *>(pRBTreeNode->right_child());
         RedBlackTreeNode<T> *pRCopied = this->copy_from(pRC);
         pCopiedRoot->insert_as_left_child(pLCopied);
         pCopiedRoot->insert_as_right_child(pRCopied);
