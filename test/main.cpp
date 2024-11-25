@@ -38,7 +38,6 @@
 #include "test_kvpair.h"
 #include "test_leftheap.h"
 #include "test_list.h"
-#include "test_lua.h"
 #include "test_match.h"
 #include "test_median.h"
 #include "test_permutation.h"
@@ -169,7 +168,6 @@ int main(int argc, char const *argv[])
 	// test_kvpair();
 	// test_leftheap();
 	// test_list();
-	// test_lua();
 	// test_match();
 	// test_median();
 	// test_permutation();

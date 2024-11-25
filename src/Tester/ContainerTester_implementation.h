@@ -203,7 +203,7 @@ namespace DSA
         {
             int64_t idx = rand() % size;
 
-            c.at(idx);
+            auto elem = c.at(idx);
         }
 
         gettimeofday(&tv, NULL);

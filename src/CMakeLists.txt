@@ -24,10 +24,6 @@ SET_TARGET_PROPERTIES(dsa_shared PROPERTIES OUTPUT_NAME "dsa")
 # VERSION：动态库版本，SOVERSION：API 版本
 SET_TARGET_PROPERTIES(dsa_shared PROPERTIES VERSION ${version} SOVERSION ${api_version})
 
-# 链接外部库
-TARGET_LINK_LIBRARIES(dsa lua)
-TARGET_LINK_LIBRARIES(dsa_shared /usr/local/lib/liblua-5.4.4.so)
-
 # 指定库编译输出目录
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 

@@ -159,9 +159,6 @@
     <ClCompile Include="test_vector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test_lua.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="test_allocator2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -309,9 +306,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="test_unionfindset.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="test_lua.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="test_allocator2.h">

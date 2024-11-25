@@ -3,7 +3,6 @@
         {
             "includePath": [
                 "${workspaceFolder}/src/**",
-                "D:/lua-5.4.2_Win64_dll17_lib/include",
             ],
             "intelliSenseMode": "linux-gcc-x64",
             "compilerPath": "/usr/bin/g++",

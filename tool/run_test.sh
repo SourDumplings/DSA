@@ -6,9 +6,6 @@
  # @Description: 运行测试程序，必须要先构建
 ### 
 
-source /etc/profile
-source .bashrc
-
 export ASAN_OPTIONS=abort_on_error=1:disable_coredump=0:unmap_shadow_on_exit=1
 
 ulimit -c unlimited

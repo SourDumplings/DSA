@@ -9,7 +9,7 @@
 # 概述
 Data Structs and Algorithms(DSA)
 
-版本号：14.0.1，与 CMakeLists.txt 同步
+版本号：14.1.0，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -23,15 +23,13 @@ Data Structs and Algorithms(DSA)
 2. 容器元素必须支持`operator<<`（DEBUG 模式需要）
 
 ### Linux
-1. 编译器：gcc version 8.3.1 20190311 (Red Hat 8.3.1-3) (GCC)
-2. 调试器：推荐 GNU gdb (GDB) 10.2
-3. CMake：3.17.5
+1. 编译器：gcc version 14.2.0 (Ubuntu 14.2.0-4ubuntu2~24.04)
+2. 调试器：GNU gdb (Ubuntu 15.0.50.20240403-0ubuntu1) 15.0.50.20240403-git
+3. CMake：cmake version 3.31.1
 4. Graphviz（DEBUG 模式需要）
-5. Lua：Lua 5.4.4 开发环境，见文档`doc/Linux 下安装 Lua 5.4.4 开发环境.md`
 
 ### Windows
 1. 编译器：Visual Studio 2022 (v143)
-2. Lua：Lua 5.4.2 开发环境：安装后需要改配置，见文档`doc/Windows 下安装 Lua 5.4.2 开发环境并配置.md`
 
 ## 构建步骤
 以 Linux 平台为例，Windows 打开`DSA.sln`用 Visual Studio 2022 Build 即可：
@@ -47,7 +45,6 @@ Data Structs and Algorithms(DSA)
 - 在`test`目录下编写单元测试代码，命名规范为：`test_xxx.cpp`
 - 在项目构建好后，执行`tool/run_test.sh`脚本（Linux）即可运行单元测试（VSCode task: Run test）
 - 可以运行 Python3 脚本进行测试，执行`tool/run_python_test.sh`脚本（Windows 下为`tool/run_python_test.bat`）即可（VSCode task: Run python test，与 Asan 不太兼容，故只支持 RELEASE 模式构建的），Python 脚本的执行入口为`test/python/main.py`
-- 可以通过`test/test_lua.cpp`来执行 Lua 测试脚本，执行入口为`test/lua/main.lua`
 - Windows 下用 VS 打开项目解决方案`DSA.sln`后将 test 项目设置为启动项目
 
 ## 性能分析
@@ -148,7 +145,6 @@ Data Structs and Algorithms(DSA)
 4. ### 内存分配器
 5. ### Asset 宏
 6. ### Python3 调用接口
-7. ### Lua 调用接口
 
 # 参考资料
 1. 《数据结构》3rd-邓俊辉
@@ -160,11 +156,10 @@ Data Structs and Algorithms(DSA)
 7. 《Database System Concepts》6th-Abraham Silberschatz, Henry F. Korth, S. Sudarshan
 8. 《STL 源码剖析》-侯捷
 9. 《C++ 内存管理》-侯捷
-10. https://github.com/SourDumplings/TestLua
-11.《Computer Systems A Programmer's Perspective》3e-Randal E.Bryant, David R. O'Hallaron
+10.《Computer Systems A Programmer's Perspective》3e-Randal E.Bryant, David R. O'Hallaron
 
 # TODO
-- 删掉所有的 dynamic_cast 为 reinterpret_cast 来实现最佳性能
+- 修正 Vector，其在元素为 string 时扩缩容会有问题会 core
 - 实现稀疏集
 - 整理一下编译规则，在 Windows 下也使用 CMake，参考 SCGF 项目
 - 将其用在 SCGF 项目中
