@@ -25,8 +25,8 @@ void Vector<T>::push_back(const T &x)
 	// 如有必要则扩容
 	++_size;
 	if (_need_expand()) { _expand(); }
-	// _elem[_size - 1] = x;
-	new (_elem + _size - 1) T(x);
+	if constexpr (IsMemoryCopyable<T>::_value) { new (_elem + _size - 1) T(x); }
+	else { _elem[_size - 1] = x; }
 }
 
 template <typename T>
@@ -35,8 +35,8 @@ void Vector<T>::push_back(T &&x)
 	// 如有必要则扩容
 	++_size;
 	if (_need_expand()) { _expand(); }
-	// _elem[_size - 1] = std::move(x);
-	new (_elem + _size - 1) T(std::move(x));
+	if constexpr (IsMemoryCopyable<T>::_value) { new (_elem + _size - 1) T(std::move(x)); }
+	else { _elem[_size - 1] = std::move(x); }
 }
 
 template <typename T>
@@ -59,17 +59,24 @@ typename Vector<T>::Iterator Vector<T>::insert(typename Vector<T>::Iterator itPo
 	++_size;
 	if (_need_expand()) { _expand(); }
 
-	/*         for (uint32_t i = _size - 1; i != r; --i)
-			{
-				_elem[i] = _elem[i - 1];
-			}
-			_elem[r] = x; */
-	memmove(
-		reinterpret_cast<void *>(_elem + r + 1),
-		reinterpret_cast<void *>(_elem + r),
-		(oldSize - r) * sizeof(T)
-	);
-	new (_elem + r) T(x);
+	if constexpr (IsMemoryCopyable<T>::_value)
+	{
+		memmove(
+			reinterpret_cast<void *>(_elem + r + 1),
+			reinterpret_cast<void *>(_elem + r),
+			(oldSize - r) * sizeof(T)
+		);
+		new (_elem + r) T(x);
+	}
+	else
+	{
+		for (uint32_t i = _size - 1; i != r; --i)
+		{
+			_elem[i] = std::move(_elem[i - 1]);
+		}
+		_elem[r] = x;
+	}
+
 	return begin() + r;
 }
 
@@ -82,17 +89,24 @@ typename Vector<T>::Iterator Vector<T>::insert(typename Vector<T>::Iterator itPo
 	++_size;
 	if (_need_expand()) { _expand(); }
 
-	/*         for (uint32_t i = _size - 1; i != r; --i)
-			{
-				_elem[i] = _elem[i - 1];
-			}
-			_elem[r] = std::move(x); */
-	memmove(
-		reinterpret_cast<void *>(_elem + r + 1),
-		reinterpret_cast<void *>(_elem + r),
-		(oldSize - r) * sizeof(T)
-	);
-	new (_elem + r) T(std::move(x));
+	if constexpr (IsMemoryCopyable<T>::_value)
+	{
+		memmove(
+			reinterpret_cast<void *>(_elem + r + 1),
+			reinterpret_cast<void *>(_elem + r),
+			(oldSize - r) * sizeof(T)
+		);
+		new (_elem + r) T(std::move(x));
+	}
+	else
+	{
+		for (uint32_t i = _size - 1; i != r; --i)
+		{
+			_elem[i] = _elem[i - 1];
+		}
+		_elem[r] = std::move(x);
+	}
+
 	return begin() + r;
 }
 
@@ -109,23 +123,30 @@ typename Vector<T>::Iterator
 	_size					   += n;
 	if (_need_expand()) { _expand(); }
 
-	/*         typename Vector<T>::Rank rTemp = r;
-			for (const T *it = b; it != e; ++it)
-			{
-				_elem[rTemp++] = *it;
-			} */
-	Vector<T> elems(b, e);	// 将元素备份出来
-	memmove(
-		reinterpret_cast<void *>(_elem + r + n),
-		reinterpret_cast<void *>(_elem + r),
-		(oldSize - r) * sizeof(T)
-	);
-	typename Vector<T>::Rank rTemp = r;
-	for (const T &t : elems)
+	if constexpr (IsMemoryCopyable<T>::_value)
 	{
-		new (_elem + rTemp) T(std::move(t));
-		++rTemp;
+		Vector<T> elems(b, e);	// 将元素备份出来
+		memmove(
+			reinterpret_cast<void *>(_elem + r + n),
+			reinterpret_cast<void *>(_elem + r),
+			(oldSize - r) * sizeof(T)
+		);
+		typename Vector<T>::Rank rTemp = r;
+		for (const T &t : elems)
+		{
+			new (_elem + rTemp) T(std::move(t));
+			++rTemp;
+		}
 	}
+	else
+	{
+		typename Vector<T>::Rank rTemp = r;
+		for (const T *it = b; it != e; ++it)
+		{
+			_elem[rTemp++] = *it;
+		}
+	}
+
 	return begin() + r;
 }
 
@@ -146,16 +167,22 @@ typename Vector<T>::Iterator Vector<T>::erase(typename Vector<T>::Iterator itPos
 	typename Vector<T>::Rank r = itPos - begin();
 	ASSERT_DEBUG(itPos < end() && itPos >= begin(), "Invalid pos Iterator");
 
-	/*         for (Rank i = r; i != _size - 1; ++i)
-			{
-				_elem[i] = std::move(_elem[i + 1]);
-			} */
-	(_elem + r)->~T();
-	memmove(
-		reinterpret_cast<void *>(_elem + r),
-		reinterpret_cast<void *>(_elem + r + 1),
-		(_size - r - 1) * sizeof(T)
-	);
+	if constexpr (IsMemoryCopyable<T>::_value)
+	{
+		(_elem + r)->~T();
+		memmove(
+			reinterpret_cast<void *>(_elem + r),
+			reinterpret_cast<void *>(_elem + r + 1),
+			(_size - r - 1) * sizeof(T)
+		);
+	}
+	else
+	{
+		for (Rank i = r; i != _size - 1; ++i)
+		{
+			_elem[i] = std::move(_elem[i + 1]);
+		}
+	}
 
 	--_size;
 	if (_need_shrink()) { _shrink(); }
@@ -175,19 +202,25 @@ typename Vector<T>::Iterator
 	);
 	typename Vector<T>::Rank n = itEnd - itBegin;
 
-	/*         for (Rank i = rB; i != rE; ++i)
-			{
-				_elem[i] = std::move(_elem[i + n]);
-			} */
-	for (Rank i = rB; i != rE; ++i)
+	if constexpr (IsMemoryCopyable<T>::_value)
 	{
-		(_elem + i)->~T();
+		for (Rank i = rB; i != rE; ++i)
+		{
+			(_elem + i)->~T();
+		}
+		memmove(
+			reinterpret_cast<void *>(_elem + rB),
+			reinterpret_cast<void *>(_elem + rE),
+			(_size - rE) * sizeof(T)
+		);
 	}
-	memmove(
-		reinterpret_cast<void *>(_elem + rB),
-		reinterpret_cast<void *>(_elem + rE),
-		(_size - rE) * sizeof(T)
-	);
+	else
+	{
+		for (Rank i = rB; i != rE; ++i)
+		{
+			_elem[i] = std::move(_elem[i + n]);
+		}
+	}
 
 	_size -= n;
 	if (_need_shrink()) { _shrink(); }

@@ -1,5 +1,5 @@
 # 声明编译要求cmake最低版本
-CMAKE_MINIMUM_REQUIRED(VERSION 3.17)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.28)
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     message(FATAL_ERROR "This project doesn't support CMake build on Windows!")

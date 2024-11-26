@@ -1,5 +1,5 @@
 # 声明编译要求cmake最低版本
-CMAKE_MINIMUM_REQUIRED(VERSION 3.17)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.28)
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     message(FATAL_ERROR "This project doesn't support CMake build on Windows!")
@@ -9,7 +9,7 @@ endif()
 set(CMAKE_C_COMPILER "/usr/bin/gcc")
 set(CMAKE_CXX_COMPILER "/usr/bin/g++")
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # 声明一个cmake工程
@@ -43,9 +43,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin/)
 
 # 版本号管理，如果项目版本号为 a.b.c，则 version = a.b.c，api_version = a.b
 # 动态库版本
-set(version 14.1.0)
+set(version 14.2.0)
 # API 版本
-set(api_version 14.1)
+set(api_version 14.2)
 
 # PROJECT_SOURCE_DIR 即项目根目录，即脚本中的 project_base_dir
 message(STATUS "build_type: " ${BUILD_TYPE})

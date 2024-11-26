@@ -16,43 +16,51 @@ Vector类模板的扩容操作
 
 namespace DSA
 {
-    template <typename T>
-    bool Vector<T>::_expand()
-    {
-        if (_need_expand())
-        {
-            T *oldElem = _elem;
-            Rank oldCapacity = _capacity;
-            while (_need_expand())
-            {
-                if (_capacity)
-                {
-                    _capacity <<= 1;
-                }
-                else
-                    _capacity = 1;
-            }
+template <typename T>
+bool Vector<T>::_expand()
+{
+	if (_need_expand())
+	{
+		T *oldElem		 = _elem;
+		Rank oldCapacity = _capacity;
+		while (_need_expand())
+		{
+			if (_capacity) { _capacity <<= 1; }
+			else
+				_capacity = 1;
+		}
 
-/*             _elem = new T[_capacity];
-            for (Rank i = 0; i != tempC; ++i)
-            {
-                _elem[i] = oldElem[i];
-            }
-            delete [] oldElem; */
-            _elem = reinterpret_cast<T *>(malloc(_capacity * sizeof(T)));
-            memcpy(reinterpret_cast<void*>(_elem), reinterpret_cast<void*>(oldElem), oldCapacity * sizeof(T));
-            free(oldElem);
-            return true;
-        }
-        else
-            return false;
-    }
+		if constexpr (IsMemoryCopyable<T>::_value)
+		{
+			_elem = reinterpret_cast<T *>(malloc(_capacity * sizeof(T)));
+			memcpy(
+				reinterpret_cast<void *>(_elem),
+				reinterpret_cast<void *>(oldElem),
+				oldCapacity * sizeof(T)
+			);
+			free(oldElem);
+		}
+		else
+		{
+			_elem = new T[_capacity];
+			for (Rank i = 0; i != oldCapacity; ++i)
+			{
+				_elem[i] = std::move(oldElem[i]);
+			}
+			delete[] oldElem;
+		}
 
-    template <typename T>
-    inline bool Vector<T>::_need_expand() const
-    {
-        return _capacity <= _size;
-    }
-} // DSA
+		return true;
+	}
+	else
+		return false;
+}
 
-#endif // VECTOR_EXPAND_H
+template <typename T>
+inline bool Vector<T>::_need_expand() const
+{
+	return _capacity <= _size;
+}
+}  // namespace DSA
+
+#endif	// VECTOR_EXPAND_H

@@ -16,51 +16,54 @@ Vector的构造函数
 
 namespace DSA
 {
-    template <typename T>
-    Vector<T>::Vector(Vector<T>::Rank s)
-        : _elem(nullptr)
-        , _size(s)
-        , _capacity(s * 2)
+template <typename T>
+Vector<T>::Vector(Vector<T>::Rank s)
+	: _elem(nullptr)
+	, _size(s)
+	, _capacity(s * 2)
+{
+	if constexpr (IsMemoryCopyable<T>::_value)
+	{
+		_elem = reinterpret_cast<T *>(malloc(_capacity * sizeof(T)));
+		for (Rank i = 0; i != s; ++i)
+		{
+			new (_elem + i) T();
+		}
+	}
+    else
     {
-        _elem = reinterpret_cast<T *>(malloc(_capacity * sizeof(T)));
-        for (Rank i = 0; i != s; ++i)
-        {
-            new(_elem + i) T();
-        }
-    }
-
-    template <typename T>
-    template <typename It>
-    Vector<T>::Vector(const It &begin, const It &end)
-        : _elem(nullptr)
-        , _size(0)
-        , _capacity(0)
-    {
-        _init_from(begin, end);
-    }
-
-    template <typename T>
-    Vector<T>::Vector(const T *begin, const T *end)
-        : _elem(nullptr)
-        , _size(0)
-        , _capacity(0)
-    {
-        _init_from(begin, end);
-    }
-
-    template <typename T>
-    Vector<T>::Vector(const std::initializer_list<T> &initL)
-        : _elem(nullptr)
-        , _size(0)
-        , _capacity(0)
-    {
-        // printf("initL construct\n");
-        _init_from(initL.begin(), initL.end());
+        _elem = new T[_capacity];
     }
 }
 
-#endif // VECTOR_CONSTRUCTORS_H
+template <typename T>
+template <typename It>
+Vector<T>::Vector(const It &begin, const It &end)
+	: _elem(nullptr)
+	, _size(0)
+	, _capacity(0)
+{
+	_init_from(begin, end);
+}
 
+template <typename T>
+Vector<T>::Vector(const T *begin, const T *end)
+	: _elem(nullptr)
+	, _size(0)
+	, _capacity(0)
+{
+	_init_from(begin, end);
+}
 
+template <typename T>
+Vector<T>::Vector(const std::initializer_list<T> &initL)
+	: _elem(nullptr)
+	, _size(0)
+	, _capacity(0)
+{
+	// printf("initL construct\n");
+	_init_from(initL.begin(), initL.end());
+}
+}  // namespace DSA
 
-
+#endif	// VECTOR_CONSTRUCTORS_H

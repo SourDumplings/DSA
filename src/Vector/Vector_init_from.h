@@ -16,22 +16,32 @@
 
 namespace DSA
 {
-    // 迭代器区间的复制
-    template <typename T>
-    template <typename It>
-    void Vector<T>::_init_from(const It &begin, const It &end)
-    {
-        clear();
-        _size = end - begin;
-        _capacity = 2 * _size;
-        _elem = reinterpret_cast<T *>(malloc(_capacity * sizeof(T)));
+// 迭代器区间的复制
+template <typename T>
+template <typename It>
+void Vector<T>::_init_from(const It &begin, const It &end)
+{
+	clear();
+	_size	  = end - begin;
+	_capacity = 2 * _size;
 
-        for (Rank i = 0; i < _size; ++i)
-        {
-            new(_elem + i) T(*(begin + i));
-        }
-    }
+	if constexpr (IsMemoryCopyable<T>::_value)
+	{
+		_elem = reinterpret_cast<T *>(malloc(_capacity * sizeof(T)));
+		for (Rank i = 0; i < _size; ++i)
+		{
+			new (_elem + i) T(*(begin + i));
+		}
+	}
+	else
+	{
+		_elem = new T[_capacity];
+		for (Rank i = 0; i < _size; ++i)
+		{
+			_elem[i] = *(begin + i);
+		}
+	}
 }
+}  // namespace DSA
 
-#endif // INIT_FROM_H
-
+#endif	// INIT_FROM_H

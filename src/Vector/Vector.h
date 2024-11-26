@@ -8,6 +8,8 @@
 /*
 向量类模板
 迭代器为随机访问迭代器
+
+由于其会对 raw 内存进行操作，因此对于不同的元素类型会采取不同的策略
  */
 
 #ifndef VECTOR_H
@@ -16,6 +18,7 @@
 #include <initializer_list>
 #include "../Base/Assert.h"
 #include "../Base/AbstractSeqIterableContainer.h"
+#include "../Base/BaseChecker.h"
 #include "../Iterator/RandomIterator.h"
 #include "../Algorithms/Dict_compare.h"
 

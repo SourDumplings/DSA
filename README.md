@@ -9,12 +9,12 @@
 # 概述
 Data Structs and Algorithms(DSA)
 
-版本号：14.1.0，与 CMakeLists.txt 同步
+版本号：14.2.0，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
 
-我自己实现的各种数据结构和算法的模板，采用 C++17 语言标准，统一在 DSA 命名空间中，支持跨平台
+我自己实现的各种数据结构和算法的模板，采用 C++20 语言标准，统一在 DSA 命名空间中，支持跨平台
 
 # 使用说明
 ## 环境要求
@@ -159,7 +159,6 @@ Data Structs and Algorithms(DSA)
 10.《Computer Systems A Programmer's Perspective》3e-Randal E.Bryant, David R. O'Hallaron
 
 # TODO
-- 修正 Vector，其在元素为 string 时扩缩容会有问题会 core
 - 实现稀疏集
 - 整理一下编译规则，在 Windows 下也使用 CMake，参考 SCGF 项目
 - 将其用在 SCGF 项目中

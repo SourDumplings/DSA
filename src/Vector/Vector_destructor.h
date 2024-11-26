@@ -16,32 +16,41 @@
 
 namespace DSA
 {
-    template <typename T>
-    void Vector<T>::clear()
-    {
-        if (_elem == nullptr)
-        {
-            ASSERT_DEBUG(_capacity == 0 && _size == 0, "Error capacity %u and size %u.", _capacity, _size);
-            return;
-        }
+template <typename T>
+void Vector<T>::clear()
+{
+	if (_elem == nullptr)
+	{
+		ASSERT_DEBUG(
+			_capacity == 0 && _size == 0,
+			"Error capacity %u and size %u.",
+			_capacity,
+			_size
+		);
+		return;
+	}
 
-        ASSERT_DEBUG(_size <= _capacity, "Error capacity %u and size %u.", _capacity, _size);
+	ASSERT_DEBUG(_size <= _capacity, "Error capacity %u and size %u.", _capacity, _size);
 
-        for (Rank i = 0; i < _size; i++)
-        {
-            (_elem + i)->~T();
-        }
-        free(_elem);
-        _size = _capacity = 0;
-        _elem = nullptr;
-    }
+	if constexpr (IsMemoryCopyable<T>::_value)
+	{
+		for (Rank i = 0; i < _size; i++)
+		{
+			(_elem + i)->~T();
+		}
+		free(_elem);
+	}
+	else { delete[] _elem; }
 
-    template <typename T>
-    Vector<T>::~Vector()
-    {
-        clear();
-    }
+	_size = _capacity = 0;
+	_elem			  = nullptr;
 }
 
-#endif
+template <typename T>
+Vector<T>::~Vector()
+{
+	clear();
+}
+}  // namespace DSA
 
+#endif

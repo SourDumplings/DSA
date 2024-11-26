@@ -17,6 +17,7 @@
 #include <utility>
 #include <vector>
 #include "Vector/Vector.h"
+#include "DSAString/DSAString.h"
 
 #ifdef _WIN32
 #include "Base/WinTime.h"
@@ -38,14 +39,11 @@ public:
 	int a = 1;
 };
 
-ostream &operator<<(ostream &os, const C &c)
-{
-    return os << c.a;
-}
+ostream &operator<<(ostream &os, const C &c) { return os << c.a; }
 
 void test_normal_class_elem()
 {
-	Vector<C> v{ 1, 2, 3, 4, 6 };
+	Vector<C> v{1, 2, 3, 4, 6};
 	v.print_info("v");
 }
 
@@ -110,7 +108,7 @@ bool test_c_str_hash()
 
 bool test_complex_elem()
 {
-	Vector<string> vs1(20), vs2(3), vs3({"123", "abx", "sada1"});
+	Vector<DSAString> vs1(20), vs2(3), vs3({"123", "abx", "sada1"});
 
 	vs1.print_info("vs1");
 	std::cout << "vs1: " << vs1 << std::endl;
@@ -313,7 +311,31 @@ bool test_erase_by_value()
 
 bool test_modification_on_string()
 {
-	// TODO
+	Vector<string> vs8({"abc", "hello"});
+	vs8.print_info("vs8");
+	vs8.push_back("world");
+	vs8.print_info("vs8");
+	vs8.push_back("hey");
+	vs8.print_info("vs8");
+	vs8.pop_back();
+	vs8.print_info("vs8");
+	vs8.pop_back();
+	vs8.print_info("vs8");
+	vs8.pop_back();
+	vs8.print_info("vs8");
+
+	Vector<DSAString> vs9({"abc", "hello"});
+	vs9.print_info("vs9");
+	vs9.push_back("world");
+	vs9.print_info("vs9");
+	vs9.push_back("hey");
+	vs9.print_info("vs9");
+	vs9.pop_back();
+	vs9.print_info("vs9");
+	vs9.pop_back();
+	vs9.print_info("vs9");
+	vs9.pop_back();
+	vs9.print_info("vs9");
 	return true;
 }
 
@@ -331,7 +353,6 @@ bool test_vector()
 	// test_invalid_iter();
 	// test_erase_by_value();
 	// test_normal_class_elem();
-
 	test_modification_on_string();
 
 	return true;

@@ -18,29 +18,28 @@
 
 namespace DSA
 {
-    // 打印所有元素，空格隔开，末尾换行
-    template <typename T>
-    void Vector<T>::print_info(const char *name) const
-    {
-        printf("Vector %s:\n", name);
-        printf("capacity = %u, size = %u\n", _capacity, _size);
+// 打印所有元素，空格隔开，末尾换行
+template <typename T>
+void Vector<T>::print_info(const char *name) const
+{
+	printf("Vector %s:\n", name);
+	printf("capacity = %u, size = %u\n", _capacity, _size);
+
+	if constexpr (IsMemoryCopyable<T>::_value) { printf("Its value is memory copyable.\n"); }
+	else { printf("Its value is NOT memory copyable.\n"); }
 
 #ifdef DEBUG
-        printf("including: ");
-        int output = 0;
-        for (Vector<T>::Rank i = 0; i < _size; ++i)
-        {
-            if (output++)
-            {
-                putchar(' ');
-            }
-            std::cout << _elem[i];
-        }
+	printf("including: ");
+	int output = 0;
+	for (Vector<T>::Rank i = 0; i < _size; ++i)
+	{
+		if (output++) { putchar(' '); }
+		std::cout << _elem[i];
+	}
 #endif
 
-        printf("\n\n");
-    }
+	printf("\n\n");
 }
+}  // namespace DSA
 
 #endif
-

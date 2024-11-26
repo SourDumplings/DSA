@@ -26,5 +26,4 @@ fi
 cd build
 cmake .. -DBUILD_TYPE=Debug --graphviz=dsa.dot
 dot -Tpng dsa.dot.dsa-test > dsa-test_dependencies.png
-make
-make install
+cmake --build . --target install -j8
