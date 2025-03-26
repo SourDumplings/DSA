@@ -9,7 +9,7 @@
 # 概述
 Data Structs and Algorithms(DSA)
 
-版本号：14.2.1，与 CMakeLists.txt 同步
+版本号：14.2.2，与 CMakeLists.txt 同步
 - 第一位：架构
 - 第二位：api
 - 第三位：小版本号
@@ -159,9 +159,7 @@ Data Structs and Algorithms(DSA)
 10.《Computer Systems A Programmer's Perspective》3e-Randal E.Bryant, David R. O'Hallaron
 
 # TODO
-- 实现稀疏集
 - 整理一下编译规则，在 Windows 下也使用 CMake，参考 SCGF 项目
-- 将其用在 SCGF 项目中
 - 实现树状数组（区间）
 - 实现 KD 树
 - 优化树的打印方法

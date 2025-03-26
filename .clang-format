@@ -1,3 +1,4 @@
+# ====================== 公共配置 ======================
 AccessModifierOffset: -4
 AlignAfterOpenBracket: BlockIndent
 AlignConsecutiveAssignments:
@@ -6,11 +7,10 @@ AlignConsecutiveAssignments:
   AcrossComments: false
   AlignCompound: true
 AlignConsecutiveBitFields: Consecutive
-AlignConsecutiveDeclarations: None
 AlignConsecutiveMacros: Consecutive
 AlignEscapedNewlinesLeft: true
-AlignOperands: false
 AlignTrailingComments: true
+AllowShortEnumsOnASingleLine: false
 AllowAllParametersOfDeclarationOnNextLine: false
 AllowAllArgumentsOnNextLine: false
 AllowShortBlocksOnASingleLine: true
@@ -25,13 +25,12 @@ BinPackParameters: false
 BreakBeforeBraces: Allman
 BreakConstructorInitializersBeforeComma: true
 ColumnLimit: 100
-CommentPragmas: '^ IWYU pragma:'
+CommentPragmas: '^'
 ConstructorInitializerAllOnOneLineOrOnePerLine: false
 IndentCaseLabels: true
 IndentWidth: 4
 IndentWrappedFunctionNames: true
 KeepEmptyLinesAtTheStartOfBlocks: true
-Language: Cpp
 MaxEmptyLinesToKeep: 1
 ObjCBlockIndentWidth: 4
 ObjCSpaceAfterProperty: true
@@ -43,6 +42,16 @@ SpaceBeforeAssignmentOperators: true
 SpacesInContainerLiterals: true
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
-Standard: c++20
 TabWidth: 4
 UseTab: true
+
+# ====================== 语言专用配置 ======================
+---
+Language: Cpp
+Standard: c++20
+AlignConsecutiveDeclarations: None  # C++特有配置
+AlignOperands: false                # C++特有配置
+
+---
+Language: JavaScript
+# JavaScript特有配置（当前无额外配置，保留空块）
